@@ -25,7 +25,7 @@ async def health():
 
 
 @router.get("/signals", response_model=List[WatchlistItem], tags=["signals"])
-async def get_all_signals(
+def get_all_signals(
     type:      Optional[str] = Query(None, description="CRYPTO|STOCK|ETF|INDEX|COMMODITY|FOREX"),
     direction: Optional[str] = Query(None, description="BUY|SELL|HOLD"),
     user: dict = Depends(get_current_user),
@@ -63,7 +63,7 @@ async def get_all_signals(
 
 
 @router.get("/signals/{symbol}", response_model=SignalResponse, tags=["signals"])
-async def get_signal(
+def get_signal(
     symbol:  str,
     reason:  bool = Query(True, description="Include LLM reasoning"),
     user: dict = Depends(get_current_user),
@@ -86,7 +86,7 @@ async def get_signal(
 
 
 @router.get("/market/mood", response_model=MarketMood, tags=["signals"])
-async def market_mood(user: dict = Depends(get_current_user)):
+def market_mood(user: dict = Depends(get_current_user)):
     """
     Aggregate mood across first 20 assets — powers the top bar.
     """
@@ -117,7 +117,7 @@ async def market_mood(user: dict = Depends(get_current_user)):
 
 
 @router.get("/backtest/{symbol}", response_model=BacktestSummary, tags=["backtest"])
-async def backtest(
+def backtest(
     symbol: str,
     user: dict = Depends(require_pro),
 ):
