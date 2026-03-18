@@ -76,7 +76,7 @@ def get_signal(
     if symbol not in TICKER_MAP:
         raise HTTPException(status_code=404, detail=f"Unknown symbol: {symbol}")
 
-    include_reasoning = reason and user.get("tier") == "pro"
+    include_reasoning = reason
     sig = generate_signal(symbol, include_reasoning=include_reasoning)
 
     if sig is None:
