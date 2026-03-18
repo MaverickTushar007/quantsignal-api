@@ -28,7 +28,7 @@ async def health():
 def get_all_signals(
     type:      Optional[str] = Query(None, description="CRYPTO|STOCK|ETF|INDEX|COMMODITY|FOREX"),
     direction: Optional[str] = Query(None, description="BUY|SELL|HOLD"),
-    user: dict = Depends(get_current_user),
+
 ):
     """
     Lightweight signals for all assets — powers the watchlist dashboard.
@@ -66,7 +66,7 @@ def get_all_signals(
 def get_signal(
     symbol:  str,
     reason:  bool = Query(True, description="Include LLM reasoning"),
-    user: dict = Depends(get_current_user),
+
 ):
     """
     Full signal for one asset — includes confluence, news, LLM reasoning.
@@ -86,7 +86,7 @@ def get_signal(
 
 
 @router.get("/market/mood", response_model=MarketMood, tags=["signals"])
-def market_mood(user: dict = Depends(get_current_user)):
+def market_mood():
     """
     Aggregate mood across first 20 assets — powers the top bar.
     """
