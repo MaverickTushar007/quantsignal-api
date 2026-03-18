@@ -10,8 +10,10 @@ from fastapi.middleware.gzip import GZipMiddleware
 from core.config import settings
 from api.routes import router
 from api.chat import router as chat_router
+from api.ws import router as ws_router
 
 app = FastAPI(
+
     title="QuantSignal API",
     description="ML-powered trading signals — XGBoost + LightGBM + LLM reasoning",
     version="1.0.0",
@@ -30,6 +32,8 @@ app.add_middleware(GZipMiddleware, minimum_size=1000)
 
 app.include_router(router, prefix="/api/v1")
 app.include_router(chat_router, prefix="/api/v1")
+app.include_router(ws_router, prefix="/api/v1")
+
 
 @app.get("/")
 async def root():

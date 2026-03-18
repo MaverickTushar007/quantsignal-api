@@ -158,17 +158,27 @@ async def stream_chat(symbol: str, message: str, history: list):
         await asyncio.sleep(0.5)
 
         # Build System Prompt
-        sys_prompt = "You are an elite quantitative trading AI assistant. Respond strictly in clean Markdown.\n"
+        sys_prompt = (
+            "You are Perseus, an elite quantitative trading intelligence. Your purpose is to provide signal-focused analysis, not generic education.\n"
+            "STRICT RULES:\n"
+            "1. NEVER give generic crypto definitions (e.g., don't explain what Ethereum is).\n"
+            "2. FOCUS on the current signal, ML confidence, and technical confluence listed below.\n"
+            "3. USE the RAG context to ground your reasoning in quantitative research.\n"
+            "4. If the user asks 'what is [asset]', respond with its current technical bias, key levels, and recent price action context from a quant perspective.\n"
+            "5. Keep responses concise and professional (Markdown format).\n"
+        )
         if sig_data:
-            sys_prompt += f"\nLIVE ASSET CONTEXT:\nAsset: {symbol}\nSignal: {sig_data.get('direction')} ({sig_data.get('probability', 0)*100:.1f}%)"
-            sys_prompt += f"\nFeatures: {', '.join(sig_data.get('top_features', []))}"
-            sys_prompt += f"\nConfluence: {sig_data.get('confluence_bulls', 0)}/9 Bullish"
-            sys_prompt += f"\nKey Levels - Entry: {sig_data.get('current_price')}, TP: {sig_data.get('take_profit')}, SL: {sig_data.get('stop_loss')}"
+            sys_prompt += f"\nLIVE ASSET CONTEXT for {symbol}:\n"
+            sys_prompt += f"- Signal: {sig_data.get('direction')} ({sig_data.get('probability', 0)*100:.1f}% ML confidence)\n"
+            sys_prompt += f"- Confluence: {sig_data.get('confluence_bulls', 0)}/9 Bullish indicators\n"
+            sys_prompt += f"- Predictive Features: {', '.join(sig_data.get('top_features', []))}\n"
+            sys_prompt += f"- V1 Levels: Entry @ {sig_data.get('current_price')}, TP @ {sig_data.get('take_profit')}, SL @ {sig_data.get('stop_loss')}\n"
         else:
-            sys_prompt += f"\nLIVE ASSET CONTEXT: Data for {symbol} is currently unavailable. Discuss purely technically."
+            sys_prompt += f"\nLIVE ASSET CONTEXT: Data for {symbol} is currently unavailable. Analyze the structural trend if possible.\n"
 
-        sys_prompt += f"\n\nACADEMIC RAG CONTEXT:\n{rag_text}"
-        sys_prompt += "\n\nINSTRUCTIONS: Answer the user's question precisely. If they ask about the current signal, explain the exact indicators listed above. If they ask general concepts, use the RAG context."
+        sys_prompt += f"\nACADEMIC RAG CONTEXT:\n{rag_text}\n"
+        sys_prompt += "\nRespond as a high-frequency analyst would—direct, data-driven, and devoid of fluff."
+
 
         # Connect to Groq Async
         if not settings.groq_api_key:
