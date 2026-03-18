@@ -75,8 +75,8 @@ def get_reasoning(
     try:
         from core.rag import search_research
         query = f"{direction} signal {feat_str} momentum volatility technicals"
-        context_chunks = search_research(query, top_k=2)
-        academic_context = "\n".join([f"- {c}" for c in context_chunks])
+        academic_context = search_research(query, top_k=2)
+        
     except Exception:
         academic_context = "No academic context available."
 

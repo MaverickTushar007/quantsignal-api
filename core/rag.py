@@ -1,56 +1,50 @@
-import json
-import numpy as np
+"""
+core/rag.py
+Vector search over quant research papers stored in Supabase pgvector.
+"""
+from sentence_transformers import SentenceTransformer
+from supabase import create_client
 import os
-from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.metrics.pairwise import cosine_similarity
+from dotenv import load_dotenv
 
-# Paths
-CORPUS_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), "../data/quant_corpus.json"))
+load_dotenv()
 
-class LiteRAG:
-    def __init__(self):
-        self.vectorizer = TfidfVectorizer(stop_words='english')
-        self.chunks = []
-        self.matrix = None
-        self.load_corpus()
+_model = None
+_client = None
 
-    def load_corpus(self):
-        if not os.path.exists(CORPUS_PATH):
-            return
+def _get_model():
+    global _model
+    if _model is None:
+        _model = SentenceTransformer("all-MiniLM-L6-v2")
+    return _model
 
-        with open(CORPUS_PATH, 'r') as f:
-            data = json.load(f)
+def _get_client():
+    global _client
+    if _client is None:
+        _client = create_client(
+            os.getenv("SUPABASE_URL"),
+            os.getenv("SUPABASE_SERVICE_KEY")
+        )
+    return _client
 
-        # Flatten into search chunks
-        for paper in data["papers"]:
-            for chunk in paper["content"]:
-                self.chunks.append({
-                    "title": paper["title"],
-                    "year": paper["year"],
-                    "text": chunk
-                })
-
-        # Fit TF-IDF matrix
-        corpus_texts = [f"{c['title']} {c['text']}" for c in self.chunks]
-        self.matrix = self.vectorizer.fit_transform(corpus_texts)
-
-    def search(self, query: str, top_k: int = 2):
-        if not self.matrix or not self.chunks:
-            return []
-
-        query_vec = self.vectorizer.transform([query])
-        similarities = cosine_similarity(query_vec, self.matrix).flatten()
-        top_indices = np.argsort(similarities)[::-1][:top_k]
-
-        results = []
-        for idx in top_indices:
-            if similarities[idx] > 0.1: # relevance threshold
-                results.append(self.chunks[idx])
+def search_research(query: str, top_k: int = 3) -> str:
+    try:
+        model = _get_model()
+        client = _get_client()
         
-        return results
-
-# Singleton
-rag_engine = LiteRAG()
-
-def search_research(query: str, top_k: int = 2):
-    return rag_engine.search(query, top_k)
+        embedding = model.encode(query).tolist()
+        
+        result = client.rpc("match_research_chunks", {
+            "query_embedding": embedding,
+            "match_count": top_k
+        }).execute()
+        
+        if not result.data:
+            return ""
+        
+        chunks = [r["content"] for r in result.data]
+        return "\n\n".join(chunks)
+    
+    except Exception as e:
+        print(f"RAG lookup failed: {e}")
+        return ""
