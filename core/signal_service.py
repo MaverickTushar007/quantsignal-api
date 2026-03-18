@@ -82,6 +82,23 @@ def generate_signal(symbol: str, include_reasoning: bool = True) -> Optional[dic
     Full pipeline for one ticker.
     Returns a dict ready to serialize to JSON — or None if data unavailable.
     """
+    import json
+    from pathlib import Path
+    
+    # --- V1 RAILWAY BYPASS ---
+    # Railway blocks yfinance. We use a locally computed cache for the V1 launch.
+    cache_path = Path("data/signals_cache.json")
+    if cache_path.exists():
+        try:
+            cache = json.loads(cache_path.read_text())
+            if symbol in cache:
+                sig = dict(cache[symbol])  # copy
+                if not include_reasoning and "reasoning" in sig:
+                    sig["reasoning"] = ""
+                return sig
+        except Exception:
+            pass
+
     meta = TICKER_MAP.get(symbol)
     if not meta:
         return None

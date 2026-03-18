@@ -1,0 +1,5387 @@
+{
+  "BTC-USD": {
+    "symbol": "BTC-USD",
+    "display": "BTC/USD",
+    "name": "Bitcoin",
+    "type": "CRYPTO",
+    "icon": "\u20bf",
+    "direction": "HOLD",
+    "probability": 0.5334,
+    "confidence": "LOW",
+    "kelly_size": 5.0,
+    "expected_value": 1016.6919,
+    "take_profit": 67298.5592,
+    "stop_loss": 74925.7595,
+    "current_price": 72383.3594,
+    "risk_reward": 2.0,
+    "atr": 2542.4001,
+    "model_agreement": 0.945,
+    "top_features": [
+      "SMA_cross",
+      "stoch_D",
+      "RSI_14"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "49 \u2014 Neutral",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bullish (+768.8289)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "74% (Mid)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "65 \u2014 Neutral",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Volume",
+        "value": "0.88x avg",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 below SMA50",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price above SMA20",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "19% (Low)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "+1.99% ROC",
+        "signal": "BULLISH"
+      }
+    ],
+    "confluence_score": "4/9 bullish",
+    "news": [
+      {
+        "title": "Bitcoin Price Prediction: Analyst Warns Bitcoin Could Repeat the Sell the News Trap \u2014 Will Powell Break the Pattern This Time?",
+        "source": "News - Cryptonews",
+        "sentiment": "NEUTRAL",
+        "url": "https://cryptonews.com/news/bitcoin-price-prediction-march-fomc-80k-breakout/"
+      },
+      {
+        "title": "Bitcoin Price Prediction: Rich Dad Poor Dad Author Calls $750,000 \u2014 Is This The \u201cBiggest Bubble Bust\u201d in History?",
+        "source": "News - Cryptonews",
+        "sentiment": "NEUTRAL",
+        "url": "https://cryptonews.com/news/bitcoin-price-prediction-rich-dad-poor-dad-author-calls-750000-is-t-biggest-bubble-bust-in-history-should-you-be-worried/"
+      },
+      {
+        "title": "Bitcoin Price Holds $73,500 as March FOMC Looms \u2014 Will Jerome Powell Trigger the Next Big Move?",
+        "source": "News - Cryptonews",
+        "sentiment": "NEUTRAL",
+        "url": "https://cryptonews.com/news/oil-volatility-fomc-march-outlook-maxi-doge/"
+      }
+    ],
+    "reasoning": "This trading signal indicates a HOLD recommendation for Bitcoin (BTC-USD) with 53% machine learning (ML) confidence. The signal is generated based on the confluence of three technical indicators (SMA_cross, stoch_D, RSI_14) and four bullish indicators (4/9). Recent news articles suggest market uncertainty, but the technical analysis suggests a potential holding pattern. Key risk factor: Market volatility may increase due to upcoming FOMC meeting and potential policy changes.",
+    "generated_at": "2026-03-18T13:02:36.136549+00:00"
+  },
+  "ETH-USD": {
+    "symbol": "ETH-USD",
+    "display": "ETH/USD",
+    "name": "Ethereum",
+    "type": "CRYPTO",
+    "icon": "\u039e",
+    "direction": "BUY",
+    "probability": 0.634,
+    "confidence": "MEDIUM",
+    "kelly_size": 11.27,
+    "expected_value": 91.5059,
+    "take_profit": 2441.3216,
+    "stop_loss": 2136.9486,
+    "current_price": 2238.4062,
+    "risk_reward": 2.0,
+    "atr": 101.4577,
+    "model_agreement": 0.967,
+    "top_features": [
+      "MACD_hist",
+      "pos_52w",
+      "RSI_14"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "58 \u2014 Neutral",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bullish (+43.6044)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "85% (Upper)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "69 \u2014 Neutral",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Volume",
+        "value": "0.94x avg",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 below SMA50",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price above SMA20",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "15% (Low)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "+6.97% ROC",
+        "signal": "BULLISH"
+      }
+    ],
+    "confluence_score": "3/9 bullish",
+    "news": [
+      {
+        "title": "Ethereum USD Reclaims $2,200 as the Crypto Market Booms",
+        "source": "News - Cryptonews",
+        "sentiment": "NEUTRAL",
+        "url": "https://cryptonews.com/news/ethereum-usd-reclaims-2200-recovery-signals-strengthen/"
+      }
+    ],
+    "reasoning": "The trading signal for Ethereum (ETH-USD) is a BUY recommendation with 63% machine learning (ML) confidence. This signal was generated based on the confluence of three key technical indicators: MACD_hist, pos_52w, and RSI_14, which are all bullish. The recent news of Ethereum reclaiming $2,200 also supports this signal, indicating a potential uptrend in the cryptocurrency market.\n\nKey risk factor: Market volatility and potential price corrections in response to regulatory changes or other unforeseen events.",
+    "generated_at": "2026-03-18T13:02:37.220878+00:00"
+  },
+  "SOL-USD": {
+    "symbol": "SOL-USD",
+    "display": "SOL/USD",
+    "name": "Solana",
+    "type": "CRYPTO",
+    "icon": "\u25ce",
+    "direction": "HOLD",
+    "probability": 0.5479,
+    "confidence": "LOW",
+    "kelly_size": 4.45,
+    "expected_value": 1.5123,
+    "take_profit": 82.1011,
+    "stop_loss": 94.8377,
+    "current_price": 90.5921,
+    "risk_reward": 2.0,
+    "atr": 4.2455,
+    "model_agreement": 0.96,
+    "top_features": [
+      "SMA_cross",
+      "mom_10d",
+      "pos_52w"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "50 \u2014 Neutral",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bullish (+1.3812)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "70% (Mid)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "59 \u2014 Neutral",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Volume",
+        "value": "0.88x avg",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 below SMA50",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price above SMA20",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "12% (Low)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "+2.77% ROC",
+        "signal": "BULLISH"
+      }
+    ],
+    "confluence_score": "4/9 bullish",
+    "news": [
+      {
+        "title": "Macy's store revamp shows progress, but company expects sales to fall this year",
+        "source": "US Top News and Analysis",
+        "sentiment": "BEARISH",
+        "url": "https://www.cnbc.com/2026/03/18/macys-m-q4-2025-earnings-.html"
+      },
+      {
+        "title": "Tesla to buy $4.3 billion of LG Energy battery cells from disbanded GM plant",
+        "source": "US Top News and Analysis",
+        "sentiment": "BULLISH",
+        "url": "https://www.cnbc.com/2026/03/17/tesla-to-buy-4-point-3-billion-lg-energy-battery-cells-made-in-michigan.html"
+      },
+      {
+        "title": "Solana Crypto Stablecoin Liquidity Hits Record Highs as Open Interest Climbs",
+        "source": "News - Cryptonews",
+        "sentiment": "BULLISH",
+        "url": "https://cryptonews.com/news/solana-stablecoin-liquidity-hits-record-open-interest-climbs/"
+      }
+    ],
+    "reasoning": "The trading signal for Solana (SOL-USD) is a HOLD recommendation with 55% machine learning (ML) confidence. This signal is generated based on the confluence of technical indicators, including a short-term moving average cross (SMA_cross), a 10-day momentum indicator (mom_10d), and a positive 52-week indicator (pos_52w). The recent news on Solana's stablecoin liquidity and climbing open interest also supports this signal.\n\nKey risk factor: Market volatility may be exacerbated by the current economic uncertainty and potential sales decline in the retail sector.",
+    "generated_at": "2026-03-18T13:02:38.328037+00:00"
+  },
+  "BNB-USD": {
+    "symbol": "BNB-USD",
+    "display": "BNB/USD",
+    "name": "BNB",
+    "type": "CRYPTO",
+    "icon": "B",
+    "direction": "BUY",
+    "probability": 0.5845,
+    "confidence": "MEDIUM",
+    "kelly_size": 9.42,
+    "expected_value": 13.9364,
+    "take_profit": 695.1327,
+    "stop_loss": 639.649,
+    "current_price": 658.1436,
+    "risk_reward": 2.0,
+    "atr": 18.4946,
+    "model_agreement": 0.98,
+    "top_features": [
+      "ATR_pct",
+      "MACD",
+      "BB_pct"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "50 \u2014 Neutral",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bullish (+6.5994)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "69% (Mid)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "64 \u2014 Neutral",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Volume",
+        "value": "1.00x avg",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 below SMA50",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price above SMA20",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "10% (Low)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "+0.34% ROC",
+        "signal": "BULLISH"
+      }
+    ],
+    "confluence_score": "3/9 bullish",
+    "news": [
+      {
+        "title": "XRP Price Flips BNB as Open Interest Rebuilds Toward Pre-Crash Levels",
+        "source": "News - Cryptonews",
+        "sentiment": "NEUTRAL",
+        "url": "https://cryptonews.com/news/xrp-flips-bnb-open-interest-pre-crash-levels/"
+      }
+    ],
+    "reasoning": "This trading signal was generated due to a combination of technical indicators and machine learning confidence, suggesting a potential buying opportunity for BNB (BNB-USD). The top predictive features, including ATR_pct, MACD, and BB_pct, indicate a bullish trend, while 3/9 technical indicators confluence to support this signal. Recent news of XRP's price flip and rebuilding open interest may also be contributing to this signal, but a key risk factor to consider is the potential for a reversal if open interest does not sustain.",
+    "generated_at": "2026-03-18T13:02:39.463177+00:00"
+  },
+  "XRP-USD": {
+    "symbol": "XRP-USD",
+    "display": "XRP/USD",
+    "name": "XRP",
+    "type": "CRYPTO",
+    "icon": "X",
+    "direction": "SELL",
+    "probability": 0.439,
+    "confidence": "MEDIUM",
+    "kelly_size": 8.54,
+    "expected_value": 0.0388,
+    "take_profit": 1.3523,
+    "stop_loss": 1.5227,
+    "current_price": 1.4659,
+    "risk_reward": 2.0,
+    "atr": 0.0568,
+    "model_agreement": 0.969,
+    "top_features": [
+      "dist_SMA20",
+      "BB_width",
+      "ret_vol"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "55 \u2014 Neutral",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bullish (+0.0224)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "79% (Mid)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "50 \u2014 Neutral",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Volume",
+        "value": "1.08x avg",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 below SMA50",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price above SMA20",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "13% (Low)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "+4.79% ROC",
+        "signal": "BULLISH"
+      }
+    ],
+    "confluence_score": "4/9 bullish",
+    "news": [
+      {
+        "title": "XRP Price Prediction: Orderbook Shows 9:1 Buy Pressure on Coinbase \u2014 Is $2.25 Now the Path of Least Resistance?",
+        "source": "News - Cryptonews",
+        "sentiment": "BULLISH",
+        "url": "https://cryptonews.com/news/xrp-price-prediction-orderbook-shows-91-buy-pressure-on-coinbase-is-2-25-now-the-path-of-least-resistance/"
+      },
+      {
+        "title": "XRP Price Flips BNB as Open Interest Rebuilds Toward Pre-Crash Levels",
+        "source": "News - Cryptonews",
+        "sentiment": "NEUTRAL",
+        "url": "https://cryptonews.com/news/xrp-flips-bnb-open-interest-pre-crash-levels/"
+      },
+      {
+        "title": "Crypto Price Prediction Today 16 March \u2013 XRP, Pi Coin, PEPE",
+        "source": "News - Cryptonews",
+        "sentiment": "NEUTRAL",
+        "url": "https://cryptonews.com/news/crypto-price-prediction-today-16-march-xrp-pi-coin-pepe/"
+      }
+    ],
+    "reasoning": "The SELL signal for XRP-USD is generated based on a 44% machine learning confidence level, driven by top predictive features indicating potential overextension and volatility. Despite 4/9 bullish technical indicators, the signal suggests caution due to recent news and market dynamics, including a significant buy pressure on Coinbase and rebuilding open interest. Key risk factor: potential reversal if market sentiment shifts in response to upcoming news and events.",
+    "generated_at": "2026-03-18T13:02:40.828264+00:00"
+  },
+  "DOGE-USD": {
+    "symbol": "DOGE-USD",
+    "display": "DOGE/USD",
+    "name": "Dogecoin",
+    "type": "CRYPTO",
+    "icon": "D",
+    "direction": "BUY",
+    "probability": 0.7397,
+    "confidence": "HIGH",
+    "kelly_size": 15.24,
+    "expected_value": 0.0058,
+    "take_profit": 0.1056,
+    "stop_loss": 0.0913,
+    "current_price": 0.0961,
+    "risk_reward": 2.0,
+    "atr": 0.0047,
+    "model_agreement": 0.889,
+    "top_features": [
+      "pos_52w",
+      "dist_SMA20",
+      "MACD"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "46 \u2014 Neutral",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bullish (+0.0012)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "62% (Mid)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "52 \u2014 Neutral",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Volume",
+        "value": "0.95x avg",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 below SMA50",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price above SMA20",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "6% (Low)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "+0.14% ROC",
+        "signal": "BULLISH"
+      }
+    ],
+    "confluence_score": "4/9 bullish",
+    "news": [
+      {
+        "title": "Bitcoin Price Holds $73,500 as March FOMC Looms \u2014 Will Jerome Powell Trigger the Next Big Move?",
+        "source": "News - Cryptonews",
+        "sentiment": "NEUTRAL",
+        "url": "https://cryptonews.com/news/oil-volatility-fomc-march-outlook-maxi-doge/"
+      }
+    ],
+    "reasoning": "The trading signal for Dogecoin (DOGE-USD) is a BUY recommendation with 74% machine learning (ML) confidence. This signal is generated based on the confluence of technical indicators, including positive 52-week momentum, distance from the 20-day Simple Moving Average (SMA20), and a bullish MACD signal. The recent news on Bitcoin's price stability and potential market volatility also contributes to this signal.\n\nKey risk factor: Market volatility triggered by Jerome Powell's FOMC announcement may negatively impact cryptocurrency prices.",
+    "generated_at": "2026-03-18T13:02:41.917659+00:00"
+  },
+  "ADA-USD": {
+    "symbol": "ADA-USD",
+    "display": "ADA/USD",
+    "name": "Cardano",
+    "type": "CRYPTO",
+    "icon": "A",
+    "direction": "HOLD",
+    "probability": 0.5009,
+    "confidence": "LOW",
+    "kelly_size": 6.21,
+    "expected_value": 0.0064,
+    "take_profit": 0.2507,
+    "stop_loss": 0.2891,
+    "current_price": 0.2763,
+    "risk_reward": 2.0,
+    "atr": 0.0128,
+    "model_agreement": 0.957,
+    "top_features": [
+      "RSI_14",
+      "pos_52w",
+      "MACD_signal"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "50 \u2014 Neutral",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bullish (+0.0038)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "67% (Mid)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "62 \u2014 Neutral",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Volume",
+        "value": "0.99x avg",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 below SMA50",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price above SMA20",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "6% (Low)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "+4.00% ROC",
+        "signal": "BULLISH"
+      }
+    ],
+    "confluence_score": "3/9 bullish",
+    "news": [
+      {
+        "title": "Cardano Price Pinned Below $0.30 for 45 Days Straight \u2014 Is a Violent Breakout Finally Coming?",
+        "source": "News - Cryptonews",
+        "sentiment": "BULLISH",
+        "url": "https://cryptonews.com/news/ada-price-breakout-rally-30-cents/"
+      }
+    ],
+    "reasoning": "The trading signal for Cardano (ADA-USD) is to HOLD with 50% machine learning (ML) confidence. This decision is based on the confluence of three technical indicators (RSI_14, pos_52w, MACD_signal) and three bullish indicators, suggesting a potential upward trend. The signal is also influenced by recent news of Cardano's price being pinned below $0.30 for 45 days, potentially setting up a violent breakout.\n\nKey risk factor: A sudden shift in market sentiment or unexpected regulatory changes could lead to a sharp decline in Cardano's price.",
+    "generated_at": "2026-03-18T13:02:42.983688+00:00"
+  },
+  "AVAX-USD": {
+    "symbol": "AVAX-USD",
+    "display": "AVAX/USD",
+    "name": "Avalanche",
+    "type": "CRYPTO",
+    "icon": "A",
+    "direction": "BUY",
+    "probability": 0.7571,
+    "confidence": "HIGH",
+    "kelly_size": 15.89,
+    "expected_value": 0.5388,
+    "take_profit": 10.651,
+    "stop_loss": 9.3795,
+    "current_price": 9.8033,
+    "risk_reward": 2.0,
+    "atr": 0.4238,
+    "model_agreement": 0.94,
+    "top_features": [
+      "MACD_hist",
+      "ATR_pct",
+      "RSI_7"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "55 \u2014 Neutral",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bullish (+0.1230)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "70% (Mid)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "60 \u2014 Neutral",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Volume",
+        "value": "1.01x avg",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 above SMA50",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price above SMA20",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "7% (Low)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "+0.85% ROC",
+        "signal": "BULLISH"
+      }
+    ],
+    "confluence_score": "5/9 bullish",
+    "news": [],
+    "reasoning": "The trading signal for Avalanche (AVAX-USD) is a BUY recommendation with 76% machine learning (ML) confidence, driven by the confluence of three key predictive features: MACD_hist, ATR_pct, and RSI_7. This signal is further supported by the presence of 5 out of 9 bullish technical indicators. The lack of recent news suggests that market sentiment is primarily driven by technical factors. Key risk factor: potential reversal due to sudden market sentiment shift.",
+    "generated_at": "2026-03-18T13:02:44.104571+00:00"
+  },
+  "MATIC-USD": {
+    "symbol": "MATIC-USD",
+    "display": "MATIC",
+    "name": "Polygon",
+    "type": "CRYPTO",
+    "icon": "M",
+    "direction": "SELL",
+    "probability": 0.182,
+    "confidence": "HIGH",
+    "kelly_size": 18.17,
+    "expected_value": 0.0148,
+    "take_profit": 0.196,
+    "stop_loss": 0.2266,
+    "current_price": 0.2164,
+    "risk_reward": 2.0,
+    "atr": 0.0102,
+    "model_agreement": 0.909,
+    "top_features": [
+      "MACD_hist",
+      "BB_pct",
+      "ATR_pct"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "56 \u2014 Neutral",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bullish (+0.0037)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "43% (Mid)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "75 \u2014 Neutral",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Volume",
+        "value": "0.14x avg",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 below SMA50",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price below SMA20",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "3% (Low)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "-1.68% ROC",
+        "signal": "BEARISH"
+      }
+    ],
+    "confluence_score": "2/9 bullish",
+    "news": [],
+    "reasoning": "The trading signal for Polygon (MATIC-USD) is a SELL recommendation with 18% machine learning (ML) confidence. This signal is generated based on the confluence of negative technical indicators, including MACD_hist, BB_pct, and ATR_pct, which suggest a potential reversal in the asset's upward trend. The low ML confidence level indicates a moderate level of conviction in the signal. Key risk factor: potential for false signals due to the relatively low confidence level.",
+    "generated_at": "2026-03-18T13:02:45.113597+00:00"
+  },
+  "DOT-USD": {
+    "symbol": "DOT-USD",
+    "display": "DOT/USD",
+    "name": "Polkadot",
+    "type": "CRYPTO",
+    "icon": "D",
+    "direction": "SELL",
+    "probability": 0.3584,
+    "confidence": "MEDIUM",
+    "kelly_size": 11.56,
+    "expected_value": 0.0713,
+    "take_profit": 1.4346,
+    "stop_loss": 1.6657,
+    "current_price": 1.5887,
+    "risk_reward": 2.0,
+    "atr": 0.077,
+    "model_agreement": 0.971,
+    "top_features": [
+      "MACD_signal",
+      "dist_SMA50",
+      "ret_vol"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "54 \u2014 Neutral",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bullish (+0.0141)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "73% (Mid)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "75 \u2014 Neutral",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Volume",
+        "value": "1.16x avg",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 above SMA50",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price above SMA20",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "12% (Low)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "+8.47% ROC",
+        "signal": "BULLISH"
+      }
+    ],
+    "confluence_score": "5/9 bullish",
+    "news": [],
+    "reasoning": "The trading signal for Polkadot (DOT-USD) is a SELL recommendation with 36% machine learning (ML) confidence. This signal was generated due to the dominance of bearish predictive features, including the MACD_signal and dist_SMA50, which indicate a potential trend reversal. Despite technical confluence suggesting 5 out of 9 bullish indicators, the ML model's confidence in the bearish signal outweighs the bullish sentiment.\n\nKey risk factor: The signal's relatively low ML confidence of 36% suggests that the model is not highly certain in its prediction, increasing the risk of a false signal.",
+    "generated_at": "2026-03-18T13:02:46.504630+00:00"
+  },
+  "LINK-USD": {
+    "symbol": "LINK-USD",
+    "display": "LINK/USD",
+    "name": "Chainlink",
+    "type": "CRYPTO",
+    "icon": "L",
+    "direction": "BUY",
+    "probability": 0.6863,
+    "confidence": "HIGH",
+    "kelly_size": 13.24,
+    "expected_value": 0.4147,
+    "take_profit": 10.1691,
+    "stop_loss": 8.9942,
+    "current_price": 9.3858,
+    "risk_reward": 2.0,
+    "atr": 0.3916,
+    "model_agreement": 0.818,
+    "top_features": [
+      "mom_10d",
+      "pos_52w",
+      "RSI_14"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "51 \u2014 Neutral",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bullish (+0.1212)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "72% (Mid)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "58 \u2014 Neutral",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Volume",
+        "value": "0.98x avg",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 below SMA50",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price above SMA20",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "10% (Low)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "+3.28% ROC",
+        "signal": "BULLISH"
+      }
+    ],
+    "confluence_score": "3/9 bullish",
+    "news": [],
+    "reasoning": "The trading signal for Chainlink (LINK-USD) is a BUY recommendation with 69% machine learning (ML) confidence. This signal is generated based on the top predictive features of recent price momentum (mom_10d), positive 52-week performance (pos_52w), and the Relative Strength Index (RSI_14). The signal also aligns with 3 out of 9 bullish technical indicators, indicating a potential upward trend. Key risk factor: A sudden shift in market sentiment or unexpected regulatory changes could negatively impact the signal's accuracy.",
+    "generated_at": "2026-03-18T13:02:47.633455+00:00"
+  },
+  "LTC-USD": {
+    "symbol": "LTC-USD",
+    "display": "LTC/USD",
+    "name": "Litecoin",
+    "type": "CRYPTO",
+    "icon": "L",
+    "direction": "BUY",
+    "probability": 0.7209,
+    "confidence": "HIGH",
+    "kelly_size": 14.53,
+    "expected_value": 2.1478,
+    "take_profit": 59.7427,
+    "stop_loss": 54.2012,
+    "current_price": 56.0484,
+    "risk_reward": 2.0,
+    "atr": 1.8472,
+    "model_agreement": 0.835,
+    "top_features": [
+      "pos_52w",
+      "SMA_cross",
+      "dist_SMA20"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "47 \u2014 Neutral",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bullish (+0.5565)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "67% (Mid)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "56 \u2014 Neutral",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Volume",
+        "value": "0.99x avg",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 below SMA50",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price above SMA20",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "11% (Low)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "+1.34% ROC",
+        "signal": "BULLISH"
+      }
+    ],
+    "confluence_score": "4/9 bullish",
+    "news": [],
+    "reasoning": "This trading signal was generated based on a 72% model confidence level, indicating a strong predictive model. The top features contributing to the signal are the positive 52-week trend (pos_52w), a crossover of the short-term moving average (SMA_cross), and a distance between the short-term and long-term moving averages (dist_SMA20). The technical confluence of 4 out of 9 bullish indicators further supports the signal.\n\nKey risk factor: The signal's reliance on short-term trend indicators may lead to whipsaws if the market experiences a sudden reversal.",
+    "generated_at": "2026-03-18T13:02:48.777123+00:00"
+  },
+  "ATOM-USD": {
+    "symbol": "ATOM-USD",
+    "display": "ATOM/USD",
+    "name": "Cosmos",
+    "type": "CRYPTO",
+    "icon": "A",
+    "direction": "HOLD",
+    "probability": 0.4836,
+    "confidence": "LOW",
+    "kelly_size": 6.87,
+    "expected_value": 0.0362,
+    "take_profit": 1.8177,
+    "stop_loss": 2.0155,
+    "current_price": 1.9495,
+    "risk_reward": 2.0,
+    "atr": 0.0659,
+    "model_agreement": 0.972,
+    "top_features": [
+      "pos_52w",
+      "dist_SMA20",
+      "mom_10d"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "58 \u2014 Neutral",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bullish (+0.0288)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "91% (Upper)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "75 \u2014 Neutral",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Volume",
+        "value": "1.06x avg",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 below SMA50",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price above SMA20",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "7% (Low)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "+4.85% ROC",
+        "signal": "BULLISH"
+      }
+    ],
+    "confluence_score": "4/9 bullish",
+    "news": [],
+    "reasoning": "The trading signal for Cosmos (ATOM-USD) is a HOLD recommendation with 48% machine learning confidence. This signal is generated based on the confluence of three predictive features: the asset's price performance over the past 52 weeks (pos_52w), its distance from the 20-day Simple Moving Average (dist_SMA20), and its 10-day momentum (mom_10d). The signal is also supported by 4 out of 9 bullish technical indicators. \n\nKey risk factor: The signal's relatively low confidence level may indicate a higher risk of incorrect predictions.",
+    "generated_at": "2026-03-18T13:02:50.200157+00:00"
+  },
+  "NEAR-USD": {
+    "symbol": "NEAR-USD",
+    "display": "NEAR/USD",
+    "name": "NEAR Protocol",
+    "type": "CRYPTO",
+    "icon": "N",
+    "direction": "SELL",
+    "probability": 0.3847,
+    "confidence": "MEDIUM",
+    "kelly_size": 10.57,
+    "expected_value": 0.0625,
+    "take_profit": 1.2697,
+    "stop_loss": 1.4913,
+    "current_price": 1.4174,
+    "risk_reward": 2.0,
+    "atr": 0.0738,
+    "model_agreement": 0.997,
+    "top_features": [
+      "pos_52w",
+      "dist_SMA50",
+      "ATR_pct"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "60 \u2014 Neutral",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bullish (+0.0186)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "80% (Mid)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "71 \u2014 Neutral",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Volume",
+        "value": "0.68x avg",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 above SMA50",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price above SMA20",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "22% (Low)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "+5.93% ROC",
+        "signal": "BULLISH"
+      }
+    ],
+    "confluence_score": "4/9 bullish",
+    "news": [
+      {
+        "title": "Oil prices climb after Iran reports attacks on key oil and natural gas field",
+        "source": "MarketWatch.com - Top Stories",
+        "sentiment": "NEUTRAL",
+        "url": "https://www.marketwatch.com/story/oil-prices-dip-after-iraq-resumes-oil-exports-via-pipeline-to-turkey-7e706930?mod=mw_rss_topstories"
+      },
+      {
+        "title": "XRP Price Flips BNB as Open Interest Rebuilds Toward Pre-Crash Levels",
+        "source": "News - Cryptonews",
+        "sentiment": "NEUTRAL",
+        "url": "https://cryptonews.com/news/xrp-flips-bnb-open-interest-pre-crash-levels/"
+      },
+      {
+        "title": "Crypto Price Prediction Today 16 March \u2013 XRP, Pi Coin, PEPE",
+        "source": "News - Cryptonews",
+        "sentiment": "NEUTRAL",
+        "url": "https://cryptonews.com/news/crypto-price-prediction-today-16-march-xrp-pi-coin-pepe/"
+      }
+    ],
+    "reasoning": "The trading signal for NEAR Protocol (NEAR-USD) is a SELL recommendation with 38% machine learning confidence. This signal was generated due to the confluence of negative predictive features, including a 52-week positive indicator and a distance from the 50-day Simple Moving Average (SMA50), indicating potential overbought conditions. Additionally, the asset's technical indicators are not strongly bullish, contributing to the signal. Key risk factor: potential for a short-term market reversal driven by external macroeconomic factors, such as the recent oil price increase.",
+    "generated_at": "2026-03-18T13:02:51.318061+00:00"
+  },
+  "OP-USD": {
+    "symbol": "OP-USD",
+    "display": "OP/USD",
+    "name": "Optimism",
+    "type": "CRYPTO",
+    "icon": "O",
+    "direction": "SELL",
+    "probability": 0.4303,
+    "confidence": "MEDIUM",
+    "kelly_size": 8.86,
+    "expected_value": 0.0045,
+    "take_profit": 0.1174,
+    "stop_loss": 0.1364,
+    "current_price": 0.1301,
+    "risk_reward": 2.0,
+    "atr": 0.0063,
+    "model_agreement": 1.0,
+    "top_features": [
+      "dist_SMA20",
+      "stoch_D",
+      "MACD"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "52 \u2014 Neutral",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bullish (+0.0053)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "76% (Mid)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "64 \u2014 Neutral",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Volume",
+        "value": "0.97x avg",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 below SMA50",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price above SMA20",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "3% (Low)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "+5.15% ROC",
+        "signal": "BULLISH"
+      }
+    ],
+    "confluence_score": "3/9 bullish",
+    "news": [
+      {
+        "title": "France ready to help U.S. secure Strait of Hormuz \u2014 but not while drones and missiles are flying",
+        "source": "US Top News and Analysis",
+        "sentiment": "NEUTRAL",
+        "url": "https://www.cnbc.com/2026/03/18/france-strait-of-hormuz-ships-attacks-trump-allies-insurance-drones.html"
+      },
+      {
+        "title": "Micron rides memory price spike into earnings with stock up 62%, drubbing its tech peers",
+        "source": "US Top News and Analysis",
+        "sentiment": "NEUTRAL",
+        "url": "https://www.cnbc.com/2026/03/18/micron-mu-memory-price-spike-earnings.html"
+      },
+      {
+        "title": "Mortgage refinance demand plunges 19% after interest rates shoot higher",
+        "source": "US Top News and Analysis",
+        "sentiment": "BEARISH",
+        "url": "https://www.cnbc.com/2026/03/18/mortgage-refinance-demand-plunges-19percent-after-interest-rates-shoot-higher.html"
+      }
+    ],
+    "reasoning": "The trading signal for Optimism (OP-USD) is a SELL recommendation with 43% machine learning (ML) confidence. This signal is generated due to the confluence of bearish technical indicators, including a decline in stochastic momentum (stoch_D) and a negative moving average convergence divergence (MACD). The recent news on rising interest rates and geopolitical tensions may be contributing to the pessimistic sentiment, but a key risk factor is the potential for a sudden market shift in response to Micron's earnings report.",
+    "generated_at": "2026-03-18T13:02:53.742661+00:00"
+  },
+  "INJ-USD": {
+    "symbol": "INJ-USD",
+    "display": "INJ/USD",
+    "name": "Injective",
+    "type": "CRYPTO",
+    "icon": "I",
+    "direction": "HOLD",
+    "probability": 0.534,
+    "confidence": "LOW",
+    "kelly_size": 4.97,
+    "expected_value": 0.0535,
+    "take_profit": 2.8513,
+    "stop_loss": 3.2545,
+    "current_price": 3.1201,
+    "risk_reward": 2.0,
+    "atr": 0.1344,
+    "model_agreement": 0.874,
+    "top_features": [
+      "dist_SMA20",
+      "MACD_hist",
+      "pos_52w"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "50 \u2014 Neutral",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bullish (+0.0512)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "66% (Mid)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "61 \u2014 Neutral",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Volume",
+        "value": "0.97x avg",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 below SMA50",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price above SMA20",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "3% (Low)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "+1.04% ROC",
+        "signal": "BULLISH"
+      }
+    ],
+    "confluence_score": "3/9 bullish",
+    "news": [],
+    "reasoning": "This trading signal was generated based on a 53% machine learning confidence level, indicating a moderate likelihood of a bullish trend for Injective (INJ-USD). The top predictive features, including distance from the 20-day Simple Moving Average (SMA20) and the MACD histogram, suggest a potential upward momentum. The confluence of 3 out of 9 bullish indicators further supports this trend, although recent news does not provide any significant insights.\n\nKey risk factor: A potential reversal in market sentiment could lead to a decline in Injective's price.",
+    "generated_at": "2026-03-18T13:02:54.832285+00:00"
+  },
+  "FET-USD": {
+    "symbol": "FET-USD",
+    "display": "FET/USD",
+    "name": "Fetch.ai",
+    "type": "CRYPTO",
+    "icon": "F",
+    "direction": "SELL",
+    "probability": 0.4301,
+    "confidence": "MEDIUM",
+    "kelly_size": 8.87,
+    "expected_value": 0.0119,
+    "take_profit": 0.1852,
+    "stop_loss": 0.2355,
+    "current_price": 0.2187,
+    "risk_reward": 2.0,
+    "atr": 0.0168,
+    "model_agreement": 0.967,
+    "top_features": [
+      "pos_52w",
+      "SMA_cross",
+      "BB_width"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "73 \u2014 Overbought",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bullish (+0.0101)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "90% (Upper)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "69 \u2014 Neutral",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Volume",
+        "value": "1.12x avg",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 below SMA50",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price above SMA20",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "11% (Low)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "+22.68% ROC",
+        "signal": "BULLISH"
+      }
+    ],
+    "confluence_score": "4/9 bullish",
+    "news": [],
+    "reasoning": "The SELL signal for Fetch.ai (FET-USD) was generated based on a 43% machine learning confidence level, driven by top predictive features indicating a potential decline in the asset's value. This is supported by 4 out of 9 bullish indicators currently in confluence, suggesting a shift in market sentiment. However, this signal may be influenced by the asset's historical performance, as indicated by the 'pos_52w' feature, which could be a key risk factor.",
+    "generated_at": "2026-03-18T13:02:55.904316+00:00"
+  },
+  "RENDER-USD": {
+    "symbol": "RENDER-USD",
+    "display": "RNDR",
+    "name": "Render",
+    "type": "CRYPTO",
+    "icon": "R",
+    "direction": "SELL",
+    "probability": 0.4044,
+    "confidence": "MEDIUM",
+    "kelly_size": 9.84,
+    "expected_value": 0.1023,
+    "take_profit": 1.4954,
+    "stop_loss": 1.8853,
+    "current_price": 1.7553,
+    "risk_reward": 2.0,
+    "atr": 0.13,
+    "model_agreement": 0.991,
+    "top_features": [
+      "pos_52w",
+      "dist_SMA50",
+      "BB_pct"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "70 \u2014 Overbought",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bullish (+0.0443)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "74% (Mid)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "65 \u2014 Neutral",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Volume",
+        "value": "1.00x avg",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 above SMA50",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price above SMA20",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "26% (Low)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "-2.22% ROC",
+        "signal": "BEARISH"
+      }
+    ],
+    "confluence_score": "4/9 bullish",
+    "news": [],
+    "reasoning": "The trading signal for Render (RENDER-USD) is a SELL recommendation with 40% machine learning confidence, indicating a potential decline in the asset's value. This signal is primarily driven by the presence of bearish predictive features, including a positive 52-week return, distance from the 50-day Simple Moving Average, and Bollinger Bands percentage. Despite technical confluence favoring bullish indicators, the bearish predictive features outweigh the bullish sentiment. \n\nKey risk factor: The signal's relatively low machine learning confidence level (40%) suggests that the model is uncertain about the trade's outcome, increasing the risk of incorrect predictions.",
+    "generated_at": "2026-03-18T13:02:57.117497+00:00"
+  },
+  "^IXIC": {
+    "symbol": "^IXIC",
+    "display": "NASDAQ",
+    "name": "Nasdaq",
+    "type": "INDEX",
+    "icon": "N",
+    "direction": "BUY",
+    "probability": 0.7737,
+    "confidence": "HIGH",
+    "kelly_size": 16.51,
+    "expected_value": 464.73,
+    "take_profit": 23183.0639,
+    "stop_loss": 22127.7591,
+    "current_price": 22479.5273,
+    "risk_reward": 2.0,
+    "atr": 351.7683,
+    "model_agreement": 0.84,
+    "top_features": [
+      "SMA_cross",
+      "BB_width",
+      "ret_vol"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "38 \u2014 Neutral",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bearish (-14.3886)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "32% (Mid)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "40 \u2014 Neutral",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Volume",
+        "value": "0.83x avg",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 below SMA50",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price below SMA20",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "83% (High)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "-0.96% ROC",
+        "signal": "BEARISH"
+      }
+    ],
+    "confluence_score": "4/9 bullish",
+    "news": [],
+    "reasoning": "The trading signal was generated based on a machine learning model that analyzed the Nasdaq (^IXIC) asset. The model identified a potential buying opportunity due to the confluence of three key technical features: a short-term moving average crossover (SMA_cross), an increase in Bollinger Bands width (BB_width), and a decrease in return volatility (ret_vol). This signal is supported by 4 out of 9 bullish indicators, suggesting a favorable technical outlook.\n\nKey risk factor: A potential reversal in market sentiment could lead to a decline in the Nasdaq (^IXIC) asset, impacting the trade's profitability.",
+    "generated_at": "2026-03-18T13:02:58.948354+00:00"
+  },
+  "^RUT": {
+    "symbol": "^RUT",
+    "display": "RUT",
+    "name": "Russell 2000",
+    "type": "INDEX",
+    "icon": "R",
+    "direction": "BUY",
+    "probability": 0.7928,
+    "confidence": "HIGH",
+    "kelly_size": 17.23,
+    "expected_value": 64.4284,
+    "take_profit": 2613.4671,
+    "stop_loss": 2473.258,
+    "current_price": 2519.9944,
+    "risk_reward": 2.0,
+    "atr": 46.7364,
+    "model_agreement": 0.864,
+    "top_features": [
+      "BB_pct",
+      "dist_SMA20",
+      "pos_52w"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "33 \u2014 Oversold",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bearish (-12.4283)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "22% (Mid)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "26 \u2014 Neutral",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Volume",
+        "value": "0.00x avg",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 below SMA50",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price below SMA20",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "79% (High)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "-1.10% ROC",
+        "signal": "BEARISH"
+      }
+    ],
+    "confluence_score": "4/9 bullish",
+    "news": [],
+    "reasoning": "This BUY signal for the Russell 2000 (^RUT) was generated based on a machine learning model with 79% confidence, indicating a strong predictive power. The top features driving this signal are the percentage of stocks above their Bollinger Bands (BB_pct), the distance between the stock's price and its 20-day Simple Moving Average (dist_SMA20), and the stock's position relative to its 52-week high (pos_52w). Key risk factor: potential for overbought conditions if the signal is triggered.",
+    "generated_at": "2026-03-18T13:03:00.687136+00:00"
+  },
+  "^N225": {
+    "symbol": "^N225",
+    "display": "NIKKEI",
+    "name": "Nikkei 225",
+    "type": "INDEX",
+    "icon": "N",
+    "direction": "BUY",
+    "probability": 0.8396,
+    "confidence": "HIGH",
+    "kelly_size": 18.98,
+    "expected_value": 2005.9683,
+    "take_profit": 57881.0028,
+    "stop_loss": 53918.5963,
+    "current_price": 55239.3984,
+    "risk_reward": 2.0,
+    "atr": 1320.8022,
+    "model_agreement": 0.949,
+    "top_features": [
+      "SMA_cross",
+      "ret_vol",
+      "dist_SMA50"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "38 \u2014 Neutral",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bearish (-294.1489)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "42% (Mid)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "51 \u2014 Neutral",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Volume",
+        "value": "0.00x avg",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 above SMA50",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price below SMA20",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "86% (High)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "+0.39% ROC",
+        "signal": "BULLISH"
+      }
+    ],
+    "confluence_score": "5/9 bullish",
+    "news": [],
+    "reasoning": "The trading signal is generated based on a machine learning model with 84% confidence, indicating a high likelihood of a potential buying opportunity in the Nikkei 225. The top predictive features, including SMA_cross, ret_vol, and dist_SMA50, suggest a trend reversal and increased volatility. This is further supported by technical confluence from 5 out of 9 bullish indicators. Key risk factor: potential reversal of the trend if the market sentiment shifts.",
+    "generated_at": "2026-03-18T13:03:03.244701+00:00"
+  },
+  "^HSI": {
+    "symbol": "^HSI",
+    "display": "HANG SENG",
+    "name": "Hang Seng",
+    "type": "INDEX",
+    "icon": "H",
+    "direction": "BUY",
+    "probability": 0.7404,
+    "confidence": "HIGH",
+    "kelly_size": 15.27,
+    "expected_value": 528.9284,
+    "take_profit": 26891.6348,
+    "stop_loss": 25592.3125,
+    "current_price": 26025.4199,
+    "risk_reward": 2.0,
+    "atr": 433.1074,
+    "model_agreement": 0.947,
+    "top_features": [
+      "dist_SMA20",
+      "RSI_7",
+      "stoch_D"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "46 \u2014 Neutral",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bullish (+20.7830)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "49% (Mid)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "62 \u2014 Neutral",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Volume",
+        "value": "0.00x avg",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 below SMA50",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price below SMA20",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "77% (High)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "+0.49% ROC",
+        "signal": "BULLISH"
+      }
+    ],
+    "confluence_score": "5/9 bullish",
+    "news": [],
+    "reasoning": "The trading signal for the Hang Seng (^HSI) is a BUY recommendation with 74% model confidence. This signal was generated due to the confluence of technical indicators, including a strong distance between the 20-day Simple Moving Average (SMA20) and the current price, a bullish Relative Strength Index (RSI_7), and a bullish Stochastic Oscillator (stoch_D). This combination suggests a potential upward trend, but key risk factor is the potential for a false breakout.",
+    "generated_at": "2026-03-18T13:03:05.244422+00:00"
+  },
+  "QQQ": {
+    "symbol": "QQQ",
+    "display": "QQQ",
+    "name": "Nasdaq ETF",
+    "type": "ETF",
+    "icon": "Q",
+    "direction": "BUY",
+    "probability": 0.6862,
+    "confidence": "HIGH",
+    "kelly_size": 13.23,
+    "expected_value": 9.7918,
+    "take_profit": 621.8071,
+    "stop_loss": 594.0614,
+    "current_price": 603.31,
+    "risk_reward": 2.0,
+    "atr": 9.2486,
+    "model_agreement": 0.84,
+    "top_features": [
+      "BB_width",
+      "RSI_14",
+      "ret_vol"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "40 \u2014 Neutral",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bearish (-0.2753)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "40% (Mid)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "49 \u2014 Neutral",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Volume",
+        "value": "0.66x avg",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 below SMA50",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price below SMA20",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "86% (High)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "-0.73% ROC",
+        "signal": "BEARISH"
+      }
+    ],
+    "confluence_score": "4/9 bullish",
+    "news": [],
+    "reasoning": "This trading signal was generated due to a high 69% machine learning confidence in a bullish trend for the Nasdaq ETF (QQQ), driven by confluence of technical indicators, including a widening Bollinger Band (BB_width), a moderate Relative Strength Index (RSI_14), and low recent return volatility (ret_vol). The presence of 4 out of 9 bullish indicators further supports this signal. A key risk factor is the potential for a sharp market correction if the current trend reverses.",
+    "generated_at": "2026-03-18T13:03:07.089573+00:00"
+  },
+  "IWM": {
+    "symbol": "IWM",
+    "display": "IWM",
+    "name": "Russell ETF",
+    "type": "ETF",
+    "icon": "I",
+    "direction": "BUY",
+    "probability": 0.6753,
+    "confidence": "HIGH",
+    "kelly_size": 12.82,
+    "expected_value": 5.049,
+    "take_profit": 259.8943,
+    "stop_loss": 245.1278,
+    "current_price": 250.05,
+    "risk_reward": 2.0,
+    "atr": 4.9222,
+    "model_agreement": 0.895,
+    "top_features": [
+      "BB_pct",
+      "RSI_7",
+      "pos_52w"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "32 \u2014 Oversold",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bearish (-1.2201)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "23% (Mid)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "28 \u2014 Neutral",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Volume",
+        "value": "0.84x avg",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 below SMA50",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price below SMA20",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "79% (High)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "-1.13% ROC",
+        "signal": "BEARISH"
+      }
+    ],
+    "confluence_score": "4/9 bullish",
+    "news": [],
+    "reasoning": "This trading signal was generated due to a combination of technical indicators, including a bullish Bollinger Band percentage (BB_pct), a relatively low Relative Strength Index (RSI_7), and a positive 52-week momentum indicator (pos_52w). The model's 68% confidence level suggests a moderate level of certainty in the signal. However, a key risk factor is the potential for a false breakout above the Bollinger Bands, which could lead to a reversal in the asset's price trend.",
+    "generated_at": "2026-03-18T13:03:08.154313+00:00"
+  },
+  "GLD": {
+    "symbol": "GLD",
+    "display": "GLD",
+    "name": "Gold ETF",
+    "type": "ETF",
+    "icon": "G",
+    "direction": "BUY",
+    "probability": 0.7719,
+    "confidence": "HIGH",
+    "kelly_size": 16.45,
+    "expected_value": 12.6602,
+    "take_profit": 478.5157,
+    "stop_loss": 449.6471,
+    "current_price": 459.27,
+    "risk_reward": 2.0,
+    "atr": 9.6229,
+    "model_agreement": 0.922,
+    "top_features": [
+      "MACD_signal",
+      "BB_width",
+      "mom_10d"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "41 \u2014 Neutral",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bearish (-3.1960)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "17% (Lower)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "34 \u2014 Neutral",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Volume",
+        "value": "0.61x avg",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 above SMA50",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price below SMA20",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "79% (High)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "-3.89% ROC",
+        "signal": "BEARISH"
+      }
+    ],
+    "confluence_score": "5/9 bullish",
+    "news": [],
+    "reasoning": "The trading signal for the Gold ETF (GLD) is a BUY recommendation with 77% model confidence. This signal was generated due to the confluence of bullish technical indicators, including a strong MACD signal, increased Bollinger Band width, and a positive momentum indicator. The combination of these factors suggests a potential upward trend in the asset price. Key risk factor: potential reversal if the MACD signal weakens.",
+    "generated_at": "2026-03-18T13:03:09.161718+00:00"
+  },
+  "SLV": {
+    "symbol": "SLV",
+    "display": "SLV",
+    "name": "Silver ETF",
+    "type": "ETF",
+    "icon": "S",
+    "direction": "BUY",
+    "probability": 0.7949,
+    "confidence": "HIGH",
+    "kelly_size": 17.31,
+    "expected_value": 4.5327,
+    "take_profit": 78.2074,
+    "stop_loss": 68.3863,
+    "current_price": 71.66,
+    "risk_reward": 2.0,
+    "atr": 3.2737,
+    "model_agreement": 0.881,
+    "top_features": [
+      "mom_10d",
+      "stoch_D",
+      "MACD"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "37 \u2014 Neutral",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bearish (-0.6550)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "18% (Lower)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "6 \u2014 Oversold",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Volume",
+        "value": "0.59x avg",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 below SMA50",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price below SMA20",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "54% (Mid)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "-10.53% ROC",
+        "signal": "BEARISH"
+      }
+    ],
+    "confluence_score": "4/9 bullish",
+    "news": [],
+    "reasoning": "The trading signal for the Silver ETF (SLV) is a BUY recommendation with 79% model confidence, driven by a combination of technical indicators, including momentum (mom_10d), stochastic oscillator (stoch_D), and moving average convergence divergence (MACD). The signal is supported by 4 out of 9 bullish indicators, suggesting a potential upward trend. However, a key risk factor is the potential for a reversal in the stochastic oscillator, which could indicate overbought conditions.",
+    "generated_at": "2026-03-18T13:03:10.232994+00:00"
+  },
+  "XLE": {
+    "symbol": "XLE",
+    "display": "XLE",
+    "name": "Energy ETF",
+    "type": "ETF",
+    "icon": "E",
+    "direction": "SELL",
+    "probability": 0.05,
+    "confidence": "HIGH",
+    "kelly_size": 23.12,
+    "expected_value": 2.245,
+    "take_profit": 56.0829,
+    "stop_loss": 59.7235,
+    "current_price": 58.51,
+    "risk_reward": 2.0,
+    "atr": 1.2135,
+    "model_agreement": 1.0,
+    "top_features": [
+      "dist_SMA50",
+      "stoch_D",
+      "MACD"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "75 \u2014 Overbought",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bearish (-0.0194)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "101% (Upper)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "89 \u2014 Overbought",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Volume",
+        "value": "0.60x avg",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 above SMA50",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price above SMA20",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "98% (High)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "+5.23% ROC",
+        "signal": "BULLISH"
+      }
+    ],
+    "confluence_score": "4/9 bullish",
+    "news": [],
+    "reasoning": "The trading signal for the Energy ETF (XLE) is a SELL recommendation with a 5% Machine Learning (ML) confidence level. This signal was generated due to the confluence of bearish technical indicators, including a declining 50-day Simple Moving Average (dist_SMA50), a stochastic oscillator below 20 (stoch_D), and a negative Moving Average Convergence Divergence (MACD). The presence of only 4 out of 9 bullish indicators further supports this bearish sentiment. Key risk factor: potential for a short squeeze if market sentiment shifts.",
+    "generated_at": "2026-03-18T13:03:12.088684+00:00"
+  },
+  "XLF": {
+    "symbol": "XLF",
+    "display": "XLF",
+    "name": "Financials ETF",
+    "type": "ETF",
+    "icon": "F",
+    "direction": "BUY",
+    "probability": 0.853,
+    "confidence": "HIGH",
+    "kelly_size": 19.49,
+    "expected_value": 1.3653,
+    "take_profit": 51.3114,
+    "stop_loss": 48.6843,
+    "current_price": 49.56,
+    "risk_reward": 2.0,
+    "atr": 0.8757,
+    "model_agreement": 0.87,
+    "top_features": [
+      "mom_5d",
+      "ATR_pct",
+      "MACD_signal"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "29 \u2014 Oversold",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bearish (-0.1177)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "23% (Mid)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "20 \u2014 Oversold",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Volume",
+        "value": "0.74x avg",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 below SMA50",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price below SMA20",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "53% (Mid)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "-1.00% ROC",
+        "signal": "BEARISH"
+      }
+    ],
+    "confluence_score": "4/9 bullish",
+    "news": [],
+    "reasoning": "The trading signal for the Financials ETF (XLF) was generated based on a machine learning model that predicts a 85% likelihood of a price increase. The model's confidence is driven by recent trends in momentum (mom_5d), volatility (ATR_pct), and a bullish signal from the MACD indicator. This confluence of technical indicators suggests a potential buying opportunity, but it's essential to consider the risk of a potential market downturn triggered by economic instability.",
+    "generated_at": "2026-03-18T13:03:13.167197+00:00"
+  },
+  "XLK": {
+    "symbol": "XLK",
+    "display": "XLK",
+    "name": "Tech ETF",
+    "type": "ETF",
+    "icon": "T",
+    "direction": "BUY",
+    "probability": 0.6614,
+    "confidence": "HIGH",
+    "kelly_size": 12.3,
+    "expected_value": 2.7063,
+    "take_profit": 145.04,
+    "stop_loss": 136.79,
+    "current_price": 139.54,
+    "risk_reward": 2.0,
+    "atr": 2.75,
+    "model_agreement": 0.961,
+    "top_features": [
+      "MACD_hist",
+      "dist_SMA20",
+      "mom_10d"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "42 \u2014 Neutral",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bullish (+0.0918)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "50% (Mid)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "57 \u2014 Neutral",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Volume",
+        "value": "0.64x avg",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 below SMA50",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price below SMA20",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "80% (High)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "-0.16% ROC",
+        "signal": "BEARISH"
+      }
+    ],
+    "confluence_score": "4/9 bullish",
+    "news": [],
+    "reasoning": "This trading signal was generated due to a combination of technical indicators suggesting a potential upward trend in the Tech ETF (XLK). The Machine Learning (ML) model has a 66% confidence level in predicting a BUY signal, driven by the confluence of three key features: MACD_hist, dist_SMA20, and mom_10d. This is further supported by 4 out of 9 bullish indicators, indicating a moderate level of technical confluence.\n\nKey risk factor: The signal's reliance on short-term technical indicators may lead to whipsaws or false signals if market conditions change rapidly.",
+    "generated_at": "2026-03-18T13:03:14.243287+00:00"
+  },
+  "ARKK": {
+    "symbol": "ARKK",
+    "display": "ARKK",
+    "name": "ARK Innovation",
+    "type": "ETF",
+    "icon": "A",
+    "direction": "BUY",
+    "probability": 0.6611,
+    "confidence": "HIGH",
+    "kelly_size": 12.29,
+    "expected_value": 2.1484,
+    "take_profit": 77.4293,
+    "stop_loss": 70.8754,
+    "current_price": 73.06,
+    "risk_reward": 2.0,
+    "atr": 2.1846,
+    "model_agreement": 0.881,
+    "top_features": [
+      "ATR_pct",
+      "MACD_signal",
+      "ret_vol"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "49 \u2014 Neutral",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bullish (+0.0970)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "58% (Mid)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "55 \u2014 Neutral",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Volume",
+        "value": "0.82x avg",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 below SMA50",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price above SMA20",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "64% (Mid)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "+0.23% ROC",
+        "signal": "BULLISH"
+      }
+    ],
+    "confluence_score": "5/9 bullish",
+    "news": [],
+    "reasoning": "The trading signal for ARK Innovation (ARKK) is a BUY recommendation with 66% machine learning confidence. This signal is generated based on a combination of technical indicators, including average true range percentage (ATR_pct), moving average convergence divergence (MACD) signal, and return volatility (ret_vol), which collectively indicate a bullish trend. The technical confluence of 5 out of 9 indicators also supports this signal. A key risk factor is the potential for increased volatility in the stock, which may lead to significant price swings.",
+    "generated_at": "2026-03-18T13:03:16.164185+00:00"
+  },
+  "IEMG": {
+    "symbol": "IEMG",
+    "display": "IEMG",
+    "name": "Emerging Markets",
+    "type": "ETF",
+    "icon": "E",
+    "direction": "BUY",
+    "probability": 0.8097,
+    "confidence": "HIGH",
+    "kelly_size": 17.86,
+    "expected_value": 2.1482,
+    "take_profit": 75.0664,
+    "stop_loss": 70.5568,
+    "current_price": 72.06,
+    "risk_reward": 2.0,
+    "atr": 1.5032,
+    "model_agreement": 0.879,
+    "top_features": [
+      "vol_trend",
+      "vol_ratio",
+      "ret_vol"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "32 \u2014 Oversold",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bearish (-0.3723)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "36% (Mid)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "35 \u2014 Neutral",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Volume",
+        "value": "0.65x avg",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 above SMA50",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price below SMA20",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "82% (High)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "-0.07% ROC",
+        "signal": "BEARISH"
+      }
+    ],
+    "confluence_score": "5/9 bullish",
+    "news": [],
+    "reasoning": "The trading signal for Emerging Markets (IEMG) is a BUY recommendation with 81% machine learning (ML) confidence. This signal was generated based on the confluence of three key predictive features: a positive trend in volatility, a favorable volatility ratio, and low return volatility. Additionally, 5 out of 9 technical indicators are bullish, supporting the BUY signal. Key risk factor: Market volatility may increase if global economic conditions deteriorate.",
+    "generated_at": "2026-03-18T13:03:17.234861+00:00"
+  },
+  "AAPL": {
+    "symbol": "AAPL",
+    "display": "AAPL",
+    "name": "Apple",
+    "type": "STOCK",
+    "icon": "A",
+    "direction": "BUY",
+    "probability": 0.6101,
+    "confidence": "MEDIUM",
+    "kelly_size": 10.38,
+    "expected_value": 4.4212,
+    "take_profit": 264.88,
+    "stop_loss": 248.905,
+    "current_price": 254.23,
+    "risk_reward": 2.0,
+    "atr": 5.325,
+    "model_agreement": 0.871,
+    "top_features": [
+      "dist_SMA20",
+      "MACD",
+      "MACD_hist"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "22 \u2014 Oversold",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bearish (-1.2842)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "19% (Lower)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "18 \u2014 Oversold",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Volume",
+        "value": "0.71x avg",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 above SMA50",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price below SMA20",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "72% (High)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "-2.53% ROC",
+        "signal": "BEARISH"
+      }
+    ],
+    "confluence_score": "5/9 bullish",
+    "news": [],
+    "reasoning": "This trading signal is generated based on a machine learning model that predicts a 61% likelihood of a BUY signal for Apple (AAPL) stock. The top predictive features contributing to this signal are the distance between the stock's price and its 20-day Simple Moving Average (dist_SMA20), the Moving Average Convergence Divergence (MACD), and the MACD histogram. The signal is supported by a confluence of 5 out of 9 bullish technical indicators. Key risk factor: a potential reversal in the MACD trend.",
+    "generated_at": "2026-03-18T13:03:19.081271+00:00"
+  },
+  "MSFT": {
+    "symbol": "MSFT",
+    "display": "MSFT",
+    "name": "Microsoft",
+    "type": "STOCK",
+    "icon": "M",
+    "direction": "SELL",
+    "probability": 0.2455,
+    "confidence": "HIGH",
+    "kelly_size": 15.79,
+    "expected_value": 10.0729,
+    "take_profit": 383.4664,
+    "stop_loss": 407.3818,
+    "current_price": 399.41,
+    "risk_reward": 2.0,
+    "atr": 7.9718,
+    "model_agreement": 0.899,
+    "top_features": [
+      "MACD",
+      "dist_SMA50",
+      "mom_20d"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "49 \u2014 Neutral",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bullish (+1.6839)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "46% (Mid)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "41 \u2014 Neutral",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Volume",
+        "value": "0.74x avg",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 below SMA50",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price below SMA20",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "27% (Low)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "-1.56% ROC",
+        "signal": "BEARISH"
+      }
+    ],
+    "confluence_score": "4/9 bullish",
+    "news": [],
+    "reasoning": "The trading signal for Microsoft (MSFT) is a SELL recommendation with 25% machine learning (ML) confidence. This signal was generated based on the confluence of technical indicators, including MACD, distance from the 50-day Simple Moving Average (dist_SMA50), and momentum (mom_20d). The presence of 4 out of 9 bullish indicators suggests a weakening trend, contributing to the SELL signal. Key risk factor: potential for a short squeeze if the stock price rapidly reverses.",
+    "generated_at": "2026-03-18T13:03:22.334328+00:00"
+  },
+  "GOOGL": {
+    "symbol": "GOOGL",
+    "display": "GOOGL",
+    "name": "Alphabet",
+    "type": "STOCK",
+    "icon": "G",
+    "direction": "BUY",
+    "probability": 0.63,
+    "confidence": "MEDIUM",
+    "kelly_size": 11.13,
+    "expected_value": 6.0918,
+    "take_profit": 324.6094,
+    "stop_loss": 304.0753,
+    "current_price": 310.92,
+    "risk_reward": 2.0,
+    "atr": 6.8447,
+    "model_agreement": 0.978,
+    "top_features": [
+      "pos_52w",
+      "ret_vol",
+      "MACD"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "48 \u2014 Neutral",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bullish (+0.9491)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "75% (Mid)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "89 \u2014 Overbought",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Volume",
+        "value": "0.71x avg",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 below SMA50",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price above SMA20",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "82% (High)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "+1.26% ROC",
+        "signal": "BULLISH"
+      }
+    ],
+    "confluence_score": "5/9 bullish",
+    "news": [],
+    "reasoning": "The BUY signal for Alphabet (GOOGL) was generated based on a 63% machine learning confidence level, driven by top predictive features including positive 52-week momentum, low return volatility, and a bullish MACD indicator. This signal is further supported by technical confluence, with 5 out of 9 indicators pointing to a bullish trend. However, one key risk factor to consider is the potential for a sharp decline if the company's earnings report fails to meet market expectations.",
+    "generated_at": "2026-03-18T13:03:25.410239+00:00"
+  },
+  "AMZN": {
+    "symbol": "AMZN",
+    "display": "AMZN",
+    "name": "Amazon",
+    "type": "STOCK",
+    "icon": "A",
+    "direction": "BUY",
+    "probability": 0.6529,
+    "confidence": "HIGH",
+    "kelly_size": 11.98,
+    "expected_value": 4.9904,
+    "take_profit": 225.6114,
+    "stop_loss": 209.9943,
+    "current_price": 215.2,
+    "risk_reward": 2.0,
+    "atr": 5.2057,
+    "model_agreement": 0.89,
+    "top_features": [
+      "pos_52w",
+      "MACD_hist",
+      "ATR_pct"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "56 \u2014 Neutral",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bullish (+1.0447)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "79% (Mid)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "71 \u2014 Neutral",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Volume",
+        "value": "0.89x avg",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 below SMA50",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price above SMA20",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "55% (Mid)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "+0.41% ROC",
+        "signal": "BULLISH"
+      }
+    ],
+    "confluence_score": "4/9 bullish",
+    "news": [
+      {
+        "title": "Arizona charges Kalshi with criminal misdemeanors, alleging it's an illegal gambling operation",
+        "source": "US Top News and Analysis",
+        "sentiment": "NEUTRAL",
+        "url": "https://www.cnbc.com/2026/03/17/arizona-kalshi-criminal-misdemeanor-charges.html"
+      },
+      {
+        "title": "Elon Musk and SEC in talks to settle lawsuit over Twitter deal",
+        "source": "US Top News and Analysis",
+        "sentiment": "NEUTRAL",
+        "url": "https://www.cnbc.com/2026/03/17/elon-musk-sec-in-talks-to-settle-government-lawsuit-over-twitter-deal.html"
+      }
+    ],
+    "reasoning": "The trading signal for Amazon (AMZN) is a BUY recommendation with 65% machine learning (ML) confidence. This signal is generated based on the confluence of positive technical indicators, including a 4/9 bullish indicator alignment, and top predictive features such as a positive 52-week momentum (pos_52w), a positive MACD histogram (MACD_hist), and a relatively low average true range percentage (ATR_pct). Key risk factor: potential market volatility stemming from ongoing regulatory and litigation concerns.",
+    "generated_at": "2026-03-18T13:03:28.665807+00:00"
+  },
+  "NVDA": {
+    "symbol": "NVDA",
+    "display": "NVDA",
+    "name": "Nvidia",
+    "type": "STOCK",
+    "icon": "N",
+    "direction": "BUY",
+    "probability": 0.7348,
+    "confidence": "HIGH",
+    "kelly_size": 15.05,
+    "expected_value": 6.9862,
+    "take_profit": 193.5323,
+    "stop_loss": 176.1288,
+    "current_price": 181.93,
+    "risk_reward": 2.0,
+    "atr": 5.8012,
+    "model_agreement": 0.865,
+    "top_features": [
+      "MACD",
+      "SMA_cross",
+      "dist_SMA50"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "37 \u2014 Neutral",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bearish (-0.1878)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "35% (Mid)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "37 \u2014 Neutral",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Volume",
+        "value": "0.91x avg",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 below SMA50",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price below SMA20",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "76% (High)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "-1.53% ROC",
+        "signal": "BEARISH"
+      }
+    ],
+    "confluence_score": "4/9 bullish",
+    "news": [
+      {
+        "title": "Nvidia CEO Jensen Huang says OpenClaw is 'definitely the next ChatGPT'",
+        "source": "US Top News and Analysis",
+        "sentiment": "NEUTRAL",
+        "url": "https://www.cnbc.com/2026/03/17/nvidia-ceo-jensen-huang-says-openclaw-is-definitely-the-next-chatgpt.html"
+      },
+      {
+        "title": "Nvidia\u2019s big GTC showcase barely budged the stock. Is that a problem?",
+        "source": "US Top News and Analysis",
+        "sentiment": "NEUTRAL",
+        "url": "https://www.cnbc.com/2026/03/17/nvidias-big-gtc-showcase-barely-budged-the-stock-is-that-a-problem.html"
+      },
+      {
+        "title": "China\u2019s \u2018AI tigers\u2019 see shares surge after Nvidia CEO touts OpenClaw as \u2018next ChatGPT\u2019",
+        "source": "US Top News and Analysis",
+        "sentiment": "BULLISH",
+        "url": "https://www.cnbc.com/2026/03/18/china-ai-zhipu-minimax-after-nvidia-jensen-huang-openclaw-comments.html"
+      }
+    ],
+    "reasoning": "The trading signal for Nvidia (NVDA) is a BUY recommendation with 73% machine learning (ML) confidence, driven by the confluence of technical indicators and recent news. The top predictive features, including MACD and SMA_cross, indicate a potential trend reversal, while the CEO's positive comments on OpenClaw have sparked interest in the AI sector. However, the lack of stock movement following the GTC showcase presents a key risk factor.",
+    "generated_at": "2026-03-18T13:03:31.886222+00:00"
+  },
+  "TSLA": {
+    "symbol": "TSLA",
+    "display": "TSLA",
+    "name": "Tesla",
+    "type": "STOCK",
+    "icon": "T",
+    "direction": "BUY",
+    "probability": 0.765,
+    "confidence": "HIGH",
+    "kelly_size": 16.19,
+    "expected_value": 14.9717,
+    "take_profit": 422.39,
+    "stop_loss": 387.71,
+    "current_price": 399.27,
+    "risk_reward": 2.0,
+    "atr": 11.56,
+    "model_agreement": 0.98,
+    "top_features": [
+      "dist_SMA20",
+      "BB_pct",
+      "MACD_hist"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "39 \u2014 Neutral",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bullish (+0.3978)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "37% (Mid)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "50 \u2014 Neutral",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Volume",
+        "value": "0.79x avg",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 below SMA50",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price below SMA20",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "65% (Mid)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "+0.01% ROC",
+        "signal": "BULLISH"
+      }
+    ],
+    "confluence_score": "5/9 bullish",
+    "news": [
+      {
+        "title": "Tesla to buy $4.3 billion of LG Energy battery cells from disbanded GM plant",
+        "source": "US Top News and Analysis",
+        "sentiment": "BULLISH",
+        "url": "https://www.cnbc.com/2026/03/17/tesla-to-buy-4-point-3-billion-lg-energy-battery-cells-made-in-michigan.html"
+      },
+      {
+        "title": "Elon Musk and SEC in talks to settle lawsuit over Twitter deal",
+        "source": "US Top News and Analysis",
+        "sentiment": "NEUTRAL",
+        "url": "https://www.cnbc.com/2026/03/17/elon-musk-sec-in-talks-to-settle-government-lawsuit-over-twitter-deal.html"
+      }
+    ],
+    "reasoning": "The trading signal for Tesla (TSLA) is a BUY recommendation with 76% machine learning (ML) confidence, driven by the confluence of three key predictive features: a positive distance between the stock's price and the 20-day Simple Moving Average (dist_SMA20), a narrowing Bollinger Bands percentage (BB_pct), and a positive Moving Average Convergence Divergence (MACD) histogram (MACD_hist). This signal is further supported by 5 out of 9 bullish technical indicators. Key risk factor: potential volatility in response to ongoing SEC lawsuit negotiations.",
+    "generated_at": "2026-03-18T13:03:35.205682+00:00"
+  },
+  "META": {
+    "symbol": "META",
+    "display": "META",
+    "name": "Meta",
+    "type": "STOCK",
+    "icon": "M",
+    "direction": "BUY",
+    "probability": 0.6474,
+    "confidence": "MEDIUM",
+    "kelly_size": 11.78,
+    "expected_value": 15.1364,
+    "take_profit": 654.7857,
+    "stop_loss": 606.5971,
+    "current_price": 622.66,
+    "risk_reward": 2.0,
+    "atr": 16.0629,
+    "model_agreement": 0.931,
+    "top_features": [
+      "dist_SMA50",
+      "MACD_hist",
+      "dist_SMA20"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "38 \u2014 Neutral",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bearish (-3.2487)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "7% (Lower)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "22 \u2014 Neutral",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Volume",
+        "value": "0.85x avg",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 below SMA50",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price below SMA20",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "46% (Mid)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "-4.72% ROC",
+        "signal": "BEARISH"
+      }
+    ],
+    "confluence_score": "3/9 bullish",
+    "news": [
+      {
+        "title": "It's not just oil: Aluminum prices have surged as Iran conflict chokes supply",
+        "source": "US Top News and Analysis",
+        "sentiment": "NEUTRAL",
+        "url": "https://www.cnbc.com/2026/03/18/why-aluminum-surged-iran-war.html"
+      },
+      {
+        "title": "Meta's Manus launches desktop app to bring its AI agent onto personal devices amid OpenClaw craze",
+        "source": "US Top News and Analysis",
+        "sentiment": "NEUTRAL",
+        "url": "https://www.cnbc.com/2026/03/18/metas-manus-launches-desktop-app-to-bring-its-ai-agent-onto-personal-devices.html"
+      },
+      {
+        "title": "H.C. Wainwright raises McEwen Mining stock price target on higher metals prices",
+        "source": "All News",
+        "sentiment": "NEUTRAL",
+        "url": "https://www.investing.com/news/analyst-ratings/hc-wainwright-raises-mcewen-mining-stock-price-target-on-higher-metals-prices-93CH-4568365"
+      }
+    ],
+    "reasoning": "The trading signal is a BUY recommendation for Meta (META) with 65% machine learning (ML) confidence. This signal is generated based on the confluence of three top predictive features: a positive distance between the 50-day and 20-day Simple Moving Averages (dist_SMA50), a positive Moving Average Convergence Divergence (MACD) histogram (MACD_hist), and three bullish technical indicators out of nine. Recent news, including a surge in aluminum prices and positive developments in Meta's AI capabilities, may be contributing to this signal. Key risk factor: market volatility due to geopolitical tensions and economic uncertainty.",
+    "generated_at": "2026-03-18T13:03:38.558333+00:00"
+  },
+  "NFLX": {
+    "symbol": "NFLX",
+    "display": "NFLX",
+    "name": "Netflix",
+    "type": "STOCK",
+    "icon": "N",
+    "direction": "HOLD",
+    "probability": 0.4788,
+    "confidence": "LOW",
+    "kelly_size": 7.05,
+    "expected_value": 1.5342,
+    "take_profit": 88.9157,
+    "stop_loss": 97.0821,
+    "current_price": 94.36,
+    "risk_reward": 2.0,
+    "atr": 2.7221,
+    "model_agreement": 0.993,
+    "top_features": [
+      "MACD_hist",
+      "MACD",
+      "pos_52w"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "75 \u2014 Overbought",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bullish (+0.1280)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "61% (Mid)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "66 \u2014 Neutral",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Volume",
+        "value": "0.50x avg",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 above SMA50",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price above SMA20",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "33% (Mid)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "-2.66% ROC",
+        "signal": "BEARISH"
+      }
+    ],
+    "confluence_score": "3/9 bullish",
+    "news": [],
+    "reasoning": "The trading signal for Netflix (NFLX) is a HOLD recommendation with 48% machine learning (ML) confidence. This signal is generated based on the confluence of three bullish technical indicators, including MACD histogram, MACD, and positive 52-week momentum. The model's confidence in this signal is moderate, suggesting a cautious approach to investing in NFLX.\n\nKey risk factor: A potential reversal in the stock's momentum could be triggered by a decline in subscriber growth or increased competition in the streaming market.",
+    "generated_at": "2026-03-18T13:03:41.792041+00:00"
+  },
+  "AMD": {
+    "symbol": "AMD",
+    "display": "AMD",
+    "name": "AMD",
+    "type": "STOCK",
+    "icon": "A",
+    "direction": "HOLD",
+    "probability": 0.5293,
+    "confidence": "LOW",
+    "kelly_size": 5.15,
+    "expected_value": 3.0834,
+    "take_profit": 181.35,
+    "stop_loss": 203.79,
+    "current_price": 196.31,
+    "risk_reward": 2.0,
+    "atr": 7.48,
+    "model_agreement": 0.859,
+    "top_features": [
+      "SMA_cross",
+      "vol_trend",
+      "pos_52w"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "39 \u2014 Neutral",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bullish (+0.4304)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "32% (Mid)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "38 \u2014 Neutral",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Volume",
+        "value": "0.63x avg",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 below SMA50",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price below SMA20",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "63% (Mid)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "-3.41% ROC",
+        "signal": "BEARISH"
+      }
+    ],
+    "confluence_score": "5/9 bullish",
+    "news": [],
+    "reasoning": "The trading signal for AMD is a HOLD recommendation based on a 53% machine learning confidence level. This decision is driven by the confluence of technical indicators, including a short-term moving average crossover (SMA_cross) and a positive 52-week trend (pos_52w), as well as a moderate volatility trend (vol_trend). The signal is further supported by a technical confluence of 5 out of 9 bullish indicators.\n\nKey risk factor: Volatility in the technology sector can lead to sudden market fluctuations, potentially impacting AMD's stock price.",
+    "generated_at": "2026-03-18T13:03:45.426976+00:00"
+  },
+  "CRM": {
+    "symbol": "CRM",
+    "display": "CRM",
+    "name": "Salesforce",
+    "type": "STOCK",
+    "icon": "C",
+    "direction": "HOLD",
+    "probability": 0.5087,
+    "confidence": "LOW",
+    "kelly_size": 5.92,
+    "expected_value": 3.642,
+    "take_profit": 179.9386,
+    "stop_loss": 202.9957,
+    "current_price": 195.31,
+    "risk_reward": 2.0,
+    "atr": 7.6857,
+    "model_agreement": 0.716,
+    "top_features": [
+      "MACD",
+      "stoch_K",
+      "dist_SMA50"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "53 \u2014 Neutral",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bullish (+1.6246)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "58% (Mid)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "37 \u2014 Neutral",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Volume",
+        "value": "0.77x avg",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 below SMA50",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price above SMA20",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "17% (Low)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "+0.21% ROC",
+        "signal": "BULLISH"
+      }
+    ],
+    "confluence_score": "4/9 bullish",
+    "news": [],
+    "reasoning": "The trading signal for Salesforce (CRM) is a HOLD recommendation with 51% machine learning (ML) confidence. This decision is based on the confluence of technical indicators, including MACD, stoch_K, and dist_SMA50, which collectively indicate a bullish trend. The presence of 4 out of 9 bullish indicators further supports this assessment.\n\nKey risk factor: A potential reversal in the trend due to unforeseen market or economic conditions.",
+    "generated_at": "2026-03-18T13:03:48.562183+00:00"
+  },
+  "ORCL": {
+    "symbol": "ORCL",
+    "display": "ORCL",
+    "name": "Oracle",
+    "type": "STOCK",
+    "icon": "O",
+    "direction": "BUY",
+    "probability": 0.5662,
+    "confidence": "MEDIUM",
+    "kelly_size": 8.73,
+    "expected_value": 4.7924,
+    "take_profit": 168.4086,
+    "stop_loss": 147.8307,
+    "current_price": 154.69,
+    "risk_reward": 2.0,
+    "atr": 6.8593,
+    "model_agreement": 0.987,
+    "top_features": [
+      "SMA_cross",
+      "mom_20d",
+      "BB_width"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "57 \u2014 Neutral",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bullish (+1.7230)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "63% (Mid)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "44 \u2014 Neutral",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Volume",
+        "value": "0.72x avg",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 below SMA50",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price above SMA20",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "16% (Low)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "+3.54% ROC",
+        "signal": "BULLISH"
+      }
+    ],
+    "confluence_score": "4/9 bullish",
+    "news": [],
+    "reasoning": "The trading signal for Oracle (ORCL) is a BUY recommendation generated by a machine learning model with 57% confidence. This signal is based on the confluence of three technical indicators: SMA_cross, mom_20d, and BB_width, which suggest a potential upward trend. The signal is further supported by 4 out of 9 bullish indicators, indicating a technical confluence. Key risk factor: potential reversal in market sentiment due to recent economic uncertainty.",
+    "generated_at": "2026-03-18T13:03:51.904834+00:00"
+  },
+  "INTC": {
+    "symbol": "INTC",
+    "display": "INTC",
+    "name": "Intel",
+    "type": "STOCK",
+    "icon": "I",
+    "direction": "BUY",
+    "probability": 0.686,
+    "confidence": "HIGH",
+    "kelly_size": 13.23,
+    "expected_value": 2.4644,
+    "take_profit": 48.7179,
+    "stop_loss": 41.7311,
+    "current_price": 44.06,
+    "risk_reward": 2.0,
+    "atr": 2.3289,
+    "model_agreement": 0.962,
+    "top_features": [
+      "MACD",
+      "mom_20d",
+      "vol_trend"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "43 \u2014 Neutral",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bearish (-0.0795)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "24% (Mid)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "32 \u2014 Neutral",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Volume",
+        "value": "1.08x avg",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 below SMA50",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price below SMA20",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "71% (High)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "-5.81% ROC",
+        "signal": "BEARISH"
+      }
+    ],
+    "confluence_score": "5/9 bullish",
+    "news": [],
+    "reasoning": "The trading signal for Intel (INTC) is a BUY recommendation with 69% machine learning (ML) confidence, driven by the confluence of technical indicators, including MACD, mom_20d, and vol_trend, which collectively indicate a bullish trend. This signal is further supported by the presence of 5 out of 9 bullish indicators. The recent lack of significant news may also be contributing to the signal's confidence.\n\nKey risk factor: A potential reversal in the trend due to unforeseen market or company-specific events.",
+    "generated_at": "2026-03-18T13:03:55.045935+00:00"
+  },
+  "QCOM": {
+    "symbol": "QCOM",
+    "display": "QCOM",
+    "name": "Qualcomm",
+    "type": "STOCK",
+    "icon": "Q",
+    "direction": "BUY",
+    "probability": 0.6735,
+    "confidence": "HIGH",
+    "kelly_size": 12.76,
+    "expected_value": 3.8051,
+    "take_profit": 139.0473,
+    "stop_loss": 127.8613,
+    "current_price": 131.59,
+    "risk_reward": 2.0,
+    "atr": 3.7287,
+    "model_agreement": 0.897,
+    "top_features": [
+      "MACD",
+      "dist_SMA50",
+      "mom_20d"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "24 \u2014 Oversold",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bearish (-0.2552)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "18% (Lower)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "16 \u2014 Oversold",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Volume",
+        "value": "1.06x avg",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 below SMA50",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price below SMA20",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "16% (Low)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "-2.67% ROC",
+        "signal": "BEARISH"
+      }
+    ],
+    "confluence_score": "4/9 bullish",
+    "news": [],
+    "reasoning": "The trading signal for Qualcomm (QCOM) is a BUY recommendation with 67% machine learning confidence, driven by the confluence of technical indicators, including the MACD, distance from the 50-day SMA, and momentum. This signal is supported by 4 out of 9 bullish indicators, suggesting a potential upward trend. However, the recent lack of relevant news may limit the signal's robustness, and a key risk factor is the potential for a surprise earnings miss.",
+    "generated_at": "2026-03-18T13:03:58.161520+00:00"
+  },
+  "PYPL": {
+    "symbol": "PYPL",
+    "display": "PYPL",
+    "name": "PayPal",
+    "type": "STOCK",
+    "icon": "P",
+    "direction": "HOLD",
+    "probability": 0.5036,
+    "confidence": "LOW",
+    "kelly_size": 6.12,
+    "expected_value": 0.7237,
+    "take_profit": 43.1721,
+    "stop_loss": 47.609,
+    "current_price": 46.13,
+    "risk_reward": 2.0,
+    "atr": 1.479,
+    "model_agreement": 0.974,
+    "top_features": [
+      "mom_10d",
+      "MACD_hist",
+      "ATR_pct"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "45 \u2014 Neutral",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bullish (+0.3349)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "62% (Mid)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "52 \u2014 Neutral",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Volume",
+        "value": "0.84x avg",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 below SMA50",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price above SMA20",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "19% (Low)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "+2.47% ROC",
+        "signal": "BULLISH"
+      }
+    ],
+    "confluence_score": "4/9 bullish",
+    "news": [],
+    "reasoning": "The trading signal for PayPal (PYPL) is a HOLD recommendation with 50% machine learning (ML) confidence. This signal is generated based on the confluence of top predictive features, including recent price momentum (mom_10d), MACD histogram, and average true range percentage (ATR_pct), which collectively indicate a neutral market sentiment. However, this signal is somewhat tempered by the presence of only 4 out of 9 bullish technical indicators, suggesting some underlying market uncertainty. \n\nKey risk factor: Market sentiment may shift rapidly in response to unforeseen news or events.",
+    "generated_at": "2026-03-18T13:04:01.272671+00:00"
+  },
+  "SHOP": {
+    "symbol": "SHOP",
+    "display": "SHOP",
+    "name": "Shopify",
+    "type": "STOCK",
+    "icon": "S",
+    "direction": "BUY",
+    "probability": 0.7073,
+    "confidence": "HIGH",
+    "kelly_size": 14.03,
+    "expected_value": 7.4724,
+    "take_profit": 141.1195,
+    "stop_loss": 121.1403,
+    "current_price": 127.8,
+    "risk_reward": 2.0,
+    "atr": 6.6597,
+    "model_agreement": 0.992,
+    "top_features": [
+      "dist_SMA50",
+      "mom_10d",
+      "dist_SMA20"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "57 \u2014 Neutral",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bullish (+0.9150)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "63% (Mid)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "65 \u2014 Neutral",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Volume",
+        "value": "0.48x avg",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 below SMA50",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price above SMA20",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "52% (Mid)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "-1.21% ROC",
+        "signal": "BEARISH"
+      }
+    ],
+    "confluence_score": "3/9 bullish",
+    "news": [],
+    "reasoning": "This BUY signal for Shopify (SHOP) was generated by a machine learning model with 71% confidence, indicating a high likelihood of a price increase. The model's top predictive features, including distance to the 50-day SMA, momentum over the past 10 days, and distance to the 20-day SMA, suggest a bullish trend. The technical confluence of three out of nine bullish indicators further supports this signal. Key risk factor: potential reversal if the stock price fails to break above the 50-day SMA resistance.",
+    "generated_at": "2026-03-18T13:04:04.692785+00:00"
+  },
+  "UBER": {
+    "symbol": "UBER",
+    "display": "UBER",
+    "name": "Uber",
+    "type": "STOCK",
+    "icon": "U",
+    "direction": "SELL",
+    "probability": 0.3924,
+    "confidence": "MEDIUM",
+    "kelly_size": 10.29,
+    "expected_value": 1.9912,
+    "take_profit": 72.9509,
+    "stop_loss": 80.2096,
+    "current_price": 77.79,
+    "risk_reward": 2.0,
+    "atr": 2.4196,
+    "model_agreement": 0.893,
+    "top_features": [
+      "mom_20d",
+      "MACD",
+      "ret_vol"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "64 \u2014 Neutral",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bullish (+0.4814)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "99% (Upper)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "80 \u2014 Overbought",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Volume",
+        "value": "1.65x avg",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 below SMA50",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price above SMA20",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "41% (Mid)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "+7.50% ROC",
+        "signal": "BULLISH"
+      }
+    ],
+    "confluence_score": "4/9 bullish",
+    "news": [],
+    "reasoning": "The trading signal for Uber (UBER) is a SELL recommendation with 39% machine learning confidence. This signal was generated due to the confluence of negative predictive features, including a 20-day momentum indicator (mom_20d) and a high relative volatility (ret_vol), which outweighed the presence of 4 bullish technical indicators. The MACD indicator also contributed to the bearish sentiment. Key risk factor: potential for a short squeeze if the stock experiences a sudden price increase.",
+    "generated_at": "2026-03-18T13:04:07.789317+00:00"
+  },
+  "COIN": {
+    "symbol": "COIN",
+    "display": "COIN",
+    "name": "Coinbase",
+    "type": "STOCK",
+    "icon": "C",
+    "direction": "HOLD",
+    "probability": 0.5118,
+    "confidence": "LOW",
+    "kelly_size": 5.81,
+    "expected_value": 5.0689,
+    "take_profit": 188.4157,
+    "stop_loss": 221.1371,
+    "current_price": 210.23,
+    "risk_reward": 2.0,
+    "atr": 10.9071,
+    "model_agreement": 0.969,
+    "top_features": [
+      "ATR_pct",
+      "BB_width",
+      "RSI_7"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "65 \u2014 Neutral",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bullish (+3.5172)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "86% (Upper)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "92 \u2014 Overbought",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Volume",
+        "value": "0.90x avg",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 below SMA50",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price above SMA20",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "23% (Low)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "+6.98% ROC",
+        "signal": "BULLISH"
+      }
+    ],
+    "confluence_score": "3/9 bullish",
+    "news": [
+      {
+        "title": "Bitcoin Price Prediction: Analyst Warns Bitcoin Could Repeat the Sell the News Trap \u2014 Will Powell Break the Pattern This Time?",
+        "source": "News - Cryptonews",
+        "sentiment": "NEUTRAL",
+        "url": "https://cryptonews.com/news/bitcoin-price-prediction-march-fomc-80k-breakout/"
+      },
+      {
+        "title": "Solana Crypto Stablecoin Liquidity Hits Record Highs as Open Interest Climbs",
+        "source": "News - Cryptonews",
+        "sentiment": "BULLISH",
+        "url": "https://cryptonews.com/news/solana-stablecoin-liquidity-hits-record-open-interest-climbs/"
+      },
+      {
+        "title": "Bitcoin Price Prediction: Rich Dad Poor Dad Author Calls $750,000 \u2014 Is This The \u201cBiggest Bubble Bust\u201d in History?",
+        "source": "News - Cryptonews",
+        "sentiment": "NEUTRAL",
+        "url": "https://cryptonews.com/news/bitcoin-price-prediction-rich-dad-poor-dad-author-calls-750000-is-t-biggest-bubble-bust-in-history-should-you-be-worried/"
+      }
+    ],
+    "reasoning": "The HOLD signal for Coinbase (COIN) is generated based on a 51% machine learning (ML) confidence level, driven by the confluence of three predictive features: ATR_pct, BB_width, and RSI_7. This signal is reinforced by the technical confluence of 3/9 bullish indicators. The recent news on Bitcoin and Solana may have contributed to the market sentiment, but the signal's primary driver is the technical analysis. Key risk factor: Market sentiment can shift rapidly in response to unexpected news or events.",
+    "generated_at": "2026-03-18T13:04:10.876227+00:00"
+  },
+  "PLTR": {
+    "symbol": "PLTR",
+    "display": "PLTR",
+    "name": "Palantir",
+    "type": "STOCK",
+    "icon": "P",
+    "direction": "BUY",
+    "probability": 0.5862,
+    "confidence": "MEDIUM",
+    "kelly_size": 9.48,
+    "expected_value": 4.5163,
+    "take_profit": 166.9851,
+    "stop_loss": 149.1274,
+    "current_price": 155.08,
+    "risk_reward": 2.0,
+    "atr": 5.9526,
+    "model_agreement": 0.975,
+    "top_features": [
+      "dist_SMA50",
+      "vol_trend",
+      "dist_SMA20"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "77 \u2014 Overbought",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bullish (+1.8231)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "76% (Mid)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "78 \u2014 Neutral",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Volume",
+        "value": "0.71x avg",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 below SMA50",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price above SMA20",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "63% (Mid)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "+2.61% ROC",
+        "signal": "BULLISH"
+      }
+    ],
+    "confluence_score": "4/9 bullish",
+    "news": [],
+    "reasoning": "The trading signal for Palantir (PLTR) is a BUY recommendation with 59% machine learning (ML) confidence. This signal is generated based on the confluence of three key predictive features: a distance between the stock's price and its 50-day Simple Moving Average (dist_SMA50), a bullish trend in trading volume (vol_trend), and a distance between the stock's price and its 20-day Simple Moving Average (dist_SMA20). The signal is further supported by 4 out of 9 bullish technical indicators. Key risk factor: potential reversal due to lack of recent news or market sentiment shifts.",
+    "generated_at": "2026-03-18T13:04:13.992053+00:00"
+  },
+  "MSTR": {
+    "symbol": "MSTR",
+    "display": "MSTR",
+    "name": "MicroStrategy",
+    "type": "STOCK",
+    "icon": "M",
+    "direction": "SELL",
+    "probability": 0.206,
+    "confidence": "HIGH",
+    "kelly_size": 17.28,
+    "expected_value": 9.7291,
+    "take_profit": 136.2014,
+    "stop_loss": 157.3193,
+    "current_price": 150.28,
+    "risk_reward": 2.0,
+    "atr": 7.0393,
+    "model_agreement": 0.971,
+    "top_features": [
+      "MACD_signal",
+      "ret_vol",
+      "MACD"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "61 \u2014 Neutral",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bullish (+2.4155)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "100% (Upper)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "92 \u2014 Overbought",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Volume",
+        "value": "0.92x avg",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 below SMA50",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price above SMA20",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "13% (Low)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "+8.54% ROC",
+        "signal": "BULLISH"
+      }
+    ],
+    "confluence_score": "3/9 bullish",
+    "news": [],
+    "reasoning": "The SELL signal for MicroStrategy (MSTR) was generated due to a 21% machine learning (ML) confidence, indicating a moderate likelihood of a price decline. The top predictive features, including MACD_signal and ret_vol, suggest a potential shift in market momentum, while the technical confluence of 3/9 bullish indicators is neutralizing the signal's strength. A key risk factor is the potential for a short squeeze if MSTR's price continues to decline.",
+    "generated_at": "2026-03-18T13:04:17.317313+00:00"
+  },
+  "JPM": {
+    "symbol": "JPM",
+    "display": "JPM",
+    "name": "JPMorgan",
+    "type": "STOCK",
+    "icon": "J",
+    "direction": "BUY",
+    "probability": 0.8067,
+    "confidence": "HIGH",
+    "kelly_size": 17.75,
+    "expected_value": 9.6486,
+    "take_profit": 300.48,
+    "stop_loss": 280.095,
+    "current_price": 286.89,
+    "risk_reward": 2.0,
+    "atr": 6.795,
+    "model_agreement": 0.881,
+    "top_features": [
+      "RSI_14",
+      "dist_SMA20",
+      "BB_pct"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "27 \u2014 Oversold",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bearish (-0.8278)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "24% (Mid)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "26 \u2014 Neutral",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Volume",
+        "value": "0.84x avg",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 below SMA50",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price below SMA20",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "64% (Mid)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "-0.64% ROC",
+        "signal": "BEARISH"
+      }
+    ],
+    "confluence_score": "4/9 bullish",
+    "news": [
+      {
+        "title": "Trump Adds Fuel to Claims That Big Banks Discriminate Against Conservatives",
+        "source": "WSJ.com: Markets",
+        "sentiment": "NEUTRAL",
+        "url": "https://www.wsj.com/articles/trump-big-bank-conservative-bias-accusations-168abb27?mod=rss_markets_main"
+      }
+    ],
+    "reasoning": "The trading signal for JPMorgan (JPM) is a BUY recommendation with 81% machine learning (ML) confidence, driven by the confluence of technical indicators, including RSI_14, dist_SMA20, and BB_pct. The signal is further supported by 4 out of 9 bullish indicators, suggesting a potential upward trend. The recent news about Trump's claims may have contributed to the signal, but its impact is uncertain.\n\nKey risk factor: Market volatility and potential regulatory backlash against big banks could negatively impact JPM's stock price.",
+    "generated_at": "2026-03-18T13:04:20.480432+00:00"
+  },
+  "GS": {
+    "symbol": "GS",
+    "display": "GS",
+    "name": "Goldman Sachs",
+    "type": "STOCK",
+    "icon": "G",
+    "direction": "BUY",
+    "probability": 0.7547,
+    "confidence": "HIGH",
+    "kelly_size": 15.8,
+    "expected_value": 36.6212,
+    "take_profit": 864.9738,
+    "stop_loss": 778.0731,
+    "current_price": 807.04,
+    "risk_reward": 2.0,
+    "atr": 28.9669,
+    "model_agreement": 0.953,
+    "top_features": [
+      "ret_vol",
+      "SMA_cross",
+      "RSI_14"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "25 \u2014 Oversold",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bearish (-6.0805)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "24% (Mid)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "17 \u2014 Oversold",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Volume",
+        "value": "0.76x avg",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 below SMA50",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price below SMA20",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "69% (Mid)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "-3.21% ROC",
+        "signal": "BEARISH"
+      }
+    ],
+    "confluence_score": "4/9 bullish",
+    "news": [
+      {
+        "title": "Micron rides memory price spike into earnings with stock up 62%, drubbing its tech peers",
+        "source": "US Top News and Analysis",
+        "sentiment": "NEUTRAL",
+        "url": "https://www.cnbc.com/2026/03/18/micron-mu-memory-price-spike-earnings.html"
+      },
+      {
+        "title": "Lululemon reports weak guidance as proxy battle, tariffs weigh on bottom line",
+        "source": "US Top News and Analysis",
+        "sentiment": "BEARISH",
+        "url": "https://www.cnbc.com/2026/03/17/lululemon-lulu-earnings-q4-2025.html"
+      },
+      {
+        "title": "Fed\u2019s Powell to deliver a gut check for markets as stocks climb alongside oil prices",
+        "source": "MarketWatch.com - Top Stories",
+        "sentiment": "NEUTRAL",
+        "url": "https://www.marketwatch.com/story/feds-powell-to-deliver-a-gut-check-for-markets-as-stocks-climb-alongside-oil-prices-4c85e342?mod=mw_rss_topstories"
+      }
+    ],
+    "reasoning": "The trading signal for Goldman Sachs (GS) is a BUY recommendation with 75% machine learning (ML) confidence. This signal was generated based on the confluence of three predictive features: high relative volatility (ret_vol), a short-term moving average cross (SMA_cross), and a 14-period relative strength index (RSI_14) indicating oversold conditions. The signal is further supported by 4 out of 9 bullish technical indicators. Key risk factor: potential market volatility ahead of the Fed's Powell speech.",
+    "generated_at": "2026-03-18T13:04:23.646963+00:00"
+  },
+  "BAC": {
+    "symbol": "BAC",
+    "display": "BAC",
+    "name": "Bank of America",
+    "type": "STOCK",
+    "icon": "B",
+    "direction": "BUY",
+    "probability": 0.559,
+    "confidence": "MEDIUM",
+    "kelly_size": 8.46,
+    "expected_value": 0.861,
+    "take_profit": 49.8233,
+    "stop_loss": 46.0083,
+    "current_price": 47.28,
+    "risk_reward": 2.0,
+    "atr": 1.2717,
+    "model_agreement": 0.865,
+    "top_features": [
+      "SMA_cross",
+      "MACD_signal",
+      "mom_10d"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "26 \u2014 Oversold",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bearish (-0.2025)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "20% (Mid)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "11 \u2014 Oversold",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Volume",
+        "value": "0.72x avg",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 below SMA50",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price below SMA20",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "60% (Mid)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "-2.64% ROC",
+        "signal": "BEARISH"
+      }
+    ],
+    "confluence_score": "4/9 bullish",
+    "news": [
+      {
+        "title": "Orlando Bravo pushes back on private markets criticism: 'Everybody's extremely comfortable'",
+        "source": "US Top News and Analysis",
+        "sentiment": "NEUTRAL",
+        "url": "https://www.cnbc.com/2026/03/17/orlando-bravo-pushes-back-on-private-markets-criticism-everybodys-extremely-comfortable.html"
+      }
+    ],
+    "reasoning": "The trading signal for Bank of America (BAC) is a BUY recommendation with 56% machine learning (ML) confidence, driven by the confluence of three predictive features: SMA_cross, MACD_signal, and mom_10d. This signal is also supported by 4 out of 9 bullish technical indicators. Recent news of Orlando Bravo's comments on private markets suggests a positive sentiment shift, contributing to the signal's generation. Key risk factor: potential market volatility due to ongoing economic uncertainty.",
+    "generated_at": "2026-03-18T13:04:26.841893+00:00"
+  },
+  "V": {
+    "symbol": "V",
+    "display": "VISA",
+    "name": "Visa",
+    "type": "STOCK",
+    "icon": "V",
+    "direction": "BUY",
+    "probability": 0.8299,
+    "confidence": "HIGH",
+    "kelly_size": 18.62,
+    "expected_value": 9.0842,
+    "take_profit": 320.6571,
+    "stop_loss": 302.3614,
+    "current_price": 308.46,
+    "risk_reward": 2.0,
+    "atr": 6.0986,
+    "model_agreement": 0.979,
+    "top_features": [
+      "mom_20d",
+      "dist_SMA50",
+      "MACD"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "42 \u2014 Neutral",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bearish (-0.4026)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "22% (Mid)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "12 \u2014 Oversold",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Volume",
+        "value": "0.72x avg",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 below SMA50",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price below SMA20",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "15% (Low)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "-1.90% ROC",
+        "signal": "BEARISH"
+      }
+    ],
+    "confluence_score": "3/9 bullish",
+    "news": [
+      {
+        "title": "The Fed issues its latest interest rate decision Wednesday. Here's what to expect",
+        "source": "US Top News and Analysis",
+        "sentiment": "NEUTRAL",
+        "url": "https://www.cnbc.com/2026/03/17/the-fed-issues-its-latest-interest-rate-decision-wednesday-heres-what-to-expect.html"
+      },
+      {
+        "title": "Disney embarks on new chapter as Josh D'Amaro takes over as CEO",
+        "source": "US Top News and Analysis",
+        "sentiment": "NEUTRAL",
+        "url": "https://www.cnbc.com/2026/03/18/disney-josh-damaro-ceo-new-chapter.html"
+      },
+      {
+        "title": "It's not just oil: Aluminum prices have surged as Iran conflict chokes supply",
+        "source": "US Top News and Analysis",
+        "sentiment": "NEUTRAL",
+        "url": "https://www.cnbc.com/2026/03/18/why-aluminum-surged-iran-war.html"
+      }
+    ],
+    "reasoning": "The trading signal for Visa (V) is a BUY recommendation with 83% machine learning (ML) confidence. This signal is generated based on the confluence of three key predictive features: a positive 20-day momentum (mom_20d), a distance from the 50-day simple moving average (dist_SMA50), and a bullish MACD indicator. The signal is further supported by 3 out of 9 bullish technical indicators. \n\nKey risk factor: The upcoming Fed interest rate decision may lead to increased volatility in the market, potentially impacting Visa's stock price.",
+    "generated_at": "2026-03-18T13:04:30.001024+00:00"
+  },
+  "MA": {
+    "symbol": "MA",
+    "display": "MA",
+    "name": "Mastercard",
+    "type": "STOCK",
+    "icon": "M",
+    "direction": "BUY",
+    "probability": 0.8482,
+    "confidence": "HIGH",
+    "kelly_size": 19.31,
+    "expected_value": 16.9068,
+    "take_profit": 528.47,
+    "stop_loss": 495.635,
+    "current_price": 506.58,
+    "risk_reward": 2.0,
+    "atr": 10.945,
+    "model_agreement": 0.869,
+    "top_features": [
+      "MACD_hist",
+      "dist_SMA20",
+      "RSI_7"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "48 \u2014 Neutral",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bearish (-0.3425)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "33% (Mid)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "36 \u2014 Neutral",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Volume",
+        "value": "0.54x avg",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 below SMA50",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price below SMA20",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "32% (Mid)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "-1.58% ROC",
+        "signal": "BEARISH"
+      }
+    ],
+    "confluence_score": "3/9 bullish",
+    "news": [
+      {
+        "title": "Israel says it has killed Iran\u2019s intelligence minister in third assassination in two days",
+        "source": "US Top News and Analysis",
+        "sentiment": "NEUTRAL",
+        "url": "https://www.cnbc.com/2026/03/18/iran-war-intelligence-esmail-khatib-israel-middle-east-crisis.html"
+      },
+      {
+        "title": "Disney embarks on new chapter as Josh D'Amaro takes over as CEO",
+        "source": "US Top News and Analysis",
+        "sentiment": "NEUTRAL",
+        "url": "https://www.cnbc.com/2026/03/18/disney-josh-damaro-ceo-new-chapter.html"
+      },
+      {
+        "title": "WNBA and players' union reach verbal agreement on landmark new CBA deal",
+        "source": "US Top News and Analysis",
+        "sentiment": "NEUTRAL",
+        "url": "https://www.cnbc.com/2026/03/18/wnba-players-reach-verbal-cba-deal.html"
+      }
+    ],
+    "reasoning": "The trading signal for Mastercard (MA) is a BUY recommendation with 85% machine learning (ML) confidence. This signal was generated based on the confluence of three technical indicators: MACD_hist, dist_SMA20, and RSI_7, which collectively indicate a bullish trend. The recent news environment, characterized by mixed market sentiment, has not significantly impacted the technical analysis, suggesting a potential buying opportunity.\n\nKey risk factor: Market volatility may be heightened by geopolitical tensions, particularly following the recent assassination in Israel.",
+    "generated_at": "2026-03-18T13:04:33.582716+00:00"
+  },
+  "DIS": {
+    "symbol": "DIS",
+    "display": "DIS",
+    "name": "Disney",
+    "type": "STOCK",
+    "icon": "D",
+    "direction": "BUY",
+    "probability": 0.7732,
+    "confidence": "HIGH",
+    "kelly_size": 16.49,
+    "expected_value": 2.5154,
+    "take_profit": 104.1125,
+    "stop_loss": 98.3938,
+    "current_price": 100.3,
+    "risk_reward": 2.0,
+    "atr": 1.9062,
+    "model_agreement": 0.986,
+    "top_features": [
+      "BB_width",
+      "ret_vol",
+      "ATR_pct"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "27 \u2014 Oversold",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bearish (-0.2184)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "23% (Mid)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "22 \u2014 Neutral",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Volume",
+        "value": "0.83x avg",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 below SMA50",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price below SMA20",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "47% (Mid)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "-1.01% ROC",
+        "signal": "BEARISH"
+      }
+    ],
+    "confluence_score": "3/9 bullish",
+    "news": [
+      {
+        "title": "Disney embarks on new chapter as Josh D'Amaro takes over as CEO",
+        "source": "US Top News and Analysis",
+        "sentiment": "NEUTRAL",
+        "url": "https://www.cnbc.com/2026/03/18/disney-josh-damaro-ceo-new-chapter.html"
+      },
+      {
+        "title": "Tesla to buy $4.3 billion of LG Energy battery cells from disbanded GM plant",
+        "source": "US Top News and Analysis",
+        "sentiment": "BULLISH",
+        "url": "https://www.cnbc.com/2026/03/17/tesla-to-buy-4-point-3-billion-lg-energy-battery-cells-made-in-michigan.html"
+      },
+      {
+        "title": "Elon Musk and SEC in talks to settle lawsuit over Twitter deal",
+        "source": "US Top News and Analysis",
+        "sentiment": "NEUTRAL",
+        "url": "https://www.cnbc.com/2026/03/17/elon-musk-sec-in-talks-to-settle-government-lawsuit-over-twitter-deal.html"
+      }
+    ],
+    "reasoning": "The trading signal for Disney (DIS) is a BUY recommendation with 77% machine learning (ML) confidence, driven by the confluence of three key predictive features: BB_width, ret_vol, and ATR_pct. This signal is also supported by 3/9 bullish technical indicators, suggesting a potential upward trend. The recent news of Josh D'Amaro's CEO appointment may contribute to the positive sentiment.\n\nKey risk factor: Market reaction to Elon Musk's SEC settlement talks may impact investor sentiment and potentially disrupt the Disney stock price.",
+    "generated_at": "2026-03-18T13:04:36.817807+00:00"
+  },
+  "BABA": {
+    "symbol": "BABA",
+    "display": "BABA",
+    "name": "Alibaba",
+    "type": "STOCK",
+    "icon": "A",
+    "direction": "BUY",
+    "probability": 0.9206,
+    "confidence": "HIGH",
+    "kelly_size": 22.02,
+    "expected_value": 5.5063,
+    "take_profit": 142.821,
+    "stop_loss": 133.4445,
+    "current_price": 136.57,
+    "risk_reward": 2.0,
+    "atr": 3.1255,
+    "model_agreement": 0.979,
+    "top_features": [
+      "ret_vol",
+      "ATR_pct",
+      "vol_trend"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "27 \u2014 Oversold",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bullish (+0.3181)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "36% (Mid)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "39 \u2014 Neutral",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Volume",
+        "value": "1.00x avg",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 below SMA50",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price below SMA20",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "43% (Mid)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "-0.20% ROC",
+        "signal": "BEARISH"
+      }
+    ],
+    "confluence_score": "5/9 bullish",
+    "news": [],
+    "reasoning": "The trading signal for Alibaba (BABA) is a BUY recommendation with 92% machine learning (ML) confidence. This signal was generated based on the confluence of three key predictive features: return volatility (ret_vol), average true range percentage (ATR_pct), and volume trend (vol_trend), which indicate a potential upward price movement. The signal is further supported by a technical confluence of 5 out of 9 bullish indicators. Key risk factor: potential volatility in the stock price due to market fluctuations.",
+    "generated_at": "2026-03-18T13:04:39.907055+00:00"
+  },
+  "TSM": {
+    "symbol": "TSM",
+    "display": "TSM",
+    "name": "TSMC",
+    "type": "STOCK",
+    "icon": "T",
+    "direction": "BUY",
+    "probability": 0.6085,
+    "confidence": "MEDIUM",
+    "kelly_size": 10.32,
+    "expected_value": 8.5272,
+    "take_profit": 366.6395,
+    "stop_loss": 335.6503,
+    "current_price": 345.98,
+    "risk_reward": 2.0,
+    "atr": 10.3297,
+    "model_agreement": 0.833,
+    "top_features": [
+      "BB_width",
+      "dist_SMA50",
+      "vol_trend"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "30 \u2014 Oversold",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bearish (-3.4832)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "31% (Mid)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "28 \u2014 Neutral",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Volume",
+        "value": "0.84x avg",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 above SMA50",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price below SMA20",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "83% (High)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "-0.04% ROC",
+        "signal": "BEARISH"
+      }
+    ],
+    "confluence_score": "5/9 bullish",
+    "news": [],
+    "reasoning": "This trading signal was generated based on a machine learning model that analyzed technical indicators and stock performance data for TSMC (TSM). The model identified a potential buying opportunity with a 61% confidence level, driven by the stock's recent price action, volatility, and moving averages. The signal is supported by technical confluence, with 5 out of 9 indicators pointing to a bullish trend. \n\nKey risk factor: The signal's reliance on technical indicators may lead to false signals if the market experiences a sudden shift in sentiment or unexpected news.",
+    "generated_at": "2026-03-18T13:04:43.079752+00:00"
+  },
+  "ASML": {
+    "symbol": "ASML",
+    "display": "ASML",
+    "name": "ASML",
+    "type": "STOCK",
+    "icon": "A",
+    "direction": "BUY",
+    "probability": 0.6711,
+    "confidence": "HIGH",
+    "kelly_size": 12.66,
+    "expected_value": 45.8263,
+    "take_profit": 1479.6187,
+    "stop_loss": 1343.9307,
+    "current_price": 1389.16,
+    "risk_reward": 2.0,
+    "atr": 45.2293,
+    "model_agreement": 0.882,
+    "top_features": [
+      "mom_20d",
+      "RSI_14",
+      "dist_SMA50"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "36 \u2014 Neutral",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bearish (-8.0950)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "40% (Mid)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "47 \u2014 Neutral",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Volume",
+        "value": "0.76x avg",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 above SMA50",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price below SMA20",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "84% (High)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "+0.42% ROC",
+        "signal": "BULLISH"
+      }
+    ],
+    "confluence_score": "6/9 bullish",
+    "news": [],
+    "reasoning": "The trading signal for ASML is a BUY recommendation with 67% machine learning (ML) confidence. This is based on the confluence of three key predictive features: a 20-day momentum (mom_20d) indicator, a 14-day Relative Strength Index (RSI_14), and a distance from the 50-day Simple Moving Average (dist_SMA50). The signal is further supported by 6 out of 9 bullish technical indicators, indicating a strong technical confluence. Key risk factor: potential for a reversal if the RSI_14 indicator enters overbought territory.",
+    "generated_at": "2026-03-18T13:04:46.245771+00:00"
+  },
+  "ABNB": {
+    "symbol": "ABNB",
+    "display": "ABNB",
+    "name": "Airbnb",
+    "type": "STOCK",
+    "icon": "A",
+    "direction": "BUY",
+    "probability": 0.6064,
+    "confidence": "MEDIUM",
+    "kelly_size": 10.24,
+    "expected_value": 3.6379,
+    "take_profit": 140.8307,
+    "stop_loss": 127.5096,
+    "current_price": 131.95,
+    "risk_reward": 2.0,
+    "atr": 4.4404,
+    "model_agreement": 0.846,
+    "top_features": [
+      "MACD",
+      "dist_SMA50",
+      "ATR_pct"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "50 \u2014 Neutral",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bearish (-0.3536)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "57% (Mid)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "47 \u2014 Neutral",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Volume",
+        "value": "0.59x avg",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 above SMA50",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price above SMA20",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "73% (High)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "-0.37% ROC",
+        "signal": "BEARISH"
+      }
+    ],
+    "confluence_score": "5/9 bullish",
+    "news": [],
+    "reasoning": "The trading signal for Airbnb (ABNB) is a BUY recommendation generated by a machine learning model with 61% confidence. The model identified key technical indicators, including MACD, distance from the 50-day SMA, and ATR percentage, as predictive features. The signal is reinforced by a confluence of 5 out of 9 bullish indicators, suggesting a potential upward trend. Key risk factor: potential reversal due to unaccounted fundamental news or market sentiment shifts.",
+    "generated_at": "2026-03-18T13:04:49.475436+00:00"
+  },
+  "SNOW": {
+    "symbol": "SNOW",
+    "display": "SNOW",
+    "name": "Snowflake",
+    "type": "STOCK",
+    "icon": "S",
+    "direction": "BUY",
+    "probability": 0.6583,
+    "confidence": "HIGH",
+    "kelly_size": 12.19,
+    "expected_value": 8.2906,
+    "take_profit": 191.6079,
+    "stop_loss": 166.0961,
+    "current_price": 174.6,
+    "risk_reward": 2.0,
+    "atr": 8.5039,
+    "model_agreement": 0.879,
+    "top_features": [
+      "vol_trend",
+      "RSI_14",
+      "MACD"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "55 \u2014 Neutral",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bullish (+1.6519)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "56% (Mid)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "64 \u2014 Neutral",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Volume",
+        "value": "0.65x avg",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 below SMA50",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price above SMA20",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "34% (Mid)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "-0.41% ROC",
+        "signal": "BEARISH"
+      }
+    ],
+    "confluence_score": "2/9 bullish",
+    "news": [],
+    "reasoning": "The trading signal for Snowflake (SNOW) is a BUY recommendation with 66% machine learning (ML) confidence, driven by the confluence of three predictive features: vol_trend, RSI_14, and MACD. These indicators suggest a potential upward trend, despite only 2 out of 9 technical indicators being bullish. The signal is generated based on a quantitative analysis of historical data, without consideration of recent news. Key risk factor: potential reversal due to market sentiment shift.",
+    "generated_at": "2026-03-18T13:04:52.554539+00:00"
+  },
+  "NET": {
+    "symbol": "NET",
+    "display": "NET",
+    "name": "Cloudflare",
+    "type": "STOCK",
+    "icon": "C",
+    "direction": "BUY",
+    "probability": 0.6575,
+    "confidence": "HIGH",
+    "kelly_size": 12.16,
+    "expected_value": 8.72,
+    "take_profit": 229.4523,
+    "stop_loss": 202.5539,
+    "current_price": 211.52,
+    "risk_reward": 2.0,
+    "atr": 8.9661,
+    "model_agreement": 0.89,
+    "top_features": [
+      "SMA_cross",
+      "pos_52w",
+      "dist_SMA20"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "83 \u2014 Overbought",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bullish (+3.0513)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "81% (Upper)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "88 \u2014 Overbought",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Volume",
+        "value": "0.75x avg",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 above SMA50",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price above SMA20",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "72% (High)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "+1.94% ROC",
+        "signal": "BULLISH"
+      }
+    ],
+    "confluence_score": "5/9 bullish",
+    "news": [
+      {
+        "title": "Bittensor (TAO) Crypto Surges 46% as Covenant-72B Launch Triggers Subnet Explosion",
+        "source": "News - Cryptonews",
+        "sentiment": "NEUTRAL",
+        "url": "https://cryptonews.com/news/bittensor-tao-surges-46-covenant-72b-subnet-explosion/"
+      },
+      {
+        "title": "Regional Banks Declare War on Stablecoins With ZKsync-Based Cari Network",
+        "source": "News - Cryptonews",
+        "sentiment": "NEUTRAL",
+        "url": "https://cryptonews.com/news/regional-banks-launch-cari-network-zksync/"
+      },
+      {
+        "title": "Bitcoin Price Prediction: BlackRock Just Bought $600 Million in BTC \u2014 What Do They Know?",
+        "source": "News - Cryptonews",
+        "sentiment": "NEUTRAL",
+        "url": "https://cryptonews.com/news/bitcoin-price-prediction-blackrock-just-bought-600-million-in-btc-what-do-they-know/"
+      }
+    ],
+    "reasoning": "This trading signal is generated based on a machine learning model with 66% confidence, indicating a potential buying opportunity for Cloudflare (NET). The model's top predictive features, including SMA_cross and pos_52w, suggest a bullish trend, supported by 5 out of 9 bullish technical indicators. Recent news on cryptocurrency market developments and Bitcoin price prediction may be influencing the model's confidence in this signal. Key risk factor: potential volatility in the cryptocurrency market.",
+    "generated_at": "2026-03-18T13:04:55.657765+00:00"
+  },
+  "GC=F": {
+    "symbol": "GC=F",
+    "display": "GOLD",
+    "name": "Gold Futures",
+    "type": "COMMODITY",
+    "icon": "G",
+    "direction": "BUY",
+    "probability": 0.812,
+    "confidence": "HIGH",
+    "kelly_size": 17.95,
+    "expected_value": 132.04,
+    "take_profit": 5074.7141,
+    "stop_loss": 4798.8427,
+    "current_price": 4890.7998,
+    "risk_reward": 2.0,
+    "atr": 91.9571,
+    "model_agreement": 0.92,
+    "top_features": [
+      "range_pct",
+      "MACD_hist",
+      "MACD_signal"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "36 \u2014 Neutral",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bearish (-41.0831)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "-6% (Lower)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "3 \u2014 Oversold",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Volume",
+        "value": "17.34x avg",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 above SMA50",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price below SMA20",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "74% (High)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "-5.35% ROC",
+        "signal": "BEARISH"
+      }
+    ],
+    "confluence_score": "6/9 bullish",
+    "news": [
+      {
+        "title": "It\u2019s a \u2018black swan\u2019 moment in oil but nowhere else. The stock market is at risk of a 20% fall, say these strategists.",
+        "source": "MarketWatch.com - Top Stories",
+        "sentiment": "NEUTRAL",
+        "url": "https://www.marketwatch.com/story/why-the-real-black-swan-of-the-iran-war-is-the-lack-of-them-in-stocks-bonds-or-almost-anything-but-oil-79fa1504?mod=mw_rss_topstories"
+      },
+      {
+        "title": "H.C. Wainwright raises Dakota Gold stock price target on drilling results",
+        "source": "All News",
+        "sentiment": "NEUTRAL",
+        "url": "https://www.investing.com/news/analyst-ratings/hc-wainwright-raises-dakota-gold-stock-price-target-on-drilling-results-93CH-4568366"
+      },
+      {
+        "title": "Comex Gold, Silver Settle Lower",
+        "source": "WSJ.com: Markets",
+        "sentiment": "NEUTRAL",
+        "url": "https://www.wsj.com/articles/gold-edges-lower-feds-rate-decision-in-focus-09dbfceb?mod=rss_markets_main"
+      }
+    ],
+    "reasoning": "This trading signal is generated due to a BUY recommendation for Gold Futures (GC=F) with 81% model confidence, driven by top predictive features such as range_pct, MACD_hist, and MACD_signal, as well as technical confluence from 6/9 bullish indicators. The recent news of a potential stock market downturn and a raised price target for Dakota Gold may contribute to increased demand for gold as a safe-haven asset. Key risk factor: potential market volatility and gold price fluctuations.",
+    "generated_at": "2026-03-18T13:04:58.734934+00:00"
+  },
+  "CL=F": {
+    "symbol": "CL=F",
+    "display": "OIL",
+    "name": "Crude Oil",
+    "type": "COMMODITY",
+    "icon": "O",
+    "direction": "SELL",
+    "probability": 0.2184,
+    "confidence": "HIGH",
+    "kelly_size": 16.81,
+    "expected_value": 13.2817,
+    "take_profit": 77.3686,
+    "stop_loss": 106.9957,
+    "current_price": 97.12,
+    "risk_reward": 2.0,
+    "atr": 9.8757,
+    "model_agreement": 0.907,
+    "top_features": [
+      "stoch_K",
+      "mom_20d",
+      "mom_10d"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "75 \u2014 Overbought",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bullish (+1.5934)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "83% (Upper)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "59 \u2014 Neutral",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Volume",
+        "value": "0.39x avg",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 above SMA50",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price above SMA20",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "65% (Mid)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "+11.31% ROC",
+        "signal": "BULLISH"
+      }
+    ],
+    "confluence_score": "5/9 bullish",
+    "news": [
+      {
+        "title": "It's not just oil: Aluminum prices have surged as Iran conflict chokes supply",
+        "source": "US Top News and Analysis",
+        "sentiment": "NEUTRAL",
+        "url": "https://www.cnbc.com/2026/03/18/why-aluminum-surged-iran-war.html"
+      },
+      {
+        "title": "Fed to still cut rates this year, even as high oil prices spark an uptick in inflation: CNBC Fed Survey",
+        "source": "US Top News and Analysis",
+        "sentiment": "BULLISH",
+        "url": "https://www.cnbc.com/2026/03/18/cnbc-fed-survey-elevated-oil-but-a-rate-cut.html"
+      },
+      {
+        "title": "Cuba partially restores power as President D\u00edaz-Canel vows \u2018unyielding resistance\u2019 to U.S. oil blockade",
+        "source": "US Top News and Analysis",
+        "sentiment": "NEUTRAL",
+        "url": "https://www.cnbc.com/2026/03/18/cuba-crisis-trump-energy-power-blackout-fuel-havana.html"
+      }
+    ],
+    "reasoning": "The trading signal for Crude Oil (CL=F) is a SELL recommendation with 22% Machine Learning (ML) confidence. This signal is generated based on the confluence of three key technical indicators: stoch_K, mom_20d, and mom_10d, which suggest a potential reversal in the asset's upward trend. The recent news on Iran's conflict, Fed rate cuts, and Cuba's power restoration may be contributing factors to this signal, but a key risk factor is the potential for a supply disruption to be offset by the Fed's rate cut, leading to a short-term price rebound.",
+    "generated_at": "2026-03-18T13:05:01.889259+00:00"
+  },
+  "SI=F": {
+    "symbol": "SI=F",
+    "display": "SILVER",
+    "name": "Silver Futures",
+    "type": "COMMODITY",
+    "icon": "S",
+    "direction": "BUY",
+    "probability": 0.8504,
+    "confidence": "HIGH",
+    "kelly_size": 19.39,
+    "expected_value": 7.1844,
+    "take_profit": 87.4524,
+    "stop_loss": 73.5588,
+    "current_price": 78.19,
+    "risk_reward": 2.0,
+    "atr": 4.6312,
+    "model_agreement": 0.967,
+    "top_features": [
+      "MACD",
+      "MACD_signal",
+      "BB_width"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "37 \u2014 Neutral",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bearish (-0.8080)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "13% (Lower)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "3 \u2014 Oversold",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Volume",
+        "value": "5.17x avg",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 below SMA50",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price below SMA20",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "54% (Mid)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "-8.08% ROC",
+        "signal": "BEARISH"
+      }
+    ],
+    "confluence_score": "5/9 bullish",
+    "news": [],
+    "reasoning": "This trading signal for Silver Futures (SI=F) was generated based on a machine learning model with 85% confidence, indicating a high likelihood of a price increase. The model's top predictive features, including the Moving Average Convergence Divergence (MACD) and Bollinger Band width, suggest a bullish trend. The signal is further supported by technical confluence from 5 out of 9 bullish indicators. Key risk factor: potential for price reversal due to unexpected market events.",
+    "generated_at": "2026-03-18T13:05:05.021916+00:00"
+  },
+  "NG=F": {
+    "symbol": "NG=F",
+    "display": "NAT GAS",
+    "name": "Natural Gas",
+    "type": "COMMODITY",
+    "icon": "N",
+    "direction": "BUY",
+    "probability": 0.8387,
+    "confidence": "HIGH",
+    "kelly_size": 18.95,
+    "expected_value": 0.3004,
+    "take_profit": 3.4503,
+    "stop_loss": 2.8559,
+    "current_price": 3.054,
+    "risk_reward": 2.0,
+    "atr": 0.1981,
+    "model_agreement": 0.975,
+    "top_features": [
+      "pos_52w",
+      "RSI_7",
+      "vol_trend"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "59 \u2014 Neutral",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bullish (+0.0454)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "56% (Mid)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "35 \u2014 Neutral",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Volume",
+        "value": "0.23x avg",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 below SMA50",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price above SMA20",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "8% (Low)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "-4.83% ROC",
+        "signal": "BEARISH"
+      }
+    ],
+    "confluence_score": "3/9 bullish",
+    "news": [],
+    "reasoning": "This trading signal for Natural Gas (NG=F) is generated based on a 84% machine learning (ML) confidence level, indicating a high degree of predictive accuracy. The top predictive features, including the price over the past 52 weeks (pos_52w), Relative Strength Index (RSI_7), and volume trend, suggest a bullish trend. The confluence of 3 out of 9 bullish indicators further supports this signal.\n\nKey risk factor: A potential reversal in the price trend if the current bullish momentum is not sustained.",
+    "generated_at": "2026-03-18T13:05:08.123428+00:00"
+  },
+  "HG=F": {
+    "symbol": "HG=F",
+    "display": "COPPER",
+    "name": "Copper",
+    "type": "COMMODITY",
+    "icon": "C",
+    "direction": "BUY",
+    "probability": 0.7355,
+    "confidence": "HIGH",
+    "kelly_size": 15.08,
+    "expected_value": 0.1501,
+    "take_profit": 5.9243,
+    "stop_loss": 5.5511,
+    "current_price": 5.6755,
+    "risk_reward": 2.0,
+    "atr": 0.1244,
+    "model_agreement": 0.976,
+    "top_features": [
+      "pos_52w",
+      "dist_SMA50",
+      "ret_vol"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "36 \u2014 Neutral",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bearish (-0.0191)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "10% (Lower)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "10 \u2014 Oversold",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Volume",
+        "value": "4.73x avg",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 below SMA50",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price below SMA20",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "65% (Mid)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "-2.91% ROC",
+        "signal": "BEARISH"
+      }
+    ],
+    "confluence_score": "5/9 bullish",
+    "news": [],
+    "reasoning": "The trading signal suggests a BUY opportunity for Copper (HG=F) with 74% model confidence. This signal is generated based on the confluence of strong predictive features, including a positive 52-week outlook, a significant distance between the short-term and long-term moving averages, and low volatility. The technical confluence of 5 out of 9 bullish indicators also supports this signal. Key risk factor: potential for a sudden increase in global economic uncertainty, which could negatively impact copper prices.",
+    "generated_at": "2026-03-18T13:05:11.155527+00:00"
+  },
+  "ZW=F": {
+    "symbol": "ZW=F",
+    "display": "WHEAT",
+    "name": "Wheat",
+    "type": "COMMODITY",
+    "icon": "W",
+    "direction": "SELL",
+    "probability": 0.3939,
+    "confidence": "MEDIUM",
+    "kelly_size": 10.23,
+    "expected_value": 9.7032,
+    "take_profit": 568.7857,
+    "stop_loss": 604.3571,
+    "current_price": 592.5,
+    "risk_reward": 2.0,
+    "atr": 11.8571,
+    "model_agreement": 0.848,
+    "top_features": [
+      "mom_20d",
+      "stoch_K",
+      "dist_SMA50"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "56 \u2014 Neutral",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bearish (-0.7294)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "64% (Mid)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "38 \u2014 Neutral",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Volume",
+        "value": "0.57x avg",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 above SMA50",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price above SMA20",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "70% (High)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "+0.68% ROC",
+        "signal": "BULLISH"
+      }
+    ],
+    "confluence_score": "5/9 bullish",
+    "news": [],
+    "reasoning": "The trading signal for Wheat (ZW=F) is a SELL recommendation with 39% model confidence. This signal was generated based on a combination of technical indicators, including a 20-day momentum (mom_20d) decline, a stochastic oscillator (stoch_K) indicating overbought conditions, and a distance from the 50-day Simple Moving Average (dist_SMA50). The signal is somewhat contrarian given the presence of 5/9 bullish technical indicators. \n\nKey risk factor: A potential reversal in market sentiment due to unaccounted fundamental factors or news.",
+    "generated_at": "2026-03-18T13:05:14.713472+00:00"
+  }
+}
