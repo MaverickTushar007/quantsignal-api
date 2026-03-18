@@ -1,0 +1,106 @@
+"""
+data/universe.py
+Single source of truth for all 86 assets.
+Every other module imports TICKERS from here.
+"""
+
+TICKERS = [
+    # ── Crypto ───────────────────────────────────────────────
+    {"symbol": "BTC-USD",   "display": "BTC/USD",   "name": "Bitcoin",          "type": "CRYPTO",    "icon": "₿"},
+    {"symbol": "ETH-USD",   "display": "ETH/USD",   "name": "Ethereum",         "type": "CRYPTO",    "icon": "Ξ"},
+    {"symbol": "SOL-USD",   "display": "SOL/USD",   "name": "Solana",           "type": "CRYPTO",    "icon": "◎"},
+    {"symbol": "BNB-USD",   "display": "BNB/USD",   "name": "BNB",              "type": "CRYPTO",    "icon": "B"},
+    {"symbol": "XRP-USD",   "display": "XRP/USD",   "name": "XRP",              "type": "CRYPTO",    "icon": "X"},
+    {"symbol": "DOGE-USD",  "display": "DOGE/USD",  "name": "Dogecoin",         "type": "CRYPTO",    "icon": "D"},
+    {"symbol": "ADA-USD",   "display": "ADA/USD",   "name": "Cardano",          "type": "CRYPTO",    "icon": "A"},
+    {"symbol": "AVAX-USD",  "display": "AVAX/USD",  "name": "Avalanche",        "type": "CRYPTO",    "icon": "A"},
+    {"symbol": "MATIC-USD", "display": "MATIC",     "name": "Polygon",          "type": "CRYPTO",    "icon": "M"},
+    {"symbol": "DOT-USD",   "display": "DOT/USD",   "name": "Polkadot",         "type": "CRYPTO",    "icon": "D"},
+    {"symbol": "LINK-USD",  "display": "LINK/USD",  "name": "Chainlink",        "type": "CRYPTO",    "icon": "L"},
+    {"symbol": "LTC-USD",   "display": "LTC/USD",   "name": "Litecoin",         "type": "CRYPTO",    "icon": "L"},
+    {"symbol": "ATOM-USD",  "display": "ATOM/USD",  "name": "Cosmos",           "type": "CRYPTO",    "icon": "A"},
+    {"symbol": "NEAR-USD",  "display": "NEAR/USD",  "name": "NEAR Protocol",    "type": "CRYPTO",    "icon": "N"},
+    {"symbol": "APT-USD",   "display": "APT/USD",   "name": "Aptos",            "type": "CRYPTO",    "icon": "A"},
+    {"symbol": "ARB-USD",   "display": "ARB/USD",   "name": "Arbitrum",         "type": "CRYPTO",    "icon": "A"},
+    {"symbol": "OP-USD",    "display": "OP/USD",    "name": "Optimism",         "type": "CRYPTO",    "icon": "O"},
+    {"symbol": "INJ-USD",   "display": "INJ/USD",   "name": "Injective",        "type": "CRYPTO",    "icon": "I"},
+    {"symbol": "FET-USD",   "display": "FET/USD",   "name": "Fetch.ai",         "type": "CRYPTO",    "icon": "F"},
+    {"symbol": "RENDER-USD","display": "RNDR",      "name": "Render",           "type": "CRYPTO",    "icon": "R"},
+    # ── Indices ──────────────────────────────────────────────
+    {"symbol": "^GSPC",     "display": "S&P 500",   "name": "S&P 500",          "type": "INDEX",     "icon": "S"},
+    {"symbol": "^IXIC",     "display": "NASDAQ",    "name": "Nasdaq",           "type": "INDEX",     "icon": "N"},
+    {"symbol": "^DJI",      "display": "DOW",       "name": "Dow Jones",        "type": "INDEX",     "icon": "D"},
+    {"symbol": "^RUT",      "display": "RUT",       "name": "Russell 2000",     "type": "INDEX",     "icon": "R"},
+    {"symbol": "^VIX",      "display": "VIX",       "name": "Volatility",       "type": "INDEX",     "icon": "V"},
+    {"symbol": "^FTSE",     "display": "FTSE 100",  "name": "FTSE 100",         "type": "INDEX",     "icon": "F"},
+    {"symbol": "^N225",     "display": "NIKKEI",    "name": "Nikkei 225",       "type": "INDEX",     "icon": "N"},
+    {"symbol": "^GDAXI",    "display": "DAX",       "name": "German DAX",       "type": "INDEX",     "icon": "D"},
+    {"symbol": "^HSI",      "display": "HANG SENG", "name": "Hang Seng",        "type": "INDEX",     "icon": "H"},
+    # ── ETFs ─────────────────────────────────────────────────
+    {"symbol": "SPY",       "display": "SPY",       "name": "S&P 500 ETF",      "type": "ETF",       "icon": "S"},
+    {"symbol": "QQQ",       "display": "QQQ",       "name": "Nasdaq ETF",       "type": "ETF",       "icon": "Q"},
+    {"symbol": "IWM",       "display": "IWM",       "name": "Russell ETF",      "type": "ETF",       "icon": "I"},
+    {"symbol": "GLD",       "display": "GLD",       "name": "Gold ETF",         "type": "ETF",       "icon": "G"},
+    {"symbol": "SLV",       "display": "SLV",       "name": "Silver ETF",       "type": "ETF",       "icon": "S"},
+    {"symbol": "TLT",       "display": "TLT",       "name": "20Y Treasury",     "type": "ETF",       "icon": "T"},
+    {"symbol": "XLE",       "display": "XLE",       "name": "Energy ETF",       "type": "ETF",       "icon": "E"},
+    {"symbol": "XLF",       "display": "XLF",       "name": "Financials ETF",   "type": "ETF",       "icon": "F"},
+    {"symbol": "XLK",       "display": "XLK",       "name": "Tech ETF",         "type": "ETF",       "icon": "T"},
+    {"symbol": "XLV",       "display": "XLV",       "name": "Healthcare ETF",   "type": "ETF",       "icon": "H"},
+    {"symbol": "ARKK",      "display": "ARKK",      "name": "ARK Innovation",   "type": "ETF",       "icon": "A"},
+    {"symbol": "IEMG",      "display": "IEMG",      "name": "Emerging Markets", "type": "ETF",       "icon": "E"},
+    {"symbol": "HYG",       "display": "HYG",       "name": "High Yield Bond",  "type": "ETF",       "icon": "H"},
+    # ── Stocks ───────────────────────────────────────────────
+    {"symbol": "AAPL",      "display": "AAPL",      "name": "Apple",            "type": "STOCK",     "icon": "A"},
+    {"symbol": "MSFT",      "display": "MSFT",      "name": "Microsoft",        "type": "STOCK",     "icon": "M"},
+    {"symbol": "GOOGL",     "display": "GOOGL",     "name": "Alphabet",         "type": "STOCK",     "icon": "G"},
+    {"symbol": "AMZN",      "display": "AMZN",      "name": "Amazon",           "type": "STOCK",     "icon": "A"},
+    {"symbol": "NVDA",      "display": "NVDA",      "name": "Nvidia",           "type": "STOCK",     "icon": "N"},
+    {"symbol": "TSLA",      "display": "TSLA",      "name": "Tesla",            "type": "STOCK",     "icon": "T"},
+    {"symbol": "META",      "display": "META",      "name": "Meta",             "type": "STOCK",     "icon": "M"},
+    {"symbol": "NFLX",      "display": "NFLX",      "name": "Netflix",          "type": "STOCK",     "icon": "N"},
+    {"symbol": "AMD",       "display": "AMD",       "name": "AMD",              "type": "STOCK",     "icon": "A"},
+    {"symbol": "CRM",       "display": "CRM",       "name": "Salesforce",       "type": "STOCK",     "icon": "C"},
+    {"symbol": "ORCL",      "display": "ORCL",      "name": "Oracle",           "type": "STOCK",     "icon": "O"},
+    {"symbol": "INTC",      "display": "INTC",      "name": "Intel",            "type": "STOCK",     "icon": "I"},
+    {"symbol": "QCOM",      "display": "QCOM",      "name": "Qualcomm",         "type": "STOCK",     "icon": "Q"},
+    {"symbol": "PYPL",      "display": "PYPL",      "name": "PayPal",           "type": "STOCK",     "icon": "P"},
+    {"symbol": "SHOP",      "display": "SHOP",      "name": "Shopify",          "type": "STOCK",     "icon": "S"},
+    {"symbol": "UBER",      "display": "UBER",      "name": "Uber",             "type": "STOCK",     "icon": "U"},
+    {"symbol": "COIN",      "display": "COIN",      "name": "Coinbase",         "type": "STOCK",     "icon": "C"},
+    {"symbol": "PLTR",      "display": "PLTR",      "name": "Palantir",         "type": "STOCK",     "icon": "P"},
+    {"symbol": "MSTR",      "display": "MSTR",      "name": "MicroStrategy",    "type": "STOCK",     "icon": "M"},
+    {"symbol": "JPM",       "display": "JPM",       "name": "JPMorgan",         "type": "STOCK",     "icon": "J"},
+    {"symbol": "GS",        "display": "GS",        "name": "Goldman Sachs",    "type": "STOCK",     "icon": "G"},
+    {"symbol": "BAC",       "display": "BAC",       "name": "Bank of America",  "type": "STOCK",     "icon": "B"},
+    {"symbol": "V",         "display": "VISA",      "name": "Visa",             "type": "STOCK",     "icon": "V"},
+    {"symbol": "MA",        "display": "MA",        "name": "Mastercard",       "type": "STOCK",     "icon": "M"},
+    {"symbol": "DIS",       "display": "DIS",       "name": "Disney",           "type": "STOCK",     "icon": "D"},
+    {"symbol": "BABA",      "display": "BABA",      "name": "Alibaba",          "type": "STOCK",     "icon": "A"},
+    {"symbol": "TSM",       "display": "TSM",       "name": "TSMC",             "type": "STOCK",     "icon": "T"},
+    {"symbol": "ASML",      "display": "ASML",      "name": "ASML",             "type": "STOCK",     "icon": "A"},
+    {"symbol": "ABNB",      "display": "ABNB",      "name": "Airbnb",           "type": "STOCK",     "icon": "A"},
+    {"symbol": "SNOW",      "display": "SNOW",      "name": "Snowflake",        "type": "STOCK",     "icon": "S"},
+    {"symbol": "NET",       "display": "NET",       "name": "Cloudflare",       "type": "STOCK",     "icon": "C"},
+    # ── Commodities ──────────────────────────────────────────
+    {"symbol": "GC=F",      "display": "GOLD",      "name": "Gold Futures",     "type": "COMMODITY", "icon": "G"},
+    {"symbol": "CL=F",      "display": "OIL",       "name": "Crude Oil",        "type": "COMMODITY", "icon": "O"},
+    {"symbol": "SI=F",      "display": "SILVER",    "name": "Silver Futures",   "type": "COMMODITY", "icon": "S"},
+    {"symbol": "NG=F",      "display": "NAT GAS",   "name": "Natural Gas",      "type": "COMMODITY", "icon": "N"},
+    {"symbol": "HG=F",      "display": "COPPER",    "name": "Copper",           "type": "COMMODITY", "icon": "C"},
+    {"symbol": "ZW=F",      "display": "WHEAT",     "name": "Wheat",            "type": "COMMODITY", "icon": "W"},
+    # ── Forex ────────────────────────────────────────────────
+    {"symbol": "EURUSD=X",  "display": "EUR/USD",   "name": "Euro/Dollar",      "type": "FOREX",     "icon": "€"},
+    {"symbol": "GBPUSD=X",  "display": "GBP/USD",   "name": "Pound/Dollar",     "type": "FOREX",     "icon": "£"},
+    {"symbol": "USDJPY=X",  "display": "USD/JPY",   "name": "Dollar/Yen",       "type": "FOREX",     "icon": "¥"},
+    {"symbol": "AUDUSD=X",  "display": "AUD/USD",   "name": "Aussie/Dollar",    "type": "FOREX",     "icon": "A"},
+    {"symbol": "USDCAD=X",  "display": "USD/CAD",   "name": "Dollar/CAD",       "type": "FOREX",     "icon": "C"},
+    {"symbol": "USDCHF=X",  "display": "USD/CHF",   "name": "Dollar/Franc",     "type": "FOREX",     "icon": "F"},
+    {"symbol": "USDINR=X",  "display": "USD/INR",   "name": "Dollar/Rupee",     "type": "FOREX",     "icon": "₹"},
+]
+
+# Quick lookup by symbol
+TICKER_MAP = {t["symbol"]: t for t in TICKERS}
+
+# All symbols as a flat list
+ALL_SYMBOLS = [t["symbol"] for t in TICKERS]

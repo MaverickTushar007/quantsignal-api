@@ -1,0 +1,11 @@
+name: Local AI Setup
+version: 1.0.0
+schema: v1
+
+models:
+  - name: DeepSeek Local
+    provider: ollama
+    model: deepseek-coder
+
+# Optional but useful
+defaultModel: DeepSeek Local
