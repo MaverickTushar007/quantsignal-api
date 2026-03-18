@@ -1,0 +1,44 @@
+[
+  {
+    "id": "kelly-1956",
+    "title": "A New Interpretation of Information Rate",
+    "authors": "J.L. Kelly Jr.",
+    "text": "The Kelly Criterion is a mathematical formula for sizing bets that leads to optimal wealth accumulation over time. The formula is f* = p - (q / b), where f* is the fraction of the current bankroll to wager, p is the probability of winning, q is the probability of losing (1 - p), and b is the proportion of the bet gained with a win (the payout odds). By betting exactly the Kelly fraction, an investor maximizes the long-term compounded growth rate of their capital. Betting more than Kelly increases risk exponentially and guarantees eventual ruin. In financial markets, because the probabilities and payouts are not fixed, practitioners typically use 'Fractional Kelly' (e.g., half-Kelly or quarter-Kelly) to reduce volatility and safeguard against estimation errors in p and b."
+  },
+  {
+    "id": "jegadeesh-1993",
+    "title": "Returns to Buying Winners and Selling Losers",
+    "authors": "Narasimhan Jegadeesh, Sheridan Titman",
+    "text": "Momentum is the empirical phenomenon that assets which have performed well recently will continue to perform well, and assets that have performed poorly will continue to perform poorly. The standard momentum strategy involves buying past winners (assets in the top decile of returns over the past 3 to 12 months) and selling past losers. This effect persists due to behavioral factors like investor underreaction to new information, delayed price discovery, and herding behavior, rather than being explained by traditional risk models. Momentum is strongest across intermediate time horizons (3 to 12 months) and tends to reverse over longer horizons (3 to 5 years)."
+  },
+  {
+    "id": "moskowitz-2012",
+    "title": "Time Series Momentum",
+    "authors": "Tobias J. Moskowitz, Yao Hua Ooi, Lasse Heje Pedersen",
+    "text": "Unlike cross-sectional momentum, which compares an asset's performance to its peers, Time Series Momentum (or 'trend following') evaluates an asset solely against its own past. An asset exhibits positive time series momentum if its past 1-to-12 month return is positive, predicting a positive return in the following month. This strategy yields significant positive alpha across equities, currencies, commodities, and bonds. The phenomenon is driven by initial underreaction to news followed by delayed overreaction. Trend following strategies typically perform exceptionally well during extreme market moves (both bull and bear markets) because major trends persist longer than fundamentals suggest."
+  },
+  {
+    "id": "bollinger-2001",
+    "title": "Bollinger on Bollinger Bands",
+    "authors": "John Bollinger",
+    "text": "Bollinger Bands consist of a middle band (typically a 20-day Simple Moving Average) and an upper and lower band set at two standard deviations above and below the moving average. Because standard deviation is a measure of volatility, the bands self-adjust, expanding during highly volatile periods and contracting during stagnant periods. A 'Squeeze' occurs when volatility falls to a low level and the bands narrow; this is often the precursor to a major price breakout. Prices touching the upper band indicate strong momentum or overbought conditions, while touching the lower band indicates oversold conditions. In trending markets, price can 'walk the band' for extended periods without reverting to the mean."
+  },
+  {
+    "id": "wilder-1978",
+    "title": "New Concepts in Technical Trading Systems (ATR & RSI)",
+    "authors": "J. Welles Wilder Jr.",
+    "text": "The Average True Range (ATR) measures market volatility. It decomposes the entire range of an asset price for that period, capturing gaps and limit moves. High ATR values indicate high volatility and significant price movement, while low ATR values denote low volatility. ATR is essential for stop-loss placement (e.g., the Chandelier Exit sets a stop at a multiple of ATR from the highest high) because it adapts to current market conditions, preventing tight stops from being prematurely hit by random noise. The Relative Strength Index (RSI), also by Wilder, measures the speed and change of price movements on a scale from 0 to 100. RSI > 70 is traditionally considered overbought, and < 30 is oversold. However, during strong trends, RSI can remain overbought or oversold for extended periods."
+  },
+  {
+    "id": "debondt-1985",
+    "title": "Does the Stock Market Overreact?",
+    "authors": "Werner F.M. De Bondt, Richard Thaler",
+    "text": "Mean reversion is the theory that prices and returns eventually move back to the mean or average. The DeBondt and Thaler study found that portfolios of prior 'losers' (extreme poor performers over the past 3-5 years) significantly outperformed prior 'winners' over the subsequent 3-5 years. This long-term mean reversion is attributed to investor overreaction: speculators become excessively pessimistic about losers and overly optimistic about winners, driving prices away from fundamental value. Short-term algorithmic mean reversion strategies (e.g., buying when RSI drops below 20 or price falls below the lower Bollinger Band) capitalize on temporary liquidity imbalances and panic selling before price normalizes."
+  },
+  {
+    "id": "fama-1992",
+    "title": "The Cross-Section of Expected Stock Returns",
+    "authors": "Eugene F. Fama, Kenneth R. French",
+    "text": "The Fama-French Three-Factor Model expands the Capital Asset Pricing Model (CAPM) by adding size risk and value risk factors to the market risk factor. They discovered that small-cap stocks tend to outperform large-cap stocks, and value stocks (high book-to-market ratio) outperform growth stocks. In quantitative trading, 'factors' are broad, persistent drivers of return. A robust quantitative model does not just look at price charts, but evaluates an asset's exposure to underlying factors such as Value, Size, Momentum, Quality, and Volatility. A high-probability setup often features 'factor confluence', where multiple independent edges align (e.g., a stock that has strong momentum while still trading at a low valuation multiple)."
+  }
+]

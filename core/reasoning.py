@@ -72,7 +72,16 @@ def get_reasoning(
     headlines = "\n".join(f"- {h}" for h in news_headlines[:3])
     feat_str  = ", ".join(top_features[:3]) if top_features else "momentum and trend"
 
-    prompt = f"""You are a quantitative analyst. Explain this trading signal in 2-3 sentences.
+    try:
+        from core.rag import search_research
+        query = f"{direction} signal {feat_str} momentum volatility technicals"
+        context_chunks = search_research(query, top_k=2)
+        academic_context = "\n".join([f"- {c}" for c in context_chunks])
+    except Exception:
+        academic_context = "No academic context available."
+
+    prompt = f"""You are an expert quantitative analyst. Explain this trading signal in 2-3 sentences.
+Ground your explanation in the provided academic research context if relevant.
 
 Asset: {name} ({ticker})
 Signal: {direction} — {probability*100:.0f}% ML confidence
@@ -81,8 +90,11 @@ Technical confluence: {confluence_bulls}/9 bullish indicators
 Recent news:
 {headlines if headlines else "No relevant news found."}
 
-Write a concise professional explanation of WHY this signal was generated.
-Keep it under 75 words. End with one key risk factor.
+ACADEMIC RESEARCH CONTEXT:
+{academic_context}
+
+Write a concise professional explanation of WHY this signal was generated, referencing the phenomena in the academic context (if applicable) instead of generic technical jargon (e.g., mention time series momentum, reversion, or factor confluence). 
+Keep it under 75 words. End with one key risk factor based on ATR or market conditions.
 Do NOT give financial advice."""
 
     # Try Groq first
