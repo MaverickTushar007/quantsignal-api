@@ -1,56 +1,56 @@
-"""
-core/rag.py
-Loads the pre-built FAISS index and provides a semantic search interface.
-"""
-import faiss
 import json
 import numpy as np
-from sentence_transformers import SentenceTransformer
-from pathlib import Path
+import os
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
 
 # Paths
-INDEX_FILE = Path("ml/rag_index.faiss")
-CHUNKS_FILE = Path("ml/rag_chunks.json")
+CORPUS_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), "../data/quant_corpus.json"))
 
-# Global state to prevent reloading on each request
-_model = None
-_index = None
-_chunks = None
+class LiteRAG:
+    def __init__(self):
+        self.vectorizer = TfidfVectorizer(stop_words='english')
+        self.chunks = []
+        self.matrix = None
+        self.load_corpus()
 
-def _initialize():
-    global _model, _index, _chunks
-    if _model is not None:
-        return
+    def load_corpus(self):
+        if not os.path.exists(CORPUS_PATH):
+            return
 
-    print("Initializing Quant RAG...")
-    try:
-        _model = SentenceTransformer("all-MiniLM-L6-v2")
-        _index = faiss.read_index(str(INDEX_FILE))
-        with open(CHUNKS_FILE, 'r') as f:
-            _chunks = json.load(f)
-    except Exception as e:
-        print(f"RAG Initialization failed: {e}")
-        _model, _index, _chunks = None, None, None
+        with open(CORPUS_PATH, 'r') as f:
+            data = json.load(f)
 
-def search_research(query: str, top_k: int = 2) -> list[str]:
-    """
-    Search the quant corpus for the most relevant context chunks.
-    Returns a list of raw text contexts.
-    """
-    _initialize()
-    if not _model or not _index or not _chunks:
-        return []
+        # Flatten into search chunks
+        for paper in data["papers"]:
+            for chunk in paper["content"]:
+                self.chunks.append({
+                    "title": paper["title"],
+                    "year": paper["year"],
+                    "text": chunk
+                })
 
-    # Embed the search query
-    query_vector = _model.encode([query])
-    query_vector = np.array(query_vector).astype("float32")
+        # Fit TF-IDF matrix
+        corpus_texts = [f"{c['title']} {c['text']}" for c in self.chunks]
+        self.matrix = self.vectorizer.fit_transform(corpus_texts)
 
-    # Search FAISS
-    distances, indices = _index.search(query_vector, top_k)
+    def search(self, query: str, top_k: int = 2):
+        if not self.matrix or not self.chunks:
+            return []
 
-    results = []
-    for idx in indices[0]:
-        if idx != -1 and idx < len(_chunks):
-            results.append(_chunks[idx]["full_context"])
-            
-    return results
+        query_vec = self.vectorizer.transform([query])
+        similarities = cosine_similarity(query_vec, self.matrix).flatten()
+        top_indices = np.argsort(similarities)[::-1][:top_k]
+
+        results = []
+        for idx in top_indices:
+            if similarities[idx] > 0.1: # relevance threshold
+                results.append(self.chunks[idx])
+        
+        return results
+
+# Singleton
+rag_engine = LiteRAG()
+
+def search_research(query: str, top_k: int = 2):
+    return rag_engine.search(query, top_k)
