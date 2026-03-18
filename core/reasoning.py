@@ -112,3 +112,94 @@ Do NOT give financial advice."""
     # Always-available fallback
     return _rule_based_reasoning(ticker, direction, probability,
                                   confluence_bulls, top_features)
+
+
+import json
+import asyncio
+
+async def stream_chat(symbol: str, message: str, history: list):
+    """
+    Agent Workspace SSE generator.
+    Yields JSON chunks starting with "data: " for Server-Sent Events.
+    """
+    def _yield_status(msg: str):
+        return f"data: {json.dumps({'type': 'status', 'message': msg})}\n\n"
+
+    try:
+        # Step 1: Status Updates
+        yield _yield_status(f"Initializing Perseus workspace for {symbol}...")
+        await asyncio.sleep(0.5)
+
+        # Step 2: Fetch Signal Data
+        yield _yield_status(f"Fetching real-time indicators and signal data...")
+        from pathlib import Path
+        cache_path = Path("data/signals_cache.json")
+        sig_data = None
+        if cache_path.exists():
+            cache = json.loads(cache_path.read_text())
+            sig_data = cache.get(symbol)
+
+        await asyncio.sleep(0.5)
+
+        # Step 3: RAG Retrieval
+        yield _yield_status("Scanning quantitative research corpus (RAG)...")
+        rag_text = "No academic context available."
+        try:
+            from core.rag import search_research
+            if sig_data:
+                feat = ", ".join(sig_data.get("top_features", []))
+                dir_ = sig_data.get("direction", "neutral")
+                qs = f"{dir_} signal {feat} momentum volatility technicals"
+                chunks = search_research(qs, top_k=2)
+                rag_text = "\n".join([f"- {c}" for c in chunks])
+        except Exception:
+            pass
+
+        await asyncio.sleep(0.5)
+
+        # Build System Prompt
+        sys_prompt = "You are an elite quantitative trading AI assistant. Respond strictly in clean Markdown.\n"
+        if sig_data:
+            sys_prompt += f"\nLIVE ASSET CONTEXT:\nAsset: {symbol}\nSignal: {sig_data.get('direction')} ({sig_data.get('probability', 0)*100:.1f}%)"
+            sys_prompt += f"\nFeatures: {', '.join(sig_data.get('top_features', []))}"
+            sys_prompt += f"\nConfluence: {sig_data.get('confluence_bulls', 0)}/9 Bullish"
+            sys_prompt += f"\nKey Levels - Entry: {sig_data.get('current_price')}, TP: {sig_data.get('take_profit')}, SL: {sig_data.get('stop_loss')}"
+        else:
+            sys_prompt += f"\nLIVE ASSET CONTEXT: Data for {symbol} is currently unavailable. Discuss purely technically."
+
+        sys_prompt += f"\n\nACADEMIC RAG CONTEXT:\n{rag_text}"
+        sys_prompt += "\n\nINSTRUCTIONS: Answer the user's question precisely. If they ask about the current signal, explain the exact indicators listed above. If they ask general concepts, use the RAG context."
+
+        # Connect to Groq Async
+        if not settings.groq_api_key:
+            yield _yield_status("Error: No Groq API Key found.")
+            return
+
+        from groq import AsyncGroq
+        client = AsyncGroq(api_key=settings.groq_api_key)
+
+        messages = [{"role": "system", "content": sys_prompt}]
+        for m in history:
+            messages.append({"role": m.get("role", "user"), "content": m.get("content", "")})
+        messages.append({"role": "user", "content": message})
+
+        yield _yield_status("Generating neural response...")
+
+        # Stream LLM tokens
+        stream = await client.chat.completions.create(
+            model="llama-3.1-8b-instant",
+            messages=messages,
+            stream=True,
+            temperature=0.3,
+            max_tokens=600
+        )
+
+        async for chunk in stream:
+            token = chunk.choices[0].delta.content
+            if token:
+                yield f"data: {json.dumps({'type': 'token', 'content': token})}\n\n"
+
+        yield f"data: {json.dumps({'type': 'done'})}\n\n"
+
+    except Exception as e:
+        yield f"data: {json.dumps({'type': 'error', 'message': str(e)})}\n\n"

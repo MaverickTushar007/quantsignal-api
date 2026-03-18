@@ -9,6 +9,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.middleware.gzip import GZipMiddleware
 from core.config import settings
 from api.routes import router
+from api.chat import router as chat_router
 
 app = FastAPI(
     title="QuantSignal API",
@@ -28,6 +29,7 @@ app.add_middleware(
 app.add_middleware(GZipMiddleware, minimum_size=1000)
 
 app.include_router(router, prefix="/api/v1")
+app.include_router(chat_router, prefix="/api/v1")
 
 @app.get("/")
 async def root():
