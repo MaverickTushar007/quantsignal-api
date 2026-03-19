@@ -105,7 +105,23 @@ def predict(ticker, df, sentiment=0.0):
         lgb_prob = float(bundle["lgb"].predict_proba(latest)[0, 1])
 
         sentiment_adj = (sentiment + 1) / 2
-        prob = 0.45 * xgb_prob + 0.45 * lgb_prob + 0.10 * sentiment_adj
+        raw_prob = 0.45 * xgb_prob + 0.45 * lgb_prob + 0.10 * sentiment_adj
+
+        # Macro regime adjustment from FRED data
+        try:
+            from data.macro import get_macro_features
+            macro = get_macro_features()
+            bearish_count = sum([
+                macro.get("high_fear", 0),
+                macro.get("recession_signal", 0),
+                macro.get("rate_hike_regime", 0),
+                macro.get("inflation_high", 0),
+            ])
+            macro_pull = bearish_count * 0.015
+            prob = raw_prob + (0.5 - raw_prob) * macro_pull
+            prob = round(max(0.01, min(0.99, prob)), 4)
+        except Exception:
+            prob = raw_prob
 
         direction = "BUY" if prob >= 0.55 else "SELL" if prob <= 0.45 else "HOLD"
         agreement = 1.0 - abs(xgb_prob - lgb_prob)
