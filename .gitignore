@@ -1,3 +1,6 @@
 .env
 ml/models/
 .env.save
+node_modules/
+package-lock.json
+package.json
