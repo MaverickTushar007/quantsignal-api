@@ -9,7 +9,7 @@ from pydantic import BaseModel
 from typing import List
 
 from core.reasoning import stream_chat
-from api.auth import get_current_user
+
 
 router = APIRouter()
 
@@ -18,7 +18,7 @@ class ChatMessage(BaseModel):
     content: str
 
 class ChatRequest(BaseModel):
-    symbol: str
+    symbol: str = "GENERIC"
     history: List[ChatMessage]
     message: str
 
@@ -26,13 +26,19 @@ class ChatRequest(BaseModel):
 async def chat_endpoint(
     symbol: str,
     request: ChatRequest,
-    user: dict = Depends(get_current_user)
-):
-    if symbol.upper() != request.symbol.upper():
-        raise HTTPException(status_code=400, detail="Symbol mismatch")
 
-    # FastAPI's StreamingResponse takes an async generator
+):
     # stream_chat handles the workflow and yields SSE-formatted strings.
+    return StreamingResponse(
+        stream_chat(symbol.upper(), request.message, [h.dict() for h in request.history]),
+        media_type="text/event-stream"
+    )
+
+@router.post("/chat", tags=["chat"])
+async def generic_chat_endpoint(
+    request: ChatRequest,
+
+):
     return StreamingResponse(
         stream_chat(request.symbol.upper(), request.message, [h.dict() for h in request.history]),
         media_type="text/event-stream"

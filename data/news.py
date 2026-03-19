@@ -1,13 +1,19 @@
 """
 data/news.py
-RSS news fetcher + keyword sentiment scoring.
-No mock data — if feeds fail, returns empty list gracefully.
+FinSight News & Sentiment Engine.
+RSS Aggregation + Institutional-grade LLM Sentiment Scoring.
 """
 
 import feedparser
+import re
+import groq
 from dataclasses import dataclass
 from datetime import datetime, timezone
 from typing import List
+
+from core.config import settings
+
+# --- Configuration ---
 
 RSS_FEEDS = [
     "https://feeds.finance.yahoo.com/rss/2.0/headline",
@@ -24,7 +30,6 @@ BULL_WORDS = {"surge", "rally", "breakout", "bullish", "gain", "high",
 BEAR_WORDS = {"crash", "fall", "drop", "bearish", "loss", "low",
               "downgrade", "miss", "weak", "decline", "sell", "fear"}
 
-# Alias map for matching news to tickers
 ALIASES = {
     "BTC-USD":   ["bitcoin", "btc"],
     "ETH-USD":   ["ethereum", "eth", "ether"],
@@ -42,6 +47,7 @@ ALIASES = {
     "USDINR=X":  ["rupee", "inr", "india"],
 }
 
+# --- Data Models ---
 
 @dataclass
 class NewsItem:
@@ -51,33 +57,62 @@ class NewsItem:
     url:       str
     sentiment: str    # BULLISH | BEARISH | NEUTRAL
 
+# --- Sentiment Logic ---
+
+def _llm_sentiment_score(headlines: List[str]) -> float:
+    """
+    Institutional analysis: Uses Groq to extract sentiment from a cluster of headlines.
+    Returns a score between -1.0 (Bearish) and 1.0 (Bullish).
+    """
+    if not settings.groq_api_key or not headlines:
+        return 0.0
+
+    client = groq.Groq(api_key=settings.groq_api_key)
+    headline_text = "\n".join([f"- {h}" for h in headlines[:5]])
+    
+    prompt = f"""Analyze the collective financial sentiment of these headlines. 
+Return ONLY a single number between -1.0 (extremely bearish) and 1.0 (extremely bullish).
+0.0 is neutral. Do not provide any explanation or text—only the number.
+
+HEADLINES:
+{headline_text}
+"""
+    try:
+        resp = client.chat.completions.create(
+            model="llama-3.1-8b-instant",
+            messages=[{"role": "user", "content": prompt}],
+            max_tokens=10,
+            temperature=0,
+        )
+        score_text = resp.choices[0].message.content.strip()
+        
+        # Regex extraction to catch the number regardless of LLM "yap"
+        match = re.search(r"[-+]?\d*\.?\d+", score_text)
+        return float(match.group()) if match else 0.0
+    except Exception:
+        return 0.0
+
 
 def _score_sentiment(text: str) -> str:
+    """Fast keyword fallback for individual news items."""
     words = set(text.lower().split())
     bulls = len(words & BULL_WORDS)
     bears = len(words & BEAR_WORDS)
-    if bulls > bears:
-        return "BULLISH"
-    elif bears > bulls:
-        return "BEARISH"
+    if bulls > bears: return "BULLISH"
+    elif bears > bulls: return "BEARISH"
     return "NEUTRAL"
 
 
-def _matches(text: str, symbol: str) -> bool:
-    text_lower = text.lower()
-    terms = ALIASES.get(symbol, [symbol.lower().replace("-usd","").replace("=x","")])
-    return any(t in text_lower for t in terms)
+# --- RSS Logic ---
 
-
-# Module-level cache — fetch once per process run
 _rss_cache: List[dict] = []
 _cache_loaded = False
-
 
 def _load_rss_cache():
     global _rss_cache, _cache_loaded
     if _cache_loaded:
         return
+    
     articles = []
     for url in RSS_FEEDS:
         try:
@@ -96,22 +131,24 @@ def _load_rss_cache():
 
 
 def get_news(symbol: str, limit: int = 5) -> List[NewsItem]:
-    """
-    Return relevant news items for a symbol.
-    Loads RSS feeds once and filters per ticker.
-    Returns empty list (not mock data) if no news found.
-    """
+    """Retrieves and filters relevant news for a specific symbol."""
     _load_rss_cache()
+    
+    def _matches(text: str, sym: str) -> bool:
+        text_lower = text.lower()
+        terms = ALIASES.get(sym, [sym.lower().replace("-usd","").replace("=x","")])
+        return any(t in text_lower for t in terms)
+
     results = []
     for art in _rss_cache:
-        text = art["title"] + " " + art["summary"]
-        if _matches(text, symbol):
+        combined_text = f"{art['title']} {art['summary']}"
+        if _matches(combined_text, symbol):
             results.append(NewsItem(
                 title=art["title"],
                 summary=art["summary"],
                 source=art["source"],
                 url=art["url"],
-                sentiment=_score_sentiment(text),
+                sentiment=_score_sentiment(combined_text),
             ))
         if len(results) >= limit:
             break
@@ -120,18 +157,11 @@ def get_news(symbol: str, limit: int = 5) -> List[NewsItem]:
 
 def get_sentiment_score(symbol: str) -> float:
     """
-    Returns sentiment score between -1 (bearish) and +1 (bullish).
-    Used as the 10% sentiment blend in the ML ensemble.
+    Final Signal Output: Returns institutional sentiment score.
+    Used for the 10% sentiment weight in the ML ensemble.
     """
-    news = get_news(symbol, limit=10)
+    news = get_news(symbol, limit=8)
     if not news:
         return 0.0
-    scores = []
-    for n in news:
-        if n.sentiment == "BULLISH":
-            scores.append(1.0)
-        elif n.sentiment == "BEARISH":
-            scores.append(-1.0)
-        else:
-            scores.append(0.0)
-    return round(sum(scores) / len(scores), 3)
+    
+    return _llm_sentiment_score([n.title for n in news])

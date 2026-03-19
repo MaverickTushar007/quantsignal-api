@@ -1,18 +1,23 @@
 """
 core/reasoning.py
-LLM reasoning layer.
-Chain: Groq (fast) → OpenRouter (reliable) → rule-based (always works).
-Never fails — always returns a string explanation.
+FinSight AI Reasoning Layer.
+Orchestrates multi-model reasoning and streaming chat for the FinSight Assistant.
 """
 
+import json
+import asyncio
 import httpx
+from pathlib import Path
+from groq import AsyncGroq
+import groq
+
 from core.config import settings
 
+# --- Internal Helpers ---
 
 def _groq_reasoning(prompt: str) -> str:
     if not settings.groq_api_key:
         raise ValueError("No Groq key")
-    import groq
     client = groq.Groq(api_key=settings.groq_api_key)
     resp = client.chat.completions.create(
         model="llama-3.1-8b-instant",
@@ -26,7 +31,6 @@ def _groq_reasoning(prompt: str) -> str:
 def _openrouter_reasoning(prompt: str) -> str:
     if not settings.openrouter_api_key:
         raise ValueError("No OpenRouter key")
-    import httpx
     resp = httpx.post(
         "https://openrouter.ai/api/v1/chat/completions",
         headers={"Authorization": f"Bearer {settings.openrouter_api_key}"},
@@ -50,10 +54,10 @@ def _rule_based_reasoning(
     return (
         f"ML ensemble signals {direction} with {pct} confidence for {ticker}. "
         f"Key drivers: {feat_str}. Technical confluence: {bull_str}. "
-        f"This is an educational signal — not financial advice. "
-        f"Always manage risk with the provided stop loss levels."
+        f"This is an educational signal — not financial advice."
     )
 
+# --- Public API ---
 
 def get_reasoning(
     ticker: str,
@@ -65,18 +69,15 @@ def get_reasoning(
     news_headlines: list,
 ) -> str:
     """
-    Generate plain-English reasoning for a signal.
-    Tries Groq first, falls back to OpenRouter, then rule-based.
-    Always returns a string — never raises.
+    Generate plain-English reasoning for a signal (Static View).
     """
     headlines = "\n".join(f"- {h}" for h in news_headlines[:3])
-    feat_str  = ", ".join(top_features[:3]) if top_features else "momentum and trend"
+    feat_str = ", ".join(top_features[:3]) if top_features else "momentum and trend"
 
     try:
         from core.rag import search_research
         query = f"{direction} signal {feat_str} momentum volatility technicals"
         academic_context = search_research(query, top_k=2)
-        
     except Exception:
         academic_context = "No academic context available."
 
@@ -93,56 +94,49 @@ Recent news:
 ACADEMIC RESEARCH CONTEXT:
 {academic_context}
 
-Write a concise professional explanation of WHY this signal was generated, referencing the phenomena in the academic context (if applicable) instead of generic technical jargon (e.g., mention time series momentum, reversion, or factor confluence). 
-Keep it under 75 words. End with one key risk factor based on ATR or market conditions.
+Write a concise professional explanation of WHY this signal was generated.
+Keep it under 75 words. End with one key risk factor.
 Do NOT give financial advice."""
 
-    # Try Groq first
     try:
         return _groq_reasoning(prompt)
     except Exception:
-        pass
+        try:
+            return _openrouter_reasoning(prompt)
+        except Exception:
+            return _rule_based_reasoning(ticker, direction, probability, confluence_bulls, top_features)
 
-    # Try OpenRouter
-    try:
-        return _openrouter_reasoning(prompt)
-    except Exception:
-        pass
-
-    # Always-available fallback
-    return _rule_based_reasoning(ticker, direction, probability,
-                                  confluence_bulls, top_features)
-
-
-import json
-import asyncio
 
 async def stream_chat(symbol: str, message: str, history: list):
     """
-    Agent Workspace SSE generator.
-    Yields JSON chunks starting with "data: " for Server-Sent Events.
+    FinSight Assistant SSE generator (Streaming Chat).
     """
     def _yield_status(msg: str):
         return f"data: {json.dumps({'type': 'status', 'message': msg})}\n\n"
 
     try:
-        # Step 1: Status Updates
-        yield _yield_status(f"Initializing Perseus workspace for {symbol}...")
-        await asyncio.sleep(0.5)
+        # 1. Initialize
+        if symbol == "GENERIC":
+            yield _yield_status("Initializing FinSight Global Intelligence...")
+        else:
+            yield _yield_status(f"Initializing FinSight workspace for {symbol}...")
+        await asyncio.sleep(0.4)
 
-        # Step 2: Fetch Signal Data
-        yield _yield_status(f"Fetching real-time indicators and signal data...")
-        from pathlib import Path
-        cache_path = Path("data/signals_cache.json")
+        # 2. Context Extraction
         sig_data = None
-        if cache_path.exists():
-            cache = json.loads(cache_path.read_text())
-            sig_data = cache.get(symbol)
+        if symbol != "GENERIC":
+            yield _yield_status(f"Syncing real-time indicators for {symbol}...")
+            cache_path = Path("data/signals_cache.json")
+            if cache_path.exists():
+                cache = json.loads(cache_path.read_text())
+                sig_data = cache.get(symbol)
+        else:
+            yield _yield_status("Scanning global markets and macro sentiment...")
+        
+        await asyncio.sleep(0.4)
 
-        await asyncio.sleep(0.5)
-
-        # Step 3: RAG Retrieval
-        yield _yield_status("Scanning quantitative research corpus (RAG)...")
+        # 3. RAG Retrieval
+        yield _yield_status("Accessing quantitative research corpus (RAG)...")
         rag_text = "No academic context available."
         try:
             from core.rag import search_research
@@ -152,55 +146,51 @@ async def stream_chat(symbol: str, message: str, history: list):
                 qs = f"{dir_} signal {feat} momentum volatility technicals"
                 chunks = search_research(qs, top_k=2)
                 rag_text = "\n".join([f"- {c}" for c in chunks])
+            elif symbol == "GENERIC":
+                chunks = search_research(message, top_k=2)
+                rag_text = "\n".join([f"- {c}" for c in chunks])
         except Exception:
             pass
 
-        await asyncio.sleep(0.5)
+        yield _yield_status("Generating neural response...")
 
-        # Build System Prompt
+        # 4. Build Professional System Prompt
         sys_prompt = (
-            "You are Perseus, an elite quantitative trading intelligence. Your purpose is to provide signal-focused analysis, not generic education.\n"
+            "You are FinSight Elite, a high-frequency quantitative intelligence agent.\n"
+            "Your purpose is to provide deep market insights and data-driven reasoning.\n"
             "STRICT RULES:\n"
-            "1. NEVER give generic crypto definitions (e.g., don't explain what Ethereum is).\n"
-            "2. FOCUS on the current signal, ML confidence, and technical confluence listed below.\n"
-            "3. USE the RAG context to ground your reasoning in quantitative research.\n"
-            "4. If the user asks 'what is [asset]', respond with its current technical bias, key levels, and recent price action context from a quant perspective.\n"
-            "5. Keep responses concise and professional (Markdown format).\n"
+            "1. NEVER give basic definitions (e.g., don't explain what BTC is).\n"
+            "2. FOCUS on alpha factors, technical confluence, and risk management.\n"
+            "3. USE the RAG context below to ground your reasoning.\n"
+            "4. RESPOND in professional Markdown. No fluff.\n"
         )
         if sig_data:
             sys_prompt += f"\nLIVE ASSET CONTEXT for {symbol}:\n"
-            sys_prompt += f"- Signal: {sig_data.get('direction')} ({sig_data.get('probability', 0)*100:.1f}% ML confidence)\n"
-            sys_prompt += f"- Confluence: {sig_data.get('confluence_bulls', 0)}/9 Bullish indicators\n"
+            sys_prompt += f"- Bias: {sig_data.get('direction')} ({sig_data.get('probability', 0)*100:.1f}% confidence)\n"
+            sys_prompt += f"- Confluence: {sig_data.get('confluence_score', 'N/A')}\n"
             sys_prompt += f"- Predictive Features: {', '.join(sig_data.get('top_features', []))}\n"
-            sys_prompt += f"- V1 Levels: Entry @ {sig_data.get('current_price')}, TP @ {sig_data.get('take_profit')}, SL @ {sig_data.get('stop_loss')}\n"
-        else:
-            sys_prompt += f"\nLIVE ASSET CONTEXT: Data for {symbol} is currently unavailable. Analyze the structural trend if possible.\n"
+            sys_prompt += f"- Key Levels: Entry @ {sig_data.get('current_price')}, TP @ {sig_data.get('take_profit')}, SL @ {sig_data.get('stop_loss')}\n"
+        elif symbol == "GENERIC":
+            sys_prompt += "\nMODE: Global Macro Chat. Analyze across all assets (Stocks/Forex/Crypto).\n"
 
         sys_prompt += f"\nACADEMIC RAG CONTEXT:\n{rag_text}\n"
-        sys_prompt += "\nRespond as a high-frequency analyst would—direct, data-driven, and devoid of fluff."
 
-
-        # Connect to Groq Async
+        # 5. Connect to Groq Async
         if not settings.groq_api_key:
             yield _yield_status("Error: No Groq API Key found.")
             return
 
-        from groq import AsyncGroq
         client = AsyncGroq(api_key=settings.groq_api_key)
-
         messages = [{"role": "system", "content": sys_prompt}]
         for m in history:
             messages.append({"role": m.get("role", "user"), "content": m.get("content", "")})
         messages.append({"role": "user", "content": message})
 
-        yield _yield_status("Generating neural response...")
-
-        # Stream LLM tokens
         stream = await client.chat.completions.create(
             model="llama-3.1-8b-instant",
             messages=messages,
             stream=True,
-            temperature=0.3,
+            temperature=0.2,
             max_tokens=600
         )
 
