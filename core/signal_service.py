@@ -84,15 +84,24 @@ def generate_signal(symbol: str, include_reasoning: bool = True) -> Optional[dic
     """
     import json
     from pathlib import Path
-    
-    # --- V1 RAILWAY BYPASS ---
-    # Railway blocks yfinance. We use a locally computed cache for the V1 launch.
+    from core.cache import get_cached, set_cached
+
+    # --- LAYER 1: Redis cache (fastest) ---
+    redis_key = f"signal:{symbol}"
+    cached = get_cached(redis_key)
+    if cached:
+        if not include_reasoning and "reasoning" in cached:
+            cached["reasoning"] = ""
+        return cached
+
+    # --- LAYER 2: Local JSON cache (Railway bypass) ---
     cache_path = Path("data/signals_cache.json")
     if cache_path.exists():
         try:
             cache = json.loads(cache_path.read_text())
             if symbol in cache:
-                sig = dict(cache[symbol])  # copy
+                sig = dict(cache[symbol])
+                set_cached(redis_key, sig, ttl=3600)  # warm Redis
                 if not include_reasoning and "reasoning" in sig:
                     sig["reasoning"] = ""
                 return sig
@@ -142,7 +151,7 @@ def generate_signal(symbol: str, include_reasoning: bool = True) -> Optional[dic
             news_headlines=headlines,
         )
 
-    return asdict(FullSignal(
+    result = asdict(FullSignal(
         symbol=symbol,
         display=meta["display"],
         name=meta["name"],
@@ -166,3 +175,6 @@ def generate_signal(symbol: str, include_reasoning: bool = True) -> Optional[dic
         reasoning=reasoning,
         generated_at=datetime.now(timezone.utc).isoformat(),
     ))
+    from core.cache import set_cached
+    set_cached(f"signal:{symbol}", result, ttl=3600)
+    return result
