@@ -152,30 +152,81 @@ async def stream_chat(symbol: str, message: str, history: list):
         except Exception:
             pass
 
-        yield _yield_status("Generating neural response...")
+        # 3b. Live macro + funding context
+        macro_context = ""
+        funding_context = ""
+        try:
+            from data.macro import get_macro_features
+            macro = get_macro_features()
+            macro_context = (
+                f"LIVE MACRO REGIME:\n"
+                f"- Fed Funds Rate: {macro.get('fed_funds_rate', 'N/A')}%\n"
+                f"- CPI YoY: {macro.get('cpi_yoy', 'N/A')}%\n"
+                f"- VIX: {macro.get('vix', 'N/A')} ({'HIGH FEAR' if macro.get('high_fear') else 'NORMAL'})\n"
+                f"- Yield Spread 10Y-2Y: {macro.get('yield_spread_10y2y', 'N/A')}\n"
+                f"- Recession Signal: {'YES' if macro.get('recession_signal') else 'NO'}\n"
+                f"- Rate Hike Regime: {'YES' if macro.get('rate_hike_regime') else 'NO'}\n"
+            )
+        except Exception:
+            pass
 
-        # 4. Build Professional System Prompt
+        if symbol != "GENERIC":
+            try:
+                from data.funding import get_funding_features
+                funding = get_funding_features(symbol)
+                if funding.get('funding_rate', 0) != 0:
+                    funding_context = (
+                        f"FUTURES POSITIONING:\n"
+                        f"- Funding Rate: {funding.get('funding_rate', 0):.4f}%\n"
+                        f"- Market Positioning: {'OVERLEVERAGED LONGS — bearish contrarian' if funding.get('is_overleveraged_long') else 'OVERLEVERAGED SHORTS — bullish contrarian' if funding.get('is_overleveraged_short') else 'NEUTRAL positioning'}\n"
+                    )
+            except Exception:
+                pass
+
+        yield _yield_status("Searching live market intelligence...")
+        await asyncio.sleep(0.3)
+        yield _yield_status("Synthesizing hedge fund grade analysis...")
+
+        # 4. Build Hedge Fund Grade System Prompt
         sys_prompt = (
-            "You are FinSight Elite, a high-frequency quantitative intelligence agent.\n"
-            "Your purpose is to provide deep market insights and data-driven reasoning.\n"
-            "STRICT RULES:\n"
-            "1. NEVER give basic definitions (e.g., don't explain what BTC is).\n"
-            "2. FOCUS on alpha factors, technical confluence, and risk management.\n"
-            "3. USE the RAG context below to ground your reasoning.\n"
-            "4. RESPOND in professional Markdown. No fluff.\n"
+            "You are Perseus, an elite quantitative analyst at a top-tier hedge fund.\n"
+            "You have access to real-time web search. Use it to find current news, analyst reports, and market data.\n"
+            "\nYOUR ANALYTICAL FRAMEWORK:\n"
+            "1. TECHNICAL LAYER — ML signal confluence, momentum, mean reversion\n"
+            "2. MACRO LAYER — Fed policy, inflation regime, yield curve, risk-on/off\n"
+            "3. POSITIONING LAYER — funding rates, long/short ratios, options flow\n"
+            "4. NEWS CATALYST LAYER — recent events that could move price\n"
+            "5. RISK LAYER — ATR-based stops, Kelly sizing, expected value\n"
+            "\nSTRICT RULES:\n"
+            "- NEVER give basic definitions or generic advice\n"
+            "- ALWAYS cite specific numbers from the context provided\n"
+            "- ALWAYS identify the primary risk to the thesis\n"
+            "- RESPOND in clean Markdown with sections\n"
+            "- Think like you're writing a trade note for a senior PM\n"
+            "- Use web search to find the LATEST news and analyst views on the asset\n"
         )
+
         if sig_data:
-            sys_prompt += f"\nLIVE ASSET CONTEXT for {symbol}:\n"
-            sys_prompt += f"- Bias: {sig_data.get('direction')} ({sig_data.get('probability', 0)*100:.1f}% confidence)\n"
-            sys_prompt += f"- Confluence: {sig_data.get('confluence_score', 'N/A')}\n"
-            sys_prompt += f"- Predictive Features: {', '.join(sig_data.get('top_features', []))}\n"
-            sys_prompt += f"- Key Levels: Entry @ {sig_data.get('current_price')}, TP @ {sig_data.get('take_profit')}, SL @ {sig_data.get('stop_loss')}\n"
+            sys_prompt += f"\n## LIVE SIGNAL DATA — {symbol}\n"
+            sys_prompt += f"- **ML Bias:** {sig_data.get('direction')} @ {sig_data.get('probability', 0)*100:.1f}% confidence\n"
+            sys_prompt += f"- **Confluence:** {sig_data.get('confluence_score', 'N/A')}\n"
+            sys_prompt += f"- **Key Drivers:** {', '.join(sig_data.get('top_features', []))}\n"
+            sys_prompt += f"- **Entry:** ${sig_data.get('current_price')} | **TP:** ${sig_data.get('take_profit')} | **SL:** ${sig_data.get('stop_loss')}\n"
+            sys_prompt += f"- **Kelly Size:** {sig_data.get('kelly_size')}% | **R/R:** {sig_data.get('risk_reward')}:1\n"
+            sys_prompt += f"- **Model Agreement:** {sig_data.get('model_agreement', 0)*100:.0f}%\n"
         elif symbol == "GENERIC":
-            sys_prompt += "\nMODE: Global Macro Chat. Analyze across all assets (Stocks/Forex/Crypto).\n"
+            sys_prompt += "\nMODE: Global Macro Intelligence. Cover Stocks, Forex, Crypto, Commodities.\n"
 
-        sys_prompt += f"\nACADEMIC RAG CONTEXT:\n{rag_text}\n"
+        if macro_context:
+            sys_prompt += f"\n## {macro_context}\n"
+        if funding_context:
+            sys_prompt += f"\n## {funding_context}\n"
+        if rag_text and rag_text != "No academic context available.":
+            sys_prompt += f"\n## QUANTITATIVE RESEARCH CONTEXT\n{rag_text}\n"
 
-        # 5. Connect to Groq Async
+        sys_prompt += "\nSearch the web for the latest news, price action, and analyst views before responding.\n"
+
+        # 5. Connect to Groq with web search (compound-beta)
         if not settings.groq_api_key:
             yield _yield_status("Error: No Groq API Key found.")
             return
@@ -186,13 +237,23 @@ async def stream_chat(symbol: str, message: str, history: list):
             messages.append({"role": m.get("role", "user"), "content": m.get("content", "")})
         messages.append({"role": "user", "content": message})
 
-        stream = await client.chat.completions.create(
-            model="llama-3.1-8b-instant",
-            messages=messages,
-            stream=True,
-            temperature=0.2,
-            max_tokens=600
-        )
+        # Try compound-beta (web search) first, fall back to llama if unavailable
+        try:
+            stream = await client.chat.completions.create(
+                model="compound-beta",
+                messages=messages,
+                stream=True,
+                temperature=0.2,
+                max_tokens=1200
+            )
+        except Exception:
+            stream = await client.chat.completions.create(
+                model="llama-3.3-70b-versatile",
+                messages=messages,
+                stream=True,
+                temperature=0.2,
+                max_tokens=1200
+            )
 
         async for chunk in stream:
             token = chunk.choices[0].delta.content
