@@ -157,11 +157,27 @@ def get_news(symbol: str, limit: int = 5) -> List[NewsItem]:
 
 def get_sentiment_score(symbol: str) -> float:
     """
-    Final Signal Output: Returns institutional sentiment score.
-    Used for the 10% sentiment weight in the ML ensemble.
+    Upgraded sentiment pipeline:
+    - VADER scores all headlines (fast, local)
+    - Groq scores top 3 (deep, accurate)
+    - Weighted blend: 40% VADER + 60% Groq
     """
-    news = get_news(symbol, limit=8)
+    from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
+    
+    news = get_news(symbol, limit=10)
     if not news:
         return 0.0
     
-    return _llm_sentiment_score([n.title for n in news])
+    headlines = [n.title for n in news]
+    
+    # VADER scoring — fast, all headlines
+    analyzer = SentimentIntensityAnalyzer()
+    vader_scores = [analyzer.polarity_scores(h)["compound"] for h in headlines]
+    vader_avg = sum(vader_scores) / len(vader_scores) if vader_scores else 0.0
+    
+    # Groq scoring — deep, top 5 headlines
+    groq_score = _llm_sentiment_score(headlines[:5])
+    
+    # Weighted blend
+    final = 0.4 * vader_avg + 0.6 * groq_score
+    return round(max(-1.0, min(1.0, final)), 3)

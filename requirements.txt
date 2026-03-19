@@ -18,3 +18,4 @@ httpx==0.24.1
 sentence-transformers==2.7.0
 supabase==2.3.0
 upstash-redis==1.0.2
+vaderSentiment==3.3.2
