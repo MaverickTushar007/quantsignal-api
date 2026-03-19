@@ -107,10 +107,14 @@ def predict(ticker, df, sentiment=0.0):
         sentiment_adj = (sentiment + 1) / 2
         raw_prob = 0.45 * xgb_prob + 0.45 * lgb_prob + 0.10 * sentiment_adj
 
-        # Macro regime adjustment from FRED data
+        # Macro + funding rate regime adjustment
         try:
             from data.macro import get_macro_features
+            from data.funding import get_funding_features
             macro = get_macro_features()
+            funding = get_funding_features(ticker)
+
+            # Macro bearish conditions pull prob toward 0.5
             bearish_count = sum([
                 macro.get("high_fear", 0),
                 macro.get("recession_signal", 0),
@@ -119,6 +123,13 @@ def predict(ticker, df, sentiment=0.0):
             ])
             macro_pull = bearish_count * 0.015
             prob = raw_prob + (0.5 - raw_prob) * macro_pull
+
+            # Funding rate adjustment for crypto
+            funding_signal = funding.get("funding_signal", 0.0)
+            if funding_signal != 0.0:
+                # funding_signal: +1 = bullish, -1 = bearish, adjust by 2%
+                prob = prob + funding_signal * 0.02
+
             prob = round(max(0.01, min(0.99, prob)), 4)
         except Exception:
             prob = raw_prob
