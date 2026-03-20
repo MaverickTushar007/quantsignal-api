@@ -90,15 +90,15 @@ def debug_signal(symbol: str):
     import traceback
     try:
         from data.market import fetch_ohlcv
-        import traceback
+        import traceback, requests
         try:
-            from data.market import fetch_ohlcv
-            df = fetch_ohlcv(symbol.upper())
-            if df is None:
-                return {"error": "fetch_ohlcv returned None"}
-            return {"candles": len(df), "latest_close": float(df["Close"].iloc[-1]), "latest_date": str(df.index[-1])}
+            from data.market import COINGECKO_ID_MAP, fetch_coingecko_ohlcv
+            cg_id = COINGECKO_ID_MAP.get(symbol.upper())
+            url = f"https://api.coingecko.com/api/v3/coins/{cg_id}/ohlc?vs_currency=usd&days=90"
+            resp = requests.get(url, timeout=20)
+            return {"status": resp.status_code, "cg_id": cg_id, "data_len": len(resp.json()) if resp.status_code==200 else 0, "body_preview": resp.text[:100]}
         except Exception as e:
-            return {"error": str(e), "trace": traceback.format_exc()[-500:]}
+            return {"error": str(e), "trace": traceback.format_exc()[-300:]}
     except Exception as e:
         return {"error": str(e), "trace": traceback.format_exc()[-500:]}
 
