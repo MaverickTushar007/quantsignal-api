@@ -100,8 +100,8 @@ def fetch_calendar() -> list:
 
         from datetime import datetime, timezone, timedelta
         now = datetime.now(timezone.utc)
-        cutoff_past = now - timedelta(days=5)
-        cutoff_future = now + timedelta(days=10)
+        cutoff_past = now - timedelta(days=7)
+        cutoff_future = now + timedelta(days=14)
 
         def parse_date(e):
             try:
