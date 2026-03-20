@@ -5,6 +5,24 @@ Live market sentiment endpoint — Fear & Greed, positioning, funding rates.
 from fastapi import APIRouter
 router = APIRouter()
 
+@router.get("/sentiment/debug", tags=["sentiment"])
+def debug_sentiment():
+    import requests
+    results = {}
+    try:
+        r = requests.get("https://fapi.binance.com/futures/data/globalLongShortAccountRatio?symbol=BTCUSDT&period=5m&limit=1", timeout=5)
+        results["futures_status"] = r.status_code
+        results["futures_body"] = r.text[:200]
+    except Exception as e:
+        results["futures_error"] = str(e)
+    try:
+        r2 = requests.get("https://api.binance.com/api/v3/ticker/price?symbol=BTCUSDT", timeout=5)
+        results["spot_status"] = r2.status_code
+        results["spot_body"] = r2.text[:100]
+    except Exception as e:
+        results["spot_error"] = str(e)
+    return results
+
 @router.get("/sentiment/market", tags=["sentiment"])
 def market_sentiment():
     try:
