@@ -34,16 +34,19 @@ def get_all_signals(
     Lightweight signals for all assets — powers the watchlist dashboard.
     No LLM reasoning (fast). Cached after first run.
     """
-    # Check Redis for cached full list
     from core.cache import get_cached, set_cached
-    cached_list = get_cached("all_signals_list")
-    if cached_list and not type and not direction:
-        return cached_list
-
     import json
     from pathlib import Path
-    cache_path = Path("data/signals_cache.json")
+
+    # Try Redis first (fastest)
+    if not type and not direction:
+        cached = get_cached("all_signals_list")
+        if cached:
+            return cached
+
+    # Load from file
     cache = {}
+    cache_path = Path("data/signals_cache.json")
     if cache_path.exists():
         try:
             cache = json.loads(cache_path.read_text())
@@ -55,9 +58,6 @@ def get_all_signals(
     for meta in tickers:
         sym = meta["symbol"]
         sig = cache.get(sym)
-        if sig is None:
-            from core.cache import get_cached
-            sig = get_cached(f"signal:{sym}")
         if sig is None:
             continue
         if direction and sig.get("direction") != direction.upper():
@@ -75,7 +75,7 @@ def get_all_signals(
             kelly_size=sig["kelly_size"],
         ))
     if not type and not direction:
-        set_cached("all_signals_list", results, ttl=3600)
+        set_cached("all_signals_list", results, ttl=86400)
     return results
 
 
