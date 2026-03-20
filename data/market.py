@@ -13,7 +13,7 @@ COINGECKO_ID_MAP = {
     "PEPE-USD": "pepe",
 }
 
-def fetch_coingecko_ohlcv(ticker, days=180):
+def fetch_coingecko_ohlcv(ticker, days=365):
     cg_id = COINGECKO_ID_MAP.get(ticker)
     if not cg_id:
         return None

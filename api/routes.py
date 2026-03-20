@@ -85,6 +85,31 @@ def get_signal(
     return sig
 
 
+@router.get("/news/{symbol}", tags=["news"])
+def get_asset_news(symbol: str, limit: int = 10):
+    symbol = symbol.upper()
+    if symbol not in TICKER_MAP:
+        raise HTTPException(status_code=404, detail=f"Unknown symbol: {symbol}")
+    try:
+        from data.news import get_news
+        items = get_news(symbol, limit=limit)
+        return {
+            "symbol": symbol,
+            "count": len(items),
+            "items": [
+                {
+                    "title": n.title,
+                    "summary": n.summary[:200] if n.summary else "",
+                    "source": n.source,
+                    "url": n.url,
+                    "sentiment": n.sentiment,
+                }
+                for n in items
+            ]
+        }
+    except Exception as e:
+        return {"symbol": symbol, "count": 0, "items": [], "error": str(e)}
+
 @router.get("/signals/debug/{symbol}", tags=["signals"])
 def debug_signal(symbol: str):
     import traceback
