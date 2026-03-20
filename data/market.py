@@ -13,7 +13,7 @@ COINGECKO_ID_MAP = {
     "PEPE-USD": "pepe",
 }
 
-def fetch_coingecko_ohlcv(ticker: str, days: int = 365) -> pd.DataFrame | None:
+def fetch_coingecko_ohlcv(ticker: str, days: int = 180) -> pd.DataFrame | None:
     """Fetch OHLCV from CoinGecko — works on Railway, no geo-block."""
     cg_id = COINGECKO_ID_MAP.get(ticker)
     if not cg_id:
@@ -33,21 +33,7 @@ def fetch_coingecko_ohlcv(ticker: str, days: int = 365) -> pd.DataFrame | None:
         df.index.name = None
         df = df.astype(float)
 
-        # Add Volume column (CoinGecko OHLC doesn't include volume — fetch separately)
-        try:
-            vol_url = f"https://api.coingecko.com/api/v3/coins/{cg_id}/market_chart?vs_currency=usd&days={days}&interval=daily"
-            vol_resp = requests.get(vol_url, timeout=15).json()
-            volumes = vol_resp.get("total_volumes", [])
-            if volumes:
-                vol_df = pd.DataFrame(volumes, columns=["timestamp", "Volume"])
-                vol_df["timestamp"] = pd.to_datetime(vol_df["timestamp"], unit="ms").dt.normalize()
-                vol_df = vol_df.set_index("timestamp")
-                df.index = df.index.normalize()
-                df = df.join(vol_df, how="left")
-            else:
-                df["Volume"] = 0.0
-        except Exception:
-            df["Volume"] = 0.0
+        df["Volume"] = 1000000.0  # placeholder — volume not used in ML features
 
         # Remove duplicate index entries
         df = df[~df.index.duplicated(keep="last")]
@@ -64,7 +50,7 @@ def fetch_coingecko_ohlcv(ticker: str, days: int = 365) -> pd.DataFrame | None:
 def fetch_ohlcv(ticker: str, period: str = "2y") -> pd.DataFrame | None:
     # Use CoinGecko for all crypto
     if ticker in COINGECKO_ID_MAP:
-        days = 730 if period == "2y" else 365
+        days = 180  # keep it fast on Railway
         df = fetch_coingecko_ohlcv(ticker, days=days)
         if df is not None and len(df) > 50:
             return df

@@ -92,13 +92,13 @@ def debug_signal(symbol: str):
         from data.market import fetch_ohlcv
         import traceback
         try:
-            from data.market import fetch_coingecko_ohlcv
-            df = fetch_coingecko_ohlcv(symbol.upper(), days=30)
+            from data.market import fetch_ohlcv
+            df = fetch_ohlcv(symbol.upper())
             if df is None:
-                return {"error": "fetch_coingecko_ohlcv returned None"}
-            return {"candles": len(df), "latest_close": float(df["Close"].iloc[-1])}
+                return {"error": "fetch_ohlcv returned None"}
+            return {"candles": len(df), "latest_close": float(df["Close"].iloc[-1]), "latest_date": str(df.index[-1])}
         except Exception as e:
-            return {"error": str(e), "trace": traceback.format_exc()[-800:]}
+            return {"error": str(e), "trace": traceback.format_exc()[-500:]}
     except Exception as e:
         return {"error": str(e), "trace": traceback.format_exc()[-500:]}
 
