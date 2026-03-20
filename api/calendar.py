@@ -185,3 +185,30 @@ def get_calendar_events():
     past = past[:15]
 
     return {"upcoming": upcoming, "past": past, "count": len(upcoming) + len(past)}
+
+from pydantic import BaseModel
+
+class ReminderRequest(BaseModel):
+    email: str
+    event_id: str
+    event_name: str
+    event_time: str
+    impact: str
+    playbook_bull: str = ""
+    playbook_bear: str = ""
+
+@router.post("/calendar/remind", tags=["calendar"])
+def set_reminder(req: ReminderRequest):
+    from data.reminders import save_reminder
+    result = save_reminder(
+        email=req.email,
+        event_id=req.event_id,
+        event_name=req.event_name,
+        event_time=req.event_time,
+        impact=req.impact,
+        playbook_bull=req.playbook_bull,
+        playbook_bear=req.playbook_bear,
+    )
+    if result["status"] == "error":
+        raise HTTPException(status_code=500, detail=result["error"])
+    return result
