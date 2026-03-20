@@ -34,17 +34,27 @@ def get_all_signals(
     Lightweight signals for all assets — powers the watchlist dashboard.
     No LLM reasoning (fast). Cached after first run.
     """
-    tickers = [
-        t for t in TICKERS
-        if not type or t["type"] == type.upper()
-    ]
+    import json
+    from pathlib import Path
+    cache_path = Path("data/signals_cache.json")
+    cache = {}
+    if cache_path.exists():
+        try:
+            cache = json.loads(cache_path.read_text())
+        except Exception:
+            pass
 
+    tickers = [t for t in TICKERS if not type or t["type"] == type.upper()]
     results = []
     for meta in tickers:
-        sig = generate_signal(meta["symbol"], include_reasoning=False)
+        sym = meta["symbol"]
+        sig = cache.get(sym)
+        if sig is None:
+            from core.cache import get_cached
+            sig = get_cached(f"signal:{sym}")
         if sig is None:
             continue
-        if direction and sig["direction"] != direction.upper():
+        if direction and sig.get("direction") != direction.upper():
             continue
         results.append(WatchlistItem(
             symbol=sig["symbol"],
@@ -58,7 +68,6 @@ def get_all_signals(
             current_price=sig["current_price"],
             kelly_size=sig["kelly_size"],
         ))
-
     return results
 
 
