@@ -85,6 +85,18 @@ def get_signal(
     return sig
 
 
+@router.get("/signals/debug/{symbol}", tags=["signals"])
+def debug_signal(symbol: str):
+    import traceback
+    try:
+        from data.market import fetch_ohlcv
+        df = fetch_ohlcv(symbol.upper())
+        if df is None:
+            return {"error": "fetch_ohlcv returned None"}
+        return {"candles": len(df), "latest_close": float(df["Close"].iloc[-1]), "latest_date": str(df.index[-1])}
+    except Exception as e:
+        return {"error": str(e), "trace": traceback.format_exc()[-500:]}
+
 @router.get("/market/mood", response_model=MarketMood, tags=["signals"])
 def market_mood():
     """
