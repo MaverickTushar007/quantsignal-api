@@ -134,8 +134,17 @@ def predict(ticker, df, sentiment=0.0):
                 from data.fear_greed import get_fear_greed
                 fg = get_fear_greed()
                 contrarian = fg.get("contrarian_signal", 0.0)
-                # Extreme fear/greed = 1.5% contrarian adjustment
                 prob = prob + contrarian * 0.015
+            except Exception:
+                pass
+
+            # Long/Short positioning contrarian adjustment
+            try:
+                from data.positioning import get_positioning
+                pos = get_positioning(ticker)
+                pos_signal = pos.get("positioning_signal", 0.0)
+                # Crowded positioning = 1.5% contrarian adjustment
+                prob = prob + pos_signal * 0.015
             except Exception:
                 pass
 
