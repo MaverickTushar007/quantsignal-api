@@ -41,12 +41,12 @@ def _is_stale(path):
 def train(ticker, df):
     try:
         import xgboost as xgb
-        try:
-    import lightgbm as lgb
-    _LGB_OK = True
-except Exception:
-    _LGB_OK = False
         from sklearn.calibration import CalibratedClassifierCV
+        try:
+            import lightgbm as lgb
+            _LGB_OK = True
+        except Exception:
+            _LGB_OK = False
 
         feat = build_features(df)
         future_ret = df["Close"].pct_change(FORWARD_DAYS).shift(-FORWARD_DAYS).reindex(feat.index)
