@@ -148,6 +148,16 @@ def fetch_calendar() -> list:
     CACHE_PATH.write_text(json.dumps({"timestamp": time.time(), "data": events}))
     return events
 
+@router.get("/calendar/debug", tags=["calendar"])
+def debug_calendar():
+    try:
+        import requests
+        headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"}
+        resp = requests.get("https://www.forexfactory.com/calendar", headers=headers, timeout=10)
+        return {"status": resp.status_code, "length": len(resp.text), "preview": resp.text[:200]}
+    except Exception as e:
+        return {"error": str(e)}
+
 @router.get("/calendar/events", tags=["calendar"])
 def get_calendar_events():
     now = datetime.now(timezone.utc)
