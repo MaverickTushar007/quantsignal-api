@@ -3,20 +3,27 @@ data/reminders.py
 Supabase reminder storage + Resend email delivery.
 """
 import os
-import sys
-sys.path.insert(0, "/Users/tusharbhatt/Desktop/quantsignal")
-import core.config  # loads .env
 import resend
 from supabase import create_client
 from datetime import datetime, timezone
 from typing import Optional
 
-SUPABASE_URL = os.getenv("SUPABASE_URL")
-SUPABASE_KEY = os.getenv("SUPABASE_ANON_KEY")
-RESEND_KEY   = os.getenv("RESEND_API_KEY")
+# Load env vars — works both locally and on Railway
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except Exception:
+    pass
+
+SUPABASE_URL = os.environ.get("SUPABASE_URL") or os.getenv("SUPABASE_URL")
+SUPABASE_KEY = os.environ.get("SUPABASE_ANON_KEY") or os.getenv("SUPABASE_ANON_KEY")
+RESEND_KEY   = os.environ.get("RESEND_API_KEY") or os.getenv("RESEND_API_KEY")
 
 resend.api_key = RESEND_KEY
-supabase = create_client(SUPABASE_URL, SUPABASE_KEY)
+
+def _get_supabase():
+    """Lazy init supabase client — avoids startup crash if env not loaded yet."""
+    return create_client(SUPABASE_URL, SUPABASE_KEY)
 
 LEAD_TIME = {"HIGH": 60, "MEDIUM": 30, "LOW": 15}
 
@@ -32,7 +39,7 @@ def save_reminder(
     """Save a reminder to Supabase. Returns saved record or error."""
     try:
         # Check if already subscribed
-        existing = supabase.table("event_reminders").select("id").eq(
+        existing = _get_supabase().table("event_reminders").select("id").eq(
             "email", email
         ).eq("event_id", event_id).execute()
 
@@ -53,7 +60,7 @@ def save_reminder(
             "sent":              False,
         }
 
-        result = supabase.table("event_reminders").insert(record).execute()
+        result = _get_supabase().table("event_reminders").insert(record).execute()
         return {"status": "ok", "data": result.data}
 
     except Exception as e:
@@ -140,7 +147,7 @@ def check_and_fire_reminders():
         now = datetime.now(timezone.utc)
 
         # Get all unsent reminders
-        result = supabase.table("event_reminders").select("*").eq(
+        result = _get_supabase().table("event_reminders").select("*").eq(
             "sent", False
         ).execute()
 
@@ -156,7 +163,7 @@ def check_and_fire_reminders():
             if fire_at <= now <= event_time:
                 success = send_reminder_email(reminder)
                 if success:
-                    supabase.table("event_reminders").update(
+                    _get_supabase().table("event_reminders").update(
                         {"sent": True}
                     ).eq("id", reminder["id"]).execute()
                     fired += 1
