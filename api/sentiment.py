@@ -38,6 +38,7 @@ def debug_sentiment():
         "deribit": "https://www.deribit.com/api/v2/public/get_funding_rate_value?instrument_name=BTC-PERPETUAL",
         "okx_funding": "https://www.okx.com/api/v5/public/funding-rate?instId=BTC-USDT-SWAP",
         "bitget": "https://api.bitget.com/api/v2/mix/market/symbol-leverage?symbol=BTCUSDT&productType=USDT-FUTURES",
+        "yfinance_test": "https://query1.finance.yahoo.com/v8/finance/chart/BTC-USD?interval=1d&range=5d",
     }.items():
         try:
             r = requests.get(url, timeout=5)
