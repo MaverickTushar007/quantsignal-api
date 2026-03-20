@@ -1,6 +1,18 @@
+try:
+    import lightgbm as lgb
+    _LGB_OK = True
+except Exception:
+    lgb = None
+    _LGB_OK = False
+
 import numpy as np
 import pandas as pd
 import pickle
+try:
+    import lightgbm as _lgb_test
+    _LGB_OK = True
+except Exception:
+    _LGB_OK = False
 from pathlib import Path
 from dataclasses import dataclass
 from typing import Optional
@@ -46,6 +58,7 @@ def train(ticker, df):
             import lightgbm as lgb
             _LGB_OK = True
         except Exception:
+            lgb = None
             _LGB_OK = False
 
         feat = build_features(df)
