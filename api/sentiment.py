@@ -10,17 +10,17 @@ def debug_sentiment():
     import requests
     results = {}
     try:
-        r = requests.get("https://fapi.binance.com/futures/data/globalLongShortAccountRatio?symbol=BTCUSDT&period=5m&limit=1", timeout=5)
-        results["futures_status"] = r.status_code
-        results["futures_body"] = r.text[:200]
+        r = requests.get("https://api.bybit.com/v5/market/account-ratio?category=linear&symbol=BTCUSDT&period=1d&limit=1", timeout=5)
+        results["bybit_ls_status"] = r.status_code
+        results["bybit_ls_body"] = r.text[:200]
     except Exception as e:
-        results["futures_error"] = str(e)
+        results["bybit_ls_error"] = str(e)
     try:
-        r2 = requests.get("https://api.binance.com/api/v3/ticker/price?symbol=BTCUSDT", timeout=5)
-        results["spot_status"] = r2.status_code
-        results["spot_body"] = r2.text[:100]
+        r2 = requests.get("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd", timeout=5)
+        results["coingecko_status"] = r2.status_code
+        results["coingecko_body"] = r2.text[:100]
     except Exception as e:
-        results["spot_error"] = str(e)
+        results["coingecko_error"] = str(e)
     return results
 
 @router.get("/sentiment/market", tags=["sentiment"])
