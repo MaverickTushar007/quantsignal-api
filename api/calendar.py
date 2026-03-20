@@ -212,3 +212,20 @@ def set_reminder(req: ReminderRequest):
     if result["status"] == "error":
         raise HTTPException(status_code=500, detail=result["error"])
     return result
+
+@router.get("/calendar/remind-debug", tags=["calendar"])
+def debug_remind():
+    import os
+    results = {}
+    results["SUPABASE_URL"] = os.environ.get("SUPABASE_URL", "NOT SET")[:30]
+    results["SUPABASE_KEY"] = os.environ.get("SUPABASE_ANON_KEY", "NOT SET")[:20]
+    results["RESEND_KEY"] = os.environ.get("RESEND_API_KEY", "NOT SET")[:10]
+    try:
+        from data.reminders import _get_supabase
+        sb = _get_supabase()
+        test = sb.table("event_reminders").select("id").limit(1).execute()
+        results["supabase_status"] = "ok"
+        results["row_count"] = len(test.data)
+    except Exception as e:
+        results["supabase_error"] = str(e)
+    return results
