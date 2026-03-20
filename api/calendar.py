@@ -3,7 +3,7 @@ api/calendar.py
 Live economic calendar scraped from ForexFactory.
 Includes this week + next week events with AI playbooks.
 """
-from fastapi import APIRouter
+from fastapi import APIRouter, HTTPException
 import requests
 from bs4 import BeautifulSoup
 import json
