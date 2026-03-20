@@ -15,6 +15,17 @@ def clear_cache():
             cleared.append(f)
         except:
             pass
+    # Also flush Redis signal cache
+    try:
+        from core.cache import _get_redis
+        r = _get_redis()
+        if r:
+            keys = r.keys("signal:*")
+            if keys:
+                r.delete(*keys)
+                cleared.append(f"redis:{len(keys)} signal keys")
+    except Exception as e:
+        cleared.append(f"redis_error:{e}")
     return {"cleared": cleared}
 
 @router.get("/sentiment/debug", tags=["sentiment"])
