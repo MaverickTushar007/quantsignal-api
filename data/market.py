@@ -13,59 +13,42 @@ COINGECKO_ID_MAP = {
     "PEPE-USD": "pepe",
 }
 
-def fetch_coingecko_ohlcv(ticker: str, days: int = 180) -> pd.DataFrame | None:
-    """Fetch OHLCV from CoinGecko — works on Railway, no geo-block."""
+def fetch_coingecko_ohlcv(ticker, days=180):
     cg_id = COINGECKO_ID_MAP.get(ticker)
     if not cg_id:
         return None
     try:
-        url = f"https://api.coingecko.com/api/v3/coins/{cg_id}/ohlc?vs_currency=usd&days={days}"
+        url = f"https://api.coingecko.com/api/v3/coins/{cg_id}/market_chart?vs_currency=usd&days={days}&interval=daily"
         resp = requests.get(url, timeout=20)
         data = resp.json()
-
-        if not data or not isinstance(data, list) or len(data) < 10:
-            print(f"CoinGecko bad response for {ticker}: {str(data)[:100]}")
+        prices = data.get("prices", [])
+        volumes = data.get("total_volumes", [])
+        if not prices or len(prices) < 50:
+            print(f"CoinGecko insufficient data for {ticker}: {len(prices)} points")
             return None
-
         rows = []
-        for item in data:
-            try:
-                ts = pd.Timestamp(item[0], unit="ms")
-                rows.append({
-                    "Open": float(item[1]),
-                    "High": float(item[2]),
-                    "Low": float(item[3]),
-                    "Close": float(item[4]),
-                    "Volume": 1000000.0,
-                })
-            except Exception:
-                continue
-
-        if len(rows) < 10:
-            return None
-
-        df = pd.DataFrame(rows)
-        timestamps = [pd.Timestamp(item[0], unit="ms") for item in data[:len(rows)]]
-        df.index = pd.DatetimeIndex(timestamps)
+        timestamps = []
+        for i, item in enumerate(prices):
+            ts = pd.Timestamp(item[0], unit="ms").normalize()
+            close = float(item[1])
+            vol = float(volumes[i][1]) if i < len(volumes) else 1000000.0
+            rows.append({"Open": close, "High": close * 1.005, "Low": close * 0.995, "Close": close, "Volume": vol})
+            timestamps.append(ts)
+        df = pd.DataFrame(rows, index=pd.DatetimeIndex(timestamps))
         df = df[~df.index.duplicated(keep="last")]
         df = df.sort_index()
-
-        print(f"CoinGecko OHLCV for {ticker}: {len(df)} candles, latest ${df['Close'].iloc[-1]:,.2f}")
+        print(f"CoinGecko market_chart for {ticker}: {len(df)} candles, latest ${df['Close'].iloc[-1]:,.2f}")
         return df
-
     except Exception as e:
-        print(f"CoinGecko OHLCV failed for {ticker}: {e}")
+        print(f"CoinGecko failed for {ticker}: {e}")
         return None
 
-def fetch_ohlcv(ticker: str, period: str = "2y") -> pd.DataFrame | None:
-    # Use CoinGecko for all crypto
+def fetch_ohlcv(ticker, period="2y"):
     if ticker in COINGECKO_ID_MAP:
-        days = 180  # keep it fast on Railway
+        days = 180
         df = fetch_coingecko_ohlcv(ticker, days=days)
         if df is not None and len(df) > 50:
             return df
-
-    # Fall back to yFinance for stocks, ETFs, forex
     for attempt in range(3):
         try:
             t = yf.Ticker(ticker)
