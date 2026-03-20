@@ -90,10 +90,9 @@ def debug_signal(symbol: str):
     import traceback
     try:
         from data.market import fetch_ohlcv
-        df = fetch_ohlcv(symbol.upper())
-        if df is None:
-            return {"error": "fetch_ohlcv returned None"}
-        return {"candles": len(df), "latest_close": float(df["Close"].iloc[-1]), "latest_date": str(df.index[-1])}
+        import requests
+        cg_test = requests.get("https://api.coingecko.com/api/v3/coins/bitcoin/ohlc?vs_currency=usd&days=30", timeout=15)
+        return {"cg_status": cg_test.status_code, "cg_body": cg_test.text[:300]}
     except Exception as e:
         return {"error": str(e), "trace": traceback.format_exc()[-500:]}
 
