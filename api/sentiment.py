@@ -5,6 +5,18 @@ Live market sentiment endpoint — Fear & Greed, positioning, funding rates.
 from fastapi import APIRouter
 router = APIRouter()
 
+@router.get("/sentiment/clear-cache", tags=["sentiment"])
+def clear_cache():
+    import os
+    cleared = []
+    for f in ["data/positioning_cache.json", "data/funding_cache.json", "data/macro_cache.json", "data/fear_greed_cache.json"]:
+        try:
+            os.remove(f)
+            cleared.append(f)
+        except:
+            pass
+    return {"cleared": cleared}
+
 @router.get("/sentiment/debug", tags=["sentiment"])
 def debug_sentiment():
     import requests
