@@ -9,7 +9,7 @@ router = APIRouter()
 def clear_cache():
     import os
     cleared = []
-    for f in ["data/positioning_cache.json", "data/funding_cache.json", "data/macro_cache.json", "data/fear_greed_cache.json"]:
+    for f in ["data/positioning_cache.json", "data/funding_cache.json", "data/macro_cache.json", "data/fear_greed_cache.json", "data/signals_cache.json", "data/calendar_cache.json"]:
         try:
             os.remove(f)
             cleared.append(f)
