@@ -64,8 +64,9 @@ def build_features(df: pd.DataFrame) -> pd.DataFrame:
     feat["dist_SMA20"]  = (close - sma20) / sma20.replace(0, np.nan)
     feat["dist_SMA50"]  = (close - sma50) / sma50
 
-    low52               = low.rolling(252).min()
-    high52              = high.rolling(252).max()
+    _w52 = min(252, len(close))
+    low52               = low.rolling(_w52, min_periods=1).min()
+    high52              = high.rolling(_w52, min_periods=1).max()
     range52             = (high52 - low52).replace(0, np.nan)
     feat["pos_52w"]     = (close - low52) / range52
 
