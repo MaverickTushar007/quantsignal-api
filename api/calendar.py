@@ -98,18 +98,26 @@ def fetch_calendar() -> list:
             except Exception:
                 pass
 
-        from datetime import datetime, timezone
+        from datetime import datetime, timezone, timedelta
         now = datetime.now(timezone.utc)
+        cutoff_past = now - timedelta(days=5)
+        cutoff_future = now + timedelta(days=10)
 
-        # Filter high + medium impact only, upcoming events only
+        def parse_date(e):
+            try:
+                return datetime.fromisoformat(e.get("date", "2000-01-01T00:00:00+00:00").replace("Z", "+00:00"))
+            except Exception:
+                return now
+
+        # Filter high + medium impact only
         filtered = [
             e for e in all_events
             if e.get("impact") in ["High", "Medium"]
             and e.get("country") in ["USD", "EUR", "GBP", "JPY", "CAD", "AUD", "CNY"]
-            and datetime.fromisoformat(e.get("date", "2000-01-01T00:00:00+00:00").replace("Z", "+00:00")) > now
+            and cutoff_past <= parse_date(e) <= cutoff_future
         ]
 
-        # Sort by date ascending (soonest first)
+        # Sort by date ascending
         filtered.sort(key=lambda x: x.get("date", ""))
 
         # Enrich with playbooks
@@ -142,5 +150,27 @@ def fetch_calendar() -> list:
 
 @router.get("/calendar/events", tags=["calendar"])
 def get_calendar_events():
+    from datetime import datetime, timezone
+    now = datetime.now(timezone.utc)
     events = fetch_calendar()
-    return {"events": events, "count": len(events)}
+    
+    upcoming = []
+    past = []
+    for e in events:
+        try:
+            event_date = datetime.fromisoformat(e["date"].replace("Z", "+00:00"))
+            if event_date >= now:
+                upcoming.append(e)
+            else:
+                past.append(e)
+        except Exception:
+            upcoming.append(e)
+    
+    # Past events most recent first
+    past.sort(key=lambda x: x.get("date", ""), reverse=True)
+    
+    return {
+        "upcoming": upcoming,
+        "past": past,
+        "count": len(events)
+    }
