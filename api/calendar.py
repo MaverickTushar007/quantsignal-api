@@ -13,7 +13,7 @@ from datetime import datetime, timezone, timedelta
 
 router = APIRouter()
 CACHE_PATH = Path("data/calendar_cache.json")
-CACHE_TTL = 3600  # 1 hour
+CACHE_TTL = 604800  # 7 days — refreshed by local commit
 
 COUNTRY_FLAGS = {
     "USD": "🇺🇸", "EUR": "🇪🇺", "GBP": "🇬🇧", "JPY": "🇯🇵",
