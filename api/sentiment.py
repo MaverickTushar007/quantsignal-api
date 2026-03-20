@@ -9,18 +9,18 @@ router = APIRouter()
 def debug_sentiment():
     import requests
     results = {}
-    try:
-        r = requests.get("https://api.bybit.com/v5/market/account-ratio?category=linear&symbol=BTCUSDT&period=1d&limit=1", timeout=5)
-        results["bybit_ls_status"] = r.status_code
-        results["bybit_ls_body"] = r.text[:200]
-    except Exception as e:
-        results["bybit_ls_error"] = str(e)
-    try:
-        r2 = requests.get("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd", timeout=5)
-        results["coingecko_status"] = r2.status_code
-        results["coingecko_body"] = r2.text[:100]
-    except Exception as e:
-        results["coingecko_error"] = str(e)
+    for name, url in {
+        "coingecko_price": "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd",
+        "coingecko_derivatives": "https://api.coingecko.com/api/v3/derivatives/exchanges/bitmex?include_tickers=unexpired",
+        "deribit": "https://www.deribit.com/api/v2/public/get_funding_rate_value?instrument_name=BTC-PERPETUAL",
+        "okx_funding": "https://www.okx.com/api/v5/public/funding-rate?instId=BTC-USDT-SWAP",
+        "bitget": "https://api.bitget.com/api/v2/mix/market/symbol-leverage?symbol=BTCUSDT&productType=USDT-FUTURES",
+    }.items():
+        try:
+            r = requests.get(url, timeout=5)
+            results[name] = {"status": r.status_code, "body": r.text[:150]}
+        except Exception as e:
+            results[name] = {"error": str(e)}
     return results
 
 @router.get("/sentiment/market", tags=["sentiment"])
