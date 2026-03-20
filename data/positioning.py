@@ -1,7 +1,8 @@
 """
 data/positioning.py
-Binance futures positioning data — Long/Short ratio + Open Interest.
-Free, no API key required. Cached 15 minutes.
+Bybit futures positioning — Long/Short ratio + Open Interest.
+Bybit is not geo-restricted on Railway. Free, no API key required.
+Cached 15 minutes.
 """
 import requests
 import json
@@ -11,7 +12,7 @@ from pathlib import Path
 CACHE_PATH = Path("data/positioning_cache.json")
 CACHE_TTL = 900  # 15 minutes
 
-SYMBOL_MAP = {
+BYBIT_SYMBOL_MAP = {
     "BTC-USD": "BTCUSDT", "ETH-USD": "ETHUSDT", "SOL-USD": "SOLUSDT",
     "BNB-USD": "BNBUSDT", "XRP-USD": "XRPUSDT", "DOGE-USD": "DOGEUSDT",
     "ADA-USD": "ADAUSDT", "AVAX-USD": "AVAXUSDT", "MATIC-USD": "MATICUSDT",
@@ -21,8 +22,8 @@ SYMBOL_MAP = {
 }
 
 def get_positioning(symbol: str) -> dict:
-    binance_symbol = SYMBOL_MAP.get(symbol)
-    if not binance_symbol:
+    bybit_symbol = BYBIT_SYMBOL_MAP.get(symbol)
+    if not bybit_symbol:
         return {
             "long_ratio": 0.5, "short_ratio": 0.5,
             "long_short_ratio": 1.0, "open_interest": 0.0,
@@ -36,42 +37,44 @@ def get_positioning(symbol: str) -> dict:
         try:
             cached = json.loads(CACHE_PATH.read_text())
             if time.time() - cached.get("timestamp", 0) < CACHE_TTL:
-                if binance_symbol in cached.get("data", {}):
-                    return cached["data"][binance_symbol]
+                if bybit_symbol in cached.get("data", {}):
+                    return cached["data"][bybit_symbol]
             cache = cached.get("data", {})
         except Exception:
             pass
 
     try:
-        # Long/Short ratio
-        ls_url = f"https://fapi.binance.com/futures/data/globalLongShortAccountRatio?symbol={binance_symbol}&period=5m&limit=1"
-        ls_resp = requests.get(ls_url, timeout=5).json()
-        long_ratio = float(ls_resp[0]["longAccount"])
-        short_ratio = float(ls_resp[0]["shortAccount"])
-        ls_ratio = float(ls_resp[0]["longShortRatio"])
+        # Bybit Long/Short ratio
+        ls_url = f"https://api.bybit.com/v5/market/account-ratio?category=linear&symbol={bybit_symbol}&period=1d&limit=1"
+        ls_resp = requests.get(ls_url, timeout=8).json()
+        ls_list = ls_resp.get("result", {}).get("list", [])
+        if not ls_list:
+            raise ValueError("Empty L/S response")
 
-        # Open interest
-        oi_url = f"https://fapi.binance.com/fapi/v1/openInterest?symbol={binance_symbol}"
-        oi_resp = requests.get(oi_url, timeout=5).json()
-        open_interest = float(oi_resp["openInterest"])
+        long_ratio = float(ls_list[0]["buyRatio"])
+        short_ratio = float(ls_list[0]["sellRatio"])
+        ls_ratio = round(long_ratio / short_ratio, 4) if short_ratio > 0 else 1.0
+
+        # Bybit Open Interest
+        oi_url = f"https://api.bybit.com/v5/market/open-interest?category=linear&symbol={bybit_symbol}&intervalTime=1d&limit=1"
+        oi_resp = requests.get(oi_url, timeout=8).json()
+        oi_list = oi_resp.get("result", {}).get("list", [])
+        open_interest = float(oi_list[0]["openInterest"]) if oi_list else 0.0
 
         # Signals
-        # Crowded long = contrarian bearish (>65% longs)
         crowded_long = 1.0 if long_ratio > 0.65 else 0.0
-        # Crowded short = contrarian bullish (<35% longs)
         crowded_short = 1.0 if long_ratio < 0.35 else 0.0
 
-        # Positioning signal: +1 = bullish contrarian, -1 = bearish contrarian
         if long_ratio > 0.65:
-            positioning_signal = -1.0  # too many longs = bearish contrarian
+            positioning_signal = -1.0
         elif long_ratio < 0.35:
-            positioning_signal = 1.0   # too many shorts = bullish contrarian
+            positioning_signal = 1.0
         elif long_ratio > 0.58:
-            positioning_signal = -0.5  # mildly crowded long
+            positioning_signal = -0.5
         elif long_ratio < 0.42:
-            positioning_signal = 0.5   # mildly crowded short
+            positioning_signal = 0.5
         else:
-            positioning_signal = 0.0   # neutral
+            positioning_signal = 0.0
 
         result = {
             "long_ratio": round(long_ratio, 4),
@@ -83,15 +86,13 @@ def get_positioning(symbol: str) -> dict:
             "positioning_signal": positioning_signal,
         }
 
-        cache[binance_symbol] = result
-        CACHE_PATH.write_text(json.dumps({
-            "timestamp": time.time(),
-            "data": cache
-        }))
+        cache[bybit_symbol] = result
+        CACHE_PATH.write_text(json.dumps({"timestamp": time.time(), "data": cache}))
+        print(f"Bybit positioning for {symbol}: {long_ratio*100:.1f}% longs, OI={open_interest:,.0f}")
         return result
 
     except Exception as e:
-        print(f"Positioning fetch failed for {symbol}: {e}")
+        print(f"Bybit positioning failed for {symbol}: {e}")
         return {
             "long_ratio": 0.5, "short_ratio": 0.5,
             "long_short_ratio": 1.0, "open_interest": 0.0,
