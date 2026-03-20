@@ -90,19 +90,13 @@ def debug_signal(symbol: str):
     import traceback
     try:
         from data.market import fetch_ohlcv
-        import traceback, requests
+        import traceback
         try:
-            cg_id = "bitcoin"
-            url = f"https://api.coingecko.com/api/v3/coins/{cg_id}/ohlc?vs_currency=usd&days=90"
-            resp = requests.get(url, timeout=20)
-            data = resp.json()
-            if not data or not isinstance(data, list):
-                return {"error": "bad data", "status": resp.status_code, "body": resp.text[:200]}
-            import pandas as pd
-            df = pd.DataFrame(data, columns=["timestamp","Open","High","Low","Close"])
-            df["timestamp"] = pd.to_datetime(df["timestamp"], unit="ms")
-            df = df.set_index("timestamp")
-            return {"candles": len(df), "latest_close": float(df["Close"].iloc[-1]), "status": resp.status_code}
+            from data.market import fetch_ohlcv
+            df = fetch_ohlcv(symbol.upper())
+            if df is None:
+                return {"error": "fetch_ohlcv returned None"}
+            return {"candles": len(df), "latest_close": float(df["Close"].iloc[-1]), "latest_date": str(df.index[-1])}
         except Exception as e:
             return {"error": str(e), "trace": traceback.format_exc()[-500:]}
     except Exception as e:
