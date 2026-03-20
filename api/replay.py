@@ -56,13 +56,19 @@ def replay_signal(
 
         replay_row = feat_full.loc[[replay_idx[-1]], FEATURE_COLUMNS]
 
-        # Load model bundle
+        # Load model bundle — always try cached first, retrain if needed
         path = _model_path(symbol)
-        if _is_stale(path):
-            bundle = train(symbol, df_sliced)
-        else:
-            with open(path, "rb") as f:
-                bundle = pickle.load(f)
+        bundle = None
+        if not _is_stale(path):
+            try:
+                with open(path, "rb") as f:
+                    bundle = pickle.load(f)
+                # Validate bundle works with current features
+                _ = bundle["xgb"].predict_proba(replay_row)
+            except Exception:
+                bundle = None
+        if bundle is None:
+            bundle = train(symbol, df)
         if bundle is None:
             raise HTTPException(status_code=500, detail="Model unavailable")
 
