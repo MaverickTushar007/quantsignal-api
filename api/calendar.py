@@ -98,14 +98,18 @@ def fetch_calendar() -> list:
             except Exception:
                 pass
 
-        from datetime import datetime, timezone, timedelta
+        from datetime import datetime, timezone, timedelta, timedelta
         now = datetime.now(timezone.utc)
         cutoff_past = now - timedelta(days=7)
         cutoff_future = now + timedelta(days=14)
 
         def parse_date(e):
             try:
-                return datetime.fromisoformat(e.get("date", "2000-01-01T00:00:00+00:00").replace("Z", "+00:00"))
+                d = e.get("date", "2000-01-01T00:00:00+00:00")
+                # Handle offset-naive dates
+                if "+" not in d and "Z" not in d:
+                    d = d + "+00:00"
+                return datetime.fromisoformat(d.replace("Z", "+00:00"))
             except Exception:
                 return now
 
@@ -150,16 +154,20 @@ def fetch_calendar() -> list:
 
 @router.get("/calendar/events", tags=["calendar"])
 def get_calendar_events():
-    from datetime import datetime, timezone
+    from datetime import datetime, timezone, timedelta
     now = datetime.now(timezone.utc)
     events = fetch_calendar()
     
     upcoming = []
     past = []
+    buffer = timedelta(hours=2)
     for e in events:
         try:
-            event_date = datetime.fromisoformat(e["date"].replace("Z", "+00:00"))
-            if event_date >= now:
+            d = e["date"]
+            if "+" not in d and "Z" not in d:
+                d = d + "+00:00"
+            event_date = datetime.fromisoformat(d.replace("Z", "+00:00"))
+            if event_date >= (now - buffer):
                 upcoming.append(e)
             else:
                 past.append(e)
