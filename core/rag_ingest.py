@@ -3,7 +3,10 @@ core/rag_ingest.py
 Chunks quant research papers and stores embeddings in Supabase pgvector.
 Run once: python -m core.rag_ingest
 """
-from sentence_transformers import SentenceTransformer
+try:
+    from sentence_transformers import SentenceTransformer
+except ImportError:
+    SentenceTransformer = None
 from supabase import create_client
 import os
 from dotenv import load_dotenv
