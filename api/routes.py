@@ -34,6 +34,12 @@ def get_all_signals(
     Lightweight signals for all assets — powers the watchlist dashboard.
     No LLM reasoning (fast). Cached after first run.
     """
+    # Check Redis for cached full list
+    from core.cache import get_cached, set_cached
+    cached_list = get_cached("all_signals_list")
+    if cached_list and not type and not direction:
+        return cached_list
+
     import json
     from pathlib import Path
     cache_path = Path("data/signals_cache.json")
@@ -68,6 +74,8 @@ def get_all_signals(
             current_price=sig["current_price"],
             kelly_size=sig["kelly_size"],
         ))
+    if not type and not direction:
+        set_cached("all_signals_list", results, ttl=3600)
     return results
 
 
