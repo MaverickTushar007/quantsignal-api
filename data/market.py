@@ -19,28 +19,38 @@ def fetch_coingecko_ohlcv(ticker: str, days: int = 180) -> pd.DataFrame | None:
     if not cg_id:
         return None
     try:
-        # OHLC endpoint — returns [timestamp, open, high, low, close]
         url = f"https://api.coingecko.com/api/v3/coins/{cg_id}/ohlc?vs_currency=usd&days={days}"
-        resp = requests.get(url, timeout=15)
+        resp = requests.get(url, timeout=20)
         data = resp.json()
 
-        if not data or not isinstance(data, list):
+        if not data or not isinstance(data, list) or len(data) < 10:
+            print(f"CoinGecko bad response for {ticker}: {str(data)[:100]}")
             return None
 
-        df = pd.DataFrame(data, columns=["timestamp", "Open", "High", "Low", "Close"])
-        df["timestamp"] = pd.to_datetime(df["timestamp"], unit="ms")
-        df = df.set_index("timestamp")
-        df.index.name = None
-        df = df.astype(float)
+        rows = []
+        for item in data:
+            try:
+                ts = pd.Timestamp(item[0], unit="ms")
+                rows.append({
+                    "Open": float(item[1]),
+                    "High": float(item[2]),
+                    "Low": float(item[3]),
+                    "Close": float(item[4]),
+                    "Volume": 1000000.0,
+                })
+            except Exception:
+                continue
 
-        df["Volume"] = 1000000.0  # placeholder — volume not used in ML features
+        if len(rows) < 10:
+            return None
 
-        # Remove duplicate index entries
+        df = pd.DataFrame(rows)
+        timestamps = [pd.Timestamp(item[0], unit="ms") for item in data[:len(rows)]]
+        df.index = pd.DatetimeIndex(timestamps)
         df = df[~df.index.duplicated(keep="last")]
         df = df.sort_index()
 
-        latest = float(df["Close"].iloc[-1])
-        print(f"CoinGecko OHLCV for {ticker}: {len(df)} candles, latest close ${latest:,.2f}")
+        print(f"CoinGecko OHLCV for {ticker}: {len(df)} candles, latest ${df['Close'].iloc[-1]:,.2f}")
         return df
 
     except Exception as e:
