@@ -19,3 +19,4 @@ supabase==2.3.0
 upstash-redis==1.1.0
 vaderSentiment==3.3.2
 fredapi==0.5.1
+beautifulsoup4==4.12.3
