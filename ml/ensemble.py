@@ -41,7 +41,11 @@ def _is_stale(path):
 def train(ticker, df):
     try:
         import xgboost as xgb
-        import lightgbm as lgb
+        try:
+    import lightgbm as lgb
+    _LGB_OK = True
+except Exception:
+    _LGB_OK = False
         from sklearn.calibration import CalibratedClassifierCV
 
         feat = build_features(df)
@@ -65,10 +69,13 @@ def train(ticker, df):
         xgb_model = CalibratedClassifierCV(xgb_base, cv=3, method="isotonic")
         xgb_model.fit(X_tr, y_tr)
 
-        lgb_base = lgb.LGBMClassifier(n_estimators=200, max_depth=4, learning_rate=0.05,
-            subsample=0.8, colsample_bytree=0.8, random_state=42, verbose=-1)
-        lgb_model = CalibratedClassifierCV(lgb_base, cv=3, method="isotonic")
-        lgb_model.fit(X_tr, y_tr)
+        if not _LGB_OK:
+            lgb_model = xgb_model
+        else:
+            lgb_base = lgb.LGBMClassifier(n_estimators=200, max_depth=4, learning_rate=0.05,
+                subsample=0.8, colsample_bytree=0.8, random_state=42, verbose=-1)
+            lgb_model = CalibratedClassifierCV(lgb_base, cv=3, method="isotonic")
+            lgb_model.fit(X_tr, y_tr)
 
         importance = dict(zip(FEATURE_COLUMNS, xgb_model.calibrated_classifiers_[0].estimator.feature_importances_))
         top3 = dict(sorted(importance.items(), key=lambda x: x[1], reverse=True)[:3])
@@ -153,7 +160,7 @@ def predict(ticker, df, sentiment=0.0):
             prob = raw_prob
 
         direction = "BUY" if prob >= 0.55 else "SELL" if prob <= 0.45 else "HOLD"
-        agreement = 1.0 - abs(xgb_prob - lgb_prob)
+        agreement = 1.0 - abs(xgb_prob - lgb_prob) if _LGB_OK else 1.0
         confidence = "HIGH" if prob > 0.65 or prob < 0.35 else "MEDIUM" if prob > 0.55 or prob < 0.45 else "LOW"
 
         close = float(df["Close"].iloc[-1])

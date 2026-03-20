@@ -74,8 +74,12 @@ def replay_signal(
 
         # Predict at replay row
         xgb_prob = float(bundle["xgb"].predict_proba(replay_row)[0, 1])
-        lgb_prob = float(bundle["lgb"].predict_proba(replay_row)[0, 1])
-        prob = round(0.5 * xgb_prob + 0.5 * lgb_prob, 4)
+        try:
+            lgb_prob = float(bundle["lgb"].predict_proba(replay_row)[0, 1])
+            prob = round(0.5 * xgb_prob + 0.5 * lgb_prob, 4)
+        except Exception:
+            lgb_prob = xgb_prob
+            prob = round(xgb_prob, 4)
 
         if prob >= 0.55:
             direction = "BUY"
