@@ -98,14 +98,18 @@ def fetch_calendar() -> list:
             except Exception:
                 pass
 
-        # Filter high + medium impact only
+        from datetime import datetime, timezone
+        now = datetime.now(timezone.utc)
+
+        # Filter high + medium impact only, upcoming events only
         filtered = [
             e for e in all_events
             if e.get("impact") in ["High", "Medium"]
             and e.get("country") in ["USD", "EUR", "GBP", "JPY", "CAD", "AUD", "CNY"]
+            and datetime.fromisoformat(e.get("date", "2000-01-01T00:00:00+00:00").replace("Z", "+00:00")) > now
         ]
 
-        # Sort by date
+        # Sort by date ascending (soonest first)
         filtered.sort(key=lambda x: x.get("date", ""))
 
         # Enrich with playbooks
