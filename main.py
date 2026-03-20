@@ -10,6 +10,7 @@ from fastapi.middleware.gzip import GZipMiddleware
 from core.config import settings
 from api.routes import router
 from api.chat import router as chat_router
+from api.sentiment import router as sentiment_router
 try:
     from api.calendar import router as calendar_router
     _calendar_ok = True
@@ -38,6 +39,7 @@ app.add_middleware(GZipMiddleware, minimum_size=1000)
 
 app.include_router(router, prefix="/api/v1")
 app.include_router(chat_router, prefix="/api/v1")
+app.include_router(sentiment_router, prefix="/api/v1")
 if _calendar_ok:
     app.include_router(calendar_router, prefix="/api/v1")
 app.include_router(ws_router, prefix="/api/v1")
