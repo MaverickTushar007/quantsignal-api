@@ -12,6 +12,7 @@ router = APIRouter()
 
 LS_API_KEY     = os.getenv("LEMONSQUEEZY_API_KEY", "")
 LS_VARIANT_ID  = os.getenv("LEMONSQUEEZY_VARIANT_ID", "")
+LS_STORE_ID    = os.getenv("LEMONSQUEEZY_STORE_ID", "")
 LS_WEBHOOK_SECRET = os.getenv("LEMONSQUEEZY_WEBHOOK_SECRET", "")
 SUPABASE_URL   = os.getenv("NEXT_PUBLIC_SUPABASE_URL", "https://xvwkloqmzgwqsouxhgiy.supabase.co")
 SUPABASE_SERVICE_KEY = os.getenv("SUPABASE_SERVICE_KEY", "")
@@ -46,6 +47,9 @@ def create_checkout(req: CheckoutRequest):
                         }
                     },
                     "relationships": {
+                        "store": {
+                            "data": {"type": "stores", "id": str(LS_STORE_ID)}
+                        },
                         "variant": {
                             "data": {"type": "variants", "id": str(LS_VARIANT_ID)}
                         }
