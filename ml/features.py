@@ -28,7 +28,7 @@ def build_features(df: pd.DataFrame) -> pd.DataFrame:
     close = df["Close"].astype(float)
     high  = df["High"].astype(float)
     low   = df["Low"].astype(float)
-    vol   = df["Volume"].astype(float)
+    vol   = df["Volume"].astype(float).replace(0, np.nan).fillna(1.0)  # forex/VIX have no volume
     feat  = pd.DataFrame(index=df.index)
 
     feat["RSI_14"]      = _rsi(close, 14)

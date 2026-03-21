@@ -52,6 +52,9 @@ def _is_stale(path):
 
 def train(ticker, df):
     try:
+        # Flatten MultiIndex columns (yf.download returns these)
+        if isinstance(df.columns, pd.MultiIndex):
+            df.columns = df.columns.get_level_values(0)
         import xgboost as xgb
         from sklearn.calibration import CalibratedClassifierCV
         try:
@@ -63,9 +66,11 @@ def train(ticker, df):
 
         feat = build_features(df)
         future_ret = df["Close"].pct_change(FORWARD_DAYS).shift(-FORWARD_DAYS).reindex(feat.index)
+        # Dynamic threshold — use 30th percentile of abs returns so we always get enough samples
+        dynamic_thresh = max(float(future_ret.abs().quantile(0.30)), 0.001)
         labels = pd.Series(np.nan, index=feat.index)
-        labels[future_ret >  RETURN_THRESH] = 1
-        labels[future_ret < -RETURN_THRESH] = 0
+        labels[future_ret >  dynamic_thresh] = 1
+        labels[future_ret < -dynamic_thresh] = 0
         valid = labels.dropna()
 
         X = feat.loc[valid.index, FEATURE_COLUMNS]
