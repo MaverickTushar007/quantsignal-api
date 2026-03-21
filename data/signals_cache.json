@@ -9079,5 +9079,79 @@
     "news": [],
     "reasoning": "",
     "generated_at": "2026-03-21T14:36:26.266934+00:00"
+  },
+  "BAJAJ-AUTO.NS": {
+    "symbol": "BAJAJ-AUTO.NS",
+    "display": "BAJAJ AUTO",
+    "name": "Bajaj Auto",
+    "type": "IN_STOCK",
+    "icon": "B",
+    "direction": "SELL",
+    "probability": 0.4407,
+    "confidence": "MEDIUM",
+    "kelly_size": 8.47,
+    "expected_value": 179.6677,
+    "take_profit": 8520.9286,
+    "stop_loss": 9316.0357,
+    "current_price": 9051.0,
+    "risk_reward": 2.0,
+    "atr": 265.0357,
+    "model_agreement": 0.866,
+    "top_features": [
+      "dist_SMA20",
+      "MACD",
+      "MACD_hist"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "34 \u2014 Oversold",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bearish (-73.0089)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "21% (Mid)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "26 \u2014 Neutral",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Volume",
+        "value": "1.08x avg",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 below SMA50",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price below SMA20",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "65% (Mid)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "+1.98% ROC",
+        "signal": "BULLISH"
+      }
+    ],
+    "confluence_score": "6/9 bullish",
+    "news": [],
+    "reasoning": "",
+    "generated_at": "2026-03-21T16:03:14.958209+00:00"
   }
 }

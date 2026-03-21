@@ -118,7 +118,7 @@ TICKERS = [
     {"symbol": "ADANIPORTS.NS", "display": "ADANI PORT", "name": "Adani Ports",         "type": "IN_STOCK", "icon": "A"},
     {"symbol": "ADANIGREEN.NS", "display": "ADANI GRN",  "name": "Adani Green Energy",  "type": "IN_STOCK", "icon": "A"},
     # ── Indian Auto ──────────────────────────────────────────
-    {"symbol": "TATAMOTORS.NS", "display": "TATA MOTORS","name": "Tata Motors",         "type": "IN_STOCK", "icon": "T"},
+    {"symbol": "BAJAJ-AUTO.NS", "display": "BAJAJ AUTO", "name": "Bajaj Auto",           "type": "IN_STOCK", "icon": "B"},
     {"symbol": "MARUTI.NS",     "display": "MARUTI",     "name": "Maruti Suzuki",       "type": "IN_STOCK", "icon": "M"},
     # ── Indian Pharma ────────────────────────────────────────
     {"symbol": "SUNPHARMA.NS",  "display": "SUN PHARMA", "name": "Sun Pharmaceutical",  "type": "IN_STOCK", "icon": "S"},
