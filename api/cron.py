@@ -11,6 +11,15 @@ router = APIRouter()
 CRON_SECRET = os.getenv("CRON_SECRET", "quantsignal_cron_2026")
 
 def _rebuild():
+    from api.alerts import fire_signal_alerts
+    import json
+    from pathlib import Path
+    # Load old cache before rebuild for comparison
+    try:
+        old_cache = json.loads(Path("data/signals_cache.json").read_text())
+    except Exception:
+        old_cache = {}
+
     try:
         from data.universe import TICKERS
         from core.signal_service import generate_signal
@@ -27,6 +36,12 @@ def _rebuild():
             time.sleep(0.3)
         Path("data/signals_cache.json").write_text(json.dumps(cache, indent=2))
         print(f"Cache rebuilt: {len(cache)} signals")
+        # Fire signal alerts for direction changes
+        try:
+            fired = fire_signal_alerts(cache, old_cache)
+            print(f"Signal alerts fired: {fired}")
+        except Exception as e:
+            print(f"Alert firing error: {e}")
         # Clear Redis
         try:
             from core.cache import _get_redis
