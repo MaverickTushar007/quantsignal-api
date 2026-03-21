@@ -16,6 +16,7 @@ from api.replay import router as replay_router
 from api.ai_explain import router as ai_explain_router
 from api.guardian import router as guardian_router
 from api.portfolio import router as portfolio_router
+from api.payments import router as payments_router
 try:
     from api.calendar import router as calendar_router
     _calendar_ok = True
@@ -50,6 +51,7 @@ app.include_router(replay_router, prefix="/api/v1")
 app.include_router(ai_explain_router, prefix="/api/v1")
 app.include_router(guardian_router, prefix="/api/v1")
 app.include_router(portfolio_router, prefix="/api/v1")
+app.include_router(payments_router, prefix="/api/v1")
 if _calendar_ok:
     app.include_router(calendar_router, prefix="/api/v1")
 app.include_router(ws_router, prefix="/api/v1")
