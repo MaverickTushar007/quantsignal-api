@@ -9153,5 +9153,5037 @@
     "news": [],
     "reasoning": "",
     "generated_at": "2026-03-21T16:03:14.958209+00:00"
+  },
+  "NTPC.NS": {
+    "symbol": "NTPC.NS",
+    "display": "NTPC",
+    "name": "NTPC Ltd",
+    "type": "IN_STOCK",
+    "icon": "N",
+    "direction": "HOLD",
+    "probability": 0.5098,
+    "confidence": "LOW",
+    "kelly_size": 5.88,
+    "expected_value": 4.9144,
+    "take_profit": 360.0643,
+    "stop_loss": 391.3929,
+    "current_price": 380.95,
+    "risk_reward": 2.0,
+    "atr": 10.4429,
+    "model_agreement": 0.982,
+    "top_features": [
+      "MACD",
+      "mom_10d",
+      "SMA_cross"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "49 \u2014 Neutral",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bearish (-1.3473)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "57% (Mid)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "55 \u2014 Neutral",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Volume",
+        "value": "1.41x avg",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 above SMA50",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price above SMA20",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "83% (High)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "-0.91% ROC",
+        "signal": "BEARISH"
+      }
+    ],
+    "confluence_score": "5/9 bullish",
+    "news": [],
+    "reasoning": "",
+    "generated_at": "2026-03-21T22:11:57.559067+00:00"
+  },
+  "GAIL.NS": {
+    "symbol": "GAIL.NS",
+    "display": "GAIL",
+    "name": "GAIL India",
+    "type": "IN_STOCK",
+    "icon": "G",
+    "direction": "BUY",
+    "probability": 0.8121,
+    "confidence": "HIGH",
+    "kelly_size": 17.95,
+    "expected_value": 7.477,
+    "take_profit": 153.2814,
+    "stop_loss": 137.6643,
+    "current_price": 142.87,
+    "risk_reward": 2.0,
+    "atr": 5.2057,
+    "model_agreement": 0.882,
+    "top_features": [
+      "mom_5d",
+      "MACD_hist",
+      "BB_pct"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "24 \u2014 Oversold",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bearish (-1.2326)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "16% (Lower)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "2 \u2014 Oversold",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Volume",
+        "value": "1.40x avg",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 below SMA50",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price below SMA20",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "1% (Low)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "-3.32% ROC",
+        "signal": "BEARISH"
+      }
+    ],
+    "confluence_score": "4/9 bullish",
+    "news": [],
+    "reasoning": "",
+    "generated_at": "2026-03-21T22:12:00.153349+00:00"
+  },
+  "IOC.NS": {
+    "symbol": "IOC.NS",
+    "display": "IOC",
+    "name": "Indian Oil Corp",
+    "type": "IN_STOCK",
+    "icon": "I",
+    "direction": "HOLD",
+    "probability": 0.5153,
+    "confidence": "LOW",
+    "kelly_size": 5.68,
+    "expected_value": 2.4952,
+    "take_profit": 133.6105,
+    "stop_loss": 150.0947,
+    "current_price": 144.6,
+    "risk_reward": 2.0,
+    "atr": 5.4947,
+    "model_agreement": 0.985,
+    "top_features": [
+      "BB_pct",
+      "dist_SMA20",
+      "RSI_7"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "13 \u2014 Oversold",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bearish (-2.8432)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "14% (Lower)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "7 \u2014 Oversold",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Volume",
+        "value": "1.46x avg",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 below SMA50",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price below SMA20",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "42% (Mid)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "-7.63% ROC",
+        "signal": "BEARISH"
+      }
+    ],
+    "confluence_score": "4/9 bullish",
+    "news": [],
+    "reasoning": "",
+    "generated_at": "2026-03-21T22:12:02.814624+00:00"
+  },
+  "BPCL.NS": {
+    "symbol": "BPCL.NS",
+    "display": "BPCL",
+    "name": "BPCL",
+    "type": "IN_STOCK",
+    "icon": "B",
+    "direction": "BUY",
+    "probability": 0.6665,
+    "confidence": "HIGH",
+    "kelly_size": 12.49,
+    "expected_value": 12.0583,
+    "take_profit": 311.9286,
+    "stop_loss": 275.7357,
+    "current_price": 287.8,
+    "risk_reward": 2.0,
+    "atr": 12.0643,
+    "model_agreement": 0.991,
+    "top_features": [
+      "dist_SMA50",
+      "BB_width",
+      "MACD"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "9 \u2014 Oversold",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bearish (-6.6441)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "11% (Lower)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "4 \u2014 Oversold",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Volume",
+        "value": "1.31x avg",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 below SMA50",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price below SMA20",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "30% (Mid)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "-9.87% ROC",
+        "signal": "BEARISH"
+      }
+    ],
+    "confluence_score": "4/9 bullish",
+    "news": [],
+    "reasoning": "",
+    "generated_at": "2026-03-21T22:12:08.772569+00:00"
+  },
+  "HINDPETRO.NS": {
+    "symbol": "HINDPETRO.NS",
+    "display": "HPCL",
+    "name": "HPCL",
+    "type": "IN_STOCK",
+    "icon": "H",
+    "direction": "HOLD",
+    "probability": 0.5444,
+    "confidence": "LOW",
+    "kelly_size": 4.58,
+    "expected_value": 6.4242,
+    "take_profit": 301.2714,
+    "stop_loss": 353.8143,
+    "current_price": 336.3,
+    "risk_reward": 2.0,
+    "atr": 17.5143,
+    "model_agreement": 0.937,
+    "top_features": [
+      "MACD_hist",
+      "BB_pct",
+      "SMA_cross"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "20 \u2014 Oversold",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bearish (-6.6560)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "12% (Lower)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "13 \u2014 Oversold",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Volume",
+        "value": "2.31x avg",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 below SMA50",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price below SMA20",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "12% (Low)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "-8.80% ROC",
+        "signal": "BEARISH"
+      }
+    ],
+    "confluence_score": "4/9 bullish",
+    "news": [],
+    "reasoning": "",
+    "generated_at": "2026-03-21T22:12:13.195263+00:00"
+  },
+  "SAIL.NS": {
+    "symbol": "SAIL.NS",
+    "display": "SAIL",
+    "name": "Steel Authority",
+    "type": "IN_STOCK",
+    "icon": "S",
+    "direction": "SELL",
+    "probability": 0.4481,
+    "confidence": "MEDIUM",
+    "kelly_size": 8.2,
+    "expected_value": 4.1979,
+    "take_profit": 142.7157,
+    "stop_loss": 161.9221,
+    "current_price": 155.52,
+    "risk_reward": 2.0,
+    "atr": 6.4021,
+    "model_agreement": 0.907,
+    "top_features": [
+      "ret_vol",
+      "BB_width",
+      "dist_SMA50"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "39 \u2014 Neutral",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bearish (-0.3785)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "48% (Mid)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "49 \u2014 Neutral",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Volume",
+        "value": "1.12x avg",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 above SMA50",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price below SMA20",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "81% (High)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "+3.76% ROC",
+        "signal": "BULLISH"
+      }
+    ],
+    "confluence_score": "7/9 bullish",
+    "news": [],
+    "reasoning": "",
+    "generated_at": "2026-03-21T22:12:18.130971+00:00"
+  },
+  "NMDC.NS": {
+    "symbol": "NMDC.NS",
+    "display": "NMDC",
+    "name": "NMDC Ltd",
+    "type": "IN_STOCK",
+    "icon": "N",
+    "direction": "HOLD",
+    "probability": 0.506,
+    "confidence": "LOW",
+    "kelly_size": 6.02,
+    "expected_value": 1.3183,
+    "take_profit": 74.31,
+    "stop_loss": 82.515,
+    "current_price": 79.78,
+    "risk_reward": 2.0,
+    "atr": 2.735,
+    "model_agreement": 0.976,
+    "top_features": [
+      "stoch_D",
+      "dist_SMA20",
+      "stoch_K"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "45 \u2014 Neutral",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bearish (-0.0912)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "51% (Mid)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "61 \u2014 Neutral",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Volume",
+        "value": "1.65x avg",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 above SMA50",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price above SMA20",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "84% (High)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "+1.51% ROC",
+        "signal": "BULLISH"
+      }
+    ],
+    "confluence_score": "6/9 bullish",
+    "news": [],
+    "reasoning": "",
+    "generated_at": "2026-03-21T22:12:22.481190+00:00"
+  },
+  "BHEL.NS": {
+    "symbol": "BHEL.NS",
+    "display": "BHEL",
+    "name": "BHEL",
+    "type": "IN_STOCK",
+    "icon": "B",
+    "direction": "HOLD",
+    "probability": 0.4692,
+    "confidence": "LOW",
+    "kelly_size": 7.4,
+    "expected_value": 6.0234,
+    "take_profit": 241.7143,
+    "stop_loss": 272.2178,
+    "current_price": 262.05,
+    "risk_reward": 2.0,
+    "atr": 10.1679,
+    "model_agreement": 0.989,
+    "top_features": [
+      "ret_vol",
+      "SMA_cross",
+      "mom_20d"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "48 \u2014 Neutral",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bullish (+0.2991)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "67% (Mid)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "64 \u2014 Neutral",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Volume",
+        "value": "1.95x avg",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 below SMA50",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price above SMA20",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "61% (Mid)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "+1.37% ROC",
+        "signal": "BULLISH"
+      }
+    ],
+    "confluence_score": "6/9 bullish",
+    "news": [],
+    "reasoning": "",
+    "generated_at": "2026-03-21T22:12:27.061616+00:00"
+  },
+  "CONCOR.NS": {
+    "symbol": "CONCOR.NS",
+    "display": "CONCOR",
+    "name": "Container Corp",
+    "type": "IN_STOCK",
+    "icon": "C",
+    "direction": "BUY",
+    "probability": 0.7021,
+    "confidence": "HIGH",
+    "kelly_size": 13.83,
+    "expected_value": 15.1129,
+    "take_profit": 474.6214,
+    "stop_loss": 433.6393,
+    "current_price": 447.3,
+    "risk_reward": 2.0,
+    "atr": 13.6607,
+    "model_agreement": 0.718,
+    "top_features": [
+      "pos_52w",
+      "mom_20d",
+      "BB_width"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "28 \u2014 Oversold",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bearish (-2.6500)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "17% (Lower)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "18 \u2014 Oversold",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Volume",
+        "value": "1.06x avg",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 below SMA50",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price below SMA20",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "4% (Low)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "-1.35% ROC",
+        "signal": "BEARISH"
+      }
+    ],
+    "confluence_score": "4/9 bullish",
+    "news": [],
+    "reasoning": "",
+    "generated_at": "2026-03-21T22:12:31.667570+00:00"
+  },
+  "TATAPOWER.NS": {
+    "symbol": "TATAPOWER.NS",
+    "display": "TATA PWR",
+    "name": "Tata Power",
+    "type": "IN_STOCK",
+    "icon": "T",
+    "direction": "SELL",
+    "probability": 0.3403,
+    "confidence": "HIGH",
+    "kelly_size": 12.24,
+    "expected_value": 12.2632,
+    "take_profit": 377.35,
+    "stop_loss": 414.925,
+    "current_price": 402.4,
+    "risk_reward": 2.0,
+    "atr": 12.525,
+    "model_agreement": 0.913,
+    "top_features": [
+      "BB_pct",
+      "mom_10d",
+      "pos_52w"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "65 \u2014 Neutral",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bullish (+2.0226)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "88% (Upper)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "74 \u2014 Neutral",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Volume",
+        "value": "3.21x avg",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 above SMA50",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price above SMA20",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "81% (High)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "+1.89% ROC",
+        "signal": "BULLISH"
+      }
+    ],
+    "confluence_score": "6/9 bullish",
+    "news": [],
+    "reasoning": "",
+    "generated_at": "2026-03-21T22:12:36.765640+00:00"
+  },
+  "BAJAJFINSV.NS": {
+    "symbol": "BAJAJFINSV.NS",
+    "display": "BAJAJ FNSV",
+    "name": "Bajaj Finserv",
+    "type": "IN_STOCK",
+    "icon": "B",
+    "direction": "BUY",
+    "probability": 0.653,
+    "confidence": "HIGH",
+    "kelly_size": 11.99,
+    "expected_value": 45.21,
+    "take_profit": 1804.5858,
+    "stop_loss": 1663.1572,
+    "current_price": 1710.3,
+    "risk_reward": 2.0,
+    "atr": 47.1429,
+    "model_agreement": 0.985,
+    "top_features": [
+      "BB_pct",
+      "pos_52w",
+      "stoch_D"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "21 \u2014 Oversold",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bearish (-15.5589)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "15% (Lower)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "3 \u2014 Oversold",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Volume",
+        "value": "1.95x avg",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 below SMA50",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price below SMA20",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "2% (Low)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "-1.59% ROC",
+        "signal": "BEARISH"
+      }
+    ],
+    "confluence_score": "4/9 bullish",
+    "news": [],
+    "reasoning": "",
+    "generated_at": "2026-03-21T22:12:41.527478+00:00"
+  },
+  "MUTHOOTFIN.NS": {
+    "symbol": "MUTHOOTFIN.NS",
+    "display": "MUTHOOT",
+    "name": "Muthoot Finance",
+    "type": "IN_STOCK",
+    "icon": "M",
+    "direction": "BUY",
+    "probability": 0.6399,
+    "confidence": "MEDIUM",
+    "kelly_size": 11.5,
+    "expected_value": 104.5436,
+    "take_profit": 3543.2427,
+    "stop_loss": 3202.2285,
+    "current_price": 3315.8999,
+    "risk_reward": 2.0,
+    "atr": 113.6714,
+    "model_agreement": 0.99,
+    "top_features": [
+      "pos_52w",
+      "dist_SMA50",
+      "RSI_14"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "48 \u2014 Neutral",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bullish (+19.6690)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "39% (Mid)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "57 \u2014 Neutral",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Volume",
+        "value": "1.59x avg",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 below SMA50",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price below SMA20",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "62% (Mid)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "-0.52% ROC",
+        "signal": "BEARISH"
+      }
+    ],
+    "confluence_score": "5/9 bullish",
+    "news": [],
+    "reasoning": "",
+    "generated_at": "2026-03-21T22:12:46.613278+00:00"
+  },
+  "CHOLAFIN.NS": {
+    "symbol": "CHOLAFIN.NS",
+    "display": "CHOLA FIN",
+    "name": "Cholamandalam Fin",
+    "type": "IN_STOCK",
+    "icon": "C",
+    "direction": "BUY",
+    "probability": 0.5882,
+    "confidence": "MEDIUM",
+    "kelly_size": 9.56,
+    "expected_value": 42.2606,
+    "take_profit": 1551.0429,
+    "stop_loss": 1385.2286,
+    "current_price": 1440.5,
+    "risk_reward": 2.0,
+    "atr": 55.2714,
+    "model_agreement": 1.0,
+    "top_features": [
+      "dist_SMA20",
+      "MACD_hist",
+      "mom_20d"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "16 \u2014 Oversold",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bearish (-18.4153)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "7% (Lower)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "1 \u2014 Oversold",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Volume",
+        "value": "1.24x avg",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 below SMA50",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price below SMA20",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "18% (Low)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "-4.85% ROC",
+        "signal": "BEARISH"
+      }
+    ],
+    "confluence_score": "4/9 bullish",
+    "news": [],
+    "reasoning": "",
+    "generated_at": "2026-03-21T22:12:49.288594+00:00"
+  },
+  "SBILIFE.NS": {
+    "symbol": "SBILIFE.NS",
+    "display": "SBI LIFE",
+    "name": "SBI Life Insurance",
+    "type": "IN_STOCK",
+    "icon": "S",
+    "direction": "SELL",
+    "probability": 0.4427,
+    "confidence": "MEDIUM",
+    "kelly_size": 8.4,
+    "expected_value": 31.1303,
+    "take_profit": 1804.2365,
+    "stop_loss": 1943.2318,
+    "current_price": 1896.9,
+    "risk_reward": 2.0,
+    "atr": 46.3318,
+    "model_agreement": 0.894,
+    "top_features": [
+      "MACD",
+      "dist_SMA50",
+      "RSI_14"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "32 \u2014 Oversold",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bearish (-5.2894)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "22% (Mid)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "9 \u2014 Oversold",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Volume",
+        "value": "1.77x avg",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 below SMA50",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price below SMA20",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "69% (Mid)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "-0.39% ROC",
+        "signal": "BEARISH"
+      }
+    ],
+    "confluence_score": "5/9 bullish",
+    "news": [],
+    "reasoning": "",
+    "generated_at": "2026-03-21T22:12:51.840587+00:00"
+  },
+  "HDFCLIFE.NS": {
+    "symbol": "HDFCLIFE.NS",
+    "display": "HDFC LIFE",
+    "name": "HDFC Life",
+    "type": "IN_STOCK",
+    "icon": "H",
+    "direction": "SELL",
+    "probability": 0.4435,
+    "confidence": "MEDIUM",
+    "kelly_size": 8.37,
+    "expected_value": 10.2027,
+    "take_profit": 593.1715,
+    "stop_loss": 638.8893,
+    "current_price": 623.65,
+    "risk_reward": 2.0,
+    "atr": 15.2393,
+    "model_agreement": 0.987,
+    "top_features": [
+      "BB_width",
+      "dist_SMA20",
+      "vol_trend"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "15 \u2014 Oversold",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bearish (-3.6033)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "19% (Lower)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "6 \u2014 Oversold",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Volume",
+        "value": "1.00x avg",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 below SMA50",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price below SMA20",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "3% (Low)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "-0.34% ROC",
+        "signal": "BEARISH"
+      }
+    ],
+    "confluence_score": "3/9 bullish",
+    "news": [],
+    "reasoning": "",
+    "generated_at": "2026-03-21T22:12:54.435971+00:00"
+  },
+  "ICICIGI.NS": {
+    "symbol": "ICICIGI.NS",
+    "display": "ICICI GI",
+    "name": "ICICI Lombard",
+    "type": "IN_STOCK",
+    "icon": "I",
+    "direction": "BUY",
+    "probability": 0.5597,
+    "confidence": "MEDIUM",
+    "kelly_size": 8.49,
+    "expected_value": 28.8909,
+    "take_profit": 1862.2857,
+    "stop_loss": 1734.6571,
+    "current_price": 1777.2,
+    "risk_reward": 2.0,
+    "atr": 42.5429,
+    "model_agreement": 0.961,
+    "top_features": [
+      "pos_52w",
+      "MACD_signal",
+      "BB_width"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "22 \u2014 Oversold",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bearish (-11.5038)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "-1% (Lower)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "4 \u2014 Oversold",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Volume",
+        "value": "0.66x avg",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 above SMA50",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price below SMA20",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "29% (Low)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "-3.26% ROC",
+        "signal": "BEARISH"
+      }
+    ],
+    "confluence_score": "4/9 bullish",
+    "news": [],
+    "reasoning": "",
+    "generated_at": "2026-03-21T22:12:56.980560+00:00"
+  },
+  "LICI.NS": {
+    "symbol": "LICI.NS",
+    "display": "LIC",
+    "name": "Life Insurance Corp",
+    "type": "IN_STOCK",
+    "icon": "L",
+    "direction": "HOLD",
+    "probability": 0.4892,
+    "confidence": "LOW",
+    "kelly_size": 6.65,
+    "expected_value": 9.4045,
+    "take_profit": 741.4214,
+    "stop_loss": 794.4143,
+    "current_price": 776.75,
+    "risk_reward": 2.0,
+    "atr": 17.6643,
+    "model_agreement": 0.999,
+    "top_features": [
+      "vol_ratio",
+      "pos_52w",
+      "ret_vol"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "28 \u2014 Oversold",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bearish (-5.5977)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "22% (Mid)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "21 \u2014 Neutral",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Volume",
+        "value": "1.01x avg",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 below SMA50",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price below SMA20",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "20% (Low)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "+0.52% ROC",
+        "signal": "BULLISH"
+      }
+    ],
+    "confluence_score": "5/9 bullish",
+    "news": [],
+    "reasoning": "",
+    "generated_at": "2026-03-21T22:13:03.033745+00:00"
+  },
+  "INDUSINDBK.NS": {
+    "symbol": "INDUSINDBK.NS",
+    "display": "INDUSIND",
+    "name": "IndusInd Bank",
+    "type": "IN_STOCK",
+    "icon": "I",
+    "direction": "SELL",
+    "probability": 0.3517,
+    "confidence": "MEDIUM",
+    "kelly_size": 11.81,
+    "expected_value": 24.9352,
+    "take_profit": 765.8214,
+    "stop_loss": 844.9893,
+    "current_price": 818.6,
+    "risk_reward": 2.0,
+    "atr": 26.3893,
+    "model_agreement": 0.91,
+    "top_features": [
+      "MACD",
+      "mom_20d",
+      "ret_vol"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "24 \u2014 Oversold",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bearish (-9.8155)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "17% (Lower)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "9 \u2014 Oversold",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Volume",
+        "value": "1.89x avg",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 below SMA50",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price below SMA20",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "55% (Mid)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "+0.52% ROC",
+        "signal": "BULLISH"
+      }
+    ],
+    "confluence_score": "6/9 bullish",
+    "news": [],
+    "reasoning": "",
+    "generated_at": "2026-03-21T22:13:07.623966+00:00"
+  },
+  "BANKBARODA.NS": {
+    "symbol": "BANKBARODA.NS",
+    "display": "BANK BODA",
+    "name": "Bank of Baroda",
+    "type": "IN_STOCK",
+    "icon": "B",
+    "direction": "BUY",
+    "probability": 0.6234,
+    "confidence": "MEDIUM",
+    "kelly_size": 10.88,
+    "expected_value": 7.2506,
+    "take_profit": 296.6143,
+    "stop_loss": 271.6179,
+    "current_price": 279.95,
+    "risk_reward": 2.0,
+    "atr": 8.3321,
+    "model_agreement": 0.851,
+    "top_features": [
+      "dist_SMA20",
+      "ret_vol",
+      "BB_width"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "24 \u2014 Oversold",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bearish (-2.6073)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "22% (Mid)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "18 \u2014 Oversold",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Volume",
+        "value": "0.91x avg",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 below SMA50",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price below SMA20",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "64% (Mid)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "-0.39% ROC",
+        "signal": "BEARISH"
+      }
+    ],
+    "confluence_score": "4/9 bullish",
+    "news": [],
+    "reasoning": "",
+    "generated_at": "2026-03-21T22:13:12.102846+00:00"
+  },
+  "PNB.NS": {
+    "symbol": "PNB.NS",
+    "display": "PNB",
+    "name": "Punjab National Bank",
+    "type": "IN_STOCK",
+    "icon": "P",
+    "direction": "BUY",
+    "probability": 0.796,
+    "confidence": "HIGH",
+    "kelly_size": 17.35,
+    "expected_value": 4.8421,
+    "take_profit": 118.5071,
+    "stop_loss": 108.0414,
+    "current_price": 111.53,
+    "risk_reward": 2.0,
+    "atr": 3.4886,
+    "model_agreement": 0.979,
+    "top_features": [
+      "mom_10d",
+      "dist_SMA20",
+      "SMA_cross"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "24 \u2014 Oversold",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bearish (-1.0394)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "22% (Mid)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "16 \u2014 Oversold",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Volume",
+        "value": "0.88x avg",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 below SMA50",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price below SMA20",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "54% (Mid)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "-0.15% ROC",
+        "signal": "BEARISH"
+      }
+    ],
+    "confluence_score": "4/9 bullish",
+    "news": [],
+    "reasoning": "",
+    "generated_at": "2026-03-21T22:13:16.411139+00:00"
+  },
+  "CANBK.NS": {
+    "symbol": "CANBK.NS",
+    "display": "CANARA",
+    "name": "Canara Bank",
+    "type": "IN_STOCK",
+    "icon": "C",
+    "direction": "BUY",
+    "probability": 0.5766,
+    "confidence": "MEDIUM",
+    "kelly_size": 9.12,
+    "expected_value": 3.2945,
+    "take_profit": 145.4686,
+    "stop_loss": 131.9257,
+    "current_price": 136.44,
+    "risk_reward": 2.0,
+    "atr": 4.5143,
+    "model_agreement": 0.998,
+    "top_features": [
+      "MACD_signal",
+      "SMA_cross",
+      "dist_SMA20"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "26 \u2014 Oversold",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bearish (-1.1184)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "25% (Mid)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "20 \u2014 Oversold",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Volume",
+        "value": "1.18x avg",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 below SMA50",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price below SMA20",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "68% (Mid)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "+1.31% ROC",
+        "signal": "BULLISH"
+      }
+    ],
+    "confluence_score": "6/9 bullish",
+    "news": [],
+    "reasoning": "",
+    "generated_at": "2026-03-21T22:13:21.455641+00:00"
+  },
+  "UNIONBANK.NS": {
+    "symbol": "UNIONBANK.NS",
+    "display": "UNION BK",
+    "name": "Union Bank",
+    "type": "IN_STOCK",
+    "icon": "U",
+    "direction": "HOLD",
+    "probability": 0.4734,
+    "confidence": "LOW",
+    "kelly_size": 7.25,
+    "expected_value": 3.5848,
+    "take_profit": 165.2643,
+    "stop_loss": 183.8129,
+    "current_price": 177.63,
+    "risk_reward": 2.0,
+    "atr": 6.1829,
+    "model_agreement": 0.925,
+    "top_features": [
+      "stoch_D",
+      "ATR_pct",
+      "mom_10d"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "30 \u2014 Oversold",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bearish (-2.1465)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "27% (Mid)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "22 \u2014 Neutral",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Volume",
+        "value": "1.08x avg",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 above SMA50",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price below SMA20",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "71% (High)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "+2.16% ROC",
+        "signal": "BULLISH"
+      }
+    ],
+    "confluence_score": "7/9 bullish",
+    "news": [],
+    "reasoning": "",
+    "generated_at": "2026-03-21T22:13:26.146276+00:00"
+  },
+  "ABCAPITAL.NS": {
+    "symbol": "ABCAPITAL.NS",
+    "display": "ABCAP",
+    "name": "Aditya Birla Capital",
+    "type": "IN_STOCK",
+    "icon": "A",
+    "direction": "HOLD",
+    "probability": 0.5442,
+    "confidence": "LOW",
+    "kelly_size": 4.59,
+    "expected_value": 4.1805,
+    "take_profit": 288.4929,
+    "stop_loss": 322.6286,
+    "current_price": 311.25,
+    "risk_reward": 2.0,
+    "atr": 11.3786,
+    "model_agreement": 0.998,
+    "top_features": [
+      "dist_SMA50",
+      "BB_width",
+      "pos_52w"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "33 \u2014 Oversold",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bearish (-1.2515)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "17% (Lower)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "10 \u2014 Oversold",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Volume",
+        "value": "0.38x avg",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 below SMA50",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price below SMA20",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "72% (High)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "+0.16% ROC",
+        "signal": "BULLISH"
+      }
+    ],
+    "confluence_score": "5/9 bullish",
+    "news": [],
+    "reasoning": "",
+    "generated_at": "2026-03-21T22:13:31.434450+00:00"
+  },
+  "DIVISLAB.NS": {
+    "symbol": "DIVISLAB.NS",
+    "display": "DIVIS LAB",
+    "name": "Divis Laboratories",
+    "type": "IN_STOCK",
+    "icon": "D",
+    "direction": "BUY",
+    "probability": 0.6562,
+    "confidence": "HIGH",
+    "kelly_size": 12.11,
+    "expected_value": 139.1325,
+    "take_profit": 6387.2857,
+    "stop_loss": 5956.3571,
+    "current_price": 6100.0,
+    "risk_reward": 2.0,
+    "atr": 143.6429,
+    "model_agreement": 0.963,
+    "top_features": [
+      "MACD",
+      "MACD_hist",
+      "MACD_signal"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "33 \u2014 Oversold",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bearish (-33.9580)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "21% (Mid)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "31 \u2014 Neutral",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Volume",
+        "value": "1.09x avg",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 above SMA50",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price below SMA20",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "55% (Mid)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "+0.48% ROC",
+        "signal": "BULLISH"
+      }
+    ],
+    "confluence_score": "7/9 bullish",
+    "news": [],
+    "reasoning": "",
+    "generated_at": "2026-03-21T22:13:34.618610+00:00"
+  },
+  "APOLLOHOSP.NS": {
+    "symbol": "APOLLOHOSP.NS",
+    "display": "APOLLO",
+    "name": "Apollo Hospitals",
+    "type": "IN_STOCK",
+    "icon": "A",
+    "direction": "BUY",
+    "probability": 0.6381,
+    "confidence": "MEDIUM",
+    "kelly_size": 11.43,
+    "expected_value": 162.3862,
+    "take_profit": 7719.7143,
+    "stop_loss": 7186.8929,
+    "current_price": 7364.5,
+    "risk_reward": 2.0,
+    "atr": 177.6071,
+    "model_agreement": 0.999,
+    "top_features": [
+      "MACD_signal",
+      "dist_SMA50",
+      "pos_52w"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "29 \u2014 Oversold",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bearish (-66.1712)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "7% (Lower)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "24 \u2014 Neutral",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Volume",
+        "value": "1.62x avg",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 above SMA50",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price below SMA20",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "66% (Mid)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "-2.46% ROC",
+        "signal": "BEARISH"
+      }
+    ],
+    "confluence_score": "6/9 bullish",
+    "news": [],
+    "reasoning": "",
+    "generated_at": "2026-03-21T22:13:37.368062+00:00"
+  },
+  "TORNTPHARM.NS": {
+    "symbol": "TORNTPHARM.NS",
+    "display": "TORNT PHM",
+    "name": "Torrent Pharma",
+    "type": "IN_STOCK",
+    "icon": "T",
+    "direction": "BUY",
+    "probability": 0.6093,
+    "confidence": "MEDIUM",
+    "kelly_size": 10.35,
+    "expected_value": 85.4096,
+    "take_profit": 4476.5286,
+    "stop_loss": 4167.036,
+    "current_price": 4270.2002,
+    "risk_reward": 2.0,
+    "atr": 103.1642,
+    "model_agreement": 0.97,
+    "top_features": [
+      "mom_20d",
+      "RSI_7",
+      "pos_52w"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "45 \u2014 Neutral",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bearish (-30.4214)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "22% (Mid)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "31 \u2014 Neutral",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Volume",
+        "value": "0.71x avg",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 above SMA50",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price below SMA20",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "86% (High)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "-2.73% ROC",
+        "signal": "BEARISH"
+      }
+    ],
+    "confluence_score": "5/9 bullish",
+    "news": [],
+    "reasoning": "",
+    "generated_at": "2026-03-21T22:13:40.021406+00:00"
+  },
+  "AUROPHARMA.NS": {
+    "symbol": "AUROPHARMA.NS",
+    "display": "AUROBINDO",
+    "name": "Aurobindo Pharma",
+    "type": "IN_STOCK",
+    "icon": "A",
+    "direction": "BUY",
+    "probability": 0.7062,
+    "confidence": "HIGH",
+    "kelly_size": 13.98,
+    "expected_value": 38.8314,
+    "take_profit": 1360.8286,
+    "stop_loss": 1256.6857,
+    "current_price": 1291.4,
+    "risk_reward": 2.0,
+    "atr": 34.7143,
+    "model_agreement": 0.976,
+    "top_features": [
+      "pos_52w",
+      "BB_width",
+      "ATR_pct"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "64 \u2014 Neutral",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bullish (+1.2400)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "76% (Mid)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "80 \u2014 Neutral",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Volume",
+        "value": "0.92x avg",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 above SMA50",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price above SMA20",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "91% (High)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "-0.39% ROC",
+        "signal": "BEARISH"
+      }
+    ],
+    "confluence_score": "4/9 bullish",
+    "news": [],
+    "reasoning": "",
+    "generated_at": "2026-03-21T22:13:42.483516+00:00"
+  },
+  "LUPIN.NS": {
+    "symbol": "LUPIN.NS",
+    "display": "LUPIN",
+    "name": "Lupin Ltd",
+    "type": "IN_STOCK",
+    "icon": "L",
+    "direction": "HOLD",
+    "probability": 0.5147,
+    "confidence": "LOW",
+    "kelly_size": 5.7,
+    "expected_value": 22.2316,
+    "take_profit": 2224.9715,
+    "stop_loss": 2371.2643,
+    "current_price": 2322.5,
+    "risk_reward": 2.0,
+    "atr": 48.7643,
+    "model_agreement": 0.958,
+    "top_features": [
+      "dist_SMA50",
+      "RSI_7",
+      "BB_pct"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "53 \u2014 Neutral",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bearish (-8.1529)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "64% (Mid)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "59 \u2014 Neutral",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Volume",
+        "value": "1.16x avg",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 above SMA50",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price above SMA20",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "91% (High)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "+0.33% ROC",
+        "signal": "BULLISH"
+      }
+    ],
+    "confluence_score": "5/9 bullish",
+    "news": [],
+    "reasoning": "",
+    "generated_at": "2026-03-21T22:13:47.492962+00:00"
+  },
+  "BIOCON.NS": {
+    "symbol": "BIOCON.NS",
+    "display": "BIOCON",
+    "name": "Biocon",
+    "type": "IN_STOCK",
+    "icon": "B",
+    "direction": "HOLD",
+    "probability": 0.5294,
+    "confidence": "LOW",
+    "kelly_size": 5.15,
+    "expected_value": 4.4416,
+    "take_profit": 359.3786,
+    "stop_loss": 391.7357,
+    "current_price": 380.95,
+    "risk_reward": 2.0,
+    "atr": 10.7857,
+    "model_agreement": 0.979,
+    "top_features": [
+      "pos_52w",
+      "BB_width",
+      "mom_5d"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "45 \u2014 Neutral",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bearish (-1.9236)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "31% (Mid)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "40 \u2014 Neutral",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Volume",
+        "value": "3.37x avg",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 above SMA50",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price below SMA20",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "65% (Mid)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "-0.68% ROC",
+        "signal": "BEARISH"
+      }
+    ],
+    "confluence_score": "6/9 bullish",
+    "news": [],
+    "reasoning": "",
+    "generated_at": "2026-03-21T22:13:51.867254+00:00"
+  },
+  "NESTLEIND.NS": {
+    "symbol": "NESTLEIND.NS",
+    "display": "NESTLE",
+    "name": "Nestle India",
+    "type": "IN_STOCK",
+    "icon": "N",
+    "direction": "HOLD",
+    "probability": 0.4645,
+    "confidence": "LOW",
+    "kelly_size": 7.58,
+    "expected_value": 15.2362,
+    "take_profit": 1143.3571,
+    "stop_loss": 1218.7214,
+    "current_price": 1193.6,
+    "risk_reward": 2.0,
+    "atr": 25.1214,
+    "model_agreement": 0.995,
+    "top_features": [
+      "BB_pct",
+      "MACD_hist",
+      "BB_width"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "19 \u2014 Oversold",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bearish (-6.1833)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "18% (Lower)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "14 \u2014 Oversold",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Volume",
+        "value": "1.20x avg",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 below SMA50",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price below SMA20",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "48% (Mid)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "-0.72% ROC",
+        "signal": "BEARISH"
+      }
+    ],
+    "confluence_score": "4/9 bullish",
+    "news": [],
+    "reasoning": "",
+    "generated_at": "2026-03-21T22:13:56.378190+00:00"
+  },
+  "BRITANNIA.NS": {
+    "symbol": "BRITANNIA.NS",
+    "display": "BRITANNIA",
+    "name": "Britannia",
+    "type": "IN_STOCK",
+    "icon": "B",
+    "direction": "HOLD",
+    "probability": 0.4725,
+    "confidence": "LOW",
+    "kelly_size": 7.28,
+    "expected_value": 71.0442,
+    "take_profit": 5374.5714,
+    "stop_loss": 5740.4643,
+    "current_price": 5618.5,
+    "risk_reward": 2.0,
+    "atr": 121.9643,
+    "model_agreement": 0.878,
+    "top_features": [
+      "MACD",
+      "BB_width",
+      "MACD_signal"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "29 \u2014 Oversold",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bearish (-34.5612)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "-2% (Lower)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "6 \u2014 Oversold",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Volume",
+        "value": "1.35x avg",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 above SMA50",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price below SMA20",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "60% (Mid)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "-3.27% ROC",
+        "signal": "BEARISH"
+      }
+    ],
+    "confluence_score": "6/9 bullish",
+    "news": [],
+    "reasoning": "",
+    "generated_at": "2026-03-21T22:14:00.780241+00:00"
+  },
+  "TATACONSUM.NS": {
+    "symbol": "TATACONSUM.NS",
+    "display": "TATA CONS",
+    "name": "Tata Consumer",
+    "type": "IN_STOCK",
+    "icon": "T",
+    "direction": "SELL",
+    "probability": 0.4136,
+    "confidence": "MEDIUM",
+    "kelly_size": 9.49,
+    "expected_value": 19.2674,
+    "take_profit": 999.4428,
+    "stop_loss": 1075.5785,
+    "current_price": 1050.2,
+    "risk_reward": 2.0,
+    "atr": 25.3786,
+    "model_agreement": 0.875,
+    "top_features": [
+      "MACD_hist",
+      "pos_52w",
+      "mom_5d"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "26 \u2014 Oversold",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bearish (-5.2905)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "14% (Lower)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "10 \u2014 Oversold",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Volume",
+        "value": "1.72x avg",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 below SMA50",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price below SMA20",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "42% (Mid)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "-3.08% ROC",
+        "signal": "BEARISH"
+      }
+    ],
+    "confluence_score": "4/9 bullish",
+    "news": [],
+    "reasoning": "",
+    "generated_at": "2026-03-21T22:14:05.281742+00:00"
+  },
+  "MARICO.NS": {
+    "symbol": "MARICO.NS",
+    "display": "MARICO",
+    "name": "Marico",
+    "type": "IN_STOCK",
+    "icon": "M",
+    "direction": "BUY",
+    "probability": 0.5971,
+    "confidence": "MEDIUM",
+    "kelly_size": 9.89,
+    "expected_value": 12.5195,
+    "take_profit": 775.9429,
+    "stop_loss": 728.4786,
+    "current_price": 744.3,
+    "risk_reward": 2.0,
+    "atr": 15.8214,
+    "model_agreement": 0.86,
+    "top_features": [
+      "ATR_pct",
+      "pos_52w",
+      "SMA_cross"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "30 \u2014 Oversold",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bearish (-5.1547)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "15% (Lower)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "17 \u2014 Oversold",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Volume",
+        "value": "0.91x avg",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 above SMA50",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price below SMA20",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "68% (Mid)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "-1.08% ROC",
+        "signal": "BEARISH"
+      }
+    ],
+    "confluence_score": "5/9 bullish",
+    "news": [],
+    "reasoning": "",
+    "generated_at": "2026-03-21T22:14:10.044550+00:00"
+  },
+  "DABUR.NS": {
+    "symbol": "DABUR.NS",
+    "display": "DABUR",
+    "name": "Dabur India",
+    "type": "IN_STOCK",
+    "icon": "D",
+    "direction": "BUY",
+    "probability": 0.5831,
+    "confidence": "MEDIUM",
+    "kelly_size": 9.37,
+    "expected_value": 8.906,
+    "take_profit": 454.4714,
+    "stop_loss": 418.8143,
+    "current_price": 430.7,
+    "risk_reward": 2.0,
+    "atr": 11.8857,
+    "model_agreement": 0.969,
+    "top_features": [
+      "SMA_cross",
+      "dist_SMA20",
+      "ret_vol"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "16 \u2014 Oversold",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bearish (-5.2880)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "9% (Lower)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "2 \u2014 Oversold",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Volume",
+        "value": "1.14x avg",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 below SMA50",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price below SMA20",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "3% (Low)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "-5.03% ROC",
+        "signal": "BEARISH"
+      }
+    ],
+    "confluence_score": "4/9 bullish",
+    "news": [],
+    "reasoning": "",
+    "generated_at": "2026-03-21T22:14:14.685228+00:00"
+  },
+  "COLPAL.NS": {
+    "symbol": "COLPAL.NS",
+    "display": "COLGATE",
+    "name": "Colgate Palmolive",
+    "type": "IN_STOCK",
+    "icon": "C",
+    "direction": "HOLD",
+    "probability": 0.4833,
+    "confidence": "LOW",
+    "kelly_size": 6.88,
+    "expected_value": 27.7879,
+    "take_profit": 1795.0714,
+    "stop_loss": 1946.6143,
+    "current_price": 1896.1,
+    "risk_reward": 2.0,
+    "atr": 50.5143,
+    "model_agreement": 0.976,
+    "top_features": [
+      "BB_pct",
+      "SMA_cross",
+      "ret_vol"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "15 \u2014 Oversold",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bearish (-30.9697)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "12% (Lower)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "4 \u2014 Oversold",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Volume",
+        "value": "0.69x avg",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 below SMA50",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price below SMA20",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "2% (Low)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "-3.12% ROC",
+        "signal": "BEARISH"
+      }
+    ],
+    "confluence_score": "3/9 bullish",
+    "news": [],
+    "reasoning": "",
+    "generated_at": "2026-03-21T22:14:17.864527+00:00"
+  },
+  "GODREJCP.NS": {
+    "symbol": "GODREJCP.NS",
+    "display": "GODREJ CP",
+    "name": "Godrej Consumer",
+    "type": "IN_STOCK",
+    "icon": "G",
+    "direction": "HOLD",
+    "probability": 0.5425,
+    "confidence": "LOW",
+    "kelly_size": 4.66,
+    "expected_value": 11.0393,
+    "take_profit": 958.3285,
+    "stop_loss": 1047.2357,
+    "current_price": 1017.6,
+    "risk_reward": 2.0,
+    "atr": 29.6357,
+    "model_agreement": 0.939,
+    "top_features": [
+      "mom_20d",
+      "ATR_pct",
+      "ret_vol"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "18 \u2014 Oversold",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bearish (-10.1742)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "17% (Lower)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "2 \u2014 Oversold",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Volume",
+        "value": "0.95x avg",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 below SMA50",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price below SMA20",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "3% (Low)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "-1.00% ROC",
+        "signal": "BEARISH"
+      }
+    ],
+    "confluence_score": "3/9 bullish",
+    "news": [],
+    "reasoning": "",
+    "generated_at": "2026-03-21T22:14:20.328119+00:00"
+  },
+  "TRENT.NS": {
+    "symbol": "TRENT.NS",
+    "display": "TRENT",
+    "name": "Trent Ltd",
+    "type": "IN_STOCK",
+    "icon": "T",
+    "direction": "HOLD",
+    "probability": 0.5457,
+    "confidence": "LOW",
+    "kelly_size": 4.54,
+    "expected_value": 39.7479,
+    "take_profit": 3340.5429,
+    "stop_loss": 3669.1287,
+    "current_price": 3559.6001,
+    "risk_reward": 2.0,
+    "atr": 109.5286,
+    "model_agreement": 0.981,
+    "top_features": [
+      "pos_52w",
+      "stoch_D",
+      "BB_width"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "32 \u2014 Oversold",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bearish (-14.1047)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "25% (Mid)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "29 \u2014 Neutral",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Volume",
+        "value": "1.07x avg",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 below SMA50",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price below SMA20",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "5% (Low)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "+2.06% ROC",
+        "signal": "BULLISH"
+      }
+    ],
+    "confluence_score": "5/9 bullish",
+    "news": [],
+    "reasoning": "",
+    "generated_at": "2026-03-21T22:14:23.177432+00:00"
+  },
+  "NAUKRI.NS": {
+    "symbol": "NAUKRI.NS",
+    "display": "NAUKRI",
+    "name": "Info Edge",
+    "type": "IN_STOCK",
+    "icon": "N",
+    "direction": "BUY",
+    "probability": 0.699,
+    "confidence": "HIGH",
+    "kelly_size": 13.71,
+    "expected_value": 32.9413,
+    "take_profit": 1038.2571,
+    "stop_loss": 948.1714,
+    "current_price": 978.2,
+    "risk_reward": 2.0,
+    "atr": 30.0286,
+    "model_agreement": 0.954,
+    "top_features": [
+      "dist_SMA20",
+      "MACD_hist",
+      "BB_pct"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "37 \u2014 Neutral",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bullish (+8.4118)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "37% (Mid)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "50 \u2014 Neutral",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Volume",
+        "value": "1.00x avg",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 below SMA50",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price below SMA20",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "8% (Low)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "+2.71% ROC",
+        "signal": "BULLISH"
+      }
+    ],
+    "confluence_score": "5/9 bullish",
+    "news": [],
+    "reasoning": "",
+    "generated_at": "2026-03-21T22:14:26.292445+00:00"
+  },
+  "IRCTC.NS": {
+    "symbol": "IRCTC.NS",
+    "display": "IRCTC",
+    "name": "IRCTC",
+    "type": "IN_STOCK",
+    "icon": "I",
+    "direction": "BUY",
+    "probability": 0.7262,
+    "confidence": "HIGH",
+    "kelly_size": 14.73,
+    "expected_value": 17.3549,
+    "take_profit": 552.3,
+    "stop_loss": 508.125,
+    "current_price": 522.85,
+    "risk_reward": 2.0,
+    "atr": 14.725,
+    "model_agreement": 0.766,
+    "top_features": [
+      "BB_pct",
+      "ret_vol",
+      "pos_52w"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "29 \u2014 Oversold",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bearish (-1.2702)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "25% (Mid)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "8 \u2014 Oversold",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Volume",
+        "value": "0.44x avg",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 below SMA50",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price below SMA20",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "2% (Low)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "-0.90% ROC",
+        "signal": "BEARISH"
+      }
+    ],
+    "confluence_score": "3/9 bullish",
+    "news": [],
+    "reasoning": "",
+    "generated_at": "2026-03-21T22:14:30.329868+00:00"
+  },
+  "PAYTM.NS": {
+    "symbol": "PAYTM.NS",
+    "display": "PAYTM",
+    "name": "Paytm",
+    "type": "IN_STOCK",
+    "icon": "P",
+    "direction": "HOLD",
+    "probability": 0.5372,
+    "confidence": "LOW",
+    "kelly_size": 4.85,
+    "expected_value": 14.6843,
+    "take_profit": 978.6858,
+    "stop_loss": 1092.1072,
+    "current_price": 1054.3,
+    "risk_reward": 2.0,
+    "atr": 37.8071,
+    "model_agreement": 0.961,
+    "top_features": [
+      "MACD",
+      "ATR_pct",
+      "MACD_signal"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "42 \u2014 Neutral",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bullish (+6.5448)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "45% (Mid)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "68 \u2014 Neutral",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Volume",
+        "value": "0.97x avg",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 below SMA50",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price below SMA20",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "53% (Mid)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "+8.00% ROC",
+        "signal": "BULLISH"
+      }
+    ],
+    "confluence_score": "5/9 bullish",
+    "news": [],
+    "reasoning": "",
+    "generated_at": "2026-03-21T22:14:35.824770+00:00"
+  },
+  "NYKAA.NS": {
+    "symbol": "NYKAA.NS",
+    "display": "NYKAA",
+    "name": "Nykaa",
+    "type": "IN_STOCK",
+    "icon": "N",
+    "direction": "BUY",
+    "probability": 0.6025,
+    "confidence": "MEDIUM",
+    "kelly_size": 10.09,
+    "expected_value": 6.4196,
+    "take_profit": 256.5,
+    "stop_loss": 232.65,
+    "current_price": 240.6,
+    "risk_reward": 2.0,
+    "atr": 7.95,
+    "model_agreement": 1.0,
+    "top_features": [
+      "mom_20d",
+      "ATR_pct",
+      "SMA_cross"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "31 \u2014 Oversold",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bearish (-1.8432)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "21% (Mid)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "24 \u2014 Neutral",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Volume",
+        "value": "2.16x avg",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 below SMA50",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price below SMA20",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "63% (Mid)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "+1.03% ROC",
+        "signal": "BULLISH"
+      }
+    ],
+    "confluence_score": "6/9 bullish",
+    "news": [],
+    "reasoning": "",
+    "generated_at": "2026-03-21T22:14:41.338852+00:00"
+  },
+  "POLICYBZR.NS": {
+    "symbol": "POLICYBZR.NS",
+    "display": "PBFINTECH",
+    "name": "PB Fintech",
+    "type": "IN_STOCK",
+    "icon": "P",
+    "direction": "BUY",
+    "probability": 0.5552,
+    "confidence": "MEDIUM",
+    "kelly_size": 8.32,
+    "expected_value": 32.4337,
+    "take_profit": 1594.5571,
+    "stop_loss": 1448.3714,
+    "current_price": 1497.1,
+    "risk_reward": 2.0,
+    "atr": 48.7286,
+    "model_agreement": 0.968,
+    "top_features": [
+      "ATR_pct",
+      "ret_vol",
+      "MACD"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "53 \u2014 Neutral",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bullish (+11.2475)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "62% (Mid)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "73 \u2014 Neutral",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Volume",
+        "value": "0.53x avg",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 below SMA50",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price above SMA20",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "28% (Low)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "+3.53% ROC",
+        "signal": "BULLISH"
+      }
+    ],
+    "confluence_score": "3/9 bullish",
+    "news": [],
+    "reasoning": "",
+    "generated_at": "2026-03-21T22:14:46.274919+00:00"
+  },
+  "DMART.NS": {
+    "symbol": "DMART.NS",
+    "display": "DMART",
+    "name": "Avenue Supermarts",
+    "type": "IN_STOCK",
+    "icon": "D",
+    "direction": "BUY",
+    "probability": 0.5645,
+    "confidence": "MEDIUM",
+    "kelly_size": 8.67,
+    "expected_value": 77.9841,
+    "take_profit": 3995.7001,
+    "stop_loss": 3658.35,
+    "current_price": 3770.8,
+    "risk_reward": 2.0,
+    "atr": 112.45,
+    "model_agreement": 0.834,
+    "top_features": [
+      "MACD_hist",
+      "stoch_K",
+      "SMA_cross"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "44 \u2014 Neutral",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bearish (-13.8122)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "15% (Lower)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "20 \u2014 Oversold",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Volume",
+        "value": "0.89x avg",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 above SMA50",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price below SMA20",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "13% (Low)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "-1.66% ROC",
+        "signal": "BEARISH"
+      }
+    ],
+    "confluence_score": "4/9 bullish",
+    "news": [],
+    "reasoning": "",
+    "generated_at": "2026-03-21T22:14:51.692746+00:00"
+  },
+  "PIDILITIND.NS": {
+    "symbol": "PIDILITIND.NS",
+    "display": "PIDILITE",
+    "name": "Pidilite Industries",
+    "type": "IN_STOCK",
+    "icon": "P",
+    "direction": "HOLD",
+    "probability": 0.5384,
+    "confidence": "LOW",
+    "kelly_size": 4.81,
+    "expected_value": 14.5784,
+    "take_profit": 1265.5286,
+    "stop_loss": 1379.1858,
+    "current_price": 1341.3,
+    "risk_reward": 2.0,
+    "atr": 37.8857,
+    "model_agreement": 0.99,
+    "top_features": [
+      "BB_width",
+      "dist_SMA50",
+      "MACD"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "31 \u2014 Oversold",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bearish (-9.9082)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "18% (Lower)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "22 \u2014 Neutral",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Volume",
+        "value": "1.32x avg",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 below SMA50",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price below SMA20",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "14% (Low)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "+0.10% ROC",
+        "signal": "BULLISH"
+      }
+    ],
+    "confluence_score": "5/9 bullish",
+    "news": [],
+    "reasoning": "",
+    "generated_at": "2026-03-21T22:14:56.153247+00:00"
+  },
+  "BERGEPAINT.NS": {
+    "symbol": "BERGEPAINT.NS",
+    "display": "BERGER",
+    "name": "Berger Paints",
+    "type": "IN_STOCK",
+    "icon": "B",
+    "direction": "SELL",
+    "probability": 0.3861,
+    "confidence": "MEDIUM",
+    "kelly_size": 10.52,
+    "expected_value": 11.4201,
+    "take_profit": 389.5643,
+    "stop_loss": 430.2679,
+    "current_price": 416.7,
+    "risk_reward": 2.0,
+    "atr": 13.5679,
+    "model_agreement": 0.991,
+    "top_features": [
+      "MACD",
+      "pos_52w",
+      "dist_SMA50"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "29 \u2014 Oversold",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bearish (-0.4927)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "26% (Mid)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "40 \u2014 Neutral",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Volume",
+        "value": "1.09x avg",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 below SMA50",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price below SMA20",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "12% (Low)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "+2.18% ROC",
+        "signal": "BULLISH"
+      }
+    ],
+    "confluence_score": "5/9 bullish",
+    "news": [],
+    "reasoning": "",
+    "generated_at": "2026-03-21T22:15:01.215816+00:00"
+  },
+  "ULTRACEMCO.NS": {
+    "symbol": "ULTRACEMCO.NS",
+    "display": "ULTRACEM",
+    "name": "UltraTech Cement",
+    "type": "IN_STOCK",
+    "icon": "U",
+    "direction": "BUY",
+    "probability": 0.8621,
+    "confidence": "HIGH",
+    "kelly_size": 19.83,
+    "expected_value": 509.4289,
+    "take_profit": 11576.2857,
+    "stop_loss": 10612.8571,
+    "current_price": 10934.0,
+    "risk_reward": 2.0,
+    "atr": 321.1429,
+    "model_agreement": 0.867,
+    "top_features": [
+      "SMA_cross",
+      "ATR_pct",
+      "BB_width"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "29 \u2014 Oversold",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bearish (-104.3728)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "22% (Mid)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "18 \u2014 Oversold",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Volume",
+        "value": "1.05x avg",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 below SMA50",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price below SMA20",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "20% (Low)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "+3.00% ROC",
+        "signal": "BULLISH"
+      }
+    ],
+    "confluence_score": "5/9 bullish",
+    "news": [],
+    "reasoning": "",
+    "generated_at": "2026-03-21T22:15:05.931725+00:00"
+  },
+  "GRASIM.NS": {
+    "symbol": "GRASIM.NS",
+    "display": "GRASIM",
+    "name": "Grasim Industries",
+    "type": "IN_STOCK",
+    "icon": "G",
+    "direction": "BUY",
+    "probability": 0.6389,
+    "confidence": "MEDIUM",
+    "kelly_size": 11.46,
+    "expected_value": 66.5655,
+    "take_profit": 2761.5285,
+    "stop_loss": 2543.6858,
+    "current_price": 2616.3,
+    "risk_reward": 2.0,
+    "atr": 72.6142,
+    "model_agreement": 0.916,
+    "top_features": [
+      "MACD",
+      "dist_SMA50",
+      "mom_20d"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "37 \u2014 Neutral",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bearish (-9.9177)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "18% (Lower)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "24 \u2014 Neutral",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Volume",
+        "value": "1.49x avg",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 below SMA50",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price below SMA20",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "41% (Mid)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "+1.86% ROC",
+        "signal": "BULLISH"
+      }
+    ],
+    "confluence_score": "5/9 bullish",
+    "news": [],
+    "reasoning": "",
+    "generated_at": "2026-03-21T22:15:10.787041+00:00"
+  },
+  "SHREECEM.NS": {
+    "symbol": "SHREECEM.NS",
+    "display": "SHREE CEM",
+    "name": "Shree Cement",
+    "type": "IN_STOCK",
+    "icon": "S",
+    "direction": "BUY",
+    "probability": 0.8619,
+    "confidence": "HIGH",
+    "kelly_size": 19.82,
+    "expected_value": 955.3843,
+    "take_profit": 24740.0,
+    "stop_loss": 22932.5,
+    "current_price": 23535.0,
+    "risk_reward": 2.0,
+    "atr": 602.5,
+    "model_agreement": 0.963,
+    "top_features": [
+      "MACD_signal",
+      "dist_SMA20",
+      "MACD_hist"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "28 \u2014 Oversold",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bearish (-70.0311)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "27% (Mid)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "20 \u2014 Neutral",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Volume",
+        "value": "0.94x avg",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 below SMA50",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price below SMA20",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "7% (Low)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "+2.48% ROC",
+        "signal": "BULLISH"
+      }
+    ],
+    "confluence_score": "4/9 bullish",
+    "news": [],
+    "reasoning": "",
+    "generated_at": "2026-03-21T22:15:13.569339+00:00"
+  },
+  "HAVELLS.NS": {
+    "symbol": "HAVELLS.NS",
+    "display": "HAVELLS",
+    "name": "Havells India",
+    "type": "IN_STOCK",
+    "icon": "H",
+    "direction": "BUY",
+    "probability": 0.6345,
+    "confidence": "MEDIUM",
+    "kelly_size": 11.29,
+    "expected_value": 34.2814,
+    "take_profit": 1357.0857,
+    "stop_loss": 1243.2571,
+    "current_price": 1281.2,
+    "risk_reward": 2.0,
+    "atr": 37.9429,
+    "model_agreement": 0.905,
+    "top_features": [
+      "dist_SMA50",
+      "pos_52w",
+      "RSI_7"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "33 \u2014 Oversold",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bearish (-7.1807)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "8% (Lower)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "6 \u2014 Oversold",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Volume",
+        "value": "1.00x avg",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 below SMA50",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price below SMA20",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "8% (Low)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "-2.21% ROC",
+        "signal": "BEARISH"
+      }
+    ],
+    "confluence_score": "3/9 bullish",
+    "news": [],
+    "reasoning": "",
+    "generated_at": "2026-03-21T22:15:16.136216+00:00"
+  },
+  "VOLTAS.NS": {
+    "symbol": "VOLTAS.NS",
+    "display": "VOLTAS",
+    "name": "Voltas Ltd",
+    "type": "IN_STOCK",
+    "icon": "V",
+    "direction": "HOLD",
+    "probability": 0.5461,
+    "confidence": "LOW",
+    "kelly_size": 4.52,
+    "expected_value": 18.4674,
+    "take_profit": 1222.3857,
+    "stop_loss": 1375.5572,
+    "current_price": 1324.5,
+    "risk_reward": 2.0,
+    "atr": 51.0572,
+    "model_agreement": 0.9,
+    "top_features": [
+      "MACD",
+      "dist_SMA20",
+      "MACD_signal"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "23 \u2014 Oversold",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bearish (-18.3941)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "-3% (Lower)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "3 \u2014 Oversold",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Volume",
+        "value": "0.72x avg",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 above SMA50",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price below SMA20",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "35% (Mid)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "-6.34% ROC",
+        "signal": "BEARISH"
+      }
+    ],
+    "confluence_score": "4/9 bullish",
+    "news": [],
+    "reasoning": "",
+    "generated_at": "2026-03-21T22:15:18.657477+00:00"
+  },
+  "SIEMENS.NS": {
+    "symbol": "SIEMENS.NS",
+    "display": "SIEMENS",
+    "name": "Siemens India",
+    "type": "IN_STOCK",
+    "icon": "S",
+    "direction": "HOLD",
+    "probability": 0.4986,
+    "confidence": "LOW",
+    "kelly_size": 6.3,
+    "expected_value": 55.354,
+    "take_profit": 2910.0286,
+    "stop_loss": 3239.3858,
+    "current_price": 3129.6001,
+    "risk_reward": 2.0,
+    "atr": 109.7857,
+    "model_agreement": 0.937,
+    "top_features": [
+      "MACD",
+      "range_pct",
+      "BB_pct"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "35 \u2014 Oversold",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bearish (-24.2243)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "16% (Lower)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "19 \u2014 Oversold",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Volume",
+        "value": "0.73x avg",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 above SMA50",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price below SMA20",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "69% (Mid)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "-2.43% ROC",
+        "signal": "BEARISH"
+      }
+    ],
+    "confluence_score": "5/9 bullish",
+    "news": [],
+    "reasoning": "",
+    "generated_at": "2026-03-21T22:15:21.210061+00:00"
+  },
+  "ABB.NS": {
+    "symbol": "ABB.NS",
+    "display": "ABB",
+    "name": "ABB India",
+    "type": "IN_STOCK",
+    "icon": "A",
+    "direction": "HOLD",
+    "probability": 0.4568,
+    "confidence": "LOW",
+    "kelly_size": 7.87,
+    "expected_value": 117.0606,
+    "take_profit": 5925.1429,
+    "stop_loss": 6482.9286,
+    "current_price": 6297.0,
+    "risk_reward": 2.0,
+    "atr": 185.9286,
+    "model_agreement": 0.96,
+    "top_features": [
+      "dist_SMA50",
+      "mom_20d",
+      "BB_width"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "57 \u2014 Neutral",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bearish (-11.3567)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "73% (Mid)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "66 \u2014 Neutral",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Volume",
+        "value": "0.44x avg",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 above SMA50",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price above SMA20",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "87% (High)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "-1.49% ROC",
+        "signal": "BEARISH"
+      }
+    ],
+    "confluence_score": "3/9 bullish",
+    "news": [],
+    "reasoning": "",
+    "generated_at": "2026-03-21T22:15:26.457586+00:00"
+  },
+  "CUMMINSIND.NS": {
+    "symbol": "CUMMINSIND.NS",
+    "display": "CUMMINS",
+    "name": "Cummins India",
+    "type": "IN_STOCK",
+    "icon": "C",
+    "direction": "BUY",
+    "probability": 0.5885,
+    "confidence": "MEDIUM",
+    "kelly_size": 9.57,
+    "expected_value": 133.3336,
+    "take_profit": 4963.6568,
+    "stop_loss": 4441.1213,
+    "current_price": 4615.2998,
+    "risk_reward": 2.0,
+    "atr": 174.1785,
+    "model_agreement": 0.988,
+    "top_features": [
+      "BB_width",
+      "pos_52w",
+      "MACD"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "40 \u2014 Neutral",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bearish (-39.1095)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "27% (Mid)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "31 \u2014 Neutral",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Volume",
+        "value": "1.11x avg",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 above SMA50",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price below SMA20",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "85% (High)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "-0.74% ROC",
+        "signal": "BEARISH"
+      }
+    ],
+    "confluence_score": "6/9 bullish",
+    "news": [],
+    "reasoning": "",
+    "generated_at": "2026-03-21T22:15:31.001828+00:00"
+  },
+  "EICHERMOT.NS": {
+    "symbol": "EICHERMOT.NS",
+    "display": "EICHER",
+    "name": "Eicher Motors",
+    "type": "IN_STOCK",
+    "icon": "E",
+    "direction": "BUY",
+    "probability": 0.7019,
+    "confidence": "HIGH",
+    "kelly_size": 13.82,
+    "expected_value": 234.211,
+    "take_profit": 7332.6429,
+    "stop_loss": 6697.1786,
+    "current_price": 6909.0,
+    "risk_reward": 2.0,
+    "atr": 211.8214,
+    "model_agreement": 0.922,
+    "top_features": [
+      "RSI_14",
+      "MACD_signal",
+      "MACD"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "30 \u2014 Oversold",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bearish (-87.3342)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "22% (Mid)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "20 \u2014 Oversold",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Volume",
+        "value": "0.98x avg",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 above SMA50",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price below SMA20",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "61% (Mid)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "+2.49% ROC",
+        "signal": "BULLISH"
+      }
+    ],
+    "confluence_score": "6/9 bullish",
+    "news": [],
+    "reasoning": "",
+    "generated_at": "2026-03-21T22:15:36.828172+00:00"
+  },
+  "HEROMOTOCO.NS": {
+    "symbol": "HEROMOTOCO.NS",
+    "display": "HERO MOTO",
+    "name": "Hero MotoCorp",
+    "type": "IN_STOCK",
+    "icon": "H",
+    "direction": "HOLD",
+    "probability": 0.5132,
+    "confidence": "LOW",
+    "kelly_size": 5.76,
+    "expected_value": 79.1559,
+    "take_profit": 4931.6429,
+    "stop_loss": 5447.4286,
+    "current_price": 5275.5,
+    "risk_reward": 2.0,
+    "atr": 171.9286,
+    "model_agreement": 0.991,
+    "top_features": [
+      "SMA_cross",
+      "MACD_signal",
+      "ATR_pct"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "37 \u2014 Neutral",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bearish (-30.3618)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "20% (Lower)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "24 \u2014 Neutral",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Volume",
+        "value": "2.07x avg",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 below SMA50",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price below SMA20",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "67% (Mid)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "+1.33% ROC",
+        "signal": "BULLISH"
+      }
+    ],
+    "confluence_score": "6/9 bullish",
+    "news": [],
+    "reasoning": "",
+    "generated_at": "2026-03-21T22:15:41.383575+00:00"
+  },
+  "TVSMOTOR.NS": {
+    "symbol": "TVSMOTOR.NS",
+    "display": "TVS MOTOR",
+    "name": "TVS Motor",
+    "type": "IN_STOCK",
+    "icon": "T",
+    "direction": "HOLD",
+    "probability": 0.5375,
+    "confidence": "LOW",
+    "kelly_size": 4.84,
+    "expected_value": 46.7242,
+    "take_profit": 3221.0429,
+    "stop_loss": 3582.7785,
+    "current_price": 3462.2,
+    "risk_reward": 2.0,
+    "atr": 120.5785,
+    "model_agreement": 0.967,
+    "top_features": [
+      "mom_10d",
+      "BB_width",
+      "stoch_D"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "35 \u2014 Neutral",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bearish (-27.9232)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "23% (Mid)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "29 \u2014 Neutral",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Volume",
+        "value": "0.71x avg",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 below SMA50",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price below SMA20",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "71% (High)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "+4.14% ROC",
+        "signal": "BULLISH"
+      }
+    ],
+    "confluence_score": "5/9 bullish",
+    "news": [],
+    "reasoning": "",
+    "generated_at": "2026-03-21T22:15:45.808047+00:00"
+  },
+  "ASHOKLEY.NS": {
+    "symbol": "ASHOKLEY.NS",
+    "display": "ASHOK LEY",
+    "name": "Ashok Leyland",
+    "type": "IN_STOCK",
+    "icon": "A",
+    "direction": "HOLD",
+    "probability": 0.5276,
+    "confidence": "LOW",
+    "kelly_size": 5.22,
+    "expected_value": 3.1862,
+    "take_profit": 153.6157,
+    "stop_loss": 176.5271,
+    "current_price": 168.89,
+    "risk_reward": 2.0,
+    "atr": 7.6371,
+    "model_agreement": 0.979,
+    "top_features": [
+      "mom_10d",
+      "MACD_signal",
+      "vol_trend"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "23 \u2014 Oversold",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bearish (-3.2154)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "14% (Lower)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "5 \u2014 Oversold",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Volume",
+        "value": "1.88x avg",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 below SMA50",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price below SMA20",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "62% (Mid)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "-1.03% ROC",
+        "signal": "BEARISH"
+      }
+    ],
+    "confluence_score": "5/9 bullish",
+    "news": [],
+    "reasoning": "",
+    "generated_at": "2026-03-21T22:15:50.131076+00:00"
+  },
+  "ESCORTS.NS": {
+    "symbol": "ESCORTS.NS",
+    "display": "ESCORTS",
+    "name": "Escorts Kubota",
+    "type": "IN_STOCK",
+    "icon": "E",
+    "direction": "HOLD",
+    "probability": 0.5179,
+    "confidence": "LOW",
+    "kelly_size": 5.58,
+    "expected_value": 52.8897,
+    "take_profit": 2822.3856,
+    "stop_loss": 3177.907,
+    "current_price": 3059.3999,
+    "risk_reward": 2.0,
+    "atr": 118.5071,
+    "model_agreement": 0.952,
+    "top_features": [
+      "MACD",
+      "pos_52w",
+      "RSI_14"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "34 \u2014 Oversold",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bearish (-29.4257)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "21% (Mid)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "30 \u2014 Neutral",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Volume",
+        "value": "6.21x avg",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 below SMA50",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price below SMA20",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "22% (Low)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "-1.96% ROC",
+        "signal": "BEARISH"
+      }
+    ],
+    "confluence_score": "4/9 bullish",
+    "news": [],
+    "reasoning": "",
+    "generated_at": "2026-03-21T22:15:54.072860+00:00"
+  },
+  "BALKRISIND.NS": {
+    "symbol": "BALKRISIND.NS",
+    "display": "BALKRISHNA",
+    "name": "Balkrishna Ind",
+    "type": "IN_STOCK",
+    "icon": "B",
+    "direction": "BUY",
+    "probability": 0.905,
+    "confidence": "HIGH",
+    "kelly_size": 21.44,
+    "expected_value": 139.7357,
+    "take_profit": 2268.0572,
+    "stop_loss": 2023.6216,
+    "current_price": 2105.1001,
+    "risk_reward": 2.0,
+    "atr": 81.4785,
+    "model_agreement": 0.867,
+    "top_features": [
+      "SMA_cross",
+      "dist_SMA20",
+      "ret_vol"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "28 \u2014 Oversold",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bearish (-16.8013)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "16% (Lower)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "5 \u2014 Oversold",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Volume",
+        "value": "0.81x avg",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 below SMA50",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price below SMA20",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "2% (Low)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "-5.42% ROC",
+        "signal": "BEARISH"
+      }
+    ],
+    "confluence_score": "3/9 bullish",
+    "news": [],
+    "reasoning": "",
+    "generated_at": "2026-03-21T22:15:59.051148+00:00"
+  },
+  "MRF.NS": {
+    "symbol": "MRF.NS",
+    "display": "MRF",
+    "name": "MRF Ltd",
+    "type": "IN_STOCK",
+    "icon": "M",
+    "direction": "HOLD",
+    "probability": 0.5101,
+    "confidence": "LOW",
+    "kelly_size": 5.87,
+    "expected_value": 1551.5197,
+    "take_profit": 120928.5714,
+    "stop_loss": 130838.2143,
+    "current_price": 127535.0,
+    "risk_reward": 2.0,
+    "atr": 3303.2143,
+    "model_agreement": 0.933,
+    "top_features": [
+      "ret_vol",
+      "BB_width",
+      "dist_SMA20"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "31 \u2014 Oversold",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bearish (-926.6503)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "3% (Lower)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "3 \u2014 Oversold",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Volume",
+        "value": "1.63x avg",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 below SMA50",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price below SMA20",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "39% (Mid)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "-5.47% ROC",
+        "signal": "BEARISH"
+      }
+    ],
+    "confluence_score": "4/9 bullish",
+    "news": [],
+    "reasoning": "",
+    "generated_at": "2026-03-21T22:16:04.107421+00:00"
+  },
+  "HINDALCO.NS": {
+    "symbol": "HINDALCO.NS",
+    "display": "HINDALCO",
+    "name": "Hindalco Ind",
+    "type": "IN_STOCK",
+    "icon": "H",
+    "direction": "BUY",
+    "probability": 0.5709,
+    "confidence": "MEDIUM",
+    "kelly_size": 8.91,
+    "expected_value": 26.2121,
+    "take_profit": 947.8072,
+    "stop_loss": 837.4714,
+    "current_price": 874.25,
+    "risk_reward": 2.0,
+    "atr": 36.7786,
+    "model_agreement": 0.951,
+    "top_features": [
+      "SMA_cross",
+      "RSI_14",
+      "ATR_pct"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "40 \u2014 Neutral",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bearish (-6.6367)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "-14% (Lower)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "4 \u2014 Oversold",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Volume",
+        "value": "1.51x avg",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 below SMA50",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price below SMA20",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "68% (Mid)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "-3.93% ROC",
+        "signal": "BEARISH"
+      }
+    ],
+    "confluence_score": "5/9 bullish",
+    "news": [],
+    "reasoning": "",
+    "generated_at": "2026-03-21T22:16:06.861942+00:00"
+  },
+  "VEDL.NS": {
+    "symbol": "VEDL.NS",
+    "display": "VEDANTA",
+    "name": "Vedanta Ltd",
+    "type": "IN_STOCK",
+    "icon": "V",
+    "direction": "BUY",
+    "probability": 0.6056,
+    "confidence": "MEDIUM",
+    "kelly_size": 10.21,
+    "expected_value": 21.3243,
+    "take_profit": 724.4143,
+    "stop_loss": 646.0929,
+    "current_price": 672.2,
+    "risk_reward": 2.0,
+    "atr": 26.1071,
+    "model_agreement": 1.0,
+    "top_features": [
+      "dist_SMA50",
+      "mom_20d",
+      "pos_52w"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "36 \u2014 Neutral",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bearish (-6.9980)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "13% (Lower)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "14 \u2014 Oversold",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Volume",
+        "value": "1.85x avg",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 above SMA50",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price below SMA20",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "77% (High)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "-2.52% ROC",
+        "signal": "BEARISH"
+      }
+    ],
+    "confluence_score": "6/9 bullish",
+    "news": [],
+    "reasoning": "",
+    "generated_at": "2026-03-21T22:16:09.625610+00:00"
+  },
+  "MPHASIS.NS": {
+    "symbol": "MPHASIS.NS",
+    "display": "MPHASIS",
+    "name": "Mphasis",
+    "type": "IN_STOCK",
+    "icon": "M",
+    "direction": "BUY",
+    "probability": 0.7123,
+    "confidence": "HIGH",
+    "kelly_size": 14.21,
+    "expected_value": 89.0193,
+    "take_profit": 2247.7001,
+    "stop_loss": 2012.8001,
+    "current_price": 2091.1001,
+    "risk_reward": 2.0,
+    "atr": 78.3,
+    "model_agreement": 0.961,
+    "top_features": [
+      "pos_52w",
+      "ret_vol",
+      "SMA_cross"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "27 \u2014 Oversold",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bullish (+3.3037)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "19% (Lower)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "22 \u2014 Neutral",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Volume",
+        "value": "1.43x avg",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 below SMA50",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price below SMA20",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "8% (Low)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "-1.12% ROC",
+        "signal": "BEARISH"
+      }
+    ],
+    "confluence_score": "5/9 bullish",
+    "news": [],
+    "reasoning": "",
+    "generated_at": "2026-03-21T22:16:12.192218+00:00"
+  },
+  "LTIM.NS": {
+    "symbol": "LTIM.NS",
+    "display": "LTI MIND",
+    "name": "LTIMindtree",
+    "type": "IN_STOCK",
+    "icon": "L",
+    "direction": "BUY",
+    "probability": 0.5604,
+    "confidence": "MEDIUM",
+    "kelly_size": 8.52,
+    "expected_value": 95.8545,
+    "take_profit": 4580.2282,
+    "stop_loss": 4158.0856,
+    "current_price": 4298.7998,
+    "risk_reward": 2.0,
+    "atr": 140.7142,
+    "model_agreement": 0.915,
+    "top_features": [
+      "pos_52w",
+      "ATR_pct",
+      "mom_20d"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "39 \u2014 Neutral",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bullish (+43.2512)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "39% (Mid)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "58 \u2014 Neutral",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Volume",
+        "value": "3.58x avg",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 below SMA50",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price below SMA20",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "20% (Low)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "+2.19% ROC",
+        "signal": "BULLISH"
+      }
+    ],
+    "confluence_score": "5/9 bullish",
+    "news": [],
+    "reasoning": "",
+    "generated_at": "2026-03-21T22:16:14.784120+00:00"
+  },
+  "PERSISTENT.NS": {
+    "symbol": "PERSISTENT.NS",
+    "display": "PERSISTENT",
+    "name": "Persistent Systems",
+    "type": "IN_STOCK",
+    "icon": "P",
+    "direction": "BUY",
+    "probability": 0.595,
+    "confidence": "MEDIUM",
+    "kelly_size": 9.81,
+    "expected_value": 144.3503,
+    "take_profit": 5084.4715,
+    "stop_loss": 4532.8145,
+    "current_price": 4716.7002,
+    "risk_reward": 2.0,
+    "atr": 183.8857,
+    "model_agreement": 0.998,
+    "top_features": [
+      "BB_width",
+      "ATR_pct",
+      "dist_SMA50"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "49 \u2014 Neutral",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bullish (+40.6384)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "47% (Mid)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "60 \u2014 Neutral",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "Volume",
+        "value": "0.72x avg",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 below SMA50",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price below SMA20",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "24% (Low)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "+1.68% ROC",
+        "signal": "BULLISH"
+      }
+    ],
+    "confluence_score": "4/9 bullish",
+    "news": [],
+    "reasoning": "",
+    "generated_at": "2026-03-21T22:16:19.777824+00:00"
+  },
+  "COFORGE.NS": {
+    "symbol": "COFORGE.NS",
+    "display": "COFORGE",
+    "name": "Coforge Ltd",
+    "type": "IN_STOCK",
+    "icon": "C",
+    "direction": "BUY",
+    "probability": 0.6778,
+    "confidence": "HIGH",
+    "kelly_size": 12.92,
+    "expected_value": 51.1385,
+    "take_profit": 1188.2715,
+    "stop_loss": 1039.8143,
+    "current_price": 1089.3,
+    "risk_reward": 2.0,
+    "atr": 49.4857,
+    "model_agreement": 0.994,
+    "top_features": [
+      "SMA_cross",
+      "pos_52w",
+      "dist_SMA50"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "31 \u2014 Oversold",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bullish (+10.5720)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "25% (Mid)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "43 \u2014 Neutral",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Volume",
+        "value": "0.69x avg",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 below SMA50",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price below SMA20",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "8% (Low)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "-0.04% ROC",
+        "signal": "BEARISH"
+      }
+    ],
+    "confluence_score": "4/9 bullish",
+    "news": [],
+    "reasoning": "",
+    "generated_at": "2026-03-21T22:16:24.254531+00:00"
+  },
+  "TATAELXSI.NS": {
+    "symbol": "TATAELXSI.NS",
+    "display": "TATA ELXSI",
+    "name": "Tata Elxsi",
+    "type": "IN_STOCK",
+    "icon": "T",
+    "direction": "HOLD",
+    "probability": 0.4875,
+    "confidence": "LOW",
+    "kelly_size": 6.72,
+    "expected_value": 75.9526,
+    "take_profit": 3955.0859,
+    "stop_loss": 4379.0073,
+    "current_price": 4237.7002,
+    "risk_reward": 2.0,
+    "atr": 141.3071,
+    "model_agreement": 0.944,
+    "top_features": [
+      "BB_width",
+      "dist_SMA50",
+      "mom_20d"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "37 \u2014 Neutral",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bullish (+7.7333)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "32% (Mid)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "43 \u2014 Neutral",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Volume",
+        "value": "2.34x avg",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 below SMA50",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price below SMA20",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "8% (Low)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "-0.41% ROC",
+        "signal": "BEARISH"
+      }
+    ],
+    "confluence_score": "5/9 bullish",
+    "news": [],
+    "reasoning": "",
+    "generated_at": "2026-03-21T22:16:28.443746+00:00"
+  },
+  "OFSS.NS": {
+    "symbol": "OFSS.NS",
+    "display": "OFSS",
+    "name": "Oracle Fin Services",
+    "type": "IN_STOCK",
+    "icon": "O",
+    "direction": "BUY",
+    "probability": 0.7715,
+    "confidence": "HIGH",
+    "kelly_size": 16.43,
+    "expected_value": 260.0363,
+    "take_profit": 6975.6429,
+    "stop_loss": 6382.1786,
+    "current_price": 6580.0,
+    "risk_reward": 2.0,
+    "atr": 197.8214,
+    "model_agreement": 0.848,
+    "top_features": [
+      "mom_20d",
+      "pos_52w",
+      "mom_10d"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "39 \u2014 Neutral",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "MACD",
+        "value": "Bullish (+8.0194)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Bollinger",
+        "value": "39% (Mid)",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Stochastic %K",
+        "value": "45 \u2014 Neutral",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "Volume",
+        "value": "1.34x avg",
+        "signal": "BULLISH"
+      },
+      {
+        "name": "SMA Cross",
+        "value": "SMA20 below SMA50",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "vs SMA20",
+        "value": "Price below SMA20",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "52W Position",
+        "value": "10% (Low)",
+        "signal": "BEARISH"
+      },
+      {
+        "name": "5D Momentum",
+        "value": "+0.83% ROC",
+        "signal": "BULLISH"
+      }
+    ],
+    "confluence_score": "6/9 bullish",
+    "news": [],
+    "reasoning": "",
+    "generated_at": "2026-03-21T22:16:33.739843+00:00"
   }
 }
