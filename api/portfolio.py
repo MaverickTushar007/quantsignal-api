@@ -227,8 +227,9 @@ def analyze_portfolio(req: PortfolioRequest):
 
         # ── Optimal allocation in dollars ──────────────────────────
         optimal_allocation = []
+        total_invested = float(amounts.sum())
         for i, ad in enumerate(asset_data):
-            opt_amt = round(optimal_weights[i] * req.total_capital, 2)
+            opt_amt = round(optimal_weights[i] * total_invested, 2)
             curr_amt = ad["amount"]
             change = opt_amt - curr_amt
             optimal_allocation.append({
