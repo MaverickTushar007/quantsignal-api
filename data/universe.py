@@ -97,6 +97,46 @@ TICKERS = [
     {"symbol": "USDCAD=X",  "display": "USD/CAD",   "name": "Dollar/CAD",       "type": "FOREX",     "icon": "C"},
     {"symbol": "USDCHF=X",  "display": "USD/CHF",   "name": "Dollar/Franc",     "type": "FOREX",     "icon": "F"},
     {"symbol": "USDINR=X",  "display": "USD/INR",   "name": "Dollar/Rupee",     "type": "FOREX",     "icon": "₹"},
+    # ── Indian Indices ───────────────────────────────────────
+    {"symbol": "^NSEI",         "display": "NIFTY 50",   "name": "Nifty 50",            "type": "INDEX",    "icon": "N"},
+    {"symbol": "^NSEBANK",      "display": "BANKNIFTY",  "name": "Bank Nifty",          "type": "INDEX",    "icon": "B"},
+    # ── Indian Large Cap ─────────────────────────────────────
+    {"symbol": "RELIANCE.NS",   "display": "RELIANCE",   "name": "Reliance Industries", "type": "IN_STOCK", "icon": "R"},
+    {"symbol": "TCS.NS",        "display": "TCS",        "name": "Tata Consultancy",    "type": "IN_STOCK", "icon": "T"},
+    {"symbol": "INFY.NS",       "display": "INFOSYS",    "name": "Infosys",             "type": "IN_STOCK", "icon": "I"},
+    {"symbol": "HDFCBANK.NS",   "display": "HDFC BANK",  "name": "HDFC Bank",           "type": "IN_STOCK", "icon": "H"},
+    {"symbol": "ICICIBANK.NS",  "display": "ICICI BANK", "name": "ICICI Bank",          "type": "IN_STOCK", "icon": "I"},
+    {"symbol": "WIPRO.NS",      "display": "WIPRO",      "name": "Wipro",               "type": "IN_STOCK", "icon": "W"},
+    {"symbol": "HCLTECH.NS",    "display": "HCL TECH",   "name": "HCL Technologies",    "type": "IN_STOCK", "icon": "H"},
+    {"symbol": "BAJFINANCE.NS", "display": "BAJAJ FIN",  "name": "Bajaj Finance",       "type": "IN_STOCK", "icon": "B"},
+    {"symbol": "KOTAKBANK.NS",  "display": "KOTAK",      "name": "Kotak Mahindra Bank", "type": "IN_STOCK", "icon": "K"},
+    {"symbol": "TECHM.NS",      "display": "TECH M",     "name": "Tech Mahindra",       "type": "IN_STOCK", "icon": "T"},
+    {"symbol": "AXISBANK.NS",   "display": "AXIS BANK",  "name": "Axis Bank",           "type": "IN_STOCK", "icon": "A"},
+    {"symbol": "SBIN.NS",       "display": "SBI",        "name": "State Bank of India", "type": "IN_STOCK", "icon": "S"},
+    # ── Indian Adani Group ───────────────────────────────────
+    {"symbol": "ADANIENT.NS",   "display": "ADANI ENT",  "name": "Adani Enterprises",   "type": "IN_STOCK", "icon": "A"},
+    {"symbol": "ADANIPORTS.NS", "display": "ADANI PORT", "name": "Adani Ports",         "type": "IN_STOCK", "icon": "A"},
+    {"symbol": "ADANIGREEN.NS", "display": "ADANI GRN",  "name": "Adani Green Energy",  "type": "IN_STOCK", "icon": "A"},
+    # ── Indian Auto ──────────────────────────────────────────
+    {"symbol": "TATAMOTORS.NS", "display": "TATA MOTORS","name": "Tata Motors",         "type": "IN_STOCK", "icon": "T"},
+    {"symbol": "MARUTI.NS",     "display": "MARUTI",     "name": "Maruti Suzuki",       "type": "IN_STOCK", "icon": "M"},
+    # ── Indian Pharma ────────────────────────────────────────
+    {"symbol": "SUNPHARMA.NS",  "display": "SUN PHARMA", "name": "Sun Pharmaceutical",  "type": "IN_STOCK", "icon": "S"},
+    {"symbol": "DRREDDY.NS",    "display": "DR REDDY",   "name": "Dr Reddys Labs",      "type": "IN_STOCK", "icon": "D"},
+    {"symbol": "CIPLA.NS",      "display": "CIPLA",      "name": "Cipla",               "type": "IN_STOCK", "icon": "C"},
+    # ── Indian Energy and Metals ─────────────────────────────
+    {"symbol": "ONGC.NS",       "display": "ONGC",       "name": "ONGC",                "type": "IN_STOCK", "icon": "O"},
+    {"symbol": "COALINDIA.NS",  "display": "COAL INDIA", "name": "Coal India",          "type": "IN_STOCK", "icon": "C"},
+    {"symbol": "TATASTEEL.NS",  "display": "TATA STEEL", "name": "Tata Steel",          "type": "IN_STOCK", "icon": "T"},
+    {"symbol": "JSWSTEEL.NS",   "display": "JSW STEEL",  "name": "JSW Steel",           "type": "IN_STOCK", "icon": "J"},
+    # ── Indian Consumer ──────────────────────────────────────
+    {"symbol": "HINDUNILVR.NS", "display": "HUL",        "name": "Hindustan Unilever",  "type": "IN_STOCK", "icon": "H"},
+    {"symbol": "ITC.NS",        "display": "ITC",        "name": "ITC Ltd",             "type": "IN_STOCK", "icon": "I"},
+    {"symbol": "ASIANPAINT.NS", "display": "ASIAN PAINT","name": "Asian Paints",        "type": "IN_STOCK", "icon": "A"},
+    {"symbol": "TITAN.NS",      "display": "TITAN",      "name": "Titan Company",       "type": "IN_STOCK", "icon": "T"},
+    # ── Indian Infrastructure ────────────────────────────────
+    {"symbol": "LT.NS",         "display": "L&T",        "name": "Larsen and Toubro",   "type": "IN_STOCK", "icon": "L"},
+    {"symbol": "POWERGRID.NS",  "display": "POWER GRID", "name": "Power Grid Corp",     "type": "IN_STOCK", "icon": "P"},
 ]
 
 # Quick lookup by symbol
