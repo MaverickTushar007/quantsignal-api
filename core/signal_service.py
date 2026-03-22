@@ -177,4 +177,12 @@ def generate_signal(symbol: str, include_reasoning: bool = True) -> Optional[dic
     ))
     from core.cache import set_cached
     set_cached(f"signal:{symbol}", result, ttl=3600)
+    # Attach earnings flag if applicable
+    try:
+        from data.earnings import get_earnings_flag
+        flag = get_earnings_flag(symbol)
+        if flag:
+            result["earnings_flag"] = flag
+    except Exception:
+        pass
     return result

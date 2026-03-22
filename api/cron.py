@@ -71,6 +71,15 @@ def _rebuild():
         Path("data/signals_cache.json").write_text(json.dumps(cache, indent=2))
         print(f"Cache rebuilt: {len(cache)}/{len(TICKERS)} signals in {elapsed}s")
 
+        # Rebuild earnings cache daily
+        try:
+            from data.earnings import rebuild_earnings_cache
+            from data.universe import TICKERS
+            rebuild_earnings_cache(TICKERS)
+            print("Earnings cache rebuilt")
+        except Exception as e:
+            print(f"Earnings cache error: {e}")
+
         # Auto-retrain weak models (Karpathy: verifiable metric → auto-improve)
         try:
             from ml.auto_retrain import run_auto_retrain
