@@ -113,10 +113,9 @@ def generate_signal(symbol: str, include_reasoning: bool = True) -> Optional[dic
             cache = json.loads(cache_path.read_text())
             if symbol in cache:
                 sig = dict(cache[symbol])
-                set_cached(redis_key, sig, ttl=3600)  # warm Redis
                 if not include_reasoning and "reasoning" in sig:
                     sig["reasoning"] = ""
-                # Attach MTF to cached signal
+                # Attach MTF BEFORE warming Redis
                 try:
                     from data.mtf import fetch_mtf_features
                     mtf = fetch_mtf_features(symbol)
@@ -126,6 +125,7 @@ def generate_signal(symbol: str, include_reasoning: bool = True) -> Optional[dic
                     sig['mtf'] = mtf
                 except Exception:
                     pass
+                set_cached(redis_key, sig, ttl=3600)  # warm Redis WITH mtf
                 return sig
         except Exception:
             pass
