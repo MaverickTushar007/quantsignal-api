@@ -195,3 +195,19 @@ def rebuild_mtf_cache():
     Path("data/signals_cache.json").write_text(json.dumps(cache, indent=2))
     return {"updated": updated, "total": len(cache)}
 
+@router.post("/cron/flush-signal-cache", tags=["cron"])
+def flush_signal_cache():
+    """Delete all signal:* keys from Redis so fresh data is served."""
+    try:
+        from core.cache import _get_redis
+        r = _get_redis()
+        if not r:
+            return {"error": "Redis not available"}
+        keys = r.keys("signal:*")
+        if keys:
+            for key in keys:
+                r.delete(key)
+        return {"flushed": len(keys) if keys else 0}
+    except Exception as e:
+        return {"error": str(e)}
+
