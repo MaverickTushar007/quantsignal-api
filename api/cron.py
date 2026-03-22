@@ -71,6 +71,15 @@ def _rebuild():
         Path("data/signals_cache.json").write_text(json.dumps(cache, indent=2))
         print(f"Cache rebuilt: {len(cache)}/{len(TICKERS)} signals in {elapsed}s")
 
+        # Auto-retrain weak models (Karpathy: verifiable metric → auto-improve)
+        try:
+            from ml.auto_retrain import run_auto_retrain
+            symbols = list(cache.keys())
+            retrain_summary = run_auto_retrain(symbols)
+            print(f"Auto-retrain: {retrain_summary['retrained']} models improved")
+        except Exception as e:
+            print(f"Auto-retrain error: {e}")
+
         # Fire signal alerts for direction changes
         try:
             fired = fire_signal_alerts(cache, old_cache)
@@ -100,6 +109,25 @@ def refresh_cache(x_cron_secret: str = Header(None, alias="X-Cron-Secret")):
     thread = threading.Thread(target=_rebuild, daemon=True)
     thread.start()
     return {"status": "started", "message": "Cache rebuild running in background"}
+
+@router.post("/cron/retrain", tags=["cron"])
+def trigger_retrain(x_cron_secret: str = Header(None, alias="X-Cron-Secret")):
+    """Manually trigger auto-retrain of weak models."""
+    if x_cron_secret != CRON_SECRET:
+        raise HTTPException(status_code=401, detail="Unauthorized")
+    
+    def _run():
+        try:
+            cache = json.loads(Path("data/signals_cache.json").read_text())
+            from ml.auto_retrain import run_auto_retrain
+            summary = run_auto_retrain(list(cache.keys()))
+            print(f"Manual retrain complete: {summary}")
+        except Exception as e:
+            print(f"Manual retrain failed: {e}")
+    
+    thread = threading.Thread(target=_run, daemon=True)
+    thread.start()
+    return {"status": "started", "message": "Auto-retrain running in background"}
 
 @router.get("/cron/status", tags=["cron"])
 def cache_status():
