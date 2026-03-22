@@ -165,3 +165,27 @@ def cache_status():
         }
     except Exception as e:
         return {"error": str(e)}
+
+@router.post("/cron/rebuild-mtf", tags=["cron"])
+def rebuild_mtf_cache():
+    """One-shot: attach MTF to all cached signals."""
+    import json, time
+    from pathlib import Path
+    from data.mtf import fetch_mtf_features
+
+    cache = json.loads(Path("data/signals_cache.json").read_text())
+    updated = 0
+    for sym, sig in cache.items():
+        try:
+            mtf = fetch_mtf_features(sym)
+            daily_bull = sig.get("direction") == "BUY"
+            mtf["mtf_score_with_daily"] = mtf["mtf_score"] + (1 if daily_bull else 0)
+            mtf["mtf_details"]["1d"] = "BULL" if daily_bull else "BEAR"
+            sig["mtf"] = mtf
+            updated += 1
+        except Exception:
+            pass
+        time.sleep(0.2)
+    Path("data/signals_cache.json").write_text(json.dumps(cache, indent=2))
+    return {"updated": updated, "total": len(cache)}
+
