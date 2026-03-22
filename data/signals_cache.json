@@ -90,7 +90,22 @@
       }
     ],
     "reasoning": "",
-    "generated_at": "2026-03-20T11:03:17.693547+00:00"
+    "generated_at": "2026-03-20T11:03:17.693547+00:00",
+    "mtf": {
+      "tf_15m_bull": true,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 49.4,
+      "tf_4h_rsi": 33.2,
+      "mtf_score": 1,
+      "mtf_details": {
+        "15m": "BULL",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BEAR"
+      },
+      "mtf_score_with_daily": 1
+    }
   },
   "ETH-USD": {
     "symbol": "ETH-USD",
@@ -183,7 +198,22 @@
       }
     ],
     "reasoning": "",
-    "generated_at": "2026-03-20T11:04:40.609427+00:00"
+    "generated_at": "2026-03-20T11:04:40.609427+00:00",
+    "mtf": {
+      "tf_15m_bull": true,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 56.7,
+      "tf_4h_rsi": 36.1,
+      "mtf_score": 1,
+      "mtf_details": {
+        "15m": "BULL",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BULL"
+      },
+      "mtf_score_with_daily": 2
+    }
   },
   "SOL-USD": {
     "symbol": "SOL-USD",
@@ -276,7 +306,22 @@
       }
     ],
     "reasoning": "",
-    "generated_at": "2026-03-20T11:04:42.501490+00:00"
+    "generated_at": "2026-03-20T11:04:42.501490+00:00",
+    "mtf": {
+      "tf_15m_bull": true,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 48.5,
+      "tf_4h_rsi": 37.3,
+      "mtf_score": 1,
+      "mtf_details": {
+        "15m": "BULL",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BULL"
+      },
+      "mtf_score_with_daily": 2
+    }
   },
   "BNB-USD": {
     "symbol": "BNB-USD",
@@ -350,7 +395,22 @@
     "confluence_score": "4/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-20T11:04:43.967077+00:00"
+    "generated_at": "2026-03-20T11:04:43.967077+00:00",
+    "mtf": {
+      "tf_15m_bull": true,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 49.3,
+      "tf_4h_rsi": 29.2,
+      "mtf_score": 1,
+      "mtf_details": {
+        "15m": "BULL",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BULL"
+      },
+      "mtf_score_with_daily": 2
+    }
   },
   "XRP-USD": {
     "symbol": "XRP-USD",
@@ -443,7 +503,22 @@
       }
     ],
     "reasoning": "",
-    "generated_at": "2026-03-20T11:04:46.359099+00:00"
+    "generated_at": "2026-03-20T11:04:46.359099+00:00",
+    "mtf": {
+      "tf_15m_bull": true,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 45.5,
+      "tf_4h_rsi": 27.1,
+      "mtf_score": 1,
+      "mtf_details": {
+        "15m": "BULL",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BEAR"
+      },
+      "mtf_score_with_daily": 1
+    }
   },
   "DOGE-USD": {
     "symbol": "DOGE-USD",
@@ -517,7 +592,22 @@
     "confluence_score": "3/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-20T11:04:48.046982+00:00"
+    "generated_at": "2026-03-20T11:04:48.046982+00:00",
+    "mtf": {
+      "tf_15m_bull": true,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 55.8,
+      "tf_4h_rsi": 36.4,
+      "mtf_score": 1,
+      "mtf_details": {
+        "15m": "BULL",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BULL"
+      },
+      "mtf_score_with_daily": 2
+    }
   },
   "RENDER-USD": {
     "symbol": "RENDER-USD",
@@ -591,7 +681,22 @@
     "confluence_score": "4/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-20T11:04:51.219143+00:00"
+    "generated_at": "2026-03-20T11:04:51.219143+00:00",
+    "mtf": {
+      "tf_15m_bull": true,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 39.1,
+      "tf_4h_rsi": 29.6,
+      "mtf_score": 1,
+      "mtf_details": {
+        "15m": "BULL",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BEAR"
+      },
+      "mtf_score_with_daily": 1
+    }
   },
   "^IXIC": {
     "symbol": "^IXIC",
@@ -665,7 +770,22 @@
     "confluence_score": "4/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-20T11:04:52.282565+00:00"
+    "generated_at": "2026-03-20T11:04:52.282565+00:00",
+    "mtf": {
+      "tf_15m_bull": false,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 26.3,
+      "tf_4h_rsi": 24.7,
+      "mtf_score": 0,
+      "mtf_details": {
+        "15m": "BEAR",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BULL"
+      },
+      "mtf_score_with_daily": 1
+    }
   },
   "^RUT": {
     "symbol": "^RUT",
@@ -739,7 +859,22 @@
     "confluence_score": "5/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-20T11:04:52.869942+00:00"
+    "generated_at": "2026-03-20T11:04:52.869942+00:00",
+    "mtf": {
+      "tf_15m_bull": false,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 36.9,
+      "tf_4h_rsi": 29.0,
+      "mtf_score": 0,
+      "mtf_details": {
+        "15m": "BEAR",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BULL"
+      },
+      "mtf_score_with_daily": 1
+    }
   },
   "^N225": {
     "symbol": "^N225",
@@ -813,7 +948,22 @@
     "confluence_score": "5/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-20T11:04:53.935896+00:00"
+    "generated_at": "2026-03-20T11:04:53.935896+00:00",
+    "mtf": {
+      "tf_15m_bull": false,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 46.3,
+      "tf_4h_rsi": 46.0,
+      "mtf_score": 0,
+      "mtf_details": {
+        "15m": "BEAR",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BULL"
+      },
+      "mtf_score_with_daily": 1
+    }
   },
   "^HSI": {
     "symbol": "^HSI",
@@ -887,7 +1037,22 @@
     "confluence_score": "4/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-20T11:04:54.829572+00:00"
+    "generated_at": "2026-03-20T11:04:54.829572+00:00",
+    "mtf": {
+      "tf_15m_bull": true,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 9.5,
+      "tf_4h_rsi": 37.8,
+      "mtf_score": 1,
+      "mtf_details": {
+        "15m": "BULL",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BULL"
+      },
+      "mtf_score_with_daily": 2
+    }
   },
   "QQQ": {
     "symbol": "QQQ",
@@ -961,7 +1126,22 @@
     "confluence_score": "5/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-20T11:04:55.507160+00:00"
+    "generated_at": "2026-03-20T11:04:55.507160+00:00",
+    "mtf": {
+      "tf_15m_bull": false,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 26.0,
+      "tf_4h_rsi": 25.6,
+      "mtf_score": 0,
+      "mtf_details": {
+        "15m": "BEAR",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BULL"
+      },
+      "mtf_score_with_daily": 1
+    }
   },
   "IWM": {
     "symbol": "IWM",
@@ -1035,7 +1215,22 @@
     "confluence_score": "6/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-20T11:04:55.795591+00:00"
+    "generated_at": "2026-03-20T11:04:55.795591+00:00",
+    "mtf": {
+      "tf_15m_bull": true,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 38.0,
+      "tf_4h_rsi": 27.9,
+      "mtf_score": 1,
+      "mtf_details": {
+        "15m": "BULL",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BULL"
+      },
+      "mtf_score_with_daily": 2
+    }
   },
   "GLD": {
     "symbol": "GLD",
@@ -1109,7 +1304,22 @@
     "confluence_score": "6/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-20T11:04:56.126742+00:00"
+    "generated_at": "2026-03-20T11:04:56.126742+00:00",
+    "mtf": {
+      "tf_15m_bull": false,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 17.8,
+      "tf_4h_rsi": 7.2,
+      "mtf_score": 0,
+      "mtf_details": {
+        "15m": "BEAR",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BULL"
+      },
+      "mtf_score_with_daily": 1
+    }
   },
   "SLV": {
     "symbol": "SLV",
@@ -1183,7 +1393,22 @@
     "confluence_score": "4/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-20T11:04:56.531898+00:00"
+    "generated_at": "2026-03-20T11:04:56.531898+00:00",
+    "mtf": {
+      "tf_15m_bull": false,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 26.7,
+      "tf_4h_rsi": 8.7,
+      "mtf_score": 0,
+      "mtf_details": {
+        "15m": "BEAR",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BULL"
+      },
+      "mtf_score_with_daily": 1
+    }
   },
   "XLE": {
     "symbol": "XLE",
@@ -1257,7 +1482,22 @@
     "confluence_score": "6/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-20T11:04:57.140629+00:00"
+    "generated_at": "2026-03-20T11:04:57.140629+00:00",
+    "mtf": {
+      "tf_15m_bull": false,
+      "tf_1h_bull": true,
+      "tf_4h_bull": true,
+      "tf_1h_rsi": 62.0,
+      "tf_4h_rsi": 70.3,
+      "mtf_score": 2,
+      "mtf_details": {
+        "15m": "BEAR",
+        "1h": "BULL",
+        "4h": "BULL",
+        "1d": "BEAR"
+      },
+      "mtf_score_with_daily": 2
+    }
   },
   "XLF": {
     "symbol": "XLF",
@@ -1331,7 +1571,22 @@
     "confluence_score": "4/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-20T11:04:57.621180+00:00"
+    "generated_at": "2026-03-20T11:04:57.621180+00:00",
+    "mtf": {
+      "tf_15m_bull": true,
+      "tf_1h_bull": true,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 53.3,
+      "tf_4h_rsi": 43.1,
+      "mtf_score": 2,
+      "mtf_details": {
+        "15m": "BULL",
+        "1h": "BULL",
+        "4h": "BEAR",
+        "1d": "BULL"
+      },
+      "mtf_score_with_daily": 3
+    }
   },
   "XLK": {
     "symbol": "XLK",
@@ -1405,7 +1660,22 @@
     "confluence_score": "5/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-20T11:04:58.081076+00:00"
+    "generated_at": "2026-03-20T11:04:58.081076+00:00",
+    "mtf": {
+      "tf_15m_bull": true,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 32.9,
+      "tf_4h_rsi": 30.9,
+      "mtf_score": 1,
+      "mtf_details": {
+        "15m": "BULL",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BULL"
+      },
+      "mtf_score_with_daily": 2
+    }
   },
   "XLV": {
     "symbol": "XLV",
@@ -1479,7 +1749,22 @@
     "confluence_score": "5/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-20T11:04:58.431525+00:00"
+    "generated_at": "2026-03-20T11:04:58.431525+00:00",
+    "mtf": {
+      "tf_15m_bull": false,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 33.1,
+      "tf_4h_rsi": 15.9,
+      "mtf_score": 0,
+      "mtf_details": {
+        "15m": "BEAR",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BULL"
+      },
+      "mtf_score_with_daily": 1
+    }
   },
   "ARKK": {
     "symbol": "ARKK",
@@ -1553,7 +1838,22 @@
     "confluence_score": "6/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-20T11:04:58.687720+00:00"
+    "generated_at": "2026-03-20T11:04:58.687720+00:00",
+    "mtf": {
+      "tf_15m_bull": true,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 33.7,
+      "tf_4h_rsi": 32.6,
+      "mtf_score": 1,
+      "mtf_details": {
+        "15m": "BULL",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BULL"
+      },
+      "mtf_score_with_daily": 2
+    }
   },
   "IEMG": {
     "symbol": "IEMG",
@@ -1627,7 +1927,22 @@
     "confluence_score": "7/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-20T11:04:59.040237+00:00"
+    "generated_at": "2026-03-20T11:04:59.040237+00:00",
+    "mtf": {
+      "tf_15m_bull": false,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 26.1,
+      "tf_4h_rsi": 30.5,
+      "mtf_score": 0,
+      "mtf_details": {
+        "15m": "BEAR",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BULL"
+      },
+      "mtf_score_with_daily": 1
+    }
   },
   "AAPL": {
     "symbol": "AAPL",
@@ -1714,7 +2029,22 @@
       }
     ],
     "reasoning": "",
-    "generated_at": "2026-03-20T11:04:59.896200+00:00"
+    "generated_at": "2026-03-20T11:04:59.896200+00:00",
+    "mtf": {
+      "tf_15m_bull": false,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 34.4,
+      "tf_4h_rsi": 23.5,
+      "mtf_score": 0,
+      "mtf_details": {
+        "15m": "BEAR",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BULL"
+      },
+      "mtf_score_with_daily": 1
+    }
   },
   "MSFT": {
     "symbol": "MSFT",
@@ -1788,7 +2118,22 @@
     "confluence_score": "4/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-20T11:05:00.322710+00:00"
+    "generated_at": "2026-03-20T11:05:00.322710+00:00",
+    "mtf": {
+      "tf_15m_bull": false,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 18.9,
+      "tf_4h_rsi": 15.8,
+      "mtf_score": 0,
+      "mtf_details": {
+        "15m": "BEAR",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BEAR"
+      },
+      "mtf_score_with_daily": 0
+    }
   },
   "GOOGL": {
     "symbol": "GOOGL",
@@ -1869,7 +2214,22 @@
       }
     ],
     "reasoning": "",
-    "generated_at": "2026-03-20T11:05:00.864507+00:00"
+    "generated_at": "2026-03-20T11:05:00.864507+00:00",
+    "mtf": {
+      "tf_15m_bull": true,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 31.6,
+      "tf_4h_rsi": 36.5,
+      "mtf_score": 1,
+      "mtf_details": {
+        "15m": "BULL",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BULL"
+      },
+      "mtf_score_with_daily": 2
+    }
   },
   "AMZN": {
     "symbol": "AMZN",
@@ -1950,7 +2310,22 @@
       }
     ],
     "reasoning": "",
-    "generated_at": "2026-03-20T11:05:01.315101+00:00"
+    "generated_at": "2026-03-20T11:05:01.315101+00:00",
+    "mtf": {
+      "tf_15m_bull": false,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 27.9,
+      "tf_4h_rsi": 36.5,
+      "mtf_score": 0,
+      "mtf_details": {
+        "15m": "BEAR",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BULL"
+      },
+      "mtf_score_with_daily": 1
+    }
   },
   "NVDA": {
     "symbol": "NVDA",
@@ -2043,7 +2418,22 @@
       }
     ],
     "reasoning": "",
-    "generated_at": "2026-03-20T11:05:01.720268+00:00"
+    "generated_at": "2026-03-20T11:05:01.720268+00:00",
+    "mtf": {
+      "tf_15m_bull": false,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 20.9,
+      "tf_4h_rsi": 20.7,
+      "mtf_score": 0,
+      "mtf_details": {
+        "15m": "BEAR",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BULL"
+      },
+      "mtf_score_with_daily": 1
+    }
   },
   "TSLA": {
     "symbol": "TSLA",
@@ -2136,7 +2526,22 @@
       }
     ],
     "reasoning": "",
-    "generated_at": "2026-03-20T11:05:02.214355+00:00"
+    "generated_at": "2026-03-20T11:05:02.214355+00:00",
+    "mtf": {
+      "tf_15m_bull": false,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 21.7,
+      "tf_4h_rsi": 16.1,
+      "mtf_score": 0,
+      "mtf_details": {
+        "15m": "BEAR",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BULL"
+      },
+      "mtf_score_with_daily": 1
+    }
   },
   "META": {
     "symbol": "META",
@@ -2229,7 +2634,22 @@
       }
     ],
     "reasoning": "",
-    "generated_at": "2026-03-20T11:05:02.636820+00:00"
+    "generated_at": "2026-03-20T11:05:02.636820+00:00",
+    "mtf": {
+      "tf_15m_bull": true,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 23.7,
+      "tf_4h_rsi": 16.9,
+      "mtf_score": 1,
+      "mtf_details": {
+        "15m": "BULL",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BULL"
+      },
+      "mtf_score_with_daily": 2
+    }
   },
   "NFLX": {
     "symbol": "NFLX",
@@ -2303,7 +2723,22 @@
     "confluence_score": "4/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-20T11:05:02.929522+00:00"
+    "generated_at": "2026-03-20T11:05:02.929522+00:00",
+    "mtf": {
+      "tf_15m_bull": true,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 26.1,
+      "tf_4h_rsi": 32.3,
+      "mtf_score": 1,
+      "mtf_details": {
+        "15m": "BULL",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BEAR"
+      },
+      "mtf_score_with_daily": 1
+    }
   },
   "AMD": {
     "symbol": "AMD",
@@ -2377,7 +2812,22 @@
     "confluence_score": "4/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-20T11:05:03.272931+00:00"
+    "generated_at": "2026-03-20T11:05:03.272931+00:00",
+    "mtf": {
+      "tf_15m_bull": true,
+      "tf_1h_bull": true,
+      "tf_4h_bull": true,
+      "tf_1h_rsi": 54.0,
+      "tf_4h_rsi": 45.3,
+      "mtf_score": 3,
+      "mtf_details": {
+        "15m": "BULL",
+        "1h": "BULL",
+        "4h": "BULL",
+        "1d": "BULL"
+      },
+      "mtf_score_with_daily": 4
+    }
   },
   "CRM": {
     "symbol": "CRM",
@@ -2451,7 +2901,22 @@
     "confluence_score": "3/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-20T11:05:03.621680+00:00"
+    "generated_at": "2026-03-20T11:05:03.621680+00:00",
+    "mtf": {
+      "tf_15m_bull": true,
+      "tf_1h_bull": true,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 57.8,
+      "tf_4h_rsi": 52.7,
+      "mtf_score": 2,
+      "mtf_details": {
+        "15m": "BULL",
+        "1h": "BULL",
+        "4h": "BEAR",
+        "1d": "BEAR"
+      },
+      "mtf_score_with_daily": 2
+    }
   },
   "ORCL": {
     "symbol": "ORCL",
@@ -2525,7 +2990,22 @@
     "confluence_score": "3/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-20T11:05:04.067661+00:00"
+    "generated_at": "2026-03-20T11:05:04.067661+00:00",
+    "mtf": {
+      "tf_15m_bull": true,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 40.4,
+      "tf_4h_rsi": 17.2,
+      "mtf_score": 1,
+      "mtf_details": {
+        "15m": "BULL",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BEAR"
+      },
+      "mtf_score_with_daily": 1
+    }
   },
   "INTC": {
     "symbol": "INTC",
@@ -2599,7 +3079,22 @@
     "confluence_score": "3/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-20T11:05:04.455584+00:00"
+    "generated_at": "2026-03-20T11:05:04.455584+00:00",
+    "mtf": {
+      "tf_15m_bull": false,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 38.1,
+      "tf_4h_rsi": 35.7,
+      "mtf_score": 0,
+      "mtf_details": {
+        "15m": "BEAR",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BULL"
+      },
+      "mtf_score_with_daily": 1
+    }
   },
   "QCOM": {
     "symbol": "QCOM",
@@ -2673,7 +3168,22 @@
     "confluence_score": "5/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-20T11:05:04.795232+00:00"
+    "generated_at": "2026-03-20T11:05:04.795232+00:00",
+    "mtf": {
+      "tf_15m_bull": false,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 46.6,
+      "tf_4h_rsi": 31.0,
+      "mtf_score": 0,
+      "mtf_details": {
+        "15m": "BEAR",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BULL"
+      },
+      "mtf_score_with_daily": 1
+    }
   },
   "PYPL": {
     "symbol": "PYPL",
@@ -2747,7 +3257,22 @@
     "confluence_score": "4/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-20T11:05:05.122945+00:00"
+    "generated_at": "2026-03-20T11:05:05.122945+00:00",
+    "mtf": {
+      "tf_15m_bull": true,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 41.4,
+      "tf_4h_rsi": 37.8,
+      "mtf_score": 1,
+      "mtf_details": {
+        "15m": "BULL",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BEAR"
+      },
+      "mtf_score_with_daily": 1
+    }
   },
   "SHOP": {
     "symbol": "SHOP",
@@ -2821,7 +3346,22 @@
     "confluence_score": "3/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-20T11:05:05.425538+00:00"
+    "generated_at": "2026-03-20T11:05:05.425538+00:00",
+    "mtf": {
+      "tf_15m_bull": true,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 19.1,
+      "tf_4h_rsi": 26.7,
+      "mtf_score": 1,
+      "mtf_details": {
+        "15m": "BULL",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BULL"
+      },
+      "mtf_score_with_daily": 2
+    }
   },
   "UBER": {
     "symbol": "UBER",
@@ -2902,7 +3442,22 @@
       }
     ],
     "reasoning": "",
-    "generated_at": "2026-03-20T11:05:06.459934+00:00"
+    "generated_at": "2026-03-20T11:05:06.459934+00:00",
+    "mtf": {
+      "tf_15m_bull": true,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 24.0,
+      "tf_4h_rsi": 46.1,
+      "mtf_score": 1,
+      "mtf_details": {
+        "15m": "BULL",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BEAR"
+      },
+      "mtf_score_with_daily": 1
+    }
   },
   "COIN": {
     "symbol": "COIN",
@@ -2995,7 +3550,22 @@
       }
     ],
     "reasoning": "",
-    "generated_at": "2026-03-20T11:05:07.145719+00:00"
+    "generated_at": "2026-03-20T11:05:07.145719+00:00",
+    "mtf": {
+      "tf_15m_bull": true,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 40.0,
+      "tf_4h_rsi": 49.0,
+      "mtf_score": 1,
+      "mtf_details": {
+        "15m": "BULL",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BEAR"
+      },
+      "mtf_score_with_daily": 1
+    }
   },
   "PLTR": {
     "symbol": "PLTR",
@@ -3069,7 +3639,22 @@
     "confluence_score": "4/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-20T11:05:07.678630+00:00"
+    "generated_at": "2026-03-20T11:05:07.678630+00:00",
+    "mtf": {
+      "tf_15m_bull": false,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 44.3,
+      "tf_4h_rsi": 48.1,
+      "mtf_score": 0,
+      "mtf_details": {
+        "15m": "BEAR",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BULL"
+      },
+      "mtf_score_with_daily": 1
+    }
   },
   "MSTR": {
     "symbol": "MSTR",
@@ -3143,7 +3728,22 @@
     "confluence_score": "4/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-20T11:05:08.177571+00:00"
+    "generated_at": "2026-03-20T11:05:08.177571+00:00",
+    "mtf": {
+      "tf_15m_bull": true,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 34.4,
+      "tf_4h_rsi": 46.6,
+      "mtf_score": 1,
+      "mtf_details": {
+        "15m": "BULL",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BEAR"
+      },
+      "mtf_score_with_daily": 1
+    }
   },
   "JPM": {
     "symbol": "JPM",
@@ -3230,7 +3830,22 @@
       }
     ],
     "reasoning": "",
-    "generated_at": "2026-03-20T11:05:08.746521+00:00"
+    "generated_at": "2026-03-20T11:05:08.746521+00:00",
+    "mtf": {
+      "tf_15m_bull": false,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 46.3,
+      "tf_4h_rsi": 48.4,
+      "mtf_score": 0,
+      "mtf_details": {
+        "15m": "BEAR",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BULL"
+      },
+      "mtf_score_with_daily": 1
+    }
   },
   "GS": {
     "symbol": "GS",
@@ -3323,7 +3938,22 @@
       }
     ],
     "reasoning": "",
-    "generated_at": "2026-03-20T11:05:09.480285+00:00"
+    "generated_at": "2026-03-20T11:05:09.480285+00:00",
+    "mtf": {
+      "tf_15m_bull": true,
+      "tf_1h_bull": true,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 57.3,
+      "tf_4h_rsi": 45.5,
+      "mtf_score": 2,
+      "mtf_details": {
+        "15m": "BULL",
+        "1h": "BULL",
+        "4h": "BEAR",
+        "1d": "BULL"
+      },
+      "mtf_score_with_daily": 3
+    }
   },
   "BAC": {
     "symbol": "BAC",
@@ -3416,7 +4046,22 @@
       }
     ],
     "reasoning": "",
-    "generated_at": "2026-03-20T11:05:10.098235+00:00"
+    "generated_at": "2026-03-20T11:05:10.098235+00:00",
+    "mtf": {
+      "tf_15m_bull": true,
+      "tf_1h_bull": true,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 56.9,
+      "tf_4h_rsi": 34.7,
+      "mtf_score": 2,
+      "mtf_details": {
+        "15m": "BULL",
+        "1h": "BULL",
+        "4h": "BEAR",
+        "1d": "BEAR"
+      },
+      "mtf_score_with_daily": 2
+    }
   },
   "V": {
     "symbol": "V",
@@ -3509,7 +4154,22 @@
       }
     ],
     "reasoning": "",
-    "generated_at": "2026-03-20T11:05:11.045083+00:00"
+    "generated_at": "2026-03-20T11:05:11.045083+00:00",
+    "mtf": {
+      "tf_15m_bull": true,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 61.9,
+      "tf_4h_rsi": 36.1,
+      "mtf_score": 1,
+      "mtf_details": {
+        "15m": "BULL",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BULL"
+      },
+      "mtf_score_with_daily": 2
+    }
   },
   "MA": {
     "symbol": "MA",
@@ -3602,7 +4262,22 @@
       }
     ],
     "reasoning": "",
-    "generated_at": "2026-03-20T11:05:12.243982+00:00"
+    "generated_at": "2026-03-20T11:05:12.243982+00:00",
+    "mtf": {
+      "tf_15m_bull": false,
+      "tf_1h_bull": true,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 71.8,
+      "tf_4h_rsi": 43.6,
+      "mtf_score": 1,
+      "mtf_details": {
+        "15m": "BEAR",
+        "1h": "BULL",
+        "4h": "BEAR",
+        "1d": "BULL"
+      },
+      "mtf_score_with_daily": 2
+    }
   },
   "DIS": {
     "symbol": "DIS",
@@ -3695,7 +4370,22 @@
       }
     ],
     "reasoning": "",
-    "generated_at": "2026-03-20T11:05:12.987976+00:00"
+    "generated_at": "2026-03-20T11:05:12.987976+00:00",
+    "mtf": {
+      "tf_15m_bull": true,
+      "tf_1h_bull": true,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 51.0,
+      "tf_4h_rsi": 39.4,
+      "mtf_score": 2,
+      "mtf_details": {
+        "15m": "BULL",
+        "1h": "BULL",
+        "4h": "BEAR",
+        "1d": "BULL"
+      },
+      "mtf_score_with_daily": 3
+    }
   },
   "BABA": {
     "symbol": "BABA",
@@ -3782,7 +4472,22 @@
       }
     ],
     "reasoning": "",
-    "generated_at": "2026-03-20T11:05:13.714448+00:00"
+    "generated_at": "2026-03-20T11:05:13.714448+00:00",
+    "mtf": {
+      "tf_15m_bull": false,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 9.1,
+      "tf_4h_rsi": 15.9,
+      "mtf_score": 0,
+      "mtf_details": {
+        "15m": "BEAR",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BULL"
+      },
+      "mtf_score_with_daily": 1
+    }
   },
   "TSM": {
     "symbol": "TSM",
@@ -3856,7 +4561,22 @@
     "confluence_score": "7/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-20T11:05:14.192669+00:00"
+    "generated_at": "2026-03-20T11:05:14.192669+00:00",
+    "mtf": {
+      "tf_15m_bull": true,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 34.1,
+      "tf_4h_rsi": 29.0,
+      "mtf_score": 1,
+      "mtf_details": {
+        "15m": "BULL",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BULL"
+      },
+      "mtf_score_with_daily": 2
+    }
   },
   "ASML": {
     "symbol": "ASML",
@@ -3930,7 +4650,22 @@
     "confluence_score": "6/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-20T11:05:14.579434+00:00"
+    "generated_at": "2026-03-20T11:05:14.579434+00:00",
+    "mtf": {
+      "tf_15m_bull": true,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 36.9,
+      "tf_4h_rsi": 34.0,
+      "mtf_score": 1,
+      "mtf_details": {
+        "15m": "BULL",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BULL"
+      },
+      "mtf_score_with_daily": 2
+    }
   },
   "ABNB": {
     "symbol": "ABNB",
@@ -4004,7 +4739,22 @@
     "confluence_score": "6/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-20T11:05:15.041949+00:00"
+    "generated_at": "2026-03-20T11:05:15.041949+00:00",
+    "mtf": {
+      "tf_15m_bull": true,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 28.9,
+      "tf_4h_rsi": 39.2,
+      "mtf_score": 1,
+      "mtf_details": {
+        "15m": "BULL",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BULL"
+      },
+      "mtf_score_with_daily": 2
+    }
   },
   "SNOW": {
     "symbol": "SNOW",
@@ -4078,7 +4828,22 @@
     "confluence_score": "2/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-20T11:05:15.476207+00:00"
+    "generated_at": "2026-03-20T11:05:15.476207+00:00",
+    "mtf": {
+      "tf_15m_bull": false,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 32.9,
+      "tf_4h_rsi": 26.9,
+      "mtf_score": 0,
+      "mtf_details": {
+        "15m": "BEAR",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BULL"
+      },
+      "mtf_score_with_daily": 1
+    }
   },
   "NET": {
     "symbol": "NET",
@@ -4171,7 +4936,22 @@
       }
     ],
     "reasoning": "",
-    "generated_at": "2026-03-20T11:05:15.947092+00:00"
+    "generated_at": "2026-03-20T11:05:15.947092+00:00",
+    "mtf": {
+      "tf_15m_bull": false,
+      "tf_1h_bull": false,
+      "tf_4h_bull": true,
+      "tf_1h_rsi": 24.7,
+      "tf_4h_rsi": 53.2,
+      "mtf_score": 1,
+      "mtf_details": {
+        "15m": "BEAR",
+        "1h": "BEAR",
+        "4h": "BULL",
+        "1d": "BULL"
+      },
+      "mtf_score_with_daily": 2
+    }
   },
   "GC=F": {
     "symbol": "GC=F",
@@ -4264,7 +5044,22 @@
       }
     ],
     "reasoning": "",
-    "generated_at": "2026-03-20T11:05:16.512188+00:00"
+    "generated_at": "2026-03-20T11:05:16.512188+00:00",
+    "mtf": {
+      "tf_15m_bull": true,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 39.2,
+      "tf_4h_rsi": 27.0,
+      "mtf_score": 1,
+      "mtf_details": {
+        "15m": "BULL",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BULL"
+      },
+      "mtf_score_with_daily": 2
+    }
   },
   "CL=F": {
     "symbol": "CL=F",
@@ -4357,7 +5152,22 @@
       }
     ],
     "reasoning": "",
-    "generated_at": "2026-03-20T11:05:16.961917+00:00"
+    "generated_at": "2026-03-20T11:05:16.961917+00:00",
+    "mtf": {
+      "tf_15m_bull": true,
+      "tf_1h_bull": true,
+      "tf_4h_bull": true,
+      "tf_1h_rsi": 66.1,
+      "tf_4h_rsi": 53.7,
+      "mtf_score": 3,
+      "mtf_details": {
+        "15m": "BULL",
+        "1h": "BULL",
+        "4h": "BULL",
+        "1d": "BEAR"
+      },
+      "mtf_score_with_daily": 3
+    }
   },
   "SI=F": {
     "symbol": "SI=F",
@@ -4431,7 +5241,22 @@
     "confluence_score": "4/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-20T11:05:17.333782+00:00"
+    "generated_at": "2026-03-20T11:05:17.333782+00:00",
+    "mtf": {
+      "tf_15m_bull": true,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 40.4,
+      "tf_4h_rsi": 33.1,
+      "mtf_score": 1,
+      "mtf_details": {
+        "15m": "BULL",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BULL"
+      },
+      "mtf_score_with_daily": 2
+    }
   },
   "NG=F": {
     "symbol": "NG=F",
@@ -4505,7 +5330,22 @@
     "confluence_score": "4/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-20T11:05:17.787673+00:00"
+    "generated_at": "2026-03-20T11:05:17.787673+00:00",
+    "mtf": {
+      "tf_15m_bull": true,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 43.3,
+      "tf_4h_rsi": 52.4,
+      "mtf_score": 1,
+      "mtf_details": {
+        "15m": "BULL",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BULL"
+      },
+      "mtf_score_with_daily": 2
+    }
   },
   "HG=F": {
     "symbol": "HG=F",
@@ -4579,7 +5419,22 @@
     "confluence_score": "5/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-20T11:05:18.278605+00:00"
+    "generated_at": "2026-03-20T11:05:18.278605+00:00",
+    "mtf": {
+      "tf_15m_bull": true,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 36.4,
+      "tf_4h_rsi": 33.5,
+      "mtf_score": 1,
+      "mtf_details": {
+        "15m": "BULL",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BULL"
+      },
+      "mtf_score_with_daily": 2
+    }
   },
   "ZW=F": {
     "symbol": "ZW=F",
@@ -4653,7 +5508,22 @@
     "confluence_score": "3/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-20T11:05:18.605888+00:00"
+    "generated_at": "2026-03-20T11:05:18.605888+00:00",
+    "mtf": {
+      "tf_15m_bull": false,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 31.1,
+      "tf_4h_rsi": 52.9,
+      "mtf_score": 0,
+      "mtf_details": {
+        "15m": "BEAR",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BEAR"
+      },
+      "mtf_score_with_daily": 0
+    }
   },
   "ADA-USD": {
     "symbol": "ADA-USD",
@@ -4727,7 +5597,22 @@
     "confluence_score": "3/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-21T12:57:46.916033+00:00"
+    "generated_at": "2026-03-21T12:57:46.916033+00:00",
+    "mtf": {
+      "tf_15m_bull": true,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 42.1,
+      "tf_4h_rsi": 20.6,
+      "mtf_score": 1,
+      "mtf_details": {
+        "15m": "BULL",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BEAR"
+      },
+      "mtf_score_with_daily": 1
+    }
   },
   "AVAX-USD": {
     "symbol": "AVAX-USD",
@@ -4801,7 +5686,22 @@
     "confluence_score": "4/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-21T12:57:48.550017+00:00"
+    "generated_at": "2026-03-21T12:57:48.550017+00:00",
+    "mtf": {
+      "tf_15m_bull": true,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 40.1,
+      "tf_4h_rsi": 28.4,
+      "mtf_score": 1,
+      "mtf_details": {
+        "15m": "BULL",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BEAR"
+      },
+      "mtf_score_with_daily": 1
+    }
   },
   "MATIC-USD": {
     "symbol": "MATIC-USD",
@@ -4875,7 +5775,22 @@
     "confluence_score": "2/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-21T13:48:55.901744+00:00"
+    "generated_at": "2026-03-21T13:48:55.901744+00:00",
+    "mtf": {
+      "tf_15m_bull": false,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 50.0,
+      "tf_4h_rsi": 50.0,
+      "mtf_score": 0,
+      "mtf_details": {
+        "15m": "NEUTRAL",
+        "1h": "NEUTRAL",
+        "4h": "NEUTRAL",
+        "1d": "BEAR"
+      },
+      "mtf_score_with_daily": 0
+    }
   },
   "DOT-USD": {
     "symbol": "DOT-USD",
@@ -4956,7 +5871,22 @@
       }
     ],
     "reasoning": "",
-    "generated_at": "2026-03-21T13:18:05.572049+00:00"
+    "generated_at": "2026-03-21T13:18:05.572049+00:00",
+    "mtf": {
+      "tf_15m_bull": false,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 32.6,
+      "tf_4h_rsi": 23.0,
+      "mtf_score": 0,
+      "mtf_details": {
+        "15m": "BEAR",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BEAR"
+      },
+      "mtf_score_with_daily": 0
+    }
   },
   "LINK-USD": {
     "symbol": "LINK-USD",
@@ -5030,7 +5960,22 @@
     "confluence_score": "4/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-21T13:18:07.253065+00:00"
+    "generated_at": "2026-03-21T13:18:07.253065+00:00",
+    "mtf": {
+      "tf_15m_bull": true,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 51.4,
+      "tf_4h_rsi": 32.7,
+      "mtf_score": 1,
+      "mtf_details": {
+        "15m": "BULL",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BEAR"
+      },
+      "mtf_score_with_daily": 1
+    }
   },
   "LTC-USD": {
     "symbol": "LTC-USD",
@@ -5104,7 +6049,22 @@
     "confluence_score": "2/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-21T13:29:23.299345+00:00"
+    "generated_at": "2026-03-21T13:29:23.299345+00:00",
+    "mtf": {
+      "tf_15m_bull": false,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 29.3,
+      "tf_4h_rsi": 30.0,
+      "mtf_score": 0,
+      "mtf_details": {
+        "15m": "BEAR",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BEAR"
+      },
+      "mtf_score_with_daily": 0
+    }
   },
   "ATOM-USD": {
     "symbol": "ATOM-USD",
@@ -5178,7 +6138,22 @@
     "confluence_score": "3/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-21T13:29:24.804144+00:00"
+    "generated_at": "2026-03-21T13:29:24.804144+00:00",
+    "mtf": {
+      "tf_15m_bull": true,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 41.3,
+      "tf_4h_rsi": 38.3,
+      "mtf_score": 1,
+      "mtf_details": {
+        "15m": "BULL",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BEAR"
+      },
+      "mtf_score_with_daily": 1
+    }
   },
   "NEAR-USD": {
     "symbol": "NEAR-USD",
@@ -5271,7 +6246,22 @@
       }
     ],
     "reasoning": "",
-    "generated_at": "2026-03-21T12:59:02.978737+00:00"
+    "generated_at": "2026-03-21T12:59:02.978737+00:00",
+    "mtf": {
+      "tf_15m_bull": false,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 51.7,
+      "tf_4h_rsi": 25.2,
+      "mtf_score": 0,
+      "mtf_details": {
+        "15m": "BEAR",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BEAR"
+      },
+      "mtf_score_with_daily": 0
+    }
   },
   "APT-USD": {
     "symbol": "APT-USD",
@@ -5345,7 +6335,22 @@
     "confluence_score": "3/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-21T13:49:05.639483+00:00"
+    "generated_at": "2026-03-21T13:49:05.639483+00:00",
+    "mtf": {
+      "tf_15m_bull": false,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 50.0,
+      "tf_4h_rsi": 50.0,
+      "mtf_score": 0,
+      "mtf_details": {
+        "15m": "NEUTRAL",
+        "1h": "NEUTRAL",
+        "4h": "NEUTRAL",
+        "1d": "BEAR"
+      },
+      "mtf_score_with_daily": 0
+    }
   },
   "OP-USD": {
     "symbol": "OP-USD",
@@ -5438,7 +6443,22 @@
       }
     ],
     "reasoning": "",
-    "generated_at": "2026-03-21T12:59:34.244381+00:00"
+    "generated_at": "2026-03-21T12:59:34.244381+00:00",
+    "mtf": {
+      "tf_15m_bull": false,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 27.1,
+      "tf_4h_rsi": 25.4,
+      "mtf_score": 0,
+      "mtf_details": {
+        "15m": "BEAR",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BULL"
+      },
+      "mtf_score_with_daily": 1
+    }
   },
   "INJ-USD": {
     "symbol": "INJ-USD",
@@ -5512,7 +6532,22 @@
     "confluence_score": "2/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-21T12:59:35.738053+00:00"
+    "generated_at": "2026-03-21T12:59:35.738053+00:00",
+    "mtf": {
+      "tf_15m_bull": true,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 26.5,
+      "tf_4h_rsi": 25.8,
+      "mtf_score": 1,
+      "mtf_details": {
+        "15m": "BULL",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BULL"
+      },
+      "mtf_score_with_daily": 2
+    }
   },
   "FET-USD": {
     "symbol": "FET-USD",
@@ -5593,7 +6628,22 @@
       }
     ],
     "reasoning": "",
-    "generated_at": "2026-03-21T12:59:36.791037+00:00"
+    "generated_at": "2026-03-21T12:59:36.791037+00:00",
+    "mtf": {
+      "tf_15m_bull": false,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 26.5,
+      "tf_4h_rsi": 34.0,
+      "mtf_score": 0,
+      "mtf_details": {
+        "15m": "BEAR",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BEAR"
+      },
+      "mtf_score_with_daily": 0
+    }
   },
   "^GSPC": {
     "symbol": "^GSPC",
@@ -5667,7 +6717,22 @@
     "confluence_score": "5/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-21T13:49:14.875236+00:00"
+    "generated_at": "2026-03-21T13:49:14.875236+00:00",
+    "mtf": {
+      "tf_15m_bull": false,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 27.5,
+      "tf_4h_rsi": 23.8,
+      "mtf_score": 0,
+      "mtf_details": {
+        "15m": "BEAR",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BEAR"
+      },
+      "mtf_score_with_daily": 0
+    }
   },
   "^DJI": {
     "symbol": "^DJI",
@@ -5741,7 +6806,22 @@
     "confluence_score": "5/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-21T13:49:17.637958+00:00"
+    "generated_at": "2026-03-21T13:49:17.637958+00:00",
+    "mtf": {
+      "tf_15m_bull": true,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 32.0,
+      "tf_4h_rsi": 22.1,
+      "mtf_score": 1,
+      "mtf_details": {
+        "15m": "BULL",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BULL"
+      },
+      "mtf_score_with_daily": 2
+    }
   },
   "^GDAXI": {
     "symbol": "^GDAXI",
@@ -5815,7 +6895,22 @@
     "confluence_score": "4/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-21T13:49:22.846188+00:00"
+    "generated_at": "2026-03-21T13:49:22.846188+00:00",
+    "mtf": {
+      "tf_15m_bull": false,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 33.3,
+      "tf_4h_rsi": 26.0,
+      "mtf_score": 0,
+      "mtf_details": {
+        "15m": "BEAR",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BULL"
+      },
+      "mtf_score_with_daily": 1
+    }
   },
   "SPY": {
     "symbol": "SPY",
@@ -5889,7 +6984,22 @@
     "confluence_score": "5/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-21T13:49:25.386426+00:00"
+    "generated_at": "2026-03-21T13:49:25.386426+00:00",
+    "mtf": {
+      "tf_15m_bull": false,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 26.5,
+      "tf_4h_rsi": 23.2,
+      "mtf_score": 0,
+      "mtf_details": {
+        "15m": "BEAR",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BEAR"
+      },
+      "mtf_score_with_daily": 0
+    }
   },
   "TLT": {
     "symbol": "TLT",
@@ -5963,7 +7073,22 @@
     "confluence_score": "6/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-21T13:49:30.751567+00:00"
+    "generated_at": "2026-03-21T13:49:30.751567+00:00",
+    "mtf": {
+      "tf_15m_bull": false,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 34.0,
+      "tf_4h_rsi": 35.1,
+      "mtf_score": 0,
+      "mtf_details": {
+        "15m": "BEAR",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BEAR"
+      },
+      "mtf_score_with_daily": 0
+    }
   },
   "ARB-USD": {
     "symbol": "ARB-USD",
@@ -6037,7 +7162,22 @@
     "confluence_score": "3/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-21T13:57:28.877516+00:00"
+    "generated_at": "2026-03-21T13:57:28.877516+00:00",
+    "mtf": {
+      "tf_15m_bull": false,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 0.0,
+      "tf_4h_rsi": 0.0,
+      "mtf_score": 0,
+      "mtf_details": {
+        "15m": "BEAR",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BEAR"
+      },
+      "mtf_score_with_daily": 0
+    }
   },
   "^VIX": {
     "symbol": "^VIX",
@@ -6111,7 +7251,22 @@
     "confluence_score": "3/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-21T13:57:33.795293+00:00"
+    "generated_at": "2026-03-21T13:57:33.795293+00:00",
+    "mtf": {
+      "tf_15m_bull": false,
+      "tf_1h_bull": true,
+      "tf_4h_bull": true,
+      "tf_1h_rsi": 66.9,
+      "tf_4h_rsi": 73.7,
+      "mtf_score": 2,
+      "mtf_details": {
+        "15m": "BEAR",
+        "1h": "BULL",
+        "4h": "BULL",
+        "1d": "BEAR"
+      },
+      "mtf_score_with_daily": 2
+    }
   },
   "^FTSE": {
     "symbol": "^FTSE",
@@ -6185,7 +7340,22 @@
     "confluence_score": "5/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-21T14:16:45.460515+00:00"
+    "generated_at": "2026-03-21T14:16:45.460515+00:00",
+    "mtf": {
+      "tf_15m_bull": false,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 33.9,
+      "tf_4h_rsi": 25.5,
+      "mtf_score": 0,
+      "mtf_details": {
+        "15m": "BEAR",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BULL"
+      },
+      "mtf_score_with_daily": 1
+    }
   },
   "HYG": {
     "symbol": "HYG",
@@ -6259,7 +7429,22 @@
     "confluence_score": "5/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-21T14:16:49.356311+00:00"
+    "generated_at": "2026-03-21T14:16:49.356311+00:00",
+    "mtf": {
+      "tf_15m_bull": false,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 37.8,
+      "tf_4h_rsi": 33.7,
+      "mtf_score": 0,
+      "mtf_details": {
+        "15m": "BEAR",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BULL"
+      },
+      "mtf_score_with_daily": 1
+    }
   },
   "EURUSD=X": {
     "symbol": "EURUSD=X",
@@ -6340,7 +7525,22 @@
       }
     ],
     "reasoning": "",
-    "generated_at": "2026-03-21T14:16:54.562772+00:00"
+    "generated_at": "2026-03-21T14:16:54.562772+00:00",
+    "mtf": {
+      "tf_15m_bull": true,
+      "tf_1h_bull": true,
+      "tf_4h_bull": true,
+      "tf_1h_rsi": 49.5,
+      "tf_4h_rsi": 59.4,
+      "mtf_score": 3,
+      "mtf_details": {
+        "15m": "BULL",
+        "1h": "BULL",
+        "4h": "BULL",
+        "1d": "BULL"
+      },
+      "mtf_score_with_daily": 4
+    }
   },
   "GBPUSD=X": {
     "symbol": "GBPUSD=X",
@@ -6414,7 +7614,22 @@
     "confluence_score": "4/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-21T14:16:58.095657+00:00"
+    "generated_at": "2026-03-21T14:16:58.095657+00:00",
+    "mtf": {
+      "tf_15m_bull": true,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 31.1,
+      "tf_4h_rsi": 52.4,
+      "mtf_score": 1,
+      "mtf_details": {
+        "15m": "BULL",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BEAR"
+      },
+      "mtf_score_with_daily": 1
+    }
   },
   "USDJPY=X": {
     "symbol": "USDJPY=X",
@@ -6488,7 +7703,22 @@
     "confluence_score": "4/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-21T14:17:02.440138+00:00"
+    "generated_at": "2026-03-21T14:17:02.440138+00:00",
+    "mtf": {
+      "tf_15m_bull": false,
+      "tf_1h_bull": true,
+      "tf_4h_bull": true,
+      "tf_1h_rsi": 76.1,
+      "tf_4h_rsi": 47.0,
+      "mtf_score": 2,
+      "mtf_details": {
+        "15m": "BEAR",
+        "1h": "BULL",
+        "4h": "BULL",
+        "1d": "BEAR"
+      },
+      "mtf_score_with_daily": 2
+    }
   },
   "AUDUSD=X": {
     "symbol": "AUDUSD=X",
@@ -6562,7 +7792,22 @@
     "confluence_score": "6/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-21T14:17:04.735408+00:00"
+    "generated_at": "2026-03-21T14:17:04.735408+00:00",
+    "mtf": {
+      "tf_15m_bull": false,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 25.4,
+      "tf_4h_rsi": 39.8,
+      "mtf_score": 0,
+      "mtf_details": {
+        "15m": "BEAR",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BULL"
+      },
+      "mtf_score_with_daily": 1
+    }
   },
   "USDCAD=X": {
     "symbol": "USDCAD=X",
@@ -6636,7 +7881,22 @@
     "confluence_score": "3/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-21T14:17:07.166661+00:00"
+    "generated_at": "2026-03-21T14:17:07.166661+00:00",
+    "mtf": {
+      "tf_15m_bull": true,
+      "tf_1h_bull": true,
+      "tf_4h_bull": true,
+      "tf_1h_rsi": 50.8,
+      "tf_4h_rsi": 59.2,
+      "mtf_score": 3,
+      "mtf_details": {
+        "15m": "BULL",
+        "1h": "BULL",
+        "4h": "BULL",
+        "1d": "BULL"
+      },
+      "mtf_score_with_daily": 4
+    }
   },
   "USDCHF=X": {
     "symbol": "USDCHF=X",
@@ -6710,7 +7970,22 @@
     "confluence_score": "3/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-21T14:17:09.678275+00:00"
+    "generated_at": "2026-03-21T14:17:09.678275+00:00",
+    "mtf": {
+      "tf_15m_bull": false,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 43.4,
+      "tf_4h_rsi": 46.5,
+      "mtf_score": 0,
+      "mtf_details": {
+        "15m": "BEAR",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BEAR"
+      },
+      "mtf_score_with_daily": 0
+    }
   },
   "USDINR=X": {
     "symbol": "USDINR=X",
@@ -6784,7 +8059,22 @@
     "confluence_score": "5/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-21T14:17:14.269249+00:00"
+    "generated_at": "2026-03-21T14:17:14.269249+00:00",
+    "mtf": {
+      "tf_15m_bull": false,
+      "tf_1h_bull": true,
+      "tf_4h_bull": true,
+      "tf_1h_rsi": 58.3,
+      "tf_4h_rsi": 70.7,
+      "mtf_score": 2,
+      "mtf_details": {
+        "15m": "BEAR",
+        "1h": "BULL",
+        "4h": "BULL",
+        "1d": "BEAR"
+      },
+      "mtf_score_with_daily": 2
+    }
   },
   "^NSEI": {
     "symbol": "^NSEI",
@@ -6858,7 +8148,22 @@
     "confluence_score": "3/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-21T14:33:32.930641+00:00"
+    "generated_at": "2026-03-21T14:33:32.930641+00:00",
+    "mtf": {
+      "tf_15m_bull": false,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 27.2,
+      "tf_4h_rsi": 34.1,
+      "mtf_score": 0,
+      "mtf_details": {
+        "15m": "BEAR",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BULL"
+      },
+      "mtf_score_with_daily": 1
+    }
   },
   "^NSEBANK": {
     "symbol": "^NSEBANK",
@@ -6932,7 +8237,22 @@
     "confluence_score": "3/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-21T14:33:37.555527+00:00"
+    "generated_at": "2026-03-21T14:33:37.555527+00:00",
+    "mtf": {
+      "tf_15m_bull": false,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 28.0,
+      "tf_4h_rsi": 30.8,
+      "mtf_score": 0,
+      "mtf_details": {
+        "15m": "BEAR",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BULL"
+      },
+      "mtf_score_with_daily": 1
+    }
   },
   "RELIANCE.NS": {
     "symbol": "RELIANCE.NS",
@@ -7006,7 +8326,22 @@
     "confluence_score": "5/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-21T14:33:41.517215+00:00"
+    "generated_at": "2026-03-21T14:33:41.517215+00:00",
+    "mtf": {
+      "tf_15m_bull": false,
+      "tf_1h_bull": true,
+      "tf_4h_bull": true,
+      "tf_1h_rsi": 54.1,
+      "tf_4h_rsi": 58.1,
+      "mtf_score": 2,
+      "mtf_details": {
+        "15m": "BEAR",
+        "1h": "BULL",
+        "4h": "BULL",
+        "1d": "BULL"
+      },
+      "mtf_score_with_daily": 3
+    }
   },
   "TCS.NS": {
     "symbol": "TCS.NS",
@@ -7080,7 +8415,22 @@
     "confluence_score": "5/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-21T14:33:45.526153+00:00"
+    "generated_at": "2026-03-21T14:33:45.526153+00:00",
+    "mtf": {
+      "tf_15m_bull": true,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 36.0,
+      "tf_4h_rsi": 40.9,
+      "mtf_score": 1,
+      "mtf_details": {
+        "15m": "BULL",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BULL"
+      },
+      "mtf_score_with_daily": 2
+    }
   },
   "INFY.NS": {
     "symbol": "INFY.NS",
@@ -7154,7 +8504,22 @@
     "confluence_score": "6/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-21T14:33:49.405997+00:00"
+    "generated_at": "2026-03-21T14:33:49.405997+00:00",
+    "mtf": {
+      "tf_15m_bull": true,
+      "tf_1h_bull": true,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 46.5,
+      "tf_4h_rsi": 46.2,
+      "mtf_score": 2,
+      "mtf_details": {
+        "15m": "BULL",
+        "1h": "BULL",
+        "4h": "BEAR",
+        "1d": "BEAR"
+      },
+      "mtf_score_with_daily": 2
+    }
   },
   "HDFCBANK.NS": {
     "symbol": "HDFCBANK.NS",
@@ -7228,7 +8593,22 @@
     "confluence_score": "4/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-21T14:33:53.177317+00:00"
+    "generated_at": "2026-03-21T14:33:53.177317+00:00",
+    "mtf": {
+      "tf_15m_bull": false,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 21.3,
+      "tf_4h_rsi": 25.8,
+      "mtf_score": 0,
+      "mtf_details": {
+        "15m": "BEAR",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BULL"
+      },
+      "mtf_score_with_daily": 1
+    }
   },
   "ICICIBANK.NS": {
     "symbol": "ICICIBANK.NS",
@@ -7302,7 +8682,22 @@
     "confluence_score": "3/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-21T14:33:57.441596+00:00"
+    "generated_at": "2026-03-21T14:33:57.441596+00:00",
+    "mtf": {
+      "tf_15m_bull": false,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 30.4,
+      "tf_4h_rsi": 33.3,
+      "mtf_score": 0,
+      "mtf_details": {
+        "15m": "BEAR",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BULL"
+      },
+      "mtf_score_with_daily": 1
+    }
   },
   "WIPRO.NS": {
     "symbol": "WIPRO.NS",
@@ -7376,7 +8771,22 @@
     "confluence_score": "5/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-21T14:34:00.413259+00:00"
+    "generated_at": "2026-03-21T14:34:00.413259+00:00",
+    "mtf": {
+      "tf_15m_bull": true,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 34.6,
+      "tf_4h_rsi": 32.8,
+      "mtf_score": 1,
+      "mtf_details": {
+        "15m": "BULL",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BULL"
+      },
+      "mtf_score_with_daily": 2
+    }
   },
   "HCLTECH.NS": {
     "symbol": "HCLTECH.NS",
@@ -7450,7 +8860,22 @@
     "confluence_score": "6/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-21T14:34:03.331933+00:00"
+    "generated_at": "2026-03-21T14:34:03.331933+00:00",
+    "mtf": {
+      "tf_15m_bull": false,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 40.4,
+      "tf_4h_rsi": 46.2,
+      "mtf_score": 0,
+      "mtf_details": {
+        "15m": "BEAR",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BULL"
+      },
+      "mtf_score_with_daily": 1
+    }
   },
   "BAJFINANCE.NS": {
     "symbol": "BAJFINANCE.NS",
@@ -7524,7 +8949,22 @@
     "confluence_score": "4/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-21T14:34:06.511947+00:00"
+    "generated_at": "2026-03-21T14:34:06.511947+00:00",
+    "mtf": {
+      "tf_15m_bull": true,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 20.0,
+      "tf_4h_rsi": 28.7,
+      "mtf_score": 1,
+      "mtf_details": {
+        "15m": "BULL",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BULL"
+      },
+      "mtf_score_with_daily": 2
+    }
   },
   "KOTAKBANK.NS": {
     "symbol": "KOTAKBANK.NS",
@@ -7598,7 +9038,22 @@
     "confluence_score": "3/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-21T14:34:10.661541+00:00"
+    "generated_at": "2026-03-21T14:34:10.661541+00:00",
+    "mtf": {
+      "tf_15m_bull": false,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 34.3,
+      "tf_4h_rsi": 30.2,
+      "mtf_score": 0,
+      "mtf_details": {
+        "15m": "BEAR",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BEAR"
+      },
+      "mtf_score_with_daily": 0
+    }
   },
   "TECHM.NS": {
     "symbol": "TECHM.NS",
@@ -7672,7 +9127,22 @@
     "confluence_score": "4/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-21T14:34:15.123003+00:00"
+    "generated_at": "2026-03-21T14:34:15.123003+00:00",
+    "mtf": {
+      "tf_15m_bull": true,
+      "tf_1h_bull": true,
+      "tf_4h_bull": true,
+      "tf_1h_rsi": 49.8,
+      "tf_4h_rsi": 60.8,
+      "mtf_score": 3,
+      "mtf_details": {
+        "15m": "BULL",
+        "1h": "BULL",
+        "4h": "BULL",
+        "1d": "BULL"
+      },
+      "mtf_score_with_daily": 4
+    }
   },
   "AXISBANK.NS": {
     "symbol": "AXISBANK.NS",
@@ -7746,7 +9216,22 @@
     "confluence_score": "5/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-21T14:34:19.422590+00:00"
+    "generated_at": "2026-03-21T14:34:19.422590+00:00",
+    "mtf": {
+      "tf_15m_bull": false,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 27.4,
+      "tf_4h_rsi": 34.5,
+      "mtf_score": 0,
+      "mtf_details": {
+        "15m": "BEAR",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BEAR"
+      },
+      "mtf_score_with_daily": 0
+    }
   },
   "SBIN.NS": {
     "symbol": "SBIN.NS",
@@ -7820,7 +9305,22 @@
     "confluence_score": "7/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-21T14:34:23.664919+00:00"
+    "generated_at": "2026-03-21T14:34:23.664919+00:00",
+    "mtf": {
+      "tf_15m_bull": false,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 43.3,
+      "tf_4h_rsi": 39.5,
+      "mtf_score": 0,
+      "mtf_details": {
+        "15m": "BEAR",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BULL"
+      },
+      "mtf_score_with_daily": 1
+    }
   },
   "ADANIENT.NS": {
     "symbol": "ADANIENT.NS",
@@ -7894,7 +9394,22 @@
     "confluence_score": "3/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-21T14:34:27.221032+00:00"
+    "generated_at": "2026-03-21T14:34:27.221032+00:00",
+    "mtf": {
+      "tf_15m_bull": false,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 22.0,
+      "tf_4h_rsi": 41.2,
+      "mtf_score": 0,
+      "mtf_details": {
+        "15m": "BEAR",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BULL"
+      },
+      "mtf_score_with_daily": 1
+    }
   },
   "ADANIPORTS.NS": {
     "symbol": "ADANIPORTS.NS",
@@ -7968,7 +9483,22 @@
     "confluence_score": "6/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-21T14:34:30.825810+00:00"
+    "generated_at": "2026-03-21T14:34:30.825810+00:00",
+    "mtf": {
+      "tf_15m_bull": true,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 33.7,
+      "tf_4h_rsi": 38.3,
+      "mtf_score": 1,
+      "mtf_details": {
+        "15m": "BULL",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BEAR"
+      },
+      "mtf_score_with_daily": 1
+    }
   },
   "ADANIGREEN.NS": {
     "symbol": "ADANIGREEN.NS",
@@ -8042,7 +9572,22 @@
     "confluence_score": "4/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-21T14:34:33.691049+00:00"
+    "generated_at": "2026-03-21T14:34:33.691049+00:00",
+    "mtf": {
+      "tf_15m_bull": true,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 38.0,
+      "tf_4h_rsi": 55.8,
+      "mtf_score": 1,
+      "mtf_details": {
+        "15m": "BULL",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BEAR"
+      },
+      "mtf_score_with_daily": 1
+    }
   },
   "MARUTI.NS": {
     "symbol": "MARUTI.NS",
@@ -8116,7 +9661,22 @@
     "confluence_score": "5/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-21T14:34:44.485434+00:00"
+    "generated_at": "2026-03-21T14:34:44.485434+00:00",
+    "mtf": {
+      "tf_15m_bull": false,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 19.5,
+      "tf_4h_rsi": 28.6,
+      "mtf_score": 0,
+      "mtf_details": {
+        "15m": "BEAR",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BULL"
+      },
+      "mtf_score_with_daily": 1
+    }
   },
   "SUNPHARMA.NS": {
     "symbol": "SUNPHARMA.NS",
@@ -8190,7 +9750,22 @@
     "confluence_score": "5/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-21T14:34:48.404978+00:00"
+    "generated_at": "2026-03-21T14:34:48.404978+00:00",
+    "mtf": {
+      "tf_15m_bull": true,
+      "tf_1h_bull": true,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 49.4,
+      "tf_4h_rsi": 33.3,
+      "mtf_score": 2,
+      "mtf_details": {
+        "15m": "BULL",
+        "1h": "BULL",
+        "4h": "BEAR",
+        "1d": "BEAR"
+      },
+      "mtf_score_with_daily": 2
+    }
   },
   "DRREDDY.NS": {
     "symbol": "DRREDDY.NS",
@@ -8264,7 +9839,22 @@
     "confluence_score": "5/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-21T14:34:52.899078+00:00"
+    "generated_at": "2026-03-21T14:34:52.899078+00:00",
+    "mtf": {
+      "tf_15m_bull": false,
+      "tf_1h_bull": true,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 50.7,
+      "tf_4h_rsi": 39.8,
+      "mtf_score": 1,
+      "mtf_details": {
+        "15m": "BEAR",
+        "1h": "BULL",
+        "4h": "BEAR",
+        "1d": "BEAR"
+      },
+      "mtf_score_with_daily": 1
+    }
   },
   "CIPLA.NS": {
     "symbol": "CIPLA.NS",
@@ -8338,7 +9928,22 @@
     "confluence_score": "3/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-21T14:35:15.444913+00:00"
+    "generated_at": "2026-03-21T14:35:15.444913+00:00",
+    "mtf": {
+      "tf_15m_bull": true,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 44.9,
+      "tf_4h_rsi": 21.6,
+      "mtf_score": 1,
+      "mtf_details": {
+        "15m": "BULL",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BULL"
+      },
+      "mtf_score_with_daily": 2
+    }
   },
   "ONGC.NS": {
     "symbol": "ONGC.NS",
@@ -8412,7 +10017,22 @@
     "confluence_score": "6/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-21T14:35:31.507056+00:00"
+    "generated_at": "2026-03-21T14:35:31.507056+00:00",
+    "mtf": {
+      "tf_15m_bull": false,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 51.9,
+      "tf_4h_rsi": 41.1,
+      "mtf_score": 0,
+      "mtf_details": {
+        "15m": "BEAR",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BEAR"
+      },
+      "mtf_score_with_daily": 0
+    }
   },
   "COALINDIA.NS": {
     "symbol": "COALINDIA.NS",
@@ -8486,7 +10106,22 @@
     "confluence_score": "6/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-21T14:35:35.484849+00:00"
+    "generated_at": "2026-03-21T14:35:35.484849+00:00",
+    "mtf": {
+      "tf_15m_bull": false,
+      "tf_1h_bull": true,
+      "tf_4h_bull": true,
+      "tf_1h_rsi": 71.3,
+      "tf_4h_rsi": 64.5,
+      "mtf_score": 2,
+      "mtf_details": {
+        "15m": "BEAR",
+        "1h": "BULL",
+        "4h": "BULL",
+        "1d": "BEAR"
+      },
+      "mtf_score_with_daily": 2
+    }
   },
   "TATASTEEL.NS": {
     "symbol": "TATASTEEL.NS",
@@ -8560,7 +10195,22 @@
     "confluence_score": "7/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-21T14:35:42.800863+00:00"
+    "generated_at": "2026-03-21T14:35:42.800863+00:00",
+    "mtf": {
+      "tf_15m_bull": true,
+      "tf_1h_bull": true,
+      "tf_4h_bull": true,
+      "tf_1h_rsi": 54.1,
+      "tf_4h_rsi": 52.7,
+      "mtf_score": 3,
+      "mtf_details": {
+        "15m": "BULL",
+        "1h": "BULL",
+        "4h": "BULL",
+        "1d": "BULL"
+      },
+      "mtf_score_with_daily": 4
+    }
   },
   "JSWSTEEL.NS": {
     "symbol": "JSWSTEEL.NS",
@@ -8634,7 +10284,22 @@
     "confluence_score": "6/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-21T14:35:48.593584+00:00"
+    "generated_at": "2026-03-21T14:35:48.593584+00:00",
+    "mtf": {
+      "tf_15m_bull": false,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 43.9,
+      "tf_4h_rsi": 48.3,
+      "mtf_score": 0,
+      "mtf_details": {
+        "15m": "BEAR",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BULL"
+      },
+      "mtf_score_with_daily": 1
+    }
   },
   "HINDUNILVR.NS": {
     "symbol": "HINDUNILVR.NS",
@@ -8708,7 +10373,22 @@
     "confluence_score": "4/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-21T14:35:57.641908+00:00"
+    "generated_at": "2026-03-21T14:35:57.641908+00:00",
+    "mtf": {
+      "tf_15m_bull": true,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 33.6,
+      "tf_4h_rsi": 35.4,
+      "mtf_score": 1,
+      "mtf_details": {
+        "15m": "BULL",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BEAR"
+      },
+      "mtf_score_with_daily": 1
+    }
   },
   "ITC.NS": {
     "symbol": "ITC.NS",
@@ -8782,7 +10462,22 @@
     "confluence_score": "4/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-21T14:36:05.061757+00:00"
+    "generated_at": "2026-03-21T14:36:05.061757+00:00",
+    "mtf": {
+      "tf_15m_bull": false,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 41.7,
+      "tf_4h_rsi": 38.4,
+      "mtf_score": 0,
+      "mtf_details": {
+        "15m": "BEAR",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BEAR"
+      },
+      "mtf_score_with_daily": 0
+    }
   },
   "ASIANPAINT.NS": {
     "symbol": "ASIANPAINT.NS",
@@ -8856,7 +10551,22 @@
     "confluence_score": "4/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-21T14:36:10.984929+00:00"
+    "generated_at": "2026-03-21T14:36:10.984929+00:00",
+    "mtf": {
+      "tf_15m_bull": true,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 29.4,
+      "tf_4h_rsi": 43.9,
+      "mtf_score": 1,
+      "mtf_details": {
+        "15m": "BULL",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BEAR"
+      },
+      "mtf_score_with_daily": 1
+    }
   },
   "TITAN.NS": {
     "symbol": "TITAN.NS",
@@ -8930,7 +10640,22 @@
     "confluence_score": "7/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-21T14:36:16.364381+00:00"
+    "generated_at": "2026-03-21T14:36:16.364381+00:00",
+    "mtf": {
+      "tf_15m_bull": false,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 43.2,
+      "tf_4h_rsi": 46.1,
+      "mtf_score": 0,
+      "mtf_details": {
+        "15m": "BEAR",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BEAR"
+      },
+      "mtf_score_with_daily": 0
+    }
   },
   "LT.NS": {
     "symbol": "LT.NS",
@@ -9004,7 +10729,22 @@
     "confluence_score": "4/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-21T14:36:22.890372+00:00"
+    "generated_at": "2026-03-21T14:36:22.890372+00:00",
+    "mtf": {
+      "tf_15m_bull": true,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 22.6,
+      "tf_4h_rsi": 23.8,
+      "mtf_score": 1,
+      "mtf_details": {
+        "15m": "BULL",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BULL"
+      },
+      "mtf_score_with_daily": 2
+    }
   },
   "POWERGRID.NS": {
     "symbol": "POWERGRID.NS",
@@ -9078,7 +10818,22 @@
     "confluence_score": "5/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-21T14:36:26.266934+00:00"
+    "generated_at": "2026-03-21T14:36:26.266934+00:00",
+    "mtf": {
+      "tf_15m_bull": false,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 46.2,
+      "tf_4h_rsi": 48.8,
+      "mtf_score": 0,
+      "mtf_details": {
+        "15m": "BEAR",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BEAR"
+      },
+      "mtf_score_with_daily": 0
+    }
   },
   "BAJAJ-AUTO.NS": {
     "symbol": "BAJAJ-AUTO.NS",
@@ -9152,7 +10907,22 @@
     "confluence_score": "6/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-21T16:03:14.958209+00:00"
+    "generated_at": "2026-03-21T16:03:14.958209+00:00",
+    "mtf": {
+      "tf_15m_bull": true,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 34.5,
+      "tf_4h_rsi": 40.8,
+      "mtf_score": 1,
+      "mtf_details": {
+        "15m": "BULL",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BEAR"
+      },
+      "mtf_score_with_daily": 1
+    }
   },
   "NTPC.NS": {
     "symbol": "NTPC.NS",
@@ -9226,7 +10996,22 @@
     "confluence_score": "5/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-21T22:11:57.559067+00:00"
+    "generated_at": "2026-03-21T22:11:57.559067+00:00",
+    "mtf": {
+      "tf_15m_bull": true,
+      "tf_1h_bull": true,
+      "tf_4h_bull": true,
+      "tf_1h_rsi": 55.8,
+      "tf_4h_rsi": 51.0,
+      "mtf_score": 3,
+      "mtf_details": {
+        "15m": "BULL",
+        "1h": "BULL",
+        "4h": "BULL",
+        "1d": "BEAR"
+      },
+      "mtf_score_with_daily": 3
+    }
   },
   "GAIL.NS": {
     "symbol": "GAIL.NS",
@@ -9300,7 +11085,22 @@
     "confluence_score": "4/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-21T22:12:00.153349+00:00"
+    "generated_at": "2026-03-21T22:12:00.153349+00:00",
+    "mtf": {
+      "tf_15m_bull": false,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 22.8,
+      "tf_4h_rsi": 41.3,
+      "mtf_score": 0,
+      "mtf_details": {
+        "15m": "BEAR",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BULL"
+      },
+      "mtf_score_with_daily": 1
+    }
   },
   "IOC.NS": {
     "symbol": "IOC.NS",
@@ -9374,7 +11174,22 @@
     "confluence_score": "4/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-21T22:12:02.814624+00:00"
+    "generated_at": "2026-03-21T22:12:02.814624+00:00",
+    "mtf": {
+      "tf_15m_bull": false,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 37.3,
+      "tf_4h_rsi": 19.1,
+      "mtf_score": 0,
+      "mtf_details": {
+        "15m": "BEAR",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BEAR"
+      },
+      "mtf_score_with_daily": 0
+    }
   },
   "BPCL.NS": {
     "symbol": "BPCL.NS",
@@ -9448,7 +11263,22 @@
     "confluence_score": "4/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-21T22:12:08.772569+00:00"
+    "generated_at": "2026-03-21T22:12:08.772569+00:00",
+    "mtf": {
+      "tf_15m_bull": true,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 25.9,
+      "tf_4h_rsi": 18.3,
+      "mtf_score": 1,
+      "mtf_details": {
+        "15m": "BULL",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BULL"
+      },
+      "mtf_score_with_daily": 2
+    }
   },
   "HINDPETRO.NS": {
     "symbol": "HINDPETRO.NS",
@@ -9522,7 +11352,22 @@
     "confluence_score": "4/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-21T22:12:13.195263+00:00"
+    "generated_at": "2026-03-21T22:12:13.195263+00:00",
+    "mtf": {
+      "tf_15m_bull": true,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 41.0,
+      "tf_4h_rsi": 20.0,
+      "mtf_score": 1,
+      "mtf_details": {
+        "15m": "BULL",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BEAR"
+      },
+      "mtf_score_with_daily": 1
+    }
   },
   "SAIL.NS": {
     "symbol": "SAIL.NS",
@@ -9596,7 +11441,22 @@
     "confluence_score": "7/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-21T22:12:18.130971+00:00"
+    "generated_at": "2026-03-21T22:12:18.130971+00:00",
+    "mtf": {
+      "tf_15m_bull": false,
+      "tf_1h_bull": true,
+      "tf_4h_bull": true,
+      "tf_1h_rsi": 56.3,
+      "tf_4h_rsi": 52.7,
+      "mtf_score": 2,
+      "mtf_details": {
+        "15m": "BEAR",
+        "1h": "BULL",
+        "4h": "BULL",
+        "1d": "BEAR"
+      },
+      "mtf_score_with_daily": 2
+    }
   },
   "NMDC.NS": {
     "symbol": "NMDC.NS",
@@ -9670,7 +11530,22 @@
     "confluence_score": "6/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-21T22:12:22.481190+00:00"
+    "generated_at": "2026-03-21T22:12:22.481190+00:00",
+    "mtf": {
+      "tf_15m_bull": false,
+      "tf_1h_bull": true,
+      "tf_4h_bull": true,
+      "tf_1h_rsi": 51.9,
+      "tf_4h_rsi": 50.2,
+      "mtf_score": 2,
+      "mtf_details": {
+        "15m": "BEAR",
+        "1h": "BULL",
+        "4h": "BULL",
+        "1d": "BEAR"
+      },
+      "mtf_score_with_daily": 2
+    }
   },
   "BHEL.NS": {
     "symbol": "BHEL.NS",
@@ -9744,7 +11619,22 @@
     "confluence_score": "6/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-21T22:12:27.061616+00:00"
+    "generated_at": "2026-03-21T22:12:27.061616+00:00",
+    "mtf": {
+      "tf_15m_bull": false,
+      "tf_1h_bull": true,
+      "tf_4h_bull": true,
+      "tf_1h_rsi": 52.3,
+      "tf_4h_rsi": 54.7,
+      "mtf_score": 2,
+      "mtf_details": {
+        "15m": "BEAR",
+        "1h": "BULL",
+        "4h": "BULL",
+        "1d": "BEAR"
+      },
+      "mtf_score_with_daily": 2
+    }
   },
   "CONCOR.NS": {
     "symbol": "CONCOR.NS",
@@ -9818,7 +11708,22 @@
     "confluence_score": "4/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-21T22:12:31.667570+00:00"
+    "generated_at": "2026-03-21T22:12:31.667570+00:00",
+    "mtf": {
+      "tf_15m_bull": false,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 34.2,
+      "tf_4h_rsi": 32.8,
+      "mtf_score": 0,
+      "mtf_details": {
+        "15m": "BEAR",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BULL"
+      },
+      "mtf_score_with_daily": 1
+    }
   },
   "TATAPOWER.NS": {
     "symbol": "TATAPOWER.NS",
@@ -9892,7 +11797,22 @@
     "confluence_score": "6/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-21T22:12:36.765640+00:00"
+    "generated_at": "2026-03-21T22:12:36.765640+00:00",
+    "mtf": {
+      "tf_15m_bull": false,
+      "tf_1h_bull": false,
+      "tf_4h_bull": true,
+      "tf_1h_rsi": 53.6,
+      "tf_4h_rsi": 64.0,
+      "mtf_score": 1,
+      "mtf_details": {
+        "15m": "BEAR",
+        "1h": "BEAR",
+        "4h": "BULL",
+        "1d": "BEAR"
+      },
+      "mtf_score_with_daily": 1
+    }
   },
   "BAJAJFINSV.NS": {
     "symbol": "BAJAJFINSV.NS",
@@ -9966,7 +11886,22 @@
     "confluence_score": "4/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-21T22:12:41.527478+00:00"
+    "generated_at": "2026-03-21T22:12:41.527478+00:00",
+    "mtf": {
+      "tf_15m_bull": false,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 21.7,
+      "tf_4h_rsi": 28.0,
+      "mtf_score": 0,
+      "mtf_details": {
+        "15m": "BEAR",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BULL"
+      },
+      "mtf_score_with_daily": 1
+    }
   },
   "MUTHOOTFIN.NS": {
     "symbol": "MUTHOOTFIN.NS",
@@ -10040,7 +11975,22 @@
     "confluence_score": "5/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-21T22:12:46.613278+00:00"
+    "generated_at": "2026-03-21T22:12:46.613278+00:00",
+    "mtf": {
+      "tf_15m_bull": false,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 20.9,
+      "tf_4h_rsi": 65.3,
+      "mtf_score": 0,
+      "mtf_details": {
+        "15m": "BEAR",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BULL"
+      },
+      "mtf_score_with_daily": 1
+    }
   },
   "CHOLAFIN.NS": {
     "symbol": "CHOLAFIN.NS",
@@ -10114,7 +12064,22 @@
     "confluence_score": "4/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-21T22:12:49.288594+00:00"
+    "generated_at": "2026-03-21T22:12:49.288594+00:00",
+    "mtf": {
+      "tf_15m_bull": false,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 15.4,
+      "tf_4h_rsi": 18.5,
+      "mtf_score": 0,
+      "mtf_details": {
+        "15m": "BEAR",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BULL"
+      },
+      "mtf_score_with_daily": 1
+    }
   },
   "SBILIFE.NS": {
     "symbol": "SBILIFE.NS",
@@ -10188,7 +12153,22 @@
     "confluence_score": "5/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-21T22:12:51.840587+00:00"
+    "generated_at": "2026-03-21T22:12:51.840587+00:00",
+    "mtf": {
+      "tf_15m_bull": false,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 13.9,
+      "tf_4h_rsi": 40.4,
+      "mtf_score": 0,
+      "mtf_details": {
+        "15m": "BEAR",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BEAR"
+      },
+      "mtf_score_with_daily": 0
+    }
   },
   "HDFCLIFE.NS": {
     "symbol": "HDFCLIFE.NS",
@@ -10262,7 +12242,22 @@
     "confluence_score": "3/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-21T22:12:54.435971+00:00"
+    "generated_at": "2026-03-21T22:12:54.435971+00:00",
+    "mtf": {
+      "tf_15m_bull": true,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 25.4,
+      "tf_4h_rsi": 32.7,
+      "mtf_score": 1,
+      "mtf_details": {
+        "15m": "BULL",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BEAR"
+      },
+      "mtf_score_with_daily": 1
+    }
   },
   "ICICIGI.NS": {
     "symbol": "ICICIGI.NS",
@@ -10336,7 +12331,22 @@
     "confluence_score": "4/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-21T22:12:56.980560+00:00"
+    "generated_at": "2026-03-21T22:12:56.980560+00:00",
+    "mtf": {
+      "tf_15m_bull": false,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 26.5,
+      "tf_4h_rsi": 29.1,
+      "mtf_score": 0,
+      "mtf_details": {
+        "15m": "BEAR",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BULL"
+      },
+      "mtf_score_with_daily": 1
+    }
   },
   "LICI.NS": {
     "symbol": "LICI.NS",
@@ -10410,7 +12420,22 @@
     "confluence_score": "5/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-21T22:13:03.033745+00:00"
+    "generated_at": "2026-03-21T22:13:03.033745+00:00",
+    "mtf": {
+      "tf_15m_bull": true,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 36.8,
+      "tf_4h_rsi": 34.5,
+      "mtf_score": 1,
+      "mtf_details": {
+        "15m": "BULL",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BEAR"
+      },
+      "mtf_score_with_daily": 1
+    }
   },
   "INDUSINDBK.NS": {
     "symbol": "INDUSINDBK.NS",
@@ -10484,7 +12509,22 @@
     "confluence_score": "6/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-21T22:13:07.623966+00:00"
+    "generated_at": "2026-03-21T22:13:07.623966+00:00",
+    "mtf": {
+      "tf_15m_bull": false,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 33.9,
+      "tf_4h_rsi": 31.9,
+      "mtf_score": 0,
+      "mtf_details": {
+        "15m": "BEAR",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BEAR"
+      },
+      "mtf_score_with_daily": 0
+    }
   },
   "BANKBARODA.NS": {
     "symbol": "BANKBARODA.NS",
@@ -10558,7 +12598,22 @@
     "confluence_score": "4/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-21T22:13:12.102846+00:00"
+    "generated_at": "2026-03-21T22:13:12.102846+00:00",
+    "mtf": {
+      "tf_15m_bull": true,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 44.3,
+      "tf_4h_rsi": 38.9,
+      "mtf_score": 1,
+      "mtf_details": {
+        "15m": "BULL",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BULL"
+      },
+      "mtf_score_with_daily": 2
+    }
   },
   "PNB.NS": {
     "symbol": "PNB.NS",
@@ -10632,7 +12687,22 @@
     "confluence_score": "4/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-21T22:13:16.411139+00:00"
+    "generated_at": "2026-03-21T22:13:16.411139+00:00",
+    "mtf": {
+      "tf_15m_bull": false,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 42.1,
+      "tf_4h_rsi": 38.0,
+      "mtf_score": 0,
+      "mtf_details": {
+        "15m": "BEAR",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BULL"
+      },
+      "mtf_score_with_daily": 1
+    }
   },
   "CANBK.NS": {
     "symbol": "CANBK.NS",
@@ -10706,7 +12776,22 @@
     "confluence_score": "6/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-21T22:13:21.455641+00:00"
+    "generated_at": "2026-03-21T22:13:21.455641+00:00",
+    "mtf": {
+      "tf_15m_bull": false,
+      "tf_1h_bull": true,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 46.8,
+      "tf_4h_rsi": 44.4,
+      "mtf_score": 1,
+      "mtf_details": {
+        "15m": "BEAR",
+        "1h": "BULL",
+        "4h": "BEAR",
+        "1d": "BULL"
+      },
+      "mtf_score_with_daily": 2
+    }
   },
   "UNIONBANK.NS": {
     "symbol": "UNIONBANK.NS",
@@ -10780,7 +12865,22 @@
     "confluence_score": "7/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-21T22:13:26.146276+00:00"
+    "generated_at": "2026-03-21T22:13:26.146276+00:00",
+    "mtf": {
+      "tf_15m_bull": false,
+      "tf_1h_bull": true,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 47.1,
+      "tf_4h_rsi": 43.7,
+      "mtf_score": 1,
+      "mtf_details": {
+        "15m": "BEAR",
+        "1h": "BULL",
+        "4h": "BEAR",
+        "1d": "BEAR"
+      },
+      "mtf_score_with_daily": 1
+    }
   },
   "ABCAPITAL.NS": {
     "symbol": "ABCAPITAL.NS",
@@ -10854,7 +12954,22 @@
     "confluence_score": "5/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-21T22:13:31.434450+00:00"
+    "generated_at": "2026-03-21T22:13:31.434450+00:00",
+    "mtf": {
+      "tf_15m_bull": false,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 20.5,
+      "tf_4h_rsi": 38.2,
+      "mtf_score": 0,
+      "mtf_details": {
+        "15m": "BEAR",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BEAR"
+      },
+      "mtf_score_with_daily": 0
+    }
   },
   "DIVISLAB.NS": {
     "symbol": "DIVISLAB.NS",
@@ -10928,7 +13043,22 @@
     "confluence_score": "7/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-21T22:13:34.618610+00:00"
+    "generated_at": "2026-03-21T22:13:34.618610+00:00",
+    "mtf": {
+      "tf_15m_bull": false,
+      "tf_1h_bull": true,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 45.3,
+      "tf_4h_rsi": 35.5,
+      "mtf_score": 1,
+      "mtf_details": {
+        "15m": "BEAR",
+        "1h": "BULL",
+        "4h": "BEAR",
+        "1d": "BULL"
+      },
+      "mtf_score_with_daily": 2
+    }
   },
   "APOLLOHOSP.NS": {
     "symbol": "APOLLOHOSP.NS",
@@ -11002,7 +13132,22 @@
     "confluence_score": "6/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-21T22:13:37.368062+00:00"
+    "generated_at": "2026-03-21T22:13:37.368062+00:00",
+    "mtf": {
+      "tf_15m_bull": false,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 37.3,
+      "tf_4h_rsi": 29.6,
+      "mtf_score": 0,
+      "mtf_details": {
+        "15m": "BEAR",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BULL"
+      },
+      "mtf_score_with_daily": 1
+    }
   },
   "TORNTPHARM.NS": {
     "symbol": "TORNTPHARM.NS",
@@ -11076,7 +13221,22 @@
     "confluence_score": "5/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-21T22:13:40.021406+00:00"
+    "generated_at": "2026-03-21T22:13:40.021406+00:00",
+    "mtf": {
+      "tf_15m_bull": false,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 45.0,
+      "tf_4h_rsi": 32.6,
+      "mtf_score": 0,
+      "mtf_details": {
+        "15m": "BEAR",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BULL"
+      },
+      "mtf_score_with_daily": 1
+    }
   },
   "AUROPHARMA.NS": {
     "symbol": "AUROPHARMA.NS",
@@ -11150,7 +13310,22 @@
     "confluence_score": "4/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-21T22:13:42.483516+00:00"
+    "generated_at": "2026-03-21T22:13:42.483516+00:00",
+    "mtf": {
+      "tf_15m_bull": false,
+      "tf_1h_bull": true,
+      "tf_4h_bull": true,
+      "tf_1h_rsi": 63.6,
+      "tf_4h_rsi": 45.5,
+      "mtf_score": 2,
+      "mtf_details": {
+        "15m": "BEAR",
+        "1h": "BULL",
+        "4h": "BULL",
+        "1d": "BULL"
+      },
+      "mtf_score_with_daily": 3
+    }
   },
   "LUPIN.NS": {
     "symbol": "LUPIN.NS",
@@ -11224,7 +13399,22 @@
     "confluence_score": "5/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-21T22:13:47.492962+00:00"
+    "generated_at": "2026-03-21T22:13:47.492962+00:00",
+    "mtf": {
+      "tf_15m_bull": false,
+      "tf_1h_bull": true,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 55.5,
+      "tf_4h_rsi": 44.7,
+      "mtf_score": 1,
+      "mtf_details": {
+        "15m": "BEAR",
+        "1h": "BULL",
+        "4h": "BEAR",
+        "1d": "BEAR"
+      },
+      "mtf_score_with_daily": 1
+    }
   },
   "BIOCON.NS": {
     "symbol": "BIOCON.NS",
@@ -11298,7 +13488,22 @@
     "confluence_score": "6/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-21T22:13:51.867254+00:00"
+    "generated_at": "2026-03-21T22:13:51.867254+00:00",
+    "mtf": {
+      "tf_15m_bull": true,
+      "tf_1h_bull": true,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 48.0,
+      "tf_4h_rsi": 39.7,
+      "mtf_score": 2,
+      "mtf_details": {
+        "15m": "BULL",
+        "1h": "BULL",
+        "4h": "BEAR",
+        "1d": "BEAR"
+      },
+      "mtf_score_with_daily": 2
+    }
   },
   "NESTLEIND.NS": {
     "symbol": "NESTLEIND.NS",
@@ -11372,7 +13577,22 @@
     "confluence_score": "4/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-21T22:13:56.378190+00:00"
+    "generated_at": "2026-03-21T22:13:56.378190+00:00",
+    "mtf": {
+      "tf_15m_bull": false,
+      "tf_1h_bull": true,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 45.5,
+      "tf_4h_rsi": 27.6,
+      "mtf_score": 1,
+      "mtf_details": {
+        "15m": "BEAR",
+        "1h": "BULL",
+        "4h": "BEAR",
+        "1d": "BEAR"
+      },
+      "mtf_score_with_daily": 1
+    }
   },
   "BRITANNIA.NS": {
     "symbol": "BRITANNIA.NS",
@@ -11446,7 +13666,22 @@
     "confluence_score": "6/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-21T22:14:00.780241+00:00"
+    "generated_at": "2026-03-21T22:14:00.780241+00:00",
+    "mtf": {
+      "tf_15m_bull": false,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 15.0,
+      "tf_4h_rsi": 23.6,
+      "mtf_score": 0,
+      "mtf_details": {
+        "15m": "BEAR",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BEAR"
+      },
+      "mtf_score_with_daily": 0
+    }
   },
   "TATACONSUM.NS": {
     "symbol": "TATACONSUM.NS",
@@ -11520,7 +13755,22 @@
     "confluence_score": "4/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-21T22:14:05.281742+00:00"
+    "generated_at": "2026-03-21T22:14:05.281742+00:00",
+    "mtf": {
+      "tf_15m_bull": true,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 28.1,
+      "tf_4h_rsi": 41.5,
+      "mtf_score": 1,
+      "mtf_details": {
+        "15m": "BULL",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BEAR"
+      },
+      "mtf_score_with_daily": 1
+    }
   },
   "MARICO.NS": {
     "symbol": "MARICO.NS",
@@ -11594,7 +13844,22 @@
     "confluence_score": "5/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-21T22:14:10.044550+00:00"
+    "generated_at": "2026-03-21T22:14:10.044550+00:00",
+    "mtf": {
+      "tf_15m_bull": false,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 36.8,
+      "tf_4h_rsi": 38.3,
+      "mtf_score": 0,
+      "mtf_details": {
+        "15m": "BEAR",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BULL"
+      },
+      "mtf_score_with_daily": 1
+    }
   },
   "DABUR.NS": {
     "symbol": "DABUR.NS",
@@ -11668,7 +13933,22 @@
     "confluence_score": "4/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-21T22:14:14.685228+00:00"
+    "generated_at": "2026-03-21T22:14:14.685228+00:00",
+    "mtf": {
+      "tf_15m_bull": true,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 17.8,
+      "tf_4h_rsi": 8.5,
+      "mtf_score": 1,
+      "mtf_details": {
+        "15m": "BULL",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BULL"
+      },
+      "mtf_score_with_daily": 2
+    }
   },
   "COLPAL.NS": {
     "symbol": "COLPAL.NS",
@@ -11742,7 +14022,22 @@
     "confluence_score": "3/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-21T22:14:17.864527+00:00"
+    "generated_at": "2026-03-21T22:14:17.864527+00:00",
+    "mtf": {
+      "tf_15m_bull": true,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 33.5,
+      "tf_4h_rsi": 21.3,
+      "mtf_score": 1,
+      "mtf_details": {
+        "15m": "BULL",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BEAR"
+      },
+      "mtf_score_with_daily": 1
+    }
   },
   "GODREJCP.NS": {
     "symbol": "GODREJCP.NS",
@@ -11816,7 +14111,22 @@
     "confluence_score": "3/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-21T22:14:20.328119+00:00"
+    "generated_at": "2026-03-21T22:14:20.328119+00:00",
+    "mtf": {
+      "tf_15m_bull": false,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 22.2,
+      "tf_4h_rsi": 26.4,
+      "mtf_score": 0,
+      "mtf_details": {
+        "15m": "BEAR",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BEAR"
+      },
+      "mtf_score_with_daily": 0
+    }
   },
   "TRENT.NS": {
     "symbol": "TRENT.NS",
@@ -11890,7 +14200,22 @@
     "confluence_score": "5/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-21T22:14:23.177432+00:00"
+    "generated_at": "2026-03-21T22:14:23.177432+00:00",
+    "mtf": {
+      "tf_15m_bull": false,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 38.8,
+      "tf_4h_rsi": 45.8,
+      "mtf_score": 0,
+      "mtf_details": {
+        "15m": "BEAR",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BEAR"
+      },
+      "mtf_score_with_daily": 0
+    }
   },
   "NAUKRI.NS": {
     "symbol": "NAUKRI.NS",
@@ -11964,7 +14289,22 @@
     "confluence_score": "5/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-21T22:14:26.292445+00:00"
+    "generated_at": "2026-03-21T22:14:26.292445+00:00",
+    "mtf": {
+      "tf_15m_bull": false,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 41.6,
+      "tf_4h_rsi": 56.7,
+      "mtf_score": 0,
+      "mtf_details": {
+        "15m": "BEAR",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BULL"
+      },
+      "mtf_score_with_daily": 1
+    }
   },
   "IRCTC.NS": {
     "symbol": "IRCTC.NS",
@@ -12038,7 +14378,22 @@
     "confluence_score": "3/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-21T22:14:30.329868+00:00"
+    "generated_at": "2026-03-21T22:14:30.329868+00:00",
+    "mtf": {
+      "tf_15m_bull": true,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 15.2,
+      "tf_4h_rsi": 41.2,
+      "mtf_score": 1,
+      "mtf_details": {
+        "15m": "BULL",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BULL"
+      },
+      "mtf_score_with_daily": 2
+    }
   },
   "PAYTM.NS": {
     "symbol": "PAYTM.NS",
@@ -12112,7 +14467,22 @@
     "confluence_score": "5/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-21T22:14:35.824770+00:00"
+    "generated_at": "2026-03-21T22:14:35.824770+00:00",
+    "mtf": {
+      "tf_15m_bull": false,
+      "tf_1h_bull": false,
+      "tf_4h_bull": true,
+      "tf_1h_rsi": 37.9,
+      "tf_4h_rsi": 57.6,
+      "mtf_score": 1,
+      "mtf_details": {
+        "15m": "BEAR",
+        "1h": "BEAR",
+        "4h": "BULL",
+        "1d": "BEAR"
+      },
+      "mtf_score_with_daily": 1
+    }
   },
   "NYKAA.NS": {
     "symbol": "NYKAA.NS",
@@ -12186,7 +14556,22 @@
     "confluence_score": "6/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-21T22:14:41.338852+00:00"
+    "generated_at": "2026-03-21T22:14:41.338852+00:00",
+    "mtf": {
+      "tf_15m_bull": false,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 37.5,
+      "tf_4h_rsi": 32.4,
+      "mtf_score": 0,
+      "mtf_details": {
+        "15m": "BEAR",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BULL"
+      },
+      "mtf_score_with_daily": 1
+    }
   },
   "POLICYBZR.NS": {
     "symbol": "POLICYBZR.NS",
@@ -12260,7 +14645,22 @@
     "confluence_score": "3/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-21T22:14:46.274919+00:00"
+    "generated_at": "2026-03-21T22:14:46.274919+00:00",
+    "mtf": {
+      "tf_15m_bull": false,
+      "tf_1h_bull": false,
+      "tf_4h_bull": true,
+      "tf_1h_rsi": 36.1,
+      "tf_4h_rsi": 58.8,
+      "mtf_score": 1,
+      "mtf_details": {
+        "15m": "BEAR",
+        "1h": "BEAR",
+        "4h": "BULL",
+        "1d": "BULL"
+      },
+      "mtf_score_with_daily": 2
+    }
   },
   "DMART.NS": {
     "symbol": "DMART.NS",
@@ -12334,7 +14734,22 @@
     "confluence_score": "4/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-21T22:14:51.692746+00:00"
+    "generated_at": "2026-03-21T22:14:51.692746+00:00",
+    "mtf": {
+      "tf_15m_bull": false,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 31.2,
+      "tf_4h_rsi": 30.8,
+      "mtf_score": 0,
+      "mtf_details": {
+        "15m": "BEAR",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BULL"
+      },
+      "mtf_score_with_daily": 1
+    }
   },
   "PIDILITIND.NS": {
     "symbol": "PIDILITIND.NS",
@@ -12408,7 +14823,22 @@
     "confluence_score": "5/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-21T22:14:56.153247+00:00"
+    "generated_at": "2026-03-21T22:14:56.153247+00:00",
+    "mtf": {
+      "tf_15m_bull": true,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 35.0,
+      "tf_4h_rsi": 35.5,
+      "mtf_score": 1,
+      "mtf_details": {
+        "15m": "BULL",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BEAR"
+      },
+      "mtf_score_with_daily": 1
+    }
   },
   "BERGEPAINT.NS": {
     "symbol": "BERGEPAINT.NS",
@@ -12482,7 +14912,22 @@
     "confluence_score": "5/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-21T22:15:01.215816+00:00"
+    "generated_at": "2026-03-21T22:15:01.215816+00:00",
+    "mtf": {
+      "tf_15m_bull": false,
+      "tf_1h_bull": true,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 53.4,
+      "tf_4h_rsi": 39.9,
+      "mtf_score": 1,
+      "mtf_details": {
+        "15m": "BEAR",
+        "1h": "BULL",
+        "4h": "BEAR",
+        "1d": "BEAR"
+      },
+      "mtf_score_with_daily": 1
+    }
   },
   "ULTRACEMCO.NS": {
     "symbol": "ULTRACEMCO.NS",
@@ -12556,7 +15001,22 @@
     "confluence_score": "5/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-21T22:15:05.931725+00:00"
+    "generated_at": "2026-03-21T22:15:05.931725+00:00",
+    "mtf": {
+      "tf_15m_bull": false,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 27.4,
+      "tf_4h_rsi": 34.7,
+      "mtf_score": 0,
+      "mtf_details": {
+        "15m": "BEAR",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BULL"
+      },
+      "mtf_score_with_daily": 1
+    }
   },
   "GRASIM.NS": {
     "symbol": "GRASIM.NS",
@@ -12630,7 +15090,22 @@
     "confluence_score": "5/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-21T22:15:10.787041+00:00"
+    "generated_at": "2026-03-21T22:15:10.787041+00:00",
+    "mtf": {
+      "tf_15m_bull": false,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 30.3,
+      "tf_4h_rsi": 39.9,
+      "mtf_score": 0,
+      "mtf_details": {
+        "15m": "BEAR",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BULL"
+      },
+      "mtf_score_with_daily": 1
+    }
   },
   "SHREECEM.NS": {
     "symbol": "SHREECEM.NS",
@@ -12704,7 +15179,22 @@
     "confluence_score": "4/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-21T22:15:13.569339+00:00"
+    "generated_at": "2026-03-21T22:15:13.569339+00:00",
+    "mtf": {
+      "tf_15m_bull": false,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 38.7,
+      "tf_4h_rsi": 46.1,
+      "mtf_score": 0,
+      "mtf_details": {
+        "15m": "BEAR",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BULL"
+      },
+      "mtf_score_with_daily": 1
+    }
   },
   "HAVELLS.NS": {
     "symbol": "HAVELLS.NS",
@@ -12778,7 +15268,22 @@
     "confluence_score": "3/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-21T22:15:16.136216+00:00"
+    "generated_at": "2026-03-21T22:15:16.136216+00:00",
+    "mtf": {
+      "tf_15m_bull": false,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 18.9,
+      "tf_4h_rsi": 28.8,
+      "mtf_score": 0,
+      "mtf_details": {
+        "15m": "BEAR",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BULL"
+      },
+      "mtf_score_with_daily": 1
+    }
   },
   "VOLTAS.NS": {
     "symbol": "VOLTAS.NS",
@@ -12852,7 +15357,22 @@
     "confluence_score": "4/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-21T22:15:18.657477+00:00"
+    "generated_at": "2026-03-21T22:15:18.657477+00:00",
+    "mtf": {
+      "tf_15m_bull": false,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 15.8,
+      "tf_4h_rsi": 20.4,
+      "mtf_score": 0,
+      "mtf_details": {
+        "15m": "BEAR",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BEAR"
+      },
+      "mtf_score_with_daily": 0
+    }
   },
   "SIEMENS.NS": {
     "symbol": "SIEMENS.NS",
@@ -12926,7 +15446,22 @@
     "confluence_score": "5/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-21T22:15:21.210061+00:00"
+    "generated_at": "2026-03-21T22:15:21.210061+00:00",
+    "mtf": {
+      "tf_15m_bull": false,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 36.5,
+      "tf_4h_rsi": 37.2,
+      "mtf_score": 0,
+      "mtf_details": {
+        "15m": "BEAR",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BEAR"
+      },
+      "mtf_score_with_daily": 0
+    }
   },
   "ABB.NS": {
     "symbol": "ABB.NS",
@@ -13000,7 +15535,22 @@
     "confluence_score": "3/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-21T22:15:26.457586+00:00"
+    "generated_at": "2026-03-21T22:15:26.457586+00:00",
+    "mtf": {
+      "tf_15m_bull": false,
+      "tf_1h_bull": true,
+      "tf_4h_bull": true,
+      "tf_1h_rsi": 45.3,
+      "tf_4h_rsi": 52.5,
+      "mtf_score": 2,
+      "mtf_details": {
+        "15m": "BEAR",
+        "1h": "BULL",
+        "4h": "BULL",
+        "1d": "BEAR"
+      },
+      "mtf_score_with_daily": 2
+    }
   },
   "CUMMINSIND.NS": {
     "symbol": "CUMMINSIND.NS",
@@ -13074,7 +15624,22 @@
     "confluence_score": "6/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-21T22:15:31.001828+00:00"
+    "generated_at": "2026-03-21T22:15:31.001828+00:00",
+    "mtf": {
+      "tf_15m_bull": true,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 37.9,
+      "tf_4h_rsi": 49.0,
+      "mtf_score": 1,
+      "mtf_details": {
+        "15m": "BULL",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BULL"
+      },
+      "mtf_score_with_daily": 2
+    }
   },
   "EICHERMOT.NS": {
     "symbol": "EICHERMOT.NS",
@@ -13148,7 +15713,22 @@
     "confluence_score": "6/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-21T22:15:36.828172+00:00"
+    "generated_at": "2026-03-21T22:15:36.828172+00:00",
+    "mtf": {
+      "tf_15m_bull": false,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 38.0,
+      "tf_4h_rsi": 34.6,
+      "mtf_score": 0,
+      "mtf_details": {
+        "15m": "BEAR",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BULL"
+      },
+      "mtf_score_with_daily": 1
+    }
   },
   "HEROMOTOCO.NS": {
     "symbol": "HEROMOTOCO.NS",
@@ -13222,7 +15802,22 @@
     "confluence_score": "6/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-21T22:15:41.383575+00:00"
+    "generated_at": "2026-03-21T22:15:41.383575+00:00",
+    "mtf": {
+      "tf_15m_bull": true,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 36.6,
+      "tf_4h_rsi": 35.3,
+      "mtf_score": 1,
+      "mtf_details": {
+        "15m": "BULL",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BEAR"
+      },
+      "mtf_score_with_daily": 1
+    }
   },
   "TVSMOTOR.NS": {
     "symbol": "TVSMOTOR.NS",
@@ -13296,7 +15891,22 @@
     "confluence_score": "5/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-21T22:15:45.808047+00:00"
+    "generated_at": "2026-03-21T22:15:45.808047+00:00",
+    "mtf": {
+      "tf_15m_bull": false,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 25.8,
+      "tf_4h_rsi": 40.7,
+      "mtf_score": 0,
+      "mtf_details": {
+        "15m": "BEAR",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BEAR"
+      },
+      "mtf_score_with_daily": 0
+    }
   },
   "ASHOKLEY.NS": {
     "symbol": "ASHOKLEY.NS",
@@ -13370,7 +15980,22 @@
     "confluence_score": "5/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-21T22:15:50.131076+00:00"
+    "generated_at": "2026-03-21T22:15:50.131076+00:00",
+    "mtf": {
+      "tf_15m_bull": true,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 23.2,
+      "tf_4h_rsi": 28.9,
+      "mtf_score": 1,
+      "mtf_details": {
+        "15m": "BULL",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BEAR"
+      },
+      "mtf_score_with_daily": 1
+    }
   },
   "ESCORTS.NS": {
     "symbol": "ESCORTS.NS",
@@ -13444,7 +16069,22 @@
     "confluence_score": "4/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-21T22:15:54.072860+00:00"
+    "generated_at": "2026-03-21T22:15:54.072860+00:00",
+    "mtf": {
+      "tf_15m_bull": false,
+      "tf_1h_bull": true,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 50.3,
+      "tf_4h_rsi": 30.0,
+      "mtf_score": 1,
+      "mtf_details": {
+        "15m": "BEAR",
+        "1h": "BULL",
+        "4h": "BEAR",
+        "1d": "BEAR"
+      },
+      "mtf_score_with_daily": 1
+    }
   },
   "BALKRISIND.NS": {
     "symbol": "BALKRISIND.NS",
@@ -13518,7 +16158,22 @@
     "confluence_score": "3/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-21T22:15:59.051148+00:00"
+    "generated_at": "2026-03-21T22:15:59.051148+00:00",
+    "mtf": {
+      "tf_15m_bull": true,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 20.7,
+      "tf_4h_rsi": 41.8,
+      "mtf_score": 1,
+      "mtf_details": {
+        "15m": "BULL",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BULL"
+      },
+      "mtf_score_with_daily": 2
+    }
   },
   "MRF.NS": {
     "symbol": "MRF.NS",
@@ -13592,7 +16247,22 @@
     "confluence_score": "4/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-21T22:16:04.107421+00:00"
+    "generated_at": "2026-03-21T22:16:04.107421+00:00",
+    "mtf": {
+      "tf_15m_bull": false,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 11.0,
+      "tf_4h_rsi": 28.8,
+      "mtf_score": 0,
+      "mtf_details": {
+        "15m": "BEAR",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BEAR"
+      },
+      "mtf_score_with_daily": 0
+    }
   },
   "HINDALCO.NS": {
     "symbol": "HINDALCO.NS",
@@ -13666,7 +16336,22 @@
     "confluence_score": "5/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-21T22:16:06.861942+00:00"
+    "generated_at": "2026-03-21T22:16:06.861942+00:00",
+    "mtf": {
+      "tf_15m_bull": false,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 7.1,
+      "tf_4h_rsi": 29.6,
+      "mtf_score": 0,
+      "mtf_details": {
+        "15m": "BEAR",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BULL"
+      },
+      "mtf_score_with_daily": 1
+    }
   },
   "VEDL.NS": {
     "symbol": "VEDL.NS",
@@ -13740,7 +16425,22 @@
     "confluence_score": "6/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-21T22:16:09.625610+00:00"
+    "generated_at": "2026-03-21T22:16:09.625610+00:00",
+    "mtf": {
+      "tf_15m_bull": false,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 41.2,
+      "tf_4h_rsi": 26.5,
+      "mtf_score": 0,
+      "mtf_details": {
+        "15m": "BEAR",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BULL"
+      },
+      "mtf_score_with_daily": 1
+    }
   },
   "MPHASIS.NS": {
     "symbol": "MPHASIS.NS",
@@ -13814,7 +16514,22 @@
     "confluence_score": "5/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-21T22:16:12.192218+00:00"
+    "generated_at": "2026-03-21T22:16:12.192218+00:00",
+    "mtf": {
+      "tf_15m_bull": true,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 39.6,
+      "tf_4h_rsi": 37.7,
+      "mtf_score": 1,
+      "mtf_details": {
+        "15m": "BULL",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BULL"
+      },
+      "mtf_score_with_daily": 2
+    }
   },
   "LTIM.NS": {
     "symbol": "LTIM.NS",
@@ -13888,7 +16603,22 @@
     "confluence_score": "5/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-21T22:16:14.784120+00:00"
+    "generated_at": "2026-03-21T22:16:14.784120+00:00",
+    "mtf": {
+      "tf_15m_bull": false,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 50.0,
+      "tf_4h_rsi": 13.8,
+      "mtf_score": 0,
+      "mtf_details": {
+        "15m": "BEAR",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BULL"
+      },
+      "mtf_score_with_daily": 1
+    }
   },
   "PERSISTENT.NS": {
     "symbol": "PERSISTENT.NS",
@@ -13962,7 +16692,22 @@
     "confluence_score": "4/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-21T22:16:19.777824+00:00"
+    "generated_at": "2026-03-21T22:16:19.777824+00:00",
+    "mtf": {
+      "tf_15m_bull": false,
+      "tf_1h_bull": true,
+      "tf_4h_bull": true,
+      "tf_1h_rsi": 55.7,
+      "tf_4h_rsi": 48.2,
+      "mtf_score": 2,
+      "mtf_details": {
+        "15m": "BEAR",
+        "1h": "BULL",
+        "4h": "BULL",
+        "1d": "BULL"
+      },
+      "mtf_score_with_daily": 3
+    }
   },
   "COFORGE.NS": {
     "symbol": "COFORGE.NS",
@@ -14036,7 +16781,22 @@
     "confluence_score": "4/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-21T22:16:24.254531+00:00"
+    "generated_at": "2026-03-21T22:16:24.254531+00:00",
+    "mtf": {
+      "tf_15m_bull": false,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 24.3,
+      "tf_4h_rsi": 44.4,
+      "mtf_score": 0,
+      "mtf_details": {
+        "15m": "BEAR",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BULL"
+      },
+      "mtf_score_with_daily": 1
+    }
   },
   "TATAELXSI.NS": {
     "symbol": "TATAELXSI.NS",
@@ -14110,7 +16870,22 @@
     "confluence_score": "5/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-21T22:16:28.443746+00:00"
+    "generated_at": "2026-03-21T22:16:28.443746+00:00",
+    "mtf": {
+      "tf_15m_bull": false,
+      "tf_1h_bull": true,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 53.4,
+      "tf_4h_rsi": 44.3,
+      "mtf_score": 1,
+      "mtf_details": {
+        "15m": "BEAR",
+        "1h": "BULL",
+        "4h": "BEAR",
+        "1d": "BEAR"
+      },
+      "mtf_score_with_daily": 1
+    }
   },
   "OFSS.NS": {
     "symbol": "OFSS.NS",
@@ -14184,6 +16959,21 @@
     "confluence_score": "6/9 bullish",
     "news": [],
     "reasoning": "",
-    "generated_at": "2026-03-21T22:16:33.739843+00:00"
+    "generated_at": "2026-03-21T22:16:33.739843+00:00",
+    "mtf": {
+      "tf_15m_bull": true,
+      "tf_1h_bull": true,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 48.8,
+      "tf_4h_rsi": 41.7,
+      "mtf_score": 2,
+      "mtf_details": {
+        "15m": "BULL",
+        "1h": "BULL",
+        "4h": "BEAR",
+        "1d": "BULL"
+      },
+      "mtf_score_with_daily": 3
+    }
   }
 }
