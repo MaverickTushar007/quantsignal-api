@@ -28,6 +28,7 @@ class NewsItem(BaseModel):
 
 
 class SignalResponse(BaseModel):
+    model_config = {"extra": "allow"}  # pass-through any extra fields like mtf
     symbol:          str
     display:         str
     name:            str
