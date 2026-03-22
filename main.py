@@ -20,6 +20,7 @@ from api.payments import router as payments_router
 from api.cron import router as cron_router
 from api.alerts import router as alerts_router
 from api.mcp import router as mcp_router
+from api.history import router as history_router
 try:
     from api.calendar import router as calendar_router
     _calendar_ok = True
@@ -58,6 +59,7 @@ app.include_router(payments_router, prefix="/api/v1")
 app.include_router(cron_router, prefix="/api/v1")
 app.include_router(alerts_router, prefix="/api/v1")
 app.include_router(mcp_router, prefix="/api/v1")
+app.include_router(history_router, prefix="/api/v1")
 if _calendar_ok:
     app.include_router(calendar_router, prefix="/api/v1")
 app.include_router(ws_router, prefix="/api/v1")
