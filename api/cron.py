@@ -168,7 +168,7 @@ def cache_status():
 
 @router.post("/cron/rebuild-mtf", tags=["cron"])
 def rebuild_mtf_cache():
-    """One-shot: attach MTF to all cached signals."""
+    """One-shot: attach MTF to all cached signals + flush Redis."""
     import json, time
     from pathlib import Path
     from data.mtf import fetch_mtf_features
@@ -183,6 +183,12 @@ def rebuild_mtf_cache():
             mtf["mtf_details"]["1d"] = "BULL" if daily_bull else "BEAR"
             sig["mtf"] = mtf
             updated += 1
+            # Also update Redis cache directly
+            try:
+                from core.cache import set_cached
+                set_cached(f"signal:{sym}", sig, ttl=3600)
+            except Exception:
+                pass
         except Exception:
             pass
         time.sleep(0.2)
