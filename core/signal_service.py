@@ -104,6 +104,16 @@ def generate_signal(symbol: str, include_reasoning: bool = True) -> Optional[dic
                 set_cached(redis_key, sig, ttl=3600)  # warm Redis
                 if not include_reasoning and "reasoning" in sig:
                     sig["reasoning"] = ""
+                # Attach MTF to cached signal
+                try:
+                    from data.mtf import fetch_mtf_features
+                    mtf = fetch_mtf_features(symbol)
+                    daily_bull = sig.get('direction') == 'BUY'
+                    mtf['mtf_score_with_daily'] = mtf['mtf_score'] + (1 if daily_bull else 0)
+                    mtf['mtf_details']['1d'] = 'BULL' if daily_bull else 'BEAR'
+                    sig['mtf'] = mtf
+                except Exception:
+                    pass
                 return sig
         except Exception:
             pass
@@ -177,6 +187,17 @@ def generate_signal(symbol: str, include_reasoning: bool = True) -> Optional[dic
     ))
     from core.cache import set_cached
     set_cached(f"signal:{symbol}", result, ttl=3600)
+    # Attach MTF alignment
+    try:
+        from data.mtf import fetch_mtf_features
+        mtf = fetch_mtf_features(symbol)
+        # Add daily direction to MTF score
+        daily_bull = result.get('direction') == 'BUY'
+        mtf['mtf_score_with_daily'] = mtf['mtf_score'] + (1 if daily_bull else 0)
+        mtf['mtf_details']['1d'] = 'BULL' if daily_bull else 'BEAR'
+        result['mtf'] = mtf
+    except Exception as e:
+        print(f"MTF error for {symbol}: {e}")
     # Attach earnings flag if applicable
     try:
         from data.earnings import get_earnings_flag
