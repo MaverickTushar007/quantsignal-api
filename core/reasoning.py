@@ -187,24 +187,70 @@ async def stream_chat(symbol: str, message: str, history: list):
         await asyncio.sleep(0.3)
         yield _yield_status("Synthesizing hedge fund grade analysis...")
 
+
+        # Detect if user wants simple or expert explanation
+        simple_triggers = ["good buy", "should i", "worth it", "what do you think",
+                          "explain", "simple", "layman", "beginner", "understand",
+                          "what is", "how does", "good stock", "invest", "safe"]
+        expert_triggers = ["rsi", "macd", "confluence", "probability", "atr", "kelly",
+                          "divergence", "fibonacci", "bollinger", "stochastic", "regime"]
+        msg_lower = message.lower()
+        is_simple = any(t in msg_lower for t in simple_triggers)
+        is_expert = any(t in msg_lower for t in expert_triggers)
+        # Default: simple for first message, expert if technical terms used
+        use_simple_mode = is_simple and not is_expert
+
+        # Fetch fundamentals for stock/ETF assets
+        fundamentals_context = ""
+        if sig_data and symbol != "GENERIC":
+            try:
+                from data.fundamentals import get_fundamentals, format_fundamentals_for_prompt
+                fund = get_fundamentals(symbol)
+                if fund:
+                    fundamentals_context = format_fundamentals_for_prompt(symbol, fund)
+            except Exception:
+                pass
+
         # 4. Build Hedge Fund Grade System Prompt
-        sys_prompt = (
-            "You are Perseus, an elite quantitative analyst at a top-tier hedge fund.\n"
-            "You have access to real-time web search. Use it to find current news, analyst reports, and market data.\n"
-            "\nYOUR ANALYTICAL FRAMEWORK:\n"
-            "1. TECHNICAL LAYER — ML signal confluence, momentum, mean reversion\n"
-            "2. MACRO LAYER — Fed policy, inflation regime, yield curve, risk-on/off\n"
-            "3. POSITIONING LAYER — funding rates, long/short ratios, options flow\n"
-            "4. NEWS CATALYST LAYER — recent events that could move price\n"
-            "5. RISK LAYER — ATR-based stops, Kelly sizing, expected value\n"
-            "\nSTRICT RULES:\n"
-            "- NEVER give basic definitions or generic advice\n"
-            "- ALWAYS cite specific numbers from the context provided\n"
-            "- ALWAYS identify the primary risk to the thesis\n"
-            "- RESPOND in clean Markdown with sections\n"
-            "- Think like you're writing a trade note for a senior PM\n"
-            "- Use web search to find the LATEST news and analyst views on the asset\n"
-        )
+        if use_simple_mode:
+            sys_prompt = (
+                "You are Perseus, a friendly financial advisor who explains markets in simple, plain English.\n"
+                "You are talking to someone who may not know financial jargon.\n"
+                "\nYOUR STYLE:\n"
+                "- Use simple analogies and everyday language\n"
+                "- Avoid jargon — if you must use a term, explain it in brackets\n"
+                "- Use emojis sparingly to make it friendly 📈\n"
+                "- Structure: What is happening → Is it good or bad → What should they know → Bottom line\n"
+                "- Always end with: 'Want me to go deeper into the technical analysis?'\n"
+                "\nSTRICT RULES:\n"
+                "- NEVER use terms like RSI, MACD, ATR, confluence without explaining them\n"
+                "- ALWAYS give a clear bottom line in 1-2 sentences\n"
+                "- Think like you're explaining to a smart friend who doesn't trade\n"
+                "- Still cite real numbers from the data provided\n"
+                "- NOT financial advice — always mention this briefly at the end\n"
+            )
+        else:
+            sys_prompt = (
+                "You are Perseus, an elite quantitative analyst at a top-tier hedge fund.\n"
+                "You have access to real-time web search. Use it to find current news, analyst reports, and market data.\n"
+                "\nYOUR ANALYTICAL FRAMEWORK:\n"
+                "1. TECHNICAL LAYER — ML signal confluence, momentum, mean reversion\n"
+                "2. MACRO LAYER — Fed policy, inflation regime, yield curve, risk-on/off\n"
+                "3. POSITIONING LAYER — funding rates, long/short ratios, options flow\n"
+                "4. FUNDAMENTAL LAYER — valuation multiples, growth, balance sheet health\n"
+                "5. NEWS CATALYST LAYER — recent events that could move price\n"
+                "6. RISK LAYER — ATR-based stops, Kelly sizing, expected value\n"
+                "\nSTRICT RULES:\n"
+                "- NEVER give basic definitions or generic advice\n"
+                "- ALWAYS cite specific numbers from the context provided\n"
+                "- ALWAYS identify the primary risk to the thesis\n"
+                "- RESPOND in clean Markdown with sections\n"
+                "- Think like you're writing a trade note for a senior PM\n"
+                "- Use web search to find the LATEST news and analyst views on the asset\n"
+            )
+
+        if fundamentals_context:
+            sys_prompt += f"\n## FUNDAMENTAL DATA\n{fundamentals_context}\n"
 
         if sig_data:
             sys_prompt += f"\n## LIVE SIGNAL DATA — {symbol}\n"
