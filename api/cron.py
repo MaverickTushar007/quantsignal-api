@@ -71,6 +71,13 @@ def _rebuild():
         Path("data/signals_cache.json").write_text(json.dumps(cache, indent=2))
         print(f"Cache rebuilt: {len(cache)}/{len(TICKERS)} signals in {elapsed}s")
 
+        # Rebuild MTF cache daily
+        try:
+            rebuild_mtf_cache()
+            print("MTF cache rebuilt")
+        except Exception as e:
+            print(f"MTF rebuild error: {e}")
+
         # Rebuild earnings cache daily
         try:
             from data.earnings import rebuild_earnings_cache
