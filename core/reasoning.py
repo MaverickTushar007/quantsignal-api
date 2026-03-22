@@ -228,6 +228,13 @@ async def stream_chat(symbol: str, message: str, history: list):
                 "- Think like you're explaining to a smart friend who doesn't trade\n"
                 "- Still cite real numbers from the data provided\n"
                 "- NOT financial advice — always mention this briefly at the end\n"
+                "\nAT THE END — always add a verdict block:\n"
+                "---\n"
+                "🤖 **PERSEUS VERDICT**\n"
+                "**Action:** [BUY / SELL / HOLD / WAIT]\n"
+                "**Conviction:** [HIGH/MEDIUM/LOW] — one sentence why\n"
+                "**Bottom line:** one plain English sentence\n"
+                "⚠️ Not financial advice.\n"
             )
         else:
             sys_prompt = (
@@ -247,6 +254,16 @@ async def stream_chat(symbol: str, message: str, history: list):
                 "- RESPOND in clean Markdown with sections\n"
                 "- Think like you're writing a trade note for a senior PM\n"
                 "- Use web search to find the LATEST news and analyst views on the asset\n"
+                "\nAT THE END — always finish with a verdict block:\n"
+                "---\n"
+                "🤖 **PERSEUS VERDICT**\n"
+                "**Action:** [BUY / SELL / HOLD / WAIT FOR CONFIRMATION]\n"
+                "**Conviction:** [HIGH/MEDIUM/LOW] — one line rationale\n"
+                "**Entry zone:** specific price or range\n"
+                "**Target:** specific price\n"
+                "**Stop:** specific price\n"
+                "**Primary risk:** one sentence\n"
+                "⚠️ Not financial advice. Position size per Kelly: {kelly}%\n"
             )
 
         if fundamentals_context:
