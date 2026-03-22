@@ -92,6 +92,18 @@ def generate_signal(symbol: str, include_reasoning: bool = True) -> Optional[dic
     if cached:
         if not include_reasoning and "reasoning" in cached:
             cached["reasoning"] = ""
+        # Attach MTF if missing from Redis cache
+        if "mtf" not in cached:
+            try:
+                from data.mtf import fetch_mtf_features
+                mtf = fetch_mtf_features(symbol)
+                daily_bull = cached.get("direction") == "BUY"
+                mtf["mtf_score_with_daily"] = mtf["mtf_score"] + (1 if daily_bull else 0)
+                mtf["mtf_details"]["1d"] = "BULL" if daily_bull else "BEAR"
+                cached["mtf"] = mtf
+                set_cached(redis_key, cached, ttl=3600)
+            except Exception:
+                pass
         return cached
 
     # --- LAYER 2: Local JSON cache (Railway bypass) ---
