@@ -234,7 +234,7 @@ async def stream_chat(symbol: str, message: str, history: list):
                 "**Action:** [BUY / SELL / HOLD / WAIT]\n"
                 "**Conviction:** [HIGH/MEDIUM/LOW] — one sentence why\n"
                 "**Bottom line:** one plain English sentence\n"
-                "⚠️ Not financial advice.\n"
+                ""
             )
         else:
             sys_prompt = (
@@ -263,7 +263,7 @@ async def stream_chat(symbol: str, message: str, history: list):
                 "**Target:** specific price\n"
                 "**Stop:** specific price\n"
                 "**Primary risk:** one sentence\n"
-                "⚠️ Not financial advice. Position size per Kelly: {kelly}%\n"
+                ""
             )
 
         if fundamentals_context:
