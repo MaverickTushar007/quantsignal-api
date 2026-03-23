@@ -5,6 +5,8 @@ Scans signals, opens trades, closes positions, enforces kill switch.
 """
 import os, json, urllib.request
 from datetime import datetime, timezone, timedelta
+from dotenv import load_dotenv
+load_dotenv("/Users/tusharbhatt/Desktop/quantsignal/.env")
 
 SUPABASE_URL = os.getenv("SUPABASE_URL", "")
 SERVICE_KEY  = os.getenv("SUPABASE_SERVICE_KEY", "")
@@ -138,7 +140,7 @@ def _process_agent_new_trades(agent, signals_raw):
 
         direction   = sig.get("direction", "HOLD")
         probability = sig.get("probability", 0)
-        entry       = sig.get("entry_price") or sig.get("entry", 0)
+        entry       = sig.get("entry_price") or sig.get("entry") or sig.get("current_price", 0)
         tp          = sig.get("take_profit", 0)
         sl          = sig.get("stop_loss", 0)
 
