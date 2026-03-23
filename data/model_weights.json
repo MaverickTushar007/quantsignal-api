@@ -1,0 +1,8 @@
+{
+  "xgb_weight": 0.45,
+  "lgb_weight": 0.45,
+  "updated_at": "2026-03-24",
+  "xgb_recent_wr": null,
+  "lgb_recent_wr": null,
+  "note": "Default weights — will auto-update after 30 days of prob tracking"
+}

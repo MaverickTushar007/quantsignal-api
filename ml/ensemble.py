@@ -130,7 +130,17 @@ def predict(ticker, df, sentiment=0.0):
         lgb_prob = float(bundle["lgb"].predict_proba(latest)[0, 1])
 
         sentiment_adj = (sentiment + 1) / 2
-        raw_prob = 0.45 * xgb_prob + 0.45 * lgb_prob + 0.10 * sentiment_adj
+        # Load dynamic weights if available
+        try:
+            import json as _json
+            from pathlib import Path as _Path
+            _w = _json.loads(_Path("data/model_weights.json").read_text())
+            _xw = _w.get("xgb_weight", 0.45)
+            _lw = _w.get("lgb_weight", 0.45)
+        except Exception:
+            _xw, _lw = 0.45, 0.45
+
+        raw_prob = _xw * xgb_prob + _lw * lgb_prob + 0.10 * sentiment_adj
 
         # Macro + funding rate regime adjustment
         try:
@@ -179,6 +189,17 @@ def predict(ticker, df, sentiment=0.0):
 
         direction = "BUY" if prob >= 0.55 else "SELL" if prob <= 0.45 else "HOLD"
         agreement = 1.0 - abs(xgb_prob - lgb_prob) if _LGB_OK else 1.0
+        # Store per-model probs for dynamic weight tracking
+        try:
+            import json as _j, time as _t
+            from pathlib import Path as _p
+            _log = _p("data/model_prob_log.jsonl")
+            _entry = _j.dumps({"ts": _t.time(), "sym": ticker,
+                               "xgb": round(xgb_prob,4), "lgb": round(lgb_prob,4)}) + "\n"
+            with open(_log, "a") as _f:
+                _f.write(_entry)
+        except Exception:
+            pass
         confidence = "HIGH" if prob > 0.65 or prob < 0.35 else "MEDIUM" if prob > 0.55 or prob < 0.45 else "LOW"
 
         close = float(df["Close"].iloc[-1])
