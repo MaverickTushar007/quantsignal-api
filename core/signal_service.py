@@ -187,6 +187,15 @@ def generate_signal(symbol: str, include_reasoning: bool = True) -> Optional[dic
     ))
     from core.cache import set_cached
     set_cached(f"signal:{symbol}", result, ttl=3600)
+    # Attach insider trades (US stocks only)
+    try:
+        from data.insider import get_insider_trades
+        insider = get_insider_trades(symbol)
+        if insider.get("available"):
+            result["insider"] = insider
+    except Exception as e:
+        print(f"Insider error for {symbol}: {e}")
+
     # Attach MTF alignment
     try:
         from data.mtf import fetch_mtf_features

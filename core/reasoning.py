@@ -208,6 +208,14 @@ async def stream_chat(symbol: str, message: str, history: list):
                 ownership = get_ownership_context(symbol)
                 if ownership:
                     fundamentals_context = format_ownership_for_prompt(symbol, ownership)
+                    # Add insider data for US stocks
+                    try:
+                        from data.insider import format_insider_for_prompt
+                        insider_ctx = format_insider_for_prompt(symbol)
+                        if insider_ctx:
+                            fundamentals_context += f"\n\n{insider_ctx}"
+                    except Exception:
+                        pass
             except Exception:
                 pass
 
