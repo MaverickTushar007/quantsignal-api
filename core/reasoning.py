@@ -287,6 +287,27 @@ async def stream_chat(symbol: str, message: str, history: list):
         if rag_text and rag_text != "No academic context available.":
             sys_prompt += f"\n## QUANTITATIVE RESEARCH CONTEXT\n{rag_text}\n"
 
+        # What-if scenario detection
+        whatif_keywords = ["what if", "if vix", "if market", "if rate", "if price drops",
+                           "if it falls", "if it rises", "scenario", "suppose", "assuming",
+                           "what happens if", "if fed", "if inflation", "if i reduce",
+                           "if position", "stress test"]
+        is_whatif = any(kw in message.lower() for kw in whatif_keywords)
+
+        if is_whatif:
+            sys_prompt += (
+                "\n## SCENARIO ANALYSIS MODE\n"
+                "The user is asking a 'what if' scenario question. Respond with:\n"
+                "1. Current baseline — what the signal/confidence is RIGHT NOW\n"
+                "2. Scenario impact — how the changed variable shifts the signal\n"
+                "   - Show confidence % change (e.g. 71% → 52%)\n"
+                "   - Show how action changes (BUY → HOLD → SELL)\n"
+                "   - Show how position size should change\n"
+                "3. Trigger levels — at what exact price/level does the signal flip\n"
+                "4. Hedge suggestion — what position protects against this scenario\n"
+                "Be specific with numbers. Use the live signal data provided.\n"
+            )
+
         sys_prompt += "\nSearch the web for the latest news, price action, and analyst views before responding.\n"
 
         # 5. Connect to Groq with web search (compound-beta)
