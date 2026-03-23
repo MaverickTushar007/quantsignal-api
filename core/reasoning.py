@@ -204,10 +204,10 @@ async def stream_chat(symbol: str, message: str, history: list):
         fundamentals_context = ""
         if sig_data and symbol != "GENERIC":
             try:
-                from data.fundamentals import get_fundamentals, format_fundamentals_for_prompt
-                fund = get_fundamentals(symbol)
-                if fund:
-                    fundamentals_context = format_fundamentals_for_prompt(symbol, fund)
+                from data.ownership import get_ownership_context, format_ownership_for_prompt
+                ownership = get_ownership_context(symbol)
+                if ownership:
+                    fundamentals_context = format_ownership_for_prompt(symbol, ownership)
             except Exception:
                 pass
 
