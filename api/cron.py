@@ -71,6 +71,13 @@ def _rebuild():
         Path("data/signals_cache.json").write_text(json.dumps(cache, indent=2))
         print(f"Cache rebuilt: {len(cache)}/{len(TICKERS)} signals in {elapsed}s")
 
+        # Run virtual agent executor
+        try:
+            from api.agent_executor import run_agent_executor
+            run_agent_executor()
+        except Exception as e:
+            print(f"Agent executor error: {e}")
+
         # Scan for cross-asset shocks
         try:
             from data.correlations import scan_for_shocks, save_shock_cache
