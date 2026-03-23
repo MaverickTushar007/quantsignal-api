@@ -43,12 +43,12 @@ class FullSignal:
     # Confluence
     confluence:       list
     confluence_score: str
-    volume_ratio: float = 1.0
     # News + reasoning
     news:       list
     reasoning:  str
     # Meta
     generated_at: str
+    volume_ratio: float = 1.0
 
 
 def _build_confluence(feat_row) -> list:
