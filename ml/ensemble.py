@@ -41,6 +41,7 @@ class SignalResult:
     model_agreement: float
     top_features: dict
     was_cached: bool
+    volume_ratio: float = 1.0
 
 def _model_path(ticker):
     safe = ticker.replace("=","_").replace("^","_").replace("-","_")
@@ -217,6 +218,14 @@ def predict(ticker, df, sentiment=0.0):
         kelly_size = full_kelly * 0.25 * 100
         ev = (edge_prob * tp_dist) - (q * sl_dist)
 
+        # Volume anomaly
+        try:
+            avg_vol = float(df["Volume"].rolling(20).mean().iloc[-1])
+            cur_vol = float(df["Volume"].iloc[-1])
+            volume_ratio = round(cur_vol / avg_vol, 2) if avg_vol > 0 else 1.0
+        except Exception:
+            volume_ratio = 1.0
+
         return SignalResult(
             ticker=ticker, direction=direction,
             probability=round(prob, 4), confidence=confidence,
@@ -225,6 +234,7 @@ def predict(ticker, df, sentiment=0.0):
             current_price=round(close, 4), atr=round(atr, 4),
             risk_reward=round(rr, 2), model_agreement=round(agreement, 3),
             top_features=bundle["top_features"], was_cached=was_cached,
+            volume_ratio=volume_ratio,
         )
 
     except Exception as e:

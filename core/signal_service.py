@@ -43,6 +43,7 @@ class FullSignal:
     # Confluence
     confluence:       list
     confluence_score: str
+    volume_ratio: float = 1.0
     # News + reasoning
     news:       list
     reasoning:  str
@@ -179,6 +180,7 @@ def generate_signal(symbol: str, include_reasoning: bool = True) -> Optional[dic
         top_features=list(ml.top_features.keys()),
         confluence=confluence,
         confluence_score=f"{bull_count}/9 bullish",
+        volume_ratio=ml.volume_ratio,
         news=news_dicts,
         reasoning=reasoning,
         generated_at=datetime.now(timezone.utc).isoformat(),
