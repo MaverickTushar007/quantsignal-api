@@ -71,6 +71,15 @@ def _rebuild():
         Path("data/signals_cache.json").write_text(json.dumps(cache, indent=2))
         print(f"Cache rebuilt: {len(cache)}/{len(TICKERS)} signals in {elapsed}s")
 
+        # Scan for cross-asset shocks
+        try:
+            from data.correlations import scan_for_shocks, save_shock_cache
+            shock_warnings = scan_for_shocks({}, threshold_pct=3.0)
+            save_shock_cache(shock_warnings)
+            print(f"Shock scan: {len(shock_warnings)} assets flagged")
+        except Exception as e:
+            print(f"Shock scan error: {e}")
+
         # Rebuild MTF cache daily
         try:
             rebuild_mtf_cache()

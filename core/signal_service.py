@@ -103,7 +103,15 @@ def generate_signal(symbol: str, include_reasoning: bool = True) -> Optional[dic
                 sig = dict(cache[symbol])
                 if not include_reasoning and "reasoning" in sig:
                     sig["reasoning"] = ""
-                set_cached(redis_key, sig, ttl=3600)  # warm Redis WITH mtf
+                # Attach shock warning before returning
+                try:
+                    from data.correlations import load_shock_cache
+                    _shocks = load_shock_cache()
+                    if symbol in _shocks:
+                        sig['shock_warning'] = _shocks[symbol]
+                except Exception:
+                    pass
+                set_cached(redis_key, sig, ttl=3600)  # warm Redis WITH mtf + shock
                 return sig
         except Exception:
             pass
@@ -196,4 +204,13 @@ def generate_signal(symbol: str, include_reasoning: bool = True) -> Optional[dic
             result["earnings_flag"] = flag
     except Exception:
         pass
+    # Attach shock warning if this asset is flagged
+    try:
+        from data.correlations import load_shock_cache
+        shock_cache = load_shock_cache()
+        if symbol in shock_cache:
+            result['shock_warning'] = shock_cache[symbol]
+    except Exception:
+        pass
+
     return result
