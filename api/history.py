@@ -81,6 +81,28 @@ def history_summary():
                 peak = cumulative
             dd_curve.append({"date": t["date"], "drawdown": round(cumulative - peak, 3)})
 
+        # Fetch benchmark returns
+        benchmark = {}
+        try:
+            import yfinance as yf
+            trades_sorted = sorted(trades, key=lambda t: t.get("date", ""))
+            start_date = trades_sorted[0]["date"]
+            end_date = trades_sorted[-1]["date"]
+
+            for name, ticker in [("Nifty 50", "^NSEI"), ("S&P 500", "^GSPC")]:
+                df = yf.Ticker(ticker).history(start=start_date, end=end_date)
+                if not df.empty:
+                    ret = (df["Close"].iloc[-1] - df["Close"].iloc[0]) / df["Close"].iloc[0] * 100
+                    # Build daily curve
+                    base = df["Close"].iloc[0]
+                    curve = [
+                        {"date": str(d.date()), "cumulative_pnl": round((p - base) / base * 100, 3)}
+                        for d, p in zip(df.index, df["Close"])
+                    ]
+                    benchmark[name] = {"return": round(ret, 2), "curve": curve}
+        except Exception as e:
+            print(f"Benchmark error: {e}")
+
         return {
             "total_trades":       data["total_trades"],
             "win_rate":           data["win_rate"],
@@ -95,6 +117,7 @@ def history_summary():
             "sharpe_ratio":       sharpe,
             "calmar_ratio":       calmar,
             "dd_curve":           dd_curve,
+            "benchmark":          benchmark,
         }
     except Exception as e:
         return {"error": str(e)}
