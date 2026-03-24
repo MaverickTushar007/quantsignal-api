@@ -124,3 +124,58 @@ def history_trades(limit: int = 50, confidence: str = None, symbol: str = None):
         return {"total": len(trades), "trades": trades[:limit]}
     except Exception as e:
         return {"error": str(e)}
+
+@router.get("/history/montecarlo", tags=["history"])
+def history_montecarlo(simulations: int = 1000):
+    try:
+        import random, statistics
+        data = json.loads(Path("data/signal_history.json").read_text())
+        pnls = [t.get("pnl_pct", 0) for t in data.get("trades", [])]
+        n = len(pnls)
+        if n < 10:
+            return {"error": "Not enough trades"}
+
+        results = []
+        for _ in range(simulations):
+            # Bootstrap: sample WITH replacement so totals vary
+            sample = [random.choice(pnls) for _ in range(n)]
+            results.append(round(sum(sample), 3))
+
+        results.sort()
+        # Percentile bands
+        def pct(p):
+            idx = int(p / 100 * (len(results) - 1))
+            return results[idx]
+
+        # Build percentile curves (sample 60 points for efficiency)
+        step = max(1, n // 60)
+        curves = {"p5": [], "p25": [], "p50": [], "p75": [], "p95": []}
+        for end in range(1, n + 1, step):
+            sim_ends = []
+            for _ in range(200):
+                sample = [random.choice(pnls) for _ in range(end)]
+                sim_ends.append(round(sum(sample), 3))
+            sim_ends.sort()
+            def pp(p): return sim_ends[int(p / 100 * (len(sim_ends) - 1))]
+            curves["p5"].append(pp(5))
+            curves["p25"].append(pp(25))
+            curves["p50"].append(pp(50))
+            curves["p75"].append(pp(75))
+            curves["p95"].append(pp(95))
+
+        actual_final = sum(pnls)
+
+        return {
+            "simulations": simulations,
+            "trades":      n,
+            "actual_pnl":  round(actual_final, 2),
+            "p5":          pct(5),
+            "p25":         pct(25),
+            "p50":         pct(50),
+            "p75":         pct(75),
+            "p95":         pct(95),
+            "curves":      curves,
+            "beat_zero":   round(sum(1 for r in results if r > 0) / len(results) * 100, 1),
+        }
+    except Exception as e:
+        return {"error": str(e)}
