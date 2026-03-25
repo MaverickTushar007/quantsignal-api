@@ -77,6 +77,11 @@ def _rebuild():
             run_agent_executor()
         except Exception as e:
             print(f"Agent executor error: {e}")
+        try:
+            from api.agent_executor import _close_hit_positions
+            _close_hit_positions()
+        except Exception as e:
+            print(f"Outcome checker error: {e}")
 
         # Scan for cross-asset shocks
         try:
