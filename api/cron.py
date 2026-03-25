@@ -234,3 +234,17 @@ def flush_signal_cache():
     except Exception as e:
         return {"error": str(e)}
 
+
+@router.post("/cron/check-outcomes", tags=["cron"])
+def check_outcomes(x_cron_secret: str = Header(None)):
+    if x_cron_secret != CRON_SECRET:
+        raise HTTPException(status_code=401, detail="Unauthorized")
+    def _run():
+        try:
+            from api.agent_executor import _close_hit_positions
+            _close_hit_positions()
+            print("Outcome check complete")
+        except Exception as e:
+            print(f"Outcome check error: {e}")
+    threading.Thread(target=_run, daemon=True).start()
+    return {"message": "Outcome check running in background"}
