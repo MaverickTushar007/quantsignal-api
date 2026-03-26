@@ -4,7 +4,7 @@ api/routes.py
 All FastAPI endpoints.
 """
 
-from fastapi import APIRouter, HTTPException, Depends, Query, BackgroundTasks
+from fastapi import APIRouter, HTTPException, Depends, Query
 from typing import List, Optional
 from concurrent.futures import ThreadPoolExecutor
 
@@ -14,7 +14,7 @@ from app.api.schemas import (
 )
 from app.api.routes.auth import get_current_user, require_pro
 from app.domain.signal.service import generate_signal
-from app.domain.reasoning.worker import fill_reasoning_async
+from app.infrastructure.queue.reasoning_queue import enqueue_reasoning_job
 from app.domain.data.universe import TICKERS, TICKER_MAP
 
 router = APIRouter()
@@ -82,13 +82,12 @@ def get_all_signals(
 
 @router.get("/signals/{symbol}", response_model=SignalResponse, tags=["signals"])
 async def get_signal(
-    symbol:           str,
-    background_tasks: BackgroundTasks,
-    reason:           bool = Query(True, description="Include LLM reasoning"),
+    symbol: str,
+    reason: bool = Query(True, description="Include LLM reasoning"),
 ):
     """
     Full signal for one asset.
-    Returned immediately — reasoning filled in background if not cached.
+    Returned immediately — reasoning enqueued to Redis queue if not cached.
     """
     symbol = symbol.upper()
     if symbol not in TICKER_MAP:
@@ -99,7 +98,7 @@ async def get_signal(
         raise HTTPException(status_code=503, detail=f"Could not generate signal for {symbol}")
 
     if reason and not sig.get("reasoning"):
-        background_tasks.add_task(fill_reasoning_async, symbol, sig)
+        enqueue_reasoning_job(symbol, sig)
 
     return sig
 

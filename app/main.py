@@ -5,6 +5,7 @@ Run with: python -m uvicorn main:app --reload
 """
 
 from fastapi import FastAPI
+from contextlib import asynccontextmanager
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.middleware.gzip import GZipMiddleware
 from app.core.config import settings
@@ -31,13 +32,20 @@ except Exception as e:
     _calendar_ok = False
 from app.api.routes.ws import router as ws_router
 
-app = FastAPI(
 
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    from app.infrastructure.queue.poller import start_poller
+    start_poller()
+    yield
+
+app = FastAPI(
     title="QuantSignal API",
-    description="ML-powered trading signals — XGBoost + LightGBM + LLM reasoning",
+    description="ML-powered trading signals",
     version="1.0.0",
     docs_url="/docs",
     redoc_url=None,
+    lifespan=lifespan,
 )
 
 app.add_middleware(
