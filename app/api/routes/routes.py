@@ -4,7 +4,7 @@ api/routes.py
 All FastAPI endpoints.
 """
 
-from fastapi import APIRouter, HTTPException, Depends, Query
+from fastapi import APIRouter, HTTPException, Depends, Query, BackgroundTasks
 from typing import List, Optional
 from concurrent.futures import ThreadPoolExecutor
 
@@ -14,6 +14,7 @@ from app.api.schemas import (
 )
 from app.api.routes.auth import get_current_user, require_pro
 from app.domain.signal.service import generate_signal
+from app.domain.reasoning.worker import fill_reasoning_async
 from app.domain.data.universe import TICKERS, TICKER_MAP
 
 router = APIRouter()
@@ -79,28 +80,29 @@ def get_all_signals(
         set_cached("all_signals_list", results, ttl=86400)
     return results
 
-
 @router.get("/signals/{symbol}", response_model=SignalResponse, tags=["signals"])
-def get_signal(
-    symbol:  str,
-    reason:  bool = Query(True, description="Include LLM reasoning"),
-
+async def get_signal(
+    symbol:           str,
+    background_tasks: BackgroundTasks,
+    reason:           bool = Query(True, description="Include LLM reasoning"),
 ):
     """
-    Full signal for one asset — includes confluence, news, LLM reasoning.
-    LLM reasoning only for pro tier.
+    Full signal for one asset.
+    Returned immediately — reasoning filled in background if not cached.
     """
     symbol = symbol.upper()
     if symbol not in TICKER_MAP:
         raise HTTPException(status_code=404, detail=f"Unknown symbol: {symbol}")
 
-    include_reasoning = reason
-    sig = generate_signal(symbol, include_reasoning=include_reasoning)
-
+    sig = generate_signal(symbol, include_reasoning=False)
     if sig is None:
         raise HTTPException(status_code=503, detail=f"Could not generate signal for {symbol}")
 
+    if reason and not sig.get("reasoning"):
+        background_tasks.add_task(fill_reasoning_async, symbol, sig)
+
     return sig
+
 
 
 @router.get("/news/{symbol}", tags=["news"])

@@ -6,3 +6,8 @@ package-lock.json
 package.json
 __pycache__/
 *.pyc
+.env.save
+.env
+.env.save
+*.log
+__pycache__/
