@@ -278,3 +278,4 @@ async def stream_chat(symbol: str, message: str, history: list):
 
     except Exception as e:
         yield f"data: {json.dumps({'type': 'error', 'message': str(e)})}\n\n"
+# Thu Mar 26 15:08:43 IST 2026
