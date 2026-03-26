@@ -5,5 +5,4 @@ nixPkgs = ["python311", "gcc"]
 cmds = ["pip install -r requirements.txt"]
 
 [start]
-cmd = "bash startup.sh"
-# cache-bust-1774557946
+cmd = "uvicorn app.main:app --host 0.0.0.0 --port $PORT"
