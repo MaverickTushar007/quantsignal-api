@@ -158,6 +158,11 @@ def generate_signal(symbol: str, include_reasoning: bool = True) -> Optional[dic
             confluence_bulls=bull_count,
             top_features=list(ml.top_features.keys()),
             news_headlines=headlines,
+            current_price=ml.current_price,
+            take_profit=ml.take_profit,
+            stop_loss=ml.stop_loss,
+            atr=ml.atr,
+            model_agreement=ml.model_agreement,
         )
 
     result = asdict(FullSignal(
