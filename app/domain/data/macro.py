@@ -1,3 +1,4 @@
+from app.core.config import BASE_DIR
 """
 data/macro.py
 Fetches macroeconomic regime features from FRED API.
@@ -13,7 +14,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-CACHE_PATH = Path("data/macro_cache.json")
+CACHE_PATH = BASE_DIR / "data/macro_cache.json"
 CACHE_TTL = 86400  # 24 hours
 
 FRED_SERIES = {

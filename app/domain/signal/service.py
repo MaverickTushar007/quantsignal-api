@@ -1,3 +1,4 @@
+from app.core.config import BASE_DIR
 """
 core/signal_service.py
 Main orchestrator — replaces your 786-line signal_generator.py.
@@ -96,7 +97,7 @@ def generate_signal(symbol: str, include_reasoning: bool = True) -> Optional[dic
         return cached
 
     # --- LAYER 2: Local JSON cache (Railway bypass) ---
-    cache_path = Path("data/signals_cache.json")
+    cache_path = BASE_DIR / "data/signals_cache.json"
     if cache_path.exists():
         try:
             cache = json.loads(cache_path.read_text())

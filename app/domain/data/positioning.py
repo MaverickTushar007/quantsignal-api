@@ -1,3 +1,4 @@
+from app.core.config import BASE_DIR
 """
 data/positioning.py
 OKX futures positioning — Long/Short ratio + Open Interest.
@@ -9,7 +10,7 @@ import json
 import time
 from pathlib import Path
 
-CACHE_PATH = Path("data/positioning_cache.json")
+CACHE_PATH = BASE_DIR / "data/positioning_cache.json"
 CACHE_TTL = 900  # 15 minutes
 
 OKX_SYMBOL_MAP = {

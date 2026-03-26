@@ -1,3 +1,4 @@
+from app.core.config import BASE_DIR
 """
 api/mcp.py
 MCP (Model Context Protocol) endpoint — makes QuantSignal usable
@@ -120,7 +121,7 @@ def mcp_openapi():
 def get_signal(symbol: str):
     """Get full signal for a specific symbol."""
     try:
-        cache = json.loads(Path("data/signals_cache.json").read_text())
+        cache = json.loads((BASE_DIR / "data/signals_cache.json").read_text())
         
         # Try exact match first
         sig = cache.get(symbol)
@@ -167,7 +168,7 @@ def get_signal(symbol: str):
 def get_signals(type: str = None, direction: str = None, limit: int = 20):
     """Get filtered signals."""
     try:
-        cache = json.loads(Path("data/signals_cache.json").read_text())
+        cache = json.loads((BASE_DIR / "data/signals_cache.json").read_text())
         from app.domain.data.universe import TICKERS
         ticker_map = {t["symbol"]: t for t in TICKERS}
         
@@ -201,7 +202,7 @@ def get_signals(type: str = None, direction: str = None, limit: int = 20):
 def market_summary():
     """Overall market mood."""
     try:
-        cache = json.loads(Path("data/signals_cache.json").read_text())
+        cache = json.loads((BASE_DIR / "data/signals_cache.json").read_text())
         
         total = len(cache)
         buys = [s for s in cache.values() if s["direction"] == "BUY"]
@@ -231,7 +232,7 @@ def market_summary():
 def search_assets(q: str):
     """Search assets by name or symbol."""
     try:
-        cache = json.loads(Path("data/signals_cache.json").read_text())
+        cache = json.loads((BASE_DIR / "data/signals_cache.json").read_text())
         q_lower = q.lower()
         
         matches = []

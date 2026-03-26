@@ -1,3 +1,4 @@
+from app.core.config import BASE_DIR
 import json
 import asyncio
 from pathlib import Path
@@ -69,7 +70,7 @@ async def stream_chat(symbol: str, message: str, history: list):
         sig_data = None
         if symbol != "GENERIC":
             yield _yield_status(f"Syncing real-time indicators for {symbol}...")
-            cache_path = Path("data/signals_cache.json")
+            cache_path = BASE_DIR / "data/signals_cache.json"
             if cache_path.exists():
                 cache = json.loads(cache_path.read_text())
                 sig_data = cache.get(symbol)

@@ -1,3 +1,4 @@
+from app.core.config import BASE_DIR
 """
 api/cron.py
 Cache refresh endpoint — called by Railway cron or external scheduler.
@@ -18,7 +19,7 @@ def _rebuild():
 
     # Load old cache for alert comparison
     try:
-        old_cache = json.loads(Path("data/signals_cache.json").read_text())
+        old_cache = json.loads((BASE_DIR / "data/signals_cache.json").read_text())
     except Exception:
         old_cache = {}
 
@@ -68,7 +69,7 @@ def _rebuild():
                 print(f"[{group_name}] done — {len(results)} signals")
 
         elapsed = round(time.time() - start_time, 1)
-        Path("data/signals_cache.json").write_text(json.dumps(cache, indent=2))
+        (BASE_DIR / "data/signals_cache.json").write_text(json.dumps(cache, indent=2))
         print(f"Cache rebuilt: {len(cache)}/{len(TICKERS)} signals in {elapsed}s")
 
         # Run virtual agent executor
@@ -155,7 +156,7 @@ def trigger_retrain(x_cron_secret: str = Header(None, alias="X-Cron-Secret")):
     
     def _run():
         try:
-            cache = json.loads(Path("data/signals_cache.json").read_text())
+            cache = json.loads((BASE_DIR / "data/signals_cache.json").read_text())
             from app.domain.ml.auto_retrain import run_auto_retrain
             summary = run_auto_retrain(list(cache.keys()))
             print(f"Manual retrain complete: {summary}")
@@ -169,7 +170,7 @@ def trigger_retrain(x_cron_secret: str = Header(None, alias="X-Cron-Secret")):
 @router.get("/cron/status", tags=["cron"])
 def cache_status():
     try:
-        cache_path = Path("data/signals_cache.json")
+        cache_path = BASE_DIR / "data/signals_cache.json"
         cache = json.loads(cache_path.read_text())
         from app.domain.data.universe import TICKERS
         import os
@@ -201,7 +202,7 @@ def rebuild_mtf_cache():
     from pathlib import Path
     from app.domain.data.mtf import fetch_mtf_features
 
-    cache = json.loads(Path("data/signals_cache.json").read_text())
+    cache = json.loads((BASE_DIR / "data/signals_cache.json").read_text())
     updated = 0
     for sym, sig in cache.items():
         try:
@@ -220,7 +221,7 @@ def rebuild_mtf_cache():
         except Exception:
             pass
         time.sleep(0.2)
-    Path("data/signals_cache.json").write_text(json.dumps(cache, indent=2))
+    (BASE_DIR / "data/signals_cache.json").write_text(json.dumps(cache, indent=2))
     return {"updated": updated, "total": len(cache)}
 
 @router.post("/cron/flush-signal-cache", tags=["cron"])

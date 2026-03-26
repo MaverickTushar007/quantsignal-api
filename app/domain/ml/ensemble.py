@@ -1,3 +1,4 @@
+from app.core.config import BASE_DIR
 try:
     import lightgbm as lgb
     _LGB_OK = True
@@ -19,7 +20,7 @@ from typing import Optional
 from datetime import datetime, timezone
 from app.domain.ml.features import build_features, FEATURE_COLUMNS
 
-MODELS_DIR   = Path("ml/models")
+MODELS_DIR   = BASE_DIR / "ml/models"
 MODELS_DIR.mkdir(exist_ok=True)
 RETRAIN_DAYS = 7
 FORWARD_DAYS = 5
@@ -135,7 +136,7 @@ def predict(ticker, df, sentiment=0.0):
         try:
             import json as _json
             from pathlib import Path as _Path
-            _w = _json.loads(_Path("data/model_weights.json").read_text())
+            _w = _json.loads((BASE_DIR / "data/model_weights.json").read_text())
             _xw = _w.get("xgb_weight", 0.45)
             _lw = _w.get("lgb_weight", 0.45)
         except Exception:

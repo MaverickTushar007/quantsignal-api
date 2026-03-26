@@ -1,3 +1,4 @@
+from app.core.config import BASE_DIR
 """
 api/ws.py
 WebSocket endpoint for real-time price updates.
@@ -15,7 +16,7 @@ connections = {}
 
 async def get_current_price(symbol: str) -> float:
     """Fetch current price from cache or return a default."""
-    cache_path = Path("data/signals_cache.json")
+    cache_path = BASE_DIR / "data/signals_cache.json"
     if cache_path.exists():
         try:
             cache = json.loads(cache_path.read_text())

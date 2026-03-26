@@ -1,3 +1,4 @@
+from app.core.config import BASE_DIR
 """
 api/calendar.py
 Live economic calendar scraped from ForexFactory.
@@ -12,7 +13,7 @@ from pathlib import Path
 from datetime import datetime, timezone, timedelta
 
 router = APIRouter()
-CACHE_PATH = Path("data/calendar_cache.json")
+CACHE_PATH = BASE_DIR / "data/calendar_cache.json"
 CACHE_TTL = 604800  # 7 days — refreshed by local commit
 
 COUNTRY_FLAGS = {

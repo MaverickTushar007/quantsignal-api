@@ -1,3 +1,4 @@
+from app.core.config import BASE_DIR
 """
 data/funding.py
 OKX perpetual futures funding rates.
@@ -9,7 +10,7 @@ import json
 import time
 from pathlib import Path
 
-CACHE_PATH = Path("data/funding_cache.json")
+CACHE_PATH = BASE_DIR / "data/funding_cache.json"
 CACHE_TTL = 3600
 
 OKX_INST_MAP = {

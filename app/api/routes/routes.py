@@ -1,3 +1,4 @@
+from app.core.config import BASE_DIR
 """
 api/routes.py
 All FastAPI endpoints.
@@ -46,7 +47,7 @@ def get_all_signals(
 
     # Load from file
     cache = {}
-    cache_path = Path("data/signals_cache.json")
+    cache_path = BASE_DIR / "data/signals_cache.json"
     if cache_path.exists():
         try:
             cache = json.loads(cache_path.read_text())

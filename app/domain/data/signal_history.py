@@ -1,3 +1,4 @@
+from app.core.config import BASE_DIR
 """
 data/signal_history.py
 Reconstructs 90-day signal history by replaying ML predictions
@@ -10,7 +11,7 @@ import pandas as pd
 from pathlib import Path
 from datetime import datetime, timezone, timedelta
 
-HISTORY_CACHE = Path("data/signal_history.json")
+HISTORY_CACHE = BASE_DIR / "data/signal_history.json"
 LOOKBACK_DAYS = 90
 FORWARD_DAYS  = 5   # days to check TP/SL outcome
 

@@ -1,3 +1,4 @@
+from app.core.config import BASE_DIR
 """
 data/earnings.py
 Fetch and cache upcoming earnings dates for all stock tickers.
@@ -8,7 +9,7 @@ import yfinance as yf
 from datetime import date, datetime, timedelta
 from pathlib import Path
 
-EARNINGS_CACHE = Path("data/earnings_cache.json")
+EARNINGS_CACHE = BASE_DIR / "data/earnings_cache.json"
 WARN_DAYS = 7  # flag if earnings within this many days
 
 def fetch_earnings_dates(symbols: list) -> dict:

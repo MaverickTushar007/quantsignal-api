@@ -1,3 +1,4 @@
+from app.core.config import BASE_DIR
 """
 api/montecarlo.py
 Monte Carlo simulation — 1000 reshuffles of signal history.
@@ -11,7 +12,7 @@ router = APIRouter()
 @router.get("/history/montecarlo", tags=["history"])
 def monte_carlo(simulations: int = 1000):
     try:
-        data = json.loads(Path("data/signal_history.json").read_text())
+        data = json.loads((BASE_DIR / "data/signal_history.json").read_text())
         trades = data.get("trades", [])
         pnls = [t.get("pnl_pct", 0) for t in trades]
 

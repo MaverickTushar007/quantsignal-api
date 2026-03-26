@@ -1,3 +1,4 @@
+from app.core.config import BASE_DIR
 """
 api/history.py
 Signal history + equity curve endpoint.
@@ -11,7 +12,7 @@ router = APIRouter()
 @router.get("/history/summary", tags=["history"])
 def history_summary():
     try:
-        data = json.loads(Path("data/signal_history.json").read_text())
+        data = json.loads((BASE_DIR / "data/signal_history.json").read_text())
         trades = data.get("trades", [])
         equity_curve = [
             {"date": t["date"], "cumulative_pnl": t["cumulative_pnl"]}
@@ -114,7 +115,7 @@ def history_summary():
 @router.get("/history/trades", tags=["history"])
 def history_trades(limit: int = 50, confidence: str = None, symbol: str = None):
     try:
-        data = json.loads(Path("data/signal_history.json").read_text())
+        data = json.loads((BASE_DIR / "data/signal_history.json").read_text())
         trades = data.get("trades", [])
         if confidence:
             trades = [t for t in trades if t["confidence"].upper() == confidence.upper()]
@@ -129,7 +130,7 @@ def history_trades(limit: int = 50, confidence: str = None, symbol: str = None):
 def history_montecarlo(simulations: int = 1000):
     try:
         import random, statistics
-        data = json.loads(Path("data/signal_history.json").read_text())
+        data = json.loads((BASE_DIR / "data/signal_history.json").read_text())
         pnls = [t.get("pnl_pct", 0) for t in data.get("trades", [])]
         n = len(pnls)
         if n < 10:

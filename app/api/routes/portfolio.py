@@ -1,3 +1,4 @@
+from app.core.config import BASE_DIR
 """
 api/portfolio.py
 Portfolio Lab — optimization, stress test, health score.
@@ -70,13 +71,13 @@ def analyze_portfolio(req: PortfolioRequest):
 
     try:
         # Load signal cache for ML probabilities
-        cache_path = Path("data/signals_cache.json")
+        cache_path = BASE_DIR / "data/signals_cache.json"
         signal_cache = {}
         if cache_path.exists():
             signal_cache = json.loads(cache_path.read_text())
 
         # Load price cache for returns/correlation
-        price_cache_path = Path("data/price_cache.json")
+        price_cache_path = BASE_DIR / "data/price_cache.json"
         price_data = {}
         if price_cache_path.exists():
             price_data = json.loads(price_cache_path.read_text())

@@ -1,3 +1,4 @@
+from app.core.config import BASE_DIR
 """
 data/correlations.py
 Cross-asset correlation map + shock scanner.
@@ -125,7 +126,7 @@ def scan_for_shocks(cache: dict, threshold_pct: float = 3.0) -> dict:
 
 
 def load_shock_cache() -> dict:
-    path = Path("data/shock_cache.json")
+    path = BASE_DIR / "data/shock_cache.json"
     if path.exists():
         try:
             data = json.loads(path.read_text())
@@ -139,5 +140,5 @@ def load_shock_cache() -> dict:
 
 
 def save_shock_cache(warnings: dict):
-    path = Path("data/shock_cache.json")
+    path = BASE_DIR / "data/shock_cache.json"
     path.write_text(json.dumps(warnings, indent=2))
