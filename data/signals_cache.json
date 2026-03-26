@@ -89,7 +89,7 @@
         "url": "https://cryptonews.com/news/strive-beats-tesla-bitcoin-holdings-sata-dividend/"
       }
     ],
-    "reasoning": "",
+    "reasoning": "ML ensemble signals HOLD with 51% confidence for BTC-USD. Primary drivers: SMA_cross, stoch_D, RSI_14. 3/9 confluence factors align.",
     "generated_at": "2026-03-20T11:03:17.693547+00:00",
     "mtf": {
       "tf_15m_bull": true,
@@ -105,7 +105,8 @@
         "1d": "BEAR"
       },
       "mtf_score_with_daily": 1
-    }
+    },
+    "reasoning_status": "complete"
   },
   "ETH-USD": {
     "symbol": "ETH-USD",

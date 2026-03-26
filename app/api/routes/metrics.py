@@ -1,7 +1,6 @@
 """
 app/api/routes/metrics.py
 Internal observability endpoint — queue depth, job stats, reasoning latency.
-Hit GET /api/v1/metrics to see live system health.
 """
 import json
 import logging
@@ -17,34 +16,36 @@ from app.infrastructure.cache.cache import _get_redis
 router = APIRouter()
 logger = logging.getLogger(__name__)
 
+TRACKED_SYMBOLS = [
+    "BTCUSDT", "ETHUSDT", "BNBUSDT", "SOLUSDT", "XRPUSDT",
+    "ADAUSDT", "DOGEUSDT", "AVAXUSDT", "LINKUSDT", "DOTUSDT",
+]
 
 def _get_all_reasoning_states() -> list[dict]:
-    """Scan Redis for all reasoning_status:* keys and return their states."""
+    """Fetch reasoning states for known symbols — avoids KEYS scan."""
     states = []
     try:
         r = _get_redis()
         if not r:
             return states
-        keys = r.keys(f"{STATUS_KEY_PREFIX}*")
-        for key in keys:
+        for symbol in TRACKED_SYMBOLS:
+            key = f"{STATUS_KEY_PREFIX}{symbol}"
             raw = r.get(key)
             if raw:
                 state = json.loads(raw)
-                symbol = key.replace(STATUS_KEY_PREFIX, "")
                 state["symbol"] = symbol
                 states.append(state)
     except Exception as e:
-        logger.error(f"[metrics] Redis scan failed: {e}")
+        logger.error(f"[metrics] Redis fetch failed: {e}")
     return states
 
 
 @router.get("/metrics", tags=["observability"])
 def get_metrics():
-    """Live system health — queue depth, job counts, stale reasoning."""
     states = _get_all_reasoning_states()
     now = datetime.now()
 
-    counts = {"pending": 0, "complete": 0, "failed": 0, "unknown": 0}
+    counts = {"pending": 0, "complete": 0, "failed": 0}
     stale = []
     recent_completions = []
 
