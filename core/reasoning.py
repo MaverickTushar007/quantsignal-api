@@ -1,4 +1,8 @@
+import json
+import asyncio
+from pathlib import Path
 import groq
+from groq import AsyncGroq
 from core.config import settings
 
 
@@ -52,9 +56,6 @@ Do not start with "The" or "This". Start with the asset name or a verb."""
 
 
 async def stream_chat(symbol: str, message: str, history: list):
-    """
-    FinSight Assistant SSE generator (Streaming Chat).
-    """
     def _yield_status(msg: str):
         return f"data: {json.dumps({'type': 'status', 'message': msg})}\n\n"
 
@@ -156,22 +157,10 @@ async def stream_chat(symbol: str, message: str, history: list):
         if use_simple_mode:
             sys_prompt = (
                 "You are Perseus, a friendly financial advisor who explains markets in simple, plain English.\n"
-                "You are talking to someone who may not know financial jargon.\n"
-                "\nYOUR STYLE:\n"
                 "- Use simple analogies and everyday language\n"
-                "- Avoid jargon — if you must use a term, explain it in brackets\n"
-                "- Use emojis sparingly to make it friendly 📈\n"
-                "- Structure: What is happening → Is it good or bad → What should they know → Bottom line\n"
                 "- Always end with: 'Want me to go deeper into the technical analysis?'\n"
-                "\nSTRICT RULES:\n"
-                "- NEVER use terms like RSI, MACD, ATR, confluence without explaining them\n"
-                "- ALWAYS give a clear bottom line in 1-2 sentences\n"
-                "- Think like you're explaining to a smart friend who doesn't trade\n"
-                "- Still cite real numbers from the data provided\n"
                 "- NOT financial advice — always mention this briefly at the end\n"
-                "\nAT THE END — always add a verdict block:\n"
-                "---\n"
-                "🤖 **PERSEUS VERDICT**\n"
+                "\nAT THE END:\n---\n🤖 **PERSEUS VERDICT**\n"
                 "**Action:** [BUY / SELL / HOLD / WAIT]\n"
                 "**Conviction:** [HIGH/MEDIUM/LOW] — one sentence why\n"
                 "**Bottom line:** one plain English sentence\n"
@@ -179,24 +168,10 @@ async def stream_chat(symbol: str, message: str, history: list):
         else:
             sys_prompt = (
                 "You are Perseus, an elite quantitative analyst at a top-tier hedge fund.\n"
-                "You have access to real-time web search. Use it to find current news, analyst reports, and market data.\n"
-                "\nYOUR ANALYTICAL FRAMEWORK:\n"
-                "1. TECHNICAL LAYER — ML signal confluence, momentum, mean reversion\n"
-                "2. MACRO LAYER — Fed policy, inflation regime, yield curve, risk-on/off\n"
-                "3. POSITIONING LAYER — funding rates, long/short ratios, options flow\n"
-                "4. FUNDAMENTAL LAYER — valuation multiples, growth, balance sheet health\n"
-                "5. NEWS CATALYST LAYER — recent events that could move price\n"
-                "6. RISK LAYER — ATR-based stops, Kelly sizing, expected value\n"
-                "\nSTRICT RULES:\n"
                 "- NEVER give basic definitions or generic advice\n"
                 "- ALWAYS cite specific numbers from the context provided\n"
-                "- ALWAYS identify the primary risk to the thesis\n"
                 "- RESPOND in clean Markdown with sections\n"
-                "- Think like you're writing a trade note for a senior PM\n"
-                "- Use web search to find the LATEST news and analyst views on the asset\n"
-                "\nAT THE END — always finish with a verdict block:\n"
-                "---\n"
-                "🤖 **PERSEUS VERDICT**\n"
+                "\nAT THE END:\n---\n🤖 **PERSEUS VERDICT**\n"
                 "**Action:** [BUY / SELL / HOLD / WAIT FOR CONFIRMATION]\n"
                 "**Conviction:** [HIGH/MEDIUM/LOW] — one line rationale\n"
                 "**Entry zone:** specific price or range\n"
@@ -225,20 +200,6 @@ async def stream_chat(symbol: str, message: str, history: list):
             sys_prompt += f"\n## {funding_context}\n"
         if rag_text and rag_text != "No academic context available.":
             sys_prompt += f"\n## QUANTITATIVE RESEARCH CONTEXT\n{rag_text}\n"
-
-        whatif_keywords = ["what if", "if vix", "if market", "if rate", "if price drops",
-                           "if it falls", "if it rises", "scenario", "suppose", "assuming",
-                           "what happens if", "if fed", "if inflation", "if i reduce",
-                           "if position", "stress test"]
-        is_whatif = any(kw in message.lower() for kw in whatif_keywords)
-
-        if is_whatif:
-            sys_prompt += (
-                "\n## SCENARIO ANALYSIS MODE\n"
-                "The user is asking a 'what if' scenario question. Respond with:\n"
-                "1. Current baseline\n2. Scenario impact\n3. Trigger levels\n4. Hedge suggestion\n"
-                "Be specific with numbers.\n"
-            )
 
         sys_prompt += "\nSearch the web for the latest news, price action, and analyst views before responding.\n"
 
@@ -278,4 +239,3 @@ async def stream_chat(symbol: str, message: str, history: list):
 
     except Exception as e:
         yield f"data: {json.dumps({'type': 'error', 'message': str(e)})}\n\n"
-# Thu Mar 26 15:08:43 IST 2026
