@@ -7,20 +7,20 @@ from fastapi import APIRouter, HTTPException, Depends, Query
 from typing import List, Optional
 from concurrent.futures import ThreadPoolExecutor
 
-from api.schemas import (
+from app.api.schemas import (
     SignalResponse, WatchlistItem, MarketMood,
     BacktestSummary, HealthResponse
 )
-from api.auth import get_current_user, require_pro
-from core.signal_service import generate_signal
-from data.universe import TICKERS, TICKER_MAP
+from app.api.routes.auth import get_current_user, require_pro
+from app.domain.signal.service import generate_signal
+from app.domain.data.universe import TICKERS, TICKER_MAP
 
 router = APIRouter()
 
 
 @router.get("/health", response_model=HealthResponse, tags=["system"])
 async def health():
-    from core.config import settings
+    from app.core.config import settings
     return HealthResponse(status="ok", version="1.0.0", env=settings.app_env)
 
 
@@ -34,7 +34,7 @@ def get_all_signals(
     Lightweight signals for all assets — powers the watchlist dashboard.
     No LLM reasoning (fast). Cached after first run.
     """
-    from core.cache import get_cached, set_cached
+    from app.infrastructure.cache.cache import get_cached, set_cached
     import json
     from pathlib import Path
 
@@ -108,7 +108,7 @@ def get_asset_news(symbol: str, limit: int = 10):
     if symbol not in TICKER_MAP:
         raise HTTPException(status_code=404, detail=f"Unknown symbol: {symbol}")
     try:
-        from data.news import get_news
+        from app.domain.data.news import get_news
         items = get_news(symbol, limit=limit)
         return {
             "symbol": symbol,
@@ -131,10 +131,10 @@ def get_asset_news(symbol: str, limit: int = 10):
 def debug_signal(symbol: str):
     import traceback
     try:
-        from data.market import fetch_ohlcv
+        from app.domain.data.market import fetch_ohlcv
         import traceback, requests
         try:
-            from data.market import COINGECKO_ID_MAP, fetch_coingecko_ohlcv
+            from app.domain.data.market import COINGECKO_ID_MAP, fetch_coingecko_ohlcv
             cg_id = COINGECKO_ID_MAP.get(symbol.upper())
             url = f"https://api.coingecko.com/api/v3/coins/{cg_id}/ohlc?vs_currency=usd&days=90"
             resp = requests.get(url, timeout=20)
@@ -185,8 +185,8 @@ def backtest(
     if symbol not in TICKER_MAP:
         raise HTTPException(status_code=404, detail=f"Unknown symbol: {symbol}")
 
-    from data.market import fetch_ohlcv
-    from ml.backtest import run
+    from app.domain.data.market import fetch_ohlcv
+    from app.domain.ml.backtest import run
 
     df = fetch_ohlcv(symbol, period="2y")
     if df is None:

@@ -14,9 +14,9 @@ MAX_RETRAIN_PER_RUN = 10   # cap to avoid Railway timeout
 def score_model(sym: str) -> float:
     """Score a model's win rate on recent data. Returns -1 if can't score."""
     try:
-        from ml.ensemble import _model_path, FORWARD_DAYS, FEATURE_COLUMNS
-        from data.market import fetch_ohlcv
-        from ml.features import build_features
+        from app.domain.ml.ensemble import _model_path, FORWARD_DAYS, FEATURE_COLUMNS
+        from app.domain.data.market import fetch_ohlcv
+        from app.domain.ml.features import build_features
 
         path = _model_path(sym)
         if not path.exists():
@@ -58,9 +58,9 @@ def score_model(sym: str) -> float:
 def retrain_model(sym: str) -> bool:
     """Force retrain a model by deleting its pkl and regenerating."""
     try:
-        from ml.ensemble import _model_path
-        from data.market import fetch_ohlcv
-        from ml.ensemble import train
+        from app.domain.ml.ensemble import _model_path
+        from app.domain.data.market import fetch_ohlcv
+        from app.domain.ml.ensemble import train
 
         # Delete stale model to force full retrain
         path = _model_path(sym)

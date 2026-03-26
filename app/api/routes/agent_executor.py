@@ -52,7 +52,7 @@ def _patch(table, row_id, payload):
 
 def run_agent_executor():
     """Main function — called from cron every cycle."""
-    from core.signal_service import generate_signal
+    from app.domain.signal.service import generate_signal
     import yfinance as yf
 
     print("=== Agent Executor Starting ===")

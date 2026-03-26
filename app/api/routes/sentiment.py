@@ -17,7 +17,7 @@ def clear_cache():
             pass
     # Also flush Redis signal cache
     try:
-        from core.cache import _get_redis
+        from app.infrastructure.cache.cache import _get_redis
         r = _get_redis()
         if r:
             keys = r.keys("signal:*")
@@ -50,10 +50,10 @@ def debug_sentiment():
 @router.get("/sentiment/market", tags=["sentiment"])
 def market_sentiment():
     try:
-        from data.fear_greed import get_fear_greed
-        from data.positioning import get_positioning
-        from data.funding import get_funding_features
-        from data.macro import get_macro_features
+        from app.domain.data.fear_greed import get_fear_greed
+        from app.domain.data.positioning import get_positioning
+        from app.domain.data.funding import get_funding_features
+        from app.domain.data.macro import get_macro_features
 
         fg = get_fear_greed()
         btc_pos = get_positioning("BTC-USD")

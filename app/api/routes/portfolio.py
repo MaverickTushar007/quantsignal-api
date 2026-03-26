@@ -6,7 +6,7 @@ Uses Black-Litterman with ML signal probabilities.
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
 from typing import List
-from core.config import settings
+from app.core.config import settings
 import numpy as np
 import json
 from pathlib import Path

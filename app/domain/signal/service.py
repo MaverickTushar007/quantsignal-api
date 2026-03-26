@@ -9,12 +9,12 @@ from typing import Optional
 from dataclasses import dataclass, asdict
 from datetime import datetime, timezone
 
-from data.universe import TICKER_MAP
-from data.market import fetch_ohlcv
-from data.news import get_news, get_sentiment_score
-from ml.ensemble import predict, SignalResult
-from ml.features import build_features
-from core.reasoning import get_reasoning
+from app.domain.data.universe import TICKER_MAP
+from app.domain.data.market import fetch_ohlcv
+from app.domain.data.news import get_news, get_sentiment_score
+from app.domain.ml.ensemble import predict, SignalResult
+from app.domain.ml.features import build_features
+from app.domain.reasoning.service import get_reasoning
 
 
 @dataclass
@@ -85,7 +85,7 @@ def generate_signal(symbol: str, include_reasoning: bool = True) -> Optional[dic
     """
     import json
     from pathlib import Path
-    from core.cache import get_cached, set_cached
+    from app.infrastructure.cache.cache import get_cached, set_cached
 
     # --- LAYER 1: Redis cache (fastest) ---
     redis_key = f"signal:{symbol}"
@@ -106,7 +106,7 @@ def generate_signal(symbol: str, include_reasoning: bool = True) -> Optional[dic
                     sig["reasoning"] = ""
                 # Attach shock warning before returning
                 try:
-                    from data.correlations import load_shock_cache
+                    from app.domain.data.correlations import load_shock_cache
                     _shocks = load_shock_cache()
                     if symbol in _shocks:
                         sig['shock_warning'] = _shocks[symbol]
@@ -190,11 +190,11 @@ def generate_signal(symbol: str, include_reasoning: bool = True) -> Optional[dic
         reasoning=reasoning,
         generated_at=datetime.now(timezone.utc).isoformat(),
     ))
-    from core.cache import set_cached
+    from app.infrastructure.cache.cache import set_cached
     set_cached(f"signal:{symbol}", result, ttl=3600)
     # Attach insider trades (US stocks only)
     try:
-        from data.insider import get_insider_trades
+        from app.domain.data.insider import get_insider_trades
         insider = get_insider_trades(symbol)
         if insider.get("available"):
             result["insider"] = insider
@@ -203,7 +203,7 @@ def generate_signal(symbol: str, include_reasoning: bool = True) -> Optional[dic
 
     # Attach MTF alignment
     try:
-        from data.mtf import fetch_mtf_features
+        from app.domain.data.mtf import fetch_mtf_features
         mtf = fetch_mtf_features(symbol)
         # Add daily direction to MTF score
         daily_bull = result.get('direction') == 'BUY'
@@ -214,7 +214,7 @@ def generate_signal(symbol: str, include_reasoning: bool = True) -> Optional[dic
         print(f"MTF error for {symbol}: {e}")
     # Attach earnings flag if applicable
     try:
-        from data.earnings import get_earnings_flag
+        from app.domain.data.earnings import get_earnings_flag
         flag = get_earnings_flag(symbol)
         if flag:
             result["earnings_flag"] = flag
@@ -222,7 +222,7 @@ def generate_signal(symbol: str, include_reasoning: bool = True) -> Optional[dic
         pass
     # Attach shock warning if this asset is flagged
     try:
-        from data.correlations import load_shock_cache
+        from app.domain.data.correlations import load_shock_cache
         shock_cache = load_shock_cache()
         if symbol in shock_cache:
             result['shock_warning'] = shock_cache[symbol]

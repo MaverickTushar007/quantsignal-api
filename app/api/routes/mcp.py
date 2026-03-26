@@ -168,7 +168,7 @@ def get_signals(type: str = None, direction: str = None, limit: int = 20):
     """Get filtered signals."""
     try:
         cache = json.loads(Path("data/signals_cache.json").read_text())
-        from data.universe import TICKERS
+        from app.domain.data.universe import TICKERS
         ticker_map = {t["symbol"]: t for t in TICKERS}
         
         results = []

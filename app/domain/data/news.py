@@ -11,7 +11,7 @@ from dataclasses import dataclass
 from datetime import datetime, timezone
 from typing import List
 
-from core.config import settings
+from app.core.config import settings
 
 # --- Configuration ---
 

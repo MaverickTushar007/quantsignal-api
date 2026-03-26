@@ -199,7 +199,7 @@ class ReminderRequest(BaseModel):
 
 @router.post("/calendar/remind", tags=["calendar"])
 def set_reminder(req: ReminderRequest):
-    from data.reminders import save_reminder
+    from app.domain.data.reminders import save_reminder
     result = save_reminder(
         email=req.email,
         event_id=req.event_id,
@@ -221,7 +221,7 @@ def debug_remind():
     results["SUPABASE_KEY"] = os.environ.get("SUPABASE_ANON_KEY", "NOT SET")[:20]
     results["RESEND_KEY"] = os.environ.get("RESEND_API_KEY", "NOT SET")[:10]
     try:
-        from data.reminders import _get_supabase
+        from app.domain.data.reminders import _get_supabase
         sb = _get_supabase()
         test = sb.table("event_reminders").select("id").limit(1).execute()
         results["supabase_status"] = "ok"

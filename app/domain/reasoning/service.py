@@ -3,7 +3,7 @@ import asyncio
 from pathlib import Path
 import groq
 from groq import AsyncGroq
-from core.config import settings
+from app.core.config import settings
 
 
 def _groq_reasoning(prompt: str) -> str:
@@ -80,7 +80,7 @@ async def stream_chat(symbol: str, message: str, history: list):
         yield _yield_status("Accessing quantitative research corpus (RAG)...")
         rag_text = "No academic context available."
         try:
-            from core.rag import search_research
+            from app.domain.reasoning.rag import search_research
             if sig_data:
                 feat = ", ".join(sig_data.get("top_features", []))
                 dir_ = sig_data.get("direction", "neutral")
@@ -96,7 +96,7 @@ async def stream_chat(symbol: str, message: str, history: list):
         macro_context = ""
         funding_context = ""
         try:
-            from data.macro import get_macro_features
+            from app.domain.data.macro import get_macro_features
             macro = get_macro_features()
             macro_context = (
                 f"LIVE MACRO REGIME:\n"
@@ -112,7 +112,7 @@ async def stream_chat(symbol: str, message: str, history: list):
 
         if symbol != "GENERIC":
             try:
-                from data.funding import get_funding_features
+                from app.domain.data.funding import get_funding_features
                 funding = get_funding_features(symbol)
                 if funding.get('funding_rate', 0) != 0:
                     funding_context = (
@@ -140,12 +140,12 @@ async def stream_chat(symbol: str, message: str, history: list):
         fundamentals_context = ""
         if sig_data and symbol != "GENERIC":
             try:
-                from data.ownership import get_ownership_context, format_ownership_for_prompt
+                from app.domain.data.ownership import get_ownership_context, format_ownership_for_prompt
                 ownership = get_ownership_context(symbol)
                 if ownership:
                     fundamentals_context = format_ownership_for_prompt(symbol, ownership)
                     try:
-                        from data.insider import format_insider_for_prompt
+                        from app.domain.data.insider import format_insider_for_prompt
                         insider_ctx = format_insider_for_prompt(symbol)
                         if insider_ctx:
                             fundamentals_context += f"\n\n{insider_ctx}"

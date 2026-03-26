@@ -10,7 +10,7 @@ import pandas as pd
 from dataclasses import dataclass
 from typing import List
 
-from ml.features import build_features, FEATURE_COLUMNS
+from app.domain.ml.features import build_features, FEATURE_COLUMNS
 
 TRAIN_WINDOW  = 252   # 1 year training
 TEST_WINDOW   = 63    # 3 months testing per fold

@@ -17,7 +17,7 @@ from pathlib import Path
 from dataclasses import dataclass
 from typing import Optional
 from datetime import datetime, timezone
-from ml.features import build_features, FEATURE_COLUMNS
+from app.domain.ml.features import build_features, FEATURE_COLUMNS
 
 MODELS_DIR   = Path("ml/models")
 MODELS_DIR.mkdir(exist_ok=True)
@@ -145,8 +145,8 @@ def predict(ticker, df, sentiment=0.0):
 
         # Macro + funding rate regime adjustment
         try:
-            from data.macro import get_macro_features
-            from data.funding import get_funding_features
+            from app.domain.data.macro import get_macro_features
+            from app.domain.data.funding import get_funding_features
             macro = get_macro_features()
             funding = get_funding_features(ticker)
 
@@ -167,7 +167,7 @@ def predict(ticker, df, sentiment=0.0):
 
             # Fear & Greed contrarian adjustment
             try:
-                from data.fear_greed import get_fear_greed
+                from app.domain.data.fear_greed import get_fear_greed
                 fg = get_fear_greed()
                 contrarian = fg.get("contrarian_signal", 0.0)
                 prob = prob + contrarian * 0.015
@@ -176,7 +176,7 @@ def predict(ticker, df, sentiment=0.0):
 
             # Long/Short positioning contrarian adjustment
             try:
-                from data.positioning import get_positioning
+                from app.domain.data.positioning import get_positioning
                 pos = get_positioning(ticker)
                 pos_signal = pos.get("positioning_signal", 0.0)
                 # Crowded positioning = 1.5% contrarian adjustment

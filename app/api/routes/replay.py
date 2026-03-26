@@ -28,9 +28,9 @@ def replay_signal(
         raise HTTPException(status_code=400, detail="Only last 175 days supported")
 
     try:
-        from core.signal_service import TICKER_MAP, fetch_ohlcv, _build_confluence
-        from ml.features import build_features, FEATURE_COLUMNS
-        from ml.ensemble import _model_path, _is_stale, train
+        from app.domain.signal.service import TICKER_MAP, fetch_ohlcv, _build_confluence
+        from app.domain.ml.features import build_features, FEATURE_COLUMNS
+        from app.domain.ml.ensemble import _model_path, _is_stale, train
 
         meta = TICKER_MAP.get(symbol)
         if not meta:

@@ -4,7 +4,7 @@ AI replay explanation using Groq — fast, free, server-side.
 """
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
-from core.config import settings
+from app.core.config import settings
 import groq
 
 router = APIRouter()

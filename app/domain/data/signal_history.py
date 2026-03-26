@@ -19,9 +19,9 @@ def simulate_history(symbols: list, max_symbols: int = 30) -> list:
     Simulate signal history for a subset of symbols.
     Returns list of trade records.
     """
-    from data.market import fetch_ohlcv
-    from ml.features import build_features
-    from ml.ensemble import predict, FORWARD_DAYS as FWD
+    from app.domain.data.market import fetch_ohlcv
+    from app.domain.ml.features import build_features
+    from app.domain.ml.ensemble import predict, FORWARD_DAYS as FWD
 
     # Use high-volume liquid symbols for reliable history
     priority = [
@@ -76,7 +76,7 @@ def simulate_history(symbols: list, max_symbols: int = 30) -> list:
                         continue
 
                     if _wf_bundle is None or _wf_step % 60 == 0:
-                        from ml.ensemble import train as _train
+                        from app.domain.ml.ensemble import train as _train
                         _new = _train(sym, df_window)
                         if _new is not None:
                             _wf_bundle = _new
@@ -86,7 +86,7 @@ def simulate_history(symbols: list, max_symbols: int = 30) -> list:
 
                     # Predict inline — no file I/O, no retrain
                     import numpy as np
-                    from ml.ensemble import FEATURE_COLUMNS
+                    from app.domain.ml.ensemble import FEATURE_COLUMNS
                     _feat  = feat_window[FEATURE_COLUMNS].iloc[[-1]]
                     _xp    = float(_wf_bundle["xgb"].predict_proba(_feat)[0, 1])
                     _lp    = float(_wf_bundle["lgb"].predict_proba(_feat)[0, 1])
@@ -219,6 +219,6 @@ def simulate_history(symbols: list, max_symbols: int = 30) -> list:
 if __name__ == "__main__":
     import sys
     sys.path.insert(0, '.')
-    from data.universe import TICKERS
+    from app.domain.data.universe import TICKERS
     symbols = {t["symbol"] for t in TICKERS}
     simulate_history(list(symbols))

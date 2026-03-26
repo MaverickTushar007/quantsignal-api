@@ -7,7 +7,7 @@ require_pro — gates pro-only endpoints.
 
 from fastapi import Depends, HTTPException
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
-from core.config import settings
+from app.core.config import settings
 
 security = HTTPBearer(auto_error=False)
 

@@ -11,7 +11,7 @@ router = APIRouter()
 CRON_SECRET = os.getenv("CRON_SECRET", "quantsignal_cron_2026")
 
 def _rebuild():
-    from api.alerts import fire_signal_alerts
+    from app.api.routes.alerts import fire_signal_alerts
     import json, time, threading
     from pathlib import Path
     from concurrent.futures import ThreadPoolExecutor, as_completed
@@ -23,8 +23,8 @@ def _rebuild():
         old_cache = {}
 
     try:
-        from data.universe import TICKERS
-        from core.signal_service import generate_signal
+        from app.domain.data.universe import TICKERS
+        from app.domain.signal.service import generate_signal
 
         # Split into 4 parallel worker groups
         GROUPS = {
@@ -73,19 +73,19 @@ def _rebuild():
 
         # Run virtual agent executor
         try:
-            from api.agent_executor import run_agent_executor
+            from app.api.routes.agent_executor import run_agent_executor
             run_agent_executor()
         except Exception as e:
             print(f"Agent executor error: {e}")
         try:
-            from api.agent_executor import _close_hit_positions
+            from app.api.routes.agent_executor import _close_hit_positions
             _close_hit_positions()
         except Exception as e:
             print(f"Outcome checker error: {e}")
 
         # Scan for cross-asset shocks
         try:
-            from data.correlations import scan_for_shocks, save_shock_cache
+            from app.domain.data.correlations import scan_for_shocks, save_shock_cache
             shock_warnings = scan_for_shocks({}, threshold_pct=3.0)
             save_shock_cache(shock_warnings)
             print(f"Shock scan: {len(shock_warnings)} assets flagged")
@@ -101,8 +101,8 @@ def _rebuild():
 
         # Rebuild earnings cache daily
         try:
-            from data.earnings import rebuild_earnings_cache
-            from data.universe import TICKERS
+            from app.domain.data.earnings import rebuild_earnings_cache
+            from app.domain.data.universe import TICKERS
             rebuild_earnings_cache(TICKERS)
             print("Earnings cache rebuilt")
         except Exception as e:
@@ -110,7 +110,7 @@ def _rebuild():
 
         # Auto-retrain weak models (Karpathy: verifiable metric → auto-improve)
         try:
-            from ml.auto_retrain import run_auto_retrain
+            from app.domain.ml.auto_retrain import run_auto_retrain
             symbols = list(cache.keys())
             retrain_summary = run_auto_retrain(symbols)
             print(f"Auto-retrain: {retrain_summary['retrained']} models improved")
@@ -126,7 +126,7 @@ def _rebuild():
 
         # Clear Redis
         try:
-            from core.cache import _get_redis
+            from app.infrastructure.cache.cache import _get_redis
             r = _get_redis()
             if r:
                 for k in r.keys("*"):
@@ -156,7 +156,7 @@ def trigger_retrain(x_cron_secret: str = Header(None, alias="X-Cron-Secret")):
     def _run():
         try:
             cache = json.loads(Path("data/signals_cache.json").read_text())
-            from ml.auto_retrain import run_auto_retrain
+            from app.domain.ml.auto_retrain import run_auto_retrain
             summary = run_auto_retrain(list(cache.keys()))
             print(f"Manual retrain complete: {summary}")
         except Exception as e:
@@ -171,7 +171,7 @@ def cache_status():
     try:
         cache_path = Path("data/signals_cache.json")
         cache = json.loads(cache_path.read_text())
-        from data.universe import TICKERS
+        from app.domain.data.universe import TICKERS
         import os
         mtime = os.path.getmtime(cache_path)
         from datetime import datetime, timezone
@@ -199,7 +199,7 @@ def rebuild_mtf_cache():
     """One-shot: attach MTF to all cached signals + flush Redis."""
     import json, time
     from pathlib import Path
-    from data.mtf import fetch_mtf_features
+    from app.domain.data.mtf import fetch_mtf_features
 
     cache = json.loads(Path("data/signals_cache.json").read_text())
     updated = 0
@@ -213,7 +213,7 @@ def rebuild_mtf_cache():
             updated += 1
             # Also update Redis cache directly
             try:
-                from core.cache import set_cached
+                from app.infrastructure.cache.cache import set_cached
                 set_cached(f"signal:{sym}", sig, ttl=3600)
             except Exception:
                 pass
@@ -227,7 +227,7 @@ def rebuild_mtf_cache():
 def flush_signal_cache():
     """Delete all signal:* keys from Redis so fresh data is served."""
     try:
-        from core.cache import _get_redis
+        from app.infrastructure.cache.cache import _get_redis
         r = _get_redis()
         if not r:
             return {"error": "Redis not available"}
@@ -246,7 +246,7 @@ def check_outcomes(x_cron_secret: str = Header(None)):
         raise HTTPException(status_code=401, detail="Unauthorized")
     def _run():
         try:
-            from api.agent_executor import _close_hit_positions
+            from app.api.routes.agent_executor import _close_hit_positions
             _close_hit_positions()
             print("Outcome check complete")
         except Exception as e:

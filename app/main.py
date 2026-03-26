@@ -7,29 +7,29 @@ Run with: python -m uvicorn main:app --reload
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.middleware.gzip import GZipMiddleware
-from core.config import settings
-from api.routes import router
-from api.chat import router as chat_router
-from api.sentiment import router as sentiment_router
-from api.liquidity import router as liquidity_router
-from api.replay import router as replay_router
-from api.ai_explain import router as ai_explain_router
-from api.guardian import router as guardian_router
-from api.portfolio import router as portfolio_router
-from api.payments import router as payments_router
-from api.cron import router as cron_router
-from api.agents import router as agents_router
-from api.montecarlo import router as mc_router
-from api.alerts import router as alerts_router
-from api.mcp import router as mcp_router
-from api.history import router as history_router
+from app.core.config import settings
+from app.api.routes.routes import router
+from app.api.routes.chat import router as chat_router
+from app.api.routes.sentiment import router as sentiment_router
+from app.api.routes.liquidity import router as liquidity_router
+from app.api.routes.replay import router as replay_router
+from app.api.routes.ai_explain import router as ai_explain_router
+from app.api.routes.guardian import router as guardian_router
+from app.api.routes.portfolio import router as portfolio_router
+from app.api.routes.payments import router as payments_router
+from app.api.routes.cron import router as cron_router
+from app.api.routes.agents import router as agents_router
+from app.api.routes.montecarlo import router as mc_router
+from app.api.routes.alerts import router as alerts_router
+from app.api.routes.mcp import router as mcp_router
+from app.api.routes.history import router as history_router
 try:
-    from api.calendar import router as calendar_router
+    from app.api.routes.calendar import router as calendar_router
     _calendar_ok = True
 except Exception as e:
     print(f"Calendar router import failed: {e}")
     _calendar_ok = False
-from api.ws import router as ws_router
+from app.api.routes.ws import router as ws_router
 
 app = FastAPI(
 
