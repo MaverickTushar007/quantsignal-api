@@ -8,6 +8,7 @@ from fastapi import FastAPI
 from contextlib import asynccontextmanager
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.middleware.gzip import GZipMiddleware
+from app.api.middleware.protection import protection_middleware
 from app.core.config import settings
 from app.api.routes.routes import router
 from app.api.routes.metrics import router as metrics_router
@@ -82,3 +83,4 @@ app.include_router(ws_router, prefix="/api/v1")
 @app.get("/")
 async def root():
     return {"name": "QuantSignal API", "version": "1.0.0", "docs": "/docs"}
+app.middleware('http')(protection_middleware)
