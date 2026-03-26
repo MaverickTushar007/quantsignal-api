@@ -97,7 +97,8 @@ async def get_signal(
     if sig is None:
         raise HTTPException(status_code=503, detail=f"Could not generate signal for {symbol}")
 
-    if reason and not sig.get("reasoning"):
+    status = sig.get("reasoning_status", "")
+    if reason and status not in ("pending", "complete"):
         enqueue_reasoning_job(symbol, sig)
 
     return sig
