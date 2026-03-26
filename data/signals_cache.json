@@ -89,7 +89,7 @@
         "url": "https://cryptonews.com/news/strive-beats-tesla-bitcoin-holdings-sata-dividend/"
       }
     ],
-    "reasoning": "",
+    "reasoning": "Bitcoin's current technical setup is being driven by a bearish SMA_cross and a neutral stoch_D, with the RSI_14 also indicating a potential downturn, as indicated by the 50.9% ML confidence level. Holding Bitcoin at the current price of 70577.8662 offers a risk/reward ratio of approximately 1:2, with a potential take profit of 69169.221 and a stop loss at 71282.1888, representing a 1.4% downside and 1.0% upside. Dumping large amounts of Bitcoin, such as the recent $442 million sale by a 2013 whale, poses the biggest risk to this signal, as it could trigger a sharp decline in the asset's price, potentially collapsing below the stop loss level of 71282.1888.",
     "generated_at": "2026-03-20T11:03:17.693547+00:00",
     "mtf": {
       "tf_15m_bull": true,
@@ -197,7 +197,7 @@
         "url": "https://cryptonews.com/news/elons-grok-ai-predicts-the-price-of-xrp-bitcoin-and-ethereum-by-the-end-of-2026/"
       }
     ],
-    "reasoning": "",
+    "reasoning": "Ethereum's ML model is currently driven by a bullish MACD_hist and a positive 52-week price indicator, pos_52w, with 97% model agreement and 62.9% confidence. Buying Ethereum at 2149.0359 offers a potential reward of 41.0446, with a take profit at 2191.0805, and a risk of 21.0223, with a stop loss at 2128.0136, resulting in a roughly 2:1 risk-reward ratio. Invalidating this buy signal would require a significant drop in Ethereum's price, likely triggered by a surge in global conflict, such as an escalation of the Iran war, which could shift market sentiment and drive ETH-USD below its stop loss of 2128.0136.",
     "generated_at": "2026-03-20T11:04:40.609427+00:00",
     "mtf": {
       "tf_15m_bull": true,
@@ -305,7 +305,7 @@
         "url": "https://cryptonews.com/news/solana-stablecoin-liquidity-hits-record-open-interest-climbs/"
       }
     ],
-    "reasoning": "",
+    "reasoning": "Solana's ML model is currently driven by a bullish SMA_cross and a positive mom_10d, with 100% model agreement indicating a strong buy signal. Buying Solana at the current price of 89.3231 offers a potential reward of 1.7607 (91.0838 - 89.3231) and a potential loss of 0.8803 (89.3231 - 88.4428), representing a risk/reward ratio of approximately 2:1. Invalidating this buy signal would require a sudden and unexpected drop in Solana's crypto stablecoin liquidity, potentially triggered by a sharp decline in open interest, which has recently climbed to record highs.",
     "generated_at": "2026-03-20T11:04:42.501490+00:00",
     "mtf": {
       "tf_15m_bull": true,
@@ -394,7 +394,7 @@
     ],
     "confluence_score": "4/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "BNB is currently exhibiting bullish tendencies, driven by a positive ATR_pct signal and a bullish MACD signal, which are the top two drivers of the ML model's 59.1% confidence in a BUY direction. Buying BNB at the current price of 643.4455 offers a potential reward of 12.9576 if the take profit level of 656.4031 is reached, while the stop loss at 636.9667 limits the potential loss to 6.4788. Failing to hold above the 636.9667 stop loss level would invalidate the signal, particularly if BNB's price drops below this level on higher-than-average volume, given that current volume is only 1.0x average.",
     "generated_at": "2026-03-20T11:04:43.967077+00:00",
     "mtf": {
       "tf_15m_bull": true,
@@ -502,7 +502,7 @@
         "url": "https://cryptonews.com/news/goldman-sachs-xrp-shares-maxi-doge-presale/"
       }
     ],
-    "reasoning": "",
+    "reasoning": "XRP is currently exhibiting bearish tendencies, driven by a negative signal from dist_SMA20 and a widening BB_width, which are the top two drivers of the ML model's sell signal with 43.1% confidence. Selling XRP at 1.4512 offers a potential reward of 0.0283 if the price reaches the take profit level of 1.4229, while the stop loss at 1.4654 limits the risk to 0.0142. Invalidating this sell signal would require a significant bullish catalyst, such as a successful $1 billion SPAC deal announcement by Evernorth, which could rapidly increase XRP's price and undermine the bearish factors currently in place.",
     "generated_at": "2026-03-20T11:04:46.359099+00:00",
     "mtf": {
       "tf_15m_bull": true,
@@ -591,7 +591,7 @@
     ],
     "confluence_score": "3/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "Dogecoin's current technical setup is supported by the positive 52-week momentum (pos_52w) and distance above the 20-period simple moving average (dist_SMA20), both of which are driving the model's 78.8% confidence in a buy signal. Buying at the current price of 0.0944 offers a potential reward of 0.0019 (to the take profit level of 0.0963) and a potential loss of 0.0009 (to the stop loss level of 0.0935), representing a risk/reward ratio of approximately 2.1:1. Invalidating this buy signal would require a breakdown below the 0.0935 stop loss level, which could be triggered by a sudden surge in selling pressure, potentially exacerbated by Dogecoin's average true range of 0.0009.",
     "generated_at": "2026-03-20T11:04:48.046982+00:00",
     "mtf": {
       "tf_15m_bull": true,
@@ -680,7 +680,7 @@
     ],
     "confluence_score": "4/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "Render is currently exhibiting a bearish technical profile, with its position relative to the 52-week high (pos_52w) and distance from the 50-day simple moving average (dist_SMA50) being the top drivers of the sell signal, both indicating downward pressure. Selling at 1.716 with a take profit at 1.4362 and stop loss at 1.856 offers a reward of 0.2798 and a risk of 0.1400, resulting in a risk/reward ratio of approximately 2:1. Breaking above 1.856 would invalidate the sell signal, as Render would be overcoming its current resistance level and potentially setting up for a retest of recent highs.",
     "generated_at": "2026-03-20T11:04:51.219143+00:00",
     "mtf": {
       "tf_15m_bull": true,
@@ -769,7 +769,7 @@
     ],
     "confluence_score": "4/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "Nasdaq is currently exhibiting a bullish trend, driven by SMA_cross and BB_width indicators, which are signaling upwards with 78.5% confidence. Buying at 22090.6914 offers a risk/reward ratio of approximately 1:1.75, with a take profit target of 22796.6395 and a stop loss at 21737.7174, implying a 746.9481 point upside versus a 352.9741 point downside. Invalidating this bullish signal would require a sharp decline in Nasdaq below its recent support levels, specifically a drop of over 352.9741 points, or roughly 1.6% of its current price, which would likely be triggered by a broad market sell-off.",
     "generated_at": "2026-03-20T11:04:52.282565+00:00",
     "mtf": {
       "tf_15m_bull": false,
@@ -858,7 +858,7 @@
     ],
     "confluence_score": "5/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "Russell 2000 (^RUT) is currently exhibiting bullish tendencies, driven by a strong BB_pct signal and a positive dist_SMA20 indicator, both of which are pointing to an upward trend with high confidence. Buying at the current price of 2494.7104 offers a potential reward of 97.0055 points to the take profit level of 2591.7159, while the stop loss at 2446.2077 limits the potential loss to 48.5027 points, resulting in a risk/reward ratio of 2:1. Failing to hold above the 2446.2077 level would invalidate this bullish signal, particularly if the Russell 2000 (^RUT) were to break below this support and close below its 20-day SMA, currently at 2471.39.",
     "generated_at": "2026-03-20T11:04:52.869942+00:00",
     "mtf": {
       "tf_15m_bull": false,
@@ -947,7 +947,7 @@
     ],
     "confluence_score": "5/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "Nikkei 225 is currently exhibiting a bullish trend, driven by SMA_cross and ret_vol indicators, which are signaling upwards with high confidence, supported by 82.6% ML confidence and 100% model agreement. Buying at current price of 53372.5312 offers a potential reward of 2691.4956 to take profit at 56064.0268, while risking 1335.7477 to stop loss at 52026.7835, resulting in a reward-to-risk ratio of 2.02. Failing to hold above 52026.7835 would invalidate this signal, particularly if Nikkei 225 breaks below its recent support level, potentially triggering a sharp decline given the asset's average true range of 1345.7478.",
     "generated_at": "2026-03-20T11:04:53.935896+00:00",
     "mtf": {
       "tf_15m_bull": false,
@@ -1036,7 +1036,7 @@
     ],
     "confluence_score": "4/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "Hang Seng (^HSI) is currently exhibiting a bullish technical profile, with the ML model driven by a positive dist_SMA20 signal indicating the asset is above its 20-day simple moving average, and a bullish RSI_7 signal with a value below 70, suggesting room for further upside. Buying at the current price of 25277.3203 offers a potential reward of 883 points to the take profit level of 26160.195, while the stop loss at 24835.883 represents a risk of approximately 441 points, roughly in line with the asset's average true range of 441.4374. Failing to hold above the 24835.883 level would invalidate the signal, particularly if the Hang Seng (^HSI) were to break below this support with increasing volume, exceeding the current 1.0x average volume.",
     "generated_at": "2026-03-20T11:04:54.829572+00:00",
     "mtf": {
       "tf_15m_bull": true,
@@ -1125,7 +1125,7 @@
     ],
     "confluence_score": "5/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "Nasdaq ETF is currently exhibiting bullish characteristics, with BB_width and RSI_14 driving the signal, indicating a medium confidence buy direction with 67.7% probability. Buying at current price of 593.02 offers a potential reward of 18.4386 points to take profit at 611.4586, while risking 9.2193 points to stop loss at 583.8007, a roughly 2:1 risk-reward ratio. Failing to hold above 583.8007 would invalidate the signal, particularly if volume increases above 1.0x average volume, which could accelerate a decline in QQQ.",
     "generated_at": "2026-03-20T11:04:55.507160+00:00",
     "mtf": {
       "tf_15m_bull": false,
@@ -1214,7 +1214,7 @@
     ],
     "confluence_score": "6/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "Russell ETF (IWM) is currently exhibiting bullish tendencies, driven by a strong Bollinger Band percentage (BB_pct) signal and an oversold Reading of the 7-day Relative Strength Index (RSI_7), both of which are pointing upwards. Buying at the current price of 247.63 offers a potential reward of 10.39, or 4.2%, to the take profit level of 258.02, while risking 5.195, or 2.1%, to the stop loss level of 242.435. Failing to hold above the 242.435 stop loss level would invalidate the signal, particularly if volume increases above the current 1.0x average volume, which could indicate a shift in market sentiment against the IWM.",
     "generated_at": "2026-03-20T11:04:55.795591+00:00",
     "mtf": {
       "tf_15m_bull": true,
@@ -1303,7 +1303,7 @@
     ],
     "confluence_score": "6/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "Gold ETF (GLD) is currently exhibiting bullish technicals, with MACD_signal indicating a buy signal and BB_width suggesting increasing volatility, both driving the 73.1% confidence level in a long position. Buying at 426.41 with a take profit at 442.304 and stop loss at 418.463 offers a reward of 15.894 and a risk of 7.927, resulting in a risk/reward ratio of 2.00. Failing to hold above 418.463 would invalidate the signal, as it would suggest a breakdown below the recent support level, potentially triggering a sell-off in GLD.",
     "generated_at": "2026-03-20T11:04:56.126742+00:00",
     "mtf": {
       "tf_15m_bull": false,
@@ -1392,7 +1392,7 @@
     ],
     "confluence_score": "4/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "Silver ETF (SLV) is currently exhibiting a bullish technical profile, with mom_10d indicating a strong upward momentum and stoch_D suggesting oversold conditions are being reversed, both driving the 79.5% confidence level in a BUY direction. Buying at the current price of 65.68 offers a risk/reward ratio of approximately 1:1.15, with a take profit target at 71.6328 and a stop loss at 62.7036, implying a 5.96 potential upside versus a 2.96 potential downside. Failing to hold above the 62.7036 stop loss level would invalidate the signal, particularly if accompanied by a decline in mom_10d, which could signal a shift in market sentiment against the Silver ETF.",
     "generated_at": "2026-03-20T11:04:56.531898+00:00",
     "mtf": {
       "tf_15m_bull": false,
@@ -1481,7 +1481,7 @@
     ],
     "confluence_score": "6/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "XLE is currently exhibiting bearish tendencies, driven by a negative dist_SMA50 signal and a downward-trending stoch_D, which are contributing to the overall sell direction. Selling XLE at 59.36 offers a potential reward of 2.28, given a take profit at 57.08, while the stop loss at 60.5 presents a risk of 1.14, resulting in a reward-to-risk ratio of 2:1. Invalidating this sell signal would require a significant reversal in XLE's MACD, which is currently one of the top drivers, and would likely occur if the price breaks above 60.5, potentially driven by a surge in energy demand or unexpected bullish news.",
     "generated_at": "2026-03-20T11:04:57.140629+00:00",
     "mtf": {
       "tf_15m_bull": false,
@@ -1570,7 +1570,7 @@
     ],
     "confluence_score": "4/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "XLF is currently exhibiting bullish momentum, driven by a positive 5-day momentum indicator (mom_5d) and a rising MACD signal line (MACD_signal), which are the top two drivers of the 75.8% confident BUY signal. Buying XLF at 48.99 offers a risk/reward ratio of approximately 1:1.75, with a potential take profit at 50.7014 and a stop loss at 48.1343, representing a 3.53% upside and a 1.78% downside. Invalidating this BUY signal would require a sharp decline in XLF below 48.1343, likely triggered by a broad market sell-off or a negative surprise from a major financial sector component, such as a missed earnings report from a key bank.",
     "generated_at": "2026-03-20T11:04:57.621180+00:00",
     "mtf": {
       "tf_15m_bull": true,
@@ -1659,7 +1659,7 @@
     ],
     "confluence_score": "5/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "XLK is currently exhibiting bullish tendencies, driven by a positive MACD_hist signal and a dist_SMA20 indicator showing the stock is above its 20-day simple moving average, with 96% model agreement. Buying XLK at 138.43 offers a potential reward of 5.54 points to the take profit level of 143.9714, while risking 2.77 points to the stop loss level of 135.6593, a risk/reward ratio of approximately 2:1. Failing to hold above the 135.6593 stop loss level would invalidate the signal, particularly if accompanied by a decline in broader tech sector momentum, given XLK's high correlation to the sector.",
     "generated_at": "2026-03-20T11:04:58.081076+00:00",
     "mtf": {
       "tf_15m_bull": true,
@@ -1748,7 +1748,7 @@
     ],
     "confluence_score": "5/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "XLV is currently exhibiting bullish tendencies, driven by a positive MACD_hist signal and increasing mom_10d, which are contributing to the 60.9% confidence level in a BUY direction. Buying XLV at 146.61 offers a potential reward of 4.27 (to 150.8843) and a potential loss of 2.14 (to 144.4729), resulting in a risk/reward ratio of approximately 2:1. Invalidating this BUY signal would require a significant drop in XLV below its stop loss at 144.4729, likely triggered by a downturn in the broader healthcare sector, which could be precipitated by negative earnings reports from major pharmaceutical companies.",
     "generated_at": "2026-03-20T11:04:58.431525+00:00",
     "mtf": {
       "tf_15m_bull": false,
@@ -1837,7 +1837,7 @@
     ],
     "confluence_score": "6/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "ARKK's ML model is currently driven by a bullish ATR_pct and a bearish-to-bullish crossover in MACD_signal, with 74.1% confidence in a BUY direction. Buying ARKK at 71.07 offers a risk/reward ratio of approximately 1.44:1, with a take profit target of 75.5219 and a stop loss at 68.8441, implying a 4.51 point upside and a 2.23 point downside. Invalidating this BUY signal would require a sharp increase in ret_vol, specifically a 20%+ spike in daily returns, which could be triggered by unexpected negative news on ARKK's top holdings.",
     "generated_at": "2026-03-20T11:04:58.687720+00:00",
     "mtf": {
       "tf_15m_bull": true,
@@ -1926,7 +1926,7 @@
     ],
     "confluence_score": "7/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "Emerging Markets (IEMG) is currently exhibiting a strong bullish trend, driven by vol_trend and vol_ratio, which are both indicating a buy signal with high confidence. Buying at the current price of 70.74 offers a risk/reward ratio of approximately 1:1.75, with a take profit target of 73.9093 and a stop loss at 69.1554, suggesting a potential gain of 3.2353 points versus a potential loss of 1.5846 points. Invalidating this buy signal would require a sharp decline in Emerging Markets (IEMG) below the 69.1554 stop loss level, likely triggered by a sudden shift in investor sentiment away from risk-on assets, which could be exacerbated by the current average volume of 1.0x.",
     "generated_at": "2026-03-20T11:04:59.040237+00:00",
     "mtf": {
       "tf_15m_bull": false,
@@ -2028,7 +2028,7 @@
         "url": "https://www.cnbc.com/2026/03/19/interest-rates-bonds-bank-of-england-european-central-bank-investors-iran-war-ecb-inflation.html"
       }
     ],
-    "reasoning": "",
+    "reasoning": "Apple's ML model is currently seeing a bullish signal driven by a positive dist_SMA20 indicator and a rising MACD_hist, with 96% model agreement and 72.9% confidence. Buying at 248.96 offers a risk/reward ratio of approximately 1:1.05, with a take profit target of 258.93 and a stop loss at 243.975, which would be triggered if Apple's stock price falls below its recent support level. Invalidating this buy signal would require a significant downturn in iPhone sales, particularly in the Chinese market, which would contradict recent news that Apple has defied the China slump narrative.",
     "generated_at": "2026-03-20T11:04:59.896200+00:00",
     "mtf": {
       "tf_15m_bull": false,
@@ -2117,7 +2117,7 @@
     ],
     "confluence_score": "4/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "Microsoft's ML model is currently seeing a bearish signal driven by a negative MACD indicator and a dist_SMA50 signal indicating the stock is overextended, with 98% model agreement. Selling at 389.02 with a take profit at 373.5429 and stop loss at 396.7586 offers a risk/reward ratio of approximately 1:1.75, given the 7.7386 ATR and 1.0x average volume, which suggests a relatively low-risk short position. Invalidating this signal would require a sudden and unexpected surge in Microsoft's stock price, specifically a break above 396.7586, which would likely be driven by a major positive earnings surprise or unexpected acquisition announcement.",
     "generated_at": "2026-03-20T11:05:00.322710+00:00",
     "mtf": {
       "tf_15m_bull": false,
@@ -2213,7 +2213,7 @@
         "url": "https://www.cnbc.com/2026/03/19/figma-stock-drops-11percent-after-google-releases-vibe-design-product-stitch.html"
       }
     ],
-    "reasoning": "",
+    "reasoning": "Alphabet's current technical setup is supported by positive 52-week momentum and increasing return on volatility, as indicated by the ML model's top drivers, pos_52w and ret_vol, both showing bullish signals. Buying at the current price of 307.13 offers a potential reward of 12.53 points to the take profit level of 319.6613, while the stop loss at 300.8644 represents a risk of 6.27 points. Failing to hold above the 300.8644 level, particularly if Figma's recent 12% stock drop sparks a broader sell-off in design-focused tech stocks, would invalidate the buy signal for Alphabet.",
     "generated_at": "2026-03-20T11:05:00.864507+00:00",
     "mtf": {
       "tf_15m_bull": true,
@@ -2309,7 +2309,7 @@
         "url": "https://www.cnbc.com/2026/03/19/amazon-acquires-startup-rivr-to-test-robots-for-doorstep-delivery.html"
       }
     ],
-    "reasoning": "",
+    "reasoning": "Amazon's ML model is currently driven by a positive 52-week price trend and a bullish MACD histogram, with 63.9% confidence in a BUY direction. Buying at 208.76 offers a risk/reward ratio of approximately 1:0.94, with a take profit target of 218.9629 and a stop loss at 203.6586, implying a 5.0% upside and 2.5% downside. Failing to hold above the 203.6586 stop loss level would invalidate this signal, particularly if Amazon's recent acquisition of Rivr fails to impress investors and the stock's ATR of 5.1014 accelerates downward momentum.",
     "generated_at": "2026-03-20T11:05:01.315101+00:00",
     "mtf": {
       "tf_15m_bull": false,
@@ -2417,7 +2417,7 @@
         "url": "https://www.marketwatch.com/story/super-micro-cofounder-engaged-in-backdoor-scheme-to-divert-nvidia-chips-to-china-u-s-government-says-5efbea7a?mod=mw_rss_topstories"
       }
     ],
-    "reasoning": "",
+    "reasoning": "Nvidia's technical outlook is currently supported by bullish signals from MACD and SMA_cross, with the ML model showing 73.1% confidence in a BUY direction. Buying Nvidia at 178.56 offers a risk/reward ratio of approximately 1:0.94, with a potential take profit at 188.8861 and stop loss at 173.3969, representing a 5.83% upside and 2.83% downside. Invalidating this BUY signal would be a significant escalation of the U.S. government's investigation into Nvidia chip smuggling, particularly if Super Micro co-founder's alleged backdoor scheme is found to have directly involved Nvidia management, potentially causing a sharp decline below 173.3969.",
     "generated_at": "2026-03-20T11:05:01.720268+00:00",
     "mtf": {
       "tf_15m_bull": false,
@@ -2525,7 +2525,7 @@
         "url": "https://cryptonews.com/news/elons-grok-ai-predicts-the-price-of-xrp-bitcoin-and-ethereum-by-the-end-of-2026/"
       }
     ],
-    "reasoning": "",
+    "reasoning": "Tesla's ML model is currently driven by a bullish dist_SMA20 signal and a bearish-to-bullish crossover in MACD_hist, with 76.2% confidence in a BUY direction. Buying at 380.3 with a take profit at 403.0021 and stop loss at 368.9489 offers a risk/reward ratio of approximately 1:1.83, given the 11.3511 ATR and 1.0x average volume. Invalidating this BUY signal would be a regulatory crackdown on Tesla's 'Full Self-Driving' technology, specifically if the NHTSA probe results in a significant fine or forced recall, potentially sending TSLA below 368.9489.",
     "generated_at": "2026-03-20T11:05:02.214355+00:00",
     "mtf": {
       "tf_15m_bull": false,
@@ -2633,7 +2633,7 @@
         "url": "https://www.cnbc.com/2026/03/19/meta-cut-back-third-party-vendors-favor-of-ai-for-content-enforcement.html"
       }
     ],
-    "reasoning": "",
+    "reasoning": "Meta's ML model is currently driven by a bullish dist_SMA50 and a bearish MACD_hist, with the dist_SMA50 signal indicating the stock is 12.35% above its 50-day simple moving average, while the MACD_hist is -3.45, suggesting a potential shift in momentum. Buying Meta at 606.7 with a take profit at 637.9673 and stop loss at 591.0663 offers a reward of 31.2673 points and a risk of 15.6337 points, resulting in a risk/reward ratio of 2:1. Cutting back on third-party vendors in favor of AI for content enforcement, as recently announced, poses a significant risk to Meta's stock price, potentially invalidating the buy signal if the move is perceived as insufficient to address regulatory concerns.",
     "generated_at": "2026-03-20T11:05:02.636820+00:00",
     "mtf": {
       "tf_15m_bull": true,
@@ -2722,7 +2722,7 @@
     ],
     "confluence_score": "4/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "Netflix is seeing bearish signals from its MACD_hist and MACD indicators, with both drivers pointing to a downward trend. Holding Netflix at the current price of 91.74 offers a risk/reward ratio of approximately 4.99:2.49, with a take profit target at 86.7479 and a stop loss at 94.2361. Invalidating this hold signal would be a breakout above 94.2361, which could be triggered by a surprise increase in subscriber growth, a key metric for Netflix's stock performance.",
     "generated_at": "2026-03-20T11:05:02.929522+00:00",
     "mtf": {
       "tf_15m_bull": true,
@@ -2811,7 +2811,7 @@
     ],
     "confluence_score": "4/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "AMD is currently exhibiting a bullish technical profile, with SMA_cross and vol_trend drivers indicating positive signal directions, supported by 71.0% ML confidence and 98% model agreement. Buying at 205.27 offers a risk/reward ratio of approximately 1:1.63, with a take profit target of 221.3271 and a stop loss at 197.2414, implying a potential 16.0 upside versus 7.9 downside. Invalidating this bullish signal would require a breakdown below 197.2414, specifically if AMD fails to hold its 52-week high trend, given its current reliance on pos_52w as a key driver.",
     "generated_at": "2026-03-20T11:05:03.272931+00:00",
     "mtf": {
       "tf_15m_bull": true,
@@ -2900,7 +2900,7 @@
     ],
     "confluence_score": "3/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "Salesforce is currently exhibiting bearish tendencies, with MACD and stoch_K indicators showing downward momentum, contributing to the model's 45.3% confidence in a hold direction. Holding Salesforce at the current price of 194.99 offers a risk/reward ratio of approximately 1:1.17, with a take profit target of 180.3479 and a stop loss at 202.3111. Invalidating this signal would require a significant breakout above 202.3111, which could be triggered by a strong earnings report or unexpected positive news, given Salesforce's history of high volatility around quarterly releases.",
     "generated_at": "2026-03-20T11:05:03.621680+00:00",
     "mtf": {
       "tf_15m_bull": true,
@@ -2989,7 +2989,7 @@
     ],
     "confluence_score": "3/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "Oracle is currently seeing a bearish signal from its SMA_cross and mom_20d indicators, with the model agreement at 98% despite low confidence of 52.2%. Holding Oracle at its current price of 155.52 offers a risk/reward ratio of approximately 1:1.67, with a potential take profit at 141.8543 and stop loss at 162.3529, which could be triggered by a sudden increase in volume above 1.5x average volume, given the current volume is only at 1.0x average volume.",
     "generated_at": "2026-03-20T11:05:04.067661+00:00",
     "mtf": {
       "tf_15m_bull": true,
@@ -3078,7 +3078,7 @@
     ],
     "confluence_score": "3/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "Intel is currently exhibiting a bullish technical profile, with MACD and mom_20d drivers indicating positive momentum, supported by a 64.8% confidence level from the ML model. Buying Intel at 46.18 offers a risk/reward ratio of approximately 1:1.87, with a potential take profit at 50.8 and a stop loss at 43.87, which would be triggered if the stock's price falls below its recent support level. Invalidating this buy signal would require a sharp decline in Intel's stock price, likely driven by a negative earnings surprise or significant guidance cut, which could send the price below 43.87, a level that is 2.31 ATRs away from the current price.",
     "generated_at": "2026-03-20T11:05:04.455584+00:00",
     "mtf": {
       "tf_15m_bull": false,
@@ -3167,7 +3167,7 @@
     ],
     "confluence_score": "5/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "Qualcomm's current technical setup is supported by bullish signals from MACD and dist_SMA50, with the model indicating a 66.2% confidence level in a BUY direction. Buying Qualcomm at 131.28 offers a risk/reward ratio of approximately 1:1.53, with a potential take profit at 138.9704 and stop loss at 127.4348. Invalidating this signal would require a sharp decline in Qualcomm's stock price, likely triggered by a negative earnings surprise or significant industry disruption, which could send the price below 127.4348 and negate the bullish momentum driven by the 91% model agreement and 5/9 confluence of bullish factors.",
     "generated_at": "2026-03-20T11:05:04.795232+00:00",
     "mtf": {
       "tf_15m_bull": false,
@@ -3256,7 +3256,7 @@
     ],
     "confluence_score": "4/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "PayPal's ML model is currently seeing a bearish signal driven by mom_10d and MACD_hist, with 51.8% confidence, indicating a potential downturn. Holding PayPal at 44.19 offers a risk/reward ratio of approximately 1:1.45, with a take profit at 41.4302 and a stop loss at 45.5699, suggesting a relatively tight range. Invalidating this hold signal would require a significant surge in PayPal's price, likely driven by a catalyst such as unexpected earnings growth, which could quickly push the stock above 45.5699 and trigger a stop loss.",
     "generated_at": "2026-03-20T11:05:05.122945+00:00",
     "mtf": {
       "tf_15m_bull": true,
@@ -3345,7 +3345,7 @@
     ],
     "confluence_score": "3/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "Shopify's current technical setup is supported by its distance from the 50-day simple moving average (dist_SMA50) and 10-day momentum (mom_10d), both of which are indicating bullish signals. Buying Shopify at 122.37 offers a risk/reward ratio of approximately 1:1.93, with a potential take profit at 135.473 and a stop loss at 115.8185. Invalidating this bullish signal would be a break below the 20-day simple moving average (SMA20), specifically a close below 115.00, which could trigger a broader sell-off in Shopify.",
     "generated_at": "2026-03-20T11:05:05.425538+00:00",
     "mtf": {
       "tf_15m_bull": true,
@@ -3441,7 +3441,7 @@
         "url": "https://seekingalpha.com/news/4566545-what-analysts-are-saying-about-rivians-new-partnership-with-uber?utm_source=feed_news_all&utm_medium=referral&feed_item_type=news"
       }
     ],
-    "reasoning": "",
+    "reasoning": "Uber's technical outlook is bearish, driven by a negative signal from mom_20d and a bearish MACD indicator, which are the top two drivers of the current sell signal. Selling Uber at 75.34 offers a risk/reward ratio of approximately 2.16:1, with a potential profit of 4.601 if the stock reaches the take profit level of 70.739, and a potential loss of 2.3005 if it hits the stop loss level of 77.6405. Invalidating this sell signal would require a significant partnership-driven catalyst, such as a major expansion of Rivian's partnership with Uber, which could send the stock surging above 77.6405 and negate the bearish signals from mom_20d and MACD.",
     "generated_at": "2026-03-20T11:05:06.459934+00:00",
     "mtf": {
       "tf_15m_bull": true,
@@ -3549,7 +3549,7 @@
         "url": "https://cryptonews.com/news/strive-beats-tesla-bitcoin-holdings-sata-dividend/"
       }
     ],
-    "reasoning": "",
+    "reasoning": "Coinbase is currently exhibiting bearish tendencies, driven by ATR_pct and BB_width, which are indicating downward pressure with 48.8% confidence. Holding COIN at 202.91 offers a risk/reward ratio of approximately 1:1.17, with a potential take profit at 180.4365 and stop loss at 214.1468. Dumping $442 million in Bitcoin, as seen in recent news, poses a significant risk to Coinbase's price stability, potentially invalidating the hold signal if Bitcoin's collapse accelerates.",
     "generated_at": "2026-03-20T11:05:07.145719+00:00",
     "mtf": {
       "tf_15m_bull": true,
@@ -3638,7 +3638,7 @@
     ],
     "confluence_score": "4/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "Palantir's current technical setup is supported by its distance from the 50-day simple moving average (dist_SMA50) and volume trend (vol_trend), both of which are signaling bullish directions, with the model agreement standing at 88%. Buying Palantir at 155.68 offers a potential reward of 11.99 (167.6894 - 155.68) and a potential loss of 5.99 (155.68 - 149.6753), with the average true range (ATR) of 6.0047 providing context for these levels. Failing to hold above the 149.6753 stop loss level would invalidate this signal, particularly if Palantir's price drops below this level on volume greater than 1.0x average volume.",
     "generated_at": "2026-03-20T11:05:07.678630+00:00",
     "mtf": {
       "tf_15m_bull": false,
@@ -3727,7 +3727,7 @@
     ],
     "confluence_score": "4/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "MicroStrategy's current technical setup is characterized by a bearish MACD_signal and increasing ret_vol, both of which are driving the sell signal with 26.1% confidence. Selling at 138.24 with a take profit at 123.7586 and stop loss at 145.4807 offers a risk/reward ratio of approximately 2.45:1, considering the 14.48 point downside potential versus the 5.92 point upside risk. Invalidating this sell signal would require a significant reversal in MicroStrategy's MACD, given its status as a top driver, particularly if the stock were to break above 145.4807, thereby undermining the 97% model agreement and 5 out of 9 bearish factors currently in place.",
     "generated_at": "2026-03-20T11:05:08.177571+00:00",
     "mtf": {
       "tf_15m_bull": true,
@@ -3829,7 +3829,7 @@
         "url": "https://www.wsj.com/articles/trump-big-bank-conservative-bias-accusations-168abb27?mod=rss_markets_main"
       }
     ],
-    "reasoning": "",
+    "reasoning": "JPMorgan's technical outlook is currently supported by bullish signals from RSI_14 and dist_SMA20, with the model indicating a 70.9% confidence level in a BUY direction. Buying JPMorgan at 287.97 offers a risk/reward ratio of approximately 1.27:1, with a potential take profit at 300.8886 and a stop loss at 281.5107, implying a 12.91 point upside and a 6.46 point downside. Invalidating this BUY signal would require a significant deterioration in JPMorgan's wealth management business, potentially triggered by negative publicity surrounding its new athlete wealth management push or further allegations of discrimination against conservatives, which could send the stock below 281.5107.",
     "generated_at": "2026-03-20T11:05:08.746521+00:00",
     "mtf": {
       "tf_15m_bull": false,
@@ -3937,7 +3937,7 @@
         "url": "https://www.cnbc.com/2026/03/19/hegseth-iran-war-budget.html"
       }
     ],
-    "reasoning": "",
+    "reasoning": "Goldman Sachs is currently exhibiting bullish technicals, with the ML model driven by a positive signal from ret_vol and a bullish SMA_cross, which are contributing to the 74.0% confidence level. Buying Goldman Sachs at 809.5 offers a risk/reward ratio of approximately 1:1.67, with a potential profit of 52.54 to the take profit level of 862.04 and a potential loss of 26.27 to the stop loss level of 783.23. Invalidating this bullish signal would be a significant escalation of the Iran war, potentially leading to a $200 billion spending request, which could negatively impact Goldman Sachs' stock price due to increased market uncertainty and geopolitical risk.",
     "generated_at": "2026-03-20T11:05:09.480285+00:00",
     "mtf": {
       "tf_15m_bull": true,
@@ -4045,7 +4045,7 @@
         "url": "https://www.cnbc.com/2026/03/19/meta-cut-back-third-party-vendors-favor-of-ai-for-content-enforcement.html"
       }
     ],
-    "reasoning": "",
+    "reasoning": "Bank of America's current price action is being driven by a bearish SMA_cross and a negative MACD_signal, indicating a potential downtrend. Selling at 47.01 with a take profit at 44.5728 and a stop loss at 48.2286 offers a risk/reward ratio of approximately 1:2.37, given the 2.45 point difference between the stop loss and current price, versus the 2.4372 point difference between the current price and take profit. Invalidating this signal would require a sharp reversal above 48.2286, likely driven by a broad-based rally in the financial sector, which could be sparked by unexpectedly strong earnings reports from Bank of America's peers.",
     "generated_at": "2026-03-20T11:05:10.098235+00:00",
     "mtf": {
       "tf_15m_bull": true,
@@ -4153,7 +4153,7 @@
         "url": "https://www.cnbc.com/2026/03/20/anthropic-whos-most-optimistic-about-ai-and-who-isnt.html"
       }
     ],
-    "reasoning": "",
+    "reasoning": "Visa's current technical setup is supported by the ML model, which is seeing a bullish signal from mom_20d and a bearish crossover in dist_SMA50, both driving the 95.6% confidence level in a BUY direction. Buying Visa at 299.71 offers a risk/reward ratio of approximately 1:1.9, with a potential take profit at 312.0661 and a stop loss at 293.5319, representing a 4.1% upside and a 2.1% downside. Invalidating this signal would require a significant geopolitical escalation, such as a major conflict in the Gulf region, which could negatively impact consumer spending and, by extension, Visa's transaction volumes, potentially driven by events like the recent $23 billion in Gulf arms sales.",
     "generated_at": "2026-03-20T11:05:11.045083+00:00",
     "mtf": {
       "tf_15m_bull": true,
@@ -4261,7 +4261,7 @@
         "url": "https://www.cnbc.com/2026/03/20/nvidia-ai-agents-tokens-human-workers-engineer-jobs-unemployment-jensen-huang.html"
       }
     ],
-    "reasoning": "",
+    "reasoning": "Mastercard's current technical setup is supported by a bullish MACD_hist and a dist_SMA20 signal, both indicating a positive trend. Buying Mastercard at 491.14 offers a risk/reward ratio of approximately 2.24:1, with a potential take profit at 513.4157 and a stop loss at 480.0022. Invalidating this buy signal would require a sharp decline in Mastercard's stock price, likely triggered by a significant downturn in the broader financial sector, such as a 5% drop in the S&P 500, which would overwhelm the 11.1379 ATR and push Mastercard below its stop loss at 480.0022.",
     "generated_at": "2026-03-20T11:05:12.243982+00:00",
     "mtf": {
       "tf_15m_bull": false,
@@ -4369,7 +4369,7 @@
         "url": "https://www.marketwatch.com/story/asian-economies-running-out-of-fuel-and-time-as-the-fallout-from-epic-fury-widens-d63119d2?mod=mw_rss_topstories"
       }
     ],
-    "reasoning": "",
+    "reasoning": "Disney's ML model is currently driven by a bullish signal in BB_width and a bearish signal in ret_vol, with the former indicating a potential breakout and the latter suggesting caution. Buying Disney at 99.2 offers a risk/reward ratio of 3.85:1.95, with a take profit target of 103.09 and a stop loss at 97.255, implying a potential 3.89% gain versus a 1.95% loss. Invalidating this bullish signal would be a significant downturn in consumer spending, particularly if Epic Fury's fallout widens and impacts theme park attendance, a key revenue driver for Disney.",
     "generated_at": "2026-03-20T11:05:12.987976+00:00",
     "mtf": {
       "tf_15m_bull": true,
@@ -4471,7 +4471,7 @@
         "url": "https://seekingalpha.com/news/4566875-alibaba-tencent-shed-66b-as-ai-monetization-concerns-hit-stocks-report?utm_source=feed_news_all&utm_medium=referral&feed_item_type=news"
       }
     ],
-    "reasoning": "",
+    "reasoning": "Alibaba's current technical setup is supported by its high ret_vol and increasing ATR_pct, with both drivers flashing bullish signals, underpinned by a 93.5% ML confidence level. Buying Alibaba at 124.9 offers a risk/reward ratio of approximately 1:1.7, with a take profit target of 131.7253 and a stop loss at 121.4874, which would limit potential losses to 3.4126 points. Invalidating this buy signal would require a significant deterioration in Alibaba's AI monetization efforts, potentially triggered by further reports of valuation concerns, such as the recent $66B shed by Alibaba and Tencent.",
     "generated_at": "2026-03-20T11:05:13.714448+00:00",
     "mtf": {
       "tf_15m_bull": false,
@@ -4560,7 +4560,7 @@
     ],
     "confluence_score": "7/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "TSMC's technical outlook is currently supported by its Bollinger Band width and distance from the 50-day Simple Moving Average, with both indicators showing bullish signals, as indicated by the ML model's top drivers. Buying TSMC at 338.79 offers a potential reward of 20.46 points to the take profit level of 359.2423, while the stop loss at 328.5639 represents a risk of 10.23 points. Invalidating this bullish signal would require TSMC to break below its stop loss of 328.5639, likely triggered by a significant increase in selling volume, exceeding 1.5x its average volume, which would override the 91% model agreement and 70.4% ML confidence.",
     "generated_at": "2026-03-20T11:05:14.192669+00:00",
     "mtf": {
       "tf_15m_bull": true,
@@ -4649,7 +4649,7 @@
     ],
     "confluence_score": "6/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "ASML is currently exhibiting a bullish technical profile, with mom_20d indicating a strong upward momentum and RSI_14 suggesting the stock is not overbought, both driving the BUY signal with 61.7% confidence. Buying ASML at 1366.39 offers a potential reward of 85.38 (to 1451.7729) against a risk of 42.69 (to 1323.6986), a risk/reward ratio of approximately 2:1. Failing to hold above the 1323.6986 stop loss level would invalidate the signal, particularly if mom_20d reverses and turns negative, which could lead to a rapid decline in ASML's price.",
     "generated_at": "2026-03-20T11:05:14.579434+00:00",
     "mtf": {
       "tf_15m_bull": true,
@@ -4738,7 +4738,7 @@
     ],
     "confluence_score": "6/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "Airbnb's current technical setup is supported by a bullish MACD signal and a dist_SMA50 indicator showing the stock is above its 50-day moving average, with 59.3% confidence from the ML model. Buying at 130.79 offers a potential reward of 8.45 points to the take profit level of 139.24, while risking 4.225 points to the stop loss level of 126.565, a risk/reward ratio of approximately 2:1. Failing to hold above the 126.565 stop loss level would invalidate the signal, particularly if Airbnb's price drops below this level on volume exceeding 1.0x average volume.",
     "generated_at": "2026-03-20T11:05:15.041949+00:00",
     "mtf": {
       "tf_15m_bull": true,
@@ -4827,7 +4827,7 @@
     ],
     "confluence_score": "2/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "Snowflake's technical outlook is currently supported by a bullish vol_trend and a bearish-to-bullish crossover in RSI_14, with MACD also indicating a buy signal, as indicated by the 67.1% ML confidence level. Buying Snowflake at 175.4 offers a risk/reward ratio of approximately 1:1.17, with a take profit target of 190.3628 and a stop loss at 167.9186, which would result in a 15.0 loss or a 8.6% gain. Invalidating this buy signal would be a drop below 167.9186, specifically if Snowflake's price falls by more than 7.4814, its current ATR, in a single session, which could be triggered by a sudden increase in selling volume, exceeding the current 1.0x average volume.",
     "generated_at": "2026-03-20T11:05:15.476207+00:00",
     "mtf": {
       "tf_15m_bull": false,
@@ -4935,7 +4935,7 @@
         "url": "https://seekingalpha.com/news/4566875-alibaba-tencent-shed-66b-as-ai-monetization-concerns-hit-stocks-report?utm_source=feed_news_all&utm_medium=referral&feed_item_type=news"
       }
     ],
-    "reasoning": "",
+    "reasoning": "Cloudflare's current technical setup is supported by its SMA_cross and pos_52w indicators, which are both flashing bullish signals, with the model assigning a 67.0% confidence level to this BUY direction. Buying at 221.36 with a take profit at 241.293 and stop loss at 211.3935 offers a reward of 19.953 and a risk of 9.967, which is roughly a 2:1 ratio. Invalidating this signal would require a sharp decline in Cloudflare's stock price, likely triggered by a broader market downturn similar to the $66B shed by Alibaba and Tencent, which could drag NET down with it.",
     "generated_at": "2026-03-20T11:05:15.947092+00:00",
     "mtf": {
       "tf_15m_bull": false,
@@ -5043,7 +5043,7 @@
         "url": "https://cryptonews.com/news/gold-price-prediction-fed-slashes-rate-cut-outlook-and-sends-gold-crashing-10-from-5000-where-is-the-floor/"
       }
     ],
-    "reasoning": "",
+    "reasoning": "Gold Futures are currently exhibiting bullish tendencies, driven by a positive range_pct and a bullish MACD_signal, which are the top two drivers of the 74.3% confident BUY signal. Buying at the current price of 4650.8999 offers a potential reward of 200.4286 points to the take profit level of 4851.3285, while risking 100.2143 points to the stop loss level of 4550.6856, resulting in a reward-to-risk ratio of approximately 2:1. Slashing the Fed's rate cut outlook, which recently sent Gold crashing 10% from $5,000, poses the biggest risk to this signal, as a similar downturn could invalidate the BUY signal and push Gold Futures below the stop loss level of 4550.6856.",
     "generated_at": "2026-03-20T11:05:16.512188+00:00",
     "mtf": {
       "tf_15m_bull": true,
@@ -5151,7 +5151,7 @@
         "url": "https://www.cnbc.com/2026/03/19/166-a-barrel-middle-east-oil-gives-clue-to-where-all-prices-could-be-headed-if-iran-war-drags-on.html"
       }
     ],
-    "reasoning": "",
+    "reasoning": "Crude Oil prices are being driven lower by stochastic oscillator (stoch_K) and 20-day momentum (mom_20d) indicators, both of which are flashing bearish signals, with the model agreement at 91% and ML confidence at 22.3%. Selling at current levels of 95.58 offers a risk/reward ratio of approximately 1:1.87, with a take profit target of 74.9329 and a stop loss at 105.9036, considering the average true range (ATR) of 10.3236. Invalidating this bearish signal would be a significant escalation of the Iran conflict, potentially sending Crude Oil prices soaring above $166 per barrel, as hinted by Middle East oil prices.",
     "generated_at": "2026-03-20T11:05:16.961917+00:00",
     "mtf": {
       "tf_15m_bull": true,
@@ -5240,7 +5240,7 @@
     ],
     "confluence_score": "4/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "Silver Futures are currently exhibiting bullish characteristics, with MACD and MACD_signal drivers indicating a strong buy signal, supported by 98% model agreement and 83.6% confidence. Buying at the current price of 71.805 offers a potential reward of 8.8331 points to the take profit level of 80.6381, while risking 4.4166 points to the stop loss level of 67.3884, resulting in a reward-to-risk ratio of 2:1. Breaking below the stop loss level of 67.3884 would invalidate the signal, particularly if accompanied by a significant increase in average true range beyond the current 4.4166 level, which could indicate a shift in market sentiment against Silver Futures.",
     "generated_at": "2026-03-20T11:05:17.333782+00:00",
     "mtf": {
       "tf_15m_bull": true,
@@ -5329,7 +5329,7 @@
     ],
     "confluence_score": "4/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "Natural Gas prices are being driven higher by positive 52-week momentum and a bullish RSI_7 reading, with both indicators flashing strong buy signals. Buying Natural Gas at current levels offers a risk/reward ratio of approximately 1:1.88, with a take profit target of 3.5509 and a stop loss at 2.9331, which would be triggered if prices break down through key support levels, potentially driven by a surge in production that could increase supply and send NG=F plummeting.",
     "generated_at": "2026-03-20T11:05:17.787673+00:00",
     "mtf": {
       "tf_15m_bull": true,
@@ -5418,7 +5418,7 @@
     ],
     "confluence_score": "5/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "Copper prices are being driven higher by positive 52-week momentum and distance from the 50-period simple moving average, with both pos_52w and dist_SMA50 indicating bullish trends. Buying at the current price of 5.456 offers a risk/reward ratio of approximately 1:1.75, with a take profit target of 5.7376 and a stop loss at 5.3152, which would be triggered by a breakdown below the recent range support, potentially driven by a surge in global recession fears impacting copper demand.",
     "generated_at": "2026-03-20T11:05:18.278605+00:00",
     "mtf": {
       "tf_15m_bull": true,
@@ -5507,7 +5507,7 @@
     ],
     "confluence_score": "3/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "Wheat prices are being driven lower by the mom_20d indicator, which is bearish, and the stoch_K indicator, which is also bearish, as signaled by the ML model with 29.2% confidence. Selling at current levels of 603.25 offers a potential reward of 22.32 points if the take profit at 580.9286 is reached, while the stop loss at 614.4107 represents a risk of 11.16 points. Invalidating this bearish signal would require a significant shift in market sentiment, particularly if Wheat prices were to break above the key resistance level, potentially driven by unexpected supply disruptions or changes in global demand, which could send prices soaring above 614.4107.",
     "generated_at": "2026-03-20T11:05:18.605888+00:00",
     "mtf": {
       "tf_15m_bull": false,
@@ -5596,7 +5596,7 @@
     ],
     "confluence_score": "3/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "Cardano's current technical setup is bearish, with the dist_SMA20 indicator showing a strong sell signal and the SMA_cross indicator also confirming a downward trend. Selling at 0.2647 with a take profit at 0.2594 and a stop loss at 0.2674 offers a reward of 0.0053 and a risk of 0.0027, resulting in a risk/reward ratio of approximately 1.96. Invalidating this sell signal would require a significant bullish breakout above 0.2674, driven by a surge in buying volume above 1.0x average volume, which could be triggered by unexpected positive news or a broader cryptocurrency market rally.",
     "generated_at": "2026-03-21T12:57:46.916033+00:00",
     "mtf": {
       "tf_15m_bull": true,
@@ -5685,7 +5685,7 @@
     ],
     "confluence_score": "4/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "Avalanche's current downward momentum is driven by SMA_cross and BB_pct indicators, which are both signaling bearish trends, with the model agreement at 100% despite low confidence of 36.0%. Selling at current price of 9.5065 offers a potential reward of 0.1920 if the take profit at 9.3145 is reached, while the stop loss at 9.6025 limits the risk to 0.0960. Invalidating this sell signal would require Avalanche to break above its current resistance level, specifically surpassing the stop loss of 9.6025, which would likely be driven by a significant increase in buying volume, currently at 1.0x average volume.",
     "generated_at": "2026-03-21T12:57:48.550017+00:00",
     "mtf": {
       "tf_15m_bull": true,
@@ -5774,7 +5774,7 @@
     ],
     "confluence_score": "2/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "Polygon's ML model is currently driven by a bearish MACD_hist and a bearish BB_pct, indicating a potential downturn. Selling at 0.2164 with a take profit at 0.196 and a stop loss at 0.2266 offers a risk/reward ratio of approximately 1:1. Invalidating this signal would require a significant surge above 0.2266, which would likely be driven by a sudden increase in buying volume, exceeding the current 1.0x average volume.",
     "generated_at": "2026-03-21T13:48:55.901744+00:00",
     "mtf": {
       "tf_15m_bull": false,
@@ -5870,7 +5870,7 @@
         "url": "https://cryptonews.com/news/gold-price-prediction-fed-slashes-rate-cut-outlook-and-sends-gold-crashing-10-from-5000-where-is-the-floor/"
       }
     ],
-    "reasoning": "",
+    "reasoning": "Polkadot's current downward momentum is driven by SMA_cross and MACD indicators, both signaling bearish trends, with the model agreement at 100% despite low confidence of 15.4%. Selling at the current price of 1.4921 offers a potential reward of 0.0301 if the take profit at 1.462 is reached, while the stop loss at 1.5072 poses a risk of 0.0151. Invalidating this sell signal would require a sharp reversal, particularly if DOT-USD breaks above the stop loss at 1.5072, potentially driven by a shift in investor sentiment akin to the 10% crash in gold prices from $5,000.",
     "generated_at": "2026-03-21T13:18:05.572049+00:00",
     "mtf": {
       "tf_15m_bull": false,
@@ -5959,7 +5959,7 @@
     ],
     "confluence_score": "4/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "Chainlink's current technical setup is driven by a bearish MACD signal and a decreasing BB_width, which are contributing to the model's sell direction with 25.9% confidence. Selling at 9.1007 with a take profit at 8.9179 and stop loss at 9.192 offers a risk/reward ratio of approximately 1:1.75, given the 0.183 difference between the entry and stop loss, and 0.183 difference between the entry and take profit. Invalidating this sell signal would require Chainlink to break above 9.192, which would likely be driven by a significant increase in buying volume, potentially exceeding 1.5x average volume.",
     "generated_at": "2026-03-21T13:18:07.253065+00:00",
     "mtf": {
       "tf_15m_bull": true,
@@ -6048,7 +6048,7 @@
     ],
     "confluence_score": "2/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "Litecoin is currently exhibiting bearish tendencies, driven by a negative dist_SMA50 signal and a downward vol_trend, which are the top two drivers influencing the model's sell direction with 19.2% confidence. Selling at the current price of 55.9225 offers a risk/reward ratio of approximately 1:1.2, with a take profit target of 54.817 and a stop loss at 56.4752, considering the asset's average true range of 0.5527. Invalidating this sell signal would require a sudden surge in Litecoin's price above 56.4752, likely triggered by a significant increase in buying volume, exceeding the current 1.0x average volume.",
     "generated_at": "2026-03-21T13:29:23.299345+00:00",
     "mtf": {
       "tf_15m_bull": false,
@@ -6137,7 +6137,7 @@
     ],
     "confluence_score": "3/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "Cosmos is currently exhibiting bearish tendencies, driven by stoch_D and stoch_K, which are indicating oversold conditions with downward momentum. Selling at 1.8407 offers a risk/reward ratio of approximately 1:2, with a take profit target of 1.8038 and a stop loss at 1.8591, suggesting a potential 0.0369 gain versus a 0.0184 loss. Invalidating this sell signal would require a rapid price surge above 1.8591, potentially driven by unexpected positive news or a broader market rally, which could quickly turn the 40.0% confidence level in the model's sell direction into a losing trade.",
     "generated_at": "2026-03-21T13:29:24.804144+00:00",
     "mtf": {
       "tf_15m_bull": true,
@@ -6245,7 +6245,7 @@
         "url": "https://www.investing.com/news/stock-market-news/openai-to-nearly-double-workforce-to-8000-by-end2026-ft-reports-4574054"
       }
     ],
-    "reasoning": "",
+    "reasoning": "NEAR Protocol's ML model is currently driven by a bearish BB_pct and a bearish MACD, indicating a potential downturn. Selling at the current price of 1.3059 offers a risk/reward ratio of approximately 1:2, with a take profit target of 1.2793 and a stop loss at 1.3191. Invalidating this sell signal would require a sharp reversal above 1.3191, likely triggered by a broader crypto market rebound, such as a 5% surge in Bitcoin, which could quickly turn sentiment bullish for NEAR Protocol.",
     "generated_at": "2026-03-21T12:59:02.978737+00:00",
     "mtf": {
       "tf_15m_bull": false,
@@ -6334,7 +6334,7 @@
     ],
     "confluence_score": "3/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "Aptos is seeing bearish signals from its ATR_pct and MACD indicators, with the model highlighting these two drivers as the primary technical factors influencing the current SELL direction. Selling Aptos at the current price of 0.0001, with a take profit at 0.0001 and a stop loss at 0.0001, presents a risk/reward ratio that is essentially neutral, given the identical price levels for all three. Invalidating this SELL signal would require a significant shift in market sentiment, particularly if Aptos were to break above its 52-week high, given that the pos_52w driver is one of the top factors currently contributing to the bearish outlook.",
     "generated_at": "2026-03-21T13:49:05.639483+00:00",
     "mtf": {
       "tf_15m_bull": false,
@@ -6442,7 +6442,7 @@
         "url": "https://www.cnbc.com/2026/03/21/glp-1-diets-restaurants-protein-fiber-weight-loss-drugs.html"
       }
     ],
-    "reasoning": "",
+    "reasoning": "Optimism's current price action is being driven by a bullish dist_SMA20 signal and a bearish ret_vol signal, with the latter potentially indicating a buying opportunity as the model agreement stands at 100%. Buying at 0.1216 with a take profit at 0.1241 and stop loss at 0.1204 offers a reward of 0.0025 and a risk of 0.0012, representing a 2.08:1 risk/reward ratio. Invalidating this buy signal would be a break below 0.1204, particularly if driven by negative news impacting the broader crypto market, such as increased regulatory scrutiny following OpenClaw's ChatGPT moment.",
     "generated_at": "2026-03-21T12:59:34.244381+00:00",
     "mtf": {
       "tf_15m_bull": false,
@@ -6531,7 +6531,7 @@
     ],
     "confluence_score": "2/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "Injective's current technical setup is supported by bullish signals from SMA_cross and BB_pct, with the ML model showing 60.8% confidence in a buy direction. Buying Injective at 3.0936 offers a risk/reward ratio of approximately 1:1.5, with a take profit target of 3.1544 and a stop loss at 3.0632, which is 0.0304 below the current price. Invalidating this buy signal would require a breakdown below 3.0632, specifically a close below the lower Bollinger Band, which is currently being monitored by the BB_pct driver.",
     "generated_at": "2026-03-21T12:59:35.738053+00:00",
     "mtf": {
       "tf_15m_bull": true,
@@ -6627,7 +6627,7 @@
         "url": "https://www.cnbc.com/2026/03/21/buffett-defends-giving-pledge-against-thiel-and-billionaire-backlash.html"
       }
     ],
-    "reasoning": "",
+    "reasoning": "Fetch.ai's ML model is currently seeing a bearish signal driven by SMA_cross and BB_pct, with both indicators suggesting a downward trend. Selling Fetch.ai at 0.2199 offers a risk/reward ratio of approximately 1:3, with a take profit target of 0.2162 and a stop loss at 0.2218, implying a potential loss of 0.0027 and a potential gain of 0.0037. Invalidating this sell signal would require a significant surge in price, likely triggered by a broad-based cryptocurrency rally, which could be sparked by positive news or a sudden increase in buying volume, potentially pushing Fetch.ai's price above 0.2218.",
     "generated_at": "2026-03-21T12:59:36.791037+00:00",
     "mtf": {
       "tf_15m_bull": false,
@@ -6716,7 +6716,7 @@
     ],
     "confluence_score": "5/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "S&P 500 (^GSPC) is currently seeing bearish signals from MACD_signal and MACD, with the model agreement at 98% despite low confidence of 52.9%. Holding at the current price of 6506.48 offers a risk/reward ratio of approximately 1:1.79, with a take profit at 6327.4657 and a stop loss at 6595.9871, which could be triggered by a breakout above the upper Bollinger Band, given the current BB_width.",
     "generated_at": "2026-03-21T13:49:14.875236+00:00",
     "mtf": {
       "tf_15m_bull": false,
@@ -6805,7 +6805,7 @@
     ],
     "confluence_score": "5/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "Dow Jones (^DJI) is currently exhibiting a bullish technical profile, with mom_20d and ret_vol driving the signal upwards, indicating a medium-confidence buy opportunity with 67.3% ML confidence. Buying at the current price of 45577.4688 offers a potential reward of 1395.6953 to the take profit level of 46973.1641, while risking 694.8477 to the stop loss level of 44879.6211. Failing to hold above the 44879.6211 stop loss level would invalidate the signal, particularly if the Dow Jones (^DJI) were to break down through this support with increasing volume, exceeding the average volume of 1.0x.",
     "generated_at": "2026-03-21T13:49:17.637958+00:00",
     "mtf": {
       "tf_15m_bull": true,
@@ -6894,7 +6894,7 @@
     ],
     "confluence_score": "4/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "German DAX (^GDAXI) is currently exhibiting bullish tendencies, driven by a positive MACD_signal and a dist_SMA50 indicating the price is above the 50-day simple moving average, with 69.4% confidence. Buying at the current price of 22380.1895 offers a potential reward of 964.747 points to the take profit level of 23344.9364, while risking 482.373 points to the stop loss level of 21897.816. Failing to hold above the 22000 level, where the DAX has previously found support, would invalidate this signal and suggest a shift in market sentiment against the bullish thesis.",
     "generated_at": "2026-03-21T13:49:22.846188+00:00",
     "mtf": {
       "tf_15m_bull": false,
@@ -6983,7 +6983,7 @@
     ],
     "confluence_score": "5/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "S&P 500 ETF (SPY) is currently seeing bearish signals from MACD_signal and pos_52w, with the model indicating a 45.8% confidence level in a hold direction. Holding at the current price of 648.57, the risk/reward ratio is approximately 1:2, with a potential take profit at 630.8537 and a stop loss at 657.4282, suggesting a 17.72 point downside versus a 8.51 point upside. Breaking above 657.4282 would invalidate the hold signal, particularly given the 8.8581 average true range and 1.0x average volume, which could push S&P 500 ETF (SPY) towards new highs.",
     "generated_at": "2026-03-21T13:49:25.386426+00:00",
     "mtf": {
       "tf_15m_bull": false,
@@ -7072,7 +7072,7 @@
     ],
     "confluence_score": "6/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "20Y Treasury prices are being driven lower by positive 52-week momentum and Bollinger Band percentage signals, both of which are indicating bearish trends. Selling at current levels of 85.83 offers a risk/reward ratio of approximately 1:1.2, with a take profit target of 84.5257 and a stop loss at 86.4821, which would be triggered if the asset breaks above its recent range. Breaking above the 86.4821 level would invalidate the signal, particularly if accompanied by a shift in the dist_SMA50 driver, which is currently one of the key factors supporting the bearish outlook.",
     "generated_at": "2026-03-21T13:49:30.751567+00:00",
     "mtf": {
       "tf_15m_bull": false,
@@ -7161,7 +7161,7 @@
     ],
     "confluence_score": "3/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "Arbitrum's ML model is currently seeing bearish signals from mom_20d and BB_pct, with both indicators suggesting downward momentum. Holding Arbitrum at a current price of 0.0009, with a take profit at 0.0009 and stop loss at 0.0009, presents a risk/reward ratio that is essentially neutral, given the identical price levels. Invalidating this hold signal would require a significant shift in market sentiment, particularly if 3 or more of the 6 bearish factors currently in place, such as SMA_cross, were to reverse and turn bullish, thus altering the confluence of 6/9 bearish factors.",
     "generated_at": "2026-03-21T13:57:28.877516+00:00",
     "mtf": {
       "tf_15m_bull": false,
@@ -7250,7 +7250,7 @@
     ],
     "confluence_score": "3/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "Volatility (^VIX) is currently exhibiting bearish tendencies, driven by positive 52-week momentum (pos_52w) and a declining MACD histogram (MACD_hist), which are contributing to the model's sell signal. Selling at 26.78 with a take profit at 17.4586 and stop loss at 31.4407 offers a reward of approximately 9.32 points and a risk of approximately 4.66 points, resulting in a risk/reward ratio of roughly 2:1. Breaking above 31.4407 would invalidate the sell signal, as it would indicate a significant increase in market volatility, contradicting the bearish outlook suggested by the 6 out of 9 confluence factors currently in place.",
     "generated_at": "2026-03-21T13:57:33.795293+00:00",
     "mtf": {
       "tf_15m_bull": false,
@@ -7339,7 +7339,7 @@
     ],
     "confluence_score": "5/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "FTSE 100 is currently exhibiting bullish tendencies, driven by positive 52-week momentum and distance from the 50-day simple moving average, with both pos_52w and dist_SMA50 indicating upward pressure. Buying at the current price of 9918.3301 offers a potential reward of 389.4654 points to the take profit level of 10307.7955, while risking 194.7327 points to the stop loss level of 9723.5974. Breaking below 9723.5974 would invalidate the signal, particularly if accompanied by a rise in average true range above 194.7327, which could indicate a shift in market sentiment against the FTSE 100.",
     "generated_at": "2026-03-21T14:16:45.460515+00:00",
     "mtf": {
       "tf_15m_bull": false,
@@ -7428,7 +7428,7 @@
     ],
     "confluence_score": "5/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "High Yield Bond (HYG) is currently exhibiting bullish tendencies, driven by a positive MACD signal and a decreasing RSI_14, which are indicating a potential uptrend. Buying HYG at the current price of 78.92 offers a risk/reward ratio of approximately 1:0.86, with a take profit target of 79.7464 and a stop loss at 78.5068, suggesting a relatively attractive trade setup. Failing to break above 79.7464 within the next few trading sessions would invalidate this signal, particularly if the Average True Range (ATR) of 0.4132 contracts, indicating a loss of momentum in the HYG.",
     "generated_at": "2026-03-21T14:16:49.356311+00:00",
     "mtf": {
       "tf_15m_bull": false,
@@ -7524,7 +7524,7 @@
         "url": "https://www.cnbc.com/2026/03/19/interest-rates-bonds-bank-of-england-european-central-bank-investors-iran-war-ecb-inflation.html"
       }
     ],
-    "reasoning": "",
+    "reasoning": "Euro/Dollar is currently exhibiting bullish tendencies, driven by MACD_signal and MACD, which are both indicating a buy signal with the MACD_signal crossing above the zero line and the MACD showing a positive divergence. Buying at 1.1575 offers a risk/reward ratio of approximately 1:1.5, with a potential take profit at 1.1743 and a stop loss at 1.1492, representing a 1.68% upside and a 0.72% downside. Invalidating this buy signal would be a significant escalation of the Iran conflict, causing a flight to safety and driving Euro/Dollar below 1.1492, as European central banks' concerns over government bonds amplify.",
     "generated_at": "2026-03-21T14:16:54.562772+00:00",
     "mtf": {
       "tf_15m_bull": true,
@@ -7613,7 +7613,7 @@
     ],
     "confluence_score": "4/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "GBPUSD is currently seeing bearish signals from its ret_vol and MACD drivers, with the MACD histogram also indicating a downward trend, as reflected in the 52.4% ML confidence level. Holding at 1.3345, the risk/reward ratio is approximately 0.0202 to 0.0101, with a take profit target of 1.3143 and a stop loss at 1.3446. Invalidating this hold signal would require a significant breakout above 1.3446, which could be triggered by a surge in buying volume exceeding 1.0x average volume, potentially driven by unexpected positive news for the UK economy.",
     "generated_at": "2026-03-21T14:16:58.095657+00:00",
     "mtf": {
       "tf_15m_bull": true,
@@ -7702,7 +7702,7 @@
     ],
     "confluence_score": "4/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "Dollar/Yen is currently seeing bearish signals from its positive 52-week momentum and Bollinger Band width, with the ML model weighing these factors at 47.1% confidence. Holding at 159.22, risk/reward analysis suggests a potential profit of 1.7983 if the price reaches 157.4217, versus a loss of 0.8991 if it hits 160.1191. Invalidating this hold signal would require a significant shift in market sentiment, particularly if Dollar/Yen breaks above 160.1191, which could be triggered by a surge in US yields or a sharp decline in Japanese economic indicators.",
     "generated_at": "2026-03-21T14:17:02.440138+00:00",
     "mtf": {
       "tf_15m_bull": false,
@@ -7791,7 +7791,7 @@
     ],
     "confluence_score": "6/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "Aussie/Dollar is currently exhibiting bullish tendencies, driven by a positive MACD_signal and a bullish SMA_cross, which are the top two drivers of the 66.2% confident BUY signal. Buying at the current price of 0.7024 offers a potential reward of 0.0149 (0.7173 - 0.7024) and a potential risk of 0.0075 (0.7024 - 0.6949), resulting in a risk/reward ratio of 1.99:1. Failing to break above 0.7173, combined with a decline in the 87% model agreement, would invalidate this signal, particularly if the MACD_hist reverses and turns bearish, given its current influence as a top ML driver.",
     "generated_at": "2026-03-21T14:17:04.735408+00:00",
     "mtf": {
       "tf_15m_bull": false,
@@ -7880,7 +7880,7 @@
     ],
     "confluence_score": "3/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "USDCAD is currently exhibiting bullish momentum, driven by a positive signal from mom_10d and a bullish signal from ATR_pct, which are the top two drivers of the ML model's 59.1% confidence in a BUY direction. Buying at the current price of 1.3723 offers a potential reward of 0.0117 if the take profit level of 1.384 is reached, while the stop loss at 1.3664 limits the potential loss to 0.0059. Failing to break above 1.384 would invalidate the signal, particularly if the asset's price falls back below the stop loss level of 1.3664, which would suggest a failed bullish breakout in the USDCAD pair.",
     "generated_at": "2026-03-21T14:17:07.166661+00:00",
     "mtf": {
       "tf_15m_bull": true,
@@ -7969,7 +7969,7 @@
     ],
     "confluence_score": "3/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "USDCHF is seeing bearish signals from its MACD_signal and MACD indicators, which are currently driving the model's low 47.3% confidence in a hold direction. Holding at 0.7878 offers a risk/reward ratio of approximately 0.0089 to 0.0045, with a take profit at 0.7788 and stop loss at 0.7923, based on average true range of 0.0045. Breaking above 0.7923 would invalidate the signal, particularly if volume increases above its current 1.0x average volume level, given the already low model confidence and 6 out of 9 bearish confluence factors.",
     "generated_at": "2026-03-21T14:17:09.678275+00:00",
     "mtf": {
       "tf_15m_bull": false,
@@ -8058,7 +8058,7 @@
     ],
     "confluence_score": "5/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "USDINR=X is currently exhibiting bearish tendencies, driven by MACD and MACD_hist signals, which are indicating a downward trend with 41.8% confidence. Selling at 93.652 with a take profit at 91.973 and stop loss at 94.4915 offers a risk/reward ratio of approximately 1:1.91, given the average true range of 0.8395, a sharp move above 94.4915 would invalidate this signal, particularly if it coincides with a shift in the 91% model agreement.",
     "generated_at": "2026-03-21T14:17:14.269249+00:00",
     "mtf": {
       "tf_15m_bull": false,
@@ -8147,7 +8147,7 @@
     ],
     "confluence_score": "3/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "Nifty 50 is currently exhibiting bullish tendencies, driven by a rising RSI_14 and a positive MACD_signal, which are indicating a strong buy signal with 93.5% confidence. Buying at the current price of 23114.5 offers a potential reward of 691.2358 points to the take profit level of 23806.7358, while the stop loss at 22768.3821 limits the risk to 346.1179 points. Failing to hold above the recent support level, Nifty 50 could see a sharp decline, particularly if the RSI_14 reverses and falls below 50, which would invalidate the buy signal and potentially push the price towards the stop loss level of 22768.3821.",
     "generated_at": "2026-03-21T14:33:32.930641+00:00",
     "mtf": {
       "tf_15m_bull": false,
@@ -8236,7 +8236,7 @@
     ],
     "confluence_score": "3/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "Bank Nifty is currently exhibiting bullish tendencies, driven by increasing ret_vol and expanding BB_width, which are signaling upwards momentum. Buying at 53427.0508 offers a risk/reward ratio of approximately 1.93:1, with a potential profit of 1950.8348 to a take profit level of 55377.8856 and a potential loss of 975.4174 to a stop loss level of 52451.6334. Failing to hold above 52451.6334 would invalidate this signal, as a break below this level would likely trigger a cascade of stop losses and push Bank Nifty towards its recent lows.",
     "generated_at": "2026-03-21T14:33:37.555527+00:00",
     "mtf": {
       "tf_15m_bull": false,
@@ -8325,7 +8325,7 @@
     ],
     "confluence_score": "5/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "Reliance Industries is currently exhibiting bullish tendencies, driven by positive 52-week momentum and a bullish 20-day momentum indicator, which are contributing to the 60.9% buy signal confidence. Buying at the current price of 1414.4 offers a potential reward of 70.9144 points to the take profit level of 1485.3144, while the stop loss at 1378.9429 represents a risk of 35.4571 points. Failing to hold above the 1378.9429 stop loss level would invalidate the signal, particularly if the stock's average true range of 35.4572 is breached to the downside, suggesting a breakdown in the bullish trend.",
     "generated_at": "2026-03-21T14:33:41.517215+00:00",
     "mtf": {
       "tf_15m_bull": false,
@@ -8414,7 +8414,7 @@
     ],
     "confluence_score": "5/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "Tata Consultancy's current technical setup is supported by SMA_cross and pos_52w, both of which are indicating bullish signals, with the model showing 82.3% confidence in a BUY direction. Buying at the current price of 2390.6001 offers a potential reward of 113.2571 points to the take profit level of 2503.8572, while the stop loss at 2333.9716 limits the risk to 56.6285 points, roughly half the potential gain. Invalidating this bullish signal would require a breakdown below the lower Bollinger Band, currently implied by the BB_pct driver, which would likely occur if Tata Consultancy's price drops below 2333.9716, its designated stop loss level.",
     "generated_at": "2026-03-21T14:33:45.526153+00:00",
     "mtf": {
       "tf_15m_bull": true,
@@ -8503,7 +8503,7 @@
     ],
     "confluence_score": "6/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "Infosys is currently exhibiting a technically weak outlook, with the ML model driven by a bearish stochastic K-line (stoch_K) and a negative MACD signal line (MACD_signal), both indicating downward momentum. Holding Infosys at 1255.9 offers a risk/reward ratio of approximately 1:1.63, with a potential take profit at 1192.4 and a stop loss at 1287.65, suggesting a relatively tight trading range. Invalidating this hold signal would require a significant breakout above 1287.65, driven by a strong earnings surprise or other positive catalysts that could send Infosys stock soaring, potentially fueled by its 52-week positive momentum (pos_52w).",
     "generated_at": "2026-03-21T14:33:49.405997+00:00",
     "mtf": {
       "tf_15m_bull": true,
@@ -8592,7 +8592,7 @@
     ],
     "confluence_score": "4/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "HDFC Bank is currently exhibiting bullish tendencies, driven by a 14-period RSI indicating oversold conditions and a rising ATR percentage, which are aligning to support the buy signal with 70.0% confidence. Buying at the current price of 780.45 offers a potential reward of 41.08 points to the take profit level of 821.5286, while the stop loss at 759.9107 limits the potential loss to 20.54 points, roughly equal to the current ATR of 20.5393. Failing to hold above the 759.9107 stop loss level would invalidate the signal, particularly if volume increases above the current 1.0x average volume, which could accelerate a decline in HDFC Bank's price.",
     "generated_at": "2026-03-21T14:33:53.177317+00:00",
     "mtf": {
       "tf_15m_bull": false,
@@ -8681,7 +8681,7 @@
     ],
     "confluence_score": "3/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "ICICI Bank's current technical setup is supported by bullish signals from MACD and mom_20d, with the ML model showing 71.5% confidence in a BUY direction. Buying ICICI Bank at 1245.4 offers a potential reward of 59.4143 points to the take profit level of 1304.8143, while the stop loss at 1215.6929 represents a risk of 29.7071 points. Failing to hold above the 1215.6929 stop loss level would invalidate the signal, particularly if ICICI Bank's price drops below this level on higher-than-average volume, exceeding 1.0x average volume.",
     "generated_at": "2026-03-21T14:33:57.441596+00:00",
     "mtf": {
       "tf_15m_bull": false,
@@ -8770,7 +8770,7 @@
     ],
     "confluence_score": "5/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "Wipro's current technical setup is supported by positive 52-week momentum and a bullish SMA crossover, with the ML model assigning high importance to these factors. Buying Wipro at 190.9 offers a potential reward of 9.6429 points to the take profit level of 200.5429, while risking 4.8214 points to the stop loss level of 186.0786. Failing to hold above the 186.0786 stop loss level would invalidate the signal, particularly if volume increases above the current 1.0x average volume, which could indicate a shift in market sentiment against Wipro.",
     "generated_at": "2026-03-21T14:34:00.413259+00:00",
     "mtf": {
       "tf_15m_bull": true,
@@ -8859,7 +8859,7 @@
     ],
     "confluence_score": "6/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "HCL Technologies is currently exhibiting bullish tendencies, driven by positive 52-week momentum and distance above the 50-period simple moving average, with the MACD signal line also supporting the upside. Buying HCLTECH.NS at 1333.7 offers a potential reward of 67.4714 points to the take profit level of 1401.1714, while risking 33.7358 points to the stop loss level of 1299.9642. Failing to hold above the 1299.9642 stop loss level would invalidate the signal, particularly if HCLTECH.NS were to break down through this support with above-average volume, exceeding 1.0x average volume.",
     "generated_at": "2026-03-21T14:34:03.331933+00:00",
     "mtf": {
       "tf_15m_bull": false,
@@ -8948,7 +8948,7 @@
     ],
     "confluence_score": "4/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "Bajaj Finance is currently exhibiting bullish tendencies, with MACD_hist and stoch_D, two of the top ML drivers, indicating positive signal directions, contributing to the 73.5% confidence level in a BUY direction. Buying at the current price of 830.55 offers a potential reward of 56.1857 points to the take profit level of 886.7357, while risking 28.0929 points to the stop loss level of 802.4571, a risk/reward ratio of approximately 2:1. Failing to hold above the 802.4571 stop loss level would invalidate the signal, particularly if volume increases above the current 1.0x average volume, potentially triggering a sharper decline in Bajaj Finance.",
     "generated_at": "2026-03-21T14:34:06.511947+00:00",
     "mtf": {
       "tf_15m_bull": true,
@@ -9037,7 +9037,7 @@
     ],
     "confluence_score": "3/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "Kotak Mahindra Bank's current price action is being driven by negative momentum indicators, with mom_5d and mom_20d signals both pointing downwards, contributing to the overall bearish outlook. Holding Kotak Mahindra Bank at 366.75 offers a risk/reward ratio of approximately 1:2, with a potential take profit at 351.0571 and a stop loss at 374.5964, suggesting a tighter stop and more substantial downside potential. Invalidating this hold signal would require a significant reversal in Kotak Mahindra Bank's price, likely triggered by a break above 374.5964, which would contradict the 6 out of 9 bearish factors currently in place.",
     "generated_at": "2026-03-21T14:34:10.661541+00:00",
     "mtf": {
       "tf_15m_bull": false,
@@ -9126,7 +9126,7 @@
     ],
     "confluence_score": "4/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "Tech Mahindra's current technical setup is supported by a bullish MACD signal and increasing ret_vol, which are driving the 59.2% confidence BUY signal. Buying at 1384.8 with a take profit at 1458.8144 and stop loss at 1347.7929 offers a reward of 74.01 points against a risk of 37.0072 points, a risk/reward ratio of approximately 2:1. Failing to hold above 1347.7929 would invalidate the signal, particularly if accompanied by a spike in average true range above 37.0072, which could indicate a breakdown in the current bullish trend for Tech Mahindra.",
     "generated_at": "2026-03-21T14:34:15.123003+00:00",
     "mtf": {
       "tf_15m_bull": true,
@@ -9215,7 +9215,7 @@
     ],
     "confluence_score": "5/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "Axis Bank's current technical setup is being driven by a bearish mom_10d signal and a neutral MACD_signal, which are contributing to the model's 50.4% confidence in a hold direction. Holding Axis Bank at 1203.9 offers a risk/reward ratio of approximately 1:1.67, with a potential take profit at 1135.9714 and a stop loss at 1237.8643. Breaking above 1237.8643 would invalidate the signal, as it would indicate a strong bullish momentum in Axis Bank, contradicting the model's top drivers and increasing the likelihood of a further rally.",
     "generated_at": "2026-03-21T14:34:19.422590+00:00",
     "mtf": {
       "tf_15m_bull": false,
@@ -9304,7 +9304,7 @@
     ],
     "confluence_score": "7/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "State Bank of India is currently exhibiting bullish tendencies, driven by a positive signal from dist_SMA50 and dist_SMA20, which are indicating the stock is above its 50 and 20-day simple moving averages. Buying SBIN.NS at 1058.0 offers a potential reward of 56.4286 points to the take profit level of 1114.4286, while the stop loss at 1029.7857 represents a risk of 28.2143 points, roughly equal to the current ATR. Failing to hold above the 1029.7857 stop loss level would invalidate the signal, particularly if the MACD, a key driver of the bullish signal, were to turn bearish, suggesting a shift in momentum against SBIN.NS.",
     "generated_at": "2026-03-21T14:34:23.664919+00:00",
     "mtf": {
       "tf_15m_bull": false,
@@ -9393,7 +9393,7 @@
     ],
     "confluence_score": "3/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "Adani Enterprises is currently exhibiting bullish tendencies, with the ML model driven by a bullish stoch_K signal and a bearish-to-bullish crossover in BB_width, which are contributing to the 75.1% confidence level. Buying at the current price of 1927.1 offers a potential reward of 117.9286 points to the take profit level of 2045.0286, while the stop loss at 1868.1357 represents a risk of 58.9643 points, roughly equal to the average true range. Invalidating this buy signal would require a sharp decline below the stop loss level of 1868.1357, likely triggered by a sudden shift in market sentiment or an unexpected negative news event specifically impacting Adani Enterprises.",
     "generated_at": "2026-03-21T14:34:27.221032+00:00",
     "mtf": {
       "tf_15m_bull": false,
@@ -9482,7 +9482,7 @@
     ],
     "confluence_score": "6/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "Adani Ports is currently seeing a mixed signal from the ML model, driven by a positive 52-week price movement and a bearish MACD signal, which are influencing the model's 50.9% confidence level. Holding Adani Ports at 1365.4 offers a risk/reward ratio of approximately 1:1.07, with a potential take profit at 1282.4286 and a stop loss at 1406.8858, implying a 82.9724 point downside and a 41.4857 point upside. Invalidating this hold signal would be a breakout above 1406.8858, which could be triggered by a surge in volume above 1.0x average volume, potentially driven by unforeseen positive news or a broader market rally.",
     "generated_at": "2026-03-21T14:34:30.825810+00:00",
     "mtf": {
       "tf_15m_bull": true,
@@ -9571,7 +9571,7 @@
     ],
     "confluence_score": "4/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "Adani Green Energy's current technical setup is bearish, with the ML model driven by a negative stochastic oscillator (stoch_K) and a bearish MACD indicator, both contributing to the 41.0% confidence level in a SELL direction. Selling at 863.1 with a take profit at 799.5928 and stop loss at 894.8535 offers a risk/reward ratio of approximately 1:1.93, given the 63.5 point downside potential versus 31.7 point upside risk, as defined by the take profit and stop loss levels. Invalidating this SELL signal would require Adani Green Energy to break above 894.8535, thereby overcoming the current bearish confluence of 5 out of 9 factors and potentially signaling a trend reversal.",
     "generated_at": "2026-03-21T14:34:33.691049+00:00",
     "mtf": {
       "tf_15m_bull": true,
@@ -9660,7 +9660,7 @@
     ],
     "confluence_score": "5/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "Maruti Suzuki's ML model is currently driven by a bullish vol_trend and a bearish dist_SMA20, with the latter indicating the stock's distance from its 20-day simple moving average is below average. Buying at 12601.0 with a take profit at 13398.2857 and stop loss at 12202.3571 offers a reward of 797.2857 and a risk of 398.6429, resulting in a risk/reward ratio of 2:1. Failing to break above 13000.0, a key resistance level for Maruti Suzuki, would invalidate this buy signal and suggest a potential downtrend.",
     "generated_at": "2026-03-21T14:34:44.485434+00:00",
     "mtf": {
       "tf_15m_bull": false,
@@ -9749,7 +9749,7 @@
     ],
     "confluence_score": "5/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "Sun Pharmaceutical's current technical setup is driven by a bearish ATR_pct and a dist_SMA20 signal, both indicating a downward trend. Selling at 1777.1 with a take profit at 1706.0857 and a stop loss at 1812.6071 offers a reward of 70.99 and a risk of 35.51, resulting in a risk/reward ratio of 2:1. Invalidating this sell signal would require a significant surge in Sun Pharmaceutical's price, specifically a move above 1812.6071, which would likely be driven by a strong earnings report or unexpected positive news.",
     "generated_at": "2026-03-21T14:34:48.404978+00:00",
     "mtf": {
       "tf_15m_bull": true,
@@ -9838,7 +9838,7 @@
     ],
     "confluence_score": "5/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "Dr Reddys Labs is currently exhibiting a bearish technical profile, with MACD indicating a downward trend and pos_52w suggesting a negative momentum, both driving the SELL signal. Selling at 1298.9 with a take profit at 1236.1571 and stop loss at 1330.2715 offers a risk/reward ratio of approximately 1:1.93, given the 62.743 point downside target and 31.3715 point upside stop. Invalidating this SELL signal would require a significant reversal in Dr Reddys Labs' price action, specifically a move above 1330.2715, which would likely be driven by a strong bullish crossover in the SMA_cross indicator, one of the top ML drivers.",
     "generated_at": "2026-03-21T14:34:52.899078+00:00",
     "mtf": {
       "tf_15m_bull": false,
@@ -9927,7 +9927,7 @@
     ],
     "confluence_score": "3/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "Cipla's current technical setup is supported by bullish signals from MACD and mom_10d, with the latter indicating a strong momentum uptrend over the past 10 days. Buying Cipla at 1256.4 offers a reward of 52.7 points to the take profit level of 1309.1, while the stop loss at 1230.05 limits the potential loss to 26.35 points, roughly equal to the asset's average true range. Failing to hold above 1230.05 would invalidate the signal, particularly if volume increases above 1.0x average, suggesting a breakdown in the 99% model agreement and bullish confluence of 3 out of 9 factors.",
     "generated_at": "2026-03-21T14:35:15.444913+00:00",
     "mtf": {
       "tf_15m_bull": true,
@@ -10016,7 +10016,7 @@
     ],
     "confluence_score": "6/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "ONGC's technical outlook is bearish, driven by a negative MACD histogram and a positive 52-week price movement that is now reversing, as indicated by the ML model with 44.2% confidence. Selling ONGC at 265.4 with a take profit at 246.7214 and a stop loss at 274.7393 offers a reward of 18.6786 and a risk of 9.3393, which is roughly 2:1. Failing to break below 246.7214 would invalidate this signal, particularly if ONGC's price instead surges past 274.7393, which is 3.5% above the current price of 265.4.",
     "generated_at": "2026-03-21T14:35:31.507056+00:00",
     "mtf": {
       "tf_15m_bull": false,
@@ -10105,7 +10105,7 @@
     ],
     "confluence_score": "6/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "Coal India's current technical setup is driven by a bearish momentum indicator (mom_10d) and a narrowing Bollinger Band width (BB_width), both of which are contributing to the model's sell signal with 24.6% confidence. Selling at 468.15 with a take profit at 440.5071 and stop loss at 481.9714 offers a reward of 27.64 points and a risk of 13.86 points, resulting in a risk/reward ratio of approximately 2:1. Invalidating this sell signal would require a significant surge in coal prices, specifically a 3.5% move above 481.9714, which could be triggered by unexpected demand or supply disruptions in the Indian coal market.",
     "generated_at": "2026-03-21T14:35:35.484849+00:00",
     "mtf": {
       "tf_15m_bull": false,
@@ -10194,7 +10194,7 @@
     ],
     "confluence_score": "7/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "Tata Steel's current technical setup is supported by its return volatility and MACD, which are signaling bullish directions with the MACD indicating a potential upside and return volatility suggesting increased investor appetite. Buying at 196.77 offers a risk/reward ratio of approximately 1:1.35, with a take profit target of 210.1957 and a stop loss at 190.0571, implying a potential 13.43 point gain versus a 6.713 point loss. Invalidating this buy signal would be a breakdown below 190.0571, specifically if Tata Steel's price falls below its lower Bollinger Band, which is currently being monitored by the model due to the narrow Bollinger Band width.",
     "generated_at": "2026-03-21T14:35:42.800863+00:00",
     "mtf": {
       "tf_15m_bull": true,
@@ -10283,7 +10283,7 @@
     ],
     "confluence_score": "6/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "JSW Steel's current technical setup is supported by bullish signals from stoch_K and stoch_D, with 96% model agreement and 59.0% ML confidence. Buying at 1169.6 offers a potential reward of 73.9 points to the take profit level of 1243.5, while risking 36.95 points to the stop loss level of 1132.6499, a risk/reward ratio of 2:1. Failing to hold above the 1132.6499 stop loss level would invalidate the buy signal, particularly if accompanied by a rise in ATR above 36.95, indicating increased selling pressure in JSW Steel.",
     "generated_at": "2026-03-21T14:35:48.593584+00:00",
     "mtf": {
       "tf_15m_bull": false,
@@ -10372,7 +10372,7 @@
     ],
     "confluence_score": "4/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "Hindustan Unilever's current technical setup is being driven by a bearish SMA_cross and a bearish BB_pct, which are contributing to the model's sell signal with 42.4% confidence. Selling at 2082.7 with a take profit at 1988.4428 and a stop loss at 2129.8285 offers a risk/reward ratio of approximately 1:1.95, given the 94.2582 point downside target and 47.1286 point stop loss, but 96% model agreement suggests a high conviction trade, although a sudden surge in volume above 1.5x average could invalidate this signal.",
     "generated_at": "2026-03-21T14:35:57.641908+00:00",
     "mtf": {
       "tf_15m_bull": true,
@@ -10461,7 +10461,7 @@
     ],
     "confluence_score": "4/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "ITC Ltd is currently exhibiting bearish tendencies, with BB_pct and dist_SMA20 driving the signal, indicating a potential downturn as BB_pct suggests overbought conditions and dist_SMA20 shows a significant distance from the 20-day moving average. Holding ITC Ltd at 299.95 offers a risk/reward ratio of approximately 1:1.55, with a take profit at 288.3286 and a stop loss at 305.7607, implying a 11.62 point downside potential versus a 5.79 point upside risk. Invalidating this hold signal would be a breakout above 305.7607, specifically if ITC Ltd's price surges on high volume, exceeding 1.5x average volume, which could signal a shift in market sentiment and force a reevaluation of the bearish factors.",
     "generated_at": "2026-03-21T14:36:05.061757+00:00",
     "mtf": {
       "tf_15m_bull": false,
@@ -10550,7 +10550,7 @@
     ],
     "confluence_score": "4/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "Asian Paints is currently exhibiting a technically neutral outlook, with MACD_signal indicating a bearish direction and BB_pct showing a slightly bullish signal, contributing to the model's low confidence of 50.7%. Holding at the current price of 2195.3999, the risk/reward ratio is approximately 1:1, with a potential take profit at 2087.5857 and a stop loss at 2249.307, implying a 107.8142 point downside risk versus a 107.8142 point upside potential. Breaking above 2249.307 would invalidate the hold signal, as it would suggest a strong bullish momentum for Asian Paints, contradicting the bearish influence of the MACD_signal and the 5 out of 9 bearish confluence factors.",
     "generated_at": "2026-03-21T14:36:10.984929+00:00",
     "mtf": {
       "tf_15m_bull": true,
@@ -10639,7 +10639,7 @@
     ],
     "confluence_score": "7/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "Titan Company's ML model is currently seeing a bearish signal from BB_width and a neutral signal from MACD, with SMA_cross also indicating a potential downtrend. Holding at 4106.6001, risk/reward analysis suggests a potential loss of 109.1785 to stop loss at 4215.7786, versus a gain of 218.3569 to take profit at 3888.2431. Invalidating this hold signal would require a significant breakout above 4215.7786, which could be triggered by a surge in volume above 1.0x average volume, given Titan Company's current ATR of 109.1785.",
     "generated_at": "2026-03-21T14:36:16.364381+00:00",
     "mtf": {
       "tf_15m_bull": false,
@@ -10728,7 +10728,7 @@
     ],
     "confluence_score": "4/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "Larsen and Toubro is currently exhibiting a bullish technical profile, with SMA_cross and BB_width drivers indicating a buy signal, driven by a 58.1% confidence level from the ML model. Buying at 3434.8 with a take profit at 3691.6001 and stop loss at 3306.4 offers a reward of 256.8 points against a risk of 128.4 points, a risk/reward ratio of approximately 2:1. Failing to hold above the 3306.4 stop loss level would invalidate the signal, particularly if volume were to surge above 1.0x average volume, potentially indicating a shift in market sentiment against Larsen and Toubro.",
     "generated_at": "2026-03-21T14:36:22.890372+00:00",
     "mtf": {
       "tf_15m_bull": true,
@@ -10817,7 +10817,7 @@
     ],
     "confluence_score": "5/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "Power Grid Corp's ML model is currently driven by a bearish signal from ret_vol and a bullish signal from pos_52w, with SMA_cross also contributing to the overall 49.0% confidence level. Holding at 297.6, risk/reward is skewed with a potential take profit at 281.3571 and stop loss at 305.7214, implying a 16.2431 point downside versus a 8.1214 point upside. Invalidating this hold signal would require a significant breakout above 305.7214, which could be triggered by a surge in volume above 1.0x average volume, given Power Grid Corp's current ATR of 8.1214.",
     "generated_at": "2026-03-21T14:36:26.266934+00:00",
     "mtf": {
       "tf_15m_bull": false,
@@ -10906,7 +10906,7 @@
     ],
     "confluence_score": "6/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "Bajaj Auto's current technical setup is bearish, with dist_SMA20 and MACD indicating downward momentum, driven by a negative MACD histogram. Selling at 9051.0 offers a risk/reward ratio of approximately 1:1.75, with a take profit target of 8520.9286 and a stop loss at 9316.0357, which would be breached if Bajaj Auto's price surges above 9316.0357 on high volume, exceeding 1.5x average volume.",
     "generated_at": "2026-03-21T16:03:14.958209+00:00",
     "mtf": {
       "tf_15m_bull": true,
@@ -10995,7 +10995,7 @@
     ],
     "confluence_score": "5/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "NTPC Ltd is currently exhibiting a bearish technical outlook, with MACD and mom_10d drivers indicating downward momentum, contributing to the model's 51.0% confidence in a hold direction. Holding NTPC Ltd at 380.95 offers a risk/reward ratio of approximately 1:2.55, with a potential take profit at 360.0643 and stop loss at 391.3929, implying a 20.89 point downside versus a 10.95 point upside. Breaking above 391.3929 would invalidate the signal, as it would suggest a bullish breakout, driven by increasing momentum, and potentially forcing a re-evaluation of the SMA_cross and other technical indicators for NTPC Ltd.",
     "generated_at": "2026-03-21T22:11:57.559067+00:00",
     "mtf": {
       "tf_15m_bull": true,
@@ -11084,7 +11084,7 @@
     ],
     "confluence_score": "4/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "GAIL India is currently exhibiting bullish momentum, driven by a positive 5-day momentum indicator (mom_5d) and a rising MACD histogram (MACD_hist), which are the top two drivers of the 81.2% buy signal. Buying GAIL India at the current price of 142.87 offers a potential reward of 10.39 (153.2814 - 142.87) and a potential risk of 5.21 (142.87 - 137.6643), resulting in a reward-to-risk ratio of 2:1. Failing to hold above the 137.66 stop loss level would invalidate the signal, particularly if the stock's average true range (ATR) of 5.21 is breached to the downside, suggesting a breakdown in the current bullish trend.",
     "generated_at": "2026-03-21T22:12:00.153349+00:00",
     "mtf": {
       "tf_15m_bull": false,
@@ -11173,7 +11173,7 @@
     ],
     "confluence_score": "4/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "Indian Oil Corp's current price action is being driven by a bearish BB_pct and a dist_SMA20 signal, both of which are indicating a downward trend with 51.5% confidence. Holding IOC.NS at 144.6 offers a risk/reward ratio of approximately 1:1.5, with a potential take profit at 133.6105 and a stop loss at 150.0947. Invalidating this hold signal would be a breakout above 150.0947, which could be triggered by a sudden increase in demand for petroleum products in India, potentially driven by a 5-10% surge in transportation activity.",
     "generated_at": "2026-03-21T22:12:02.814624+00:00",
     "mtf": {
       "tf_15m_bull": false,
@@ -11262,7 +11262,7 @@
     ],
     "confluence_score": "4/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "BPCL is currently exhibiting bullish tendencies, driven by a positive dist_SMA50 signal indicating recent price action is above the 50-day simple moving average, and a bullish BB_width signal suggesting increasing volatility. Buying BPCL at 287.8 offers a potential reward of 24.1286 points to the take profit level of 311.9286, while risking 12.0643 points to the stop loss level of 275.7357, a roughly 2:1 reward-to-risk ratio. Failing to hold above the 275.7357 stop loss level would invalidate the signal, particularly if BPCL's price drops below this level on volume exceeding 1.0x average volume.",
     "generated_at": "2026-03-21T22:12:08.772569+00:00",
     "mtf": {
       "tf_15m_bull": true,
@@ -11351,7 +11351,7 @@
     ],
     "confluence_score": "4/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "HPCL is currently exhibiting bearish tendencies, with MACD_hist and BB_pct driving the signal, indicating a potential downturn as MACD_hist is showing a negative divergence and BB_pct is suggesting overbought conditions. Holding HPCL at 336.3, the risk/reward ratio is approximately 1:1.35, with a take profit at 301.2714 and a stop loss at 353.8143, which could be triggered if HPCL breaks above 353.8143, invalidating the bearish signal and potentially leading to a short squeeze.",
     "generated_at": "2026-03-21T22:12:13.195263+00:00",
     "mtf": {
       "tf_15m_bull": true,
@@ -11440,7 +11440,7 @@
     ],
     "confluence_score": "7/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "SAIL.NS is currently exhibiting bearish tendencies, driven by increasing ret_vol and narrowing BB_width, which are signaling downward pressure. Selling at 155.52 with a take profit at 142.7157 and stop loss at 161.9221 offers a reward of 12.8043 points and a risk of 6.37 points, resulting in a roughly 2:1 risk-reward ratio. Failing to break below 142.7157, SAIL.NS could rebound sharply, potentially reaching the stop loss level of 161.9221, especially if the ATR of 6.4021 expands rapidly, fueled by above-average volume of 1.0x.",
     "generated_at": "2026-03-21T22:12:18.130971+00:00",
     "mtf": {
       "tf_15m_bull": false,
@@ -11529,7 +11529,7 @@
     ],
     "confluence_score": "6/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "NMDC Ltd is currently exhibiting bearish tendencies, driven by stoch_D and dist_SMA20, which are indicating downward momentum with stoch_D suggesting oversold conditions and dist_SMA20 showing a significant distance from the 20-day simple moving average. Holding NMDC.NS at 79.78 offers a risk/reward ratio of approximately 1:1.5, with a potential take profit at 74.31 and a stop loss at 82.515, implying a 5.47 point downside and a 2.735 point upside. Invalidating this hold signal would be a breakout above 82.515, which could be triggered by a surge in iron ore prices, a key input for NMDC Ltd's steel production, given its 98% model agreement and 3/9 bearish factors currently in play.",
     "generated_at": "2026-03-21T22:12:22.481190+00:00",
     "mtf": {
       "tf_15m_bull": false,
@@ -11618,7 +11618,7 @@
     ],
     "confluence_score": "6/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "BHEL's technical outlook is currently influenced by ret_vol and SMA_cross, with both indicators showing bearish signals, as reflected in the ML model's 46.9% confidence level. Holding BHEL at 262.05 offers a risk/reward ratio of approximately 1:2, with a potential take profit at 241.7143 and a stop loss at 272.2178, implying a 20.34 point downside versus a 9.93 point upside. Invalidating this hold signal would require a significant surge in BHEL's price, specifically a break above 272.2178, which could be triggered by a sudden increase in volume, exceeding the current 1.0x average volume.",
     "generated_at": "2026-03-21T22:12:27.061616+00:00",
     "mtf": {
       "tf_15m_bull": false,
@@ -11707,7 +11707,7 @@
     ],
     "confluence_score": "4/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "Container Corp is currently exhibiting bullish tendencies, driven by positive 52-week momentum and a widening Bollinger Band width, which are contributing to the 70.2% confidence level in a BUY signal. Buying at 447.3 with a take profit at 474.6214 and stop loss at 433.6393 offers a reward of 27.3214 and a risk of 13.6607, resulting in a risk/reward ratio of approximately 2:1. Failing to break above 474.6214 within the next 20 days would invalidate the signal, as momentum indicators such as mom_20d would likely reverse, given Container Corp's average true range of 13.6607.",
     "generated_at": "2026-03-21T22:12:31.667570+00:00",
     "mtf": {
       "tf_15m_bull": false,
@@ -11796,7 +11796,7 @@
     ],
     "confluence_score": "6/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "Tata Power's current technical setup is being driven by a bearish BB_pct and a negative mom_10d, indicating downward momentum. Selling at 402.4 with a take profit at 377.35 and a stop loss at 414.925 offers a reward of 25.05 points versus a risk of 12.525 points, a roughly 2:1 ratio. Invalidating this sell signal would require a sharp reversal above 414.925, which could be triggered by a sudden surge in buying volume, exceeding the current 1.0x average volume, and potentially driven by unexpected positive news or a broader market rally.",
     "generated_at": "2026-03-21T22:12:36.765640+00:00",
     "mtf": {
       "tf_15m_bull": false,
@@ -11885,7 +11885,7 @@
     ],
     "confluence_score": "4/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "Bajaj Finserv is currently exhibiting bullish tendencies, with the ML model driven by a positive BB_pct indicator and a rising stoch_D, both of which are contributing to the 65.3% confidence level. Buying Bajaj Finserv at 1710.3 offers a potential reward of 94.29 points to the take profit level of 1804.5858, while the stop loss at 1663.1572 represents a risk of 47.15 points. Failing to hold above the 1663.1572 stop loss level would invalidate the signal, particularly if the stock's average true range of 47.1429 is breached to the downside, suggesting a breakdown in the current bullish momentum.",
     "generated_at": "2026-03-21T22:12:41.527478+00:00",
     "mtf": {
       "tf_15m_bull": false,
@@ -11974,7 +11974,7 @@
     ],
     "confluence_score": "5/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "Muthoot Finance is currently exhibiting bullish tendencies, driven by positive 52-week momentum and distance above the 50-day simple moving average, with both pos_52w and dist_SMA50 indicators showing positive signal directions. Buying at current price levels of 3315.8999 offers a potential reward of 227.3427 to the take profit target of 3543.2427, while risking 113.6714 to the stop loss level of 3202.2285. Failing to hold above the 3202.2285 stop loss level would invalidate the signal, particularly if Muthoot Finance's price drops below this level amidst average or above-average volume of 1.0x or higher.",
     "generated_at": "2026-03-21T22:12:46.613278+00:00",
     "mtf": {
       "tf_15m_bull": false,
@@ -12063,7 +12063,7 @@
     ],
     "confluence_score": "4/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "Cholamandalam Fin is currently exhibiting a bullish technical profile, with its distance from the 20-day simple moving average (dist_SMA20) and MACD histogram (MACD_hist) indicating positive momentum. Buying at the current price of 1440.5 offers a potential reward of 110.54 points to the take profit level of 1551.0429, while the stop loss at 1385.2286 limits the downside risk to 55.27 points. Failing to hold above the 1385.2286 stop loss level would invalidate the signal, particularly if the asset's price drops below this level on above-average volume, exceeding 1.0x average volume.",
     "generated_at": "2026-03-21T22:12:49.288594+00:00",
     "mtf": {
       "tf_15m_bull": false,
@@ -12152,7 +12152,7 @@
     ],
     "confluence_score": "5/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "SBI Life Insurance is currently exhibiting bearish tendencies, driven by a negative MACD signal and a dist_SMA50 indicator suggesting the stock is overextended, with 44.3% confidence from the ML model. Selling at 1896.9 with a take profit target of 1804.2365 and a stop loss at 1943.2318 presents a risk/reward ratio of approximately 1:1.17, given the 46.3318 ATR, a sharp move above 1943.2318 would invalidate the signal, particularly if volume surges above 1.5x average volume.",
     "generated_at": "2026-03-21T22:12:51.840587+00:00",
     "mtf": {
       "tf_15m_bull": false,
@@ -12241,7 +12241,7 @@
     ],
     "confluence_score": "3/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "HDFC Life is currently exhibiting a bearish technical profile, with the ML model highlighting narrowing Bollinger Band width and increasing distance from the 20-day simple moving average as the top drivers, both pointing to a downward signal direction. Selling at the current price of 623.65 offers a potential reward of 30.4785 points if the take profit level of 593.1715 is reached, while the stop loss at 638.8893 represents a risk of 15.2393 points. Invalidating this sell signal would require a significant reversal, specifically a breakout above the stop loss level of 638.8893, which would likely be driven by a sudden increase in buying volume, exceeding the current 1.0x average volume.",
     "generated_at": "2026-03-21T22:12:54.435971+00:00",
     "mtf": {
       "tf_15m_bull": true,
@@ -12330,7 +12330,7 @@
     ],
     "confluence_score": "4/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "ICICI Lombard's current technical setup is supported by positive signals from the 52-week price momentum and a bullish MACD signal, with the model assigning a 56.0% confidence level to this buy signal. Buying at the current price of 1777.2 offers a potential reward of 85.09 (to 1862.2857) and a potential loss of 42.54 (to 1734.6571), with the average true range of 42.5429 informing the stop loss placement. Failing to hold above the 1734.6571 stop loss level would invalidate this signal, particularly if ICICI Lombard's price drops below this level on more than 1.0x average volume.",
     "generated_at": "2026-03-21T22:12:56.980560+00:00",
     "mtf": {
       "tf_15m_bull": false,
@@ -12419,7 +12419,7 @@
     ],
     "confluence_score": "5/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "Life Insurance Corp is currently seeing bearish signals from its vol_ratio and pos_52w drivers, with the model indicating a 48.9% confidence level in a hold direction. Holding Life Insurance Corp at 776.75 offers a risk/reward ratio of approximately 1:3, with a take profit target of 741.4214 and a stop loss at 794.4143, suggesting a potential downside of 35.33 points versus an upside of 22.83 points. Invalidating this hold signal would be a breakout above 794.4143, which would likely be driven by a surge in volume above 1.0x average volume, given the current low model confidence and 4 out of 9 bearish factors.",
     "generated_at": "2026-03-21T22:13:03.033745+00:00",
     "mtf": {
       "tf_15m_bull": true,
@@ -12508,7 +12508,7 @@
     ],
     "confluence_score": "6/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "IndusInd Bank's current technical setup is bearish, with MACD indicating a downward trend and mom_20d showing negative momentum, driving the model's 35.2% confidence in a sell signal. Selling at 818.6 with a take profit at 765.8214 and stop loss at 844.9893 offers a reward of 52.78 points versus a risk of 26.39 points, a roughly 2:1 ratio. Failing to break below 844.9893, particularly if accompanied by a surge in volume above 1.0x average, would invalidate the sell signal and suggest a potential rally for IndusInd Bank.",
     "generated_at": "2026-03-21T22:13:07.623966+00:00",
     "mtf": {
       "tf_15m_bull": false,
@@ -12597,7 +12597,7 @@
     ],
     "confluence_score": "4/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "Bank of Baroda is currently exhibiting a bullish technical profile, with the ML model driven by a positive distance from the 20-day simple moving average (dist_SMA20) and increasing return volatility (ret_vol), which are contributing to the 62.3% confidence level. Buying at the current price of 279.95 offers a potential reward of 16.6643 points to the take profit level of 296.6143, while the stop loss at 271.6179 represents a risk of 8.3271 points. Failing to hold above the 271.6179 stop loss level would invalidate the signal, particularly if Bank of Baroda's price drops below this level with above-average volume, exceeding 1.0x average volume.",
     "generated_at": "2026-03-21T22:13:12.102846+00:00",
     "mtf": {
       "tf_15m_bull": true,
@@ -12686,7 +12686,7 @@
     ],
     "confluence_score": "4/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "Punjab National Bank's current technical setup is driven by a strong momentum indicator, mom_10d, showing a bullish signal, and a favorable dist_SMA20, indicating the stock is above its 20-day simple moving average, with 98% model agreement. Buying at 111.53 offers a risk/reward ratio of approximately 1:1.37, with a take profit target of 118.5071 and a stop loss at 108.0414, which is roughly 3.1 times the average true range of 3.4886. Failing to hold above 108.0414 would invalidate the signal, as it would suggest a breakdown below the recent support level, potentially triggering a sell-off in Punjab National Bank.",
     "generated_at": "2026-03-21T22:13:16.411139+00:00",
     "mtf": {
       "tf_15m_bull": false,
@@ -12775,7 +12775,7 @@
     ],
     "confluence_score": "6/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "Canara Bank is currently exhibiting bullish tendencies, driven by a positive MACD_signal and a bullish SMA_cross, which are the top two drivers of the model's 57.7% confidence in a BUY direction. Buying at the current price of 136.44 offers a potential reward of 9.0286 points to the take profit level of 145.4686, while the stop loss at 131.9257 represents a potential risk of 4.5143 points. Invalidating this signal would require a breakdown below the stop loss level, specifically a drop below 131.9257, which would likely be triggered by a failure of the SMA20 support level that the model is currently factoring in as a key driver of the bullish outlook.",
     "generated_at": "2026-03-21T22:13:21.455641+00:00",
     "mtf": {
       "tf_15m_bull": false,
@@ -12864,7 +12864,7 @@
     ],
     "confluence_score": "7/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "Union Bank's current technical setup is being driven by a bearish stoch_D signal and a neutral ATR_pct signal, with mom_10d also contributing to the overall bearish bias. Holding Union Bank at 177.63 offers a risk/reward ratio of approximately 1:1.07, with a potential take profit at 165.2643 and a stop loss at 183.8129. Invalidating this hold signal would require a significant breakout above 183.8129, which could be triggered by a surge in buying volume, exceeding the current 1.0x average volume, and potentially driven by unexpected positive news for Union Bank.",
     "generated_at": "2026-03-21T22:13:26.146276+00:00",
     "mtf": {
       "tf_15m_bull": false,
@@ -12953,7 +12953,7 @@
     ],
     "confluence_score": "5/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "Aditya Birla Capital is currently seeing bearish signals from its distance to the 50-day simple moving average (dist_SMA50) and a narrowing Bollinger Band width (BB_width), with both indicators contributing to the overall bearish outlook. Holding at the current price of 311.25, the potential risk/reward is approximately 22.76 points of downside to 288.49 versus 11.38 points of upside stop loss to 322.63. Invalidating this hold signal would require a significant breakout above 322.63, which could be triggered by a surge in buying volume above 1.0x average volume, potentially driven by unexpected positive news or a broad market rally.",
     "generated_at": "2026-03-21T22:13:31.434450+00:00",
     "mtf": {
       "tf_15m_bull": false,
@@ -13042,7 +13042,7 @@
     ],
     "confluence_score": "7/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "Divis Laboratories is currently exhibiting bullish tendencies, driven by MACD and MACD_signal, which are indicating a buy signal with 65.6% confidence. Buying at the current price of 6100.0 offers a potential reward of 287.29 points to the take profit level of 6387.2857, while the stop loss at 5956.3571 limits the potential loss to 143.64 points. Failing to hold above the 5956.3571 stop loss level would invalidate the signal, particularly if the MACD and MACD_signal drivers reverse direction, given their 96% model agreement and significant influence on the current buy recommendation.",
     "generated_at": "2026-03-21T22:13:34.618610+00:00",
     "mtf": {
       "tf_15m_bull": false,
@@ -13131,7 +13131,7 @@
     ],
     "confluence_score": "6/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "Apollo Hospitals is currently exhibiting a bullish technical profile, with MACD_signal and dist_SMA50 drivers indicating positive momentum, supported by 63.8% ML confidence. Buying at 7364.5 offers a potential reward of 355.2143 points to the take profit level of 7719.7143, while risking 177.6071 points to the stop loss level of 7186.8929. Failing to hold above 7186.8929 would invalidate the signal, particularly if volume increases above 1.0x average volume, which could accelerate a decline in Apollo Hospitals' stock price.",
     "generated_at": "2026-03-21T22:13:37.368062+00:00",
     "mtf": {
       "tf_15m_bull": false,
@@ -13220,7 +13220,7 @@
     ],
     "confluence_score": "5/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "Torrent Pharma's current technical setup is supported by bullish signals from mom_20d and RSI_7, with the model indicating a 60.9% confidence level in a BUY direction. Buying at 4270.2002 offers a potential reward of 206.3286 to the take profit level of 4476.5286, while the stop loss at 4167.036 limits the risk to 103.1642, roughly in line with the asset's average true range. Failing to hold above 4167.036 would invalidate the signal, particularly if volume were to surge above 1.0x average volume, indicating a shift in market sentiment against Torrent Pharma.",
     "generated_at": "2026-03-21T22:13:40.021406+00:00",
     "mtf": {
       "tf_15m_bull": false,
@@ -13309,7 +13309,7 @@
     ],
     "confluence_score": "4/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "Aurobindo Pharma's current technical setup is supported by its positive 52-week momentum and increasing Bollinger Band width, which are driving the ML model's 70.6% confidence in a BUY direction. Buying at the current price of 1291.4 offers a potential reward of 69.4286 points to the take profit level of 1360.8286, while the stop loss at 1256.6857 limits the risk to 34.7153 points. Failing to hold above the stop loss level of 1256.6857 would invalidate the signal, particularly if Aurobindo Pharma's price drops below this level on volume exceeding 1.0x average volume.",
     "generated_at": "2026-03-21T22:13:42.483516+00:00",
     "mtf": {
       "tf_15m_bull": false,
@@ -13398,7 +13398,7 @@
     ],
     "confluence_score": "5/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "Lupin Ltd is currently seeing bearish signals from its distance to the 50-day simple moving average (dist_SMA50) and a low RSI_7 value, with both indicators contributing to the overall 51.5% confidence level in a hold direction. Holding at the current price of 2322.5 offers a potential reward of 97.5285 points if the price reaches the take profit level of 2224.9715, while risking 48.7643 points if the stop loss at 2371.2643 is triggered. Breaking above 2371.2643 would invalidate the signal, particularly if accompanied by a significant increase in volume above the current 1.0x average volume, which could indicate a shift in market sentiment for Lupin Ltd.",
     "generated_at": "2026-03-21T22:13:47.492962+00:00",
     "mtf": {
       "tf_15m_bull": false,
@@ -13487,7 +13487,7 @@
     ],
     "confluence_score": "6/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "Biocon's current technical setup is influenced by positive 52-week momentum and a narrowing Bollinger Band width, which are both bullish drivers. Holding Biocon at 380.95 offers a risk/reward ratio of approximately 1:1.55, with a potential take profit at 359.3786 and a stop loss at 391.7357. Breaking above 391.7357 would invalidate the hold signal, as it would indicate a shift in momentum and potentially trigger a short-term uptrend in Biocon.",
     "generated_at": "2026-03-21T22:13:51.867254+00:00",
     "mtf": {
       "tf_15m_bull": true,
@@ -13576,7 +13576,7 @@
     ],
     "confluence_score": "4/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "Nestle India's current technical setup is characterized by a bearish BB_pct and a bearish MACD_hist, indicating downward momentum. Holding Nestle India at 1193.6 offers a risk/reward ratio of approximately 1:2, with a potential take profit at 1143.3571 and a stop loss at 1218.7214, suggesting a 50.24 point downside versus a 25.36 point upside. Breaking above 1218.7214 would invalidate this hold signal, as it would suggest a failure of the current bearish trend and potentially lead to a retest of recent highs for Nestle India.",
     "generated_at": "2026-03-21T22:13:56.378190+00:00",
     "mtf": {
       "tf_15m_bull": false,
@@ -13665,7 +13665,7 @@
     ],
     "confluence_score": "6/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "Britannia's current technical setup is being driven by a bearish MACD signal and a narrowing BB_width, which are contributing to the model's low confidence level of 47.2%. Holding Britannia at 5618.5 offers a risk/reward ratio of approximately 1:1.5, with a potential take profit at 5374.5714 and a stop loss at 5740.4643, implying a 243.9286 point downside risk and a 244.0714 point upside potential. Invalidating this hold signal would require a significant breakout above 5740.4643, which could be triggered by a surge in volume above 1.0x average volume, potentially driven by unexpected positive news or a broader market rally.",
     "generated_at": "2026-03-21T22:14:00.780241+00:00",
     "mtf": {
       "tf_15m_bull": false,
@@ -13754,7 +13754,7 @@
     ],
     "confluence_score": "4/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "Tata Consumer's current technical setup is characterized by a bearish MACD histogram and a positive 52-week price movement, with the model driven by these two factors indicating a sell direction. Selling at 1050.2 with a take profit at 999.4428 and stop loss at 1075.5785 offers a risk/reward ratio of approximately 1:1.5, given the 50.7585 point downside potential versus 25.3785 point upside risk, which would be invalidated if Tata Consumer breaks above 1075.5785, suggesting a bullish trend reversal.",
     "generated_at": "2026-03-21T22:14:05.281742+00:00",
     "mtf": {
       "tf_15m_bull": true,
@@ -13843,7 +13843,7 @@
     ],
     "confluence_score": "5/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "Marico is currently exhibiting bullish tendencies, driven by a 15.8214 ATR percentage and a positive 52-week price movement, which are contributing to the 59.7% ML confidence in a BUY direction. Buying Marico at 744.3 with a take profit at 775.9429 and stop loss at 728.4786 offers a reward of approximately 31.65 points and a risk of about 15.82 points, resulting in a risk-reward ratio of roughly 2:1. Failing to hold above the 728.4786 stop loss level would invalidate the signal, particularly if Marico's price drops below this level on volume exceeding 1.0x average volume.",
     "generated_at": "2026-03-21T22:14:10.044550+00:00",
     "mtf": {
       "tf_15m_bull": false,
@@ -13932,7 +13932,7 @@
     ],
     "confluence_score": "4/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "Dabur India is currently exhibiting a bullish trend, driven by SMA_cross and dist_SMA20 indicators, which are signaling upwards with 58.3% confidence. Buying Dabur India at 430.7 offers a potential reward of 23.7714 points to the take profit level of 454.4714, while risking 11.8857 points to the stop loss level of 418.8143. Failing to break above 454.4714, Dabur India's price may be capped, potentially triggering a sell-off, especially if the average true range of 11.8857 is breached to the downside.",
     "generated_at": "2026-03-21T22:14:14.685228+00:00",
     "mtf": {
       "tf_15m_bull": true,
@@ -14021,7 +14021,7 @@
     ],
     "confluence_score": "3/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "Colgate Palmolive's current technical setup is being driven by a bearish BB_pct indicator and a SMA_cross signal, which are contributing to the model's 48.3% confidence in a hold direction. Holding Colgate Palmolive at 1896.1 offers a risk/reward ratio of approximately 1:1, with a potential take profit at 1795.0714 and a stop loss at 1946.6143, implying a 101.0294 point downside and a 50.5143 point upside based on the ATR. Invalidating this hold signal would require a significant breakout above 1946.6143, which could be triggered by a surge in volume above 1.0x average volume, potentially driven by unexpected positive news or a broader market rally.",
     "generated_at": "2026-03-21T22:14:17.864527+00:00",
     "mtf": {
       "tf_15m_bull": true,
@@ -14110,7 +14110,7 @@
     ],
     "confluence_score": "3/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "Godrej Consumer's current price action is being driven by a bearish momentum indicator (mom_20d) and increasing volatility (ATR_pct), which are contributing to the model's 54.2% confidence in a hold direction. Holding Godrej Consumer at 1017.6 offers a risk/reward ratio of approximately 1:1.8, with a potential take profit at 958.3285 and stop loss at 1047.2357, implying a 59.27 point downside and 29.64 point upside. Invalidating this hold signal would be a strong breakout above 1047.2357, which could be triggered by a surge in buying volume, exceeding the current 1.0x average volume, and potentially driven by unforeseen positive news or a broader market rally.",
     "generated_at": "2026-03-21T22:14:20.328119+00:00",
     "mtf": {
       "tf_15m_bull": false,
@@ -14199,7 +14199,7 @@
     ],
     "confluence_score": "5/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "Trent Ltd's ML model is currently seeing a bearish signal driven by the stochastic D line and Bollinger Band width, with the stochastic D line indicating a potential downturn and the Bollinger Band width suggesting decreasing volatility. Holding at 3559.6001, risk/reward analysis suggests a potential loss of 109.5286 to the stop loss at 3669.1287, versus a gain of 219.0572 to the take profit at 3340.5429. Invalidating this hold signal would be a strong breakout above 3669.1287, which could be triggered by a sudden increase in average volume, currently at 1.0x, and a shift in the 98% model agreement towards bullish factors.",
     "generated_at": "2026-03-21T22:14:23.177432+00:00",
     "mtf": {
       "tf_15m_bull": false,
@@ -14288,7 +14288,7 @@
     ],
     "confluence_score": "5/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "Info Edge is currently exhibiting bullish tendencies, driven by a positive dist_SMA20 signal and a rising MACD_hist, which are the top two drivers of the ML model's 69.9% confidence in a BUY direction. Buying at the current price of 978.2 offers a potential reward of 60.0571 points to the take profit level of 1038.2571, while the stop loss at 948.1714 represents a risk of 30.0286 points, roughly equal to the asset's average true range. Invalidating this bullish signal would require a breakdown below the lower Bollinger Band, as indicated by the BB_pct driver, which could be triggered by a sudden increase in selling volume, exceeding 1.5x the average volume.",
     "generated_at": "2026-03-21T22:14:26.292445+00:00",
     "mtf": {
       "tf_15m_bull": false,
@@ -14377,7 +14377,7 @@
     ],
     "confluence_score": "3/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "IRCTC is currently exhibiting bullish tendencies, driven by a strong BB_pct signal and increasing ret_vol, which are aligning to support a buy direction with 72.6% confidence. Buying IRCTC at 522.85 offers a risk/reward ratio of approximately 1:1.5, with a potential take profit at 552.3 and a stop loss at 508.125, which would limit losses to 14.725 or roughly 2.8% of the current price. Invalidating this buy signal would require a sharp decline in IRCTC's price, specifically a break below 508.125, which could be triggered by a sudden drop in passenger traffic or unexpected regulatory changes affecting Indian railways.",
     "generated_at": "2026-03-21T22:14:30.329868+00:00",
     "mtf": {
       "tf_15m_bull": true,
@@ -14466,7 +14466,7 @@
     ],
     "confluence_score": "5/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "Paytm is currently seeing bearish signals from its MACD and ATR_pct indicators, with the MACD indicating a downward trend and ATR_pct suggesting increased volatility, as reflected in the 53.7% ML confidence level. Holding Paytm at the current price of 1054.3 offers a risk/reward ratio of approximately 1:1.07, with a potential take profit at 978.6858 and a stop loss at 1092.1072, implying a 75.6152 point downside and an 87.6152 point upside from the stop loss and take profit levels, respectively, from the current price. Invalidating this hold signal would be a breakout above 1092.1072, which could be triggered by a surge in buying volume, exceeding the current 1.0x average volume, and potentially driven by unforeseen positive news or a broader market rally.",
     "generated_at": "2026-03-21T22:14:35.824770+00:00",
     "mtf": {
       "tf_15m_bull": false,
@@ -14555,7 +14555,7 @@
     ],
     "confluence_score": "6/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "Nykaa's current technical setup is supported by its 20-day momentum (mom_20d) and ATR percentage (ATR_pct) indicators, both of which are signaling bullish trends with medium confidence. Buying Nykaa at 240.6 offers a potential reward of 15.9 points to the take profit level of 256.5, while the stop loss at 232.65 limits the potential loss to 7.95 points. Invalidating this buy signal would require a breakdown below 232.65, specifically if Nykaa's price falls below its recent support level, which could be triggered by a surge in selling volume exceeding 1.0x average volume.",
     "generated_at": "2026-03-21T22:14:41.338852+00:00",
     "mtf": {
       "tf_15m_bull": false,
@@ -14644,7 +14644,7 @@
     ],
     "confluence_score": "3/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "PB Fintech's current technical setup is supported by its ATR_pct and ret_vol drivers, which are indicating bullish signals, with the ML model showing 55.5% confidence in a BUY direction. Buying at the current price of 1497.1 offers a potential reward of 97.4571 points to the take profit level of 1594.5571, while the stop loss at 1448.3714 represents a risk of 48.7286 points. Failing to break above 1550, which is a key resistance level for PB Fintech, would invalidate this signal and suggest a potential downtrend, given the low ML confidence of 55.5%.",
     "generated_at": "2026-03-21T22:14:46.274919+00:00",
     "mtf": {
       "tf_15m_bull": false,
@@ -14733,7 +14733,7 @@
     ],
     "confluence_score": "4/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "Avenue Supermarts is currently exhibiting bullish tendencies, driven by a positive MACD histogram and an oversold stochastic indicator (stoch_K), which are contributing to the 56.5% confidence level in a BUY signal. Buying at the current price of 3770.8 offers a potential reward of 224.9 (3995.7001 - 3770.8) and a potential risk of 112.45 (3770.8 - 3658.35), resulting in a risk/reward ratio of approximately 2:1. Failing to break above the recent resistance level, coupled with a decline in average volume, which is currently at 1.0x, would invalidate the signal and suggest a reevaluation of the bullish thesis for Avenue Supermarts.",
     "generated_at": "2026-03-21T22:14:51.692746+00:00",
     "mtf": {
       "tf_15m_bull": false,
@@ -14822,7 +14822,7 @@
     ],
     "confluence_score": "5/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "Pidilite Industries is currently exhibiting a technically neutral outlook, with its ML model driven by a narrowing Bollinger Band width (BB_width) and a distance below the 50-day simple moving average (dist_SMA50), both of which are bearish signals. Holding Pidilite Industries at 1341.3 offers a risk/reward ratio of approximately 1:1.55, with a potential take profit at 1265.5286 and a stop loss at 1379.1858. Breaking above 1379.1858 would invalidate this signal, as it would suggest a bullish breakout for Pidilite Industries, contradicting the bearish implications of its current distance below the 50-day simple moving average.",
     "generated_at": "2026-03-21T22:14:56.153247+00:00",
     "mtf": {
       "tf_15m_bull": true,
@@ -14911,7 +14911,7 @@
     ],
     "confluence_score": "5/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "Berger Paints is currently exhibiting a bearish technical outlook, driven by a negative MACD signal and a positive 52-week high position that is being interpreted as a reversal indicator by the model, with 99% model agreement. Selling Berger Paints at 416.7 with a take profit at 389.5643 and a stop loss at 430.2679 offers a risk/reward ratio of approximately 1:1.75, given the 27.1 point downside target versus a 13.6 point stop loss, which would be invalidated if Berger Paints breaks above its current levels and the MACD driver reverses to a bullish signal.",
     "generated_at": "2026-03-21T22:15:01.215816+00:00",
     "mtf": {
       "tf_15m_bull": false,
@@ -15000,7 +15000,7 @@
     ],
     "confluence_score": "5/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "UltraTech Cement's current technical setup is supported by SMA_cross and ATR_pct, with both indicators showing bullish signals, contributing to the 86.2% ML confidence in a BUY direction. Buying at 10934.0 with a take profit at 11576.2857 and stop loss at 10612.8571 offers a reward of 642.2857 and a risk of 321.1429, representing a 2:1 risk-reward ratio. Failing to hold above 10612.8571 would invalidate the signal, as a break below this level would likely trigger a sell-off in UltraTech Cement, given its current average volume of 1.0x.",
     "generated_at": "2026-03-21T22:15:05.931725+00:00",
     "mtf": {
       "tf_15m_bull": false,
@@ -15089,7 +15089,7 @@
     ],
     "confluence_score": "5/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "Grasim Industries is currently exhibiting a bullish technical profile, with MACD and dist_SMA50 drivers indicating positive momentum, supported by a 63.9% confidence level from the ML model. Buying at the current price of 2616.3 offers a potential reward of 145.2285 points to the take profit level of 2761.5285, while the stop loss at 2543.6858 represents a risk of 72.6142 points. Failing to hold above the 2543.6858 stop loss level would invalidate the signal, particularly if Grasim Industries' price drops below this level on higher-than-average volume, exceeding 1.0x average volume.",
     "generated_at": "2026-03-21T22:15:10.787041+00:00",
     "mtf": {
       "tf_15m_bull": false,
@@ -15178,7 +15178,7 @@
     ],
     "confluence_score": "4/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "Shree Cement's technical outlook is currently supported by bullish signals from MACD_signal and dist_SMA20, with the model indicating a high confidence level of 86.2% in a BUY direction. Buying at the current price of 23535.0 offers a potential reward of 1205 points to the take profit level of 24740.0, while the stop loss at 22932.5 limits the potential loss to 602.5 points, resulting in a risk/reward ratio of approximately 2:1. Failing to hold above the 22932.5 stop loss level would invalidate the signal, particularly if volume increases above 1.0x average volume, which could indicate a shift in market sentiment against Shree Cement.",
     "generated_at": "2026-03-21T22:15:13.569339+00:00",
     "mtf": {
       "tf_15m_bull": false,
@@ -15267,7 +15267,7 @@
     ],
     "confluence_score": "3/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "Havells India is currently exhibiting a bullish technical profile, with its distance from the 50-day simple moving average (dist_SMA50) and positive 52-week performance (pos_52w) serving as the top two machine learning drivers, both indicating a buy signal. Buying at the current price of 1281.2 offers a potential reward of 75.8857 points to the take profit level of 1357.0857, while risking 37.9429 points to the stop loss level of 1243.2571. Failing to hold above the 1243.2571 stop loss level would invalidate the signal, particularly if Havells India's stock price falls below this level on volume exceeding 1.0x average volume.",
     "generated_at": "2026-03-21T22:15:16.136216+00:00",
     "mtf": {
       "tf_15m_bull": false,
@@ -15356,7 +15356,7 @@
     ],
     "confluence_score": "4/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "Voltas Ltd is currently exhibiting a mixed technical picture, with MACD indicating a bearish signal and dist_SMA20 showing a slightly bullish divergence, as reflected in the 54.6% ML confidence level. Holding at 1324.5, the risk/reward profile suggests a potential downside of 102.1 points to the take profit level of 1222.3857, versus an upside stop loss of 51.1 points to 1375.5572. Invalidating this hold signal would require a significant breakout above 1375.5572, which could be triggered by a surge in buying volume exceeding 1.5x average volume, given the current volume is only at 1.0x average.",
     "generated_at": "2026-03-21T22:15:18.657477+00:00",
     "mtf": {
       "tf_15m_bull": false,
@@ -15445,7 +15445,7 @@
     ],
     "confluence_score": "5/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "Siemens India is currently exhibiting a technically neutral outlook, with MACD indicating a bearish signal and range_pct suggesting a slightly bullish signal, driven by the 49.9% ML confidence. Holding Siemens India at 3129.6001 offers a risk/reward ratio of approximately 1:2, with a potential take profit at 2910.0286 and stop loss at 3239.3858, implying a 219.5715 point downside risk versus a 219.5715 point upside potential. Breaking above 3239.3858 would invalidate the hold signal, as it would suggest a bullish breakout, driven by increasing momentum and potentially triggered by a surge in volume above the current 1.0x average volume.",
     "generated_at": "2026-03-21T22:15:21.210061+00:00",
     "mtf": {
       "tf_15m_bull": false,
@@ -15534,7 +15534,7 @@
     ],
     "confluence_score": "3/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "ABB India's ML model is currently driven by a bearish dist_SMA50 signal and a neutral mom_20d signal, indicating a potential downturn in the stock's price. Holding ABB India at the current price of 6297.0 offers a risk/reward ratio of approximately 1:1.15, with a take profit target of 5925.1429 and a stop loss at 6482.9286, which would be triggered by a 185.9286-point move against the position. \nABB India's price breaking above 6482.9286 would invalidate the hold signal, as it would suggest the stock has regained upward momentum and the bearish factors are no longer dominant.",
     "generated_at": "2026-03-21T22:15:26.457586+00:00",
     "mtf": {
       "tf_15m_bull": false,
@@ -15623,7 +15623,7 @@
     ],
     "confluence_score": "6/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "Cummins India is currently exhibiting a bullish technical profile, with the ML model driven by a narrowing Bollinger Band width (BB_width) and a positive 52-week price momentum (pos_52w), both of which are signaling upwards. Buying at the current price of 4615.2998 offers a potential reward of 348.3568 (to 4963.6568) for a risk of 174.1785 (to 4441.1213), representing a risk/reward ratio of 2:1. Failing to hold above the 4441.1213 stop loss level would invalidate this signal, particularly if Cummins India's price drops below this level on higher-than-average volume, exceeding 1.0x average volume.",
     "generated_at": "2026-03-21T22:15:31.001828+00:00",
     "mtf": {
       "tf_15m_bull": true,
@@ -15712,7 +15712,7 @@
     ],
     "confluence_score": "6/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "Eicher Motors is currently exhibiting bullish tendencies, with RSI_14 and MACD_signal being the top drivers, both indicating a buy signal with the RSI_14 suggesting the stock is not overbought and the MACD_signal showing a positive crossover. Buying Eicher Motors at the current price of 6909.0 offers a potential reward of 423.64 (to 7332.6429) for a risk of 211.82 (to 6697.1786), representing a reward-to-risk ratio of approximately 2:1. Failing to hold above the 6697.1786 level would invalidate the buy signal, particularly if accompanied by a decline in volume, which is currently at 1.0x average volume.",
     "generated_at": "2026-03-21T22:15:36.828172+00:00",
     "mtf": {
       "tf_15m_bull": false,
@@ -15801,7 +15801,7 @@
     ],
     "confluence_score": "6/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "Hero MotoCorp's current technical setup is being driven by a bearish SMA_cross and a neutral MACD_signal, with the ML model showing 51.3% confidence in a hold direction. Holding Hero MotoCorp at 5275.5 offers a risk/reward ratio of approximately 1:1.43, with a potential take profit at 4931.6429 and a stop loss at 5447.4286. Invalidating this hold signal would be a break above 5447.4286, which could trigger a short squeeze and push Hero MotoCorp's price higher, potentially towards its recent resistance levels.",
     "generated_at": "2026-03-21T22:15:41.383575+00:00",
     "mtf": {
       "tf_15m_bull": true,
@@ -15890,7 +15890,7 @@
     ],
     "confluence_score": "5/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "TVS Motor is currently exhibiting a mixed technical picture, with the ML model driven by a bearish momentum indicator (mom_10d) and a neutral Bollinger Band width (BB_width) signal. Holding TVSMOTOR.NS at 3462.2 offers a risk/reward ratio of approximately 1:1.07, with a potential take profit at 3221.0429 and a stop loss at 3582.7785. Invalidating this hold signal would be a significant breakout above 3582.7785, which could be triggered by a surge in volume above 1.5x average volume, given TVS Motor's current average volume is only at 1.0x.",
     "generated_at": "2026-03-21T22:15:45.808047+00:00",
     "mtf": {
       "tf_15m_bull": false,
@@ -15979,7 +15979,7 @@
     ],
     "confluence_score": "5/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "Ashok Leyland's current technical setup is being driven by a bearish mom_10d indicator and a bearish MACD_signal, which are contributing to the model's 52.8% confidence in a hold direction. Holding Ashok Leyland at 168.89 offers a risk/reward ratio of approximately 1:1.53, with a potential take profit at 153.6157 and a stop loss at 176.5271, implying a 15.27 point downside and a 7.64 point upside. Invalidating this hold signal would be a significant surge in volume, above 1.5x average volume, which could shift the model's confidence and drive Ashok Leyland's price above the 176.5271 stop loss level.",
     "generated_at": "2026-03-21T22:15:50.131076+00:00",
     "mtf": {
       "tf_15m_bull": true,
@@ -16068,7 +16068,7 @@
     ],
     "confluence_score": "4/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "Escorts Kubota's current technical setup is influenced by a bearish MACD signal and a positive 52-week price movement, with the ML model assigning a low confidence level of 51.8% to the hold direction. Holding Escorts Kubota at the current price of 3059.3999 offers a potential reward of 237 units if the take profit level of 2822.3856 is reached, but also poses a risk of 118 units if the stop loss at 3177.907 is triggered. Breaking above the stop loss level of 3177.907 would invalidate the hold signal, as it would indicate a shift in market sentiment and potentially lead to a further upside move in Escorts Kubota.",
     "generated_at": "2026-03-21T22:15:54.072860+00:00",
     "mtf": {
       "tf_15m_bull": false,
@@ -16157,7 +16157,7 @@
     ],
     "confluence_score": "3/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "Balkrishna Ind is currently exhibiting a bullish trend, driven by SMA_cross and dist_SMA20 indicators, which are signaling upwards with 90.5% confidence. Buying at the current price of 2105.1001 offers a potential reward of 162.9572 points to the take profit level of 2268.0572, while risking 81.4785 points to the stop loss level of 2023.6216. Invalidating this buy signal would require a sharp decline in Balkrishna Ind's price, specifically a drop below the stop loss level of 2023.6216, which is 81.4785 points or approximately 3.9% away from the current price.",
     "generated_at": "2026-03-21T22:15:59.051148+00:00",
     "mtf": {
       "tf_15m_bull": true,
@@ -16246,7 +16246,7 @@
     ],
     "confluence_score": "4/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "MRF Ltd is currently exhibiting a technically weak outlook, with the ML model driven by a bearish signal from ret_vol and a neutral signal from BB_width, which is contributing to the low 51.0% confidence level. Holding MRF Ltd at the current price of 127535.0 offers a potential reward of 6686.43 (to 120928.5714) and a potential risk of 3303.21 (to 130838.2143), resulting in a risk/reward ratio of approximately 2:1. Invalidating this hold signal would be a significant breakout above 130838.2143, which would likely be driven by a surge in buying volume, exceeding the current 1.0x average volume.",
     "generated_at": "2026-03-21T22:16:04.107421+00:00",
     "mtf": {
       "tf_15m_bull": false,
@@ -16335,7 +16335,7 @@
     ],
     "confluence_score": "5/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "Hindalco Ind is currently exhibiting a bullish trend, driven by SMA_cross and RSI_14 indicators, which are signaling upwards with 57.1% confidence. Buying at 874.25 offers a potential reward of 73.56 points to the take profit level of 947.8072, while risking 36.78 points to the stop loss level of 837.4714, resulting in a reward-to-risk ratio of 2:1. Failing to hold above the 837.4714 stop loss level would invalidate the signal, particularly if volume increases above 1.0x average volume, which could exacerbate losses for Hindalco Ind.",
     "generated_at": "2026-03-21T22:16:06.861942+00:00",
     "mtf": {
       "tf_15m_bull": false,
@@ -16424,7 +16424,7 @@
     ],
     "confluence_score": "6/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "Vedanta Ltd is currently exhibiting a bullish technical profile, with its distance from the 50-day simple moving average (dist_SMA50) and 20-day momentum (mom_20d) both indicating positive signals, supporting the medium-confidence buy direction. Buying Vedanta Ltd at the current price of 672.2 offers a potential reward of 52.21 points to the take profit level of 724.4143, while the stop loss at 646.0929 represents a risk of 26.11 points. Failing to hold above the 646.0929 stop loss level would invalidate the signal, particularly if volume increases above the current 1.0x average volume, which could exacerbate losses for Vedanta Ltd.",
     "generated_at": "2026-03-21T22:16:09.625610+00:00",
     "mtf": {
       "tf_15m_bull": false,
@@ -16513,7 +16513,7 @@
     ],
     "confluence_score": "5/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "Mphasis is currently exhibiting bullish tendencies, driven by positive 52-week momentum and increasing return on volatility, which are signaling upwards price movement. Buying at the current price of 2091.1001 offers a potential reward of 156.6 points to the take profit level of 2247.7001, while risking 78.3 points to the stop loss level of 2012.8001. Failing to hold above the 2012.8001 stop loss level would invalidate the signal, particularly if the Average True Range of 78.3 is breached to the downside, suggesting a loss of bullish momentum in Mphasis.",
     "generated_at": "2026-03-21T22:16:12.192218+00:00",
     "mtf": {
       "tf_15m_bull": true,
@@ -16602,7 +16602,7 @@
     ],
     "confluence_score": "5/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "LTIMindtree is currently showing bullish tendencies, driven by positive 52-week momentum and increasing average true range percentage, which are signaling a potential uptrend with 56.0% confidence. Buying at the current price of 4298.7998 offers a risk/reward ratio of approximately 1:1.7, with a take profit target of 4580.2282 and a stop loss at 4158.0856, which would limit losses to around 3.3%. Invalidating this buy signal would require a significant drop in LTIMindtree's price, likely triggered by a broad market downturn affecting the entire IT sector, potentially causing the stock to break below its stop loss level of 4158.0856.",
     "generated_at": "2026-03-21T22:16:14.784120+00:00",
     "mtf": {
       "tf_15m_bull": false,
@@ -16691,7 +16691,7 @@
     ],
     "confluence_score": "4/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "Persistent Systems is currently exhibiting a bullish technical profile, with the ML model driven by a narrowing Bollinger Band width (BB_width) and increasing ATR percentage (ATR_pct), both of which are signaling upwards. Buying at the current price of 4716.7002 offers a potential reward of 367.7713 (to 5084.4715) and a potential loss of 183.8857 (to 4532.8145), representing a risk/reward ratio of approximately 2:1. Failing to hold above the 4532.8145 stop loss level would invalidate the signal, particularly if volume were to surge above 1.5x average volume, indicating a shift in market sentiment against Persistent Systems.",
     "generated_at": "2026-03-21T22:16:19.777824+00:00",
     "mtf": {
       "tf_15m_bull": false,
@@ -16780,7 +16780,7 @@
     ],
     "confluence_score": "4/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "Coforge Ltd is currently exhibiting a bullish technical profile, with the ML model driven by a positive SMA_cross indicator and a strong pos_52w signal, both of which are contributing to the 67.8% confidence level. Buying at the current price of 1089.3 offers a potential reward of 98.9715 points to the take profit level of 1188.2715, while the stop loss at 1039.8143 represents a risk of 49.4857 points, roughly equal to the asset's average true range. Failing to hold above the 1039.8143 stop loss level would invalidate the signal, particularly if volume were to surge above 1.0x average volume, indicating a shift in market sentiment against Coforge Ltd.",
     "generated_at": "2026-03-21T22:16:24.254531+00:00",
     "mtf": {
       "tf_15m_bull": false,
@@ -16869,7 +16869,7 @@
     ],
     "confluence_score": "5/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "Tata Elxsi's current technical setup is influenced by a narrowing Bollinger Band width and a distance below the 50-day Simple Moving Average, both of which are bearish signals driving the model's low confidence. Holding at 4237.7002, risk/reward is skewed with a potential take profit at 3955.0859, implying a 282.6143 point downside, versus a stop loss at 4379.0073, which would be a 141.3071 point loss. Invalidating this hold signal would be a strong breakout above 4379.0073, specifically if Tata Elxsi's price surges past its recent resistance, fueled by a significant increase in volume, currently at 1.0x average volume.",
     "generated_at": "2026-03-21T22:16:28.443746+00:00",
     "mtf": {
       "tf_15m_bull": false,
@@ -16958,7 +16958,7 @@
     ],
     "confluence_score": "6/9 bullish",
     "news": [],
-    "reasoning": "",
+    "reasoning": "Oracle Fin Services is currently exhibiting strong bullish momentum, driven by positive signals from mom_20d and mom_10d, which are indicating upward trends. Buying at the current price of 6580.0 offers a potential reward of 395.64 points to the take profit level of 6975.6429, while the stop loss at 6382.1786 limits the potential loss to 197.82 points. Failing to hold above the 6382.1786 level would invalidate the signal, particularly if volume increases above 1.0x average volume, which could accelerate a decline in Oracle Fin Services.",
     "generated_at": "2026-03-21T22:16:33.739843+00:00",
     "mtf": {
       "tf_15m_bull": true,
