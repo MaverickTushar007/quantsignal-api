@@ -56,8 +56,10 @@ def simulate_history(symbols: list, max_symbols: int = 30) -> list:
             sentiment = 0.0
 
             trades_for_sym = 0
+            _wf_bundle = None
+            _wf_step   = 0
             # Slide window: every 5 days to avoid overfitting
-            indices = list(range(60, len(df) - FORWARD_DAYS - 1, 5))
+            indices = list(range(300, len(df) - FORWARD_DAYS - 1, 5))
 
             for idx in indices:
                 try:
@@ -67,13 +69,39 @@ def simulate_history(symbols: list, max_symbols: int = 30) -> list:
                         if bar_date < cutoff:
                             continue
                     
-                    # Get ML prediction at this point in time
-                    # Use only data up to idx to avoid look-ahead
-                    df_window = df.iloc[:idx+1]
+                    # Walk-forward: reuse frozen bundle, retrain every 60 steps
+                    df_window   = df.iloc[:idx+1]
                     feat_window = build_features(df_window)
-                    if len(feat_window) < 60:
+                    if len(feat_window) < 150:
                         continue
 
+                    if _wf_bundle is None or _wf_step % 60 == 0:
+                        from ml.ensemble import train as _train
+                        _new = _train(sym, df_window)
+                        if _new is not None:
+                            _wf_bundle = _new
+                    _wf_step += 1
+                    if _wf_bundle is None:
+                        continue
+
+                    # Predict inline — no file I/O, no retrain
+                    import numpy as np
+                    from ml.ensemble import FEATURE_COLUMNS
+                    _feat  = feat_window[FEATURE_COLUMNS].iloc[[-1]]
+                    _xp    = float(_wf_bundle["xgb"].predict_proba(_feat)[0, 1])
+                    _lp    = float(_wf_bundle["lgb"].predict_proba(_feat)[0, 1])
+                    _prob  = round(max(0.01, min(0.99, (_xp + _lp) / 2)), 4)
+
+                    class _R: pass
+                    ml = _R()
+                    ml.probability = _prob
+                    ml.direction   = "BUY" if _prob > 0.55 else ("SELL" if _prob < 0.45 else "HOLD")
+                    ml.confidence  = "HIGH" if abs(_prob - 0.5) > 0.15 else "MEDIUM"
+                    try:
+                        _atr = df_window["Close"].diff().abs().rolling(14).mean().iloc[-1]
+                        ml.atr = float(_atr) if not np.isnan(_atr) else float(df_window["Close"].iloc[-1]) * 0.02
+                    except Exception:
+                        ml.atr = float(df_window["Close"].iloc[-1]) * 0.02
                     ml = predict(sym, df_window, sentiment)
                     if ml is None:
                         continue

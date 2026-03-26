@@ -76,7 +76,7 @@ def train(ticker, df):
 
         X = feat.loc[valid.index, FEATURE_COLUMNS]
         y = valid.values.astype(int)
-        if len(X) < 80 or len(np.unique(y)) < 2:
+        if len(X) < 150 or len(np.unique(y)) < 2:
             return None
 
         split = int(len(X) * 0.8)
