@@ -3,14 +3,16 @@ infrastructure/queue/poller.py
 Async poller — runs on startup, drains the reasoning queue continuously.
 Replaces FastAPI BackgroundTasks for reasoning jobs.
 """
-
 import asyncio
 import logging
-from app.infrastructure.queue.reasoning_queue import dequeue_reasoning_job
+from app.infrastructure.queue.reasoning_queue import (
+    dequeue_reasoning_job,
+    mark_reasoning_complete,
+    mark_reasoning_failed,
+)
 from app.domain.reasoning.worker import fill_reasoning_async
 
 logger = logging.getLogger(__name__)
-
 _poller_running = False
 
 
@@ -23,7 +25,12 @@ async def _poll_loop():
                 symbol = job["symbol"]
                 signal = job["signal"]
                 logger.info(f"[poller] Processing job for {symbol}")
-                await fill_reasoning_async(symbol, signal)
+                try:
+                    await fill_reasoning_async(symbol, signal)
+                    mark_reasoning_complete(symbol)
+                except Exception as e:
+                    logger.error(f"[poller] Reasoning failed for {symbol}: {e}")
+                    mark_reasoning_failed(symbol)
             else:
                 await asyncio.sleep(2)
         except Exception as e:
