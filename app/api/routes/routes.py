@@ -105,6 +105,55 @@ async def get_signal(
 
 
 
+
+@router.get("/signals/{symbol}/reasoning", tags=["signals"])
+async def get_signal_reasoning(symbol: str):
+    """
+    Poll this after GET /signals/{symbol}.
+    Returns reasoning status + content once async worker completes.
+    """
+    symbol = symbol.upper()
+    if symbol not in TICKER_MAP:
+        raise HTTPException(status_code=404, detail=f"Unknown symbol: {symbol}")
+
+    # Try Redis first, fall back to JSON cache
+    from app.infrastructure.cache.cache import get_cached
+    import json
+    from pathlib import Path
+    from app.core.config import BASE_DIR
+
+    signal = get_cached(f"signal:{symbol}")
+    if not signal:
+        cache_path = BASE_DIR / "data/signals_cache.json"
+        if cache_path.exists():
+            cache = json.loads(cache_path.read_text())
+            signal = cache.get(symbol)
+
+    if not signal:
+        return {"symbol": symbol, "status": "not_found", "reasoning": None}
+
+    # Check Redis deduplication status first (source of truth)
+    from app.infrastructure.queue.reasoning_queue import _status_key
+    from app.infrastructure.cache.cache import _get_redis
+    import json as _json
+    redis_status = None
+    try:
+        r = _get_redis()
+        if r:
+            raw = r.get(_status_key(symbol))
+            if raw:
+                redis_status = _json.loads(raw).get("status")
+    except Exception:
+        pass
+
+    status = redis_status or signal.get("reasoning_status", "pending")
+
+    return {
+        "symbol": symbol,
+        "status": status,
+        "reasoning": signal.get("reasoning") or None,
+        "timestamp": signal.get("timestamp"),
+    }
 @router.get("/news/{symbol}", tags=["news"])
 def get_asset_news(symbol: str, limit: int = 10):
     symbol = symbol.upper()
