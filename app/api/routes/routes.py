@@ -138,6 +138,10 @@ async def get_signal(
             # Extract mtf_score integer from mtf dict
             mtf = sig.get("mtf", {})
             sig["mtf_score"] = mtf.get("mtf_score_with_daily") or mtf.get("mtf_score")
+            # Store raw probability, use adjusted as the saved probability
+            sig["raw_probability"] = sig.get("probability")
+            if sig.get("regime_adjusted_probability") is not None:
+                sig["probability"] = sig["regime_adjusted_probability"]
             save_signal(sig)
     except Exception:
         pass
