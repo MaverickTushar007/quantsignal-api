@@ -103,7 +103,7 @@ async def get_signal(
     # Step 9: save signal for outcome tracking
     try:
         from app.domain.regime.detector import regime_multiplier
-        from app.core.cache import get_cached
+        from app.infrastructure.cache.cache import get_cached, set_cached
         regime_data = get_cached(f"regime:{symbol}") or {"regime": "unknown"}
         sig["regime"] = regime_data.get("regime", "unknown")
         sig["signal_bias"] = regime_data.get("signal_bias", "")
@@ -303,7 +303,7 @@ async def get_regime(symbol: str):
 @router.post("/regime/cache", tags=["quant"])
 async def cache_regime(payload: dict):
     """Accept regime data pushed from local runner and cache it."""
-    from app.core.cache import set_cached
+    from app.infrastructure.cache.cache import set_cached, get_cached
     symbol = payload.get("symbol")
     if not symbol:
         return {"error": "symbol required"}
@@ -312,7 +312,7 @@ async def cache_regime(payload: dict):
 
 @router.get("/regime/{symbol}", tags=["quant"])
 async def get_regime(symbol: str):
-    from app.core.cache import get_cached
+    from app.infrastructure.cache.cache import get_cached
     cached = get_cached(f"regime:{symbol}")
     if cached:
         return cached
