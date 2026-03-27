@@ -1,15 +1,24 @@
 import logging
-import yfinance as yf
 from app.infrastructure.db.signal_history import get_open_signals, update_outcome
+from app.infrastructure.cache.cache import get_cached
+from app.core.config import BASE_DIR
+import json
 
 logger = logging.getLogger(__name__)
 
 def _get_price(symbol: str) -> float | None:
     try:
-        ticker = yf.Ticker(symbol)
-        data = ticker.history(period="1d", interval="1m")
-        if not data.empty:
-            return float(data["Close"].iloc[-1])
+        # Use cached signal price — already fetched by signal pipeline
+        sig = get_cached(f"signal:{symbol}")
+        if sig and sig.get("current_price"):
+            return float(sig["current_price"])
+        # Fallback to signals_cache.json
+        cache_path = BASE_DIR / "data/signals_cache.json"
+        if cache_path.exists():
+            cache = json.loads(cache_path.read_text())
+            sig = cache.get(symbol)
+            if sig and sig.get("current_price"):
+                return float(sig["current_price"])
     except Exception as e:
         logger.error(f"[evaluator] price fetch failed for {symbol}: {e}")
     return None
