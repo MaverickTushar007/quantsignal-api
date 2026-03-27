@@ -135,6 +135,23 @@ async def get_signal(
         from app.infrastructure.db.signal_history import save_signal, is_open
         import logging; _log = logging.getLogger(__name__)
         # debug log moved to after pipeline — see save block
+        # Always run probability pipeline before suppression gate
+        raw_prob = sig.get("probability")
+        sig["raw_probability"] = raw_prob
+        try:
+            from app.domain.signal.calibration import calibrate_probability
+            calibrated = calibrate_probability(float(raw_prob)) if raw_prob is not None else raw_prob
+        except Exception as _cal_e:
+            import logging; logging.getLogger(__name__).warning(f"[calibration] skipped: {_cal_e}")
+            calibrated = raw_prob
+        if calibrated is not None:
+            from app.domain.regime.detector import regime_multiplier as get_multiplier
+            multiplier = get_multiplier(sig.get("regime", "unknown"), sig.get("direction", ""))
+            sig["regime_adjusted_probability"] = round(min(float(calibrated) * multiplier, 1.0), 4)
+            sig["probability"] = sig["regime_adjusted_probability"]
+        else:
+            sig["probability"] = calibrated
+
         if sig.get("direction") in ("BUY", "SELL") and not is_open(sig["symbol"]) and not sig.get("regime_suppressed"):
             raw_conf = sig.get("confluence_score", "")
             try:
@@ -142,32 +159,8 @@ async def get_signal(
             except Exception:
                 conf_int = None
             sig["confluence_score"] = conf_int
-            # Extract mtf_score integer from mtf dict
             mtf = sig.get("mtf", {})
             sig["mtf_score"] = mtf.get("mtf_score_with_daily") or mtf.get("mtf_score")
-            # 1. Store raw probability
-            raw_prob = sig.get("probability")
-            sig["raw_probability"] = raw_prob
-
-            # 2. Apply Platt calibration on raw probability
-            try:
-                from app.domain.signal.calibration import calibrate_probability
-                calibrated = calibrate_probability(float(raw_prob)) if raw_prob is not None else raw_prob
-            except Exception as _cal_e:
-                import logging; logging.getLogger(__name__).warning(f"[calibration] skipped: {_cal_e}")
-                calibrated = raw_prob
-
-            # 3. Apply regime multiplier on top of calibrated probability
-            regime_adj = sig.get("regime_adjusted_probability")
-            if regime_adj is not None and calibrated is not None:
-                # Recalculate regime_adjusted using calibrated base instead of raw
-                from app.domain.regime.detector import regime_multiplier as get_multiplier
-                multiplier = get_multiplier(sig.get("regime", "unknown"), sig.get("direction", ""))
-                sig["regime_adjusted_probability"] = round(min(float(calibrated) * multiplier, 1.0), 4)
-                sig["probability"] = sig["regime_adjusted_probability"]
-            else:
-                sig["probability"] = calibrated
-
             save_signal(sig)
     except Exception as _e:
         import logging; logging.getLogger(__name__).error(f'[save_signal FAILED] {_e}', exc_info=True)
