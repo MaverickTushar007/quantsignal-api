@@ -102,9 +102,9 @@ async def get_signal(
         enqueue_reasoning_job(symbol, sig)
     # Step 9: save signal for outcome tracking
     try:
-        from app.domain.regime.detector import regime_multiplier
+        from app.domain.regime.detector import regime_multiplier, detect_regime
         from app.infrastructure.cache.cache import get_cached, set_cached
-        regime_data = get_cached(f"regime:{symbol}") or {"regime": "unknown"}
+        regime_data = detect_regime(symbol)
         sig["regime"] = regime_data.get("regime", "unknown")
         sig["signal_bias"] = regime_data.get("signal_bias", "")
         sig["regime_return_20d"] = regime_data.get("return_20d")
