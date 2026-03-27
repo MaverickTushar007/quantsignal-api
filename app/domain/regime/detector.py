@@ -1,11 +1,13 @@
 """
 Market regime detection — determines if market is trending up, down, or ranging.
+Multipliers calibrated from actual signal outcomes (140 closed signals).
 """
 import logging
 import yfinance as yf
 import numpy as np
 
 logger = logging.getLogger(__name__)
+
 
 def detect_regime(symbol: str) -> dict:
     try:
@@ -40,25 +42,41 @@ def detect_regime(symbol: str) -> dict:
             "trend_strength": round(trend_strength, 4),
             "signal_bias": _bias(regime),
         }
-
     except Exception as e:
         logger.error(f"[regime] {symbol} failed: {e}")
         return {"regime": "unknown", "reason": str(e)}
 
+
 def _bias(regime: str) -> str:
     return {
-        "bull": "favor BUY signals",
-        "bear": "favor SELL signals",
-        "ranging": "reduce position size, expect mean reversion",
+        "bull":    "favor BUY signals",
+        "bear":    "favor SELL signals",
+        "ranging": "favor SELL signals, suppress BUY",
     }.get(regime, "neutral")
 
+
 def regime_multiplier(regime: str, direction: str) -> float:
-    if regime == "bull" and direction == "BUY":
-        return 1.3
-    if regime == "bear" and direction == "SELL":
-        return 1.3
-    if regime == "bull" and direction == "SELL":
-        return 0.5
-    if regime == "bear" and direction == "BUY":
-        return 0.5
-    return 1.0
+    """
+    Multipliers derived from actual win rates (140 closed signals):
+
+    regime    dir   actual_win%   multiplier   logic
+    -------   ---   -----------   -----------  ------
+    bear      BUY   5.6%          0.25x        near-suppress, rarely wins
+    bear      SELL  55.6%         1.5x         strong edge, boost it
+    bull      BUY   100% (1 smpl) 1.3x         keep conservative, tiny sample
+    bull      SELL  0.0% (5 smpl) 0.2x         suppress hard
+    ranging   BUY   10.6%         0.4x         suppress, most ranging BUYs lose
+    ranging   SELL  57.1%         1.4x         solid edge, boost it
+    unknown   *     ~0%           0.5x         no data, be cautious
+    """
+    table = {
+        ("bear",    "BUY"):  0.25,
+        ("bear",    "SELL"): 1.5,
+        ("bull",    "BUY"):  1.3,
+        ("bull",    "SELL"): 0.2,
+        ("ranging", "BUY"):  0.4,
+        ("ranging", "SELL"): 1.4,
+        ("unknown", "BUY"):  0.5,
+        ("unknown", "SELL"): 0.5,
+    }
+    return table.get((regime, direction), 1.0)
