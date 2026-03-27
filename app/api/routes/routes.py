@@ -115,10 +115,10 @@ async def get_signal(
         direction = sig.get("direction", "")
         if regime in ("ranging", "bear") and direction == "BUY":
             sig["regime_suppressed"] = True
-            sig["regime_suppression_reason"] = f"{regime} regime — BUY signal suppressed"
+            sig["regime_suppression_reason"] = f"{regime} regime - BUY signal suppressed"
         elif regime == "bull" and direction == "SELL":
             sig["regime_suppressed"] = True
-            sig["regime_suppression_reason"] = "bull regime — SELL signal suppressed"
+            sig["regime_suppression_reason"] = "bull regime - SELL signal suppressed"
         else:
             sig["regime_suppressed"] = False
     except Exception as e:
