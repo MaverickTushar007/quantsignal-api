@@ -1,26 +1,19 @@
 import logging
-import requests
+import yfinance as yf
 from app.infrastructure.db.signal_history import get_open_signals, update_outcome
 
 logger = logging.getLogger(__name__)
 
-# Internal Railway URL — avoids external routing
-BASE_URL = "http://localhost:8080"
-
 def _get_price(symbol: str) -> float | None:
-    # Try internal first, then external
-    for url in [f"http://localhost:8080/api/v1/signals/{symbol}",
-                f"https://quantsignal-api-production.up.railway.app/api/v1/signals/{symbol}"]:
-        try:
-            r = requests.get(url, timeout=15)
-            if r.status_code == 200:
-                data = r.json()
-                price = data.get("current_price")
-                if price:
-                    logger.info(f"[evaluator] {symbol} price: {price}")
-                    return float(price)
-        except Exception as e:
-            logger.warning(f"[evaluator] {url} failed: {e}")
+    try:
+        data = yf.download(symbol, period="1d", interval="5m", progress=False, auto_adjust=True)
+        if not data.empty:
+            price = float(data["Close"].iloc[-1])
+            logger.info(f"[evaluator] {symbol} = {price}")
+            return price
+        logger.warning(f"[evaluator] {symbol} empty data")
+    except Exception as e:
+        logger.error(f"[evaluator] {symbol} failed: {e}")
     return None
 
 def evaluate_open_signals() -> dict:
