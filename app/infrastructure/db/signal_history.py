@@ -166,3 +166,18 @@ def get_performance() -> dict:
         }
     finally:
         con.close()
+
+def get_evaluated_signals() -> list[dict]:
+    con, db = _get_conn()
+    try:
+        cur = con.cursor()
+        cur.execute("""
+            SELECT symbol, direction, entry_price, exit_price, outcome, generated_at, evaluated_at
+            FROM signal_history
+            WHERE outcome IN ('win', 'loss') AND exit_price IS NOT NULL
+            ORDER BY evaluated_at ASC
+        """)
+        cols = [d[0] for d in cur.description]
+        return [dict(zip(cols, row)) for row in cur.fetchall()]
+    finally:
+        con.close()

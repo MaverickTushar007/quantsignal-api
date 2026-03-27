@@ -23,3 +23,11 @@ def debug_signals():
 def run_evaluation():
     results = evaluate_open_signals()
     return {"status": "done", **results}
+
+from app.domain.performance.portfolio import compute_portfolio
+from app.infrastructure.db.signal_history import get_evaluated_signals
+
+@router.get("/portfolio", tags=["quant"])
+def get_portfolio():
+    signals = get_evaluated_signals()
+    return compute_portfolio(signals)
