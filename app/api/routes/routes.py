@@ -102,9 +102,21 @@ async def get_signal(
         enqueue_reasoning_job(symbol, sig)
     # Step 9: save signal for outcome tracking
     try:
+        from app.domain.regime.detector import detect_regime, regime_multiplier
+        regime_data = detect_regime(symbol)
+        sig["regime"] = regime_data.get("regime", "unknown")
+        sig["signal_bias"] = regime_data.get("signal_bias", "")
+        sig["regime_return_20d"] = regime_data.get("return_20d")
+        multiplier = regime_multiplier(sig["regime"], sig.get("direction", ""))
+        sig["regime_adjusted_probability"] = round(
+            min(sig.get("probability", 0.5) * multiplier, 1.0), 3
+        )
+    except Exception as e:
+        sig["regime"] = "unknown"
+
+    try:
         from app.infrastructure.db.signal_history import save_signal, is_open
         if sig.get("direction") in ("BUY", "SELL") and not is_open(sig["symbol"]):
-            # Parse confluence_score from "3/9 bullish" → 3
             raw_conf = sig.get("confluence_score", "")
             try:
                 conf_int = int(str(raw_conf).split("/")[0]) if "/" in str(raw_conf) else None
