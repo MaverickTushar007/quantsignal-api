@@ -128,6 +128,8 @@ async def get_signal(
 
     try:
         from app.infrastructure.db.signal_history import save_signal, is_open
+        import logging; _log = logging.getLogger(__name__)
+        _log.warning(f"[DEBUG] regime={sig.get('regime')} prob={sig.get('probability')} raw={sig.get('raw_probability')} is_open={is_open(sig['symbol'])}")
         if sig.get("direction") in ("BUY", "SELL") and not is_open(sig["symbol"]) and not sig.get("regime_suppressed"):
             raw_conf = sig.get("confluence_score", "")
             try:
