@@ -32,11 +32,12 @@ from fastapi import Query
 def get_portfolio(
     min_prob: float = Query(0.65, description="Minimum signal probability"),
     min_confluence: int = Query(0, description="Minimum confluence score"),
+    min_mtf: int = Query(0, description="Minimum MTF score"),
     compare: bool = Query(True, description="Show filtered vs unfiltered comparison"),
 ):
     signals = get_evaluated_signals()
     if compare:
-        return compute_dual_portfolio(signals, min_prob, min_confluence)
+        return compute_dual_portfolio(signals, min_prob, min_confluence, min_mtf)
     return compute_portfolio(signals)
 
 from app.domain.performance.calibration import calibrate

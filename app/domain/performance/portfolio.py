@@ -91,21 +91,22 @@ def compute_portfolio(signals: list[dict]) -> dict:
     }
 
 
-def filter_signals(signals: list[dict], min_prob: float = 0.65, min_confluence: int = 0) -> list[dict]:
+def filter_signals(signals: list[dict], min_prob: float = 0.65, min_confluence: int = 0, min_mtf: int = 0) -> list[dict]:
     return [
         s for s in signals
         if (s.get("probability") or 0) >= min_prob
         and (s.get("confluence_score") or 0) >= min_confluence
+        and (s.get("mtf_score") or 0) >= min_mtf
     ]
 
-def compute_dual_portfolio(signals: list[dict], min_prob: float = 0.65, min_confluence: int = 0) -> dict:
+def compute_dual_portfolio(signals: list[dict], min_prob: float = 0.65, min_confluence: int = 0, min_mtf: int = 0) -> dict:
     evaluated = [s for s in signals if s.get("outcome") in ("win", "loss") and s.get("exit_price")]
     evaluated.sort(key=lambda x: x.get("evaluated_at") or x.get("generated_at") or "")
 
     if not evaluated:
         return {"total_evaluated": 0, "all_signals": None, "filtered_signals": None}
 
-    filtered = filter_signals(evaluated, min_prob, min_confluence)
+    filtered = filter_signals(evaluated, min_prob, min_confluence, min_mtf)
 
     def portfolio_stats(sigs):
         if not sigs:
