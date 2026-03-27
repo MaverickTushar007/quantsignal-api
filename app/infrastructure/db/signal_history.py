@@ -38,9 +38,12 @@ def init_db():
                     exit_price    FLOAT,
                     generated_at  TEXT NOT NULL,
                     evaluated_at  TEXT,
-                    probability   FLOAT,
+                    probability      FLOAT,
+                    raw_probability  FLOAT,
                     confluence_score INT,
-                    mtf_score        INT
+                    mtf_score        INT,
+                    regime           TEXT,
+                    regime_multiplier FLOAT
                 )
             """)
             cur.execute("CREATE INDEX IF NOT EXISTS idx_symbol ON signal_history(symbol)")
@@ -59,9 +62,12 @@ def init_db():
                     exit_price    REAL,
                     generated_at  TEXT NOT NULL,
                     evaluated_at  TEXT,
-                    probability   REAL,
+                    probability      REAL,
+                    raw_probability  REAL,
                     confluence_score INTEGER,
-                    mtf_score        INTEGER
+                    mtf_score        INTEGER,
+                    regime           TEXT,
+                    regime_multiplier REAL
                 )
             """)
         con.commit()
@@ -88,11 +94,11 @@ def save_signal(signal: dict):
         cur = con.cursor()
         cur.execute(
             """INSERT INTO signal_history
-              (symbol, direction, entry_price, take_profit, stop_loss, generated_at, probability, confluence_score, mtf_score)
-              VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)""" if db == "pg" else
+              (symbol, direction, entry_price, take_profit, stop_loss, generated_at, probability, raw_probability, confluence_score, mtf_score, regime, regime_multiplier)
+              VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)""" if db == "pg" else
             """INSERT INTO signal_history
-              (symbol, direction, entry_price, take_profit, stop_loss, generated_at, probability, confluence_score, mtf_score)
-              VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)""",
+              (symbol, direction, entry_price, take_profit, stop_loss, generated_at, probability, raw_probability, confluence_score, mtf_score, regime, regime_multiplier)
+              VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
             (
                 signal["symbol"],
                 signal["direction"],
@@ -101,8 +107,11 @@ def save_signal(signal: dict):
                 signal["stop_loss"],
                 signal.get("generated_at", datetime.utcnow().isoformat()),
                 signal.get("probability"),
+                signal.get("raw_probability"),
                 signal.get("confluence_score"),
                 signal.get("mtf_score"),
+                signal.get("regime"),
+                signal.get("regime_multiplier"),
             )
         )
         con.commit()
