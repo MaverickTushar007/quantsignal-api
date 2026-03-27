@@ -8,7 +8,7 @@ def _get_price(symbol: str) -> float | None:
     try:
         data = yf.download(symbol, period="1d", interval="5m", progress=False, auto_adjust=True)
         if not data.empty:
-            price = float(data["Close"].iloc[-1])
+            price = float(data["Close"].iloc[-1].item()) if hasattr(data["Close"].iloc[-1], "item") else float(data["Close"].iloc[-1])
             logger.info(f"[evaluator] {symbol} = {price}")
             return price
         logger.warning(f"[evaluator] {symbol} empty data")
@@ -43,7 +43,7 @@ def evaluate_open_signals() -> dict:
         if outcome:
             update_outcome(s["id"], outcome, price)
             results["evaluated"] += 1
-            results[f"{outcome}s"] += 1
+            results[f"{outcome}s"] = results.get(f"{outcome}s", 0) + 1
             logger.info(f"[evaluator] {s['symbol']} {direction} → {outcome} @ {price}")
         else:
             results["skipped"] += 1
