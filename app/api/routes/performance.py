@@ -38,3 +38,10 @@ def get_portfolio(
     if compare:
         return compute_dual_portfolio(signals, min_prob, min_confluence)
     return compute_portfolio(signals)
+
+from app.domain.performance.calibration import calibrate
+
+@router.get("/calibration", tags=["quant"])
+def get_calibration():
+    signals = get_evaluated_signals()
+    return calibrate(signals)
