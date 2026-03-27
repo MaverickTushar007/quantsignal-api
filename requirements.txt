@@ -22,3 +22,4 @@ beautifulsoup4==4.12.3
 supabase==2.7.4
 stripe
 resend==2.26.0
+psycopg2-binary==2.9.9
