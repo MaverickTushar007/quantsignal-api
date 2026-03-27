@@ -104,6 +104,13 @@ async def get_signal(
     try:
         from app.infrastructure.db.signal_history import save_signal, is_open
         if sig.get("direction") in ("BUY", "SELL") and not is_open(sig["symbol"]):
+            # Parse confluence_score from "3/9 bullish" → 3
+            raw_conf = sig.get("confluence_score", "")
+            try:
+                conf_int = int(str(raw_conf).split("/")[0]) if "/" in str(raw_conf) else None
+            except Exception:
+                conf_int = None
+            sig["confluence_score"] = conf_int
             save_signal(sig)
     except Exception:
         pass
