@@ -135,6 +135,9 @@ async def get_signal(
             except Exception:
                 conf_int = None
             sig["confluence_score"] = conf_int
+            # Extract mtf_score integer from mtf dict
+            mtf = sig.get("mtf", {})
+            sig["mtf_score"] = mtf.get("mtf_score_with_daily") or mtf.get("mtf_score")
             save_signal(sig)
     except Exception:
         pass

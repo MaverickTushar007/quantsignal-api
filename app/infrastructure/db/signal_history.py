@@ -39,7 +39,8 @@ def init_db():
                     generated_at  TEXT NOT NULL,
                     evaluated_at  TEXT,
                     probability   FLOAT,
-                    confluence_score INT
+                    confluence_score INT,
+                    mtf_score        INT
                 )
             """)
             cur.execute("CREATE INDEX IF NOT EXISTS idx_symbol ON signal_history(symbol)")
@@ -59,7 +60,8 @@ def init_db():
                     generated_at  TEXT NOT NULL,
                     evaluated_at  TEXT,
                     probability   REAL,
-                    confluence_score INTEGER
+                    confluence_score INTEGER,
+                    mtf_score        INTEGER
                 )
             """)
         con.commit()
@@ -86,11 +88,11 @@ def save_signal(signal: dict):
         cur = con.cursor()
         cur.execute(
             """INSERT INTO signal_history
-              (symbol, direction, entry_price, take_profit, stop_loss, generated_at, probability, confluence_score)
-              VALUES (%s, %s, %s, %s, %s, %s, %s, %s)""" if db == "pg" else
+              (symbol, direction, entry_price, take_profit, stop_loss, generated_at, probability, confluence_score, mtf_score)
+              VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)""" if db == "pg" else
             """INSERT INTO signal_history
-              (symbol, direction, entry_price, take_profit, stop_loss, generated_at, probability, confluence_score)
-              VALUES (?, ?, ?, ?, ?, ?, ?, ?)""",
+              (symbol, direction, entry_price, take_profit, stop_loss, generated_at, probability, confluence_score, mtf_score)
+              VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)""",
             (
                 signal["symbol"],
                 signal["direction"],
@@ -100,6 +102,7 @@ def save_signal(signal: dict):
                 signal.get("generated_at", datetime.utcnow().isoformat()),
                 signal.get("probability"),
                 signal.get("confluence_score"),
+                signal.get("mtf_score"),
             )
         )
         con.commit()
@@ -178,7 +181,7 @@ def get_evaluated_signals() -> list[dict]:
     try:
         cur = con.cursor()
         cur.execute("""
-            SELECT symbol, direction, entry_price, exit_price, outcome, generated_at, evaluated_at, probability, confluence_score
+            SELECT symbol, direction, entry_price, exit_price, outcome, generated_at, evaluated_at, probability, confluence_score, mtf_score
             FROM signal_history
             WHERE outcome IN ('win', 'loss') AND exit_price IS NOT NULL
             ORDER BY evaluated_at ASC
