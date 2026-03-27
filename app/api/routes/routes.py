@@ -100,7 +100,13 @@ async def get_signal(
     status = sig.get("reasoning_status", "")
     if reason and status not in ("pending", "complete"):
         enqueue_reasoning_job(symbol, sig)
-
+    # Step 9: save signal for outcome tracking
+    try:
+        from app.infrastructure.db.signal_history import save_signal
+        if sig.get("direction") in ("BUY", "SELL"):
+            save_signal(sig)
+    except Exception:
+        pass
     return sig
 
 
