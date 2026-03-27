@@ -145,10 +145,19 @@ async def get_signal(
             # Extract mtf_score integer from mtf dict
             mtf = sig.get("mtf", {})
             sig["mtf_score"] = mtf.get("mtf_score_with_daily") or mtf.get("mtf_score")
-            # Store raw probability, use adjusted as the saved probability
+            # Store raw probability, apply regime multiplier then Platt calibration
             sig["raw_probability"] = sig.get("probability")
-            if sig.get("regime_adjusted_probability") is not None:
-                sig["probability"] = sig["regime_adjusted_probability"]
+            regime_adj = sig.get("regime_adjusted_probability")
+            if regime_adj is not None:
+                sig["probability"] = regime_adj
+
+            # Apply Platt calibration on top of regime-adjusted probability
+            try:
+                from app.domain.signal.calibration import calibrate_probability
+                sig["probability"] = calibrate_probability(sig["probability"])
+            except Exception as _cal_e:
+                import logging; logging.getLogger(__name__).warning(f"[calibration] skipped: {_cal_e}")
+
             save_signal(sig)
     except Exception as _e:
         import logging; logging.getLogger(__name__).error(f'[save_signal FAILED] {_e}', exc_info=True)
