@@ -9,7 +9,7 @@ logger = logging.getLogger(__name__)
 
 def detect_regime(symbol: str) -> dict:
     try:
-        data = yf.download(symbol, period="200d", interval="1d",
+        data = yf.download(symbol, period="1y", interval="1d",
                            progress=False, auto_adjust=True)
         if len(data) < 50:
             return {"regime": "unknown", "reason": "insufficient data"}
