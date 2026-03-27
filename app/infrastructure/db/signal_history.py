@@ -77,27 +77,26 @@ def is_open(symbol: str) -> bool:
     finally:
         con.close()
 
-def save_signal(signal: dict):"
-
+def save_signal(signal: dict):
     con, db = _get_conn()
     try:
         cur = con.cursor()
-        cur.execute("""
-            INSERT INTO signal_history
+        cur.execute(
+            """INSERT INTO signal_history
               (symbol, direction, entry_price, take_profit, stop_loss, generated_at)
-            VALUES (%s, %s, %s, %s, %s, %s)
-        """ if db == "pg" else """
-            INSERT INTO signal_history
+              VALUES (%s, %s, %s, %s, %s, %s)""" if db == "pg" else
+            """INSERT INTO signal_history
               (symbol, direction, entry_price, take_profit, stop_loss, generated_at)
-            VALUES (?, ?, ?, ?, ?, ?)
-        """, (
-            signal["symbol"],
-            signal["direction"],
-            signal["current_price"],
-            signal["take_profit"],
-            signal["stop_loss"],
-            signal.get("generated_at", datetime.utcnow().isoformat()),
-        ))
+              VALUES (?, ?, ?, ?, ?, ?)""",
+            (
+                signal["symbol"],
+                signal["direction"],
+                signal["current_price"],
+                signal["take_profit"],
+                signal["stop_loss"],
+                signal.get("generated_at", datetime.utcnow().isoformat()),
+            )
+        )
         con.commit()
     except Exception as e:
         logger.error(f"[signal_history] save failed: {e}")
@@ -122,15 +121,11 @@ def update_outcome(signal_id: int, outcome: str, exit_price: float):
     con, db = _get_conn()
     try:
         cur = con.cursor()
-        cur.execute("""
-            UPDATE signal_history
-            SET outcome = %s, exit_price = %s, evaluated_at = %s
-            WHERE id = %s
-        """ if db == "pg" else """
-            UPDATE signal_history
-            SET outcome = ?, exit_price = ?, evaluated_at = ?
-            WHERE id = ?
-        """, (outcome, exit_price, datetime.utcnow().isoformat(), signal_id))
+        cur.execute(
+            "UPDATE signal_history SET outcome = %s, exit_price = %s, evaluated_at = %s WHERE id = %s" if db == "pg"
+            else "UPDATE signal_history SET outcome = ?, exit_price = ?, evaluated_at = ? WHERE id = ?",
+            (outcome, exit_price, datetime.utcnow().isoformat(), signal_id)
+        )
         con.commit()
     finally:
         con.close()
