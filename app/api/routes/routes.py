@@ -102,8 +102,8 @@ async def get_signal(
         enqueue_reasoning_job(symbol, sig)
     # Step 9: save signal for outcome tracking
     try:
-        from app.infrastructure.db.signal_history import save_signal
-        if sig.get("direction") in ("BUY", "SELL"):
+        from app.infrastructure.db.signal_history import save_signal, is_open
+        if sig.get("direction") in ("BUY", "SELL") and not is_open(sig["symbol"]):
             save_signal(sig)
     except Exception:
         pass

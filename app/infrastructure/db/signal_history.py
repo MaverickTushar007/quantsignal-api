@@ -64,7 +64,21 @@ def init_db():
     finally:
         con.close()
 
-def save_signal(signal: dict):
+def is_open(symbol: str) -> bool:
+    con, db = _get_conn()
+    try:
+        cur = con.cursor()
+        cur.execute(
+            "SELECT COUNT(*) FROM signal_history WHERE symbol = %s AND outcome = 'open'" if db == "pg"
+            else "SELECT COUNT(*) FROM signal_history WHERE symbol = ? AND outcome = 'open'",
+            (symbol,)
+        )
+        return cur.fetchone()[0] > 0
+    finally:
+        con.close()
+
+def save_signal(signal: dict):"
+
     con, db = _get_conn()
     try:
         cur = con.cursor()

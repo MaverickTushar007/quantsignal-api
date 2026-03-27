@@ -4,19 +4,23 @@ from app.infrastructure.db.signal_history import get_open_signals, update_outcom
 
 logger = logging.getLogger(__name__)
 
-BASE_URL = "https://quantsignal-api-production.up.railway.app"
+# Internal Railway URL — avoids external routing
+BASE_URL = "http://localhost:8080"
 
 def _get_price(symbol: str) -> float | None:
-    try:
-        r = requests.get(f"{BASE_URL}/api/v1/signals/{symbol}", timeout=10)
-        data = r.json()
-        price = data.get("current_price")
-        if price:
-            logger.info(f"[evaluator] {symbol} price: {price}")
-            return float(price)
-        logger.warning(f"[evaluator] {symbol} no current_price in response")
-    except Exception as e:
-        logger.error(f"[evaluator] {symbol} fetch failed: {e}")
+    # Try internal first, then external
+    for url in [f"http://localhost:8080/api/v1/signals/{symbol}",
+                f"https://quantsignal-api-production.up.railway.app/api/v1/signals/{symbol}"]:
+        try:
+            r = requests.get(url, timeout=15)
+            if r.status_code == 200:
+                data = r.json()
+                price = data.get("current_price")
+                if price:
+                    logger.info(f"[evaluator] {symbol} price: {price}")
+                    return float(price)
+        except Exception as e:
+            logger.warning(f"[evaluator] {url} failed: {e}")
     return None
 
 def evaluate_open_signals() -> dict:
