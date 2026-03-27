@@ -8,17 +8,18 @@ logger = logging.getLogger(__name__)
 
 def _get_price(symbol: str) -> float | None:
     try:
-        # Use cached signal price — already fetched by signal pipeline
         sig = get_cached(f"signal:{symbol}")
         if sig and sig.get("current_price"):
+            logger.info(f"[evaluator] {symbol} price from Redis: {sig['current_price']}")
             return float(sig["current_price"])
-        # Fallback to signals_cache.json
         cache_path = BASE_DIR / "data/signals_cache.json"
         if cache_path.exists():
             cache = json.loads(cache_path.read_text())
             sig = cache.get(symbol)
             if sig and sig.get("current_price"):
+                logger.info(f"[evaluator] {symbol} price from JSON: {sig['current_price']}")
                 return float(sig["current_price"])
+        logger.warning(f"[evaluator] {symbol} no price found anywhere")
     except Exception as e:
         logger.error(f"[evaluator] price fetch failed for {symbol}: {e}")
     return None
