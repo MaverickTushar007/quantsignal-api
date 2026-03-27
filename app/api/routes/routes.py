@@ -104,7 +104,7 @@ async def get_signal(
     try:
         from app.domain.regime.detector import regime_multiplier, detect_regime
         from app.infrastructure.cache.cache import get_cached, set_cached
-        regime_data = detect_regime(symbol)
+        regime_data = detect_regime(symbol) or {}
         sig["regime"] = regime_data.get("regime", "unknown")
         sig["signal_bias"] = regime_data.get("signal_bias", "")
         sig["regime_return_20d"] = regime_data.get("return_20d")
@@ -145,8 +145,8 @@ async def get_signal(
             if sig.get("regime_adjusted_probability") is not None:
                 sig["probability"] = sig["regime_adjusted_probability"]
             save_signal(sig)
-    except Exception:
-        pass
+    except Exception as _e:
+        import logging; logging.getLogger(__name__).error(f'[save_signal FAILED] {_e}', exc_info=True)
     return sig
 
 
