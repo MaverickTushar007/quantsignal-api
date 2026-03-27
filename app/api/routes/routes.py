@@ -102,8 +102,9 @@ async def get_signal(
         enqueue_reasoning_job(symbol, sig)
     # Step 9: save signal for outcome tracking
     try:
-        from app.domain.regime.detector import detect_regime, regime_multiplier
-        regime_data = detect_regime(symbol)
+        from app.domain.regime.detector import regime_multiplier
+        from app.core.cache import get_cached
+        regime_data = get_cached(f"regime:{symbol}") or {"regime": "unknown"}
         sig["regime"] = regime_data.get("regime", "unknown")
         sig["signal_bias"] = regime_data.get("signal_bias", "")
         sig["regime_return_20d"] = regime_data.get("return_20d")
@@ -298,3 +299,21 @@ def backtest(
 async def get_regime(symbol: str):
     from app.domain.regime.detector import detect_regime
     return detect_regime(symbol)
+
+@router.post("/regime/cache", tags=["quant"])
+async def cache_regime(payload: dict):
+    """Accept regime data pushed from local runner and cache it."""
+    from app.core.cache import set_cached
+    symbol = payload.get("symbol")
+    if not symbol:
+        return {"error": "symbol required"}
+    set_cached(f"regime:{symbol}", payload, ttl=3600)
+    return {"status": "cached", "symbol": symbol}
+
+@router.get("/regime/{symbol}", tags=["quant"])
+async def get_regime(symbol: str):
+    from app.core.cache import get_cached
+    cached = get_cached(f"regime:{symbol}")
+    if cached:
+        return cached
+    return {"regime": "unknown", "reason": "no regime data cached — run local regime updater"}
