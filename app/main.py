@@ -12,6 +12,7 @@ from app.api.middleware.protection import protection_middleware
 from app.core.config import settings
 from app.api.routes.routes import router
 from app.api.routes.metrics import router as metrics_router
+from app.api.routes.performance import router as performance_router
 from app.api.routes.chat import router as chat_router
 from app.api.routes.sentiment import router as sentiment_router
 from app.api.routes.liquidity import router as liquidity_router
@@ -75,6 +76,7 @@ app.include_router(alerts_router, prefix="/api/v1")
 app.include_router(mcp_router, prefix="/api/v1")
 app.include_router(history_router, prefix="/api/v1")
 app.include_router(metrics_router, prefix="/api/v1")
+app.include_router(performance_router, prefix="/api/v1")
 if _calendar_ok:
     app.include_router(calendar_router, prefix="/api/v1")
 app.include_router(ws_router, prefix="/api/v1")
