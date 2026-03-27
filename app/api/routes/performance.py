@@ -24,10 +24,17 @@ def run_evaluation():
     results = evaluate_open_signals()
     return {"status": "done", **results}
 
-from app.domain.performance.portfolio import compute_portfolio
+from app.domain.performance.portfolio import compute_portfolio, compute_dual_portfolio
 from app.infrastructure.db.signal_history import get_evaluated_signals
+from fastapi import Query
 
 @router.get("/portfolio", tags=["quant"])
-def get_portfolio():
+def get_portfolio(
+    min_prob: float = Query(0.65, description="Minimum signal probability"),
+    min_confluence: int = Query(0, description="Minimum confluence score"),
+    compare: bool = Query(True, description="Show filtered vs unfiltered comparison"),
+):
     signals = get_evaluated_signals()
+    if compare:
+        return compute_dual_portfolio(signals, min_prob, min_confluence)
     return compute_portfolio(signals)

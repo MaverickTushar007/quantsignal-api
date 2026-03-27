@@ -89,3 +89,42 @@ def compute_portfolio(signals: list[dict]) -> dict:
         "streaks": compute_streaks(evaluated),
         "equity_curve": curve,
     }
+
+
+def filter_signals(signals: list[dict], min_prob: float = 0.65, min_confluence: int = 0) -> list[dict]:
+    return [
+        s for s in signals
+        if (s.get("probability") or 0) >= min_prob
+        and (s.get("confluence_score") or 0) >= min_confluence
+    ]
+
+def compute_dual_portfolio(signals: list[dict], min_prob: float = 0.65, min_confluence: int = 0) -> dict:
+    evaluated = [s for s in signals if s.get("outcome") in ("win", "loss") and s.get("exit_price")]
+    evaluated.sort(key=lambda x: x.get("evaluated_at") or x.get("generated_at") or "")
+
+    if not evaluated:
+        return {"total_evaluated": 0, "all_signals": None, "filtered_signals": None}
+
+    filtered = filter_signals(evaluated, min_prob, min_confluence)
+
+    def portfolio_stats(sigs):
+        if not sigs:
+            return None
+        curve = build_equity_curve(sigs)
+        wins = sum(1 for s in sigs if s["outcome"] == "win")
+        return {
+            "count": len(sigs),
+            "cumulative_pnl": cumulative_pnl(curve),
+            "max_drawdown": max_drawdown(curve),
+            "sharpe_ratio": sharpe_ratio(sigs),
+            "win_rate": round(wins / len(sigs), 3),
+            "streaks": compute_streaks(sigs),
+            "equity_curve": curve,
+        }
+
+    return {
+        "total_evaluated": len(evaluated),
+        "filters_applied": {"min_probability": min_prob, "min_confluence": min_confluence},
+        "all_signals": portfolio_stats(evaluated),
+        "filtered_signals": portfolio_stats(filtered),
+    }
