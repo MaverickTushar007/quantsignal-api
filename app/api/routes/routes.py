@@ -111,12 +111,23 @@ async def get_signal(
         sig["regime_adjusted_probability"] = round(
             min(sig.get("probability", 0.5) * multiplier, 1.0), 3
         )
+        regime = sig["regime"]
+        direction = sig.get("direction", "")
+        if regime in ("ranging", "bear") and direction == "BUY":
+            sig["regime_suppressed"] = True
+            sig["regime_suppression_reason"] = f"{regime} regime — BUY signal suppressed"
+        elif regime == "bull" and direction == "SELL":
+            sig["regime_suppressed"] = True
+            sig["regime_suppression_reason"] = "bull regime — SELL signal suppressed"
+        else:
+            sig["regime_suppressed"] = False
     except Exception as e:
         sig["regime"] = "unknown"
+        sig["regime_suppressed"] = False
 
     try:
         from app.infrastructure.db.signal_history import save_signal, is_open
-        if sig.get("direction") in ("BUY", "SELL") and not is_open(sig["symbol"]):
+        if sig.get("direction") in ("BUY", "SELL") and not is_open(sig["symbol"]) and not sig.get("regime_suppressed"):
             raw_conf = sig.get("confluence_score", "")
             try:
                 conf_int = int(str(raw_conf).split("/")[0]) if "/" in str(raw_conf) else None
