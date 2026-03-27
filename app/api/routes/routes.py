@@ -161,6 +161,16 @@ async def get_signal(
             sig["confluence_score"] = conf_int
             mtf = sig.get("mtf", {})
             sig["mtf_score"] = mtf.get("mtf_score_with_daily") or mtf.get("mtf_score")
+            # Telegram alert for high-confidence unsuppressed signals
+            try:
+                from app.domain.alerts.telegram import send_telegram, format_signal_alert
+                from app.domain.alerts.dedup import should_alert
+                prob = sig.get("probability", 0)
+                suppressed = sig.get("regime_suppressed", False)
+                if prob >= 0.35 and not suppressed and should_alert(sig.get("symbol", "")):
+                    send_telegram(format_signal_alert(sig))
+            except Exception as _tel_e:
+                import logging; logging.getLogger(__name__).warning(f"[telegram] {_tel_e}")
             save_signal(sig)
     except Exception as _e:
         import logging; logging.getLogger(__name__).error(f'[save_signal FAILED] {_e}', exc_info=True)
