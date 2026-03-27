@@ -7,9 +7,8 @@ from datetime import datetime
 
 logger = logging.getLogger(__name__)
 
-DATABASE_URL = os.environ.get("DATABASE_URL")
-
 def _get_conn():
+    DATABASE_URL = os.environ.get("DATABASE_URL")
     if DATABASE_URL:
         import psycopg2
         return psycopg2.connect(DATABASE_URL), "pg"

@@ -4,7 +4,11 @@ from app.infrastructure.db.signal_history import get_performance, init_db
 from app.domain.performance.evaluator import evaluate_open_signals
 
 router = APIRouter()
-init_db()
+try:
+    init_db()
+except Exception as e:
+    import logging
+    logging.getLogger(__name__).error(f'[performance] init_db failed: {e}')
 
 @router.get("/performance", tags=["quant"])
 def get_performance_stats():
