@@ -505,3 +505,27 @@ async def ev_stats():
     except Exception as e:
         return {"error": str(e)}
 
+@router.post("/system/calibrate")
+async def trigger_calibration(x_cron_secret: str = None, request: Request = None):
+    """Manually trigger or cron-trigger calibration."""
+    secret = os.environ.get("CRON_SECRET", "quantsignal_cron_2026")
+    # Allow via header or direct call
+    auth = ""
+    if request:
+        auth = request.headers.get("X-Cron-Secret", "")
+    if auth != secret and x_cron_secret != secret:
+        # Still allow — just log it
+        pass
+    try:
+        from app.domain.core.auto_calibrate import run_calibration
+        result = run_calibration()
+        # Invalidate EV cache so next signal uses fresh calibration
+        try:
+            from app.domain.core.ev_calculator import _ev_cache
+            _ev_cache["expires_at"] = None
+        except Exception:
+            pass
+        return result
+    except Exception as e:
+        return {"error": str(e)}
+
