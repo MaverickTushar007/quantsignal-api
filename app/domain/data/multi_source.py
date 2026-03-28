@@ -11,12 +11,7 @@ log = logging.getLogger(__name__)
 def _fetch_yfinance(symbol: str, period: str = "2y"):
     try:
         import yfinance as yf
-        import requests
-        session = requests.Session()
-        session.headers.update({
-            "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36",
-        })
-        t = yf.Ticker(symbol, session=session)
+        t = yf.Ticker(symbol)
         df = t.history(period=period, auto_adjust=True)
         if df is not None and len(df) > 50:
             df.index = df.index.tz_localize(None) if df.index.tzinfo else df.index

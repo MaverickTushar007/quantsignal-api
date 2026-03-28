@@ -49,26 +49,19 @@ def fetch_ohlcv(ticker, period="2y"):
         df = fetch_coingecko_ohlcv(ticker, days=days)
         if df is not None and len(df) > 50:
             return df
-    # Try yfinance with retries first
-    import requests
-    session = requests.Session()
-    session.headers.update({
-        "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36",
-        "Accept": "application/json",
-    })
-
+    # Try yfinance with retries — let yfinance handle its own session (curl_cffi)
     periods_to_try = [period, "1y", "6mo"]
     for attempt in range(2):
         for p in periods_to_try:
             try:
-                t = yf.Ticker(ticker, session=session)
+                t = yf.Ticker(ticker)
                 df = t.history(period=p, auto_adjust=True)
                 if df is not None and len(df) > 50:
                     df.index = df.index.tz_localize(None) if df.index.tzinfo else df.index
                     return df
             except Exception as e:
                 print(f"yFinance attempt {attempt+1} period={p} failed for {ticker}: {e}")
-        time.sleep(3)
+        time.sleep(2)
 
     # yfinance failed — try multi-source fallback
     try:
