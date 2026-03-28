@@ -248,3 +248,23 @@ def generate_signal(symbol: str, include_reasoning: bool = True) -> Optional[dic
         pass
 
     return result
+
+def validate_model_features(model, symbol: str) -> bool:
+    """Returns True if model features match current FEATURE_COLUMNS."""
+    from app.domain.ml.features import FEATURE_COLUMNS
+    expected = set(FEATURE_COLUMNS)
+    actual = set()
+    if hasattr(model, "feature_names_"):
+        actual = set(model.feature_names_)
+    elif hasattr(model, "feature_names_in_"):
+        actual = set(model.feature_names_in_)
+    elif hasattr(model, "get_booster"):
+        actual = set(model.get_booster().feature_names or [])
+    if actual and actual != expected:
+        import logging
+        logging.getLogger(__name__).warning(
+            f"[{symbol}] Feature mismatch — model has {len(actual)} features, "
+            f"current pipeline has {len(expected)}. Retrain needed."
+        )
+        return False
+    return True
