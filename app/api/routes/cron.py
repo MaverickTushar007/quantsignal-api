@@ -35,6 +35,12 @@ def _rebuild():
             "MACRO":   [t for t in TICKERS if t["type"] in ("INDEX", "FOREX", "COMMODITY")],
         }
 
+        # Load existing cache as fallback — never serve empty dashboard
+        try:
+            existing_cache = json.loads((BASE_DIR / "data/signals_cache.json").read_text())
+        except Exception:
+            existing_cache = {}
+
         cache = {}
         cache_lock = threading.Lock()
         start_time = time.time()
@@ -69,6 +75,10 @@ def _rebuild():
                 print(f"[{group_name}] done — {len(results)} signals")
 
         elapsed = round(time.time() - start_time, 1)
+        # Never serve empty dashboard — merge with stale cache if rebuild produced fewer signals
+        if len(cache) < len(existing_cache) * 0.5:
+            print(f"[cron] WARNING: only {len(cache)} new signals vs {len(existing_cache)} before — merging with stale cache")
+            cache = {**existing_cache, **cache}
         (BASE_DIR / "data/signals_cache.json").write_text(json.dumps(cache, indent=2))
         print(f"Cache rebuilt: {len(cache)}/{len(TICKERS)} signals in {elapsed}s")
 

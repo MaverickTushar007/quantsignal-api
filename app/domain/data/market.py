@@ -49,14 +49,26 @@ def fetch_ohlcv(ticker, period="2y"):
         df = fetch_coingecko_ohlcv(ticker, days=days)
         if df is not None and len(df) > 50:
             return df
+    # For NSE stocks, Yahoo Finance often rate-limits — use session with headers
+    import requests
+    session = requests.Session()
+    session.headers.update({
+        "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36",
+        "Accept": "application/json",
+    })
+
+    periods_to_try = [period, "1y", "6mo"]
     for attempt in range(3):
-        try:
-            t = yf.Ticker(ticker)
-            df = t.history(period=period, auto_adjust=True)
-            if df is not None and len(df) > 50:
-                df.index = df.index.tz_localize(None) if df.index.tzinfo else df.index
-                return df
-        except Exception as e:
-            print(f"yFinance attempt {attempt+1} failed for {ticker}: {e}")
-            time.sleep(2)
+        for p in periods_to_try:
+            try:
+                t = yf.Ticker(ticker, session=session)
+                df = t.history(period=p, auto_adjust=True)
+                if df is not None and len(df) > 50:
+                    df.index = df.index.tz_localize(None) if df.index.tzinfo else df.index
+                    return df
+            except Exception as e:
+                print(f"yFinance attempt {attempt+1} period={p} failed for {ticker}: {e}")
+        wait = [3, 8, 15][attempt]
+        print(f"yFinance retry {attempt+1} for {ticker} — waiting {wait}s")
+        time.sleep(wait)
     return None
