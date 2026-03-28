@@ -167,7 +167,7 @@ async def get_signal(
                 from app.domain.alerts.dedup import should_alert
                 prob = sig.get("probability", 0)
                 suppressed = sig.get("regime_suppressed", False)
-                if prob >= 0.35 and not suppressed and should_alert(sig.get("symbol", "")):
+                if prob >= 0.50 and not suppressed and should_alert(sig.get("symbol", "")):
                     send_telegram(format_signal_alert(sig))
             except Exception as _tel_e:
                 import logging; logging.getLogger(__name__).warning(f"[telegram] {_tel_e}")
@@ -177,7 +177,7 @@ async def get_signal(
                 import logging as _log
                 _prob = sig.get("probability", 0)
                 _suppressed = sig.get("regime_suppressed", False)
-                if _prob >= 0.35 and not _suppressed:
+                if _prob >= 0.50 and not _suppressed:
                     log_alert(sig, "signal")
                     _log.getLogger(__name__).info(f"[tracker] alert logged for {sig.get('symbol')} prob={_prob:.2f}")
                 else:

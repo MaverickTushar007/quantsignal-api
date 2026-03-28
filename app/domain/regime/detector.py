@@ -70,12 +70,12 @@ def regime_multiplier(regime: str, direction: str) -> float:
     unknown   *     ~0%           0.5x         no data, be cautious
     """
     table = {
-        ("bear",    "BUY"):  0.25,
-        ("bear",    "SELL"): 1.5,
+        ("bear",    "BUY"):  0.05,   # near-zero: bear BUY wins 15% — suppress hard
+        ("bear",    "SELL"): 1.6,
         ("bull",    "BUY"):  1.3,
         ("bull",    "SELL"): 0.2,
-        ("ranging", "BUY"):  0.4,
-        ("ranging", "SELL"): 1.4,
+        ("ranging", "BUY"):  0.05,
+        ("ranging", "SELL"): 1.5,
         ("unknown", "BUY"):  0.5,
         ("unknown", "SELL"): 0.5,
     }
