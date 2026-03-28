@@ -38,8 +38,7 @@ from app.api.routes.ws import router as ws_router
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    from app.infrastructure.queue.poller import start_poller
-    start_poller()
+    # start_poller temporarily disabled for debugging
     yield
 
 app = FastAPI(
