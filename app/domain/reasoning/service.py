@@ -248,5 +248,15 @@ async def stream_chat(symbol: str, message: str, history: list):
 
         yield f"data: {json.dumps({'type': 'done'})}\n\n"
 
+        # Save to conversation history
+        try:
+            from app.domain.core.memory import save_message
+            session_id = f"{symbol}_{hash(str(history[:1]))}"
+            save_message("default", session_id, "user", message)
+            save_message("default", session_id, "assistant",
+                        f"[Perseus response for {symbol} — {message[:80]}]")
+        except Exception:
+            pass
+
     except Exception as e:
         yield f"data: {json.dumps({'type': 'error', 'message': str(e)})}\n\n"
