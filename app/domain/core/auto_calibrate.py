@@ -47,22 +47,13 @@ def run_calibration() -> dict:
         coef      = float(model.coef_[0][0])
         intercept = float(model.intercept_[0])
 
-        # Save to DB
+        # Save to DB — params stored as JSON
+        import json
+        params_json = json.dumps({"coef": coef, "intercept": intercept})
         cur.execute("""
-            INSERT INTO calibration_params (coef, intercept, win_rate, n_samples, created_at)
+            INSERT INTO calibration_params (method, params, win_rate, n_samples, created_at)
             VALUES (%s, %s, %s, %s, NOW())
-            ON CONFLICT DO NOTHING
-        """, (coef, intercept, win_rate, len(rows)))
-
-        # Also update via upsert if table supports it
-        try:
-            cur.execute("""
-                UPDATE calibration_params
-                SET coef=%s, intercept=%s, win_rate=%s, n_samples=%s, created_at=NOW()
-                WHERE id=(SELECT id FROM calibration_params ORDER BY created_at DESC LIMIT 1)
-            """, (coef, intercept, win_rate, len(rows)))
-        except Exception:
-            pass
+        """, ("platt_scaling", params_json, win_rate, len(rows)))
 
         con.commit()
         con.close()
