@@ -143,8 +143,31 @@ def _rebuild():
 def refresh_cache(x_cron_secret: str = Header(None, alias="X-Cron-Secret")):
     if x_cron_secret != CRON_SECRET:
         raise HTTPException(status_code=401, detail="Unauthorized")
-    # Run in background so request returns immediately
-    thread = threading.Thread(target=_rebuild, daemon=True)
+
+    def _rebuild_and_calibrate():
+        _rebuild()
+        # Run auto-calibration after every cache rebuild
+        try:
+            from datetime import datetime, timezone
+            now = datetime.now(timezone.utc)
+            # Only run calibration on first rebuild of the day (hour 0-1 UTC)
+            # OR always run if triggered manually — check env flag
+            import os
+            always_calibrate = os.environ.get("ALWAYS_CALIBRATE", "false").lower() == "true"
+            if always_calibrate or now.hour in (0, 1, 2):
+                from app.domain.core.auto_calibrate import run_calibration
+                result = run_calibration()
+                print(f"[cron] auto-calibration: {result}")
+                # Invalidate EV cache
+                try:
+                    from app.domain.core.ev_calculator import _ev_cache
+                    _ev_cache["expires_at"] = None
+                except Exception:
+                    pass
+        except Exception as e:
+            print(f"[cron] calibration skipped: {e}")
+
+    thread = threading.Thread(target=_rebuild_and_calibrate, daemon=True)
     thread.start()
     return {"status": "started", "message": "Cache rebuild running in background"}
 
