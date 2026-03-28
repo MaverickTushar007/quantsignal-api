@@ -4,7 +4,7 @@ api/cron.py
 Cache refresh endpoint — called by Railway cron or external scheduler.
 Rebuilds all 118 signals and clears Redis cache.
 """
-from fastapi import APIRouter, Header, HTTPException
+from fastapi import APIRouter, Header, HTTPException, Request
 import os, json, time, threading
 from pathlib import Path
 
@@ -307,4 +307,29 @@ def evaluate_alerts(x_cron_secret: str = Header(None, alias="X-Cron-Secret")):
         return {"status": "ok", "evaluated": evaluated}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+
+@router.post("/cron/upload-cache", tags=["cron"])
+async def upload_cache(request: Request, x_cron_secret: str = Header(None, alias="X-Cron-Secret")):
+    """Receive a pre-built signals cache from local machine and write to disk."""
+    if x_cron_secret != CRON_SECRET:
+        raise HTTPException(status_code=401, detail="Unauthorized")
+    try:
+        body = await request.json()
+        if not isinstance(body, dict) or len(body) == 0:
+            return {"error": "empty or invalid cache"}
+        cache_path = BASE_DIR / "data/signals_cache.json"
+        import json as _json
+        cache_path.write_text(_json.dumps(body, indent=2))
+        try:
+            from app.infrastructure.cache.cache import _get_redis
+            r = _get_redis()
+            if r:
+                keys = r.keys("signal:*")
+                for k in keys:
+                    r.delete(k)
+        except Exception:
+            pass
+        return {"status": "ok", "signals_written": len(body)}
+    except Exception as e:
+        return {"error": str(e)}
 
