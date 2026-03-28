@@ -202,6 +202,16 @@ async def stream_chat(symbol: str, message: str, history: list):
         if rag_text and rag_text != "No academic context available.":
             sys_prompt += f"\n## QUANTITATIVE RESEARCH CONTEXT\n{rag_text}\n"
 
+        # Inject memory context
+        try:
+            from app.domain.core.memory import build_perseus_context
+            session_id = f"{symbol}_{hash(str(history[:1]))}"
+            mem_context = build_perseus_context("default", symbol, session_id)
+            if mem_context:
+                sys_prompt += f"\n## MEMORY & CONTEXT\n{mem_context}\n"
+        except Exception as _mem_e:
+            pass
+
         sys_prompt += "\nSearch the web for the latest news, price action, and analyst views before responding.\n"
 
         if not settings.groq_api_key:
