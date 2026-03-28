@@ -94,17 +94,21 @@ def get_subscriptions(email: str):
 def fire_signal_alerts(new_cache: dict, old_cache: dict):
     """
     Called after cache rebuild — compare old vs new signals,
-    fire emails for any direction changes to subscribed users.
+    fire Telegram + emails for any direction changes to subscribed users.
+    Deduped per symbol with 6h cooldown persisted in Supabase.
     """
+    from app.domain.alerts.dedup import should_alert
+    from app.domain.alerts.telegram import send_telegram, format_signal_alert
     try:
         sb = _sb()
-        # Find signals that changed direction
+        # Find signals that changed direction AND pass dedup
         changed = []
         for symbol, new_sig in new_cache.items():
             old_sig = old_cache.get(symbol, {})
-            if old_sig.get("direction") != new_sig.get("direction"):
-                if new_sig["direction"] in ["BUY", "SELL"]:
-                    changed.append({
+            direction_changed = old_sig.get("direction") != new_sig.get("direction")
+            is_actionable = new_sig["direction"] in ["BUY", "SELL"]
+            if direction_changed and is_actionable and should_alert(symbol):
+                changed.append({
                         "symbol": symbol,
                         "display": new_sig.get("display", symbol),
                         "name": new_sig.get("name", symbol),
@@ -139,6 +143,17 @@ def fire_signal_alerts(new_cache: dict, old_cache: dict):
             if email not in email_map:
                 email_map[email] = []
             email_map[email].append(sig_change)
+
+        # Fire Telegram alerts for each changed signal
+        for sig_change in changed:
+            try:
+                full_sig = new_cache.get(sig_change["symbol"], {})
+                full_sig["symbol"] = sig_change["symbol"]
+                msg = format_signal_alert(full_sig)
+                send_telegram(msg)
+                print(f"Telegram alert sent: {sig_change['symbol']} → {sig_change['direction']}")
+            except Exception as te:
+                print(f"Telegram alert failed for {sig_change['symbol']}: {te}")
 
         # Fire emails
         fired = 0
