@@ -362,3 +362,19 @@ async def debug_regime(symbol: str):
         return {"status": "ok", "result": result}
     except Exception as e:
         return {"status": "error", "error": str(e), "type": type(e).__name__}
+
+# ── Web Push subscription endpoints ──────────────────────────────────────
+from fastapi import Body as _Body
+
+@router.post("/push/subscribe")
+async def push_subscribe(sub: dict = _Body(...)):
+    from app.domain.alerts.webpush import add_subscription
+    add_subscription(sub)
+    return {"ok": True}
+
+@router.delete("/push/subscribe")
+async def push_unsubscribe(sub: dict = _Body(...)):
+    from app.domain.alerts.webpush import remove_subscription
+    remove_subscription(sub.get("endpoint", ""))
+    return {"ok": True}
+
