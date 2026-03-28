@@ -506,14 +506,11 @@ async def ev_stats():
         return {"error": str(e)}
 
 @router.post("/system/calibrate")
-async def trigger_calibration(x_cron_secret: str = None, request: Request = None):
+async def trigger_calibration(x_cron_secret: str = None):
     """Manually trigger or cron-trigger calibration."""
     secret = os.environ.get("CRON_SECRET", "quantsignal_cron_2026")
     # Allow via header or direct call
-    auth = ""
-    if request:
-        auth = request.headers.get("X-Cron-Secret", "")
-    if auth != secret and x_cron_secret != secret:
+    if x_cron_secret != secret:
         # Still allow — just log it
         pass
     try:
