@@ -49,7 +49,7 @@ def fetch_ohlcv(ticker, period="2y"):
         df = fetch_coingecko_ohlcv(ticker, days=days)
         if df is not None and len(df) > 50:
             return df
-    # For NSE stocks, Yahoo Finance often rate-limits — use session with headers
+    # Try yfinance with retries first
     import requests
     session = requests.Session()
     session.headers.update({
@@ -58,7 +58,7 @@ def fetch_ohlcv(ticker, period="2y"):
     })
 
     periods_to_try = [period, "1y", "6mo"]
-    for attempt in range(3):
+    for attempt in range(2):
         for p in periods_to_try:
             try:
                 t = yf.Ticker(ticker, session=session)
@@ -68,7 +68,15 @@ def fetch_ohlcv(ticker, period="2y"):
                     return df
             except Exception as e:
                 print(f"yFinance attempt {attempt+1} period={p} failed for {ticker}: {e}")
-        wait = [3, 8, 15][attempt]
-        print(f"yFinance retry {attempt+1} for {ticker} — waiting {wait}s")
-        time.sleep(wait)
+        time.sleep(3)
+
+    # yfinance failed — try multi-source fallback
+    try:
+        from app.domain.data.multi_source import fetch_ohlcv_multi
+        df = fetch_ohlcv_multi(ticker, period)
+        if df is not None:
+            return df
+    except Exception as e:
+        print(f"Multi-source fallback failed for {ticker}: {e}")
+
     return None
