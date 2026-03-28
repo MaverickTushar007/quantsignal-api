@@ -171,6 +171,19 @@ async def get_signal(
                     send_telegram(format_signal_alert(sig))
             except Exception as _tel_e:
                 import logging; logging.getLogger(__name__).warning(f"[telegram] {_tel_e}")
+            # Track alert for performance measurement
+            try:
+                from app.domain.alerts.tracker import log_alert
+                import logging as _log
+                _prob = sig.get("probability", 0)
+                _suppressed = sig.get("regime_suppressed", False)
+                if _prob >= 0.35 and not _suppressed:
+                    log_alert(sig, "signal")
+                    _log.getLogger(__name__).info(f"[tracker] alert logged for {sig.get('symbol')} prob={_prob:.2f}")
+                else:
+                    _log.getLogger(__name__).info(f"[tracker] skipped {sig.get('symbol')} prob={_prob:.2f} suppressed={_suppressed}")
+            except Exception as _track_e:
+                import logging; logging.getLogger(__name__).warning(f"[tracker] {_track_e}")
             save_signal(sig)
     except Exception as _e:
         import logging; logging.getLogger(__name__).error(f'[save_signal FAILED] {_e}', exc_info=True)
