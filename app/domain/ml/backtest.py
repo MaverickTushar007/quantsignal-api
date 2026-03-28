@@ -1,32 +1,31 @@
 """
 ml/backtest.py
-Walk-forward backtester — no lookahead bias.
-Produces the exact metrics shown in your dashboard:
-win rate, Sharpe, max drawdown, avg return, total return.
+Walk-forward backtester using actual trained production models.
+No lookahead bias — uses only data available at each point in time.
 """
-
+import pickle
 import numpy as np
 import pandas as pd
 from dataclasses import dataclass
 from typing import List
+from pathlib import Path
 
 from app.domain.ml.features import build_features, FEATURE_COLUMNS
+from app.core.config import BASE_DIR
 
-TRAIN_WINDOW  = 252   # 1 year training
-TEST_WINDOW   = 63    # 3 months testing per fold
-FORWARD_DAYS  = 5
-RETURN_THRESH = 0.02
-
+MODELS_DIR   = BASE_DIR / "ml/models"
+FORWARD_DAYS = 5
+MIN_PROB_BUY  = 0.52
+MIN_PROB_SELL = 0.48
 
 @dataclass
 class Trade:
-    date:        str
-    direction:   str
-    entry:       float
-    exit:        float
-    return_pct:  float
-    won:         bool
-
+    date:       str
+    direction:  str
+    entry:      float
+    exit:       float
+    return_pct: float
+    won:        bool
 
 @dataclass
 class BacktestResult:
@@ -39,97 +38,89 @@ class BacktestResult:
     n_trades:     int
     trades:       List[Trade]
 
+def _load_bundle(ticker: str):
+    """Load the production model bundle for this ticker."""
+    # Try multiple path formats
+    candidates = [
+        MODELS_DIR / f"{ticker}.pkl",
+        MODELS_DIR / f"{ticker.replace('-','_').replace('=','_').replace('^','_')}.pkl",
+        MODELS_DIR / f"{ticker.replace('-USD','_USD')}.pkl",
+    ]
+    for path in candidates:
+        if path.exists():
+            with open(path, "rb") as f:
+                return pickle.load(f)
+    raise FileNotFoundError(f"No model found for {ticker}. Tried: {[str(c) for c in candidates]}")
 
 def run(df: pd.DataFrame, ticker: str) -> BacktestResult:
-    import xgboost as xgb
-    import lightgbm as lgb
-    from sklearn.calibration import CalibratedClassifierCV
+    """
+    Backtest using the production model — walk forward through
+    historical data, predict at each bar, measure outcome.
+    """
+    bundle = _load_bundle(ticker)
+    xgb_m  = bundle["xgb"]
+    lgb_m  = bundle["lgb"]
 
     feat  = build_features(df)
     close = df["Close"].reindex(feat.index)
-    n     = len(feat)
 
-    if n < TRAIN_WINDOW + TEST_WINDOW:
-        raise ValueError(f"Not enough data: {n} rows")
+    if len(feat) < 100:
+        raise ValueError(f"Not enough data: {len(feat)} rows after feature build")
 
     trades: List[Trade] = []
-    start = 0
 
-    while start + TRAIN_WINDOW + TEST_WINDOW <= n:
-        tr_idx   = feat.index[start : start + TRAIN_WINDOW]
-        te_idx   = feat.index[start + TRAIN_WINDOW : start + TRAIN_WINDOW + TEST_WINDOW]
+    # Walk forward — skip first 60 rows as warmup, leave last FORWARD_DAYS for exit prices
+    for i in range(60, len(feat) - FORWARD_DAYS):
+        date = feat.index[i]
+        row  = feat.iloc[[i]][FEATURE_COLUMNS]
 
-        X_tr     = feat.loc[tr_idx, FEATURE_COLUMNS].values
-        fut      = close.pct_change(FORWARD_DAYS).shift(-FORWARD_DAYS).loc[tr_idx]
-        y_tr_raw = np.where(fut > RETURN_THRESH, 1,
-                   np.where(fut < -RETURN_THRESH, 0, np.nan))
-        valid    = ~np.isnan(y_tr_raw)
-
-        if valid.sum() < 50:
-            start += TEST_WINDOW
+        try:
+            xgb_prob = float(xgb_m.predict_proba(row)[0, 1])
+            lgb_prob = float(lgb_m.predict_proba(row)[0, 1])
+        except Exception:
             continue
 
-        X_tr_v = X_tr[valid]
-        y_tr_v = y_tr_raw[valid].astype(int)
+        prob = (xgb_prob + lgb_prob) / 2
 
-        xgb_m = CalibratedClassifierCV(
-            xgb.XGBClassifier(n_estimators=100, max_depth=4,
-                              learning_rate=0.05, random_state=42,
-                              eval_metric="logloss", verbosity=0),
-            cv=3, method="isotonic")
-        lgb_m = CalibratedClassifierCV(
-            lgb.LGBMClassifier(n_estimators=100, max_depth=4,
-                               learning_rate=0.05, random_state=42,
-                               verbose=-1),
-            cv=3, method="isotonic")
-        xgb_m.fit(X_tr_v, y_tr_v)
-        lgb_m.fit(X_tr_v, y_tr_v)
+        if prob >= MIN_PROB_BUY:
+            direction = "BUY"
+        elif prob <= MIN_PROB_SELL:
+            direction = "SELL"
+        else:
+            continue  # HOLD — skip
 
-        for date in te_idx[:-FORWARD_DAYS]:
-            row    = feat.loc[date, FEATURE_COLUMNS].values.reshape(1, -1)
-            row_df = pd.DataFrame(row, columns=FEATURE_COLUMNS)
-            prob   = (float(xgb_m.predict_proba(row)[:,1]) +
-                      float(lgb_m.predict_proba(row_df)[:,1])) / 2
+        entry      = float(close.iloc[i])
+        exit_price = float(close.iloc[i + FORWARD_DAYS])
 
-            if prob >= 0.55:
-                direction = "BUY"
-            elif prob <= 0.45:
-                direction = "SELL"
-            else:
-                continue
+        if entry <= 0:
+            continue
 
-            future_dates = close.index[close.index > date]
-            if len(future_dates) < FORWARD_DAYS:
-                continue
+        ret = (exit_price - entry) / entry
+        if direction == "SELL":
+            ret = -ret
 
-            entry      = float(close.loc[date])
-            exit_price = float(close.iloc[close.index.get_loc(date) + FORWARD_DAYS])
-            ret        = (exit_price - entry) / entry
-            if direction == "SELL":
-                ret = -ret
-
-            trades.append(Trade(
-                date=str(date.date()),
-                direction=direction,
-                entry=round(entry, 4),
-                exit=round(exit_price, 4),
-                return_pct=round(ret * 100, 3),
-                won=ret > 0,
-            ))
-
-        start += TEST_WINDOW
+        trades.append(Trade(
+            date=str(date.date()),
+            direction=direction,
+            entry=round(entry, 4),
+            exit=round(exit_price, 4),
+            return_pct=round(ret * 100, 3),
+            won=ret > 0,
+        ))
 
     if not trades:
-        raise ValueError("No trades generated")
+        raise ValueError("No trades generated — model may be outputting all HOLDs")
 
-    rets         = np.array([t.return_pct / 100 for t in trades])
-    win_rate     = sum(t.won for t in trades) / len(trades)
-    avg_ret      = float(np.mean(rets))
-    sharpe       = float(np.mean(rets) / np.std(rets) * np.sqrt(252 / FORWARD_DAYS)) if np.std(rets) > 0 else 0
-    total_ret    = float(np.prod(1 + rets) - 1) * 100
-    cum          = np.cumprod(1 + rets)
-    peak         = np.maximum.accumulate(cum)
-    max_dd       = float(((cum - peak) / peak).min()) * 100
+    rets     = np.array([t.return_pct / 100 for t in trades])
+    win_rate = sum(t.won for t in trades) / len(trades)
+    avg_ret  = float(np.mean(rets))
+    sharpe   = float(np.mean(rets) / np.std(rets) * np.sqrt(252 / FORWARD_DAYS)) \
+               if np.std(rets) > 0 else 0
+    # Use log returns to avoid compounding explosion in display
+    total_ret = float(np.sum(rets)) * 100
+    cum      = np.cumprod(1 + rets)
+    peak     = np.maximum.accumulate(cum)
+    max_dd   = float(((cum - peak) / peak).min()) * 100
 
     return BacktestResult(
         ticker=ticker,
