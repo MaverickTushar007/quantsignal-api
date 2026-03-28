@@ -128,6 +128,20 @@ def _rebuild():
         except Exception as e:
             print(f"Auto-retrain error: {e}")
 
+        # Save signals to history DB (feeds morning briefing + performance tracking)
+        try:
+            from app.infrastructure.db.signal_history import init_db, save_signal, is_open
+            init_db()
+            saved = 0
+            for sym, sig in cache.items():
+                if sig.get("direction") in ("BUY", "SELL"):
+                    if not is_open(sym):
+                        save_signal({**sig, "symbol": sym})
+                        saved += 1
+            print(f"Signal history: {saved} new signals recorded")
+        except Exception as e:
+            print(f"Signal history error: {e}")
+
         # Fire signal alerts for direction changes
         try:
             fired = fire_signal_alerts(cache, old_cache)

@@ -30,20 +30,8 @@ def generate_morning_briefing() -> dict:
         # Build prompt
         prompt = _build_briefing_prompt(signals, errors, cb_status, ev_summary, today)
 
-        # Call Groq
-        import groq
-        from app.core.config import settings
-        client = groq.Groq(api_key=settings.groq_api_key)
-        resp = client.chat.completions.create(
-            model="llama-3.3-70b-versatile",
-            messages=[
-                {"role": "system", "content": "You are Perseus, a quant system briefing agent. Be concise, factual, and data-driven. No fluff."},
-                {"role": "user",   "content": prompt}
-            ],
-            max_tokens=600,
-            temperature=0.2,
-        )
-        briefing_text = resp.choices[0].message.content.strip()
+        # Generate structured briefing from data — no LLM needed
+        briefing_text = _generate_structured_briefing(signals, errors, cb_status, ev_summary, today)
 
         # Store in Supabase
         sb.table("morning_briefings").insert({
@@ -121,6 +109,73 @@ def _get_ev_summary() -> list:
     except Exception:
         return []
 
+
+
+def _generate_structured_briefing(signals, errors, cb_status, ev_summary, today) -> str:
+    lines = [f"📊 QuantSignal Morning Briefing — {today}"]
+    lines.append("")
+
+    # Signal summary
+    total = len(signals)
+    by_dir = {}
+    for s in signals:
+        d = s.get("direction", "HOLD")
+        by_dir[d] = by_dir.get(d, 0) + 1
+    buys  = by_dir.get("BUY", 0)
+    sells = by_dir.get("SELL", 0)
+    holds = by_dir.get("HOLD", 0)
+    lines.append(f"📈 SIGNAL FLOW ({total} signals last 24h)")
+    lines.append(f"   BUY: {buys} | SELL: {sells} | HOLD: {holds}")
+    bias = "bullish" if buys > sells * 1.5 else "bearish" if sells > buys * 1.5 else "mixed"
+    lines.append(f"   Market bias: {bias.upper()}")
+
+    # Win rate if available
+    evaluated = [s for s in signals if s.get("outcome") in ("win","loss")]
+    if evaluated:
+        wins = sum(1 for s in evaluated if s["outcome"] == "win")
+        wr = wins / len(evaluated)
+        lines.append(f"   Evaluated: {len(evaluated)} | Win rate: {wr:.1%}")
+
+    # Top signals
+    top = [s for s in signals if s.get("direction") in ("BUY","SELL")][:5]
+    if top:
+        lines.append("")
+        lines.append("🎯 TOP SIGNALS")
+        for s in top:
+            prob = s.get("probability", 0)
+            lines.append(f"   {s['symbol']:12} {s['direction']:4} {prob:.0%} [{s.get('regime','-')}]")
+
+    # EV stats
+    if ev_summary:
+        lines.append("")
+        lines.append("⚡ REGIME PERFORMANCE (EV)")
+        for ev in ev_summary[:4]:
+            lines.append(f"   {ev['regime']:8} {ev['direction']:4}: EV={ev['ev']:+.2f}% WR={ev.get('win_rate',0):.1%} ({ev['total_trades']} trades)")
+
+    # Circuit breaker
+    lines.append("")
+    if cb_status.get("active"):
+        lines.append(f"🔴 CIRCUIT BREAKER ACTIVE: {cb_status.get('reason','')}")
+    else:
+        lines.append("🟢 Circuit breaker: INACTIVE")
+
+    # System errors
+    if errors:
+        lines.append(f"⚠️  UNRESOLVED ERRORS: {len(errors)}")
+        for e in errors[:2]:
+            lines.append(f"   {e.get('component','?')}/{e.get('error_type','?')} ×{e.get('pattern_count',1)}")
+
+    # Watch today
+    lines.append("")
+    if buys > sells:
+        watch = "Long setups favored — confirm with volume and regime alignment."
+    elif sells > buys:
+        watch = "Short setups favored — watch for oversold bounces as false signals."
+    else:
+        watch = "Mixed signals — wait for clearer directional bias before sizing up."
+    lines.append(f"👁  WATCH TODAY: {watch}")
+
+    return "\n".join(lines)
 
 def _build_briefing_prompt(signals, errors, cb_status, ev_summary, today) -> str:
     lines = [f"Generate a morning briefing for {today}."]
