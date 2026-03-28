@@ -113,7 +113,16 @@ async def get_signal(
         sig["regime"] = regime_data.get("regime", "unknown")
         sig["signal_bias"] = regime_data.get("signal_bias", "")
         sig["regime_return_20d"] = regime_data.get("return_20d")
-        multiplier = regime_multiplier(sig["regime"], sig.get("direction", ""))
+        # EV calculator (falls back to multiplier if insufficient data)
+        try:
+            from app.domain.core.ev_calculator import compute_ev
+            ev_info = compute_ev(sig.get("regime", "unknown"), sig.get("direction", "HOLD"))
+            multiplier = ev_info["multiplier"]
+            sig["ev_score"] = ev_info.get("ev")
+            sig["ev_source"] = ev_info.get("source")
+        except Exception as _ev_e:
+            from app.domain.regime.detector import regime_multiplier
+            multiplier = regime_multiplier(sig["regime"], sig.get("direction", ""))
         sig["regime_adjusted_probability"] = round(
             min(sig.get("probability", 0.5) * multiplier, 1.0), 3
         )
@@ -478,6 +487,14 @@ async def resolve_error(error_id: str):
                           os.environ.get("SUPABASE_KEY") or os.environ.get("SUPABASE_ANON_KEY"))
         sb.table("system_errors").update({"resolved": True}).eq("id", error_id).execute()
         return {"ok": True}
+    except Exception as e:
+        return {"error": str(e)}
+
+@router.get("/system/ev-stats")
+async def ev_stats():
+    try:
+        from app.domain.core.ev_calculator import get_all_ev_summary
+        return {"ev_stats": get_all_ev_summary()}
     except Exception as e:
         return {"error": str(e)}
 
