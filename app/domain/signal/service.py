@@ -213,6 +213,14 @@ def generate_signal(symbol: str, include_reasoning: bool = True) -> Optional[dic
         result['mtf'] = mtf
     except Exception as e:
         print(f"MTF error for {symbol}: {e}")
+    # Attach energy state
+    try:
+        from app.domain.core.energy_detector import compute_market_energy
+        energy = compute_market_energy(df)
+        result["energy"] = energy
+    except Exception as e:
+        print(f"Energy detector error for {symbol}: {e}")
+
     # Attach earnings flag if applicable
     try:
         from app.domain.data.earnings import get_earnings_flag
