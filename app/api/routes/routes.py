@@ -378,3 +378,47 @@ async def push_unsubscribe(sub: dict = _Body(...)):
     remove_subscription(sub.get("endpoint", ""))
     return {"ok": True}
 
+@router.get("/alerts/performance")
+async def alert_performance():
+    try:
+        import os
+        from supabase import create_client
+        sb = create_client(
+            os.environ["SUPABASE_URL"],
+            os.environ.get("SUPABASE_KEY") or os.environ.get("SUPABASE_ANON_KEY")
+        )
+        res = sb.table("alert_events").select("*").not_.is_("outcome", "null").execute()
+        rows = res.data or []
+        if not rows:
+            return {"total": 0, "win_rate": None, "avg_pnl": None, "by_probability": []}
+        wins = [r for r in rows if r["outcome"] == "WIN"]
+        win_rate = len(wins) / len(rows)
+        avg_pnl = sum(r["pnl_pct"] for r in rows) / len(rows)
+        buckets = {"0-30": [], "30-50": [], "50-70": [], "70+": []}
+        for r in rows:
+            p = (r["probability"] or 0) * 100
+            if p < 30: buckets["0-30"].append(r)
+            elif p < 50: buckets["30-50"].append(r)
+            elif p < 70: buckets["50-70"].append(r)
+            else: buckets["70+"].append(r)
+        by_prob = []
+        for label, bucket in buckets.items():
+            if bucket:
+                bwins = sum(1 for r in bucket if r["outcome"] == "WIN")
+                by_prob.append({
+                    "range": label,
+                    "count": len(bucket),
+                    "win_rate": round(bwins / len(bucket), 3),
+                    "avg_pnl": round(sum(r["pnl_pct"] for r in bucket) / len(bucket), 3),
+                })
+        return {
+            "total": len(rows),
+            "wins": len(wins),
+            "losses": len(rows) - len(wins),
+            "win_rate": round(win_rate, 3),
+            "avg_pnl": round(avg_pnl, 3),
+            "by_probability": by_prob,
+        }
+    except Exception as e:
+        return {"error": str(e)}
+

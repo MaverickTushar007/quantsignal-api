@@ -254,3 +254,15 @@ def check_outcomes(x_cron_secret: str = Header(None)):
             print(f"Outcome check error: {e}")
     threading.Thread(target=_run, daemon=True).start()
     return {"message": "Outcome check running in background"}
+
+@router.post("/cron/evaluate-alerts", tags=["cron"])
+def evaluate_alerts(x_cron_secret: str = Header(None, alias="X-Cron-Secret")):
+    if x_cron_secret != CRON_SECRET:
+        raise HTTPException(status_code=401, detail="Unauthorized")
+    try:
+        from app.domain.alerts.tracker import evaluate_outcomes
+        evaluated = evaluate_outcomes()
+        return {"status": "ok", "evaluated": evaluated}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
