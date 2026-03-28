@@ -494,7 +494,14 @@ async def resolve_error(error_id: str):
 async def ev_stats():
     try:
         from app.domain.core.ev_calculator import get_all_ev_summary
-        return {"ev_stats": get_all_ev_summary()}
+        import math
+        def clean(v):
+            if isinstance(v, float) and (math.isnan(v) or math.isinf(v)):
+                return None
+            return v
+        rows = get_all_ev_summary()
+        cleaned = [{k: clean(v) for k, v in row.items()} for row in rows]
+        return {"ev_stats": cleaned}
     except Exception as e:
         return {"error": str(e)}
 

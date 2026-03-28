@@ -85,14 +85,20 @@ def get_ev_stats() -> dict:
                 stats[key]["avg_loss"] = float(avg_pnl or 0)
 
         # Compute EV for each key
+        import math
         ev_stats = {}
         for key, s in stats.items():
             total = s["wins"] + s["losses"]
             s["total"] = total
-            if total >= MIN_SAMPLES:
+            # Sanitize avg values — NaN occurs when exit_price is NULL
+            avg_win  = s["avg_win"]  if s["avg_win"]  and not math.isnan(s["avg_win"])  else 0.0
+            avg_loss = s["avg_loss"] if s["avg_loss"] and not math.isnan(s["avg_loss"]) else 0.0
+            s["avg_win"] = avg_win
+            s["avg_loss"] = avg_loss
+            if total >= MIN_SAMPLES and (avg_win != 0.0 or avg_loss != 0.0):
                 win_rate = s["wins"] / total
                 loss_rate = 1 - win_rate
-                ev = (win_rate * s["avg_win"]) + (loss_rate * s["avg_loss"])
+                ev = (win_rate * avg_win) + (loss_rate * avg_loss)
                 s["win_rate"] = round(win_rate, 3)
                 s["ev"] = round(ev, 3)
                 s["sufficient_data"] = True
