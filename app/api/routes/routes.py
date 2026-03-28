@@ -171,6 +171,19 @@ async def get_signal(
                     send_telegram(format_signal_alert(sig))
             except Exception as _tel_e:
                 import logging; logging.getLogger(__name__).warning(f"[telegram] {_tel_e}")
+            # Validate signal before saving
+            try:
+                from app.domain.core.signal_validator import validate_signal
+                is_valid, reason = validate_signal(sig)
+                if not is_valid:
+                    import logging
+                    logging.getLogger(__name__).warning(f"[validator] signal rejected: {reason} for {sig.get('symbol')}")
+                    save_signal(sig)
+                    continue
+            except Exception as _val_e:
+                import logging
+                logging.getLogger(__name__).warning(f"[validator] {_val_e}")
+
             # Track alert for performance measurement
             try:
                 from app.domain.alerts.tracker import log_alert
@@ -432,6 +445,41 @@ async def alert_performance():
             "avg_pnl": round(avg_pnl, 3),
             "by_probability": by_prob,
         }
+    except Exception as e:
+        return {"error": str(e)}
+
+# ── Safety layer endpoints ────────────────────────────────────────────────
+@router.get("/system/circuit-breaker")
+async def circuit_breaker_status():
+    try:
+        from app.domain.core.circuit_breaker import get_breaker_status
+        return get_breaker_status()
+    except Exception as e:
+        return {"active": False, "error": str(e)}
+
+@router.get("/system/errors")
+async def system_errors(limit: int = 20, resolved: bool = False):
+    try:
+        from app.domain.core.error_logger import get_error_summary
+        import os
+        from supabase import create_client
+        sb = create_client(os.environ["SUPABASE_URL"],
+                          os.environ.get("SUPABASE_KEY") or os.environ.get("SUPABASE_ANON_KEY"))
+        res = sb.table("system_errors").select("*")             .eq("resolved", resolved)             .order("timestamp", desc=True)             .limit(limit).execute()
+        summary = get_error_summary()
+        return {"summary": summary, "errors": res.data or []}
+    except Exception as e:
+        return {"error": str(e)}
+
+@router.post("/system/errors/{error_id}/resolve")
+async def resolve_error(error_id: str):
+    try:
+        import os
+        from supabase import create_client
+        sb = create_client(os.environ["SUPABASE_URL"],
+                          os.environ.get("SUPABASE_KEY") or os.environ.get("SUPABASE_ANON_KEY"))
+        sb.table("system_errors").update({"resolved": True}).eq("id", error_id).execute()
+        return {"ok": True}
     except Exception as e:
         return {"error": str(e)}
 
