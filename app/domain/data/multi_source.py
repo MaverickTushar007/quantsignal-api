@@ -7,6 +7,35 @@ import logging, os, time
 import pandas as pd
 log = logging.getLogger(__name__)
 
+# ── Source 0: Yahoo Finance Direct (no yfinance, no rate limits) ──────────
+def _fetch_yahoo_direct(symbol: str, period: str = "2y"):
+    try:
+        import requests, pandas as pd
+        headers = {
+            "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36",
+            "Accept": "application/json",
+        }
+        url = f"https://query1.finance.yahoo.com/v8/finance/chart/{symbol}?interval=1d&range={period}"
+        r = requests.get(url, headers=headers, timeout=15)
+        data = r.json()
+        result = data.get("chart", {}).get("result", [])
+        if not result:
+            return None
+        timestamps = result[0].get("timestamp", [])
+        q = result[0]["indicators"]["quote"][0]
+        df = pd.DataFrame({
+            "Open": q.get("open"), "High": q.get("high"), "Low": q.get("low"),
+            "Close": q.get("close"), "Volume": q.get("volume"),
+        }, index=pd.to_datetime(timestamps, unit="s"))
+        df = df.dropna(subset=["Close"])
+        df.index = df.index.tz_localize(None) if df.index.tzinfo else df.index
+        if len(df) > 50:
+            log.info(f"[multi_source] yahoo_direct OK for {symbol}: {len(df)} rows")
+            return df
+    except Exception as e:
+        log.debug(f"[multi_source] yahoo_direct failed for {symbol}: {e}")
+    return None
+
 # ── Source 1: yfinance ─────────────────────────────────────────────────────
 def _fetch_yfinance(symbol: str, period: str = "2y"):
     try:

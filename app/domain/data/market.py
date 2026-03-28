@@ -49,21 +49,26 @@ def fetch_ohlcv(ticker, period="2y"):
         df = fetch_coingecko_ohlcv(ticker, days=days)
         if df is not None and len(df) > 50:
             return df
-    # Try yfinance with retries — let yfinance handle its own session (curl_cffi)
-    periods_to_try = [period, "1y", "6mo"]
-    for attempt in range(2):
-        for p in periods_to_try:
-            try:
-                t = yf.Ticker(ticker)
-                df = t.history(period=p, auto_adjust=True)
-                if df is not None and len(df) > 50:
-                    df.index = df.index.tz_localize(None) if df.index.tzinfo else df.index
-                    return df
-            except Exception as e:
-                print(f"yFinance attempt {attempt+1} period={p} failed for {ticker}: {e}")
-        time.sleep(2)
+    # Try Yahoo direct first — fastest, no rate limits, works for all symbols
+    try:
+        from app.domain.data.multi_source import _fetch_yahoo_direct
+        df = _fetch_yahoo_direct(ticker, period)
+        if df is not None:
+            return df
+    except Exception as e:
+        print(f"Yahoo direct failed for {ticker}: {e}")
 
-    # yfinance failed — try multi-source fallback
+    # yfinance fallback
+    try:
+        t = yf.Ticker(ticker)
+        df = t.history(period=period, auto_adjust=True)
+        if df is not None and len(df) > 50:
+            df.index = df.index.tz_localize(None) if df.index.tzinfo else df.index
+            return df
+    except Exception as e:
+        print(f"yFinance failed for {ticker}: {e}")
+
+    # Full multi-source fallback
     try:
         from app.domain.data.multi_source import fetch_ohlcv_multi
         df = fetch_ohlcv_multi(ticker, period)
