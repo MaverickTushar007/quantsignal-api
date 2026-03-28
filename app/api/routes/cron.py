@@ -128,6 +128,14 @@ def _rebuild():
         except Exception as e:
             print(f"Auto-retrain error: {e}")
 
+        # Evaluate open signals first (close wins/losses before saving new ones)
+        try:
+            from app.domain.performance.evaluator import evaluate_open_signals
+            eval_result = evaluate_open_signals()
+            print(f"Signal evaluation: {eval_result}")
+        except Exception as e:
+            print(f"Signal evaluation error: {e}")
+
         # Save signals to history DB (feeds morning briefing + performance tracking)
         try:
             from app.infrastructure.db.signal_history import init_db, save_signal, is_open
