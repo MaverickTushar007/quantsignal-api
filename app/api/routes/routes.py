@@ -539,3 +539,19 @@ async def trigger_calibration(x_cron_secret: str = None):
     except Exception as e:
         return {"error": str(e)}
 
+@router.get("/system/morning-briefing")
+async def get_morning_briefing():
+    try:
+        from app.domain.core.morning_briefing import get_latest_briefing
+        return get_latest_briefing()
+    except Exception as e:
+        return {"error": str(e)}
+
+@router.post("/system/morning-briefing/generate")
+async def generate_morning_briefing():
+    try:
+        from app.domain.core.morning_briefing import generate_morning_briefing
+        return generate_morning_briefing()
+    except Exception as e:
+        return {"error": str(e)}
+
