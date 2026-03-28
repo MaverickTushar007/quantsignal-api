@@ -94,6 +94,15 @@ def generate_signal(symbol: str, include_reasoning: bool = True) -> Optional[dic
     if cached:
         if not include_reasoning and "reasoning" in cached:
             cached["reasoning"] = ""
+        # Add energy if missing from cached signal
+        if "energy" not in cached or cached.get("energy") is None:
+            try:
+                from app.domain.core.energy_detector import compute_market_energy
+                _df = fetch_ohlcv(symbol, period="2y")
+                if _df is not None:
+                    cached["energy"] = compute_market_energy(_df)
+            except Exception:
+                pass
         return cached
 
     # --- LAYER 2: Local JSON cache (Railway bypass) ---
