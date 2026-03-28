@@ -180,6 +180,18 @@ async def get_signal(
                     send_telegram(format_signal_alert(sig))
             except Exception as _tel_e:
                 import logging; logging.getLogger(__name__).warning(f"[telegram] {_tel_e}")
+            # Generate signal context (non-blocking)
+            try:
+                from app.domain.core.context_generator import generate_signal_context
+                import threading
+                threading.Thread(
+                    target=generate_signal_context,
+                    args=(sig,),
+                    daemon=True
+                ).start()
+            except Exception as _ctx_e:
+                pass
+
             # Validate signal before saving
             try:
                 from app.domain.core.signal_validator import validate_signal
