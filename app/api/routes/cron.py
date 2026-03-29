@@ -187,6 +187,13 @@ def _rebuild():
         except Exception as e:
             print(f"NewsAgent error: {e}")
 
+        try:
+            from app.domain.agents.guardian_agent import run as guardian_run
+            g = guardian_run(user_id="default")
+            print(f"GuardianAgent: watched={len(g.get('watched', []))}, alerts={len(g.get('alerts_fired', []))}")
+        except Exception as e:
+            print(f"GuardianAgent error: {e}")
+
         # Proactive reasoning engine — push insights for notable events
         try:
             from app.domain.core.proactive_engine import run_proactive_engine

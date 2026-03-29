@@ -194,3 +194,10 @@ def run_news_agent():
     """NewsAgent — earnings dates, IV spikes, macro catalysts."""
     from app.domain.agents.news_agent import run
     return run()
+
+
+@router.post("/agents/specialist/guardian", tags=["agents"])
+def run_guardian_agent(x_user_id: str = "default"):
+    """GuardianAgent — autonomous watchlist monitor, fires Telegram alerts."""
+    from app.domain.agents.guardian_agent import run
+    return run(user_id=x_user_id)
