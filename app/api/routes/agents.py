@@ -197,7 +197,7 @@ def run_news_agent():
 
 
 @router.post("/agents/specialist/guardian", tags=["agents"])
-def run_guardian_agent(x_user_id: str = "default"):
+def run_guardian_agent(x_user_id: Optional[str] = Header(None)):
     """GuardianAgent — autonomous watchlist monitor, fires Telegram alerts."""
     from app.domain.agents.guardian_agent import run
-    return run(user_id=x_user_id)
+    return run(user_id=x_user_id or "default")
