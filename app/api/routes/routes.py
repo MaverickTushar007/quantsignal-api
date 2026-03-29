@@ -154,8 +154,25 @@ async def get_signal(
             import logging; logging.getLogger(__name__).warning(f"[calibration] skipped: {_cal_e}")
             calibrated = raw_prob
         if calibrated is not None:
-            from app.domain.regime.detector import regime_multiplier as get_multiplier
-            multiplier = get_multiplier(sig.get("regime", "unknown"), sig.get("direction", ""))
+            # Use EV-based multiplier (falls back to regime multiplier if insufficient data)
+            try:
+                from app.domain.core.ev_calculator import should_fire, compute_ev
+                ev_fire, ev_info = should_fire(
+                    sig.get("regime", "unknown"),
+                    sig.get("direction", "HOLD"),
+                    float(calibrated)
+                )
+                multiplier = ev_info["multiplier"]
+                sig["ev_score"]  = ev_info.get("ev")
+                sig["ev_source"] = ev_info.get("source")
+                sig["ev_win_rate"] = ev_info.get("win_rate")
+                # Suppress if EV gate says no
+                if not ev_fire and sig.get("direction") in ("BUY", "SELL"):
+                    sig["regime_suppressed"] = True
+                    sig["regime_suppression_reason"] = ev_info.get("blocked_reason", "negative_ev")
+            except Exception as _ev2_e:
+                from app.domain.regime.detector import regime_multiplier as get_multiplier
+                multiplier = get_multiplier(sig.get("regime", "unknown"), sig.get("direction", ""))
             sig["regime_adjusted_probability"] = round(min(float(calibrated) * multiplier, 1.0), 4)
             sig["probability"] = sig["regime_adjusted_probability"]
         else:
