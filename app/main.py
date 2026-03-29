@@ -38,6 +38,7 @@ from app.api.routes.preferences import router as prefs_router
 from app.api.routes.weekly_report import router as weekly_report_router
 from app.api.routes.admin import router as admin_router
 from app.api.routes.portfolio_tracker import router as portfolio_router
+from app.api.routes.billing import router as billing_router
 
 
 @asynccontextmanager
@@ -71,6 +72,7 @@ app.include_router(replay_router, prefix="/api/v1")
 app.include_router(ai_explain_router, prefix="/api/v1")
 app.include_router(guardian_router, prefix="/api/v1")
 app.include_router(portfolio_router, prefix="/api/v1")
+app.include_router(billing_router, prefix="/api/v1")
 app.include_router(payments_router, prefix="/api/v1")
 app.include_router(cron_router, prefix="/api/v1")
 app.include_router(agents_router, prefix="/api/v1")
