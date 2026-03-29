@@ -79,6 +79,24 @@ def _build_agent_context(symbol: str, user_id: str) -> str:
         except Exception:
             pass
 
+        # NewsAgent — upcoming catalysts
+        try:
+            res = sb.table("agent_runs").select("findings,run_at")                 .eq("agent", "NewsAgent")                 .order("run_at", desc=True).limit(1).execute()
+            if res.data:
+                f = res.data[0].get("findings", {})
+                sym_catalyst = f.get("catalysts", {}).get(symbol, {})
+                lines.append(f"### NewsAgent — Catalysts")
+                if sym_catalyst:
+                    lines.append(f"- {symbol} catalyst: {sym_catalyst}")
+                    if sym_catalyst.get("risk") == "high":
+                        lines.append(f"- ⚠️ HIGH RISK: {sym_catalyst.get('note', 'Major event imminent')}")
+                else:
+                    lines.append(f"- No near-term catalysts detected for {symbol}")
+                if f.get("high_risk"):
+                    lines.append(f"- Market-wide high-risk symbols: {', '.join(f['high_risk'][:5])}")
+        except Exception:
+            pass
+
         # User preferences
         try:
             from app.api.routes.preferences import _load_prefs

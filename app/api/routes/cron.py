@@ -165,6 +165,28 @@ def _rebuild():
         except Exception as e:
             print(f"Alert firing error: {e}")
 
+        # Run specialist agents after every rebuild
+        try:
+            from app.domain.agents.risk_agent import run as risk_run
+            risk_result = risk_run()
+            print(f"RiskAgent: {risk_result['risk_level']} — {len(risk_result.get('warnings', []))} warnings")
+        except Exception as e:
+            print(f"RiskAgent error: {e}")
+
+        try:
+            from app.domain.agents.briefing_agent import run as briefing_run
+            briefing_run(user_id="default")
+            print("BriefingAgent: morning briefing updated")
+        except Exception as e:
+            print(f"BriefingAgent error: {e}")
+
+        try:
+            from app.domain.agents.news_agent import run as news_run
+            news_result = news_run()
+            print(f"NewsAgent: {len(news_result.get('catalysts', {}))} catalysts found, {len(news_result.get('high_risk', []))} high-risk")
+        except Exception as e:
+            print(f"NewsAgent error: {e}")
+
         # Proactive reasoning engine — push insights for notable events
         try:
             from app.domain.core.proactive_engine import run_proactive_engine

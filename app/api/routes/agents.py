@@ -187,3 +187,10 @@ def get_latest_agent_runs():
         return {"agents": results, "count": len(results)}
     except Exception as e:
         return {"error": str(e)}
+
+
+@router.post("/agents/specialist/news", tags=["agents"])
+def run_news_agent():
+    """NewsAgent — earnings dates, IV spikes, macro catalysts."""
+    from app.domain.agents.news_agent import run
+    return run()

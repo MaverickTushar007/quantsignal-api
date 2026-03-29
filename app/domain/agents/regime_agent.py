@@ -19,8 +19,13 @@ def run(symbols: list[str] = None) -> dict:
     from app.domain.signal.pipeline import enrich_signal
 
     if symbols is None:
-        from app.api.routes.routes import TICKERS
-        symbols = [t["symbol"] for t in TICKERS[:30]]
+        from app.domain.data.universe import TICKERS
+        # Priority symbols always scanned first
+        priority = ["NVDA", "BTC-USD", "RELIANCE.NS", "AAPL", "MSFT", "ETH-USD",
+                    "TSLA", "^NSEI", "AMZN", "GOOGL", "META", "SOL-USD"]
+        all_syms = [t["symbol"] for t in TICKERS]
+        rest = [s for s in all_syms if s not in priority]
+        symbols = priority + rest[:18]  # 12 priority + 18 others = 30 total
 
     findings = {
         "agent":        "RegimeAgent",
