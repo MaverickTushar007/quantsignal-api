@@ -208,3 +208,17 @@ def run_outcome_agent():
     """OutcomeAgent — evaluates past Guardian alerts for accuracy."""
     from app.domain.agents.outcome_agent import run
     return run()
+
+
+@router.post("/agents/specialist/calibration", tags=["agents"])
+def run_calibration_agent():
+    """CalibrationAgent — recalibrates per-symbol thresholds from outcome history."""
+    from app.domain.agents.calibration_agent import run
+    return run()
+
+
+@router.post("/agents/specialist/conflicts", tags=["agents"])
+def run_conflict_agent():
+    """ConflictAgent — detects ML vs regime/energy conflicts market-wide."""
+    from app.domain.agents.conflict_agent import run
+    return run()

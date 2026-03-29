@@ -79,6 +79,23 @@ def _build_agent_context(symbol: str, user_id: str) -> str:
         except Exception:
             pass
 
+        # ConflictAgent — ML vs regime/energy conflicts
+        try:
+            from app.domain.agents.conflict_agent import get_conflict_map
+            cmap = get_conflict_map()
+            if symbol in cmap:
+                c = cmap[symbol]
+                lines.append(f"### ConflictAgent — Signal Conflict Detected")
+                lines.append(f"- {symbol} has ML vs regime/energy conflict (severity: {c.get('severity','?')})")
+                for r in c.get('reasons', []):
+                    lines.append(f"  - {r}")
+                lines.append(f"- ⚠️ Trade with caution — conflicting signals reduce edge")
+            else:
+                lines.append(f"### ConflictAgent")
+                lines.append(f"- No ML/regime/energy conflict detected for {symbol} — signals aligned")
+        except Exception:
+            pass
+
         # NewsAgent — upcoming catalysts
         try:
             res = sb.table("agent_runs").select("findings,run_at")                 .eq("agent", "NewsAgent")                 .order("run_at", desc=True).limit(1).execute()

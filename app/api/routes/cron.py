@@ -201,6 +201,13 @@ def _rebuild():
         except Exception as e:
             print(f"OutcomeAgent error: {e}")
 
+        try:
+            from app.domain.agents.conflict_agent import run as conflict_run
+            cf = conflict_run()
+            print(f"ConflictAgent: conflicts={len(cf.get('conflicts', []))}, stress={cf.get('stress_level')}, score={cf.get('conflict_score')}")
+        except Exception as e:
+            print(f"ConflictAgent error: {e}")
+
         # Proactive reasoning engine — push insights for notable events
         try:
             from app.domain.core.proactive_engine import run_proactive_engine
