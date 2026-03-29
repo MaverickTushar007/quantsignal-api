@@ -7,6 +7,97 @@ from groq import AsyncGroq
 from app.core.config import settings
 
 
+def _build_agent_context(symbol: str, user_id: str) -> str:
+    """
+    Query specialist agents and return a formatted context block
+    for injection into Perseus system prompt.
+    Never raises — returns empty string on failure.
+    """
+    try:
+        import os
+        from supabase import create_client
+        sb = create_client(
+            os.environ.get("SUPABASE_URL", ""),
+            os.environ.get("SUPABASE_KEY") or os.environ.get("SUPABASE_ANON_KEY", "")
+        )
+
+        lines = ["## LIVE AGENT INTELLIGENCE"]
+
+        # Latest signal context for this symbol
+        if symbol and symbol != "GENERIC":
+            try:
+                res = sb.table("signal_context")                     .select("direction,ev_score,energy_state,context_text,conflict_detected,generated_at")                     .eq("symbol", symbol)                     .order("generated_at", desc=True).limit(1).execute()
+                if res.data:
+                    sc = res.data[0]
+                    lines.append(f"### Signal Context — {symbol}")
+                    lines.append(f"- Direction: {sc.get('direction')} | EV: {sc.get('ev_score', 'N/A')} | Energy: {sc.get('energy_state', 'N/A')}")
+                    if sc.get("context_text"):
+                        lines.append(f"- Interpretation: {sc['context_text'][:200]}")
+                    if sc.get("conflict_detected"):
+                        lines.append(f"- ⚠️ CONFLICT DETECTED: {sc.get('conflict_reason', 'signal conflict')}")
+            except Exception:
+                pass
+
+        # Latest RiskAgent run
+        try:
+            res = sb.table("agent_runs").select("findings,run_at")                 .eq("agent", "RiskAgent")                 .order("run_at", desc=True).limit(1).execute()
+            if res.data:
+                f = res.data[0].get("findings", {})
+                lines.append(f"### RiskAgent — {f.get('risk_level', 'unknown').upper()} risk")
+                if f.get("warnings"):
+                    for w in f["warnings"]:
+                        lines.append(f"- ⚠️ {w}")
+                if f.get("circuit_breaker"):
+                    lines.append("- 🚨 CIRCUIT BREAKER ACTIVE — reduce position sizes")
+        except Exception:
+            pass
+
+        # Latest RegimeAgent run
+        try:
+            res = sb.table("agent_runs").select("findings,run_at")                 .eq("agent", "RegimeAgent")                 .order("run_at", desc=True).limit(1).execute()
+            if res.data:
+                f   = res.data[0].get("findings", {})
+                sym_regime = f.get("regime_map", {}).get(symbol, "unknown")
+                sym_energy = f.get("energy_map", {}).get(symbol, "unknown")
+                alerts     = f.get("alerts", [])
+                lines.append(f"### RegimeAgent — {symbol} regime: {sym_regime} | energy: {sym_energy}")
+                if alerts:
+                    lines.append(f"- {len(alerts)} high-conviction alert(s) across market")
+                    for a in alerts[:2]:
+                        lines.append(f"  • {a['symbol']} {a['direction']}: {a.get('reason', '')}")
+        except Exception:
+            pass
+
+        # Latest BriefingAgent commentary
+        try:
+            res = sb.table("agent_runs").select("findings,run_at")                 .eq("agent", "BriefingAgent")                 .order("run_at", desc=True).limit(1).execute()
+            if res.data:
+                f = res.data[0].get("findings", {})
+                if f.get("commentary"):
+                    lines.append(f"### Morning Briefing")
+                    lines.append(f.get("commentary", "")[:300])
+        except Exception:
+            pass
+
+        # User preferences
+        try:
+            from app.api.routes.preferences import _load_prefs
+            prefs = _load_prefs(user_id)
+            watchlist = prefs.get("watchlist", [])
+            risk_tol  = prefs.get("risk_tolerance", "medium")
+            lines.append(f"### User Profile")
+            lines.append(f"- Risk tolerance: {risk_tol}")
+            if watchlist:
+                lines.append(f"- Watchlist: {', '.join(watchlist[:5])}")
+        except Exception:
+            pass
+
+        return "\n".join(lines) if len(lines) > 1 else ""
+
+    except Exception as e:
+        return ""
+
+
 def _groq_reasoning(prompt: str) -> str:
     client = groq.Groq(api_key=settings.groq_api_key)
     resp = client.chat.completions.create(
@@ -210,6 +301,14 @@ async def stream_chat(symbol: str, message: str, history: list, user_id: str = "
             if mem_context:
                 sys_prompt += f"\n## MEMORY & CONTEXT\n{mem_context}\n"
         except Exception as _mem_e:
+            pass
+
+        # Inject live agent intelligence
+        try:
+            agent_ctx = _build_agent_context(symbol, user_id)
+            if agent_ctx:
+                sys_prompt += f"\n{agent_ctx}\n"
+        except Exception:
             pass
 
         sys_prompt += "\nSearch the web for the latest news, price action, and analyst views before responding.\n"
