@@ -154,6 +154,21 @@ async def get_signal(
             import logging; logging.getLogger(__name__).warning(f"[calibration] skipped: {_cal_e}")
             calibrated = raw_prob
         if calibrated is not None:
+            # Energy state detection — adjusts probability before EV gate
+            try:
+                from app.domain.data.market import fetch_ohlcv
+                from app.domain.core.energy_detector import compute_energy_state, energy_signal_modifier
+                _edf = fetch_ohlcv(symbol, period="3mo")
+                energy = compute_energy_state(_edf)
+                sig["energy_state"]  = energy.get("state")
+                sig["energy_score"]  = energy.get("score")
+                sig["energy_bias"]   = energy.get("direction_bias")
+                sig["energy_reason"] = energy.get("reason")
+                e_mod = energy_signal_modifier(energy, sig.get("direction", "HOLD"))
+                calibrated = round(min(float(calibrated) * e_mod["boost"], 1.0), 4)
+            except Exception as _en_e:
+                sig["energy_state"] = "unknown"
+
             # Use EV-based multiplier (falls back to regime multiplier if insufficient data)
             try:
                 from app.domain.core.ev_calculator import should_fire, compute_ev
