@@ -54,6 +54,11 @@ def generate_signal_context(sig: dict) -> dict:
         conflict = _detect_conflict(sig, history)
         context_text = " ".join(lines)
 
+        # Generate LLM interpretation (2-sentence signal summary)
+        interpretation = _generate_interpretation(context_text, sig)
+        if interpretation:
+            context_text = interpretation
+
         # Store in Supabase
         _store_context(symbol, direction, context_text, ev_score, conflict)
 
@@ -67,6 +72,47 @@ def generate_signal_context(sig: dict) -> dict:
         log.warning(f"[context_generator] failed for {sig.get('symbol')}: {e}")
         return {}
 
+
+
+
+SIGNAL_SYSTEM_PROMPT = """You are a quant signal interpreter. Given a signal and its context, generate exactly 2 sentences that explain:
+1. Why this signal is firing (regime, energy state, confluence factors)
+2. What the historical base rate suggests about this setup
+Be factual and specific with numbers. Never say "buy" or "sell" directly. State evidence only. No fluff."""
+
+def _generate_interpretation(context_text: str, sig: dict) -> str:
+    """Use Groq to generate a 2-sentence natural language interpretation."""
+    try:
+        import groq, os
+        key = os.environ.get("GROQ_API_KEY", "")
+        if not key:
+            return ""
+        client = groq.Groq(api_key=key)
+        prompt = f"""Signal context:
+{context_text}
+
+Additional context:
+- Energy state: {sig.get("energy_state", "unknown")} ({sig.get("energy_reason", "")})
+- EV score: {sig.get("ev_score")}
+- Confluence: {sig.get("confluence_score")}
+- Raw probability: {sig.get("raw_probability")}
+- Final probability: {sig.get("probability")}
+
+Generate 2 sentences interpreting this signal."""
+
+        resp = client.chat.completions.create(
+            model="llama-3.3-70b-versatile",
+            messages=[
+                {"role": "system", "content": SIGNAL_SYSTEM_PROMPT},
+                {"role": "user",   "content": prompt},
+            ],
+            max_tokens=120,
+            temperature=0.2,
+        )
+        return resp.choices[0].message.content.strip()
+    except Exception as e:
+        log.debug(f"[context_generator] LLM interpretation failed: {e}")
+        return ""
 
 def _get_symbol_history(symbol: str, limit: int = 5) -> list:
     try:
