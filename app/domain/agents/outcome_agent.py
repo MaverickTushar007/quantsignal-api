@@ -120,7 +120,7 @@ def _store_outcome(sb, outcome: dict):
             "ev":           outcome["ev"],
             "pct_move":     outcome["pct_move"],
             "correct":      outcome["correct"],
-            "window":       outcome["window"],
+            "eval_window":  outcome["window"],
             "evaluated_at": outcome["evaluated_at"],
         }).execute()
     except Exception as e:

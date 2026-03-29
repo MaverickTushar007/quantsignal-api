@@ -49,8 +49,26 @@ def run(symbols: list[str] | None = None) -> dict:
 
     try:
         # Load signals from cache
-        from app.domain.signal.service import get_cached_signals
-        all_signals = get_cached_signals()
+        import json
+        from app.core.config import BASE_DIR
+        all_signals = []
+        # Try Redis/Upstash first
+        try:
+            from app.infrastructure.cache.cache import get_cached
+            cached = get_cached("signals_cache")
+            if cached and isinstance(cached, dict):
+                all_signals = list(cached.values())
+        except Exception:
+            pass
+        # Fall back to local JSON cache file
+        if not all_signals:
+            try:
+                cache_path = BASE_DIR / "data/signals_cache.json"
+                if cache_path.exists():
+                    raw = json.loads(cache_path.read_text())
+                    all_signals = list(raw.values()) if isinstance(raw, dict) else raw
+            except Exception:
+                pass
 
         if not all_signals:
             result["summary"] = "No cached signals available."
