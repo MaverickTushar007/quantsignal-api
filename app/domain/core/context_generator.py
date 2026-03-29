@@ -81,14 +81,13 @@ SIGNAL_SYSTEM_PROMPT = """You are a quant signal interpreter. Given a signal and
 Be factual and specific with numbers. Never say "buy" or "sell" directly. State evidence only. No fluff."""
 
 def _generate_interpretation(context_text: str, sig: dict) -> str:
-    """Use Groq to generate a 2-sentence natural language interpretation."""
-    try:
-        import groq, os
-        key = os.environ.get("GROQ_API_KEY", "")
-        if not key:
-            return ""
-        client = groq.Groq(api_key=key)
-        prompt = f"""Signal context:
+    """
+    Generate 2-sentence signal interpretation.
+    Tries: Groq → OpenRouter → template fallback.
+    Never returns empty string.
+    """
+    import os
+    prompt_user = f"""Signal context:
 {context_text}
 
 Additional context:
@@ -100,19 +99,73 @@ Additional context:
 
 Generate 2 sentences interpreting this signal."""
 
-        resp = client.chat.completions.create(
-            model="llama-3.3-70b-versatile",
-            messages=[
-                {"role": "system", "content": SIGNAL_SYSTEM_PROMPT},
-                {"role": "user",   "content": prompt},
-            ],
-            max_tokens=120,
-            temperature=0.2,
-        )
-        return resp.choices[0].message.content.strip()
+    # 1. Try Groq
+    try:
+        import groq
+        key = os.environ.get("GROQ_API_KEY", "")
+        if key:
+            client = groq.Groq(api_key=key)
+            resp = client.chat.completions.create(
+                model="llama-3.3-70b-versatile",
+                messages=[
+                    {"role": "system", "content": SIGNAL_SYSTEM_PROMPT},
+                    {"role": "user",   "content": prompt_user},
+                ],
+                max_tokens=120,
+                temperature=0.2,
+            )
+            result = resp.choices[0].message.content.strip()
+            if result:
+                log.debug("[context_generator] interpretation via Groq")
+                return result
     except Exception as e:
-        log.debug(f"[context_generator] LLM interpretation failed: {e}")
-        return ""
+        log.debug(f"[context_generator] Groq failed: {e}")
+
+    # 2. Try OpenRouter (free tier — no cost)
+    try:
+        import httpx
+        or_key = os.environ.get("OPENROUTER_API_KEY", "")
+        if or_key:
+            r = httpx.post(
+                "https://openrouter.ai/api/v1/chat/completions",
+                headers={"Authorization": f"Bearer {or_key}", "Content-Type": "application/json"},
+                json={
+                    "model": "meta-llama/llama-3.3-8b-instruct:free",
+                    "messages": [
+                        {"role": "system", "content": SIGNAL_SYSTEM_PROMPT},
+                        {"role": "user",   "content": prompt_user},
+                    ],
+                    "max_tokens": 120,
+                },
+                timeout=8,
+            )
+            result = r.json()["choices"][0]["message"]["content"].strip()
+            if result:
+                log.debug("[context_generator] interpretation via OpenRouter")
+                return result
+    except Exception as e:
+        log.debug(f"[context_generator] OpenRouter failed: {e}")
+
+    # 3. Template fallback — always works, never empty
+    symbol    = sig.get("symbol", "")
+    direction = sig.get("direction", "HOLD")
+    regime    = sig.get("regime", "unknown")
+    prob      = sig.get("probability", 0)
+    ev        = sig.get("ev_score")
+    energy    = sig.get("energy_state", "unknown")
+    conf      = sig.get("confluence_score", "?")
+
+    ev_str = f"EV +{ev:.2f}%" if ev and ev > 0 else (f"EV {ev:.2f}%" if ev else "EV unavailable")
+    energy_str = {"exhausted": "market is overextended — mean reversion risk elevated",
+                  "coiled":    "market energy compressed — breakout likely imminent",
+                  "releasing": "momentum active — trend confirmation in play"}.get(energy, "energy state neutral")
+
+    return (
+        f"{symbol} {direction} signal firing in {regime} regime with {prob:.0%} calibrated confidence "
+        f"and {conf} confluence score; {energy_str}. "
+        f"{ev_str} based on historical outcomes — "
+        f"{'edge present' if ev and ev > 0 else 'edge marginal, trade with caution'}."
+    )
 
 def _get_symbol_history(symbol: str, limit: int = 5) -> list:
     try:
