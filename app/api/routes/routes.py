@@ -97,129 +97,16 @@ async def get_signal(
     if sig is None:
         raise HTTPException(status_code=503, detail=f"Could not generate signal for {symbol}")
 
+    # Full enrichment pipeline — regime, calibration, energy, EV, context
+    from app.domain.signal.pipeline import enrich_signal
+    sig = enrich_signal(sig, symbol)
+
     status = sig.get("reasoning_status", "")
     if reason and status not in ("pending", "complete"):
         enqueue_reasoning_job(symbol, sig)
-    # Step 9: save signal for outcome tracking
-    try:
-        from app.domain.regime.detector import regime_multiplier
-        from app.infrastructure.db.signal_history import _get_conn
-        _rc, _db = _get_conn()
-        _cur = _rc.cursor()
-        _cur.execute("SELECT regime, return_20d, signal_bias FROM regime_cache WHERE symbol=%s", (symbol,))
-        _row = _cur.fetchone()
-        _rc.close()
-        regime_data = {"regime": _row[0], "return_20d": _row[1], "signal_bias": _row[2]} if _row else {}
-        sig["regime"] = regime_data.get("regime", "unknown")
-        sig["signal_bias"] = regime_data.get("signal_bias", "")
-        sig["regime_return_20d"] = regime_data.get("return_20d")
-        # EV calculator (falls back to multiplier if insufficient data)
-        try:
-            from app.domain.core.ev_calculator import compute_ev
-            ev_info = compute_ev(sig.get("regime", "unknown"), sig.get("direction", "HOLD"))
-            multiplier = ev_info["multiplier"]
-            sig["ev_score"] = ev_info.get("ev")
-            sig["ev_source"] = ev_info.get("source")
-        except Exception as _ev_e:
-            from app.domain.regime.detector import regime_multiplier
-            multiplier = regime_multiplier(sig["regime"], sig.get("direction", ""))
-        sig["regime_adjusted_probability"] = round(
-            min(sig.get("probability", 0.5) * multiplier, 1.0), 3
-        )
-        regime = sig["regime"]
-        direction = sig.get("direction", "")
-        if regime in ("ranging", "bear") and direction == "BUY":
-            sig["regime_suppressed"] = True
-            sig["regime_suppression_reason"] = f"{regime} regime - BUY signal suppressed"
-        elif regime == "bull" and direction == "SELL":
-            sig["regime_suppressed"] = True
-            sig["regime_suppression_reason"] = "bull regime - SELL signal suppressed"
-        else:
-            sig["regime_suppressed"] = False
-    except Exception as e:
-        sig["regime"] = "unknown"
-        sig["regime_suppressed"] = False
 
     try:
         from app.infrastructure.db.signal_history import save_signal, is_open
-        import logging; _log = logging.getLogger(__name__)
-        # debug log moved to after pipeline — see save block
-        # Always run probability pipeline before suppression gate
-        raw_prob = sig.get("probability")
-        sig["raw_probability"] = raw_prob
-        try:
-            from app.domain.signal.calibration import calibrate_probability
-            calibrated = calibrate_probability(float(raw_prob)) if raw_prob is not None else raw_prob
-        except Exception as _cal_e:
-            import logging; logging.getLogger(__name__).warning(f"[calibration] skipped: {_cal_e}")
-            calibrated = raw_prob
-        if calibrated is not None:
-            # Energy state detection — adjusts probability before EV gate
-            try:
-                from app.domain.data.market import fetch_ohlcv
-                from app.domain.core.energy_detector import compute_energy_state, energy_signal_modifier
-                _edf = fetch_ohlcv(symbol, period="3mo")
-                energy = compute_energy_state(_edf)
-                sig["energy_state"]  = energy.get("state")
-                sig["energy_score"]  = energy.get("score")
-                sig["energy_bias"]   = energy.get("direction_bias")
-                sig["energy_reason"] = energy.get("reason")
-                e_mod = energy_signal_modifier(energy, sig.get("direction", "HOLD"))
-                calibrated = round(min(float(calibrated) * e_mod["boost"], 1.0), 4)
-            except Exception as _en_e:
-                sig["energy_state"] = "unknown"
-
-            # Use EV-based multiplier (falls back to regime multiplier if insufficient data)
-            try:
-                from app.domain.core.ev_calculator import should_fire, compute_ev
-                ev_fire, ev_info = should_fire(
-                    sig.get("regime", "unknown"),
-                    sig.get("direction", "HOLD"),
-                    float(calibrated)
-                )
-                multiplier = ev_info["multiplier"]
-                sig["ev_score"]  = ev_info.get("ev")
-                sig["ev_source"] = ev_info.get("source")
-                sig["ev_win_rate"] = ev_info.get("win_rate")
-                # Suppress if EV gate says no
-                if not ev_fire and sig.get("direction") in ("BUY", "SELL"):
-                    sig["regime_suppressed"] = True
-                    sig["regime_suppression_reason"] = ev_info.get("blocked_reason", "negative_ev")
-            except Exception as _ev2_e:
-                from app.domain.regime.detector import regime_multiplier as get_multiplier
-                multiplier = get_multiplier(sig.get("regime", "unknown"), sig.get("direction", ""))
-            sig["regime_adjusted_probability"] = round(min(float(calibrated) * multiplier, 1.0), 4)
-            sig["probability"] = sig["regime_adjusted_probability"]
-        else:
-            sig["probability"] = calibrated
-
-        # Context generation — always runs regardless of suppression or open status
-        try:
-            _sym      = sig.get("symbol", "")
-            _dir      = sig.get("direction", "HOLD")
-            _reg      = sig.get("regime", "unknown")
-            _prob     = sig.get("probability", 0)
-            _ev       = sig.get("ev_score")
-            _energy   = sig.get("energy_state", "unknown")
-            _ev_str   = f"EV +{_ev:.2f}%" if _ev and _ev > 0 else (f"EV {_ev:.2f}%" if _ev else "")
-            _emap     = {
-                "exhausted": "market overextended — mean reversion risk elevated",
-                "coiled":    "market energy compressed — breakout likely imminent",
-                "releasing": "momentum active — trend confirmation in play",
-            }
-            _estr = _emap.get(_energy, "energy state neutral")
-            sig["context_text"] = (
-                f"{_sym} {_dir} signal in {_reg} regime "
-                f"with {_prob:.0%} calibrated confidence; {_estr}."
-                + (f" {_ev_str} based on historical outcomes." if _ev_str else "")
-            )
-            sig["conflict_detected"] = False
-            import threading
-            from app.domain.core.context_generator import generate_signal_context
-            threading.Thread(target=generate_signal_context, args=(sig.copy(),), daemon=True).start()
-        except Exception as _ctx_e:
-            pass
-
         if sig.get("direction") in ("BUY", "SELL") and not is_open(sig["symbol"]) and not sig.get("regime_suppressed"):
             raw_conf = sig.get("confluence_score", "")
             try:
@@ -229,44 +116,14 @@ async def get_signal(
             sig["confluence_score"] = conf_int
             mtf = sig.get("mtf", {})
             sig["mtf_score"] = mtf.get("mtf_score_with_daily") or mtf.get("mtf_score")
-            # Telegram alert for high-confidence unsuppressed signals
+            # Telegram alert
             try:
                 from app.domain.alerts.telegram import send_telegram, format_signal_alert
                 from app.domain.alerts.dedup import should_alert
-                prob = sig.get("probability", 0)
-                suppressed = sig.get("regime_suppressed", False)
-                if prob >= 0.50 and not suppressed and should_alert(sig.get("symbol", "")):
+                if sig.get("probability", 0) >= 0.50 and should_alert(sig.get("symbol", "")):
                     send_telegram(format_signal_alert(sig))
             except Exception as _tel_e:
                 import logging; logging.getLogger(__name__).warning(f"[telegram] {_tel_e}")
-            # Generate signal context — inline so interpretation is in the response
-            # Context generation — fast template inline, full LLM in background
-            try:
-                symbol    = sig.get("symbol", "")
-                direction = sig.get("direction", "HOLD")
-                regime    = sig.get("regime", "unknown")
-                prob      = sig.get("probability", 0)
-                ev        = sig.get("ev_score")
-                energy    = sig.get("energy_state", "unknown")
-                ev_str    = f"EV +{ev:.2f}%" if ev and ev > 0 else (f"EV {ev:.2f}%" if ev else "")
-                energy_map = {
-                    "exhausted": "market overextended — mean reversion risk elevated",
-                    "coiled":    "market energy compressed — breakout likely imminent",
-                    "releasing": "momentum active — trend confirmation in play",
-                }
-                energy_str = energy_map.get(energy, "energy state neutral")
-                sig["context_text"] = (
-                    f"{symbol} {direction} signal in {regime} regime "
-                    f"with {prob:.0%} calibrated confidence; {energy_str}."
-                    + (f" {ev_str} based on historical outcomes." if ev_str else "")
-                )
-                sig["conflict_detected"] = False
-                # Full LLM context in background — updates Supabase for next request
-                import threading
-                from app.domain.core.context_generator import generate_signal_context
-                threading.Thread(target=generate_signal_context, args=(sig,), daemon=True).start()
-            except Exception as _ctx_e:
-                pass
 
             # Validate signal before saving
             try:
