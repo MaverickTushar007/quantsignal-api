@@ -194,6 +194,13 @@ def _rebuild():
         except Exception as e:
             print(f"GuardianAgent error: {e}")
 
+        try:
+            from app.domain.agents.outcome_agent import run as outcome_run
+            o = outcome_run()
+            print(f"OutcomeAgent: evaluated={len(o.get('evaluated', []))}, accuracy={o.get('accuracy', {}).get('win_rate', 'N/A')}")
+        except Exception as e:
+            print(f"OutcomeAgent error: {e}")
+
         # Proactive reasoning engine — push insights for notable events
         try:
             from app.domain.core.proactive_engine import run_proactive_engine

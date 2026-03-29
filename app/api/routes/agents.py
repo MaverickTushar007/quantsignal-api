@@ -201,3 +201,10 @@ def run_guardian_agent(x_user_id: Optional[str] = Header(None)):
     """GuardianAgent — autonomous watchlist monitor, fires Telegram alerts."""
     from app.domain.agents.guardian_agent import run
     return run(user_id=x_user_id or "default")
+
+
+@router.post("/agents/specialist/outcomes", tags=["agents"])
+def run_outcome_agent():
+    """OutcomeAgent — evaluates past Guardian alerts for accuracy."""
+    from app.domain.agents.outcome_agent import run
+    return run()
