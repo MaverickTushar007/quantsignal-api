@@ -256,7 +256,7 @@ async def stream_chat(symbol: str, message: str, history: list):
             session_id = f"{symbol}_default"
             save_message("default", session_id, "user", message)
             save_message("default", session_id, "assistant",
-                        f"[Perseus response for {symbol} — {message[:80]}]")
+                        full_response[:4000])
         except Exception:
             pass
 
