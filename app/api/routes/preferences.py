@@ -146,3 +146,4 @@ def watchlist_signals(x_user_id: Optional[str] = Header(None)):
         except Exception as e:
             log.debug(f"[prefs] watchlist signal failed for {sym}: {e}")
     return {"signals": signals, "watchlist": watchlist}
+# Sun Mar 29 16:01:52 IST 2026
