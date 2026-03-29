@@ -46,16 +46,10 @@ def _load_prefs(user_id: str) -> dict:
 def _save_prefs(user_id: str, prefs: dict) -> bool:
     try:
         sb = _sb()
-        existing = sb.table("user_preferences").select("user_id") \
-            .eq("user_id", user_id).limit(1).execute()
-        if existing.data:
-            sb.table("user_preferences").update({"preferences": prefs}) \
-                .eq("user_id", user_id).execute()
-        else:
-            sb.table("user_preferences").insert({
-                "user_id": user_id,
-                "preferences": prefs,
-            }).execute()
+        sb.table("user_preferences").upsert({
+            "user_id": user_id,
+            "preferences": prefs,
+        }).execute()
         return True
     except Exception as e:
         log.warning(f"[prefs] save failed: {e}")
