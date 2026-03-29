@@ -69,8 +69,24 @@ def generate_signal_context(sig: dict) -> dict:
         }
 
     except Exception as e:
-        log.warning(f"[context_generator] failed for {sig.get('symbol')}: {e}")
-        return {}
+        import traceback
+        log.warning(f"[context_generator] failed for {sig.get('symbol')}: {e}\n{traceback.format_exc()[-500:]}")
+        # Return template fallback even on full failure
+        symbol    = sig.get("symbol", "")
+        direction = sig.get("direction", "HOLD")
+        regime    = sig.get("regime", "unknown")
+        prob      = sig.get("probability", 0)
+        ev        = sig.get("ev_score")
+        energy    = sig.get("energy_state", "unknown")
+        ev_str    = f"EV +{ev:.2f}%" if ev and ev > 0 else (f"EV {ev:.2f}%" if ev else "EV unavailable")
+        energy_str = {"exhausted": "market overextended — mean reversion risk elevated",
+                      "coiled": "market energy compressed — breakout likely imminent",
+                      "releasing": "momentum active — trend confirmation in play"}.get(energy, "energy state neutral")
+        fallback_text = (
+            f"{symbol} {direction} signal in {regime} regime with {prob:.0%} calibrated confidence; "
+            f"{energy_str}. {ev_str} based on historical outcomes."
+        )
+        return {"context_text": fallback_text, "conflict_detected": False, "conflict_reason": None}
 
 
 
