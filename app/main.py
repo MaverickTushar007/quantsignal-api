@@ -34,6 +34,7 @@ except Exception as e:
     print(f"Calendar router import failed: {e}")
     _calendar_ok = False
 from app.api.routes.ws import router as ws_router
+from app.api.routes.preferences import router as prefs_router
 
 
 @asynccontextmanager
@@ -79,6 +80,7 @@ app.include_router(performance_router, prefix="/api/v1")
 if _calendar_ok:
     app.include_router(calendar_router, prefix="/api/v1")
 app.include_router(ws_router, prefix="/api/v1")
+app.include_router(prefs_router, prefix="/api/v1")
 
 
 @app.get("/")
