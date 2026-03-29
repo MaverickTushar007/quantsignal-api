@@ -165,6 +165,14 @@ def _rebuild():
         except Exception as e:
             print(f"Alert firing error: {e}")
 
+        # Proactive reasoning engine — push insights for notable events
+        try:
+            from app.domain.core.proactive_engine import run_proactive_engine
+            proactive_result = run_proactive_engine(cache, old_cache)
+            print(f"Proactive engine: {proactive_result}")
+        except Exception as e:
+            print(f"Proactive engine error: {e}")
+
         # Clear Redis
         try:
             from app.infrastructure.cache.cache import _get_redis
