@@ -120,7 +120,10 @@ async def get_signal(
             try:
                 from app.domain.alerts.telegram import send_telegram, format_signal_alert
                 from app.domain.alerts.dedup import should_alert
-                if sig.get("probability", 0) >= 0.50 and should_alert(sig.get("symbol", "")):
+                from app.api.routes.preferences import _load_prefs
+                _user_prefs    = _load_prefs("default")
+                _alert_thresh  = _user_prefs.get("alert_threshold", 0.50)
+                if sig.get("probability", 0) >= _alert_thresh and should_alert(sig.get("symbol", "")):
                     send_telegram(format_signal_alert(sig))
             except Exception as _tel_e:
                 import logging; logging.getLogger(__name__).warning(f"[telegram] {_tel_e}")

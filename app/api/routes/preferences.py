@@ -57,17 +57,6 @@ def _save_prefs(user_id: str, prefs: dict) -> bool:
         return False
 
 
-@router.get("/preferences/test-supabase")
-def test_supabase():
-    """Temporary debug — remove after fixing."""
-    try:
-        sb = _sb()
-        res = sb.table("user_preferences").select("*").limit(1).execute()
-        return {"status": "ok", "data": res.data, "count": len(res.data)}
-    except Exception as e:
-        import traceback
-        return {"status": "error", "error": str(e), "trace": traceback.format_exc()[-600:]}
-
 @router.get("/preferences")
 def get_preferences(x_user_id: Optional[str] = Header(None)):
     user_id = _get_user_id(x_user_id)
