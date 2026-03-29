@@ -252,11 +252,14 @@ async def stream_chat(symbol: str, message: str, history: list, user_id: str = "
 
         # Save to conversation history
         try:
-            from app.domain.core.memory import save_message
-            session_id = f"{symbol}_default"
-            save_message("default", session_id, "user", message)
-            save_message("default", session_id, "assistant",
-                        full_response[:4000])
+            from app.domain.core.memory import save_message, set_user_memory
+            session_id = f"{symbol}_{user_id}"
+            save_message(user_id, session_id, "user", message, {"symbol": symbol})
+            save_message(user_id, session_id, "assistant", full_response[:4000], {"symbol": symbol})
+            try:
+                set_user_memory(user_id, f"viewed_{symbol}", {"symbol": symbol, "last_asked": message[:100]}, "watchlist")
+            except Exception:
+                pass
         except Exception:
             pass
 
