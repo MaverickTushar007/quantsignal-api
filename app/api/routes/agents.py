@@ -5,7 +5,7 @@ Virtual Agent Paper Trading — CRUD + executor logic.
 import os, json
 from datetime import datetime, timezone, timedelta
 from typing import Optional
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Header
 from pydantic import BaseModel
 import urllib.request
 
