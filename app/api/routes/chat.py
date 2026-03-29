@@ -21,6 +21,7 @@ class ChatRequest(BaseModel):
     symbol: str = "GENERIC"
     history: List[ChatMessage]
     message: str
+    user_id: str = "default"
 
 @router.post("/chat/{symbol}", tags=["chat"])
 async def chat_endpoint(
@@ -30,7 +31,7 @@ async def chat_endpoint(
 ):
     # stream_chat handles the workflow and yields SSE-formatted strings.
     return StreamingResponse(
-        stream_chat(symbol.upper(), request.message, [h.dict() for h in request.history]),
+        stream_chat(symbol.upper(), request.message, [h.dict() for h in request.history], request.user_id),
         media_type="text/event-stream"
     )
 
@@ -40,6 +41,6 @@ async def generic_chat_endpoint(
 
 ):
     return StreamingResponse(
-        stream_chat(request.symbol.upper(), request.message, [h.dict() for h in request.history]),
+        stream_chat(request.symbol.upper(), request.message, [h.dict() for h in request.history], request.user_id),
         media_type="text/event-stream"
     )

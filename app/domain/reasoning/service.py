@@ -56,7 +56,7 @@ Do not start with "The" or "This". Start with the asset name or a verb."""
         return _rule_based_reasoning(ticker, direction, probability, confluence_bulls, top_features)
 
 
-async def stream_chat(symbol: str, message: str, history: list):
+async def stream_chat(symbol: str, message: str, history: list, user_id: str = "default"):
     def _yield_status(msg: str):
         return f"data: {json.dumps({'type': 'status', 'message': msg})}\n\n"
 
@@ -205,8 +205,8 @@ async def stream_chat(symbol: str, message: str, history: list):
         # Inject memory context
         try:
             from app.domain.core.memory import build_perseus_context
-            session_id = f"{symbol}_default"
-            mem_context = build_perseus_context("default", symbol, session_id)
+            session_id = f"{symbol}_{user_id}"
+            mem_context = build_perseus_context(user_id, symbol, session_id)
             if mem_context:
                 sys_prompt += f"\n## MEMORY & CONTEXT\n{mem_context}\n"
         except Exception as _mem_e:
