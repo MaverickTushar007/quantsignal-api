@@ -213,13 +213,31 @@ async def get_signal(
             except Exception as _tel_e:
                 import logging; logging.getLogger(__name__).warning(f"[telegram] {_tel_e}")
             # Generate signal context — inline so interpretation is in the response
+            # Context generation — fast template inline, full LLM in background
             try:
+                symbol    = sig.get("symbol", "")
+                direction = sig.get("direction", "HOLD")
+                regime    = sig.get("regime", "unknown")
+                prob      = sig.get("probability", 0)
+                ev        = sig.get("ev_score")
+                energy    = sig.get("energy_state", "unknown")
+                ev_str    = f"EV +{ev:.2f}%" if ev and ev > 0 else (f"EV {ev:.2f}%" if ev else "")
+                energy_map = {
+                    "exhausted": "market overextended — mean reversion risk elevated",
+                    "coiled":    "market energy compressed — breakout likely imminent",
+                    "releasing": "momentum active — trend confirmation in play",
+                }
+                energy_str = energy_map.get(energy, "energy state neutral")
+                sig["context_text"] = (
+                    f"{symbol} {direction} signal in {regime} regime "
+                    f"with {prob:.0%} calibrated confidence; {energy_str}."
+                    + (f" {ev_str} based on historical outcomes." if ev_str else "")
+                )
+                sig["conflict_detected"] = False
+                # Full LLM context in background — updates Supabase for next request
+                import threading
                 from app.domain.core.context_generator import generate_signal_context
-                ctx = generate_signal_context(sig)
-                if ctx:
-                    sig["context_text"]       = ctx.get("context_text")
-                    sig["conflict_detected"]  = ctx.get("conflict_detected")
-                    sig["conflict_reason"]    = ctx.get("conflict_reason")
+                threading.Thread(target=generate_signal_context, args=(sig,), daemon=True).start()
             except Exception as _ctx_e:
                 pass
 
