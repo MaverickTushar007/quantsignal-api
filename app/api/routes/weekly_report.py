@@ -107,9 +107,9 @@ def _generate_report(user_id: str) -> dict:
     # Pull signal history from Supabase
     try:
         sb  = _sb()
-        res = sb.table("signal_history") \
-            .select("symbol,direction,ev_score,regime,probability,outcome,created_at") \
-            .gte("created_at", week_ago.isoformat()) \
+        res = sb.table("signal_context") \
+            .select("symbol,direction,ev_score,energy_state,context_text,generated_at") \
+            .gte("generated_at", week_ago.isoformat()) \
             .order("ev_score", desc=True) \
             .limit(50).execute()
         rows = res.data or []
@@ -117,23 +117,23 @@ def _generate_report(user_id: str) -> dict:
         # Top 5 by EV
         report["top_signals"] = [r for r in rows if r.get("ev_score")][:5]
 
-        # Regime distribution
+        # Energy state as proxy for regime
         for r in rows:
-            reg = r.get("regime", "")
-            if reg in report["regime_summary"]:
-                report["regime_summary"][reg] += 1
+            energy = r.get("energy_state", "")
+            if energy == "releasing":   report["regime_summary"]["bull"] += 1
+            elif energy == "exhausted": report["regime_summary"]["bear"] += 1
+            elif energy == "coiled":    report["regime_summary"]["ranging"] += 1
 
         # Performance stats
-        total   = len(rows)
-        wins    = sum(1 for r in rows if r.get("outcome") == "win")
-        evs     = [r["ev_score"] for r in rows if r.get("ev_score")]
-        avg_ev  = round(sum(evs) / len(evs), 2) if evs else None
-        win_rate = f"{wins/total:.0%}" if total else "N/A"
+        total  = len(rows)
+        evs    = [r["ev_score"] for r in rows if r.get("ev_score")]
+        avg_ev = round(sum(evs) / len(evs), 2) if evs else None
+        pos_ev = sum(1 for e in evs if e > 0)
         report["performance"] = {
             "total_signals": total,
-            "wins":          wins,
-            "win_rate":      win_rate,
-            "avg_ev":        f"{avg_ev:+.2f}%" if avg_ev else "N/A",
+            "positive_ev":   pos_ev,
+            "win_rate":      f"{pos_ev/len(evs):.0%}" if evs else "N/A",
+            "avg_ev":        f"{avg_ev:+.2f}%" if avg_ev is not None else "N/A",
         }
     except Exception as e:
         log.warning(f"[weekly_report] history fetch failed: {e}")
