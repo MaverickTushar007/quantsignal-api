@@ -205,7 +205,7 @@ async def stream_chat(symbol: str, message: str, history: list):
         # Inject memory context
         try:
             from app.domain.core.memory import build_perseus_context
-            session_id = f"{symbol}_{hash(str(history[:1]))}"
+            session_id = f"{symbol}_default"
             mem_context = build_perseus_context("default", symbol, session_id)
             if mem_context:
                 sys_prompt += f"\n## MEMORY & CONTEXT\n{mem_context}\n"
@@ -241,9 +241,11 @@ async def stream_chat(symbol: str, message: str, history: list):
                 max_tokens=1200
             )
 
+        full_response = ""
         async for chunk in stream:
             token = chunk.choices[0].delta.content
             if token:
+                full_response += token
                 yield f"data: {json.dumps({'type': 'token', 'content': token})}\n\n"
 
         yield f"data: {json.dumps({'type': 'done'})}\n\n"
@@ -251,7 +253,7 @@ async def stream_chat(symbol: str, message: str, history: list):
         # Save to conversation history
         try:
             from app.domain.core.memory import save_message
-            session_id = f"{symbol}_{hash(str(history[:1]))}"
+            session_id = f"{symbol}_default"
             save_message("default", session_id, "user", message)
             save_message("default", session_id, "assistant",
                         f"[Perseus response for {symbol} — {message[:80]}]")
