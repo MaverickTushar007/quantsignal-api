@@ -212,15 +212,14 @@ async def get_signal(
                     send_telegram(format_signal_alert(sig))
             except Exception as _tel_e:
                 import logging; logging.getLogger(__name__).warning(f"[telegram] {_tel_e}")
-            # Generate signal context (non-blocking)
+            # Generate signal context — inline so interpretation is in the response
             try:
                 from app.domain.core.context_generator import generate_signal_context
-                import threading
-                threading.Thread(
-                    target=generate_signal_context,
-                    args=(sig,),
-                    daemon=True
-                ).start()
+                ctx = generate_signal_context(sig)
+                if ctx:
+                    sig["context_text"]       = ctx.get("context_text")
+                    sig["conflict_detected"]  = ctx.get("conflict_detected")
+                    sig["conflict_reason"]    = ctx.get("conflict_reason")
             except Exception as _ctx_e:
                 pass
 
