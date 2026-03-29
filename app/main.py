@@ -85,3 +85,4 @@ app.include_router(ws_router, prefix="/api/v1")
 async def root():
     return {"name": "QuantSignal API", "version": "1.0.0", "docs": "/docs"}
 app.middleware('http')(protection_middleware)
+# rebuild Sun Mar 29 15:18:59 IST 2026
