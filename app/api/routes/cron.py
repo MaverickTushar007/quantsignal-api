@@ -136,6 +136,14 @@ def _rebuild():
         except Exception as e:
             print(f"Signal evaluation error: {e}")
 
+        # Detect failure patterns and log to system_errors
+        try:
+            from app.domain.core.error_logger import detect_signal_patterns
+            pattern_result = detect_signal_patterns()
+            print(f"Pattern detection: {pattern_result}")
+        except Exception as e:
+            print(f"Pattern detection error: {e}")
+
         # Save signals to history DB (feeds morning briefing + performance tracking)
         try:
             from app.infrastructure.db.signal_history import init_db, save_signal, is_open

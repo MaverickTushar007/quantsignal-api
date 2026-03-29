@@ -82,3 +82,67 @@ def get_error_summary() -> dict:
 def _hour_ago() -> str:
     from datetime import timedelta
     return (datetime.now(timezone.utc) - timedelta(hours=1)).isoformat()
+
+
+def detect_signal_patterns():
+    """
+    Scan signal_history for failure patterns and log them.
+    Called after evaluate_open_signals() in cron.
+    Detects: regime/direction combos with >60% loss rate in last 50 signals.
+    """
+    try:
+        from app.infrastructure.db.signal_history import _get_conn
+        con, db = _get_conn()
+        cur = con.cursor()
+
+        if db == "pg":
+            cur.execute("""
+                SELECT regime, direction,
+                       COUNT(*) as total,
+                       SUM(CASE WHEN outcome = 'loss' THEN 1 ELSE 0 END) as losses
+                FROM signal_history
+                WHERE outcome IN ('win', 'loss')
+                  AND generated_at >= NOW() - INTERVAL '7 days'
+                  AND regime IS NOT NULL
+                GROUP BY regime, direction
+                HAVING COUNT(*) >= 5
+            """)
+        else:
+            cur.execute("""
+                SELECT regime, direction,
+                       COUNT(*) as total,
+                       SUM(CASE WHEN outcome = 'loss' THEN 1 ELSE 0 END) as losses
+                FROM signal_history
+                WHERE outcome IN ('win', 'loss')
+                  AND generated_at >= datetime('now', '-7 days')
+                  AND regime IS NOT NULL
+                GROUP BY regime, direction
+                HAVING COUNT(*) >= 5
+            """)
+
+        rows = cur.fetchall()
+        con.close()
+
+        flagged = []
+        for regime, direction, total, losses in rows:
+            loss_rate = losses / total if total > 0 else 0
+            if loss_rate > 0.60:
+                log_error(
+                    component="signal_pipeline",
+                    error_type=f"high_loss_rate_{regime}_{direction}",
+                    message=f"{regime} {direction} signals: {loss_rate:.0%} loss rate over {total} trades (last 7d)",
+                    context={"regime": regime, "direction": direction,
+                             "loss_rate": round(loss_rate, 3), "total": total, "losses": int(losses)}
+                )
+                flagged.append({"regime": regime, "direction": direction,
+                                "loss_rate": round(loss_rate, 3), "total": total})
+            elif loss_rate < 0.30 and total >= 5:
+                # Good pattern — resolve any existing error for this combo
+                resolve_errors("signal_pipeline", f"high_loss_rate_{regime}_{direction}")
+
+        log.info(f"[pattern_detector] checked {len(rows)} regime/direction combos, flagged {len(flagged)}")
+        return {"checked": len(rows), "flagged": flagged}
+
+    except Exception as e:
+        log.debug(f"[pattern_detector] failed: {e}")
+        return {"error": str(e)}
