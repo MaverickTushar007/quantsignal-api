@@ -193,6 +193,33 @@ async def get_signal(
         else:
             sig["probability"] = calibrated
 
+        # Context generation — always runs regardless of suppression or open status
+        try:
+            _sym      = sig.get("symbol", "")
+            _dir      = sig.get("direction", "HOLD")
+            _reg      = sig.get("regime", "unknown")
+            _prob     = sig.get("probability", 0)
+            _ev       = sig.get("ev_score")
+            _energy   = sig.get("energy_state", "unknown")
+            _ev_str   = f"EV +{_ev:.2f}%" if _ev and _ev > 0 else (f"EV {_ev:.2f}%" if _ev else "")
+            _emap     = {
+                "exhausted": "market overextended — mean reversion risk elevated",
+                "coiled":    "market energy compressed — breakout likely imminent",
+                "releasing": "momentum active — trend confirmation in play",
+            }
+            _estr = _emap.get(_energy, "energy state neutral")
+            sig["context_text"] = (
+                f"{_sym} {_dir} signal in {_reg} regime "
+                f"with {_prob:.0%} calibrated confidence; {_estr}."
+                + (f" {_ev_str} based on historical outcomes." if _ev_str else "")
+            )
+            sig["conflict_detected"] = False
+            import threading
+            from app.domain.core.context_generator import generate_signal_context
+            threading.Thread(target=generate_signal_context, args=(sig.copy(),), daemon=True).start()
+        except Exception as _ctx_e:
+            pass
+
         if sig.get("direction") in ("BUY", "SELL") and not is_open(sig["symbol"]) and not sig.get("regime_suppressed"):
             raw_conf = sig.get("confluence_score", "")
             try:
