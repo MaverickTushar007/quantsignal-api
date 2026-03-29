@@ -65,16 +65,23 @@ def get_latest_briefing() -> dict:
 
 def _get_overnight_signals() -> list:
     try:
-        import psycopg2
-        con = psycopg2.connect(os.environ["DATABASE_URL"])
+        from app.infrastructure.db.signal_history import _get_conn
+        con, db = _get_conn()
         cur = con.cursor()
-        cur.execute("""
-            SELECT symbol, direction, probability, regime, outcome, confidence
-            FROM signal_history
-            WHERE generated_at >= NOW() - INTERVAL '24 hours'
-            ORDER BY generated_at DESC
-            LIMIT 30
-        """)
+        if db == "pg":
+            cur.execute("""
+                SELECT symbol, direction, probability, regime, outcome, confidence
+                FROM signal_history
+                WHERE generated_at >= NOW() - INTERVAL '24 hours'
+                ORDER BY generated_at DESC LIMIT 30
+            """)
+        else:
+            cur.execute("""
+                SELECT symbol, direction, probability, regime, outcome, 'MEDIUM'
+                FROM signal_history
+                WHERE generated_at >= datetime('now', '-24 hours')
+                ORDER BY generated_at DESC LIMIT 30
+            """)
         rows = cur.fetchall()
         con.close()
         return [{"symbol": r[0], "direction": r[1], "probability": r[2],
