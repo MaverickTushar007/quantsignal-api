@@ -142,3 +142,48 @@ def delete_agent(agent_id: str):
     )
     urllib.request.urlopen(req)
     return {"message": "Agent deleted"}
+
+
+# ── Specialist AI Agents ────────────────────────────────────────────────────
+
+@router.post("/agents/specialist/regime", tags=["agents"])
+def run_regime_agent():
+    """RegimeAgent — scans for regime transitions and high-conviction setups."""
+    from app.domain.agents.regime_agent import run
+    return run()
+
+
+@router.post("/agents/specialist/risk", tags=["agents"])
+def run_risk_agent():
+    """RiskAgent — evaluates circuit breaker conditions and risk patterns."""
+    from app.domain.agents.risk_agent import run
+    return run()
+
+
+@router.post("/agents/specialist/briefing", tags=["agents"])
+def run_briefing_agent(x_user_id: str = "default"):
+    """BriefingAgent — morning briefing synthesized from all agent outputs."""
+    from app.domain.agents.briefing_agent import run
+    return run(user_id=x_user_id)
+
+
+@router.get("/agents/specialist/latest", tags=["agents"])
+def get_latest_agent_runs():
+    """Get the most recent run from each specialist agent."""
+    try:
+        import os
+        from supabase import create_client
+        sb = create_client(
+            os.environ.get("SUPABASE_URL", ""),
+            os.environ.get("SUPABASE_KEY") or os.environ.get("SUPABASE_ANON_KEY", "")
+        )
+        results = {}
+        for agent in ["RegimeAgent", "RiskAgent", "BriefingAgent"]:
+            res = sb.table("agent_runs").select("agent,run_at,findings") \
+                .eq("agent", agent) \
+                .order("run_at", desc=True).limit(1).execute()
+            if res.data:
+                results[agent] = res.data[0]
+        return {"agents": results, "count": len(results)}
+    except Exception as e:
+        return {"error": str(e)}
