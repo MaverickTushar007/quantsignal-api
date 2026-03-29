@@ -58,7 +58,8 @@ def _save_prefs(user_id: str, prefs: dict) -> bool:
             }).execute()
         return True
     except Exception as e:
-        log.debug(f"[prefs] save failed: {e}")
+        log.warning(f"[prefs] save failed: {e}")
+        import traceback; log.warning(traceback.format_exc()[-400:])
         return False
 
 
