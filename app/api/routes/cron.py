@@ -414,3 +414,18 @@ async def upload_cache(request: Request, x_cron_secret: str = Header(None, alias
     except Exception as e:
         return {"error": str(e)}
 
+@router.post("/cron/guardian", tags=["cron"])
+def guardian_cron(x_cron_secret: str = Header(None, alias="X-Cron-Secret")):
+    """15-minute Guardian monitoring cycle — called by Railway cron."""
+    if x_cron_secret != CRON_SECRET:
+        raise HTTPException(status_code=401, detail="Unauthorized")
+    def _run():
+        try:
+            from app.domain.agents.guardian_agent import run as guardian_run
+            result = guardian_run(user_id="default")
+            print(f"[guardian cron] watched={len(result.get('watched',[]))}, alerts={len(result.get('alerts_fired',[]))}")
+        except Exception as e:
+            print(f"[guardian cron] failed: {e}")
+    import threading
+    threading.Thread(target=_run, daemon=True).start()
+    return {"status": "started"}
