@@ -360,8 +360,8 @@ async def stream_chat(symbol: str, message: str, history: list, user_id: str = "
 
         client = AsyncGroq(api_key=settings.groq_api_key)
         # Cap system prompt to prevent 413 from Groq
-        if len(sys_prompt) > 6000:
-            sys_prompt = sys_prompt[:6000] + "\n[Context truncated for brevity]"
+        if len(sys_prompt) > 3500:
+            sys_prompt = sys_prompt[:3500] + "\n[Context truncated for brevity]"
         messages = [{"role": "system", "content": sys_prompt}]
         for m in history:
             messages.append({"role": m.get("role", "user"), "content": m.get("content", "")})
@@ -369,7 +369,7 @@ async def stream_chat(symbol: str, message: str, history: list, user_id: str = "
 
         try:
             stream = await client.chat.completions.create(
-                model="compound-beta",
+                model="llama-3.3-70b-versatile",
                 messages=messages,
                 stream=True,
                 temperature=0.2,
