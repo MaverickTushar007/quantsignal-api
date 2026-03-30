@@ -25,10 +25,31 @@ RSS_FEEDS = [
     "https://seekingalpha.com/market_currents.xml",
 ]
 
-BULL_WORDS = {"surge", "rally", "breakout", "bullish", "gain", "high",
-              "upgrade", "beat", "strong", "growth", "record", "buy"}
-BEAR_WORDS = {"crash", "fall", "drop", "bearish", "loss", "low",
-              "downgrade", "miss", "weak", "decline", "sell", "fear"}
+BULL_WORDS = {
+    "surge", "rally", "breakout", "bullish", "gain", "high", "upgrade", "beat",
+    "strong", "growth", "record", "buy", "soar", "jump", "spike", "rise", "rises",
+    "risen", "rising", "climbs", "climbed", "rebounds", "rebound", "recover",
+    "recovery", "recovering", "outperform", "outperforms", "upside", "uptrend",
+    "inflow", "inflows", "accumulate", "accumulation", "buying", "purchased",
+    "purchases", "long", "longs", "holds", "holding", "support", "supported",
+    "positive", "profit", "profits", "earnings", "beat", "exceeds", "exceeded",
+    "adoption", "approve", "approved", "approval", "launch", "launches", "partnership",
+    "bullrun", "ath", "all-time", "milestone", "momentum", "optimistic", "confidence"
+}
+BEAR_WORDS = {
+    "crash", "fall", "drop", "bearish", "loss", "low", "downgrade", "miss",
+    "weak", "decline", "sell", "fear", "plunge", "plunges", "plummets", "slump",
+    "slumps", "tumble", "tumbles", "collapse", "collapses", "selloff", "sell-off",
+    "dump", "dumps", "liquidation", "liquidations", "outflow", "outflows", "short",
+    "shorts", "shorting", "resistance", "rejected", "rejection", "warning", "warns",
+    "risk", "risks", "risky", "concern", "concerns", "worried", "worry", "panic",
+    "hack", "hacked", "exploit", "ban", "banned", "crackdown", "regulation",
+    "lawsuit", "sued", "fraud", "investigation", "probe", "halted", "suspended",
+    "negative", "losses", "missed", "disappoints", "disappointing", "weakness",
+    "downside", "downtrend", "correction", "corrections", "volatile", "volatility",
+    "uncertainty", "uncertain", "recession", "inflation", "rate hike", "hawkish",
+    "skips", "pauses", "pause", "delays", "delay", "halts", "stops", "suspended"
+}
 
 ALIASES = {
     "BTC-USD":   ["bitcoin", "btc"],
