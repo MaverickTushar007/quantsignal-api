@@ -206,6 +206,7 @@ async def stream_chat(symbol: str, message: str, history: list, user_id: str = "
 
         yield _yield_status("Accessing quantitative research corpus (RAG)...")
         rag_text = "No academic context available."
+        _rag_mode = "quant" if mode == "quant" else "auto"
         try:
             from app.domain.reasoning.rag import search_research
             if sig_data:

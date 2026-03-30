@@ -31,7 +31,12 @@ def _get_client():
         )
     return _client
 
-def search_research(query: str, top_k: int = 3) -> str:
+GS_PAPERS = {
+    "derman_1999_vol_regimes", "derman_1994_local_vol", "goldman_var_framework",
+    "goldman_stat_arb", "goldman_momentum_factors", "goldman_regime_detection"
+}
+
+def search_research(query: str, top_k: int = 3, mode: str = "auto") -> str:
     try:
         model = _get_model()
         client = _get_client()
@@ -40,13 +45,20 @@ def search_research(query: str, top_k: int = 3) -> str:
         
         result = client.rpc("match_research_chunks", {
             "query_embedding": embedding,
-            "match_count": top_k
+            "match_count": top_k * 2  # fetch more, then filter
         }).execute()
         
         if not result.data:
             return ""
         
-        chunks = [r["content"] for r in result.data]
+        if mode == "quant":
+            # Prioritise GS papers in quant mode
+            gs_chunks = [r["content"] for r in result.data if r.get("paper") in GS_PAPERS]
+            other_chunks = [r["content"] for r in result.data if r.get("paper") not in GS_PAPERS]
+            chunks = (gs_chunks + other_chunks)[:top_k]
+        else:
+            chunks = [r["content"] for r in result.data][:top_k]
+        
         return "\n\n".join(chunks)
     
     except Exception as e:

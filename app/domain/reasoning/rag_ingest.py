@@ -64,6 +64,54 @@ Factor investing: diversifying across uncorrelated risk factors improves Sharpe 
 Market volatility regimes affect factor performance — momentum works best in trending markets,
 mean reversion works best in range-bound markets with high RSI extremes.
 """,
+    "derman_1999_vol_regimes": """Goldman Sachs Quantitative Strategies Research: Regimes of Volatility (Derman 1999).
+Three volatility regimes exist in equity markets: sticky strike, sticky delta, and sticky implied tree.
+In sticky strike regime: implied volatility of a given strike remains constant as spot moves.
+This regime dominates in trending markets. Momentum signals are more reliable in this regime.
+In sticky delta regime: implied volatility of a given delta remains constant as spot moves.
+Dominates in range-bound markets. RSI overbought/oversold signals have higher hit rate here.
+Variance risk premium: implied vol consistently exceeds realized vol by 2-4 vol points on average.
+This premium is compensation for bearing volatility risk.""",
+    "derman_1994_local_vol": """Goldman Sachs Quantitative Strategies: Implied Trinomial Trees and Local Volatility (Derman 1994).
+Local volatility surface captures market expectation of future volatility at each price level and time.
+Negative skew in equity markets: OTM puts are expensive relative to Black-Scholes due to crash fear.
+High implied vol skew signals institutional hedging demand — smart money buying protection.
+When skew is steep, market participants are defensively positioned — often a contrarian bullish signal.
+For signal generation: high put/call skew on a BUY signal is a conflict — reduce position size.
+Term structure upward sloping means market expects more volatility ahead — uncertainty regime.""",
+    "goldman_var_framework": """Goldman Sachs Risk Management: Value at Risk and Portfolio Greeks.
+VaR at 95% confidence: maximum expected loss over 1 day = 1.65 * daily_vol * position_size.
+Portfolio VaR is not additive — correlation reduces total risk. Two uncorrelated positions reduce VaR by sqrt(2).
+Delta measures price sensitivity to underlying moves. Gamma is rate of change of delta.
+High gamma stocks near earnings have explosive move potential — ATR understates true risk in this case.
+Kelly sizing should be reduced by 50% for high-gamma situations due to path dependency of returns.
+Vega sensitivity to implied volatility. Long options benefit from vol increases.""",
+    "goldman_stat_arb": """Goldman Sachs Quantitative Strategies: Statistical Arbitrage and Convergence Trading.
+Pairs trading: identify two cointegrated assets, long underperformer, short outperformer.
+Z-score entry when spread exceeds 2.0 standard deviations, exit at mean reversion to zero.
+Cross-asset correlation regime: during risk-off events, correlations spike toward 1.0 across all assets.
+Diversification fails precisely when needed most — only truly uncorrelated factors provide protection.
+When multiple signals in portfolio are BUY simultaneously, check correlation between assets.
+If assets are highly correlated above 0.7, treat multiple positions as a single concentrated bet.
+Effective diversification requires correlation-adjusted position sizing — reduce size when correlation rises.""",
+    "goldman_momentum_factors": """Goldman Sachs Asset Management: Factor-Based Momentum and Cross-Sectional Alpha.
+Cross-sectional momentum: rank assets by 12-1 month returns, long top decile, short bottom decile.
+This strategy has generated 1-2 percent monthly alpha historically with Sharpe ratio above 0.8.
+Momentum crashes occur after prolonged bear markets — momentum reverses sharply in recovery.
+Risk management: cap momentum exposure during high VIX environments above 30 — momentum unreliable.
+Factor timing: momentum works best in trending macro environments. Value works best when spreads are wide.
+Signal decay: momentum signals have 3-6 month half-life. Refresh signals monthly minimum.
+Momentum features such as 12-1 month return and 3-month return are highest importance features
+in cross-sectional return prediction models at institutional quant funds.""",
+    "goldman_regime_detection": """Goldman Sachs Global Investment Research: Market Regime Classification Framework.
+Four primary market regimes: Risk-On Growth with high returns and low vol, Risk-Off Recession with
+negative returns and high vol, Goldilocks with moderate returns and declining vol, and Stagflation.
+Bull regime: breadth above 60 percent of stocks above 200-day MA, VIX below 20, yield curve positive.
+Bear regime: breadth below 40 percent, VIX above 25, yield curve inverted, credit spreads widening.
+Reduce position sizes by 30-50 percent in bear regime. Defensive factors outperform.
+Ranging regime: breadth 40-60 percent, VIX 15-25, no clear macro trend. Mean reversion optimal.
+Signal calibration by regime: in bull regimes BUY signals above 55 percent probability are actionable.
+In bear regimes raise threshold to 70 percent probability. In ranging only trade confluence above 8 of 9.""",
     "atr_risk_management": """
 Position sizing based on volatility: risk a fixed percentage (1-2%) of portfolio per trade.
 Risk per trade = Portfolio * Risk% / ATR. This normalizes position size across different volatility regimes.
