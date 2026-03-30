@@ -28,6 +28,7 @@ async def health():
 
 @router.get("/signals", response_model=List[WatchlistItem], tags=["signals"])
 def get_all_signals(
+    _gate: dict = Depends(signal_gate),
     type:      Optional[str] = Query(None, description="CRYPTO|STOCK|ETF|INDEX|COMMODITY|FOREX"),
     direction: Optional[str] = Query(None, description="BUY|SELL|HOLD"),
 
@@ -83,6 +84,7 @@ def get_all_signals(
 @router.get("/signals/{symbol}", response_model=SignalResponse, tags=["signals"])
 async def get_signal(
     symbol: str,
+    _gate: dict = Depends(signal_gate),
     reason: bool = Query(True, description="Include LLM reasoning"),
 ):
     """
@@ -161,7 +163,7 @@ async def get_signal(
 
 
 @router.get("/signals/{symbol}/reasoning", tags=["signals"])
-async def get_signal_reasoning(symbol: str):
+async def get_signal_reasoning(symbol: str, _gate: dict = Depends(signal_gate)):
     """
     Poll this after GET /signals/{symbol}.
     Returns reasoning status + content once async worker completes.
@@ -346,6 +348,9 @@ async def debug_regime(symbol: str):
 
 # ── Web Push subscription endpoints ──────────────────────────────────────
 from fastapi import Body as _Body
+
+from app.domain.billing.middleware import signal_gate, user_context
+
 
 @router.post("/push/subscribe")
 async def push_subscribe(sub: dict = _Body(...)):
