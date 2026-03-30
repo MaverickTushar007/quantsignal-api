@@ -130,4 +130,32 @@ def enrich_signal(sig: dict, symbol: str) -> dict:
     except Exception as e:
         log.debug(f"[pipeline] context generation failed: {e}")
 
+
+    # 8. CONFLICT RESOLVER
+    try:
+        from app.domain.core.context_generator import _get_symbol_history, _detect_conflict
+        history = _get_symbol_history(sig.get("symbol", ""), limit=5)
+        conflict = _detect_conflict(sig, history)
+        sig["conflict_detected"] = conflict["detected"]
+        sig["conflict_reason"]   = conflict.get("reason", "")
+
+        if conflict["detected"]:
+            reason = conflict.get("reason", "")
+            # 3 consecutive losses → suppress to HOLD
+            if "3 consecutive losses" in reason:
+                sig["direction"]               = "HOLD"
+                sig["probability"]             = min(sig.get("probability", 0.5), 0.25)
+                sig["confidence"]              = "low"
+                sig["regime_suppressed"]       = True
+                sig["regime_suppression_reason"] = f"Conflict resolver: {reason}"
+            # Last signal opposite direction and won → downgrade
+            else:
+                sig["probability"] = round(sig.get("probability", 0.5) * 0.70, 4)
+                sig["confidence"]  = "low"
+                sig["context_text"] = (
+                    f"⚠️ Conflicted signal — {reason}. "
+                    + sig.get("context_text", "")
+                )
+    except Exception as e:
+        log.debug(f"[pipeline] conflict resolver failed: {e}")
     return sig
