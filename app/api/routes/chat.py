@@ -9,6 +9,7 @@ from pydantic import BaseModel
 from typing import List
 
 from app.domain.reasoning.service import stream_chat
+from app.domain.billing.middleware import perseus_gate
 
 
 router = APIRouter()
