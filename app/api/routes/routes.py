@@ -16,6 +16,7 @@ from app.api.routes.auth import get_current_user, require_pro
 from app.domain.signal.service import generate_signal
 from app.infrastructure.queue.reasoning_queue import enqueue_reasoning_job
 from app.domain.data.universe import TICKERS, TICKER_MAP
+from app.domain.billing.middleware import signal_gate
 
 router = APIRouter()
 
@@ -348,8 +349,7 @@ async def debug_regime(symbol: str):
 
 # ── Web Push subscription endpoints ──────────────────────────────────────
 from fastapi import Body as _Body
-
-from app.domain.billing.middleware import signal_gate, user_context
+, user_context
 
 
 @router.post("/push/subscribe")
