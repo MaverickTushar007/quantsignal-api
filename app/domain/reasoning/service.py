@@ -182,7 +182,7 @@ Do not start with "The" or "This". Start with the asset name or a verb."""
         return _rule_based_reasoning(ticker, direction, probability, confluence_bulls, top_features)
 
 
-async def stream_chat(symbol: str, message: str, history: list, user_id: str = "default"):
+async def stream_chat(symbol: str, message: str, history: list, user_id: str = "default", mode: str = "auto"):
     def _yield_status(msg: str):
         return f"data: {json.dumps({'type': 'status', 'message': msg})}\n\n"
 
@@ -263,6 +263,11 @@ async def stream_chat(symbol: str, message: str, history: list, user_id: str = "
         is_simple = any(t in msg_lower for t in simple_triggers)
         is_expert = any(t in msg_lower for t in expert_triggers)
         use_simple_mode = is_simple and not is_expert
+        # Explicit mode override takes priority over auto-detection
+        if mode == "simple":
+            use_simple_mode = True
+        elif mode == "quant":
+            use_simple_mode = False
 
         fundamentals_context = ""
         if sig_data and symbol != "GENERIC":

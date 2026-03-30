@@ -23,6 +23,7 @@ class ChatRequest(BaseModel):
     history: List[ChatMessage]
     message: str
     user_id: str = "default"
+    mode: str = "auto"
 
 @router.post("/chat/{symbol}", tags=["chat"])
 async def chat_endpoint(
@@ -32,7 +33,7 @@ async def chat_endpoint(
 ):
     # stream_chat handles the workflow and yields SSE-formatted strings.
     return StreamingResponse(
-        stream_chat(symbol.upper(), request.message, [h.dict() for h in request.history], request.user_id),
+        stream_chat(symbol.upper(), request.message, [h.dict() for h in request.history], request.user_id, mode=request.mode),
         media_type="text/event-stream"
     )
 
