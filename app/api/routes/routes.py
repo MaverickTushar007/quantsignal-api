@@ -349,7 +349,6 @@ async def debug_regime(symbol: str):
 
 # ── Web Push subscription endpoints ──────────────────────────────────────
 from fastapi import Body as _Body
-, user_context
 
 
 @router.post("/push/subscribe")
