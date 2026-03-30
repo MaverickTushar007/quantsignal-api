@@ -45,19 +45,19 @@ def search_research(query: str, top_k: int = 3, mode: str = "auto") -> str:
         
         result = client.rpc("match_research_chunks", {
             "query_embedding": embedding,
-            "match_count": top_k * 2  # fetch more, then filter
+            "match_count": top_k
         }).execute()
         
         if not result.data:
             return ""
         
         if mode == "quant":
-            # Prioritise GS papers in quant mode
-            gs_chunks = [r["content"] for r in result.data if r.get("paper") in GS_PAPERS]
-            other_chunks = [r["content"] for r in result.data if r.get("paper") not in GS_PAPERS]
-            chunks = (gs_chunks + other_chunks)[:top_k]
+            # Prioritise GS papers, truncate to 300 chars each
+            gs_chunks = [r["content"][:300] for r in result.data if r.get("paper") in GS_PAPERS]
+            other_chunks = [r["content"][:200] for r in result.data if r.get("paper") not in GS_PAPERS]
+            chunks = (gs_chunks + other_chunks)[:2]
         else:
-            chunks = [r["content"] for r in result.data][:top_k]
+            chunks = [r["content"][:250] for r in result.data][:2]
         
         return "\n\n".join(chunks)
     
