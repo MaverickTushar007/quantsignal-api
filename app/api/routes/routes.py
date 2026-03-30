@@ -492,7 +492,6 @@ async def get_morning_briefing():
 async def generate_morning_briefing():
     try:
         from app.domain.core.morning_briefing import generate_morning_briefing
-from app.domain.billing.middleware import signal_gate
         return generate_morning_briefing()
     except Exception as e:
         return {"error": str(e)}
