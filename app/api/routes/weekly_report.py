@@ -166,8 +166,12 @@ def _generate_report(user_id: str) -> dict:
                         }],
                         max_tokens=150,
                         temperature=0.4,
-            )
-            report["commentary"] = resp.choices[0].message.content.strip()
+                    )
+                    break
+                except groq.RateLimitError:
+                    continue
+            if resp:
+                report["commentary"] = resp.choices[0].message.content.strip()
     except Exception as e:
         log.debug(f"[weekly_report] commentary failed: {e}")
         perf = report["performance"]
