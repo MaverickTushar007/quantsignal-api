@@ -392,9 +392,7 @@ async def stream_chat(symbol: str, message: str, history: list, user_id: str = "
                 max_tokens=1200
             )
         except groq.RateLimitError:
-            yield f"data: {json.dumps({'type': 'status', 'message': 'Primary model rate-limited — switching to fallback model...'})}
-
-"
+            yield "data: " + json.dumps({"type": "status", "message": "Primary model rate-limited — switching to fallback model..."}) + "\n\n"
             stream = await client.chat.completions.create(
                 model=FALLBACK_MODEL,
                 messages=messages,
