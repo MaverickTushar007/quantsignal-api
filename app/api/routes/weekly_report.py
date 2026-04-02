@@ -146,22 +146,26 @@ def _generate_report(user_id: str) -> dict:
             perf    = report["performance"]
             regimes = report["regime_summary"]
             client  = groq.Groq(api_key=key)
-            resp    = client.chat.completions.create(
-                model="llama-3.3-70b-versatile",
-                messages=[{
-                    "role": "system",
-                    "content": "You are Perseus, a quant trading AI. Write a 3-sentence weekly market commentary."
-                }, {
-                    "role": "user",
-                    "content": (
-                        f"This week: {perf.get('total_signals', 0)} signals fired, "
-                        f"{perf.get('win_rate', 'N/A')} win rate, avg EV {perf.get('avg_ev', 'N/A')}. "
-                        f"Regime mix: bull={regimes['bull']}, bear={regimes['bear']}, ranging={regimes['ranging']}. "
-                        f"Write a 3-sentence commentary on market conditions and what traders should watch next week."
-                    )
-                }],
-                max_tokens=150,
-                temperature=0.4,
+            _weekly_models = ["llama-3.3-70b-versatile", "llama-3.1-8b-instant"]
+            resp    = None
+            for _wm in _weekly_models:
+                try:
+                    resp = client.chat.completions.create(
+                        model=_wm,
+                        messages=[{
+                            "role": "system",
+                            "content": "You are Perseus, a quant trading AI. Write a 3-sentence weekly market commentary."
+                        }, {
+                            "role": "user",
+                            "content": (
+                                f"This week: {perf.get('total_signals', 0)} signals fired, "
+                                f"{perf.get('win_rate', 'N/A')} win rate, avg EV {perf.get('avg_ev', 'N/A')}. "
+                                f"Regime mix: bull={regimes['bull']}, bear={regimes['bear']}, ranging={regimes['ranging']}. "
+                                f"Write a 3-sentence commentary on market conditions and what traders should watch next week."
+                            )
+                        }],
+                        max_tokens=150,
+                        temperature=0.4,
             )
             report["commentary"] = resp.choices[0].message.content.strip()
     except Exception as e:

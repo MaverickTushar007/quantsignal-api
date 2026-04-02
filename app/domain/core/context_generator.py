@@ -121,19 +121,24 @@ Generate 2 sentences interpreting this signal."""
         key = os.environ.get("GROQ_API_KEY", "")
         if key:
             client = groq.Groq(api_key=key)
-            resp = client.chat.completions.create(
-                model="llama-3.3-70b-versatile",
-                messages=[
-                    {"role": "system", "content": SIGNAL_SYSTEM_PROMPT},
-                    {"role": "user",   "content": prompt_user},
-                ],
-                max_tokens=120,
-                temperature=0.2,
-            )
-            result = resp.choices[0].message.content.strip()
-            if result:
-                log.debug("[context_generator] interpretation via Groq")
-                return result
+            for model in ["llama-3.3-70b-versatile", "llama-3.1-8b-instant"]:
+                try:
+                    resp = client.chat.completions.create(
+                        model=model,
+                        messages=[
+                            {"role": "system", "content": SIGNAL_SYSTEM_PROMPT},
+                            {"role": "user",   "content": prompt_user},
+                        ],
+                        max_tokens=120,
+                        temperature=0.2,
+                    )
+                    result = resp.choices[0].message.content.strip()
+                    if result:
+                        log.debug(f"[context_generator] interpretation via Groq ({model})")
+                        return result
+                except groq.RateLimitError:
+                    log.debug(f"[context_generator] {model} rate-limited, trying next")
+                    continue
     except Exception as e:
         log.debug(f"[context_generator] Groq failed: {e}")
 

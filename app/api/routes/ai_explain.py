@@ -40,6 +40,7 @@ Explain why the model made this call, what the market was doing, and the key les
 
     try:
         client = groq.Groq(api_key=settings.groq_api_key)
+        _explain_models = ["llama-3.3-70b-versatile", "llama-3.1-8b-instant"]
         response = client.chat.completions.create(
             model="llama-3.1-8b-instant",
             messages=[{"role": "user", "content": prompt}],

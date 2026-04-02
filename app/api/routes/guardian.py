@@ -114,6 +114,7 @@ Recommended size: ${recommended_dollars:,.0f}
 Be direct, protective, and honest. Mention the specific dollar amounts. End with one clear actionable sentence."""
 
             client = groq.Groq(api_key=settings.groq_api_key)
+            _groq_models = ["llama-3.3-70b-versatile", "llama-3.1-8b-instant"]
             response = client.chat.completions.create(
                 model="llama-3.1-8b-instant",
                 messages=[{"role": "user", "content": prompt}],

@@ -135,13 +135,18 @@ def _build_agent_context(symbol: str, user_id: str) -> str:
 
 def _groq_reasoning(prompt: str) -> str:
     client = groq.Groq(api_key=settings.groq_api_key)
-    resp = client.chat.completions.create(
-        model="llama-3.3-70b-versatile",
-        messages=[{"role": "user", "content": prompt}],
-        max_tokens=200,
-        temperature=0.2,
-    )
-    return resp.choices[0].message.content.strip()
+    for model in ["llama-3.3-70b-versatile", "llama-3.1-8b-instant"]:
+        try:
+            resp = client.chat.completions.create(
+                model=model,
+                messages=[{"role": "user", "content": prompt}],
+                max_tokens=200,
+                temperature=0.2,
+            )
+            return resp.choices[0].message.content.strip()
+        except groq.RateLimitError:
+            continue
+    raise RuntimeError("All Groq models rate-limited")
 
 
 def _rule_based_reasoning(ticker, direction, probability, confluence_bulls, top_features):
@@ -376,17 +381,22 @@ async def stream_chat(symbol: str, message: str, history: list, user_id: str = "
             messages.append({"role": m.get("role", "user"), "content": m.get("content", "")})
         messages.append({"role": "user", "content": message})
 
+        PRIMARY_MODEL  = "llama-3.3-70b-versatile"
+        FALLBACK_MODEL = "llama-3.1-8b-instant"
         try:
             stream = await client.chat.completions.create(
-                model="llama-3.3-70b-versatile",
+                model=PRIMARY_MODEL,
                 messages=messages,
                 stream=True,
                 temperature=0.2,
                 max_tokens=1200
             )
-        except Exception:
+        except groq.RateLimitError:
+            yield f"data: {json.dumps({'type': 'status', 'message': 'Primary model rate-limited — switching to fallback model...'})}
+
+"
             stream = await client.chat.completions.create(
-                model="llama-3.3-70b-versatile",
+                model=FALLBACK_MODEL,
                 messages=messages,
                 stream=True,
                 temperature=0.2,
