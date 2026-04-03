@@ -15,6 +15,8 @@ from app.api.schemas import (
 from app.api.routes.auth import get_current_user, require_pro
 from app.domain.signal.service import generate_signal
 from app.infrastructure.queue.reasoning_queue import enqueue_reasoning_job
+from app.domain.reasoning.worker import fill_reasoning_async
+from fastapi import BackgroundTasks
 from app.domain.data.universe import TICKERS, TICKER_MAP
 from app.domain.billing.middleware import signal_gate
 
@@ -85,6 +87,7 @@ def get_all_signals(
 @router.get("/signals/{symbol}", response_model=SignalResponse, tags=["signals"])
 async def get_signal(
     symbol: str,
+    background_tasks: BackgroundTasks,
     _gate: dict = Depends(signal_gate),
     reason: bool = Query(True, description="Include LLM reasoning"),
 ):
@@ -106,7 +109,7 @@ async def get_signal(
 
     status = sig.get("reasoning_status", "")
     if reason and status not in ("pending", "complete"):
-        enqueue_reasoning_job(symbol, sig)
+        background_tasks.add_task(fill_reasoning_async, symbol, sig)
 
     try:
         from app.infrastructure.db.signal_history import save_signal, is_open
