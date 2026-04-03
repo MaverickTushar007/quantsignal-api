@@ -156,6 +156,46 @@ def _rule_based_reasoning(ticker, direction, probability, confluence_bulls, top_
             f"Primary drivers: {feat_str}. {confluence_bulls}/9 confluence factors align.")
 
 
+def _compute_conviction(probability: float, confluence_score: str, model_agreement: float = 0) -> dict:
+    """
+    Hard rules layer — conviction band based on quantitative thresholds.
+    LLM must use this, not invent its own.
+    """
+    # Parse confluence score e.g. "6/9 bullish" -> 6
+    conf_bulls = 0
+    try:
+        conf_bulls = int(str(confluence_score).split("/")[0])
+    except Exception:
+        pass
+
+    prob_pct = probability * 100
+    agreement_pct = model_agreement * 100
+
+    # Hard conviction rules
+    if prob_pct >= 72 and conf_bulls >= 6 and agreement_pct >= 70:
+        conviction = "HIGH"
+        tradable = True
+        note = f"Strong edge: {prob_pct:.0f}% probability, {conf_bulls}/9 confluence, {agreement_pct:.0f}% model agreement"
+    elif prob_pct >= 60 and conf_bulls >= 4:
+        conviction = "MODERATE"
+        tradable = True
+        note = f"Moderate edge: {prob_pct:.0f}% probability, {conf_bulls}/9 confluence factors aligned"
+    elif prob_pct >= 50 and conf_bulls >= 3:
+        conviction = "LOW"
+        tradable = False
+        note = f"Weak edge: {prob_pct:.0f}% probability only — watchlist, do not size up"
+    else:
+        conviction = "INSUFFICIENT"
+        tradable = False
+        note = f"No tradable edge: {prob_pct:.0f}% probability, {conf_bulls}/9 confluence — skip or wait"
+
+    # Regime conflict penalty
+    if prob_pct < 65 and conf_bulls < 4:
+        note += " | ⚠️ Low confluence — signal may be noise"
+
+    return {"conviction": conviction, "tradable": tradable, "note": note}
+
+
 def get_reasoning(ticker, name, direction, probability, confluence_bulls,
                   top_features, news_headlines, current_price=0,
                   take_profit=0, stop_loss=0, atr=0, volume_ratio=1.0, model_agreement=0):
@@ -331,6 +371,12 @@ async def stream_chat(symbol: str, message: str, history: list, user_id: str = "
             sys_prompt += f"\n## FUNDAMENTAL DATA\n{fundamentals_context}\n"
 
         if sig_data:
+            # Hard conviction rules — LLM cannot override these
+            conviction_data = _compute_conviction(
+                sig_data.get("probability", 0),
+                sig_data.get("confluence_score", "0/9"),
+                sig_data.get("model_agreement", 0)
+            )
             sys_prompt += f"\n## LIVE SIGNAL DATA — {symbol}\n"
             sys_prompt += f"- **ML Bias:** {sig_data.get('direction')} @ {sig_data.get('probability', 0)*100:.1f}% confidence\n"
             sys_prompt += f"- **Confluence:** {sig_data.get('confluence_score', 'N/A')}\n"
@@ -338,6 +384,11 @@ async def stream_chat(symbol: str, message: str, history: list, user_id: str = "
             sys_prompt += f"- **Entry:** ${sig_data.get('current_price')} | **TP:** ${sig_data.get('take_profit')} | **SL:** ${sig_data.get('stop_loss')}\n"
             sys_prompt += f"- **Kelly Size:** {sig_data.get('kelly_size')}% | **R/R:** {sig_data.get('risk_reward')}:1\n"
             sys_prompt += f"- **Model Agreement:** {sig_data.get('model_agreement', 0)*100:.0f}%\n"
+            sys_prompt += f"\n## ⚠️ CONVICTION RULES — YOU MUST USE EXACTLY THIS:\n"
+            sys_prompt += f"- **Conviction:** {conviction_data['conviction']} — {conviction_data['note']}\n"
+            sys_prompt += f"- **Tradable:** {'YES — size per Kelly' if conviction_data['tradable'] else 'NO — watchlist only, do not recommend entry'}\n"
+            if not conviction_data['tradable']:
+                sys_prompt += f"- **INSTRUCTION:** Do NOT recommend entry. Signal is weak. Tell user to wait or watch.\n"
         elif symbol == "GENERIC":
             sys_prompt += "\nMODE: Global Macro Intelligence. Cover Stocks, Forex, Crypto, Commodities.\n"
 
