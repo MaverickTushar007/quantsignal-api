@@ -97,10 +97,10 @@ def generate_signal(symbol: str, include_reasoning: bool = True) -> Optional[dic
         # Add energy if missing from cached signal
         if "energy" not in cached or cached.get("energy") is None:
             try:
-                from app.domain.core.energy_detector import compute_market_energy
+                from app.domain.core.energy_detector import compute_energy_state
                 _df = fetch_ohlcv(symbol, period="2y")
                 if _df is not None:
-                    cached["energy"] = compute_market_energy(_df)
+                    cached["energy"] = compute_energy_state(_df)
             except Exception:
                 pass
         return cached
@@ -224,8 +224,8 @@ def generate_signal(symbol: str, include_reasoning: bool = True) -> Optional[dic
         print(f"MTF error for {symbol}: {e}")
     # Attach energy state
     try:
-        from app.domain.core.energy_detector import compute_market_energy
-        energy = compute_market_energy(df)
+        from app.domain.core.energy_detector import compute_energy_state
+        energy = compute_energy_state(df)
         result["energy"] = energy
     except Exception as e:
         print(f"Energy detector error for {symbol}: {e}")
