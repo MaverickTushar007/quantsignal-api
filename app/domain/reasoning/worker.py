@@ -2,76 +2,75 @@
 reasoning/worker.py
 Background worker — fills reasoning into cache after signal is generated.
 Does NOT block the signal pipeline.
-
-Hardening:
-- Idempotency guard (skip if already complete)
-- Explicit reasoning_status field (pending / complete / failed)
-- 2-attempt retry before marking failed
-- Structured logging at every stage
 """
 
 import json
 import asyncio
 import logging
-from pathlib import Path
-from app.core.config import BASE_DIR, settings
 from app.domain.reasoning.service import get_reasoning
 
 logger = logging.getLogger(__name__)
 
-CACHE_PATH = BASE_DIR / "data/signals_cache.json"
 
-
-def _read_cache() -> dict:
-    if not CACHE_PATH.exists():
-        return {}
-    return json.loads(CACHE_PATH.read_text())
-
-
-def _write_cache(cache: dict) -> None:
-    CACHE_PATH.write_text(json.dumps(cache, indent=2))
-
-
-def _update_redis(symbol: str, data: dict) -> None:
+def _update_redis(symbol: str, reasoning: str, status: str) -> None:
     try:
-        from app.infrastructure.cache.cache import get_cached, set_cached
-        existing = get_cached(f"signal:{symbol}")
-        if existing:
-            existing["reasoning"] = data["reasoning"]
-            existing["reasoning_status"] = data["reasoning_status"]
-            set_cached(f"signal:{symbol}", existing, ttl=3600)
-    except Exception:
-        pass
+        from app.infrastructure.cache.cache import get_cached, set_cached, _get_redis
+        from app.infrastructure.queue.reasoning_queue import _status_key
+        # Update signal cache
+        existing = get_cached(f"signal:{symbol}") or {}
+        existing["reasoning"] = reasoning
+        existing["reasoning_status"] = status
+        set_cached(f"signal:{symbol}", existing, ttl=3600)
+        # Write to status key so reasoning endpoint can read it
+        r = _get_redis()
+        if r:
+            r.set(_status_key(symbol), json.dumps({
+                "status": status,
+                "reasoning": reasoning,
+            }))
+    except Exception as e:
+        logger.warning(f"[reasoning_worker] _update_redis failed: {e}")
 
 
 async def fill_reasoning_async(symbol: str, signal: dict) -> None:
     """
     Called as a BackgroundTask after signal is returned to client.
-    Generates reasoning and writes it to cache.
+    Generates reasoning and writes it to Redis.
     """
     logger.info(f"[reasoning_worker] Starting for {symbol}")
 
-    # --- Idempotency guard ---
-    cache = _read_cache()
-    if cache.get(symbol, {}).get("reasoning_status") == "complete":
-        logger.info(f"[reasoning_worker] {symbol} already complete — skipping")
-        return
-
-    # --- Mark as pending ---
-    if symbol in cache:
-        cache[symbol]["reasoning_status"] = "pending"
-        _write_cache(cache)
+    # --- Idempotency guard via Redis ---
+    try:
+        from app.infrastructure.cache.cache import _get_redis
+        from app.infrastructure.queue.reasoning_queue import _status_key
+        r = _get_redis()
+        if r:
+            raw = r.get(_status_key(symbol))
+            if raw:
+                state = json.loads(raw)
+                if state.get("status") == "complete" and state.get("reasoning"):
+                    logger.info(f"[reasoning_worker] {symbol} already complete — skipping")
+                    return
+    except Exception:
+        pass
 
     # --- Build args ---
     news = signal.get("news", [])
     headlines = [n.get("title", "") for n in news]
+    if not headlines:
+        try:
+            from app.domain.data.news import get_news
+            items = get_news(symbol, limit=5)
+            headlines = [i.title for i in items]
+        except Exception:
+            pass
 
     kwargs = dict(
         ticker=symbol,
         name=signal.get("name", symbol),
         direction=signal.get("direction", "HOLD"),
         probability=signal.get("probability", 0.5),
-        confluence_bulls=int(signal.get("confluence_score", "0/9").split("/")[0]),
+        confluence_bulls=int(str(signal.get("confluence_score", "0/9")).split("/")[0]),
         top_features=signal.get("top_features", []),
         news_headlines=headlines,
         current_price=signal.get("current_price", 0),
@@ -88,23 +87,15 @@ async def fill_reasoning_async(symbol: str, signal: dict) -> None:
             reasoning = await asyncio.get_event_loop().run_in_executor(
                 None, lambda: get_reasoning(**kwargs)
             )
-            break
+            if reasoning:
+                break
         except Exception as e:
             logger.warning(f"[reasoning_worker] {symbol} attempt {attempt} failed: {e}")
 
     # --- Write result ---
-    cache = _read_cache()
-    if symbol not in cache:
-        logger.error(f"[reasoning_worker] {symbol} not found in cache after generation")
-        return
-
     if reasoning:
-        cache[symbol]["reasoning"] = reasoning
-        cache[symbol]["reasoning_status"] = "complete"
-        _write_cache(cache)
-        _update_redis(symbol, cache[symbol])
+        _update_redis(symbol, reasoning, "complete")
         logger.info(f"[reasoning_worker] {symbol} complete")
     else:
-        cache[symbol]["reasoning_status"] = "failed"
-        _write_cache(cache)
+        _update_redis(symbol, "", "failed")
         logger.error(f"[reasoning_worker] {symbol} failed after 2 attempts")
