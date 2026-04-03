@@ -197,12 +197,15 @@ async def get_signal_reasoning(symbol: str, _gate: dict = Depends(signal_gate)):
     from app.infrastructure.cache.cache import _get_redis
     import json as _json
     redis_status = None
+    redis_reasoning = None
     try:
         r = _get_redis()
         if r:
             raw = r.get(_status_key(symbol))
             if raw:
-                redis_status = _json.loads(raw).get("status")
+                _rd = _json.loads(raw)
+                redis_status = _rd.get("status")
+                redis_reasoning = _rd.get("reasoning") or None
     except Exception:
         pass
 
@@ -211,7 +214,7 @@ async def get_signal_reasoning(symbol: str, _gate: dict = Depends(signal_gate)):
     return {
         "symbol": symbol,
         "status": status,
-        "reasoning": signal.get("reasoning") or None,
+        "reasoning": redis_reasoning or signal.get("reasoning") or None,
         "timestamp": signal.get("timestamp"),
     }
 @router.get("/news/{symbol}", tags=["news"])
