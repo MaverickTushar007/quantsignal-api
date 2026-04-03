@@ -1,121 +1,24 @@
 """
-data/news.py
-FinSight News & Sentiment Engine.
-RSS Aggregation + Institutional-grade LLM Sentiment Scoring.
+data/news.py — yfinance-based news engine (RSS feeds replaced, all dead).
 """
-
-import feedparser
 import re
 import groq
 from dataclasses import dataclass
-from datetime import datetime, timezone
 from typing import List
-
 from app.core.config import settings
 
-# --- Configuration ---
-
-RSS_FEEDS = [
-    "https://feeds.finance.yahoo.com/rss/2.0/headline",
-    "https://www.cnbc.com/id/100003114/device/rss/rss.html",
-    "https://feeds.marketwatch.com/marketwatch/topstories/",
-    "https://www.investing.com/rss/news.rss",
-    "https://cryptonews.com/news/feed/",
-    "https://feeds.a.dj.com/rss/RSSMarketsMain.xml",
-    "https://seekingalpha.com/market_currents.xml",
-]
-
-BULL_WORDS = {
-    "surge", "rally", "breakout", "bullish", "gain", "high", "upgrade", "beat",
-    "strong", "growth", "record", "buy", "soar", "jump", "spike", "rise", "rises",
-    "risen", "rising", "climbs", "climbed", "rebounds", "rebound", "recover",
-    "recovery", "recovering", "outperform", "outperforms", "upside", "uptrend",
-    "inflow", "inflows", "accumulate", "accumulation", "buying", "purchased",
-    "purchases", "long", "longs", "holds", "holding", "support", "supported",
-    "positive", "profit", "profits", "earnings", "beat", "exceeds", "exceeded",
-    "adoption", "approve", "approved", "approval", "launch", "launches", "partnership",
-    "bullrun", "ath", "all-time", "milestone", "momentum", "optimistic", "confidence"
-}
-BEAR_WORDS = {
-    "crash", "fall", "drop", "bearish", "loss", "low", "downgrade", "miss",
-    "weak", "decline", "sell", "fear", "plunge", "plunges", "plummets", "slump",
-    "slumps", "tumble", "tumbles", "collapse", "collapses", "selloff", "sell-off",
-    "dump", "dumps", "liquidation", "liquidations", "outflow", "outflows", "short",
-    "shorts", "shorting", "resistance", "rejected", "rejection", "warning", "warns",
-    "risk", "risks", "risky", "concern", "concerns", "worried", "worry", "panic",
-    "hack", "hacked", "exploit", "ban", "banned", "crackdown", "regulation",
-    "lawsuit", "sued", "fraud", "investigation", "probe", "halted", "suspended",
-    "negative", "losses", "missed", "disappoints", "disappointing", "weakness",
-    "downside", "downtrend", "correction", "corrections", "volatile", "volatility",
-    "uncertainty", "uncertain", "recession", "inflation", "rate hike", "hawkish",
-    "skips", "pauses", "pause", "delays", "delay", "halts", "stops", "suspended"
-}
-
-ALIASES = {
-    "BTC-USD":   ["bitcoin", "btc"],
-    "ETH-USD":   ["ethereum", "eth", "ether"],
-    "SOL-USD":   ["solana", "sol"],
-    "NVDA":      ["nvidia", "nvda"],
-    "AAPL":      ["apple", "aapl", "iphone"],
-    "TSLA":      ["tesla", "tsla", "elon"],
-    "MSFT":      ["microsoft", "msft"],
-    "GOOGL":     ["google", "alphabet", "googl"],
-    "AMZN":      ["amazon", "amzn", "aws"],
-    "META":      ["meta", "facebook"],
-    "GC=F":      ["gold", "xau"],
-    "CL=F":      ["oil", "crude", "wti"],
-    "EURUSD=X":  ["euro", "eur", "eurusd"],
-    "USDINR=X":  ["rupee", "inr", "india"],
-}
-
-# --- Data Models ---
+BULL_WORDS = {"surge","rally","breakout","bullish","gain","upgrade","beat","strong","growth","record","buy","soar","jump","spike","rise","rises","risen","rising","climbs","rebounds","rebound","recover","recovery","outperform","upside","uptrend","inflow","accumulate","buying","positive","profit","profits","earnings","exceeds","adoption","approve","approved","launch","partnership","momentum","optimistic","confidence"}
+BEAR_WORDS = {"crash","fall","drop","bearish","loss","low","downgrade","miss","weak","decline","sell","fear","plunge","plunges","plummets","slump","tumble","collapse","selloff","sell-off","dump","liquidation","outflow","short","shorting","resistance","rejected","warning","warns","risk","concern","worried","panic","hack","exploit","ban","crackdown","regulation","lawsuit","fraud","investigation","halted","suspended","negative","losses","missed","disappoints","weakness","downside","downtrend","correction","volatile","uncertainty","recession","inflation","hawkish","pauses","delays"}
 
 @dataclass
 class NewsItem:
-    title:     str
-    summary:   str
-    source:    str
-    url:       str
-    sentiment: str    # BULLISH | BEARISH | NEUTRAL
-
-# --- Sentiment Logic ---
-
-def _llm_sentiment_score(headlines: List[str]) -> float:
-    """
-    Institutional analysis: Uses Groq to extract sentiment from a cluster of headlines.
-    Returns a score between -1.0 (Bearish) and 1.0 (Bullish).
-    """
-    if not settings.groq_api_key or not headlines:
-        return 0.0
-
-    client = groq.Groq(api_key=settings.groq_api_key)
-    headline_text = "\n".join([f"- {h}" for h in headlines[:5]])
-    
-    prompt = f"""Analyze the collective financial sentiment of these headlines. 
-Return ONLY a single number between -1.0 (extremely bearish) and 1.0 (extremely bullish).
-0.0 is neutral. Do not provide any explanation or text—only the number.
-
-HEADLINES:
-{headline_text}
-"""
-    try:
-        resp = client.chat.completions.create(
-            model="llama-3.1-8b-instant",
-            messages=[{"role": "user", "content": prompt}],
-            max_tokens=10,
-            temperature=0,
-        )
-        score_text = resp.choices[0].message.content.strip()
-        
-        # Regex extraction to catch the number regardless of LLM "yap"
-        match = re.search(r"[-+]?\d*\.?\d+", score_text)
-        return float(match.group()) if match else 0.0
-    except Exception:
-        return 0.0
-
+    title: str
+    summary: str
+    source: str
+    url: str
+    sentiment: str
 
 def _score_sentiment(text: str) -> str:
-    """Fast keyword fallback for individual news items."""
     words = set(text.lower().split())
     bulls = len(words & BULL_WORDS)
     bears = len(words & BEAR_WORDS)
@@ -123,82 +26,40 @@ def _score_sentiment(text: str) -> str:
     elif bears > bulls: return "BEARISH"
     return "NEUTRAL"
 
-
-# --- RSS Logic ---
-
-_rss_cache: List[dict] = []
-_cache_loaded = False
-
-def _load_rss_cache():
-    global _rss_cache, _cache_loaded
-    if _cache_loaded:
-        return
-    
-    articles = []
-    for url in RSS_FEEDS:
-        try:
-            feed = feedparser.parse(url)
-            for entry in feed.entries[:30]:
-                articles.append({
-                    "title":   entry.get("title", ""),
-                    "summary": entry.get("summary", "")[:200],
-                    "source":  feed.feed.get("title", url),
-                    "url":     entry.get("link", ""),
-                })
-        except Exception:
-            continue
-    _rss_cache = articles
-    _cache_loaded = True
-
+def _llm_sentiment_score(headlines: List[str]) -> float:
+    if not settings.groq_api_key or not headlines: return 0.0
+    client = groq.Groq(api_key=settings.groq_api_key)
+    prompt = f"Analyze financial sentiment of these headlines. Return ONLY a number between -1.0 (bearish) and 1.0 (bullish). No text.\n\nHEADLINES:\n" + "\n".join(f"- {h}" for h in headlines[:5])
+    try:
+        resp = client.chat.completions.create(model="llama-3.1-8b-instant", messages=[{"role":"user","content":prompt}], max_tokens=10, temperature=0)
+        match = re.search(r"[-+]?\d*\.?\d+", resp.choices[0].message.content.strip())
+        return float(match.group()) if match else 0.0
+    except Exception: return 0.0
 
 def get_news(symbol: str, limit: int = 5) -> List[NewsItem]:
-    """Retrieves and filters relevant news for a specific symbol."""
-    _load_rss_cache()
-    
-    def _matches(text: str, sym: str) -> bool:
-        text_lower = text.lower()
-        terms = ALIASES.get(sym, [sym.lower().replace("-usd","").replace("=x","")])
-        return any(t in text_lower for t in terms)
-
+    try:
+        import yfinance as yf
+        raw_news = yf.Ticker(symbol).news or []
+    except Exception: return []
     results = []
-    for art in _rss_cache:
-        combined_text = f"{art['title']} {art['summary']}"
-        if _matches(combined_text, symbol):
-            results.append(NewsItem(
-                title=art["title"],
-                summary=art["summary"],
-                source=art["source"],
-                url=art["url"],
-                sentiment=_score_sentiment(combined_text),
-            ))
-        if len(results) >= limit:
-            break
+    for item in raw_news[:limit]:
+        content = item.get("content", {})
+        title   = content.get("title") or item.get("title", "")
+        summary = content.get("summary") or item.get("summary", "")
+        source  = (content.get("provider") or {}).get("displayName") or item.get("publisher", "")
+        url     = (content.get("canonicalUrl") or {}).get("url") or item.get("link", "")
+        if not title: continue
+        results.append(NewsItem(title=title[:200], summary=summary[:300], source=source, url=url, sentiment=_score_sentiment(f"{title} {summary}")))
     return results
 
-
 def get_sentiment_score(symbol: str) -> float:
-    """
-    Upgraded sentiment pipeline:
-    - VADER scores all headlines (fast, local)
-    - Groq scores top 3 (deep, accurate)
-    - Weighted blend: 40% VADER + 60% Groq
-    """
-    from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
-    
-    news = get_news(symbol, limit=10)
-    if not news:
-        return 0.0
-    
-    headlines = [n.title for n in news]
-    
-    # VADER scoring — fast, all headlines
-    analyzer = SentimentIntensityAnalyzer()
-    vader_scores = [analyzer.polarity_scores(h)["compound"] for h in headlines]
-    vader_avg = sum(vader_scores) / len(vader_scores) if vader_scores else 0.0
-    
-    # Groq scoring — deep, top 5 headlines
-    groq_score = _llm_sentiment_score(headlines[:5])
-    
-    # Weighted blend
-    final = 0.4 * vader_avg + 0.6 * groq_score
-    return round(max(-1.0, min(1.0, final)), 3)
+    try:
+        from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
+        news = get_news(symbol, limit=10)
+        if not news: return 0.0
+        headlines = [n.title for n in news]
+        analyzer = SentimentIntensityAnalyzer()
+        vader_avg = sum(analyzer.polarity_scores(h)["compound"] for h in headlines) / len(headlines)
+        groq_score = _llm_sentiment_score(headlines[:5])
+        return round(max(-1.0, min(1.0, 0.4 * vader_avg + 0.6 * groq_score)), 3)
+    except Exception: return 0.0

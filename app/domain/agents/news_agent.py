@@ -1,111 +1,57 @@
 """
-agents/news_agent.py
-NewsAgent — injects earnings dates, macro events, and IV context
-into Perseus so it reasons about catalysts, not just technicals.
+agents/news_agent.py — live yfinance news + earnings flags for Perseus.
 """
-import logging
-import os
+import logging, os
 from datetime import datetime, timezone
-
 log = logging.getLogger(__name__)
 
+DEFAULT_SYMBOLS = ["NVDA","AAPL","TSLA","MSFT","AMZN","GOOGL","META","RELIANCE.NS","TCS.NS","BTC-USD","ETH-USD","SOL-USD","BNB-USD","GC=F","CL=F","EURUSD=X","USDINR=X"]
 
-def run(symbols: list[str] = None) -> dict:
-    """
-    Fetch upcoming catalysts for symbols.
-    Returns findings dict — never raises.
-    """
-    if symbols is None:
-        symbols = ["NVDA", "AAPL", "TSLA", "MSFT", "RELIANCE.NS",
-                   "BTC-USD", "ETH-USD", "AMZN", "GOOGL", "META"]
-
-    findings = {
-        "agent":      "NewsAgent",
-        "run_at":     datetime.now(timezone.utc).isoformat(),
-        "catalysts":  {},
-        "high_risk":  [],
-        "summary":    "",
-    }
-
+def run(symbols: list = None) -> dict:
+    if symbols is None: symbols = DEFAULT_SYMBOLS
+    findings = {"agent":"NewsAgent","run_at":datetime.now(timezone.utc).isoformat(),"catalysts":{},"headlines":{},"high_risk":[],"summary":""}
     for sym in symbols:
-        catalyst = _get_catalyst(sym)
+        catalyst, headlines = _get_catalyst_and_news(sym)
+        if headlines: findings["headlines"][sym] = headlines
         if catalyst:
             findings["catalysts"][sym] = catalyst
-            if catalyst.get("risk") == "high":
-                findings["high_risk"].append(sym)
-
-    # Perseus summary
-    if findings["catalysts"]:
-        n_high = len(findings["high_risk"])
-        total  = len(findings["catalysts"])
-        findings["summary"] = (
-            f"{total} symbols have upcoming catalysts. "
-            f"{n_high} flagged HIGH risk (earnings/FOMC within 7 days). "
-            f"High-risk symbols: {', '.join(findings['high_risk']) or 'none'}."
-        )
-    else:
-        findings["summary"] = "No major catalysts detected for tracked symbols."
-
+            if catalyst.get("risk") == "high": findings["high_risk"].append(sym)
+    n_news = sum(len(v) for v in findings["headlines"].values())
+    findings["summary"] = (f"{n_news} live headlines across {len(findings['headlines'])} symbols. "
+        f"{len(findings['catalysts'])} with catalysts. {len(findings['high_risk'])} HIGH risk: {', '.join(findings['high_risk']) or 'none'}.")
     _store(findings)
     return findings
 
-
-def _get_catalyst(symbol: str) -> dict | None:
-    """
-    Check earnings cache + basic IV check.
-    Returns catalyst dict or None.
-    """
-    result = {}
-
-    # Check earnings cache
-    try:
-        from app.domain.data.earnings import get_earnings_date
-        earnings = get_earnings_date(symbol)
-        if earnings:
-            from datetime import datetime, timezone, timedelta
-            now = datetime.now(timezone.utc)
-            try:
-                ed = datetime.fromisoformat(str(earnings).replace("Z", "+00:00"))
-                days_away = (ed - now).days
-                if 0 <= days_away <= 30:
-                    result["earnings_date"] = str(earnings)
-                    result["days_to_earnings"] = days_away
-                    result["risk"] = "high" if days_away <= 7 else "medium"
-                    result["note"] = f"Earnings in {days_away}d — expect IV expansion"
-            except Exception:
-                pass
-    except Exception:
-        pass
-
-    # IV check via yfinance
+def _get_catalyst_and_news(symbol: str) -> tuple:
+    catalyst, headlines = {}, []
     try:
         import yfinance as yf
-        ticker = yf.Ticker(symbol)
-        info   = ticker.info or {}
-        # Beta as volatility proxy if IV unavailable
-        beta = info.get("beta")
-        if beta and beta > 1.5:
-            result["high_beta"] = round(beta, 2)
-            result["note"] = result.get("note", "") + f" High beta ({beta:.1f}) — amplified moves likely."
-            if "risk" not in result:
-                result["risk"] = "medium"
-    except Exception:
-        pass
-
-    return result if result else None
-
+        for item in (yf.Ticker(symbol).news or [])[:3]:
+            content = item.get("content", {})
+            title = content.get("title") or item.get("title", "")
+            if title: headlines.append(title[:150])
+    except Exception: pass
+    try:
+        from app.domain.data.earnings import get_earnings_flag
+        flag = get_earnings_flag(symbol)
+        if flag:
+            catalyst.update({"earnings_date":flag["date"],"days_to_earnings":flag["days_until"],"risk":"high" if flag["days_until"]<=7 else "medium","note":flag["warning"]})
+    except Exception: pass
+    try:
+        import yfinance as yf
+        beta = (yf.Ticker(symbol).info or {}).get("beta")
+        if beta and beta > 1.8:
+            catalyst["high_beta"] = round(beta, 2)
+            catalyst["note"] = catalyst.get("note","") + f" High beta ({beta:.1f}) — amplified moves."
+            catalyst.setdefault("risk","medium")
+    except Exception: pass
+    return (catalyst if catalyst else None), headlines
 
 def _store(findings: dict):
     try:
         from supabase import create_client
-        sb = create_client(
-            os.environ.get("SUPABASE_URL", ""),
-            os.environ.get("SUPABASE_KEY") or os.environ.get("SUPABASE_ANON_KEY", "")
-        )
-        sb.table("agent_runs").upsert({
-            "agent":    "NewsAgent",
-            "run_at":   findings["run_at"],
-            "findings": findings,
-        }).execute()
+        sb = create_client(os.environ.get("SUPABASE_URL",""), os.environ.get("SUPABASE_KEY") or os.environ.get("SUPABASE_ANON_KEY",""))
+        sb.table("agent_runs").upsert({"agent":"NewsAgent","run_at":findings["run_at"],"findings":findings}).execute()
+        log.info(f"[NewsAgent] stored — {len(findings['headlines'])} symbols")
     except Exception as e:
         log.debug(f"[NewsAgent] store failed: {e}")

@@ -96,21 +96,26 @@ def _build_agent_context(symbol: str, user_id: str) -> str:
         except Exception:
             pass
 
-        # NewsAgent — upcoming catalysts
+        # NewsAgent — live headlines + catalysts
         try:
             res = sb.table("agent_runs").select("findings,run_at")                 .eq("agent", "NewsAgent")                 .order("run_at", desc=True).limit(1).execute()
             if res.data:
                 f = res.data[0].get("findings", {})
-                sym_catalyst = f.get("catalysts", {}).get(symbol, {})
-                lines.append(f"### NewsAgent — Catalysts")
-                if sym_catalyst:
-                    lines.append(f"- {symbol} catalyst: {sym_catalyst}")
-                    if sym_catalyst.get("risk") == "high":
-                        lines.append(f"- ⚠️ HIGH RISK: {sym_catalyst.get('note', 'Major event imminent')}")
+                # Live headlines for this symbol
+                sym_headlines = f.get("headlines", {}).get(symbol, [])
+                sym_catalyst  = f.get("catalysts", {}).get(symbol, {})
+                lines.append(f"### NewsAgent — Live Headlines for {symbol}")
+                if sym_headlines:
+                    for h in sym_headlines[:3]:
+                        lines.append(f"- {h}")
                 else:
-                    lines.append(f"- No near-term catalysts detected for {symbol}")
+                    lines.append(f"- No recent headlines found for {symbol}")
+                if sym_catalyst:
+                    risk = sym_catalyst.get("risk", "medium").upper()
+                    note = sym_catalyst.get("note", "")
+                    lines.append(f"- ⚠️ CATALYST [{risk}]: {note}")
                 if f.get("high_risk"):
-                    lines.append(f"- Market-wide high-risk symbols: {', '.join(f['high_risk'][:5])}")
+                    lines.append(f"- Market-wide HIGH RISK symbols: {', '.join(f['high_risk'][:5])}")
         except Exception:
             pass
 
