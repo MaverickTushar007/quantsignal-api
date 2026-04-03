@@ -38,6 +38,7 @@ from app.api.routes.preferences import router as prefs_router
 from app.api.routes.weekly_report import router as weekly_report_router
 from app.api.routes.admin import router as admin_router
 from app.api.routes.billing import router as billing_router
+from app.api.routes.feedback import router as feedback_router
 
 
 @asynccontextmanager
@@ -87,6 +88,7 @@ app.include_router(ws_router, prefix="/api/v1")
 app.include_router(prefs_router, prefix="/api/v1")
 app.include_router(weekly_report_router, prefix="/api/v1")
 app.include_router(admin_router, prefix="/api/v1")
+app.include_router(feedback_router, prefix="/api/v1")
 
 
 @app.get("/")
