@@ -17,3 +17,8 @@ data/*.jsonl
 logs/*.txt
 ml/
 
+data/*.json
+data/*.db
+data/*.jsonl
+logs/*.txt
+ml/
