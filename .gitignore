@@ -11,3 +11,9 @@ __pycache__/
 .env.save
 *.log
 __pycache__/
+data/*.json
+data/*.db
+data/*.jsonl
+logs/*.txt
+ml/
+
