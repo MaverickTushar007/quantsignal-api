@@ -1,0 +1,19 @@
+{
+  "watchlist": [
+    "BTC-USD",
+    "ETH-USD",
+    "RELIANCE.NS",
+    "TCS.NS",
+    "NVDA",
+    "NIFTY50.NS"
+  ],
+  "risk_tolerance": "medium",
+  "alert_threshold": 0.58,
+  "alert_channels": [
+    "telegram"
+  ],
+  "timezone": "Asia/Kolkata",
+  "briefing_enabled": true,
+  "ev_minimum": 0.0,
+  "suppress_hold": true
+}

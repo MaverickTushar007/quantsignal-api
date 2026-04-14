@@ -1,0 +1,13 @@
+.env
+ml/models/
+.env.save
+node_modules/
+package-lock.json
+package.json
+__pycache__/
+*.pyc
+.env.save
+.env
+.env.save
+*.log
+__pycache__/

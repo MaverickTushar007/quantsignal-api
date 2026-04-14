@@ -1,0 +1,177 @@
+{
+  "ICICIBANK.NS": {
+    "shocked_by": "HDFCBANK.NS",
+    "move_pct": -4.65,
+    "warning": "HDFCBANK.NS fell -4.65% today \u2014 Banking sector under pressure",
+    "reduce_size": true,
+    "scanned_at": 1774291295.519883
+  },
+  "AXISBANK.NS": {
+    "shocked_by": "HDFCBANK.NS",
+    "move_pct": -4.65,
+    "warning": "HDFCBANK.NS fell -4.65% today \u2014 Banking sector under pressure",
+    "reduce_size": true,
+    "scanned_at": 1774291295.519886
+  },
+  "KOTAKBANK.NS": {
+    "shocked_by": "HDFCBANK.NS",
+    "move_pct": -4.65,
+    "warning": "HDFCBANK.NS fell -4.65% today \u2014 Banking sector under pressure",
+    "reduce_size": true,
+    "scanned_at": 1774291295.5198872
+  },
+  "SBIN.NS": {
+    "shocked_by": "HDFCBANK.NS",
+    "move_pct": -4.65,
+    "warning": "HDFCBANK.NS fell -4.65% today \u2014 Banking sector under pressure",
+    "reduce_size": true,
+    "scanned_at": 1774291295.5198889
+  },
+  "BANKBARODA.NS": {
+    "shocked_by": "HDFCBANK.NS",
+    "move_pct": -4.65,
+    "warning": "HDFCBANK.NS fell -4.65% today \u2014 Banking sector under pressure",
+    "reduce_size": true,
+    "scanned_at": 1774291295.519891
+  },
+  "RELIANCE.NS": {
+    "shocked_by": "BPCL.NS",
+    "move_pct": -5.73,
+    "warning": "BPCL.NS fell -5.73% today \u2014 Energy sector under pressure",
+    "reduce_size": true,
+    "scanned_at": 1774291295.5198941
+  },
+  "ONGC.NS": {
+    "shocked_by": "BPCL.NS",
+    "move_pct": -5.73,
+    "warning": "BPCL.NS fell -5.73% today \u2014 Energy sector under pressure",
+    "reduce_size": true,
+    "scanned_at": 1774291295.519896
+  },
+  "IOC.NS": {
+    "shocked_by": "BPCL.NS",
+    "move_pct": -5.73,
+    "warning": "BPCL.NS fell -5.73% today \u2014 Energy sector under pressure",
+    "reduce_size": true,
+    "scanned_at": 1774291295.519897
+  },
+  "HINDALCO.NS": {
+    "shocked_by": "TATASTEEL.NS",
+    "move_pct": -4.88,
+    "warning": "TATASTEEL.NS fell -4.88% today \u2014 Metals sector under pressure",
+    "reduce_size": true,
+    "scanned_at": 1774291295.5198998
+  },
+  "JSWSTEEL.NS": {
+    "shocked_by": "TATASTEEL.NS",
+    "move_pct": -4.88,
+    "warning": "TATASTEEL.NS fell -4.88% today \u2014 Metals sector under pressure",
+    "reduce_size": true,
+    "scanned_at": 1774291295.519902
+  },
+  "SAIL.NS": {
+    "shocked_by": "TATASTEEL.NS",
+    "move_pct": -4.88,
+    "warning": "TATASTEEL.NS fell -4.88% today \u2014 Metals sector under pressure",
+    "reduce_size": true,
+    "scanned_at": 1774291295.519904
+  },
+  "VEDL.NS": {
+    "shocked_by": "TATASTEEL.NS",
+    "move_pct": -4.88,
+    "warning": "TATASTEEL.NS fell -4.88% today \u2014 Metals sector under pressure",
+    "reduce_size": true,
+    "scanned_at": 1774291295.519906
+  },
+  "TATASTEEL.NS": {
+    "shocked_by": "HINDALCO.NS",
+    "move_pct": -3.89,
+    "warning": "HINDALCO.NS fell -3.89% today \u2014 Metals sector under pressure",
+    "reduce_size": true,
+    "scanned_at": 1774291295.5199091
+  },
+  "MARUTI.NS": {
+    "shocked_by": "M&M.NS",
+    "move_pct": -3.6,
+    "warning": "M&M.NS fell -3.6% today \u2014 Auto sector under pressure",
+    "reduce_size": true,
+    "scanned_at": 1774291295.519913
+  },
+  "TATAMOTORS.NS": {
+    "shocked_by": "M&M.NS",
+    "move_pct": -3.6,
+    "warning": "M&M.NS fell -3.6% today \u2014 Auto sector under pressure",
+    "reduce_size": true,
+    "scanned_at": 1774291295.519915
+  },
+  "BAJAJ-AUTO.NS": {
+    "shocked_by": "M&M.NS",
+    "move_pct": -3.6,
+    "warning": "M&M.NS fell -3.6% today \u2014 Auto sector under pressure",
+    "reduce_size": true,
+    "scanned_at": 1774291295.519917
+  },
+  "SUNPHARMA.NS": {
+    "shocked_by": "DRREDDY.NS",
+    "move_pct": -3.51,
+    "warning": "DRREDDY.NS fell -3.51% today \u2014 Pharma sector under pressure",
+    "reduce_size": true,
+    "scanned_at": 1774291295.5199192
+  },
+  "CIPLA.NS": {
+    "shocked_by": "DRREDDY.NS",
+    "move_pct": -3.51,
+    "warning": "DRREDDY.NS fell -3.51% today \u2014 Pharma sector under pressure",
+    "reduce_size": true,
+    "scanned_at": 1774291295.5199208
+  },
+  "LUPIN.NS": {
+    "shocked_by": "DRREDDY.NS",
+    "move_pct": -3.51,
+    "warning": "DRREDDY.NS fell -3.51% today \u2014 Pharma sector under pressure",
+    "reduce_size": true,
+    "scanned_at": 1774291295.519922
+  },
+  "ETH-USD": {
+    "shocked_by": "BTC-USD",
+    "move_pct": 3.83,
+    "warning": "BTC-USD surged +3.83% today \u2014 Crypto sector under pressure",
+    "reduce_size": true,
+    "scanned_at": 1774291295.519948
+  },
+  "SOL-USD": {
+    "shocked_by": "BTC-USD",
+    "move_pct": 3.83,
+    "warning": "BTC-USD surged +3.83% today \u2014 Crypto sector under pressure",
+    "reduce_size": true,
+    "scanned_at": 1774291295.5199502
+  },
+  "BNB-USD": {
+    "shocked_by": "BTC-USD",
+    "move_pct": 3.83,
+    "warning": "BTC-USD surged +3.83% today \u2014 Crypto sector under pressure",
+    "reduce_size": true,
+    "scanned_at": 1774291295.5199518
+  },
+  "AVAX-USD": {
+    "shocked_by": "BTC-USD",
+    "move_pct": 3.83,
+    "warning": "BTC-USD surged +3.83% today \u2014 Crypto sector under pressure",
+    "reduce_size": true,
+    "scanned_at": 1774291295.519957
+  },
+  "MATIC-USD": {
+    "shocked_by": "BTC-USD",
+    "move_pct": 3.83,
+    "warning": "BTC-USD surged +3.83% today \u2014 Crypto sector under pressure",
+    "reduce_size": true,
+    "scanned_at": 1774291295.519959
+  },
+  "BTC-USD": {
+    "shocked_by": "ETH-USD",
+    "move_pct": 4.39,
+    "warning": "ETH-USD surged +4.39% today \u2014 Crypto sector under pressure",
+    "reduce_size": true,
+    "scanned_at": 1774291295.519964
+  }
+}
