@@ -1,0 +1,37 @@
+version: "3.8"
+
+services:
+  api:
+    image: localhost/quantsignal-api:latest
+    container_name: quantsignal-api
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    env_file: .env.production
+    volumes:
+      - ./data:/app/data
+      - ./logs:/app/logs
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/api/v1/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 15s
+
+  caddy:
+    image: docker.io/caddy:2-alpine
+    container_name: quantsignal-caddy
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+      - caddy_data:/data
+      - caddy_certs:/config
+    depends_on:
+      - api
+
+volumes:
+  caddy_data:
+  caddy_certs:
