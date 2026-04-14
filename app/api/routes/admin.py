@@ -146,3 +146,51 @@ def admin_weekly_reports():
         return {"reports": res.data or [], "count": len(res.data or [])}
     except Exception as e:
         return {"error": str(e)}
+
+
+@router.get("/admin/token-usage")
+def admin_token_usage():
+    """Per-user token usage for today and last 7 days."""
+    try:
+        sb = _sb()
+        from datetime import date
+        today = date.today().isoformat()
+        week_ago = (datetime.now(timezone.utc) - timedelta(days=7)).date().isoformat()
+
+        # Today's usage
+        today_res = sb.table("token_usage") \
+            .select("user_id,tokens_used,symbol") \
+            .eq("date", today) \
+            .order("tokens_used", desc=True) \
+            .limit(50).execute()
+
+        # Last 7 days total per user
+        week_res = sb.table("token_usage") \
+            .select("user_id,tokens_used,date") \
+            .gte("date", week_ago) \
+            .execute()
+
+        # Aggregate weekly
+        from collections import defaultdict
+        weekly = defaultdict(int)
+        for r in (week_res.data or []):
+            weekly[r["user_id"]] += r["tokens_used"]
+
+        total_today = sum(r["tokens_used"] for r in (today_res.data or []))
+        total_week  = sum(weekly.values())
+
+        return {
+            "today": {
+                "total_tokens": total_today,
+                "users": today_res.data or [],
+            },
+            "last_7_days": {
+                "total_tokens": total_week,
+                "per_user": [
+                    {"user_id": uid, "tokens_used": t}
+                    for uid, t in sorted(weekly.items(), key=lambda x: -x[1])
+                ]
+            }
+        }
+    except Exception as e:
+        return {"error": str(e)}
