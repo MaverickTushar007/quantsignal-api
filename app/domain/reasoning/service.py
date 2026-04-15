@@ -232,7 +232,16 @@ Do not start with "The" or "This". Start with the asset name or a verb."""
         return _rule_based_reasoning(ticker, direction, probability, confluence_bulls, top_features)
 
 
-async def stream_chat(symbol: str, message: str, history: list, user_id: str = "default", mode: str = "auto"):
+async def stream_chat(symbol: str, message: str, history: list, user_id: str = "default", mode: str = "auto", tier: str = "free"):
+    # ── Daily token limit gate ──
+    limit_check = check_token_limit(user_id, tier)
+    if not limit_check["allowed"]:
+        used = limit_check["used"]
+        limit = limit_check["limit"]
+        import json as _json
+        msg = "Daily limit reached (" + str(used) + "/" + str(limit) + " tokens). Upgrade to Pro."
+        yield "data: " + _json.dumps({"type": "error", "message": msg}) + "\n\n"
+        return
     def _yield_status(msg: str):
         return f"data: {json.dumps({'type': 'status', 'message': msg})}\n\n"
 
@@ -545,3 +554,36 @@ async def stream_chat(symbol: str, message: str, history: list, user_id: str = "
 
     except Exception as e:
         yield f"data: {json.dumps({'type': 'error', 'message': str(e)})}\n\n"
+
+
+# ── Token Limit Enforcement ──────────────────────────────────────────────────
+FREE_DAILY_TOKEN_LIMIT = 10_000   # ~7 queries/day
+PRO_DAILY_TOKEN_LIMIT  = 999_999  # effectively unlimited
+
+def check_token_limit(user_id: str, tier: str = "free") -> dict:
+    """
+    Returns {"allowed": True/False, "used": int, "limit": int}
+    Reads today's usage from Supabase token_usage table.
+    """
+    if user_id in ("default", "v1-public-user"):
+        return {"allowed": True, "used": 0, "limit": FREE_DAILY_TOKEN_LIMIT}
+    try:
+        import os
+        from supabase import create_client
+        from datetime import date
+        sb = create_client(
+            os.environ.get("SUPABASE_URL", ""),
+            os.environ.get("SUPABASE_SERVICE_KEY", "")
+        )
+        today = date.today().isoformat()
+        rows = sb.table("token_usage") \
+            .select("tokens_used") \
+            .eq("user_id", user_id) \
+            .eq("date", today) \
+            .execute()
+        used = sum(r["tokens_used"] for r in (rows.data or []))
+        limit = PRO_DAILY_TOKEN_LIMIT if tier == "pro" else FREE_DAILY_TOKEN_LIMIT
+        return {"allowed": used < limit, "used": used, "limit": limit}
+    except Exception as e:
+        print(f"[token_limit] check failed: {e}")
+        return {"allowed": True, "used": 0, "limit": FREE_DAILY_TOKEN_LIMIT}
