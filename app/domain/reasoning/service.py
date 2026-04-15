@@ -656,26 +656,36 @@ def _execute_tool(name: str, args: dict, symbol: str) -> str:
 
         if name == "get_regime_state":
             sym = args.get("symbol", symbol)
-            res = sb.table("signal_context").select("regime,energy_state,run_at").eq("symbol", sym).order("run_at", desc=True).limit(1).execute()
+            res = sb.table("signal_context").select("direction,energy_state,conflict_detected,context_text,generated_at").eq("symbol", sym).order("generated_at", desc=True).limit(1).execute()
             if res.data:
                 d = res.data[0]
-                return f"Regime: {d.get('regime','unknown')} | Energy: {d.get('energy_state','unknown')} | Updated: {d.get('run_at','')[:10]}"
-            return "No regime data available."
+                return (f"Direction: {d.get('direction','unknown')} | "
+                        f"Energy: {d.get('energy_state') or 'N/A'} | "
+                        f"Conflict: {d.get('conflict_detected',False)} | "
+                        f"Updated: {str(d.get('generated_at',''))[:10]} | "
+                        f"Context: {d.get('context_text','')[:120]}")
+            return "NO_DATA"
 
         elif name == "get_ev_stats":
             sym = args.get("symbol", symbol)
-            res = sb.table("signal_context").select("ev_score,confluence_score,ml_probability,direction").eq("symbol", sym).order("run_at", desc=True).limit(1).execute()
+            res = sb.table("signal_context").select("ev_score,direction,conflict_detected,context_text,generated_at").eq("symbol", sym).order("generated_at", desc=True).limit(1).execute()
             if res.data:
                 d = res.data[0]
-                return f"EV: {d.get('ev_score','N/A')} | Confluence: {d.get('confluence_score','N/A')} | ML Prob: {d.get('ml_probability','N/A')} | Direction: {d.get('direction','N/A')}"
-            return "No EV stats available."
+                ev = d.get("ev_score")
+                return (f"EV Score: {ev if ev is not None else 'N/A'} | "
+                        f"Direction: {d.get('direction','N/A')} | "
+                        f"Conflict: {d.get('conflict_detected',False)} | "
+                        f"Summary: {d.get('context_text','')[:120]}")
+            return "NO_DATA"
 
         elif name == "get_portfolio_risk":
             res = sb.table("agent_runs").select("findings,run_at").eq("agent", "RiskAgent").order("run_at", desc=True).limit(1).execute()
             if res.data:
                 f = res.data[0].get("findings", {})
-                return f"Risk Level: {f.get('risk_level','unknown')} | Warnings: {f.get('warnings',[])} | Updated: {res.data[0].get('run_at','')[:10]}"
-            return "No risk data available."
+                return (f"Risk Level: {f.get('risk_level','unknown')} | "
+                        f"Warnings: {f.get('warnings',[])} | "
+                        f"Updated: {str(res.data[0].get('run_at',''))[:10]}")
+            return "NO_DATA"
 
         elif name == "get_news_context":
             sym = args.get("symbol", symbol)
@@ -684,9 +694,10 @@ def _execute_tool(name: str, args: dict, symbol: str) -> str:
                 f = res.data[0].get("findings", {})
                 headlines = f.get("headlines", {}).get(sym, [])
                 catalyst = f.get("catalysts", {}).get(sym, {})
-                out = f"Headlines: {headlines[:2]} | Catalyst: {catalyst}"
-                return out
-            return "No news data available."
+                if not headlines and not catalyst:
+                    return "NO_DATA"
+                return f"Headlines: {headlines[:2]} | Catalyst: {catalyst}"
+            return "NO_DATA"
 
         elif name == "get_error_patterns":
             sym = args.get("symbol", symbol)
@@ -694,16 +705,17 @@ def _execute_tool(name: str, args: dict, symbol: str) -> str:
             if res.data:
                 f = res.data[0].get("findings", {})
                 conflicts = [c for c in f.get("conflicts", []) if c.get("symbol") == sym]
-                return f"Conflicts for {sym}: {conflicts[:2]}" if conflicts else f"No conflicts detected for {sym}."
-            return "No error pattern data available."
+                return f"Conflicts: {conflicts[:2]}" if conflicts else f"No conflicts for {sym}."
+            return "NO_DATA"
 
         elif name == "run_backtest":
+            # signal_context has no backtest columns — return real context_text instead
             sym = args.get("symbol", symbol)
-            res = sb.table("signal_context").select("win_rate,sharpe_ratio,total_trades").eq("symbol", sym).order("run_at", desc=True).limit(1).execute()
+            res = sb.table("signal_context").select("context_text,direction,generated_at").eq("symbol", sym).order("generated_at", desc=True).limit(3).execute()
             if res.data:
-                d = res.data[0]
-                return f"Win Rate: {d.get('win_rate','N/A')} | Sharpe: {d.get('sharpe_ratio','N/A')} | Trades: {d.get('total_trades','N/A')}"
-            return "No backtest data available."
+                lines = [f"{d.get('direction','?')} @ {str(d.get('generated_at',''))[:10]}: {d.get('context_text','')[:80]}" for d in res.data]
+                return "Recent signal history (no backtest engine yet):\n" + "\n".join(lines)
+            return "NO_DATA"
 
     except Exception as e:
         return f"Tool error: {e}"
@@ -720,7 +732,7 @@ async def _run_tool_preflight(symbol: str, message: str, client) -> str:
         resp = await client.chat.completions.create(
             model="llama-3.3-70b-versatile",
             messages=[
-                {"role": "system", "content": "You are Perseus, a quant trading AI. Decide which tools to call to best answer the user query. Call only what is relevant."},
+                {"role": "system", "content": "You are Perseus, a quant trading AI. Decide which tools to call to best answer the user query. Call only what is relevant. CRITICAL: If a tool returns NO_DATA, state that data is unavailable — never invent or estimate numbers."},
                 {"role": "user", "content": f"Symbol: {symbol}. Query: {message}"}
             ],
             tools=PERSEUS_TOOLS,
