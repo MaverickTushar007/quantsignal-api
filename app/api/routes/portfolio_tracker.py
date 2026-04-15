@@ -175,3 +175,22 @@ def _enrich_position(pos: dict) -> dict:
     except Exception:
         pass
     return pos
+
+@router.get("/history/trades")
+async def get_trade_history(limit: int = 200):
+    """
+    Stub endpoint — returns empty trades list until signal outcome tracking is built.
+    The dashboard Track Record tab and outcome badges use this.
+    """
+    try:
+        sb = _sb()
+        res = sb.table("user_positions") \
+            .select("*") \
+            .in_("status", ["closed", "TP_HIT", "SL_HIT"]) \
+            .order("updated_at", desc=True) \
+            .limit(limit) \
+            .execute()
+        trades = res.data or []
+        return {"trades": trades, "total": len(trades)}
+    except Exception:
+        return {"trades": [], "total": 0}
