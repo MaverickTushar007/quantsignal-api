@@ -68,18 +68,7 @@ def get_all_signals(
             continue
         if direction and sig.get("direction") != direction.upper():
             continue
-        results.append(WatchlistItem(
-            symbol=sig["symbol"],
-            display=sig["display"],
-            name=sig["name"],
-            type=sig["type"],
-            icon=sig["icon"],
-            direction=sig["direction"],
-            probability=sig["probability"],
-            confidence=sig["confidence"],
-            current_price=sig["current_price"],
-            kelly_size=sig["kelly_size"],
-        ))
+        results.append(sig)
     if not type and not direction:
         set_cached("all_signals_list", results, ttl=86400)
     return results

@@ -54,16 +54,31 @@ class SignalResponse(BaseModel):
 
 
 class WatchlistItem(BaseModel):
-    symbol:        str
-    display:       str
-    name:          str
-    type:          str
-    icon:          str
-    direction:     Direction
-    probability:   float
-    confidence:    str
-    current_price: float
-    kelly_size:    float
+    symbol:           str
+    display:          str
+    name:             str
+    type:             str
+    icon:             str
+    direction:        Direction
+    probability:      float
+    confidence:       str
+    current_price:    float
+    kelly_size:       float
+    expected_value:   Optional[float] = None
+    take_profit:      Optional[float] = None
+    stop_loss:        Optional[float] = None
+    risk_reward:      Optional[float] = None
+    atr:              Optional[float] = None
+    model_agreement:  Optional[float] = None
+    confluence_score: Optional[float] = None
+    volume_ratio:     Optional[float] = None
+    top_features:     Optional[list]  = None
+    confluence:       Optional[list]  = None
+    news:             Optional[list]  = None
+    reasoning:        Optional[str]   = None
+    generated_at:     Optional[str]   = None
+    mtf:              Optional[dict]  = None
+    energy:           Optional[dict]  = None
 
 
 class MarketMood(BaseModel):
