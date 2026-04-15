@@ -469,6 +469,13 @@ async def stream_chat(symbol: str, message: str, history: list, user_id: str = "
                 pass
 
         client = AsyncGroq(api_key=settings.groq_api_key)
+        # Perseus tool-use preflight
+        try:
+            tool_ctx = await _run_tool_preflight(symbol, message, client)
+            if tool_ctx:
+                sys_prompt += tool_ctx
+        except Exception:
+            pass
         # Cap system prompt to prevent 413 from Groq
         if len(sys_prompt) > 3500:
             sys_prompt = sys_prompt[:3500] + "\n[Context truncated for brevity]"
@@ -587,3 +594,150 @@ def check_token_limit(user_id: str, tier: str = "free") -> dict:
     except Exception as e:
         print(f"[token_limit] check failed: {e}")
         return {"allowed": True, "used": 0, "limit": FREE_DAILY_TOKEN_LIMIT}
+
+# ── Perseus Tool-Use Layer ───────────────────────────────────────────────────
+PERSEUS_TOOLS = [
+    {
+        "type": "function",
+        "function": {
+            "name": "get_regime_state",
+            "description": "Get current bull/bear/ranging regime and energy state for a symbol",
+            "parameters": {"type": "object", "properties": {"symbol": {"type": "string"}}, "required": ["symbol"]}
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "get_ev_stats",
+            "description": "Get EV score, confluence score, ML probability and signal strength for a symbol",
+            "parameters": {"type": "object", "properties": {"symbol": {"type": "string"}}, "required": ["symbol"]}
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "get_portfolio_risk",
+            "description": "Get portfolio risk level, warnings and drawdown metrics",
+            "parameters": {"type": "object", "properties": {}, "required": []}
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "get_news_context",
+            "description": "Get live headlines, earnings dates and catalyst flags for a symbol",
+            "parameters": {"type": "object", "properties": {"symbol": {"type": "string"}}, "required": ["symbol"]}
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "get_error_patterns",
+            "description": "Get recent signal conflicts, errors and calibration issues",
+            "parameters": {"type": "object", "properties": {"symbol": {"type": "string"}}, "required": ["symbol"]}
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "run_backtest",
+            "description": "Run a quick backtest for a symbol and return win rate and Sharpe ratio",
+            "parameters": {"type": "object", "properties": {"symbol": {"type": "string"}}, "required": ["symbol"]}
+        }
+    },
+]
+
+def _execute_tool(name: str, args: dict, symbol: str) -> str:
+    """Execute a Perseus tool call and return result as string."""
+    try:
+        import os
+        from supabase import create_client
+        sb = create_client(os.environ.get("SUPABASE_URL", ""), os.environ.get("SUPABASE_SERVICE_KEY", "") or os.environ.get("SUPABASE_KEY", ""))
+
+        if name == "get_regime_state":
+            sym = args.get("symbol", symbol)
+            res = sb.table("signal_context").select("regime,energy_state,run_at").eq("symbol", sym).order("run_at", desc=True).limit(1).execute()
+            if res.data:
+                d = res.data[0]
+                return f"Regime: {d.get('regime','unknown')} | Energy: {d.get('energy_state','unknown')} | Updated: {d.get('run_at','')[:10]}"
+            return "No regime data available."
+
+        elif name == "get_ev_stats":
+            sym = args.get("symbol", symbol)
+            res = sb.table("signal_context").select("ev_score,confluence_score,ml_probability,direction").eq("symbol", sym).order("run_at", desc=True).limit(1).execute()
+            if res.data:
+                d = res.data[0]
+                return f"EV: {d.get('ev_score','N/A')} | Confluence: {d.get('confluence_score','N/A')} | ML Prob: {d.get('ml_probability','N/A')} | Direction: {d.get('direction','N/A')}"
+            return "No EV stats available."
+
+        elif name == "get_portfolio_risk":
+            res = sb.table("agent_runs").select("findings,run_at").eq("agent", "RiskAgent").order("run_at", desc=True).limit(1).execute()
+            if res.data:
+                f = res.data[0].get("findings", {})
+                return f"Risk Level: {f.get('risk_level','unknown')} | Warnings: {f.get('warnings',[])} | Updated: {res.data[0].get('run_at','')[:10]}"
+            return "No risk data available."
+
+        elif name == "get_news_context":
+            sym = args.get("symbol", symbol)
+            res = sb.table("agent_runs").select("findings,run_at").eq("agent", "NewsAgent").order("run_at", desc=True).limit(1).execute()
+            if res.data:
+                f = res.data[0].get("findings", {})
+                headlines = f.get("headlines", {}).get(sym, [])
+                catalyst = f.get("catalysts", {}).get(sym, {})
+                out = f"Headlines: {headlines[:2]} | Catalyst: {catalyst}"
+                return out
+            return "No news data available."
+
+        elif name == "get_error_patterns":
+            sym = args.get("symbol", symbol)
+            res = sb.table("agent_runs").select("findings,run_at").eq("agent", "ConflictAgent").order("run_at", desc=True).limit(1).execute()
+            if res.data:
+                f = res.data[0].get("findings", {})
+                conflicts = [c for c in f.get("conflicts", []) if c.get("symbol") == sym]
+                return f"Conflicts for {sym}: {conflicts[:2]}" if conflicts else f"No conflicts detected for {sym}."
+            return "No error pattern data available."
+
+        elif name == "run_backtest":
+            sym = args.get("symbol", symbol)
+            res = sb.table("signal_context").select("win_rate,sharpe_ratio,total_trades").eq("symbol", sym).order("run_at", desc=True).limit(1).execute()
+            if res.data:
+                d = res.data[0]
+                return f"Win Rate: {d.get('win_rate','N/A')} | Sharpe: {d.get('sharpe_ratio','N/A')} | Trades: {d.get('total_trades','N/A')}"
+            return "No backtest data available."
+
+    except Exception as e:
+        return f"Tool error: {e}"
+    return "Unknown tool."
+
+
+async def _run_tool_preflight(symbol: str, message: str, client) -> str:
+    """
+    Ask Groq which tools are needed for this query.
+    Returns injected context string to append to sys_prompt.
+    """
+    import json as _json
+    try:
+        resp = await client.chat.completions.create(
+            model="llama-3.3-70b-versatile",
+            messages=[
+                {"role": "system", "content": "You are Perseus, a quant trading AI. Decide which tools to call to best answer the user query. Call only what is relevant."},
+                {"role": "user", "content": f"Symbol: {symbol}. Query: {message}"}
+            ],
+            tools=PERSEUS_TOOLS,
+            tool_choice="auto",
+            max_tokens=300,
+            temperature=0,
+        )
+        msg = resp.choices[0].message
+        if not msg.tool_calls:
+            return ""
+        results = []
+        for tc in msg.tool_calls:
+            name = tc.function.name
+            args = _json.loads(tc.function.arguments or "{}")
+            result = _execute_tool(name, args, symbol)
+            results.append(f"### [{name}]\n{result}")
+        return "\n## TOOL INTELLIGENCE\n" + "\n".join(results) + "\n"
+    except Exception as e:
+        return ""
+
