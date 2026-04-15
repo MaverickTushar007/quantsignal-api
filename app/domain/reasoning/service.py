@@ -497,7 +497,7 @@ async def stream_chat(symbol: str, message: str, history: list, user_id: str = "
                 yield f"data: {json.dumps({'type': 'token', 'content': token})}\n\n"
             # Groq sends usage in the final chunk
             if hasattr(chunk, 'x_groq') and chunk.x_groq and hasattr(chunk.x_groq, 'usage'):
-                total_tokens = chunk.x_groq.usage.total_tokens or 0
+                total_tokens = chunk.x_groq.usage.total_tokens if chunk.x_groq.usage else 0
 
         yield f"data: {json.dumps({'type': 'done'})}\n\n"
 
