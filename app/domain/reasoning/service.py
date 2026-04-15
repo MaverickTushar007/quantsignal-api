@@ -481,6 +481,21 @@ async def stream_chat(symbol: str, message: str, history: list, user_id: str = "
         # Cap system prompt to prevent 413 from Groq
         if len(sys_prompt) > 3500:
             sys_prompt = sys_prompt[:3500] + "\n[Context truncated for brevity]"
+
+        # DATA FENCE — injected after truncation so it always survives
+        # Explicitly lists what tool data is/isn't available to prevent hallucination
+        tool_manifest = "\n\n## ⛔ DATA MANIFEST — HARD BOUNDARY\n"
+        tool_manifest += "Only the following data was retrieved from live systems.\n"
+        tool_manifest += "DO NOT write any metric, statistic, or news item not listed here.\n"
+        if tool_ctx:
+            tool_manifest += "### Tool Data Retrieved:\n" + tool_ctx[:600] + "\n"
+        else:
+            tool_manifest += "### Tool Data: NONE RETRIEVED\n"
+        tool_manifest += "### Backtest Engine: NOT AVAILABLE — write [data not available] if asked\n"
+        tool_manifest += "### News Engine: only cite items explicitly listed in tool data above\n"
+        tool_manifest += "VIOLATION: Writing any number or event not in this manifest is a critical error.\n"
+        sys_prompt += tool_manifest
+
         messages = [{"role": "system", "content": sys_prompt}]
         for m in history:
             messages.append({"role": m.get("role", "user"), "content": m.get("content", "")})
