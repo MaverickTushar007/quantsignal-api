@@ -70,7 +70,7 @@ class WatchlistItem(BaseModel):
     risk_reward:      Optional[float] = None
     atr:              Optional[float] = None
     model_agreement:  Optional[float] = None
-    confluence_score: Optional[float] = None
+    confluence_score: Optional[str]   = None
     volume_ratio:     Optional[float] = None
     top_features:     Optional[list]  = None
     confluence:       Optional[list]  = None
