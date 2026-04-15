@@ -68,7 +68,7 @@ def get_all_signals(
             continue
         if direction and sig.get("direction") != direction.upper():
             continue
-        results.append(sig)
+        results.append(WatchlistItem(**{k: v for k, v in sig.items() if k in WatchlistItem.model_fields}))
     if not type and not direction:
         set_cached("all_signals_list", results, ttl=86400)
     return results
