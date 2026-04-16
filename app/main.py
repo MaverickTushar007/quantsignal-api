@@ -96,7 +96,7 @@ app.include_router(feedback_router, prefix="/api/v1")
 
 @app.get("/")
 async def root():
-    return {"name": "QuantSignal API", "version": "1.0.0", "docs": "/docs"}
+    return {"name": "QuantSignal API", "version": "1.0.1", "docs": "/docs"}
 app.middleware('http')(protection_middleware)
 # rebuild Sun Mar 29 15:18:59 IST 2026
 
@@ -104,4 +104,4 @@ app.middleware('http')(protection_middleware)
 # ── HEALTH ──────────────────────────────────────────────────────────────────
 @app.get("/api/v1/health", tags=["infra"])
 async def health():
-    return {"status": "ok", "version": "1.0.0"}
+    return {"status": "ok", "version": "1.0.1"}
