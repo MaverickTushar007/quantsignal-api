@@ -103,11 +103,11 @@ async def get_signal(
                     try:
                         _dt = datetime.fromisoformat(_gen.replace("Z", "+00:00"))
                         _age_s = (datetime.now(_tz.utc) - _dt).total_seconds()
-                        _fresh = _age_s < 129600  # 36 hours
+                        _fresh = _age_s < 86400  # 24 hours
                     except Exception:
-                        _fresh = (time.time() - _cache_path.stat().st_mtime) < 129600
+                        _fresh = (time.time() - _cache_path.stat().st_mtime) < 86400
                 else:
-                    _fresh = (time.time() - _cache_path.stat().st_mtime) < 129600
+                    _fresh = (time.time() - _cache_path.stat().st_mtime) < 86400
             if _sig and _fresh:
                 from datetime import datetime, timezone
                 _gen = _sig.get("generated_at") or _sig.get("timestamp")
