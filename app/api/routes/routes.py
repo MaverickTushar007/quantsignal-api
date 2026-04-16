@@ -96,6 +96,16 @@ async def get_signal(
             _cache = json.loads(_cache_path.read_text())
             _sig = _cache.get(symbol)
             if _sig and (time.time() - _cache_path.stat().st_mtime) < 129600:
+                from datetime import datetime, timezone
+                _gen = _sig.get("generated_at") or _sig.get("timestamp")
+                if _gen:
+                    try:
+                        _dt = datetime.fromisoformat(_gen.replace("Z", "+00:00"))
+                        _age_h = round((datetime.now(timezone.utc) - _dt).total_seconds() / 3600, 1)
+                        _sig["data_age_hours"] = _age_h
+                        _sig["is_stale"] = _age_h > 24
+                    except Exception:
+                        pass
                 return _sig
         except Exception:
             pass
