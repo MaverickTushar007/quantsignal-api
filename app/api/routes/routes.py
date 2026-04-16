@@ -97,6 +97,7 @@ async def get_signal(
             _sig = _cache.get(symbol)
             if _sig:
                 from datetime import datetime, timezone as _tz
+                import logging as _log
                 _gen = _sig.get("generated_at") or _sig.get("timestamp")
                 _fresh = False
                 if _gen:
@@ -104,7 +105,9 @@ async def get_signal(
                         _dt = datetime.fromisoformat(_gen.replace("Z", "+00:00"))
                         _age_s = (datetime.now(_tz.utc) - _dt).total_seconds()
                         _fresh = _age_s < 86400  # 24 hours
-                    except Exception:
+                        _log.getLogger(__name__).info(f"[cache] {symbol} age={_age_s:.0f}s fresh={_fresh}")
+                    except Exception as _ce:
+                        _log.getLogger(__name__).warning(f"[cache] {symbol} fromisoformat failed: {_ce}")
                         _fresh = (time.time() - _cache_path.stat().st_mtime) < 86400
                 else:
                     _fresh = (time.time() - _cache_path.stat().st_mtime) < 86400
