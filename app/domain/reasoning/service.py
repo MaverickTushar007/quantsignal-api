@@ -376,7 +376,7 @@ async def stream_chat(symbol: str, message: str, history: list, user_id: str = "
                 "**Action:** [BUY / SELL / HOLD / WAIT FOR CONFIRMATION]\n"
                 "**Vol Regime:** [STICKY STRIKE / STICKY DELTA / TRANSITIONING]\n"
                 "**Conviction:** [HIGH/MEDIUM/LOW] — one line rationale with specific numbers\n"
-                "**Kelly-optimal size:** specific % of portfolio\n"
+                "**Kelly-optimal size:** use the Kelly size from LIVE SIGNAL DATA above\n"
                 "**Entry zone:** specific price or range\n"
                 "**Target:** specific price\n"
                 "**Stop:** specific price\n"
@@ -524,13 +524,14 @@ async def stream_chat(symbol: str, message: str, history: list, user_id: str = "
         full_response = ""
         total_tokens = 0
         async for chunk in stream:
+            if not chunk.choices:
+                if hasattr(chunk, 'x_groq') and chunk.x_groq and hasattr(chunk.x_groq, 'usage'):
+                    total_tokens = chunk.x_groq.usage.total_tokens if chunk.x_groq.usage else 0
+                continue
             token = chunk.choices[0].delta.content
             if token:
                 full_response += token
                 yield f"data: {json.dumps({'type': 'token', 'content': token})}\n\n"
-            # Groq sends usage in the final chunk
-            if hasattr(chunk, 'x_groq') and chunk.x_groq and hasattr(chunk.x_groq, 'usage'):
-                total_tokens = chunk.x_groq.usage.total_tokens if chunk.x_groq.usage else 0
 
         yield f"data: {json.dumps({'type': 'done'})}\n\n"
 
