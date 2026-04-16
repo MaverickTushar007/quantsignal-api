@@ -154,7 +154,10 @@ def fetch_ohlcv_multi(symbol: str, period: str = "2y"):
         cached = get_cached(cache_key)
         if cached:
             log.info(f"[multi_source] cache HIT for {symbol}")
-            return pd.DataFrame(cached)
+            df = pd.DataFrame(cached["data"], columns=cached["columns"])
+            df["Date"] = pd.to_datetime(df["Date"])
+            df = df.set_index("Date")
+            return df
     except Exception as e:
         log.debug(f"[multi_source] cache read failed: {e}")
 
@@ -181,6 +184,7 @@ def _cache_ohlcv(cache_key: str, df):
     """Write DataFrame to Redis with 5-min TTL. Fails silently."""
     try:
         from app.infrastructure.cache.cache import set_cached
-        set_cached(cache_key, df.to_dict(), ttl=300)
+        # orient="split" serializes DatetimeIndex safely as strings
+        set_cached(cache_key, df.reset_index().to_dict(orient="split"), ttl=300)
     except Exception as e:
         log.debug(f"[multi_source] cache write failed: {e}")
