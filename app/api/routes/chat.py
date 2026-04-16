@@ -38,9 +38,10 @@ class ChatRequest(BaseModel):
     message: str
     user_id: str = "default"
     mode: str = "auto"
+    # All other fields ignored — tier/plan/depth controlled server-side only
 
 @router.post("/chat/{symbol}", tags=["chat"])
-async def chat_endpoint(symbol: str, request: ChatRequest):
+async def chat_endpoint(symbol: str, request: ChatRequest, gate: dict = Depends(perseus_gate)):
     blocked = _moderate(request.message)
     if blocked:
         async def _err():
