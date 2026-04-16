@@ -95,7 +95,7 @@ async def get_signal(
         try:
             _cache = json.loads(_cache_path.read_text())
             _sig = _cache.get(symbol)
-            if _sig and (time.time() - _cache_path.stat().st_mtime) < 43200:
+            if _sig and (time.time() - _cache_path.stat().st_mtime) < 129600:
                 return _sig
         except Exception:
             pass
