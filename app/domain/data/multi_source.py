@@ -184,7 +184,8 @@ def _cache_ohlcv(cache_key: str, df):
     """Write DataFrame to Redis with 5-min TTL. Fails silently."""
     try:
         from app.infrastructure.cache.cache import set_cached
-        # orient="split" serializes DatetimeIndex safely as strings
-        set_cached(cache_key, df.reset_index().to_dict(orient="split"), ttl=300)
+        df_reset = df.reset_index()
+        df_reset["Date"] = df_reset["Date"].astype(str)
+        set_cached(cache_key, df_reset.to_dict(orient="split"), ttl=300)
     except Exception as e:
         log.debug(f"[multi_source] cache write failed: {e}")
