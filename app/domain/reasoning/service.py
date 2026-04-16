@@ -412,6 +412,11 @@ async def stream_chat(symbol: str, message: str, history: list, user_id: str = "
             elif ml_direction == "BUY":
                 sys_prompt += f"\n⚠️ HARD CONSTRAINT: ML direction is BUY. Your **Action:** field MUST say BUY. Narrative tone must be bullish. FORBIDDEN WORDS: bearish, downside, sell, avoid, resistance ahead, sell pressure, downtrend. Do not use any of these words.\n"
             else:
+                if ml_direction == "SELL":
+                sys_prompt += f"\n⚠️ HARD CONSTRAINT: ML direction is SELL. Your **Action:** field MUST say SELL. Narrative tone must be bearish. FORBIDDEN WORDS: bullish, upside, breakout, accumulate, strong momentum, buy, opportunity, uptrend. Do not use any of these words.\n"
+            elif ml_direction == "BUY":
+                sys_prompt += f"\n⚠️ HARD CONSTRAINT: ML direction is BUY. Your **Action:** field MUST say BUY. Narrative tone must be bullish. FORBIDDEN WORDS: bearish, downside, sell, avoid, resistance ahead, sell pressure, downtrend. Do not use any of these words.\n"
+            else:
                 sys_prompt += f"\n⚠️ HARD CONSTRAINT: ML direction is {ml_direction}. Your **Action:** field MUST say {ml_direction}. Narrative tone must match. Do not contradict the ML signal.\n"
         elif symbol == "GENERIC":
             sys_prompt += "\nMODE: Global Macro Intelligence. Cover Stocks, Forex, Crypto, Commodities.\n"
