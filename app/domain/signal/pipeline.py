@@ -115,7 +115,7 @@ def enrich_signal(sig: dict, symbol: str) -> dict:
             "releasing": "momentum active — trend confirmation in play",
         }
         _ev     = sig.get("ev_score")
-        _ev_str = f"EV +{_ev:.2f}%" if _ev and _ev > 0 else (f"EV {_ev:.2f}%" if _ev else "")
+        _ev_str = f"EV +{_ev:.2f}" if _ev and _ev > 0 else (f"EV {_ev:.2f}" if _ev else "")
         _estr   = _emap.get(sig.get("energy_state", ""), "energy state neutral")
         sig["context_text"]     = (
             f"{sig.get('symbol','')} {sig.get('direction','HOLD')} signal in "

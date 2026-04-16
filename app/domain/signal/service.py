@@ -144,6 +144,18 @@ def generate_signal(symbol: str, include_reasoning: bool = True) -> Optional[dic
     if ml is None:
         return None
 
+    # 3b. Hard validation — EV must be consistent with direction
+    if ml.direction == "BUY" and ml.expected_value < 0:
+        import logging
+        logging.getLogger(__name__).warning(f"[{symbol}] EV/direction mismatch: BUY but EV={ml.expected_value:.4f} — overriding to HOLD")
+        from dataclasses import replace
+        ml = replace(ml, direction="HOLD", confidence="LOW", probability=0.5)
+    elif ml.direction == "SELL" and ml.expected_value > 0:
+        import logging
+        logging.getLogger(__name__).warning(f"[{symbol}] EV/direction mismatch: SELL but EV={ml.expected_value:.4f} — overriding to HOLD")
+        from dataclasses import replace
+        ml = replace(ml, direction="HOLD", confidence="LOW", probability=0.5)
+
     # 4. Confluence scorecard
     feat       = build_features(df)
     latest_row = feat.iloc[-1].to_dict()
