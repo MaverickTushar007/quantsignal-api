@@ -140,31 +140,47 @@ def _fetch_coingecko(symbol: str):
         log.debug(f"[multi_source] coingecko failed for {symbol}: {e}")
     return None
 
-# ── Master fetcher ─────────────────────────────────────────────────────────
+# -- Master fetcher --------------------------------------------------------
 def fetch_ohlcv_multi(symbol: str, period: str = "2y"):
     """
     Try all sources in order. Return first successful result.
+    Redis-cached with 5-min TTL to avoid repeated yfinance fetches.
     """
-    # Crypto: CoinGecko first
-    if symbol.endswith("-USD") or symbol in ["BTC-USD","ETH-USD","SOL-USD"]:
-        df = _fetch_coingecko(symbol)
-        if df is not None:
-            return df
+    import pandas as pd
+    from app.infrastructure.cache.cache import get_cached, set_cached
 
+    cache_key = f"ohlcv:{symbol}:{period}"
+    try:
+        cached = get_cached(cache_key)
+        if cached:
+            log.info(f"[multi_source] cache HIT for {symbol}")
+            return pd.DataFrame(cached)
+    except Exception as e:
+        log.debug(f"[multi_source] cache read failed: {e}")
+
+    # CoinGecko removed — fabricates High/Low
     # Try yfinance first
     df = _fetch_yfinance(symbol, period)
     if df is not None:
+        _cache_ohlcv(cache_key, df)
         return df
-
     # Try stooq
     df = _fetch_stooq(symbol)
     if df is not None:
+        _cache_ohlcv(cache_key, df)
         return df
-
     # Try Alpha Vantage (only if key set)
     df = _fetch_alpha_vantage(symbol)
     if df is not None:
+        _cache_ohlcv(cache_key, df)
         return df
-
     log.warning(f"[multi_source] ALL sources failed for {symbol}")
     return None
+
+def _cache_ohlcv(cache_key: str, df):
+    """Write DataFrame to Redis with 5-min TTL. Fails silently."""
+    try:
+        from app.infrastructure.cache.cache import set_cached
+        set_cached(cache_key, df.to_dict(), ttl=300)
+    except Exception as e:
+        log.debug(f"[multi_source] cache write failed: {e}")
