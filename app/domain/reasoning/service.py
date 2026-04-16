@@ -145,8 +145,8 @@ def _groq_reasoning(prompt: str) -> str:
             resp = client.chat.completions.create(
                 model=model,
                 messages=[{"role": "user", "content": prompt}],
-                max_tokens=200,
-                temperature=0.2,
+                max_tokens=400,
+                temperature=0,
             )
             return resp.choices[0].message.content.strip()
         except groq.RateLimitError:
@@ -405,6 +405,9 @@ async def stream_chat(symbol: str, message: str, history: list, user_id: str = "
             sys_prompt += f"- **Tradable:** {'YES — size per Kelly' if conviction_data['tradable'] else 'NO — watchlist only, do not recommend entry'}\n"
             if not conviction_data['tradable']:
                 sys_prompt += f"- **INSTRUCTION:** Do NOT recommend entry. Signal is weak. Tell user to wait or watch.\n"
+            # Hard-pin action label — Perseus narrative must match ML direction
+            ml_direction = sig_data.get("direction", "HOLD")
+            sys_prompt += f"\n⚠️ HARD CONSTRAINT: ML direction is {ml_direction}. Your **Action:** field MUST say {ml_direction}. Narrative tone must match. Do not contradict the ML signal.\n"
         elif symbol == "GENERIC":
             sys_prompt += "\nMODE: Global Macro Intelligence. Cover Stocks, Forex, Crypto, Commodities.\n"
 
