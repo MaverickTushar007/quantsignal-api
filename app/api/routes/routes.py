@@ -131,6 +131,22 @@ async def get_signal(
     from app.domain.signal.pipeline import enrich_signal
     sig = enrich_signal(sig, symbol)
 
+    # Staleness fields for live-generated signals
+    from datetime import datetime, timezone as _tz
+    _gen = sig.get("generated_at") or sig.get("timestamp")
+    if _gen:
+        try:
+            _dt = datetime.fromisoformat(_gen.replace("Z", "+00:00"))
+            _age_h = round((datetime.now(_tz.utc) - _dt).total_seconds() / 3600, 1)
+            sig["data_age_hours"] = _age_h
+            sig["is_stale"] = _age_h > 24
+        except Exception:
+            sig["data_age_hours"] = 0.0
+            sig["is_stale"] = False
+    else:
+        sig["data_age_hours"] = 0.0
+        sig["is_stale"] = False
+
     status = sig.get("reasoning_status", "")
     if reason and status not in ("pending", "complete"):
         background_tasks.add_task(fill_reasoning_async, symbol, sig)
