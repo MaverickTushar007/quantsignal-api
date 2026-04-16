@@ -70,7 +70,7 @@ def get_all_signals(
             continue
         results.append(WatchlistItem(**{k: v for k, v in sig.items() if k in WatchlistItem.model_fields}))
     if not type and not direction:
-        set_cached("all_signals_list", results, ttl=86400)
+        set_cached("all_signals_list", [r.model_dump() if hasattr(r, "model_dump") else r for r in results], ttl=86400)
     return results
 
 @router.get("/signals/{symbol}", response_model=SignalResponse, tags=["signals"])
@@ -87,6 +87,18 @@ async def get_signal(
     symbol = symbol.upper()
     if symbol not in TICKER_MAP:
         raise HTTPException(status_code=404, detail=f"Unknown symbol: {symbol}")
+
+    # Serve from nightly cache if fresh (< 12 hours old)
+    import json, time
+    _cache_path = BASE_DIR / "data/signals_cache.json"
+    if _cache_path.exists():
+        try:
+            _cache = json.loads(_cache_path.read_text())
+            _sig = _cache.get(symbol)
+            if _sig and (time.time() - _cache_path.stat().st_mtime) < 43200:
+                return _sig
+        except Exception:
+            pass
 
     sig = generate_signal(symbol, include_reasoning=False)
     if sig is None:
