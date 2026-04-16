@@ -511,8 +511,9 @@ async def stream_chat(symbol: str, message: str, history: list, user_id: str = "
                 model=PRIMARY_MODEL,
                 messages=messages,
                 stream=True,
-                temperature=0.2,
-                max_tokens=1200
+                temperature=0,
+                max_tokens=1200,
+                timeout=30
             )
         except groq.RateLimitError:
             yield "data: " + json.dumps({"type": "status", "message": "Primary model rate-limited — switching to fallback model..."}) + "\n\n"
@@ -520,8 +521,9 @@ async def stream_chat(symbol: str, message: str, history: list, user_id: str = "
                 model=FALLBACK_MODEL,
                 messages=messages,
                 stream=True,
-                temperature=0.2,
-                max_tokens=1200
+                temperature=0,
+                max_tokens=1200,
+                timeout=30
             )
 
         full_response = ""
