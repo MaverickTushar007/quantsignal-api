@@ -123,6 +123,22 @@ async def get_signal(
         except Exception:
             pass
     sig = generate_signal(symbol, include_reasoning=False)
+
+    # Staleness SLA — flag signal age so frontend can warn users
+    if sig and sig.get("generated_at"):
+        try:
+            from datetime import datetime, timezone
+            generated = datetime.fromisoformat(sig["generated_at"].replace("Z", "+00:00"))
+            age_hours = (datetime.now(timezone.utc) - generated).total_seconds() / 3600
+            # SLA: crypto 4h, stocks 26h (covers overnight + pre-market)
+            is_crypto = symbol.endswith("-USD") or symbol.endswith("-USDT")
+            sla_hours = 4 if is_crypto else 26
+            sig["signal_age_hours"] = round(age_hours, 1)
+            sig["is_stale"] = age_hours > sla_hours
+            if sig["is_stale"]:
+                sig["stale_warning"] = f"Signal is {age_hours:.0f}h old — refresh for latest data"
+        except Exception:
+            sig["is_stale"] = False
     if sig is None:
         raise HTTPException(status_code=503, detail=f"Could not generate signal for {symbol}")
 
