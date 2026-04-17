@@ -52,6 +52,8 @@ class FullSignal:
     volume_ratio: float = 1.0
     market_open: bool = True
     market_closed_reason: str = None
+    price_conflict: bool = False
+    price_divergence_pct: float = 0.0
 
 
 def _build_confluence(feat_row) -> list:
@@ -142,6 +144,25 @@ def generate_signal(symbol: str, include_reasoning: bool = True) -> Optional[dic
     except Exception:
         _market_is_open = True
         _market_closed_reason = ""
+
+    # 1c. Cross-source price validation
+    _price_conflict      = False
+    _price_divergence    = 0.0
+    _cross_source_detail = {}
+    try:
+        from app.domain.data.multi_source import validate_price_cross_source
+        _csv = validate_price_cross_source(symbol)
+        _price_conflict      = _csv.get("conflict", False)
+        _price_divergence    = _csv.get("divergence_pct", 0.0)
+        _cross_source_detail = _csv
+        if _price_conflict:
+            import logging as _log
+            _log.getLogger(__name__).warning(
+                f"[{symbol}] Price conflict: yf={_csv.get('price_yf')} "
+                f"stooq={_csv.get('price_stooq')} div={_price_divergence:.2f}%"
+            )
+    except Exception:
+        pass
 
     # 1. Fetch price data
     df = fetch_ohlcv(symbol, period="2y")
@@ -246,6 +267,8 @@ def generate_signal(symbol: str, include_reasoning: bool = True) -> Optional[dic
         generated_at=datetime.now(timezone.utc).isoformat(),
         market_open=_market_is_open,
         market_closed_reason=_market_closed_reason if not _market_is_open else None,
+        price_conflict=_price_conflict,
+        price_divergence_pct=_price_divergence,
     ))
     from app.infrastructure.cache.cache import set_cached
     set_cached(f"signal:{symbol}", result, ttl=3600)

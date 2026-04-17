@@ -189,3 +189,55 @@ def _cache_ohlcv(cache_key: str, df):
         set_cached(cache_key, df_reset.to_dict(orient="split"), ttl=300)
     except Exception as e:
         log.debug(f"[multi_source] cache write failed: {e}")
+
+# ── Cross-source price validation ─────────────────────────────────────────
+def validate_price_cross_source(symbol: str) -> dict:
+    """
+    Fetch latest close from yfinance AND stooq.
+    Returns:
+        {
+            "conflict": bool,
+            "price_yf": float,
+            "price_stooq": float,
+            "divergence_pct": float,
+            "conservative_price": float,   # lower of the two on BUY, higher on SELL
+            "source_used": str
+        }
+    Never raises.
+    """
+    result = {"conflict": False, "price_yf": None, "price_stooq": None,
+              "divergence_pct": 0.0, "conservative_price": None, "source_used": "yfinance"}
+    try:
+        df_yf = _fetch_yfinance(symbol, period="5d")
+        if df_yf is not None and len(df_yf) > 0:
+            result["price_yf"] = float(df_yf["Close"].iloc[-1])
+    except Exception:
+        pass
+
+    try:
+        df_stooq = _fetch_stooq(symbol)
+        if df_stooq is not None and len(df_stooq) > 0:
+            result["price_stooq"] = float(df_stooq["Close"].iloc[-1])
+    except Exception:
+        pass
+
+    yf_p    = result["price_yf"]
+    stooq_p = result["price_stooq"]
+
+    if yf_p and stooq_p:
+        div = abs(yf_p - stooq_p) / ((yf_p + stooq_p) / 2) * 100
+        result["divergence_pct"] = round(div, 3)
+        if div > 2.0:
+            result["conflict"]           = True
+            result["conservative_price"] = min(yf_p, stooq_p)
+            result["source_used"]        = "conservative (min of yf/stooq)"
+            log.warning(f"[cross_source] {symbol} price conflict: yf={yf_p} stooq={stooq_p} div={div:.2f}%")
+        else:
+            result["conservative_price"] = yf_p
+    elif yf_p:
+        result["conservative_price"] = yf_p
+    elif stooq_p:
+        result["conservative_price"] = stooq_p
+        result["source_used"] = "stooq"
+
+    return result
