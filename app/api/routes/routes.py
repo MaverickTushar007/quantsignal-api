@@ -90,6 +90,7 @@ async def get_signal(
     background_tasks: BackgroundTasks,
     _gate: dict = Depends(signal_gate),
     reason: bool = Query(True, description="Include LLM reasoning"),
+    bust: bool = Query(False, description="Force cache bypass"),
 ):
     """
     Full signal for one asset.
@@ -99,6 +100,28 @@ async def get_signal(
     if symbol not in TICKER_MAP:
         raise HTTPException(status_code=404, detail=f"Unknown symbol: {symbol}")
 
+    if bust:
+        from app.infrastructure.cache.cache import get_cached, set_cached
+        import json
+        from pathlib import Path
+        from app.core.config import BASE_DIR
+        # Evict from Redis
+        try:
+            from app.infrastructure.cache.cache import _get_redis
+            r = _get_redis()
+            if r: r.delete(f"signal:{symbol}")
+        except Exception:
+            pass
+        # Evict from JSON file cache
+        try:
+            cache_path = BASE_DIR / "data/signals_cache.json"
+            if cache_path.exists():
+                cache = json.loads(cache_path.read_text())
+                if symbol in cache:
+                    del cache[symbol]
+                    cache_path.write_text(json.dumps(cache))
+        except Exception:
+            pass
     sig = generate_signal(symbol, include_reasoning=False)
     if sig is None:
         raise HTTPException(status_code=503, detail=f"Could not generate signal for {symbol}")
