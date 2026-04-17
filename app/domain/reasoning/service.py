@@ -337,6 +337,7 @@ async def stream_chat(symbol: str, message: str, history: list, user_id: str = "
             except Exception:
                 pass
 
+        direction_lock = ""  # initialized here so it's always in scope
         if use_simple_mode:
             sys_prompt = (
                 "You are Perseus, a friendly financial advisor who explains markets in simple, plain English.\n"
