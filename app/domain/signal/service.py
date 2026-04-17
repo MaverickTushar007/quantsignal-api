@@ -199,6 +199,27 @@ def generate_signal(symbol: str, include_reasoning: bool = True) -> Optional[dic
             model_agreement=ml.model_agreement,
         )
 
+    # 6b. Narrative consistency check
+    try:
+        if reasoning and ml.direction in ("BUY", "SELL"):
+            r_lower = reasoning.lower()
+            bearish_words = ["bearish", "downside", "sell", "avoid", "resistance", "downtrend", "sell pressure", "decline", "weak"]
+            bullish_words = ["bullish", "upside", "buy", "breakout", "accumulate", "uptrend", "strong momentum", "rally"]
+            if ml.direction == "BUY":
+                hits = [w for w in bearish_words if w in r_lower]
+                if len(hits) >= 2:
+                    import logging as _log
+                    _log.getLogger(__name__).warning(f"[{symbol}] Narrative conflict: BUY but reasoning contains {hits}")
+                    reasoning = reasoning + f"\n\n⚠️ Note: Signal direction is BUY — focus on upside scenario."
+            elif ml.direction == "SELL":
+                hits = [w for w in bullish_words if w in r_lower]
+                if len(hits) >= 2:
+                    import logging as _log
+                    _log.getLogger(__name__).warning(f"[{symbol}] Narrative conflict: SELL but reasoning contains {hits}")
+                    reasoning = reasoning + f"\n\n⚠️ Note: Signal direction is SELL — focus on downside scenario."
+    except Exception:
+        pass
+
     result = asdict(FullSignal(
         symbol=symbol,
         display=meta["display"],
