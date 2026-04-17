@@ -50,6 +50,8 @@ class FullSignal:
     # Meta
     generated_at: str
     volume_ratio: float = 1.0
+    market_open: bool = True
+    market_closed_reason: str = None
 
 
 def _build_confluence(feat_row) -> list:
