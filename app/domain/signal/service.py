@@ -57,6 +57,9 @@ class FullSignal:
     corporate_action: bool = False
     corporate_action_warning: str = None
     corporate_actions: list = field(default_factory=list)
+    model_version: str = None
+    feature_hash: str = None
+    snapshot_id: str = None
 
 
 def _build_confluence(feat_row) -> list:
@@ -193,6 +196,25 @@ def generate_signal(symbol: str, include_reasoning: bool = True) -> Optional[dic
     if ml is None:
         return None
 
+    # 3a. Snapshot metadata
+    _model_version = None
+    _feature_hash  = None
+    _snapshot_id   = None
+    try:
+        import os, hashlib
+        from app.domain.ml.ensemble import _model_path
+        _mp = _model_path(symbol)
+        if os.path.exists(_mp):
+            _mtime = int(os.path.getmtime(_mp))
+            _model_version = f"v{_mtime}"
+        # Hash top features for reproducibility fingerprint
+        _feat_str = ",".join(sorted(ml.top_features.keys())) if ml and ml.top_features else ""
+        _feature_hash = hashlib.md5(_feat_str.encode()).hexdigest()[:8]
+        # Snapshot ID: symbol + model_version + feature_hash
+        _snapshot_id = f"{symbol}:{_model_version or 'unknown'}:{_feature_hash or 'none'}"
+    except Exception:
+        pass
+
     # 3b. Hard validation — EV must be consistent with direction
     if ml.direction == "BUY" and ml.expected_value < 0:
         import logging
@@ -286,6 +308,9 @@ def generate_signal(symbol: str, include_reasoning: bool = True) -> Optional[dic
         price_conflict=_price_conflict,
         price_divergence_pct=_price_divergence,
         corporate_action=_corporate_action,
+        model_version=_model_version,
+        feature_hash=_feature_hash,
+        snapshot_id=_snapshot_id,
         corporate_action_warning=_corporate_action_warning,
         corporate_actions=_corporate_actions_list,
     ))
