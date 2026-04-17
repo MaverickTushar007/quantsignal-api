@@ -48,7 +48,7 @@ async def chat_endpoint(symbol: str, request: ChatRequest, gate: dict = Depends(
             yield f"data: {json.dumps({'type': 'error', 'message': blocked})}\n\n"
         return StreamingResponse(_err(), media_type="text/event-stream")
     return StreamingResponse(
-        stream_chat(symbol.upper(), request.message, [h.dict() for h in request.history], request.user_id, mode=request.mode),
+        stream_chat(symbol.upper(), request.message, [h.dict() for h in request.history], request.user_id, mode=request.mode, tier=gate.get("tier","free")),
         media_type="text/event-stream"
     )
 
@@ -60,6 +60,6 @@ async def generic_chat_endpoint(request: ChatRequest):
             yield f"data: {json.dumps({'type': 'error', 'message': blocked})}\n\n"
         return StreamingResponse(_err(), media_type="text/event-stream")
     return StreamingResponse(
-        stream_chat(request.symbol.upper(), request.message, [h.dict() for h in request.history], request.user_id),
+        stream_chat(request.symbol.upper(), request.message, [h.dict() for h in request.history], request.user_id, tier="free"),
         media_type="text/event-stream"
     )

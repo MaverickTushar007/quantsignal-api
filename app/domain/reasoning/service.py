@@ -447,36 +447,6 @@ async def stream_chat(symbol: str, message: str, history: list, user_id: str = "
             yield _yield_status("Error: No Groq API Key found.")
             return
 
-        # Token budget gate
-        if user_id != "default":
-            try:
-                import os
-                from supabase import create_client
-                from datetime import date
-                sb = create_client(
-                    os.environ.get("SUPABASE_URL", ""),
-                    os.environ.get("SUPABASE_SERVICE_KEY", "")
-                )
-                today = date.today().isoformat()
-                existing = sb.table("token_usage") \
-                    .select("tokens_used") \
-                    .eq("user_id", user_id) \
-                    .eq("date", today) \
-                    .execute()
-                used = existing.data[0]["tokens_used"] if existing.data else 0
-                # Free tier: 10k tokens/day, Pro: 100k tokens/day
-                # Fetch user tier from profiles
-                profile = sb.table("profiles") \
-                    .select("tier") \
-                    .eq("id", user_id) \
-                    .execute()
-                tier = profile.data[0]["tier"] if profile.data else "free"
-                limit = 100_000 if tier == "pro" else 10_000
-                if used >= limit:
-                    yield f"data: {json.dumps({'type': 'error', 'message': f'Daily AI limit reached ({used:,} tokens used). Upgrade to Pro for 10x more capacity.'})}\n\n"
-                    return
-            except Exception:
-                pass
 
         client = AsyncGroq(api_key=settings.groq_api_key)
         # Perseus tool-use preflight
