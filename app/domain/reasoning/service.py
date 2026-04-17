@@ -271,6 +271,36 @@ async def stream_chat(symbol: str, message: str, history: list, user_id: str = "
         except Exception:
             pass
 
+        # ── Calendar suppression check ────────────────────────────────────
+        calendar_warning = ""
+        try:
+            from app.api.routes.calendar import fetch_calendar
+            from datetime import datetime, timezone, timedelta
+            events = fetch_calendar()
+            now = datetime.now(timezone.utc)
+            for ev in events:
+                if not ev.get("date") or ev.get("impact") != "High":
+                    continue
+                try:
+                    ev_dt = datetime.fromisoformat(ev["date"])
+                    if ev_dt.tzinfo is None:
+                        ev_dt = ev_dt.replace(tzinfo=timezone.utc)
+                    hours_away = (ev_dt - now).total_seconds() / 3600
+                    if -1 <= hours_away <= 24:  # within past 1h or next 24h
+                        time_label = "NOW" if abs(hours_away) < 1 else f"in {int(hours_away)}h" if hours_away > 0 else f"{int(abs(hours_away))}h ago"
+                        calendar_warning = (
+                            f"⚠️ HIGH-IMPACT MACRO EVENT: {ev['title']} ({ev['country']}) — {time_label}\n"
+                            f"Traditional technical indicators are UNRELIABLE during this window.\n"
+                            f"Bullish scenario: {ev.get('bullish_scenario','')}\n"
+                            f"Bearish scenario: {ev.get('bearish_scenario','')}\n"
+                            f"INSTRUCTION: Downgrade signal confidence to LOW. Verdict must be HOLD unless confluence >= 7/9."
+                        )
+                        break  # only flag the nearest high-impact event
+                except Exception:
+                    continue
+        except Exception:
+            pass
+
         macro_context = ""
         funding_context = ""
         try:
@@ -404,8 +434,10 @@ async def stream_chat(symbol: str, message: str, history: list, user_id: str = "
         elif symbol == "GENERIC":
             sys_prompt += "\nMODE: Global Macro Intelligence. Cover Stocks, Forex, Crypto, Commodities.\n"
 
+        if calendar_warning:
+            sys_prompt += "\n## MACRO EVENT OVERRIDE\n" + calendar_warning + "\n"
         if macro_context:
-            sys_prompt += f"\n## {macro_context}\n"
+            sys_prompt += "\n## " + macro_context + "\n"
         if funding_context:
             sys_prompt += f"\n## {funding_context}\n"
         if rag_text and rag_text != "No academic context available.":
