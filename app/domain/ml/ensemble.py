@@ -7,7 +7,6 @@ except Exception:
 
 MODEL_VERSION = "1.0.0"  # bump when retrained
 
-    _LGB_OK = False
 
 import numpy as np
 import pandas as pd
