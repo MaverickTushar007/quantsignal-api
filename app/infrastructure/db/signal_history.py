@@ -76,17 +76,41 @@ def init_db():
         con.close()
 
 def is_open(symbol: str) -> bool:
-    con, db = _get_conn()
-    try:
-        cur = con.cursor()
-        cur.execute(
-            "SELECT COUNT(*) FROM signal_history WHERE symbol = %s AND outcome = 'open'" if db == "pg"
-            else "SELECT COUNT(*) FROM signal_history WHERE symbol = ? AND outcome = 'open'",
-            (symbol,)
-        )
-        return cur.fetchone()[0] > 0
-    finally:
-        con.close()
+    """Returns True if the market for this symbol is currently open."""
+    from datetime import datetime
+    import pytz
+
+    now_utc = datetime.now(pytz.utc)
+    sym = symbol.upper()
+
+    # Crypto — always open
+    if any(sym.endswith(x) for x in ("-USD", "-USDT", "BTC", "ETH")):
+        return True
+
+    # Indian market (NSE/BSE) — Mon-Fri 03:45-10:00 UTC (09:15-15:30 IST)
+    if sym.endswith(".NS") or sym.endswith(".BO"):
+        if now_utc.weekday() >= 5:
+            return False
+        market_open  = now_utc.replace(hour=3, minute=45, second=0, microsecond=0)
+        market_close = now_utc.replace(hour=10, minute=0,  second=0, microsecond=0)
+        return market_open <= now_utc <= market_close
+
+    # US market — Mon-Fri 13:30-20:00 UTC (09:30-16:00 ET)
+    if now_utc.weekday() >= 5:
+        return False
+    market_open  = now_utc.replace(hour=13, minute=30, second=0, microsecond=0)
+    market_close = now_utc.replace(hour=20, minute=0,  second=0, microsecond=0)
+    return market_open <= now_utc <= market_close
+
+
+def market_status(symbol: str) -> dict:
+    """Returns market open/closed status with human-readable label."""
+    open_ = is_open(symbol)
+    return {
+        "is_open": open_,
+        "label": "LIVE" if open_ else "MARKET CLOSED",
+        "note": None if open_ else "Signal based on last available close price",
+    }
 
 def save_signal(signal: dict):
     con, db = _get_conn()

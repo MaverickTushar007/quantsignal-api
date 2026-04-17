@@ -49,6 +49,7 @@ class FullSignal:
     reasoning:  str
     # Meta
     generated_at: str
+    market_open:  bool = True
     volume_ratio: float = 1.0
 
 
@@ -252,6 +253,7 @@ def generate_signal(symbol: str, include_reasoning: bool = True) -> Optional[dic
         news=news_dicts,
         reasoning=reasoning,
         generated_at=datetime.now(timezone.utc).isoformat(),
+        market_open=__import__('app.infrastructure.db.signal_history', fromlist=['is_open']).is_open(symbol),
     ))
     from app.infrastructure.cache.cache import set_cached
     set_cached(f"signal:{symbol}", result, ttl=3600)
