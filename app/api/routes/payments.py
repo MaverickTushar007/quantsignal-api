@@ -43,7 +43,7 @@ def create_checkout(req: CheckoutRequest):
                             "custom": {"user_id": req.user_id}
                         },
                         "product_options": {
-                            "redirect_url": "https://quantsignal-web.vercel.app/dashboard?upgraded=true",
+                            "redirect_url": "https://quantsignal.app/dashboard?upgraded=true",
                         }
                     },
                     "relationships": {
@@ -101,9 +101,10 @@ async def webhook(request: Request, x_signature: str = Header(None, alias="X-Sig
             sb.table("profiles").upsert({
                 "id": user_id,
                 "is_pro": True,
-                "stripe_customer_id": customer_id,
-                "stripe_subscription_id": subscription_id,
-                "pro_since": attrs.get("created_at"),
+                "tier": "pro",
+                "ls_customer_id": customer_id,
+                "ls_order_id": subscription_id,
+                "upgraded_at": attrs.get("created_at"),
             }).execute()
         except Exception as e:
             print(f"Supabase update failed: {e}")
@@ -112,7 +113,7 @@ async def webhook(request: Request, x_signature: str = Header(None, alias="X-Sig
     if event in ["subscription_expired", "subscription_cancelled"]:
         try:
             sb = create_client(SUPABASE_URL, SUPABASE_SERVICE_KEY)
-            sb.table("profiles").update({"is_pro": False}).eq("id", user_id).execute()
+            sb.table("profiles").update({"is_pro": False, "tier": "free"}).eq("id", user_id).execute()
         except Exception as e:
             print(f"Supabase downgrade failed: {e}")
 
