@@ -206,8 +206,19 @@ def predict(ticker, df, sentiment=0.0):
 
         close = float(df["Close"].iloc[-1])
         atr   = float((df["High"] - df["Low"]).rolling(14).mean().iloc[-1])
-        tp = close + 2.0 * atr if direction == "BUY" else close - 2.0 * atr
-        sl = close - 1.0 * atr if direction == "BUY" else close + 1.0 * atr
+        tp_raw = close + 2.0 * atr if direction == "BUY" else close - 2.0 * atr
+        sl_raw = close - 1.0 * atr if direction == "BUY" else close + 1.0 * atr
+        # Sanity bands: cap at ±30% for TP, ±15% for SL, never inverted
+        if direction == "BUY":
+            tp = min(tp_raw, close * 1.30)   # max +30%
+            sl = max(sl_raw, close * 0.85)   # max -15%
+            tp = max(tp, close * 1.005)      # tp must be above current price
+            sl = min(sl, close * 0.999)      # sl must be below current price
+        else:
+            tp = max(tp_raw, close * 0.70)   # max -30%
+            sl = min(sl_raw, close * 1.15)   # max +15%
+            tp = min(tp, close * 0.995)      # tp must be below current price
+            sl = max(sl, close * 1.001)      # sl must be above current price
 
         tp_dist = abs(tp - close)
         sl_dist = abs(sl - close)
