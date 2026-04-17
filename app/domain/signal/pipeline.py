@@ -158,4 +158,73 @@ def enrich_signal(sig: dict, symbol: str) -> dict:
                 )
     except Exception as e:
         log.debug(f"[pipeline] conflict resolver failed: {e}")
+
+    # 9. INTEGRITY GATE — EV monotonicity, confidence realism, price target sanity
+    try:
+        direction  = sig.get("direction", "HOLD")
+        ev         = sig.get("ev_score")
+        prob       = sig.get("probability", 0.5)
+        confidence = sig.get("confidence", "LOW")
+        model_agr  = sig.get("model_agreement", 0)
+        price      = sig.get("current_price")
+        tp         = sig.get("take_profit")
+        sl         = sig.get("stop_loss")
+        atr        = sig.get("atr")
+        overrides  = []
+
+        # 9a. EV monotonicity — direction must match EV sign
+        if ev is not None and direction in ("BUY", "SELL"):
+            if direction == "BUY" and ev < 0:
+                sig["direction"]                 = "HOLD"
+                sig["regime_suppressed"]         = True
+                sig["regime_suppression_reason"] = f"EV monotonicity: BUY with negative EV ({ev:.3f})"
+                overrides.append("ev_monotonicity_buy")
+                direction = "HOLD"
+            elif direction == "SELL" and ev > 0:
+                sig["direction"]                 = "HOLD"
+                sig["regime_suppressed"]         = True
+                sig["regime_suppression_reason"] = f"EV monotonicity: SELL with positive EV ({ev:.3f})"
+                overrides.append("ev_monotonicity_sell")
+                direction = "HOLD"
+
+        # 9b. Confidence realism — HIGH confidence needs statistical backing
+        if confidence and confidence.upper() == "HIGH":
+            if model_agr < 0.7 or prob < 0.65:
+                sig["confidence"] = "MEDIUM"
+                overrides.append(f"confidence_downgrade: agr={model_agr:.2f} prob={prob:.2f}")
+
+        # 9c. Price target sanity
+        if price and tp and sl and atr and direction in ("BUY", "SELL"):
+            # Target must be on correct side of price
+            if direction == "BUY" and tp <= price:
+                sig["direction"]                 = "HOLD"
+                sig["regime_suppressed"]         = True
+                sig["regime_suppression_reason"] = f"Price sanity: BUY tp={tp:.2f} <= price={price:.2f}"
+                overrides.append("tp_below_price_buy")
+            elif direction == "SELL" and tp >= price:
+                sig["direction"]                 = "HOLD"
+                sig["regime_suppressed"]         = True
+                sig["regime_suppression_reason"] = f"Price sanity: SELL tp={tp:.2f} >= price={price:.2f}"
+                overrides.append("tp_above_price_sell")
+            # Target must not exceed 3x ATR (unrealistic)
+            elif abs(tp - price) > 3 * atr:
+                sig["direction"]                 = "HOLD"
+                sig["regime_suppressed"]         = True
+                sig["regime_suppression_reason"] = f"Price sanity: target {abs(tp-price):.2f} > 3x ATR ({3*atr:.2f})"
+                overrides.append("tp_exceeds_3x_atr")
+            # Risk/reward must be >= 1.0
+            rr = sig.get("risk_reward")
+            if rr is not None and rr < 1.0:
+                sig["direction"]                 = "HOLD"
+                sig["regime_suppressed"]         = True
+                sig["regime_suppression_reason"] = f"Price sanity: risk_reward={rr:.2f} < 1.0"
+                overrides.append("rr_below_1")
+
+        sig["integrity_overrides"] = overrides
+        if overrides:
+            log.info(f"[integrity] {sig.get('symbol')} overrides applied: {overrides}")
+
+    except Exception as e:
+        log.debug(f"[pipeline] integrity gate failed: {e}")
+
     return sig
