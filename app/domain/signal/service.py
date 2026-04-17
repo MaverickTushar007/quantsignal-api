@@ -131,6 +131,16 @@ def generate_signal(symbol: str, include_reasoning: bool = True) -> Optional[dic
     if not meta:
         return None
 
+    # 1b. Market hours check
+    try:
+        from app.domain.data.market_hours import is_market_open
+        _mh = is_market_open(symbol)
+        _market_is_open = _mh.get("open", True)
+        _market_closed_reason = _mh.get("reason", "")
+    except Exception:
+        _market_is_open = True
+        _market_closed_reason = ""
+
     # 1. Fetch price data
     df = fetch_ohlcv(symbol, period="2y")
     if df is None:
@@ -211,6 +221,8 @@ def generate_signal(symbol: str, include_reasoning: bool = True) -> Optional[dic
         news=news_dicts,
         reasoning=reasoning,
         generated_at=datetime.now(timezone.utc).isoformat(),
+        market_open=_market_is_open,
+        market_closed_reason=_market_closed_reason if not _market_is_open else None,
     ))
     from app.infrastructure.cache.cache import set_cached
     set_cached(f"signal:{symbol}", result, ttl=3600)
