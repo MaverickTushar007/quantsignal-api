@@ -199,3 +199,52 @@ def get_evaluated_signals() -> list[dict]:
         return [dict(zip(cols, row)) for row in cur.fetchall()]
     finally:
         con.close()
+
+def log_signal_serve(signal: dict, overrides_fired: list = None):
+    """Write a provenance record every time a signal is served."""
+    con, db = _get_conn()
+    try:
+        cur = con.cursor()
+        overrides = overrides_fired or []
+        # pg uses ARRAY literal, sqlite stores as comma-joined string
+        if db == "pg":
+            import json
+            cur.execute(
+                """INSERT INTO signal_provenance
+                  (symbol, snapshot_id, direction, confidence, data_age_hours,
+                   price_conflict, corporate_action, overrides_fired, served_at)
+                  VALUES (%s, %s, %s, %s, %s, %s, %s, %s::text[], NOW())""",
+                (
+                    signal.get("symbol"),
+                    signal.get("snapshot_id"),
+                    signal.get("direction"),
+                    signal.get("confidence"),
+                    signal.get("data_age_hours", 0.0),
+                    bool(signal.get("price_conflict", False)),
+                    bool(signal.get("corporate_action", False)),
+                    overrides,
+                )
+            )
+        else:
+            cur.execute(
+                """INSERT INTO signal_provenance
+                  (symbol, snapshot_id, direction, confidence, data_age_hours,
+                   price_conflict, corporate_action, overrides_fired, served_at)
+                  VALUES (?, ?, ?, ?, ?, ?, ?, ?, datetime('now'))""",
+                (
+                    signal.get("symbol"),
+                    signal.get("snapshot_id"),
+                    signal.get("direction"),
+                    signal.get("confidence"),
+                    signal.get("data_age_hours", 0.0),
+                    int(bool(signal.get("price_conflict", False))),
+                    int(bool(signal.get("corporate_action", False))),
+                    ",".join(overrides),
+                )
+            )
+        con.commit()
+    except Exception as e:
+        import logging
+        logging.getLogger(__name__).warning(f"[provenance] log failed: {e}")
+    finally:
+        con.close()
