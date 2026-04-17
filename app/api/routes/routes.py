@@ -120,6 +120,14 @@ async def get_signal(
                         _age_h = round((datetime.now(timezone.utc) - _dt).total_seconds() / 3600, 1)
                         _sig["data_age_hours"] = _age_h
                         _sig["is_stale"] = _age_h > 24
+                        if _age_h > 36:
+                            from fastapi.responses import JSONResponse
+                            return JSONResponse(status_code=503, content={
+                                "error": "stale_signal",
+                                "message": f"Signal for {symbol} is {_age_h}h old — exceeds 36h SLA. Retry shortly.",
+                                "data_age_hours": _age_h,
+                                "symbol": symbol
+                            })
                     except Exception:
                         pass
                 return _sig
@@ -143,6 +151,14 @@ async def get_signal(
             _age_h = round((datetime.now(_tz.utc) - _dt).total_seconds() / 3600, 1)
             sig["data_age_hours"] = _age_h
             sig["is_stale"] = _age_h > 24
+            if _age_h > 36:
+                from fastapi.responses import JSONResponse
+                return JSONResponse(status_code=503, content={
+                    "error": "stale_signal",
+                    "message": f"Signal for {symbol} is {_age_h}h old — exceeds 36h SLA. Retry shortly.",
+                    "data_age_hours": _age_h,
+                    "symbol": symbol
+                })
         except Exception:
             sig["data_age_hours"] = 0.0
             sig["is_stale"] = False
