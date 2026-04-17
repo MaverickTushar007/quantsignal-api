@@ -146,3 +146,28 @@ def admin_weekly_reports():
         return {"reports": res.data or [], "count": len(res.data or [])}
     except Exception as e:
         return {"error": str(e)}
+
+
+@router.post("/admin/cache/wipe")
+async def wipe_signal_cache():
+    """Nuclear cache clear — wipes JSON file + all Redis signal keys."""
+    import json
+    from app.core.config import BASE_DIR
+    wiped = {"json_file": False, "redis_keys": 0}
+    try:
+        cache_path = BASE_DIR / "data/signals_cache.json"
+        cache_path.write_text("{}")
+        wiped["json_file"] = True
+    except Exception as e:
+        wiped["json_error"] = str(e)
+    try:
+        from app.infrastructure.cache.cache import _get_redis
+        r = _get_redis()
+        if r:
+            keys = r.keys("signal:*")
+            if keys:
+                r.delete(*keys)
+                wiped["redis_keys"] = len(keys)
+    except Exception as e:
+        wiped["redis_error"] = str(e)
+    return {"status": "wiped", "detail": wiped}
