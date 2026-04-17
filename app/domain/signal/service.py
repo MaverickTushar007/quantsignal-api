@@ -54,6 +54,9 @@ class FullSignal:
     market_closed_reason: str = None
     price_conflict: bool = False
     price_divergence_pct: float = 0.0
+    corporate_action: bool = False
+    corporate_action_warning: str = None
+    corporate_actions: list = None
 
 
 def _build_confluence(feat_row) -> list:
@@ -164,6 +167,19 @@ def generate_signal(symbol: str, include_reasoning: bool = True) -> Optional[dic
     except Exception:
         pass
 
+    # 1d. Corporate action check
+    _corporate_action = False
+    _corporate_action_warning = None
+    _corporate_actions_list = []
+    try:
+        from app.domain.data.corporate_actions import get_recent_corporate_actions
+        _ca = get_recent_corporate_actions(symbol)
+        _corporate_action = _ca.get("has_action", False)
+        _corporate_action_warning = _ca.get("warning")
+        _corporate_actions_list = _ca.get("actions", [])
+    except Exception:
+        pass
+
     # 1. Fetch price data
     df = fetch_ohlcv(symbol, period="2y")
     if df is None:
@@ -269,6 +285,9 @@ def generate_signal(symbol: str, include_reasoning: bool = True) -> Optional[dic
         market_closed_reason=_market_closed_reason if not _market_is_open else None,
         price_conflict=_price_conflict,
         price_divergence_pct=_price_divergence,
+        corporate_action=_corporate_action,
+        corporate_action_warning=_corporate_action_warning,
+        corporate_actions=_corporate_actions_list,
     ))
     from app.infrastructure.cache.cache import set_cached
     set_cached(f"signal:{symbol}", result, ttl=3600)
