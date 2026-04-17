@@ -168,3 +168,48 @@ def fetch_ohlcv_multi(symbol: str, period: str = "2y"):
 
     log.warning(f"[multi_source] ALL sources failed for {symbol}")
     return None
+
+
+def validate_ohlcv(df, symbol: str) -> tuple:
+    """
+    Sanity-check a DataFrame before feeding it to the ML model.
+    Returns (is_valid: bool, warnings: list[str])
+    """
+    warnings = []
+    if df is None or len(df) < 50:
+        return False, ["Insufficient data — fewer than 50 rows"]
+
+    from datetime import datetime, timedelta
+    last_date = df.index[-1]
+    if hasattr(last_date, 'to_pydatetime'):
+        last_date = last_date.to_pydatetime().replace(tzinfo=None)
+    staleness_days = (datetime.utcnow() - last_date).days
+
+    # Staleness check — data older than 5 days is suspect
+    if staleness_days > 5:
+        warnings.append(f"Stale data — last close is {staleness_days} days old")
+
+    # Price sanity — last close must be positive and not an outlier
+    closes = df["Close"].dropna()
+    if len(closes) < 10:
+        return False, ["Too few valid close prices"]
+
+    last_close = float(closes.iloc[-1])
+    median_close = float(closes.median())
+
+    if last_close <= 0:
+        return False, ["Invalid close price — zero or negative"]
+
+    # Flag if last close deviates >50% from median (possible bad tick)
+    if median_close > 0 and abs(last_close - median_close) / median_close > 0.50:
+        warnings.append(f"Price anomaly — last close {last_close:.2f} deviates >50% from median {median_close:.2f}")
+
+    # Volume sanity — last volume shouldn't be zero on a trading day
+    try:
+        last_vol = float(df["Volume"].iloc[-1])
+        if last_vol == 0 and staleness_days <= 1:
+            warnings.append("Zero volume on latest bar — possible data feed issue")
+    except Exception:
+        pass
+
+    return True, warnings

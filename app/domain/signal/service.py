@@ -50,7 +50,8 @@ class FullSignal:
     # Meta
     generated_at: str
     market_open:    bool = True
-    earnings_flag:  dict = None
+    earnings_flag:   dict = None
+    data_warnings:   list = None
     volume_ratio: float = 1.0
 
 
@@ -176,6 +177,18 @@ def generate_signal(symbol: str, include_reasoning: bool = True) -> Optional[dic
 
     # 1. Fetch price data
     df = fetch_ohlcv(symbol, period="2y")
+
+    # Cross-source validation — reject bad/stale data before it reaches the model
+    try:
+        from app.domain.data.multi_source import validate_ohlcv
+        is_valid, data_warnings = validate_ohlcv(df, symbol)
+        if not is_valid:
+            logger.warning(f"[signal] {symbol} rejected — {data_warnings}")
+            return None
+        if data_warnings:
+            logger.warning(f"[signal] {symbol} data warnings: {data_warnings}")
+    except Exception as _ve:
+        data_warnings = []
     if df is None:
         return None
 
@@ -264,6 +277,7 @@ def generate_signal(symbol: str, include_reasoning: bool = True) -> Optional[dic
         generated_at=datetime.now(timezone.utc).isoformat(),
         market_open=__import__('app.infrastructure.db.signal_history', fromlist=['is_open']).is_open(symbol),
         earnings_flag=earnings_flag,
+        data_warnings=data_warnings if data_warnings else None,
     ))
     from app.infrastructure.cache.cache import set_cached
     set_cached(f"signal:{symbol}", result, ttl=3600)
