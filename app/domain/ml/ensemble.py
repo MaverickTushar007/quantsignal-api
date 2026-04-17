@@ -4,6 +4,9 @@ try:
     _LGB_OK = True
 except Exception:
     lgb = None
+
+MODEL_VERSION = "1.0.0"  # bump when retrained
+
     _LGB_OK = False
 
 import numpy as np
@@ -42,7 +45,9 @@ class SignalResult:
     model_agreement: float
     top_features: dict
     was_cached: bool
-    volume_ratio: float = 1.0
+    volume_ratio:   float = 1.0
+    data_source:    str = "unknown"
+    model_version:  str = "1.0.0"
 
 def _model_path(ticker):
     safe = ticker.replace("=","_").replace("^","_").replace("-","_")
@@ -254,6 +259,8 @@ def predict(ticker, df, sentiment=0.0):
             risk_reward=round(rr, 2), model_agreement=round(agreement, 3),
             top_features=bundle["top_features"], was_cached=was_cached,
             volume_ratio=volume_ratio,
+            data_source=__import__('app.domain.data.market', fromlist=['_FETCH_SOURCE'])._FETCH_SOURCE.get(ticker, "unknown"),
+            model_version=MODEL_VERSION,
         )
 
     except Exception as e:

@@ -43,6 +43,8 @@ def fetch_coingecko_ohlcv(ticker, days=365):
         print(f"CoinGecko failed for {ticker}: {e}")
         return None
 
+_FETCH_SOURCE = {}  # module-level registry: symbol -> last source used
+
 def fetch_ohlcv(ticker, period="2y"):
     if ticker in COINGECKO_ID_MAP:
         days = 180
@@ -52,6 +54,7 @@ def fetch_ohlcv(ticker, period="2y"):
     # Try Yahoo direct first — fastest, no rate limits, works for all symbols
     try:
         from app.domain.data.multi_source import _fetch_yahoo_direct
+        _FETCH_SOURCE[ticker] = "yahoo_direct"
         df = _fetch_yahoo_direct(ticker, period)
         if df is not None:
             return df
@@ -71,6 +74,7 @@ def fetch_ohlcv(ticker, period="2y"):
     # Full multi-source fallback
     try:
         from app.domain.data.multi_source import fetch_ohlcv_multi
+        _FETCH_SOURCE[ticker] = "multi_source"
         df = fetch_ohlcv_multi(ticker, period)
         if df is not None:
             return df
