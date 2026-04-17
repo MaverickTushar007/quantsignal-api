@@ -372,6 +372,9 @@ async def stream_chat(symbol: str, message: str, history: list, user_id: str = "
                 "**Primary risk:** one sentence with quantified downside\n"
             )
 
+        if direction_lock:
+            sys_prompt += direction_lock
+
         if fundamentals_context:
             sys_prompt += f"\n## FUNDAMENTAL DATA\n{fundamentals_context}\n"
 
