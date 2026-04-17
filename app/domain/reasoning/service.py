@@ -428,6 +428,19 @@ async def stream_chat(symbol: str, message: str, history: list, user_id: str = "
             yield _yield_status("Error: No Groq API Key found.")
             return
 
+        # Token-level guard — estimate before sending to Groq
+        from app.domain.billing.middleware import get_user_tier
+        from app.domain.billing.plans import get_plan
+        estimated_tokens = len(message) // 4
+        tier = get_user_tier(user_id)
+        plan = get_plan(tier)
+        token_limit = plan.get("perseus_max_input_tokens", 300 if tier == "free" else 9999)
+        if estimated_tokens > token_limit:
+            yield f"data: {json.dumps({'type': 'error', 'message': 'token_limit', 'used': estimated_tokens, 'limit': token_limit, 'tier': tier})}
+
+"
+            return
+
         client = AsyncGroq(api_key=settings.groq_api_key)
         # Cap system prompt to prevent 413 from Groq
         if len(sys_prompt) > 3500:

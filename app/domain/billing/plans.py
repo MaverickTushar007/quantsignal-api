@@ -9,6 +9,7 @@ PLANS = {
         "price_inr":         0,
         "signals_per_day":   10,
         "perseus_per_day":   5,
+        "perseus_max_input_tokens": 300,
         "alerts":            False,
         "guardian":          False,
         "portfolio":         False,
@@ -21,6 +22,7 @@ PLANS = {
         "ls_variant_id":     "",   # fill after LS product setup
         "signals_per_day":   9999,
         "perseus_per_day":   9999,
+        "perseus_max_input_tokens": 9999,
         "alerts":            True,
         "guardian":          True,
         "portfolio":         True,
