@@ -51,3 +51,4 @@ Base URL: `https://web-production-1a093.up.railway.app/api/v1/mcp`
 186 assets: 98 Indian NSE stocks · 31 US stocks · 20 crypto · 13 ETFs · 11 indices · 7 forex · 6 commodities
 
 Built with FastAPI + XGBoost + LightGBM. Signals refresh daily at 6 AM IST.
+# Sat Apr 18 04:29:30 IST 2026
