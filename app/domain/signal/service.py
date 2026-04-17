@@ -49,7 +49,8 @@ class FullSignal:
     reasoning:  str
     # Meta
     generated_at: str
-    market_open:  bool = True
+    market_open:    bool = True
+    earnings_flag:  dict = None
     volume_ratio: float = 1.0
 
 
@@ -206,6 +207,14 @@ def generate_signal(symbol: str, include_reasoning: bool = True) -> Optional[dic
 
     # 5. News
     news_items = get_news(symbol, limit=3)
+
+    # 5b. Earnings warning
+    earnings_flag = None
+    try:
+        from app.domain.data.earnings import get_earnings_flag
+        earnings_flag = get_earnings_flag(symbol)
+    except Exception:
+        pass
     headlines  = [n.title for n in news_items]
     news_dicts = [{"title": n.title, "source": n.source,
                    "sentiment": n.sentiment, "url": n.url}
@@ -254,6 +263,7 @@ def generate_signal(symbol: str, include_reasoning: bool = True) -> Optional[dic
         reasoning=reasoning,
         generated_at=datetime.now(timezone.utc).isoformat(),
         market_open=__import__('app.infrastructure.db.signal_history', fromlist=['is_open']).is_open(symbol),
+        earnings_flag=earnings_flag,
     ))
     from app.infrastructure.cache.cache import set_cached
     set_cached(f"signal:{symbol}", result, ttl=3600)
