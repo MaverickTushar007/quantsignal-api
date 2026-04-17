@@ -436,9 +436,7 @@ async def stream_chat(symbol: str, message: str, history: list, user_id: str = "
         plan = get_plan(tier)
         token_limit = plan.get("perseus_max_input_tokens", 300 if tier == "free" else 9999)
         if estimated_tokens > token_limit:
-            yield f"data: {json.dumps({'type': 'error', 'message': 'token_limit', 'used': estimated_tokens, 'limit': token_limit, 'tier': tier})}
-
-"
+            yield f"data: {json.dumps({'type': 'error', 'message': 'token_limit', 'used': estimated_tokens, 'limit': token_limit, 'tier': tier})}\n"
             return
 
         client = AsyncGroq(api_key=settings.groq_api_key)
