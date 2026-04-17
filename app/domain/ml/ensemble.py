@@ -228,7 +228,13 @@ def predict(ticker, df, sentiment=0.0):
         q          = 1 - edge_prob
         full_kelly = max((edge_prob * rr - q) / rr, 0) if rr > 0 else 0
         kelly_size = full_kelly * 0.25 * 100
-        ev = (edge_prob * tp_dist) - (q * sl_dist)
+        ev_raw = (edge_prob * tp_dist) - (q * sl_dist)
+        # Normalize EV as % of current price for cross-asset comparability
+        ev_pct = (ev_raw / close) * 100 if close > 0 else 0
+        # Monotonicity guard: EV must be positive iff edge_prob > 0.5
+        if edge_prob <= 0.5 and ev_pct > 0:
+            ev_pct = -abs(ev_pct) * (0.5 - edge_prob) * 2
+        ev = round(ev_pct, 4)  # EV now in % terms
 
         # Volume anomaly
         try:
