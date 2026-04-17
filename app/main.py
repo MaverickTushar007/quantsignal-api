@@ -49,7 +49,7 @@ async def lifespan(app: FastAPI):
 app = FastAPI(
     title="QuantSignal API",
     description="ML-powered trading signals",
-    version="1.0.0",
+    version="1.0.2",
     docs_url="/docs",
     redoc_url=None,
     lifespan=lifespan,
