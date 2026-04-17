@@ -79,6 +79,47 @@ def _build_confluence(feat_row) -> list:
     ]
 
 
+def _enforce_consistency(direction: str, probability: float, model_agreement: float, bull_count: int):
+    """
+    Single source of truth: confluence drives direction drives agreement.
+    
+    Rules:
+      bull_count 0-2  → SELL only (probability dampened toward 0.35)
+      bull_count 3-4  → HOLD only (probability dampened toward 0.45)
+      bull_count 5    → HOLD (neutral zone)
+      bull_count 6-7  → BUY allowed (medium confidence)
+      bull_count 8-9  → BUY (high confidence)
+    
+    model_agreement is replaced with confluence agreement (bull_count/9)
+    so the displayed % always matches the scorecard.
+    """
+    confluence_agreement = round(bull_count / 9, 3)
+
+    if bull_count <= 2:
+        # Strong bearish confluence — force SELL, dampen probability toward bearish
+        enforced_dir = "SELL"
+        enforced_prob = round(min(probability, 0.40) * 0.85 + 0.10, 4)
+    elif bull_count <= 4:
+        # Weak confluence either way — force HOLD
+        enforced_dir = "HOLD"
+        enforced_prob = round(0.45 + (bull_count - 3) * 0.02, 4)  # 0.43–0.47 range
+    elif bull_count == 5:
+        # True neutral
+        enforced_dir = "HOLD"
+        enforced_prob = 0.50
+    elif bull_count <= 7:
+        # Moderate bullish — allow BUY only if ML also says BUY, else HOLD
+        enforced_dir = direction if direction == "BUY" else "HOLD"
+        enforced_prob = round(max(probability, 0.52), 4) if enforced_dir == "BUY" else 0.50
+    else:
+        # Strong bullish confluence (8-9) — BUY regardless of ML hesitation
+        enforced_dir = "BUY"
+        enforced_prob = round(max(probability, 0.62), 4)
+
+    enforced_prob = round(max(0.01, min(0.99, enforced_prob)), 4)
+    return enforced_dir, enforced_prob, confluence_agreement
+
+
 def generate_signal(symbol: str, include_reasoning: bool = True) -> Optional[dict]:
     """
     Full pipeline for one ticker.
@@ -149,6 +190,18 @@ def generate_signal(symbol: str, include_reasoning: bool = True) -> Optional[dic
     latest_row = feat.iloc[-1].to_dict()
     confluence = _build_confluence(latest_row)
     bull_count = sum(1 for c in confluence if c["signal"] == "BULLISH")
+
+    # 4b. Enforce consistency: confluence → direction → agreement
+    enforced_dir, enforced_prob, confluence_agreement = _enforce_consistency(
+        ml.direction, ml.probability, ml.model_agreement, bull_count
+    )
+    # Patch ml fields so reasoning + all downstream use consistent values
+    ml.direction       = enforced_dir
+    ml.probability     = enforced_prob
+    ml.model_agreement = confluence_agreement
+    # Recalculate confidence from enforced probability
+    p = enforced_prob
+    ml.confidence = "HIGH" if p > 0.65 or p < 0.35 else "MEDIUM" if p > 0.55 or p < 0.45 else "LOW"
 
     # 5. News
     news_items = get_news(symbol, limit=3)
