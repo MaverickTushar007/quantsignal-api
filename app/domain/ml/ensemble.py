@@ -202,7 +202,8 @@ def predict(ticker, df, sentiment=0.0):
                 _f.write(_entry)
         except Exception:
             pass
-        confidence = "HIGH" if prob > 0.65 or prob < 0.35 else "MEDIUM" if prob > 0.55 or prob < 0.45 else "LOW"
+        # Confidence thresholds aligned with _compute_conviction (HIGH is rare and earned)
+        confidence = "HIGH" if prob > 0.72 or prob < 0.28 else "MEDIUM" if prob > 0.60 or prob < 0.40 else "LOW"
 
         close = float(df["Close"].iloc[-1])
         atr   = float((df["High"] - df["Low"]).rolling(14).mean().iloc[-1])
