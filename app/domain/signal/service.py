@@ -7,7 +7,7 @@ Clean pipeline: fetch → features → ML → confluence → news → reasoning 
 
 import pandas as pd
 from typing import Optional
-from dataclasses import dataclass, asdict
+from dataclasses import dataclass, asdict, field
 from datetime import datetime, timezone
 
 from app.domain.data.universe import TICKER_MAP
@@ -56,7 +56,7 @@ class FullSignal:
     price_divergence_pct: float = 0.0
     corporate_action: bool = False
     corporate_action_warning: str = None
-    corporate_actions: list = None
+    corporate_actions: list = field(default_factory=list)
 
 
 def _build_confluence(feat_row) -> list:
