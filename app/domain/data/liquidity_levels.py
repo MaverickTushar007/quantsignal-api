@@ -77,46 +77,51 @@ def snap_to_liquidity(
     snap_info = {}
 
     if direction == "BUY":
-        # Find nearest cluster above that raw_tp is approaching
-        # TP: place just below the first squeeze zone above current price
+        # TP: if raw_tp is inside a squeeze zone, pull it just below that zone
         tp_target = raw_tp
         for cluster in above:
-            if raw_tp >= cluster * 0.98:  # within 2% of a squeeze zone
-                tp_target = round(cluster * 0.995, 4)  # 0.5% below the zone
-                snap_info["tp_snapped"] = f"TP moved below squeeze zone at {cluster}"
+            if cluster * 0.995 <= raw_tp <= cluster * 1.005:  # inside the zone
+                tp_target = round(cluster * 0.993, 4)  # just below
+                snap_info["tp_snapped"] = f"TP pulled below squeeze zone at {cluster}"
                 break
 
-        # SL: place just below nearest long liq zone below current price
+        # SL: if raw_sl is inside a liq zone, push it just below that zone
         sl_target = raw_sl
-        for cluster in reversed(below):
-            if raw_sl <= cluster * 1.02:  # within 2% of a liq zone
-                sl_target = round(cluster * 0.995, 4)  # just below the zone
-                snap_info["sl_snapped"] = f"SL moved below long liq zone at {cluster}"
+        for cluster in below:
+            if cluster * 0.995 <= raw_sl <= cluster * 1.005:  # inside the zone
+                sl_target = round(cluster * 0.993, 4)  # just below
+                snap_info["sl_snapped"] = f"SL pulled below long liq zone at {cluster}"
                 break
 
-        # Safety: TP must still be above entry, SL below
-        tp_target = max(tp_target, raw_tp, current_price * 1.003)
-        sl_target = min(sl_target, raw_sl, current_price * 0.997)
+        # Safety: never move TP down or SL up from raw values
+        tp_target = max(tp_target, raw_tp)
+        sl_target = min(sl_target, raw_sl)
+        # Hard floor/ceiling
+        tp_target = max(tp_target, current_price * 1.003)
+        sl_target = min(sl_target, current_price * 0.997)
 
     else:  # SELL
-        # TP: place just above nearest long liq zone below current price
+        # TP: if raw_tp is inside a liq zone, push it just above that zone
         tp_target = raw_tp
         for cluster in below:
-            if raw_tp <= cluster * 1.02:
-                tp_target = round(cluster * 1.005, 4)  # just above the zone
-                snap_info["tp_snapped"] = f"TP moved above long liq zone at {cluster}"
+            if cluster * 0.995 <= raw_tp <= cluster * 1.005:  # inside the zone
+                tp_target = round(cluster * 1.007, 4)  # just above
+                snap_info["tp_snapped"] = f"TP pushed above long liq zone at {cluster}"
                 break
 
-        # SL: place just above nearest short squeeze zone above current
+        # SL: if raw_sl is inside a squeeze zone, push it just above that zone
         sl_target = raw_sl
         for cluster in above:
-            if raw_sl >= cluster * 0.98:
-                sl_target = round(cluster * 1.005, 4)
-                snap_info["sl_snapped"] = f"SL moved above short squeeze zone at {cluster}"
+            if cluster * 0.995 <= raw_sl <= cluster * 1.005:  # inside the zone
+                sl_target = round(cluster * 1.007, 4)  # just above
+                snap_info["sl_snapped"] = f"SL pushed above short squeeze zone at {cluster}"
                 break
 
-        # Safety: TP must still be below entry, SL above
-        tp_target = min(tp_target, raw_tp, current_price * 0.997)
-        sl_target = max(sl_target, raw_sl, current_price * 1.003)
+        # Safety: never move TP up or SL down from raw values
+        tp_target = min(tp_target, raw_tp)
+        sl_target = max(sl_target, raw_sl)
+        # Hard floor/ceiling
+        tp_target = min(tp_target, current_price * 0.997)
+        sl_target = max(sl_target, current_price * 1.003)
 
     return tp_target, sl_target, snap_info if snap_info else None
