@@ -171,3 +171,14 @@ async def wipe_signal_cache():
     except Exception as e:
         wiped["redis_error"] = str(e)
     return {"status": "wiped", "detail": wiped}
+
+@router.post("/admin/expire-signal/{signal_id}", tags=["admin"])
+def expire_signal(signal_id: int):
+    """One-time use: manually expire a bad signal by ID."""
+    from app.infrastructure.db.signal_history import update_outcome, get_open_signals
+    signals = get_open_signals()
+    match = next((s for s in signals if s["id"] == signal_id), None)
+    if not match:
+        raise HTTPException(status_code=404, detail=f"Open signal {signal_id} not found")
+    update_outcome(signal_id, "expired", match["entry_price"])
+    return {"expired": signal_id, "symbol": match["symbol"]}
