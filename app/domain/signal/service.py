@@ -261,7 +261,7 @@ def generate_signal(symbol: str, include_reasoning: bool = True) -> Optional[dic
     # 5c. Calendar suppression — check for high-impact macro events today
     macro_event_today = None
     try:
-        from app.api.routes.calendar import fetch_calendar
+        from app.domain.data.calendar_data import fetch_calendar
         from datetime import datetime, timezone
         events = fetch_calendar()
         now = datetime.now(timezone.utc)
