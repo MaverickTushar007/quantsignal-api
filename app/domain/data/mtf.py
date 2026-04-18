@@ -3,10 +3,11 @@ data/mtf.py
 Multi-timeframe feature extraction.
 Pulls 1H, 4H, 15min data and computes trend alignment features.
 """
-import yfinance as yf
 import pandas as pd
 import numpy as np
 from typing import Optional
+import logging
+log = logging.getLogger(__name__)
 
 def fetch_mtf_features(symbol: str) -> dict:
     """
@@ -22,19 +23,77 @@ def fetch_mtf_features(symbol: str) -> dict:
     }
     """
     try:
-        # Fetch 1H (2 years) — also used to build 4H
-        df_1h = yf.Ticker(symbol).history(period='60d', interval='1h')
-        if len(df_1h) < 20:
+        # Fetch 1H — try Yahoo direct first, fall back to yfinance
+        df_1h = None
+        try:
+            import requests
+            headers = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)"}
+            url = f"https://query1.finance.yahoo.com/v8/finance/chart/{symbol}?interval=1h&range=60d"
+            r = requests.get(url, headers=headers, timeout=12)
+            result = r.json().get("chart", {}).get("result", [])
+            if result:
+                ts = result[0].get("timestamp", [])
+                q = result[0]["indicators"]["quote"][0]
+                df_1h = pd.DataFrame({
+                    "Open": q.get("open"), "High": q.get("high"),
+                    "Low": q.get("low"), "Close": q.get("close"), "Volume": q.get("volume"),
+                }, index=pd.to_datetime(ts, unit="s"))
+                df_1h = df_1h.dropna(subset=["Close"])
+                df_1h.index = df_1h.index.tz_localize(None) if df_1h.index.tzinfo else df_1h.index
+                log.info(f"[mtf] yahoo_direct 1h OK for {symbol}: {len(df_1h)} bars")
+        except Exception as e:
+            log.debug(f"[mtf] yahoo_direct 1h failed for {symbol}: {e}")
+
+        if df_1h is None or len(df_1h) < 20:
+            try:
+                import yfinance as yf
+                df_1h = yf.Ticker(symbol).history(period="60d", interval="1h")
+                if df_1h is not None:
+                    df_1h.index = df_1h.index.tz_localize(None) if df_1h.index.tzinfo else df_1h.index
+                log.info(f"[mtf] yfinance 1h fallback OK for {symbol}")
+            except Exception as e:
+                log.debug(f"[mtf] yfinance 1h fallback failed for {symbol}: {e}")
+
+        if df_1h is None or len(df_1h) < 20:
             return _neutral_mtf()
 
         # Build 4H by resampling
-        df_4h = df_1h.resample('4h').agg({
-            'Open': 'first', 'High': 'max',
-            'Low': 'min', 'Close': 'last', 'Volume': 'sum'
+        df_4h = df_1h.resample("4h").agg({
+            "Open": "first", "High": "max",
+            "Low": "min", "Close": "last", "Volume": "sum"
         }).dropna()
 
-        # Fetch 15min (last 60 days)
-        df_15m = yf.Ticker(symbol).history(period='5d', interval='15m')
+        # Fetch 15min — Yahoo direct first, yfinance fallback
+        df_15m = None
+        try:
+            import requests
+            headers = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)"}
+            url = f"https://query1.finance.yahoo.com/v8/finance/chart/{symbol}?interval=15m&range=5d"
+            r = requests.get(url, headers=headers, timeout=12)
+            result = r.json().get("chart", {}).get("result", [])
+            if result:
+                ts = result[0].get("timestamp", [])
+                q = result[0]["indicators"]["quote"][0]
+                df_15m = pd.DataFrame({
+                    "Open": q.get("open"), "High": q.get("high"),
+                    "Low": q.get("low"), "Close": q.get("close"), "Volume": q.get("volume"),
+                }, index=pd.to_datetime(ts, unit="s"))
+                df_15m = df_15m.dropna(subset=["Close"])
+                df_15m.index = df_15m.index.tz_localize(None) if df_15m.index.tzinfo else df_15m.index
+        except Exception as e:
+            log.debug(f"[mtf] yahoo_direct 15m failed for {symbol}: {e}")
+
+        if df_15m is None or len(df_15m) < 5:
+            try:
+                import yfinance as yf
+                df_15m = yf.Ticker(symbol).history(period="5d", interval="15m")
+                if df_15m is not None:
+                    df_15m.index = df_15m.index.tz_localize(None) if df_15m.index.tzinfo else df_15m.index
+            except Exception as e:
+                log.debug(f"[mtf] yfinance 15m fallback failed for {symbol}: {e}")
+
+        if df_15m is None:
+            df_15m = pd.DataFrame()
 
         def ema(series, n):
             return series.ewm(span=n, adjust=False).mean()

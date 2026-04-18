@@ -1,25 +1,7 @@
-import logging, requests
+import logging
 from app.infrastructure.db.signal_history import get_open_signals, update_outcome
+from app.domain.data.multi_source import get_price as _get_price
 logger = logging.getLogger(__name__)
-
-def _get_price(symbol: str) -> float | None:
-    """Fetch latest price via Yahoo Finance direct — no yfinance."""
-    try:
-        headers = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)"}
-        url = f"https://query1.finance.yahoo.com/v8/finance/chart/{symbol}?interval=1d&range=5d"
-        r = requests.get(url, headers=headers, timeout=10)
-        result = r.json().get("chart", {}).get("result", [])
-        if result:
-            closes = result[0]["indicators"]["quote"][0].get("close", [])
-            closes = [c for c in closes if c is not None]
-            if closes:
-                price = float(closes[-1])
-                logger.info(f"[evaluator] {symbol} = {price}")
-                return price
-        logger.warning(f"[evaluator] {symbol} empty data")
-    except Exception as e:
-        logger.error(f"[evaluator] {symbol} failed: {e}")
-    return None
 
 def evaluate_open_signals() -> dict:
     from datetime import datetime, timezone
