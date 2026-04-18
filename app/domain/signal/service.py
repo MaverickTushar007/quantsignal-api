@@ -188,6 +188,14 @@ def generate_signal(symbol: str, include_reasoning: bool = True) -> Optional[dic
     except Exception:
         pass
 
+    # 5e. Liquidity-aware TP/SL snapping (crypto only)
+    liquidity_clusters = None
+    try:
+        from app.domain.data.liquidity_levels import get_liquidity_clusters
+        liquidity_clusters = get_liquidity_clusters(symbol, 0)  # price filled after ml
+    except Exception:
+        pass
+
     # Cross-source validation — reject bad/stale data before it reaches the model
     try:
         from app.domain.data.multi_source import validate_ohlcv
@@ -207,6 +215,28 @@ def generate_signal(symbol: str, include_reasoning: bool = True) -> Optional[dic
 
     # 3. ML signal
     ml: Optional[SignalResult] = predict(symbol, df, sentiment)
+    # Apply liquidity cluster snapping to TP/SL (crypto only)
+    if ml is not None and liquidity_clusters is None:
+        try:
+            from app.domain.data.liquidity_levels import get_liquidity_clusters
+            liquidity_clusters = get_liquidity_clusters(symbol, ml.current_price)
+        except Exception:
+            pass
+
+    if ml is not None and liquidity_clusters is not None:
+        try:
+            import dataclasses
+            from app.domain.data.liquidity_levels import snap_to_liquidity
+            new_tp, new_sl, snap_info = snap_to_liquidity(
+                ml.direction, ml.current_price,
+                ml.take_profit, ml.stop_loss,
+                liquidity_clusters,
+            )
+            if snap_info:
+                ml = dataclasses.replace(ml, take_profit=new_tp, stop_loss=new_sl)
+        except Exception:
+            pass
+
     # Apply event-day ATR multiplier to TP/SL and Kelly reduction
     if ml is not None and event_adj["atr_multiplier"] != 1.0:
         import dataclasses
