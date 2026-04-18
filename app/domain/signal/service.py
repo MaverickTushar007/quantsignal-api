@@ -50,7 +50,9 @@ class FullSignal:
     # Meta
     generated_at: str
     market_open:    bool = True
-    earnings_flag:   dict = None
+    earnings_flag:      dict = None
+    macro_event_today:  dict = None
+    event_adjustment:   dict = None
     data_warnings:   list = None
     volume_ratio: float = 1.0
 
@@ -178,6 +180,14 @@ def generate_signal(symbol: str, include_reasoning: bool = True) -> Optional[dic
     # 1. Fetch price data
     df = fetch_ohlcv(symbol, period="2y")
 
+    # 5d. Apply event-day adjustments to TP/SL and Kelly size
+    event_adj = {"atr_multiplier": 1.0, "kelly_reduction": 1.0, "event_type": None}
+    try:
+        from app.domain.data.event_adjustments import get_event_adjustments
+        event_adj = get_event_adjustments(symbol, macro_event_today)
+    except Exception:
+        pass
+
     # Cross-source validation — reject bad/stale data before it reaches the model
     try:
         from app.domain.data.multi_source import validate_ohlcv
@@ -197,6 +207,25 @@ def generate_signal(symbol: str, include_reasoning: bool = True) -> Optional[dic
 
     # 3. ML signal
     ml: Optional[SignalResult] = predict(symbol, df, sentiment)
+    # Apply event-day ATR multiplier to TP/SL and Kelly reduction
+    if ml is not None and event_adj["atr_multiplier"] != 1.0:
+        import dataclasses
+        mult = event_adj["atr_multiplier"]
+        kelly_mult = event_adj["kelly_reduction"]
+        close = ml.current_price
+        if ml.direction == "BUY":
+            new_tp = close + (ml.take_profit - close) * mult
+            new_sl = close - (close - ml.stop_loss) * mult
+        else:
+            new_tp = close - (close - ml.take_profit) * mult
+            new_sl = close + (ml.stop_loss - close) * mult
+        ml = dataclasses.replace(
+            ml,
+            take_profit=round(new_tp, 4),
+            stop_loss=round(new_sl, 4),
+            kelly_size=round(ml.kelly_size * kelly_mult, 2),
+        )
+
     if ml is None:
         return None
 
@@ -277,6 +306,8 @@ def generate_signal(symbol: str, include_reasoning: bool = True) -> Optional[dic
         generated_at=datetime.now(timezone.utc).isoformat(),
         market_open=__import__('app.infrastructure.db.signal_history', fromlist=['is_open']).is_open(symbol),
         earnings_flag=earnings_flag,
+        macro_event_today=macro_event_today,
+        event_adjustment=event_adj if event_adj["event_type"] else None,
         data_warnings=data_warnings if data_warnings else None,
     ))
     from app.infrastructure.cache.cache import set_cached
