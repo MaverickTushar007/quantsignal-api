@@ -381,9 +381,9 @@ def check_outcomes(x_cron_secret: str = Header(None)):
         raise HTTPException(status_code=401, detail="Unauthorized")
     def _run():
         try:
-            from app.api.routes.agent_executor import _close_hit_positions
-            _close_hit_positions()
-            print("Outcome check complete")
+            from app.domain.performance.evaluator import evaluate_open_signals
+            result = evaluate_open_signals()
+            print(f"Outcome check complete: {result}")
         except Exception as e:
             print(f"Outcome check error: {e}")
     threading.Thread(target=_run, daemon=True).start()
