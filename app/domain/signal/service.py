@@ -277,6 +277,48 @@ def generate_signal(symbol: str, include_reasoning: bool = True) -> Optional[dic
     p = enforced_prob
     ml.confidence = "HIGH" if p > 0.65 or p < 0.35 else "MEDIUM" if p > 0.55 or p < 0.45 else "LOW"
 
+    # 4c. Apply liquidity cluster snapping AFTER direction is enforced
+    if liquidity_clusters is None:
+        try:
+            from app.domain.data.liquidity_levels import get_liquidity_clusters
+            liquidity_clusters = get_liquidity_clusters(symbol, ml.current_price)
+        except Exception:
+            pass
+
+    if liquidity_clusters is not None:
+        try:
+            import dataclasses
+            from app.domain.data.liquidity_levels import snap_to_liquidity
+            new_tp, new_sl, snap_info = snap_to_liquidity(
+                ml.direction, ml.current_price,
+                ml.take_profit, ml.stop_loss,
+                liquidity_clusters,
+            )
+            if snap_info:
+                ml = dataclasses.replace(ml, take_profit=new_tp, stop_loss=new_sl)
+        except Exception:
+            pass
+
+    # 4d. Apply event-day ATR multiplier AFTER direction is enforced
+    if event_adj["atr_multiplier"] != 1.0:
+        import dataclasses
+        mult = event_adj["atr_multiplier"]
+        kelly_mult = event_adj["kelly_reduction"]
+        close = ml.current_price
+        if ml.direction == "BUY":
+            new_tp = close + (ml.take_profit - close) * mult
+            new_sl = close - (close - ml.stop_loss) * mult
+        else:
+            new_tp = close - (close - ml.take_profit) * mult
+            new_sl = close + (ml.stop_loss - close) * mult
+        ml = dataclasses.replace(
+            ml,
+            take_profit=round(new_tp, 4),
+            stop_loss=round(new_sl, 4),
+            kelly_size=round(ml.kelly_size * kelly_mult, 2),
+        )
+
+
     # 5. News
     news_items = get_news(symbol, limit=3)
 
