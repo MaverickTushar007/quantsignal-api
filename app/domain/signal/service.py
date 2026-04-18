@@ -257,6 +257,33 @@ def generate_signal(symbol: str, include_reasoning: bool = True) -> Optional[dic
         earnings_flag = get_earnings_flag(symbol)
     except Exception:
         pass
+
+    # 5c. Calendar suppression — check for high-impact macro events today
+    macro_event_today = None
+    try:
+        from app.api.routes.calendar import fetch_calendar
+        from datetime import datetime, timezone
+        events = fetch_calendar()
+        now = datetime.now(timezone.utc)
+        for ev in events:
+            if not ev.get("date") or ev.get("impact") != "High":
+                continue
+            try:
+                ev_dt = datetime.fromisoformat(ev["date"])
+                if ev_dt.tzinfo is None:
+                    ev_dt = ev_dt.replace(tzinfo=timezone.utc)
+                hours_away = (ev_dt - now).total_seconds() / 3600
+                if -1 <= hours_away <= 24:
+                    macro_event_today = {
+                        "title": ev["title"],
+                        "country": ev["country"],
+                        "hours_away": round(hours_away, 1),
+                    }
+                    break
+            except Exception:
+                continue
+    except Exception:
+        pass
     headlines  = [n.title for n in news_items]
     news_dicts = [{"title": n.title, "source": n.source,
                    "sentiment": n.sentiment, "url": n.url}
