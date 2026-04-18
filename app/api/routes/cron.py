@@ -80,6 +80,12 @@ def _rebuild():
             print(f"[cron] WARNING: only {len(cache)} new signals vs {len(existing_cache)} before — merging with stale cache")
             cache = {**existing_cache, **cache}
         (BASE_DIR / "data/signals_cache.json").write_text(json.dumps(cache, indent=2))
+        try:
+            from app.infrastructure.cache.cache import set_cached
+            set_cached("signals_cache_full", cache, ttl=86400)
+            print("[cron] signals_cache_full written to Redis")
+        except Exception as e:
+            print(f"[cron] Redis write failed: {e}")
         print(f"Cache rebuilt: {len(cache)}/{len(TICKERS)} signals in {elapsed}s")
 
         # Run virtual agent executor
@@ -336,6 +342,11 @@ def rebuild_mtf_cache():
             pass
         time.sleep(0.2)
     (BASE_DIR / "data/signals_cache.json").write_text(json.dumps(cache, indent=2))
+    try:
+        from app.infrastructure.cache.cache import set_cached
+        set_cached("signals_cache_full", cache, ttl=86400)
+    except Exception:
+        pass
     return {"updated": updated, "total": len(cache)}
 
 @router.post("/cron/flush-signal-cache", tags=["cron"])

@@ -50,14 +50,21 @@ def get_all_signals(
         if cached:
             return cached
 
-    # Load from file
+    # Load from Redis first (survives deploys), fall back to JSON file
     cache = {}
-    cache_path = BASE_DIR / "data/signals_cache.json"
-    if cache_path.exists():
-        try:
-            cache = json.loads(cache_path.read_text())
-        except Exception:
-            pass
+    try:
+        redis_cache = get_cached("signals_cache_full")
+        if redis_cache and isinstance(redis_cache, dict) and len(redis_cache) > 0:
+            cache = redis_cache
+    except Exception:
+        pass
+    if not cache:
+        cache_path = BASE_DIR / "data/signals_cache.json"
+        if cache_path.exists():
+            try:
+                cache = json.loads(cache_path.read_text())
+            except Exception:
+                pass
 
     tickers = [t for t in TICKERS if not type or t["type"] == type.upper()]
     results = []
