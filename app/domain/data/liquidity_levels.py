@@ -95,8 +95,8 @@ def snap_to_liquidity(
                 break
 
         # Safety: TP must still be above entry, SL below
-        tp_target = max(tp_target, current_price * 1.003)
-        sl_target = min(sl_target, current_price * 0.997)
+        tp_target = max(tp_target, raw_tp, current_price * 1.003)
+        sl_target = min(sl_target, raw_sl, current_price * 0.997)
 
     else:  # SELL
         # TP: place just above nearest long liq zone below current price
@@ -116,7 +116,7 @@ def snap_to_liquidity(
                 break
 
         # Safety: TP must still be below entry, SL above
-        tp_target = min(tp_target, current_price * 0.997)
-        sl_target = max(sl_target, current_price * 1.003)
+        tp_target = min(tp_target, raw_tp, current_price * 0.997)
+        sl_target = max(sl_target, raw_sl, current_price * 1.003)
 
     return tp_target, sl_target, snap_info if snap_info else None
