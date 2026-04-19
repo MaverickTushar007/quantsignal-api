@@ -241,6 +241,15 @@ def get_reasoning(ticker, name, direction, probability, confluence_bulls,
     headlines_str = "\n".join(f"- {h}" for h in news_headlines[:3]) or "No recent news."
     feat_str = ", ".join(top_features[:4]) if top_features else "momentum and trend"
     confidence_label = "HIGH" if probability >= 0.72 else "MEDIUM" if probability >= 0.58 else "LOW"
+    # Fetch document context (RBI/SEBI/NSE)
+    doc_context = ""
+    try:
+        from app.infrastructure.documents.retriever import get_relevant_context, format_for_perseus
+        raw_ctx = get_relevant_context(ticker, direction, limit=3)
+        doc_context = format_for_perseus(raw_ctx)
+    except Exception:
+        pass
+
     # Fetch past signal history
     history_str = "No prior signals for this asset."
     try:
@@ -277,6 +286,7 @@ SIGNAL DATA:
 PAST SIGNALS FOR {ticker}:
 {history_str}
 
+{doc_context}
 Write exactly 3 sentences. Each must contain specific numbers."""
     try:
         return _groq_smart(prompt)  # Sprint 3: always use smart model for Perseus narrative

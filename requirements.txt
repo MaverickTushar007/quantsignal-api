@@ -25,7 +25,8 @@ resend==2.26.0
 psycopg2-binary==2.9.9
 curl_cffi>=0.6.0
 pandas-datareader>=0.10.0
-razorpay
 # cache bust Mon Mar 30 15:25:23 IST 2026
 # cache bust Mon Mar 30 15:28:38 IST 2026
 APScheduler==3.10.4
+fastembed==0.3.6
+lxml==5.2.2
