@@ -685,6 +685,17 @@ async def stream_signal(
                     reasoning = sig.get("context_text", "Perseus analysis complete.")
             yield emit(6, "Perseus generating reasoning", "done")
 
+            # ── STORE EMBEDDING (Sprint 4) ────────────────────────────────
+            try:
+                from app.infrastructure.db.signal_history import save_signal
+                from app.infrastructure.db.signal_embeddings import store_embedding
+                import threading
+                sig["symbol"] = symbol
+                save_signal(sig)
+                threading.Thread(target=store_embedding, args=(sig,), daemon=True).start()
+            except Exception:
+                pass
+
             # ── FINAL RESULT ──────────────────────────────────────────────
             sig["reasoning"] = reasoning
             sig["stream_complete"] = True
