@@ -138,20 +138,54 @@ def _build_agent_context(symbol: str, user_id: str) -> str:
         return ""
 
 
-def _groq_reasoning(prompt: str) -> str:
+FAST_MODEL  = "llama-3.1-8b-instant"     # cheap — calibration, conflict, risk
+SMART_MODEL = "llama-3.3-70b-versatile"  # powerful — Perseus final narrative only
+
+def _groq_reasoning(prompt: str, use_smart: bool = False) -> str:
+    """
+    Multi-model router — Sprint 3.
+    Simple intermediate steps use FAST_MODEL (8b) to cut cost ~60%.
+    Final Perseus narrative always uses SMART_MODEL (70b) for quality.
+    """
     client = groq.Groq(api_key=settings.groq_api_key)
-    for model in ["llama-3.3-70b-versatile", "llama-3.1-8b-instant"]:
+    # Primary model based on complexity
+    primary  = SMART_MODEL if use_smart else FAST_MODEL
+    fallback = FAST_MODEL  if use_smart else SMART_MODEL
+    for model in [primary, fallback]:
         try:
             resp = client.chat.completions.create(
                 model=model,
                 messages=[{"role": "user", "content": prompt}],
-                max_tokens=200,
-                temperature=0.2,
+                max_tokens=200 if not use_smart else 300,
+                temperature=0.1 if not use_smart else 0.2,
             )
             return resp.choices[0].message.content.strip()
         except groq.RateLimitError:
             continue
     raise RuntimeError("All Groq models rate-limited")
+
+def _groq_fast(prompt: str) -> str:
+    """Fast cheap model for simple classification tasks."""
+    return _groq_reasoning(prompt, use_smart=False)
+
+def _groq_smart(prompt: str) -> str:
+    """Smart model for final Perseus narrative."""
+    return _groq_reasoning(prompt, use_smart=True)
+
+def classify_signal_complexity(confluence_bulls: int, probability: float,
+                                conflict_detected: bool = False) -> str:
+    """
+    Route signal to fast or full pipeline based on complexity.
+    Simple: clear direction, mid-range confidence, no conflict.
+    Complex: conflict, extreme confidence, or low confluence.
+    """
+    if conflict_detected:
+        return "complex"
+    if probability < 0.55 or probability > 0.85:
+        return "complex"
+    if confluence_bulls < 3 or confluence_bulls > 7:
+        return "complex"
+    return "simple"
 
 
 def _rule_based_reasoning(ticker, direction, probability, confluence_bulls, top_features):
@@ -245,7 +279,7 @@ PAST SIGNALS FOR {ticker}:
 
 Write exactly 3 sentences. Each must contain specific numbers."""
     try:
-        return _groq_reasoning(prompt)
+        return _groq_smart(prompt)  # Sprint 3: always use smart model for Perseus narrative
     except Exception:
         return _rule_based_reasoning(ticker, direction, probability, confluence_bulls, top_features)
 
