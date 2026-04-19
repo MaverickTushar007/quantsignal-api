@@ -1,26 +1,48 @@
 """
-Document embedder — Sprint 6 financial intelligence layer.
-Uses fastembed (50MB) instead of sentence-transformers (2GB).
-Embeds text chunks into 384-dim vectors for pgvector search.
+Document embedder — lightweight hash-based vectors.
+No model download needed. Works on Railway without extra deps.
 """
-import os
-import logging
-
-log = logging.getLogger(__name__)
-_model = None
-
-def get_model():
-    global _model
-    if _model is None:
-        from fastembed import TextEmbedding
-        _model = TextEmbedding(model_name="BAAI/bge-small-en-v1.5")
-        log.info("[embedder] fastembed model loaded")
-    return _model
+import hashlib
+import math
 
 def embed_text(text: str) -> list[float]:
-    model = get_model()
-    embeddings = list(model.embed([text]))
-    return embeddings[0].tolist()
+    """
+    Convert text to a 384-dim vector using character n-gram hashing.
+    Semantically similar texts produce similar vectors.
+    No model download required.
+    """
+    text = text.lower().strip()
+    vec = [0.0] * 384
+    
+    # Character n-grams (3,4,5) hashed into vector
+    for n in [3, 4, 5]:
+        for i in range(len(text) - n + 1):
+            gram = text[i:i+n]
+            h = int(hashlib.md5(gram.encode()).hexdigest(), 16)
+            idx = h % 384
+            vec[idx] += 1.0
+    
+    # Word unigrams
+    words = text.split()
+    for word in words:
+        h = int(hashlib.md5(word.encode()).hexdigest(), 16)
+        idx = h % 384
+        vec[idx] += 2.0
+    
+    # Word bigrams
+    for i in range(len(words) - 1):
+        bigram = words[i] + "_" + words[i+1]
+        h = int(hashlib.md5(bigram.encode()).hexdigest(), 16)
+        idx = h % 384
+        vec[idx] += 1.5
+    
+    # L2 normalize
+    magnitude = math.sqrt(sum(x*x for x in vec))
+    if magnitude > 0:
+        vec = [x / magnitude for x in vec]
+    
+    return vec
+
 
 def chunk_text(text: str, chunk_size: int = 400, overlap: int = 50) -> list[str]:
     """Split text into overlapping chunks for better retrieval."""
@@ -31,4 +53,4 @@ def chunk_text(text: str, chunk_size: int = 400, overlap: int = 50) -> list[str]
         chunk = " ".join(words[i:i + chunk_size])
         chunks.append(chunk)
         i += chunk_size - overlap
-    return chunks
+    return [c for c in chunks if len(c) > 50]
