@@ -116,6 +116,16 @@ def save_signal(signal: dict):
     con, db = _get_conn()
     try:
         cur = con.cursor()
+        # Dedup: skip if identical signal for same symbol+direction in last 4 hours
+        dedup_q = (
+            "SELECT COUNT(*) FROM signal_history WHERE symbol=%s AND direction=%s AND ABS(entry_price-%s)<0.01 AND generated_at > NOW() - INTERVAL '4 hours'"
+            if db == "pg" else
+            "SELECT COUNT(*) FROM signal_history WHERE symbol=? AND direction=? AND ABS(entry_price-?)<0.01 AND generated_at > datetime('now','-4 hours')"
+        )
+        cur.execute(dedup_q, (signal["symbol"], signal["direction"], signal["current_price"]))
+        if cur.fetchone()[0] > 0:
+            logger.info(f"[signal_history] dedup skip {signal['symbol']} {signal['direction']}")
+            return
         cur.execute(
             """INSERT INTO signal_history
               (symbol, direction, entry_price, take_profit, stop_loss, generated_at, probability, raw_probability, confluence_score, mtf_score, regime, regime_multiplier, outcome)
