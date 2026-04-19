@@ -207,6 +207,14 @@ async def get_signal(
             save_signal(sig)
     except Exception as _e:
         import logging; logging.getLogger(__name__).error(f'[save_signal FAILED] {_e}', exc_info=True)
+
+    # Sprint 4 — store embedding for similarity search
+    try:
+        from app.infrastructure.db.signal_embeddings import store_embedding
+        import threading
+        threading.Thread(target=store_embedding, args=(sig,), daemon=True).start()
+    except Exception as _ee:
+        pass
     return sig
 
 
@@ -580,6 +588,14 @@ async def stream_signal(
                 from app.infrastructure.db.signal_history import get_recent_signals
                 history = get_recent_signals(symbol, limit=5)
                 history_detail = f"{len(history)} past signal{'s' if len(history) != 1 else ''} found"
+            except Exception:
+                pass
+            # Also pre-fetch similar embeddings (used later in Perseus prompt)
+            similar_setups = []
+            try:
+                from app.infrastructure.db.signal_embeddings import find_similar
+                _probe = {"symbol": symbol, "direction": "BUY", "probability": 0.6}
+                similar_setups = find_similar(_probe, limit=3)
             except Exception:
                 pass
             yield emit(1, "Loading signal history", "done", history_detail)
