@@ -221,3 +221,16 @@ async def trigger_watcher():
     t.start()
     t.join(timeout=120)  # wait up to 2 min for scan to complete
     return {"status": "watcher triggered", "completed": not t.is_alive()}
+
+@router.post("/admin/models/wipe")
+async def wipe_models():
+    """Delete all cached ML model pickles — forces retrain on next signal request."""
+    import glob
+    from app.core.config import BASE_DIR
+    files = glob.glob(str(BASE_DIR / "data/models/*.pkl"))
+    for f in files:
+        try:
+            import os; os.remove(f)
+        except Exception:
+            pass
+    return {"wiped": len(files), "message": f"Deleted {len(files)} model pickles — will retrain on next request"}

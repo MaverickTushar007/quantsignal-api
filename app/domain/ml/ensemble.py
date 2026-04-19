@@ -24,7 +24,7 @@ from app.domain.ml.features import build_features, FEATURE_COLUMNS
 
 MODELS_DIR   = BASE_DIR / "ml/models"
 MODELS_DIR.mkdir(exist_ok=True)
-RETRAIN_DAYS = 7
+RETRAIN_DAYS = 0.5
 FORWARD_DAYS = 5
 RETURN_THRESH= 0.02
 
