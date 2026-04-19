@@ -17,8 +17,8 @@ TOP_ASSETS = [
 ]
 
 # Minimum confidence to fire an alert (avoid noise)
-MIN_CONFIDENCE = 0.68
-MIN_CONFLUENCE = 5  # out of 9
+MIN_CONFIDENCE = 0.40  # TEMP: lowered for testing
+MIN_CONFLUENCE = 1  # TEMP
 
 
 def _parse_confluence(score_str: str) -> int:
