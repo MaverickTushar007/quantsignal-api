@@ -43,7 +43,18 @@ from app.api.routes.feedback import router as feedback_router
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    # start_poller temporarily disabled for debugging
+    # Perseus Watcher — Sprint 5
+    try:
+        from apscheduler.schedulers.background import BackgroundScheduler
+        from app.infrastructure.scheduler.perseus_watcher import scan_and_alert
+        scheduler = BackgroundScheduler()
+        scheduler.add_job(scan_and_alert, 'interval', minutes=15, id='perseus_watcher')
+        scheduler.start()
+        import logging
+        logging.getLogger(__name__).info("[Perseus Watcher] Scheduler started — scanning every 15 min")
+    except Exception as _e:
+        import logging
+        logging.getLogger(__name__).error(f"[Perseus Watcher] Scheduler failed to start: {_e}")
     yield
 
 app = FastAPI(

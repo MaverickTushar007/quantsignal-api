@@ -28,3 +28,4 @@ pandas-datareader>=0.10.0
 razorpay
 # cache bust Mon Mar 30 15:25:23 IST 2026
 # cache bust Mon Mar 30 15:28:38 IST 2026
+APScheduler==3.10.4
