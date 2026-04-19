@@ -104,6 +104,15 @@ def scan_and_alert():
             log.error(f"[Perseus Watcher] failed for {symbol}: {e}")
 
     log.info(f"[Perseus Watcher] Scan complete — {alerts_fired} alerts fired")
+
+    # Also run outcome checker every scan
+    try:
+        from app.domain.performance.evaluator import evaluate_open_signals
+        eval_result = evaluate_open_signals()
+        log.info(f"[Perseus Watcher] Outcomes evaluated: {eval_result}")
+    except Exception as _oe:
+        log.warning(f"[Perseus Watcher] Outcome check failed: {_oe}")
+
     return alerts_fired
 
 

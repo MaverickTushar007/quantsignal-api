@@ -9,7 +9,7 @@ import os, json, time, threading
 from pathlib import Path
 
 router = APIRouter()
-CRON_SECRET = os.getenv("CRON_SECRET", "quantsignal_cron_2026")
+CRON_SECRET = os.getenv("CRON_SECRET", "quantsignal-cron-2026")
 
 def _rebuild():
     from app.api.routes.alerts import fire_signal_alerts
