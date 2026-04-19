@@ -118,11 +118,11 @@ def save_signal(signal: dict):
         cur = con.cursor()
         cur.execute(
             """INSERT INTO signal_history
-              (symbol, direction, entry_price, take_profit, stop_loss, generated_at, probability, raw_probability, confluence_score, mtf_score, regime, regime_multiplier)
-              VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)""" if db == "pg" else
+              (symbol, direction, entry_price, take_profit, stop_loss, generated_at, probability, raw_probability, confluence_score, mtf_score, regime, regime_multiplier, outcome)
+              VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, 'open')""" if db == "pg" else
             """INSERT INTO signal_history
-              (symbol, direction, entry_price, take_profit, stop_loss, generated_at, probability, raw_probability, confluence_score, mtf_score, regime, regime_multiplier)
-              VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
+              (symbol, direction, entry_price, take_profit, stop_loss, generated_at, probability, raw_probability, confluence_score, mtf_score, regime, regime_multiplier, outcome)
+              VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'open')""",
             (
                 signal["symbol"],
                 signal["direction"],

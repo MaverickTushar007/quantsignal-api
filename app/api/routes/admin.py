@@ -182,3 +182,20 @@ def expire_signal(signal_id: int):
         raise HTTPException(status_code=404, detail=f"Open signal {signal_id} not found")
     update_outcome(signal_id, "expired", match["entry_price"])
     return {"expired": signal_id, "symbol": match["symbol"]}
+
+@router.post("/admin/fix-null-outcomes")
+async def fix_null_outcomes():
+    from app.infrastructure.db.signal_history import _get_conn
+    con, db = _get_conn()
+    try:
+        cur = con.cursor()
+        cur.execute(
+            "UPDATE signal_history SET outcome = 'open' WHERE outcome IS NULL AND direction IN ('BUY','SELL')"
+            if db == "pg" else
+            "UPDATE signal_history SET outcome = 'open' WHERE outcome IS NULL AND direction IN ('BUY','SELL')"
+        )
+        updated = cur.rowcount
+        con.commit()
+        return {"updated": updated, "message": f"Fixed {updated} signals with NULL outcome"}
+    finally:
+        con.close()

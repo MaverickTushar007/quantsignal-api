@@ -108,7 +108,8 @@ def store_embedding(signal: dict) -> bool:
         logger.info(f"[embeddings] stored for {signal.get('symbol')}")
         return True
     except Exception as e:
-        logger.error(f"[embeddings] store failed: {e}")
+        logger.error(f"[embeddings] store failed: {e}", exc_info=True)
+        print(f"[embeddings] store failed: {e}", flush=True)
         return False
 
 
