@@ -212,3 +212,10 @@ async def raw_signals():
         return {"total": len(rows), "signals": rows}
     finally:
         con.close()
+
+@router.post("/admin/watcher/trigger")
+async def trigger_watcher():
+    from app.infrastructure.scheduler.perseus_watcher import scan_and_alert
+    import asyncio
+    asyncio.create_task(asyncio.to_thread(scan_and_alert))
+    return {"status": "watcher triggered"}
