@@ -187,6 +187,7 @@ async def get_signal(
                 if not is_valid:
                     import logging
                     logging.getLogger(__name__).warning(f"[validator] signal rejected: {reason} for {sig.get('symbol')}")
+                    return sig  # BLOCK save — invalid TP/SL
             except Exception as _val_e:
                 import logging
                 logging.getLogger(__name__).warning(f"[validator] {_val_e}")
