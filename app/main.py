@@ -48,7 +48,7 @@ async def lifespan(app: FastAPI):
         from apscheduler.schedulers.background import BackgroundScheduler
         from app.infrastructure.scheduler.perseus_watcher import scan_and_alert
         scheduler = BackgroundScheduler()
-        scheduler.add_job(scan_and_alert, 'interval', minutes=15, id='perseus_watcher')
+        scheduler.add_job(scan_and_alert, 'interval', minutes=5, id='perseus_watcher')
         from app.infrastructure.documents.scraper import run_full_scrape
         scheduler.add_job(run_full_scrape, 'interval', hours=1, id='doc_scraper')
         scheduler.start()

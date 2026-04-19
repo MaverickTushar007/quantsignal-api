@@ -10,15 +10,19 @@ from datetime import datetime, timezone
 log = logging.getLogger(__name__)
 
 TOP_ASSETS = [
-    "BTC-USD", "ETH-USD", "SOL-USD", "BNB-USD",
+    "BTC-USD", "ETH-USD", "SOL-USD", "BNB-USD", "XRP-USD",
+    "ADA-USD", "AVAX-USD", "DOGE-USD",
+    "AAPL", "NVDA", "MSFT", "GOOGL", "AMZN", "META", "TSLA",
     "RELIANCE.NS", "TCS.NS", "INFY.NS", "HDFCBANK.NS",
-    "AAPL", "NVDA", "MSFT",
-    "GC=F",  # Gold
+    "ICICIBANK.NS", "WIPRO.NS", "BAJFINANCE.NS", "AXISBANK.NS",
+    "KOTAKBANK.NS", "LT.NS", "SBIN.NS", "MARUTI.NS", "TITAN.NS",
+    "GC=F", "SI=F", "CL=F",
+    "^NSEI", "^BSESN",
 ]
 
 # Minimum confidence to fire an alert (avoid noise)
-MIN_CONFIDENCE = 0.68
-MIN_CONFLUENCE = 5  # out of 9
+MIN_CONFIDENCE = 0.55
+MIN_CONFLUENCE = 4  # out of 9
 
 
 def _parse_confluence(score_str: str) -> int:
