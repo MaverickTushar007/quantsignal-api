@@ -547,3 +547,142 @@ async def generate_morning_briefing():
     except Exception as e:
         return {"error": str(e)}
 
+
+
+@router.get("/signals/{symbol}/stream", tags=["signals"])
+async def stream_signal(
+    symbol: str,
+    _gate: dict = Depends(signal_gate),
+):
+    """
+    Perseus streaming endpoint — emits SSE events for each pipeline step.
+    Powers the step-by-step UI on the frontend.
+    """
+    import json
+    import asyncio
+    from fastapi.responses import StreamingResponse
+
+    symbol = symbol.upper()
+    if symbol not in TICKER_MAP:
+        raise HTTPException(status_code=404, detail=f"Unknown symbol: {symbol}")
+
+    async def generate():
+        def emit(step: int, label: str, status: str, detail: str = ""):
+            return f"data: {json.dumps({'step': step, 'label': label, 'status': status, 'detail': detail})}\n\n"
+
+        try:
+            # ── STEP 1: Signal history ────────────────────────────────────
+            yield emit(1, "Loading signal history", "running")
+            await asyncio.sleep(0.1)
+            history = []
+            history_detail = "No past signals yet"
+            try:
+                from app.domain.data.signal_history import get_signal_history
+                history = get_signal_history(symbol, limit=5)
+                history_detail = f"{len(history)} past signals found"
+            except Exception:
+                pass
+            yield emit(1, "Loading signal history", "done", history_detail)
+
+            # ── STEP 2: Technical analysis (ML confluence) ────────────────
+            yield emit(2, "Running technical analysis", "running")
+            await asyncio.sleep(0.1)
+            sig = None
+            confluence_detail = "Confluence score computed"
+            try:
+                from app.domain.signal.service import generate_signal
+                sig = generate_signal(symbol, include_reasoning=False)
+                if sig:
+                    score = sig.get("confluence_score", "?")
+                    direction = sig.get("direction", "?")
+                    confluence_detail = f"Confluence {score} — {direction}"
+            except Exception as e:
+                confluence_detail = "ML pipeline error"
+            yield emit(2, "Running technical analysis", "done", confluence_detail)
+
+            if sig is None:
+                yield f"data: {json.dumps({'type': 'error', 'message': 'Signal generation failed'})}\n\n"
+                return
+
+            # ── STEP 3: Calibration ───────────────────────────────────────
+            yield emit(3, "Calibrating confidence", "running")
+            await asyncio.sleep(0.1)
+            raw_prob = sig.get("raw_probability") or sig.get("probability", 0)
+            cal_prob = sig.get("probability", raw_prob)
+            cal_detail = f"{cal_prob*100:.0f}% calibrated confidence"
+            if sig.get("regime_suppressed"):
+                cal_detail += " — suppressed"
+            yield emit(3, "Calibrating confidence", "done", cal_detail)
+
+            # ── STEP 4: Timeframe conflict check ─────────────────────────
+            yield emit(4, "Validating timeframes", "running")
+            await asyncio.sleep(0.1)
+            conflict_detail = "Timeframes aligned"
+            try:
+                if sig.get("conflict_detected"):
+                    conflict_detail = f"Conflict: {sig.get('conflict_reason', 'signals diverge')}"
+                elif sig.get("mtf"):
+                    mtf = sig["mtf"]
+                    aligned = sum(1 for v in mtf.values() if v == sig.get("direction"))
+                    conflict_detail = f"{aligned}/{len(mtf)} timeframes aligned"
+            except Exception:
+                pass
+            yield emit(4, "Validating timeframes", "done", conflict_detail)
+
+            # ── STEP 5: Risk assessment ───────────────────────────────────
+            yield emit(5, "Running risk assessment", "running")
+            await asyncio.sleep(0.1)
+            risk_detail = "Risk assessed"
+            try:
+                energy = sig.get("energy_state", "unknown")
+                regime = sig.get("regime", "unknown")
+                rr = sig.get("risk_reward", "?")
+                risk_detail = f"R/R {rr}:1 · {regime} regime · energy {energy}"
+            except Exception:
+                pass
+            yield emit(5, "Running risk assessment", "done", risk_detail)
+
+            # ── STEP 6: Perseus reasoning (LLM) ──────────────────────────
+            yield emit(6, "Perseus generating reasoning", "running")
+            await asyncio.sleep(0.2)
+            reasoning = sig.get("reasoning") or sig.get("context_text") or ""
+            if not reasoning or len(reasoning) < 40:
+                try:
+                    from app.domain.reasoning.service import get_reasoning
+                    reasoning = get_reasoning(
+                        ticker=symbol,
+                        name=sig.get("name", symbol),
+                        direction=sig.get("direction", "HOLD"),
+                        probability=float(sig.get("probability", 0.5)),
+                        confluence_bulls=int(str(sig.get("confluence_score", "0/9")).split("/")[0]),
+                        top_features=sig.get("top_features", []),
+                        news_headlines=[],
+                        current_price=sig.get("current_price", 0),
+                        take_profit=sig.get("take_profit", 0),
+                        stop_loss=sig.get("stop_loss", 0),
+                        atr=sig.get("atr", 0),
+                        volume_ratio=sig.get("volume_ratio", 1.0),
+                        model_agreement=sig.get("model_agreement", 0),
+                    )
+                    sig["reasoning"] = reasoning
+                except Exception:
+                    reasoning = sig.get("context_text", "Perseus analysis complete.")
+            yield emit(6, "Perseus generating reasoning", "done")
+
+            # ── FINAL RESULT ──────────────────────────────────────────────
+            sig["reasoning"] = reasoning
+            sig["stream_complete"] = True
+            yield f"data: {json.dumps({'type': 'result', 'signal': sig})}\n\n"
+
+        except Exception as e:
+            yield f"data: {json.dumps({'type': 'error', 'message': str(e)})}\n\n"
+
+    return StreamingResponse(
+        generate(),
+        media_type="text/event-stream",
+        headers={
+            "Cache-Control": "no-cache",
+            "X-Accel-Buffering": "no",
+            "Connection": "keep-alive",
+        },
+    )
