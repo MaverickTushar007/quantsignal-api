@@ -219,8 +219,7 @@ async def trigger_watcher():
     import threading
     t = threading.Thread(target=scan_and_alert, daemon=True)
     t.start()
-    t.join(timeout=120)  # wait up to 2 min for scan to complete
-    return {"status": "watcher triggered", "completed": not t.is_alive()}
+    return {"status": "watcher triggered — check signals in 3 minutes"}
 
 @router.post("/admin/models/wipe")
 async def wipe_models():
