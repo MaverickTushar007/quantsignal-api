@@ -223,3 +223,21 @@ def get_evaluated_signals() -> list[dict]:
         return [dict(zip(cols, row)) for row in cur.fetchall()]
     finally:
         con.close()
+
+def get_recent_signals(symbol: str, limit: int = 5) -> list[dict]:
+    """Fetch recent live signals for a symbol — used by Perseus stream."""
+    con, db = _get_conn()
+    try:
+        cur = con.cursor()
+        cur.execute(
+            "SELECT direction, probability, outcome, generated_at, entry_price, take_profit, stop_loss FROM signal_history WHERE symbol = %s ORDER BY generated_at DESC LIMIT %s" if db == "pg"
+            else "SELECT direction, probability, outcome, generated_at, entry_price, take_profit, stop_loss FROM signal_history WHERE symbol = ? ORDER BY generated_at DESC LIMIT ?",
+            (symbol, limit)
+        )
+        cols = [d[0] for d in cur.description]
+        return [dict(zip(cols, row)) for row in cur.fetchall()]
+    except Exception as e:
+        logger.error(f"[get_recent_signals] {e}")
+        return []
+    finally:
+        con.close()

@@ -577,9 +577,9 @@ async def stream_signal(
             history = []
             history_detail = "No past signals yet"
             try:
-                from app.domain.data.signal_history import get_signal_history
-                history = get_signal_history(symbol, limit=5)
-                history_detail = f"{len(history)} past signals found"
+                from app.infrastructure.db.signal_history import get_recent_signals
+                history = get_recent_signals(symbol, limit=5)
+                history_detail = f"{len(history)} past signal{'s' if len(history) != 1 else ''} found"
             except Exception:
                 pass
             yield emit(1, "Loading signal history", "done", history_detail)

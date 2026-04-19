@@ -244,8 +244,8 @@ def get_reasoning(ticker, name, direction, probability, confluence_bulls,
     # Fetch past signal history
     history_str = "No prior signals for this asset."
     try:
-        from app.domain.data.signal_history import get_signal_history
-        past = get_signal_history(ticker, limit=3)
+        from app.infrastructure.db.signal_history import get_recent_signals
+        past = get_recent_signals(ticker, limit=3)
         if past:
             h_lines = []
             for h in past:
