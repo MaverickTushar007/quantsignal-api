@@ -207,9 +207,30 @@ def get_reasoning(ticker, name, direction, probability, confluence_bulls,
     headlines_str = "\n".join(f"- {h}" for h in news_headlines[:3]) or "No recent news."
     feat_str = ", ".join(top_features[:4]) if top_features else "momentum and trend"
     confidence_label = "HIGH" if probability >= 0.72 else "MEDIUM" if probability >= 0.58 else "LOW"
-    prompt = f"""You are a quantitative analyst writing a trade note. Be specific, direct, and market-aware.
-Do NOT use generic phrases like "potential reversal due to volatility" or "not financial advice".
-Write exactly 3 sentences. Each sentence must contain specific numbers from the data below.
+    # Fetch past signal history
+    history_str = "No prior signals for this asset."
+    try:
+        from app.domain.data.signal_history import get_signal_history
+        past = get_signal_history(ticker, limit=3)
+        if past:
+            h_lines = []
+            for h in past:
+                outcome = h.get("outcome", "open")
+                h_lines.append(f"- {str(h.get('generated_at',''))[:10]}: {h.get('direction','?')} -> {outcome} (conf: {h.get('probability',0)*100:.0f}%)")
+            history_str = "\n".join(h_lines)
+    except Exception:
+        pass
+
+    prompt = f"""You are Perseus, QuantSignal's quantitative reasoning engine.
+
+STRICT RULES:
+1. Direction MUST match ML: {direction}. Explain why to {direction.lower()}. Never contradict.
+2. Cite the top 2 ML drivers BY NAME with their values. Use actual feature names from data.
+3. Reference past signal outcomes if history exists.
+4. Under 80 words. Dense. Specific. Declarative.
+5. End with one specific risk that would invalidate this signal.
+6. Never say "I think", "possibly", "might". Be declarative.
+7. Start with ticker or verb. Never "The" or "This".
 
 SIGNAL DATA:
 - Asset: {name} ({ticker})
@@ -217,15 +238,12 @@ SIGNAL DATA:
 - Current Price: {current_price} | Take Profit: {take_profit} | Stop Loss: {stop_loss}
 - ATR: {atr} | Confluence: {confluence_bulls}/9 bullish factors
 - Top ML drivers: {feat_str}
-- Recent news:
-{headlines_str}
+- News: {headlines_str}
 
-FORMAT:
-Sentence 1: What the ML model sees technically RIGHT NOW (cite top 2 drivers with signal direction).
-Sentence 2: Risk/reward at these specific price levels (use actual TP and SL numbers).
-Sentence 3: The single biggest risk that would invalidate this signal (specific to this asset).
+PAST SIGNALS FOR {ticker}:
+{history_str}
 
-Do not start with "The" or "This". Start with the asset name or a verb."""
+Write exactly 3 sentences. Each must contain specific numbers."""
     try:
         return _groq_reasoning(prompt)
     except Exception:
