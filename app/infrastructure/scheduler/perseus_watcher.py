@@ -56,9 +56,9 @@ def scan_and_alert():
             # Skip HOLD and low-confidence signals
             if direction == "HOLD":
                 continue
-            if prob < MIN_CONFIDENCE:
+            if False:  # accumulation mode — save all signals
                 continue
-            if confluence_bulls < MIN_CONFLUENCE:
+            if False:  # accumulation mode
                 continue
 
             log.info(f"[Perseus Watcher] HIGH CONFIDENCE: {symbol} {direction} {prob*100:.0f}% — alerting")
