@@ -724,3 +724,14 @@ def trigger_watcher():
         return {"status": "scan started", "message": "Check Telegram in ~2 min"}
     except Exception as e:
         return {"status": "error", "message": str(e)}
+
+@router.get("/admin/scrape/trigger", tags=["admin"])
+def trigger_scrape():
+    """Manually trigger financial document scrape — RBI/SEBI/NSE."""
+    try:
+        from app.infrastructure.documents.scraper import run_full_scrape
+        import threading
+        threading.Thread(target=run_full_scrape, daemon=True).start()
+        return {"status": "scrape started", "sources": ["RBI", "SEBI", "NSE"]}
+    except Exception as e:
+        return {"status": "error", "message": str(e)}
