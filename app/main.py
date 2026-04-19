@@ -51,6 +51,12 @@ async def lifespan(app: FastAPI):
         scheduler.add_job(scan_and_alert, 'interval', minutes=5, id='perseus_watcher')
         from app.infrastructure.documents.scraper import run_full_scrape
         scheduler.add_job(run_full_scrape, 'interval', hours=1, id='doc_scraper')
+        # Wipe stale cache on every startup so prices are always fresh
+        try:
+            from app.infrastructure.scheduler.cache_manager import wipe_signal_cache
+            wipe_signal_cache()
+        except Exception:
+            pass
         scheduler.start()
         import logging
         logging.getLogger(__name__).info("[Perseus Watcher] Scheduler started — scanning every 15 min")

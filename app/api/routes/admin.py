@@ -216,6 +216,8 @@ async def raw_signals():
 @router.post("/admin/watcher/trigger")
 async def trigger_watcher():
     from app.infrastructure.scheduler.perseus_watcher import scan_and_alert
-    import asyncio
-    asyncio.create_task(asyncio.to_thread(scan_and_alert))
-    return {"status": "watcher triggered"}
+    import threading
+    t = threading.Thread(target=scan_and_alert, daemon=True)
+    t.start()
+    t.join(timeout=120)  # wait up to 2 min for scan to complete
+    return {"status": "watcher triggered", "completed": not t.is_alive()}
