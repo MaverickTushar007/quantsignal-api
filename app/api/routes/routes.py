@@ -713,3 +713,14 @@ async def stream_signal(
             "Connection": "keep-alive",
         },
     )
+
+@router.get("/admin/watcher/trigger", tags=["admin"])
+def trigger_watcher():
+    """Manually trigger Perseus watcher scan — for testing."""
+    try:
+        from app.infrastructure.scheduler.perseus_watcher import scan_and_alert
+        import threading
+        threading.Thread(target=scan_and_alert, daemon=True).start()
+        return {"status": "scan started", "message": "Check Telegram in ~2 min"}
+    except Exception as e:
+        return {"status": "error", "message": str(e)}
