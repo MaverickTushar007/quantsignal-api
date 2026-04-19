@@ -84,8 +84,14 @@ def scan_and_alert():
             # Save signal to history
             try:
                 from app.infrastructure.db.signal_history import save_signal
+                from app.domain.core.signal_validator import validate_signal
                 sig["symbol"] = symbol
-                save_signal(sig)
+                _valid, _reason = validate_signal(sig)
+                if not _valid:
+                    import logging
+                    logging.getLogger(__name__).warning(f"[watcher] invalid signal skipped: {_reason} for {symbol}")
+                else:
+                    save_signal(sig)
             except Exception:
                 pass
 
