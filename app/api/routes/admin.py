@@ -199,3 +199,16 @@ async def fix_null_outcomes():
         return {"updated": updated, "message": f"Fixed {updated} signals with NULL outcome"}
     finally:
         con.close()
+
+@router.get("/admin/signals/raw")
+async def raw_signals():
+    from app.infrastructure.db.signal_history import _get_conn
+    con, db = _get_conn()
+    try:
+        cur = con.cursor()
+        cur.execute("SELECT id, symbol, direction, outcome, entry_price, take_profit, stop_loss, generated_at, evaluated_at FROM signal_history ORDER BY id DESC")
+        cols = [d[0] for d in cur.description]
+        rows = [dict(zip(cols, row)) for row in cur.fetchall()]
+        return {"total": len(rows), "signals": rows}
+    finally:
+        con.close()
