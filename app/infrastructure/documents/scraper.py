@@ -82,7 +82,14 @@ def scrape_rbi_pressreleases(limit: int = 10) -> int:
         for link in pr_links:
             try:
                 href = link.get("href", "")
-                full_url = f"https://rbi.org.in{href}" if href.startswith("/") else href
+                if not href:
+                    continue
+                if href.startswith("http"):
+                    full_url = href
+                elif href.startswith("/"):
+                    full_url = f"https://rbi.org.in{href}"
+                else:
+                    full_url = f"https://rbi.org.in/{href}"
                 title = link.get_text(strip=True)
                 if not title:
                     continue
@@ -165,11 +172,15 @@ def scrape_nse_announcements(limit: int = 20) -> int:
         session = httpx.Client(headers={
             **HEADERS,
             "Referer": "https://www.nseindia.com",
-        }, follow_redirects=True)
+            "Accept": "application/json, text/plain, */*",
+            "Accept-Language": "en-US,en;q=0.9",
+            "Connection": "keep-alive",
+        }, follow_redirects=True, timeout=20)
 
-        # NSE needs a session cookie first
-        session.get("https://www.nseindia.com", timeout=10)
-        resp = session.get(url, timeout=15)
+        # NSE requires a valid browser session first
+        session.get("https://www.nseindia.com", timeout=15)
+        import time; time.sleep(2)
+        resp = session.get(url, timeout=20)
         data = resp.json()
 
         announcements = data if isinstance(data, list) else data.get("data", [])
@@ -200,13 +211,46 @@ def scrape_nse_announcements(limit: int = 20) -> int:
     return stored
 
 
+
+
+def scrape_et_markets_rss(limit: int = 20) -> int:
+    """Scrape Economic Times Markets RSS — reliable, no auth needed."""
+    stored = 0
+    RSS_FEEDS = [
+        ("https://economictimes.indiatimes.com/markets/rssfeeds/1977021501.cms", "market_news"),
+        ("https://economictimes.indiatimes.com/markets/stocks/rssfeeds/2146842.cms", "stock_news"),
+        ("https://economictimes.indiatimes.com/news/economy/policy/rssfeeds/1373380680.cms", "policy_news"),
+    ]
+    try:
+        import xml.etree.ElementTree as ET
+        for feed_url, doc_type in RSS_FEEDS:
+            try:
+                resp = httpx.get(feed_url, headers=HEADERS, timeout=10, follow_redirects=True)
+                root = ET.fromstring(resp.content)
+                items = root.findall(".//item")[:limit]
+                for item in items:
+                    title   = item.findtext("title", "").strip()
+                    desc    = item.findtext("description", "").strip()
+                    link    = item.findtext("link", "").strip()
+                    pubdate = item.findtext("pubDate", "").strip()
+                    content = f"{title}. {desc}"
+                    if len(content) > 100:
+                        ok = _store_document("ET_MARKETS", doc_type, title, link, content, pubdate)
+                        if ok:
+                            stored += 1
+            except Exception as e:
+                log.warning(f"[scraper] ET RSS feed failed ({feed_url}): {e}")
+    except Exception as e:
+        log.error(f"[scraper] ET RSS scrape failed: {e}")
+    log.info(f"[scraper] ET Markets: stored {stored} documents")
+    return stored
+
 def run_full_scrape() -> dict:
     """Run all scrapers. Called by Perseus watcher every hour."""
     log.info("[scraper] Starting full financial document scrape...")
     results = {
-        "rbi":  scrape_rbi_pressreleases(limit=5),
-        "sebi": scrape_sebi_circulars(limit=5),
-        "nse":  scrape_nse_announcements(limit=20),
+        "et_markets": scrape_et_markets_rss(limit=20),
+        "nse":        scrape_nse_announcements(limit=10),
     }
     total = sum(results.values())
     log.info(f"[scraper] Full scrape complete: {total} documents stored")
