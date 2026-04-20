@@ -159,7 +159,8 @@ def get_open_signals() -> list[dict]:
     try:
         cur = con.cursor()
         cur.execute("""
-            SELECT id, symbol, direction, entry_price, take_profit, stop_loss, generated_at
+            SELECT id, symbol, direction, entry_price, take_profit, stop_loss,
+                   generated_at, regime, confluence_score
             FROM signal_history
             WHERE outcome = 'open' AND direction IN ('BUY', 'SELL')
         """)
@@ -168,15 +169,24 @@ def get_open_signals() -> list[dict]:
     finally:
         con.close()
 
-def update_outcome(signal_id: int, outcome: str, exit_price: float):
+def update_outcome(signal_id: int, outcome: str, exit_price: float, extra: dict = None):
     con, db = _get_conn()
+    extra = extra or {}
     try:
         cur = con.cursor()
-        cur.execute(
-            "UPDATE signal_history SET outcome = %s, exit_price = %s, evaluated_at = %s WHERE id = %s" if db == "pg"
-            else "UPDATE signal_history SET outcome = ?, exit_price = ?, evaluated_at = ? WHERE id = ?",
-            (outcome, exit_price, datetime.utcnow().isoformat(), signal_id)
-        )
+        ph = "%s" if db == "pg" else "?"
+        sets = ["outcome = " + ph, "exit_price = " + ph, "evaluated_at = " + ph]
+        vals = [outcome, exit_price, datetime.utcnow().isoformat()]
+        allowed = ["pnl_pct", "hold_time_hours", "max_favorable_excursion",
+                   "max_adverse_excursion", "failure_reason", "failure_category",
+                   "market_regime_at_entry"]
+        for k in allowed:
+            if k in extra and extra[k] is not None:
+                sets.append(f"{k} = {ph}")
+                vals.append(extra[k])
+        vals.append(signal_id)
+        q = f"UPDATE signal_history SET {', '.join(sets)} WHERE id = {ph}"
+        cur.execute(q, vals)
         con.commit()
     finally:
         con.close()
