@@ -42,21 +42,6 @@ def evaluate_open_signals() -> dict:
 
     for s in signals:
         try:
-            # ── Expiry check ──
-            try:
-                gen = datetime.fromisoformat(s["generated_at"].replace("Z", "+00:00"))
-                if gen.tzinfo is None:
-                    gen = gen.replace(tzinfo=timezone.utc)
-                age_days = (datetime.now(timezone.utc) - gen).days
-                if age_days > 7:
-                    update_outcome(s["id"], "expired", s["entry_price"],
-                                   extra={"failure_reason": "expired_7d",
-                                          "failure_category": "timeout"})
-                    results["expired"] += 1
-                    continue
-            except Exception:
-                pass
-
             # ── Bad TP/SL check ──
             if s["take_profit"] == s["entry_price"] or s["stop_loss"] == s["entry_price"]:
                 update_outcome(s["id"], "expired", s["entry_price"],
@@ -74,6 +59,35 @@ def evaluate_open_signals() -> dict:
             entry = s["entry_price"]
             tp = s["take_profit"]
             sl = s["stop_loss"]
+
+            # ── Check TP/SL FIRST, then expiry ──
+            outcome = None
+            if direction == "BUY":
+                if price >= tp:
+                    outcome = "win"
+                elif price <= sl:
+                    outcome = "loss"
+            elif direction == "SELL":
+                if price <= tp:
+                    outcome = "win"
+                elif price >= sl:
+                    outcome = "loss"
+
+            # ── Expiry check (only if no TP/SL hit) ──
+            if outcome is None:
+                try:
+                    gen = datetime.fromisoformat(s["generated_at"].replace("Z", "+00:00"))
+                    if gen.tzinfo is None:
+                        gen = gen.replace(tzinfo=timezone.utc)
+                    age_days = (datetime.now(timezone.utc) - gen).days
+                    if age_days > 30:
+                        update_outcome(s["id"], "expired", s["entry_price"],
+                                       extra={"failure_reason": "expired_30d",
+                                              "failure_category": "timeout"})
+                        results["expired"] += 1
+                        continue
+                except Exception:
+                    pass
 
             # ── Hold time ──
             try:
@@ -105,19 +119,6 @@ def evaluate_open_signals() -> dict:
                         mae = float((max(highs) - entry) / entry * 100)
             except Exception:
                 pass
-
-            # ── Outcome ──
-            outcome = None
-            if direction == "BUY":
-                if price >= tp:
-                    outcome = "win"
-                elif price <= sl:
-                    outcome = "loss"
-            elif direction == "SELL":
-                if price <= tp:
-                    outcome = "win"
-                elif price >= sl:
-                    outcome = "loss"
 
             if outcome:
                 extra = {
