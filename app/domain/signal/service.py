@@ -125,7 +125,7 @@ def _enforce_consistency(direction: str, probability: float, model_agreement: fl
     return enforced_dir, enforced_prob, confluence_agreement
 
 
-def generate_signal(symbol: str, include_reasoning: bool = True) -> Optional[dict]:
+def generate_signal(symbol: str, include_reasoning: bool = True, bypass_cache: bool = False) -> Optional[dict]:
     """
     Full pipeline for one ticker.
     Returns a dict ready to serialize to JSON — or None if data unavailable.
@@ -136,7 +136,10 @@ def generate_signal(symbol: str, include_reasoning: bool = True) -> Optional[dic
 
     # --- LAYER 1: Redis cache (fastest) ---
     redis_key = f"signal:{symbol}"
-    cached = get_cached(redis_key)
+    if bypass_cache:
+        cached = None
+    else:
+        cached = get_cached(redis_key)
     if cached:
         if not include_reasoning and "reasoning" in cached:
             cached["reasoning"] = ""

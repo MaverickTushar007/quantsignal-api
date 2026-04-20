@@ -118,7 +118,7 @@ def save_signal(signal: dict):
         cur = con.cursor()
         # Dedup: skip if identical signal for same symbol+direction in last 4 hours
         dedup_q = (
-            "SELECT COUNT(*) FROM signal_history WHERE symbol=%s AND direction=%s AND ABS(entry_price-%s)<0.01 AND generated_at > NOW() - INTERVAL '4 hours'"
+            "SELECT COUNT(*) FROM signal_history WHERE symbol=%s AND direction=%s AND ABS(entry_price-%s)<0.01 AND generated_at::timestamptz > NOW() - INTERVAL '4 hours'"
             if db == "pg" else
             "SELECT COUNT(*) FROM signal_history WHERE symbol=? AND direction=? AND ABS(entry_price-?)<0.01 AND generated_at > datetime('now','-4 hours')"
         )

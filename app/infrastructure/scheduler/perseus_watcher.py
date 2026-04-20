@@ -44,7 +44,7 @@ def scan_and_alert():
     for symbol in TOP_ASSETS:
         try:
             from app.domain.signal.service import generate_signal
-            sig = generate_signal(symbol, include_reasoning=False)
+            sig = generate_signal(symbol, include_reasoning=False, bypass_cache=True)
 
             if not sig:
                 continue
