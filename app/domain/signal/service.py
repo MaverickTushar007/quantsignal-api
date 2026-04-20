@@ -16,6 +16,7 @@ from app.domain.data.news import get_news, get_sentiment_score
 from app.domain.ml.ensemble import predict, SignalResult
 from app.domain.ml.features import build_features
 from app.domain.reasoning.service import get_reasoning
+from app.domain.signal.confluence_v2 import build_confluence_v2, enforce_consistency_v2
 
 
 @dataclass
@@ -55,74 +56,9 @@ class FullSignal:
     event_adjustment:   dict = None
     data_warnings:   list = None
     volume_ratio: float = 1.0
+    session_info:  str = "nse (×1.0)"
 
 
-def _build_confluence(feat_row) -> list:
-    """9-factor confluence scorecard from latest feature row."""
-    rsi    = float(feat_row.get("RSI_14", 50))
-    macdh  = float(feat_row.get("MACD_hist", 0))
-    bbpct  = float(feat_row.get("BB_pct", 0.5)) * 100
-    stoch  = float(feat_row.get("stoch_K", 50))
-    volr   = float(feat_row.get("vol_ratio", 1))
-    smacx  = float(feat_row.get("SMA_cross", 1)) > 1
-    dsma20 = float(feat_row.get("dist_SMA20", 0)) > 0
-    p52w   = float(feat_row.get("pos_52w", 0.5)) * 100
-    mom5   = float(feat_row.get("mom_5d", 0)) * 100
-
-    def sig(bull): return "BULLISH" if bull else "BEARISH"
-
-    return [
-        {"name": "RSI-14",       "value": f"{rsi:.0f} — {'Oversold' if rsi<35 else 'Overbought' if rsi>65 else 'Neutral'}",  "signal": sig(rsi < 50)},
-        {"name": "MACD",         "value": f"{'Bullish' if macdh>0 else 'Bearish'} ({macdh:+.4f})",                            "signal": sig(macdh > 0)},
-        {"name": "Bollinger",    "value": f"{bbpct:.0f}% ({'Upper' if bbpct>80 else 'Lower' if bbpct<20 else 'Mid'})",        "signal": sig(bbpct < 50)},
-        {"name": "Stochastic %K","value": f"{stoch:.0f} — {'Overbought' if stoch>80 else 'Oversold' if stoch<20 else 'Neutral'}", "signal": sig(stoch < 50)},
-        {"name": "Volume",       "value": f"{volr:.2f}x avg",                                                                  "signal": sig(volr > 1)},
-        {"name": "SMA Cross",    "value": f"SMA20 {'above' if smacx else 'below'} SMA50",                                     "signal": sig(smacx)},
-        {"name": "vs SMA20",     "value": f"Price {'above' if dsma20 else 'below'} SMA20",                                    "signal": sig(dsma20)},
-        {"name": "52W Position", "value": f"{p52w:.0f}% ({'High' if p52w>70 else 'Low' if p52w<30 else 'Mid'})",              "signal": sig(p52w > 50)},
-        {"name": "5D Momentum",  "value": f"{mom5:+.2f}% ROC",                                                                "signal": sig(mom5 > 0)},
-    ]
-
-
-def _enforce_consistency(direction: str, probability: float, model_agreement: float, bull_count: int):
-    """
-    Single source of truth: confluence drives direction drives agreement.
-    
-    Rules:
-      bull_count 0-2  → SELL only (probability dampened toward 0.35)
-      bull_count 3-4  → HOLD only (probability dampened toward 0.45)
-      bull_count 5    → HOLD (neutral zone)
-      bull_count 6-7  → BUY allowed (medium confidence)
-      bull_count 8-9  → BUY (high confidence)
-    
-    model_agreement is replaced with confluence agreement (bull_count/9)
-    so the displayed % always matches the scorecard.
-    """
-    confluence_agreement = round(bull_count / 9, 3)
-
-    if bull_count <= 2:
-        # Strong bearish confluence — force SELL, dampen probability toward bearish
-        enforced_dir = "SELL"
-        enforced_prob = round(min(probability, 0.40) * 0.85 + 0.10, 4)
-    elif bull_count <= 4:
-        # Weak confluence either way — force HOLD
-        enforced_dir = "HOLD"
-        enforced_prob = round(0.45 + (bull_count - 3) * 0.02, 4)  # 0.43–0.47 range
-    elif bull_count == 5:
-        # True neutral
-        enforced_dir = "HOLD"
-        enforced_prob = 0.50
-    elif bull_count <= 7:
-        # Moderate bullish — allow BUY only if ML also says BUY, else HOLD
-        enforced_dir = direction if direction == "BUY" else "HOLD"
-        enforced_prob = round(max(probability, 0.52), 4) if enforced_dir == "BUY" else 0.50
-    else:
-        # Strong bullish confluence (8-9) — BUY regardless of ML hesitation
-        enforced_dir = "BUY"
-        enforced_prob = round(max(probability, 0.62), 4)
-
-    enforced_prob = round(max(0.01, min(0.99, enforced_prob)), 4)
-    return enforced_dir, enforced_prob, confluence_agreement
 
 
 def generate_signal(symbol: str, include_reasoning: bool = True, bypass_cache: bool = False) -> Optional[dict]:
@@ -184,6 +120,7 @@ def generate_signal(symbol: str, include_reasoning: bool = True, bypass_cache: b
     df = fetch_ohlcv(symbol, period="2y")
 
     # 5d. Apply event-day adjustments to TP/SL and Kelly size
+    macro_event_today = None
     event_adj = {"atr_multiplier": 1.0, "kelly_reduction": 1.0, "event_type": None}
     try:
         from app.domain.data.event_adjustments import get_event_adjustments
@@ -265,12 +202,15 @@ def generate_signal(symbol: str, include_reasoning: bool = True, bypass_cache: b
     # 4. Confluence scorecard
     feat       = build_features(df)
     latest_row = feat.iloc[-1].to_dict()
-    confluence = _build_confluence(latest_row)
-    bull_count = sum(1 for c in confluence if c["signal"] == "BULLISH")
+    asset_type = meta.get("type", "equity")
+    confluence, bull_count, score_label, session_info = build_confluence_v2(
+        latest_row, df, asset_type
+    )
+    session_mult = 1.0
 
     # 4b. Enforce consistency: confluence → direction → agreement
-    enforced_dir, enforced_prob, confluence_agreement = _enforce_consistency(
-        ml.direction, ml.probability, ml.model_agreement, bull_count
+    enforced_dir, enforced_prob, confluence_agreement = enforce_consistency_v2(
+        ml.direction, ml.probability, bull_count, session_mult
     )
     # Patch ml fields so reasoning + all downstream use consistent values
     ml.direction       = enforced_dir
@@ -401,7 +341,8 @@ def generate_signal(symbol: str, include_reasoning: bool = True, bypass_cache: b
         model_agreement=ml.model_agreement,
         top_features=list(ml.top_features.keys()),
         confluence=confluence,
-        confluence_score=f"{bull_count}/9 bullish",
+        confluence_score=score_label,
+        session_info=session_info,
         volume_ratio=ml.volume_ratio,
         news=news_dicts,
         reasoning=reasoning,
