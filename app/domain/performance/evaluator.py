@@ -135,7 +135,10 @@ def evaluate_open_signals() -> dict:
 
                 update_outcome(s["id"], outcome, price, extra=extra)
                 results["evaluated"] += 1
-                results[f"{outcome}s"] if outcome == "win" else results.__setitem__("losses", results.get("losses", 0) + 1) += 1
+                if outcome == "win":
+                    results["wins"] += 1
+                else:
+                    results["losses"] += 1
                 logger.info(f"[evaluator] {s['symbol']} {direction} → {outcome} "
                             f"PnL={pnl_pct:.2f}% hold={hold_hours:.1f}h")
             else:
