@@ -142,7 +142,7 @@ def save_signal(signal: dict):
                 signal.get("generated_at", datetime.utcnow().isoformat()),
                 signal.get("probability"),
                 signal.get("raw_probability"),
-                signal.get("confluence_score"),
+                int(str(signal.get("confluence_score","0")).split("/")[0]) if signal.get("confluence_score") else None,
                 signal.get("mtf_score"),
                 signal.get("regime"),
                 signal.get("regime_multiplier"),
