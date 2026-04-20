@@ -18,7 +18,7 @@ from app.infrastructure.queue.reasoning_queue import enqueue_reasoning_job
 from app.domain.reasoning.worker import fill_reasoning_async
 from fastapi import BackgroundTasks
 from app.domain.data.universe import TICKERS, TICKER_MAP
-from app.domain.billing.middleware import signal_gate
+from app.domain.billing.middleware import signal_gate, user_context
 
 router = APIRouter()
 
