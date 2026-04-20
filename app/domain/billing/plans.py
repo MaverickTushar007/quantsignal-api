@@ -9,6 +9,7 @@ PLANS = {
         "price_inr":         0,
         "signals_per_day":   10,
         "perseus_per_day":   5,
+        "tokens_per_day":    50000,
         "perseus_max_input_tokens": 300,
         "alerts":            False,
         "guardian":          False,
@@ -22,6 +23,7 @@ PLANS = {
         "ls_variant_id":     "",   # fill after LS product setup
         "signals_per_day":   9999,
         "perseus_per_day":   9999,
+        "tokens_per_day":    9999999,
         "perseus_max_input_tokens": 9999,
         "alerts":            True,
         "guardian":          True,
@@ -59,3 +61,17 @@ def signals_limit(tier: str) -> int:
 
 def perseus_limit(tier: str) -> int:
     return get_plan(tier)["perseus_per_day"]
+
+def tokens_limit(tier: str) -> int:
+    return get_plan(tier).get("tokens_per_day", 50000)
+
+TOKEN_COSTS = {
+    "signal":        800,
+    "perseus_chat": 2000,
+    "bulk_scan":     400,
+    "reasoning":    1200,
+    "default":       500,
+}
+
+def token_cost(request_type: str) -> int:
+    return TOKEN_COSTS.get(request_type, TOKEN_COSTS["default"])

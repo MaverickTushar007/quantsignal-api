@@ -60,7 +60,8 @@ def signal_gate(ctx: dict = Depends(user_context)) -> dict:
             }
         )
     from app.domain.billing.usage import increment
-    increment(ctx["user_id"], "signals")
+    from app.domain.billing.plans import token_cost
+    increment(ctx["user_id"], "signals", tokens=token_cost("signal"))
     return ctx
 
 
@@ -80,7 +81,8 @@ def perseus_gate(ctx: dict = Depends(user_context)) -> dict:
             }
         )
     from app.domain.billing.usage import increment
-    increment(ctx["user_id"], "perseus")
+    from app.domain.billing.plans import token_cost
+    increment(ctx["user_id"], "perseus", tokens=token_cost("perseus_chat"))
     return ctx
 
 

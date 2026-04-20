@@ -29,6 +29,12 @@ async def health():
     return HealthResponse(status="ok", version="1.0.0", env=settings.app_env)
 
 
+@router.get("/usage", tags=["billing"])
+async def get_usage_endpoint(ctx: dict = Depends(user_context)):
+    from app.domain.billing.usage import get_usage_summary
+    return get_usage_summary(ctx["user_id"], ctx["tier"])
+
+
 @router.get("/signals", response_model=List[WatchlistItem], tags=["signals"])
 def get_all_signals(
     _gate: dict = Depends(signal_gate),
@@ -736,3 +742,10 @@ def trigger_scrape():
         return {"status": "scrape started", "sources": ["RBI", "SEBI", "NSE"]}
     except Exception as e:
         return {"status": "error", "message": str(e)}
+
+
+@router.get("/usage", tags=["billing"])
+async def get_usage_endpoint(ctx: dict = Depends(signal_gate.__wrapped__ if hasattr(signal_gate, '__wrapped__') else lambda: {"user_id": "anonymous", "tier": "free"})):
+    from app.domain.billing.middleware import user_context
+    from app.domain.billing.usage import get_usage_summary
+    return get_usage_summary(ctx["user_id"], ctx["tier"])
