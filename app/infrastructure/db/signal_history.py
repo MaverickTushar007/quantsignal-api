@@ -116,13 +116,13 @@ def save_signal(signal: dict):
     con, db = _get_conn()
     try:
         cur = con.cursor()
-        # Dedup: skip if identical signal for same symbol+direction in last 4 hours
+        # Dedup: skip if same symbol+direction already open OR saved in last 24h
         dedup_q = (
-            "SELECT COUNT(*) FROM signal_history WHERE symbol=%s AND direction=%s AND ABS(entry_price-%s)<0.01 AND generated_at::timestamptz > NOW() - INTERVAL '4 hours'"
+            "SELECT COUNT(*) FROM signal_history WHERE symbol=%s AND direction=%s AND (outcome='open' OR generated_at::timestamptz > NOW() - INTERVAL '24 hours')"
             if db == "pg" else
-            "SELECT COUNT(*) FROM signal_history WHERE symbol=? AND direction=? AND ABS(entry_price-?)<0.01 AND generated_at > datetime('now','-4 hours')"
+            "SELECT COUNT(*) FROM signal_history WHERE symbol=? AND direction=? AND (outcome='open' OR generated_at > datetime('now','-24 hours'))"
         )
-        cur.execute(dedup_q, (signal["symbol"], signal["direction"], signal["current_price"]))
+        cur.execute(dedup_q, (signal["symbol"], signal["direction"]))
         if cur.fetchone()[0] > 0:
             logger.info(f"[signal_history] dedup skip {signal['symbol']} {signal['direction']}")
             return
