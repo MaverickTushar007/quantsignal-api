@@ -266,3 +266,16 @@ def cleanup_bad_signals():
         return {"status": "ok", "expired": count}
     finally:
         con.close()
+
+
+@router.get("/admin/job-health", tags=["admin"])
+def job_health():
+    """Return consecutive failure counts for all tracked jobs."""
+    from app.domain.core.failure_tracker import get_all_status
+    status = get_all_status()
+    unhealthy = {k: v for k, v in status.items() if not v["healthy"]}
+    return {
+        "healthy": len(unhealthy) == 0,
+        "unhealthy_jobs": unhealthy,
+        "all_jobs": status,
+    }

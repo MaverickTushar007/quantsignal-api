@@ -12,6 +12,7 @@ router = APIRouter()
 CRON_SECRET = os.getenv("CRON_SECRET", "quantsignal-cron-2026")
 
 def _rebuild():
+    from app.domain.core.failure_tracker import record_failure, record_success
     from app.api.routes.alerts import fire_signal_alerts
     import json, time, threading
     from pathlib import Path
@@ -53,10 +54,13 @@ def _rebuild():
                     sig = generate_signal(sym, include_reasoning=False)
                     if sig:
                         results[sym] = sig
+                        record_success(f"signal:{sym}")
                         print(f"[{group_name}] ✓ {sym}: {sig['direction']}")
                     else:
+                        record_failure(f"signal:{sym}")
                         print(f"[{group_name}] ✗ {sym}: no data")
                 except Exception as e:
+                    record_failure(f"signal:{sym}")
                     print(f"[{group_name}] ✗ {sym}: {e}")
                 time.sleep(0.2)
             return group_name, results
