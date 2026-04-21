@@ -46,3 +46,26 @@ from app.domain.performance.calibration import calibrate
 def get_calibration():
     signals = get_evaluated_signals()
     return calibrate(signals)
+
+
+@router.get("/performance/walk-forward")
+def get_walk_forward():
+    """Run walk-forward validation on key symbols and return results."""
+    from app.domain.ml.walk_forward import validate_all
+    symbols = ["BTC-USD", "ETH-USD", "SOL-USD", "TSLA", "RELIANCE.NS", "GC=F"]
+    results = validate_all(symbols)
+    return {
+        sym: {
+            "is_win_rate":    r.is_win_rate,
+            "oos_win_rate":   r.oos_win_rate,
+            "wfe_ratio":      r.wfe_ratio,
+            "is_trades":      r.is_trades,
+            "oos_trades":     r.oos_trades,
+            "is_overfitted":  r.is_overfitted,
+            "insufficient":   r.insufficient_data,
+            "verdict":        "overfitted" if r.is_overfitted else
+                              "insufficient_data" if r.insufficient_data else
+                              "verified"
+        }
+        for sym, r in results.items()
+    }

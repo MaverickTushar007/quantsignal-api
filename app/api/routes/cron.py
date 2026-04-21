@@ -398,7 +398,31 @@ def evaluate_alerts(x_cron_secret: str = Header(None, alias="X-Cron-Secret")):
     try:
         from app.domain.alerts.tracker import evaluate_outcomes
         evaluated = evaluate_outcomes()
-        return {"status": "ok", "evaluated": evaluated}
+    
+        # Walk-forward validation (runs on every 7th cron cycle ~weekly)
+        try:
+            import time as _time
+            _wfv_flag = "data/wfv_last_run.txt"
+            _run_wfv = True
+            try:
+                _last = float(open(_wfv_flag).read().strip())
+                _run_wfv = (_time.time() - _last) > 7 * 86400
+            except Exception:
+                pass
+            if _run_wfv:
+                from app.domain.ml.walk_forward import validate_all
+                _wfv_symbols = ["BTC-USD", "ETH-USD", "SOL-USD", "TSLA", "RELIANCE.NS"]
+                _wfv_results = validate_all(_wfv_symbols)
+                _overfitted = [s for s, r in _wfv_results.items() if r.is_overfitted]
+                if _overfitted:
+                    print(f"[WFV] WARNING overfitted symbols: {_overfitted}")
+                else:
+                    print(f"[WFV] All symbols passed walk-forward validation")
+                open(_wfv_flag, "w").write(str(_time.time()))
+        except Exception as _e:
+            print(f"WFV error: {_e}")
+
+    return {"status": "ok", "evaluated": evaluated}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
