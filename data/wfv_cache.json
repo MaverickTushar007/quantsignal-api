@@ -1,0 +1,50 @@
+{
+  "BTC-USD": {
+    "is_win_rate": 0.375,
+    "oos_win_rate": 0.25,
+    "wfe_ratio": 0.6667,
+    "is_overfitted": false,
+    "insufficient": false,
+    "verdict": "verified"
+  },
+  "ETH-USD": {
+    "is_win_rate": 0.2381,
+    "oos_win_rate": 0.6667,
+    "wfe_ratio": 2.8001,
+    "is_overfitted": false,
+    "insufficient": false,
+    "verdict": "verified"
+  },
+  "SOL-USD": {
+    "is_win_rate": 0.4286,
+    "oos_win_rate": 0.5,
+    "wfe_ratio": 0,
+    "is_overfitted": false,
+    "insufficient": true,
+    "verdict": "insufficient_data"
+  },
+  "TSLA": {
+    "is_win_rate": 0.3333,
+    "oos_win_rate": 0.0,
+    "wfe_ratio": 0,
+    "is_overfitted": false,
+    "insufficient": true,
+    "verdict": "insufficient_data"
+  },
+  "RELIANCE.NS": {
+    "is_win_rate": 0.2667,
+    "oos_win_rate": 0.0,
+    "wfe_ratio": 0,
+    "is_overfitted": false,
+    "insufficient": true,
+    "verdict": "insufficient_data"
+  },
+  "GC=F": {
+    "is_win_rate": 0.3333,
+    "oos_win_rate": 0.0,
+    "wfe_ratio": 0,
+    "is_overfitted": false,
+    "insufficient": true,
+    "verdict": "insufficient_data"
+  }
+}
