@@ -225,6 +225,21 @@ def predict(ticker, df, sentiment=0.0):
             tp = min(tp, close * 0.995)      # tp must be below current price
             sl = max(sl, close * 1.001)      # sl must be above current price
 
+
+        # ── Stale signal filter ───────────────────────────────────────────
+        # If price is already within 0.5x ATR of TP or SL, the move has
+        # already happened — logging this signal inflates win rate with
+        # instant fake hits. Discard it.
+        tp_proximity = abs(close - tp) / atr if atr > 0 else 999
+        sl_proximity = abs(close - sl) / atr if atr > 0 else 999
+        if tp_proximity < 0.5 or sl_proximity < 0.5:
+            import logging as _log
+            _log.getLogger(__name__).warning(
+                f"[stale_filter] {ticker} {direction} discarded — "
+                f"tp_proximity={tp_proximity:.2f} sl_proximity={sl_proximity:.2f} ATR"
+            )
+            return None
+
         tp_dist = abs(tp - close)
         sl_dist = abs(sl - close)
         rr = tp_dist / sl_dist if sl_dist > 0 else 0
