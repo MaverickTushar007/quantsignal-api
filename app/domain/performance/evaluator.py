@@ -52,6 +52,16 @@ def evaluate_open_signals() -> dict:
 
             price = _get_price(s["symbol"])
             if not price:
+                # fallback to yfinance directly
+                try:
+                    import yfinance as yf
+                    ticker = yf.Ticker(s["symbol"])
+                    hist = ticker.history(period="1d", interval="5m")
+                    if not hist.empty:
+                        price = float(hist["Close"].iloc[-1])
+                except Exception:
+                    pass
+            if not price:
                 results["skipped"] += 1
                 continue
 
