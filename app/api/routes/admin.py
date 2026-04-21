@@ -233,3 +233,36 @@ async def wipe_models():
         except Exception:
             pass
     return {"wiped": len(files), "message": f"Deleted {len(files)} model pickles — will retrain on next request"}
+
+@router.post("/admin/db/cleanup", tags=["admin"])
+def cleanup_bad_signals():
+    """Expire pre-tier junk signals from Railway Postgres."""
+    from app.infrastructure.db.signal_history import _get_conn
+    con, db = _get_conn()
+    try:
+        cur = con.cursor()
+        if db == "pg":
+            cur.execute("""
+                UPDATE signal_history
+                SET outcome = 'expired', evaluated_at = NOW()
+                WHERE outcome = 'open'
+                AND (
+                    confluence_score < 4
+                    OR generated_at < NOW() - INTERVAL '7 days'
+                )
+            """)
+        else:
+            cur.execute("""
+                UPDATE signal_history
+                SET outcome = 'expired', evaluated_at = datetime('now')
+                WHERE outcome = 'open'
+                AND (
+                    confluence_score < 4
+                    OR generated_at < datetime('now', '-7 days')
+                )
+            """)
+        count = cur.rowcount
+        con.commit()
+        return {"status": "ok", "expired": count}
+    finally:
+        con.close()
