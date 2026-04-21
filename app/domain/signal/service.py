@@ -17,6 +17,7 @@ from app.domain.ml.ensemble import predict, SignalResult
 from app.domain.ml.features import build_features
 from app.domain.reasoning.service import get_reasoning
 from app.domain.signal.confluence_v2 import build_confluence_v2, enforce_consistency_v2
+from app.domain.core.circuit_breaker_v2 import CircuitBreaker, evaluate_and_update_outcomes
 
 
 @dataclass
