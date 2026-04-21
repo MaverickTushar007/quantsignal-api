@@ -137,7 +137,7 @@ def _rebuild():
         # Evaluate open signals first (close wins/losses before saving new ones)
         try:
             from app.domain.core.circuit_breaker_v2 import evaluate_and_update_outcomes
-from app.domain.performance.evaluator import evaluate_open_signals
+            from app.domain.performance.evaluator import evaluate_open_signals
             eval_result = evaluate_open_signals()
             print(f"Signal evaluation: {eval_result}")
         except Exception as e:
@@ -383,7 +383,7 @@ def check_outcomes(x_cron_secret: str = Header(None)):
     def _run():
         try:
             from app.domain.core.circuit_breaker_v2 import evaluate_and_update_outcomes
-from app.domain.performance.evaluator import evaluate_open_signals
+            from app.domain.performance.evaluator import evaluate_open_signals
             result = evaluate_open_signals()
             print(f"Outcome check complete: {result}")
         except Exception as e:
