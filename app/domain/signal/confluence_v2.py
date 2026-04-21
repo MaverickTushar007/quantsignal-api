@@ -6,6 +6,7 @@ Factors 1-9  → original technical indicators (unchanged logic)
 Factor 10    → Equal Highs / Equal Lows  (liquidity magnet — stop cluster detection)
 Factor 11    → BOS / CHoCH              (market structure break confirmation)
 Factor 12    → Liquidity Sweep          (wick-through + close-back reversal)
+Factor 13    → Order Block               (last opposing candle before impulse)
 
 Session multiplier (crypto/global only):
   London / NY open  → score weight ×1.2
@@ -100,7 +101,7 @@ def _detect_equal_levels(
     eq_lows,  level_low  = _has_cluster(lows,  tol)
     eq_highs, level_high = _has_cluster(highs, tol)
 
-    if eq_lows and level_low < current:
+    if eq_lows and level_low < current and abs(current - level_low) / current <= 0.03:
         dist = round(abs(current - level_low) / current * 100, 2)
         return {
             "detected":     True,
@@ -111,7 +112,7 @@ def _detect_equal_levels(
             "value":        f"Equal lows @ {level_low:.2f} ({dist:.1f}% below)",
         }
 
-    if eq_highs and level_high > current:
+    if eq_highs and level_high > current and abs(level_high - current) / current <= 0.03:
         dist = round(abs(level_high - current) / current * 100, 2)
         return {
             "detected":     True,
@@ -273,6 +274,100 @@ def _detect_liquidity_sweep(
     return {"detected": False, "signal": "NEUTRAL", "value": "No sweep detected"}
 
 
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# FACTOR 13 — ORDER BLOCKS
+# ─────────────────────────────────────────────────────────────────────────────
+
+def _detect_order_block(
+    df: pd.DataFrame,
+    lookback: int = 40,
+    impulse_threshold: float = 0.015,  # 1.5% move to qualify as impulse
+) -> dict:
+    """
+    Order Block: the last opposing candle before a strong impulse move.
+
+    Bullish OB: last bearish candle before a strong bullish impulse
+                → price returning to this zone is a buy opportunity.
+    Bearish OB: last bullish candle before a strong bearish impulse
+                → price returning to this zone is a sell opportunity.
+
+    Signal fires when current price is INSIDE or just above/below the OB zone.
+    """
+    if len(df) < lookback + 3:
+        return {"detected": False, "signal": "NEUTRAL", "value": "Insufficient data"}
+
+    window  = df.iloc[-lookback:].reset_index(drop=True)
+    current = float(df["Close"].iloc[-1])
+    n       = len(window)
+
+    bullish_ob = None
+    bearish_ob = None
+
+    for i in range(1, n - 2):
+        # Calculate move after candle i
+        move = (window["Close"].iloc[i + 1] - window["Close"].iloc[i]) / window["Close"].iloc[i]
+
+        if move >= impulse_threshold:
+            # Strong bullish impulse — look for last bearish candle before it
+            if window["Close"].iloc[i] < window["Open"].iloc[i]:  # bearish candle
+                bullish_ob = {
+                    "high": float(window["High"].iloc[i]),
+                    "low":  float(window["Low"].iloc[i]),
+                    "idx":  i,
+                }
+
+        elif move <= -impulse_threshold:
+            # Strong bearish impulse — look for last bullish candle before it
+            if window["Close"].iloc[i] > window["Open"].iloc[i]:  # bullish candle
+                bearish_ob = {
+                    "high": float(window["High"].iloc[i]),
+                    "low":  float(window["Low"].iloc[i]),
+                    "idx":  i,
+                }
+
+    # Check if current price is inside or approaching an OB zone (within 0.5%)
+    proximity = current * 0.005
+
+    if bullish_ob:
+        ob_mid = (bullish_ob["high"] + bullish_ob["low"]) / 2
+        if bullish_ob["low"] - proximity <= current <= bullish_ob["high"] + proximity:
+            return {
+                "detected": True,
+                "signal":   "BULLISH",
+                "type":     "bullish_ob",
+                "zone":     (bullish_ob["low"], bullish_ob["high"]),
+                "value":    f"Bullish OB zone {bullish_ob['low']:.2f}–{bullish_ob['high']:.2f} (price inside)",
+            }
+
+    if bearish_ob:
+        ob_mid = (bearish_ob["high"] + bearish_ob["low"]) / 2
+        if bearish_ob["low"] - proximity <= current <= bearish_ob["high"] + proximity:
+            return {
+                "detected": True,
+                "signal":   "BEARISH",
+                "type":     "bearish_ob",
+                "zone":     (bearish_ob["low"], bearish_ob["high"]),
+                "value":    f"Bearish OB zone {bearish_ob['low']:.2f}–{bearish_ob['high']:.2f} (price inside)",
+            }
+
+    # OB exists but price not in zone — show nearest
+    if bullish_ob and (not bearish_ob or bullish_ob["idx"] > bearish_ob.get("idx", -1)):
+        return {
+            "detected": False,
+            "signal":   "NEUTRAL",
+            "value":    f"Nearest bullish OB: {bullish_ob['low']:.2f}–{bullish_ob['high']:.2f} (not in zone)",
+        }
+    if bearish_ob:
+        return {
+            "detected": False,
+            "signal":   "NEUTRAL",
+            "value":    f"Nearest bearish OB: {bearish_ob['low']:.2f}–{bearish_ob['high']:.2f} (not in zone)",
+        }
+
+    return {"detected": False, "signal": "NEUTRAL", "value": "No OB detected"}
+
 # ─────────────────────────────────────────────────────────────────────────────
 # PUBLIC: 12-FACTOR CONFLUENCE BUILDER
 # ─────────────────────────────────────────────────────────────────────────────
@@ -384,7 +479,6 @@ def build_confluence_v2(
     })
 
     # ── Factor 12 — Liquidity Sweep ──────────────────────────────────────
-    # Map TICKER_MAP type to sweep tolerance key
     _type_map = {
         "crypto":    "crypto",
         "global":    "global",
@@ -400,23 +494,72 @@ def build_confluence_v2(
         "name":   "Liquidity Sweep",
         "value":  sweep["value"],
         "signal": sweep["signal"] if sweep["detected"] else "NEUTRAL",
+        "tier":   1,
     })
 
-    # ── Scoring ──────────────────────────────────────────────────────────
-    # NEUTRAL counts as 0.5 — doesn't add or subtract
-    bull_count = sum(1 for f in factors if f["signal"] == "BULLISH")
-    bear_count = sum(1 for f in factors if f["signal"] == "BEARISH")
+    # ── Factor 13 — Order Block ───────────────────────────────────────────
+    ob = _detect_order_block(df)
+    factors.append({
+        "name":   "Order Block",
+        "value":  ob["value"],
+        "signal": ob["signal"] if ob["detected"] else "NEUTRAL",
+        "tier":   1,
+    })
 
-    # Session multiplier for display / downstream use
+    # ── Tier tags on existing factors ─────────────────────────────────────
+    # Tier 1: structural/liquidity (factors 10-13) — already tagged above
+    # Tier 2: volume confirmation (factors 4, 9)
+    # Tier 3: indicators (factors 1-3, 5-8)
+    tier_map = {
+        "RSI-14":              3,
+        "MACD":                3,
+        "Bollinger":           3,
+        "Volume":              2,
+        "vs SMA50":            3,
+        "5D Momentum":         3,
+        "20D Momentum":        3,
+        "Mean Rev Z":          3,
+        "Candle Conviction":   2,
+        "Equal H/L (Liquidity)": 1,
+        "Market Structure":    1,
+        "Liquidity Sweep":     1,
+        "Order Block":         1,
+    }
+    for f in factors:
+        if "tier" not in f:
+            f["tier"] = tier_map.get(f["name"], 3)
+
+    # ── Weighted Scoring ──────────────────────────────────────────────────
+    # Tier 1 = 3pts, Tier 2 = 2pts, Tier 3 = 1pt
+    # CAP RULE: if Tier 1 bulls = 0 AND Tier 1 bears = 0 → NEUTRAL regardless
+    tier_weights = {1: 3, 2: 2, 3: 1}
+
+    tier1_factors = [f for f in factors if f["tier"] == 1]
+    tier1_bull = sum(1 for f in tier1_factors if f["signal"] == "BULLISH")
+    tier1_bear = sum(1 for f in tier1_factors if f["signal"] == "BEARISH")
+    tier1_active = tier1_bull + tier1_bear  # neutral tier1 dont count
+
+    weighted_bull = sum(tier_weights[f["tier"]] for f in factors if f["signal"] == "BULLISH")
+    weighted_bear = sum(tier_weights[f["tier"]] for f in factors if f["signal"] == "BEARISH")
+    max_weighted  = sum(tier_weights[f["tier"]] for f in factors)  # 4×3 + 2×2 + 7×1 = 23
+
+    # Raw bull count for display
+    bull_count = sum(1 for f in factors if f["signal"] == "BULLISH")
+
+    # Normalised weighted score 0-13 (scaled to old 0-12 range for enforce_consistency_v2)
+    weighted_score = round((weighted_bull / max_weighted) * 13) if max_weighted > 0 else 0
+
+    # CAP: no Tier 1 signal active → clamp to NEUTRAL zone (5-7)
+    if tier1_active == 0:
+        weighted_score = min(weighted_score, 6)
+
+    # Session multiplier
     session, session_mult = _current_session(asset_type)
     session_info = f"{session} (×{session_mult:.1f})"
 
-    # Effective score (for _enforce_consistency_v2)
-    # We keep bull_count as integer for clean thresholds,
-    # session_mult is passed separately for caller to use if needed.
-    score_label = f"{bull_count}/12 bullish"
+    score_label = f"{bull_count}/13 bullish (weighted: {weighted_score}/13)"
 
-    return factors, bull_count, score_label, session_info
+    return factors, weighted_score, score_label, session_info
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -430,33 +573,35 @@ def enforce_consistency_v2(
     session_mult: float = 1.0,
 ) -> tuple[str, float, float]:
     """
-    12-factor version of _enforce_consistency.
+    Weighted 13-factor confluence enforcer.
 
-    Thresholds (session_mult applied to effective score):
-      0–3   → SELL  (strong bearish)
+    bull_count here is the WEIGHTED score (0-13), not raw factor count.
+    Tier 1 (liquidity/structure) factors dominate — cap rule applied upstream.
+
+    Thresholds on weighted score × session_mult:
+      0–3   → SELL  (strong bearish — structure against)
       4–5   → SELL  (moderate bearish)
-      6     → HOLD  (neutral)
-      7     → HOLD  (weak bullish)
-      8–9   → BUY   (moderate bullish)
-      10–12 → BUY   (strong bullish)
+      6     → HOLD  (no structural edge)
+      7     → HOLD  (weak bias)
+      8–9   → BUY   (structure + confirmation agree)
+      10–13 → BUY   (high conviction — Tier 1 strongly bullish)
 
-    session_mult: 1.2 for London/NY on crypto/global, 0.8 for Asia, 1.0 for NSE.
-    Applied to effective score only — raw bull_count preserved for display.
+    session_mult: 1.2 London/NY crypto, 0.8 Asia, 1.0 NSE.
     """
     effective = bull_count * session_mult
-    confluence_agreement = round(bull_count / 12, 3)
+    confluence_agreement = round(bull_count / 13, 3)
 
     if effective <= 3:
         enforced_dir  = "SELL"
-        enforced_prob = round(min(probability, 0.40) * 0.85 + 0.10, 4)
+        enforced_prob = round(min(probability, 0.38) * 0.85 + 0.10, 4)
 
     elif effective <= 5:
         enforced_dir  = "SELL"
-        enforced_prob = round(min(probability, 0.45), 4)
+        enforced_prob = round(min(probability, 0.44), 4)
 
     elif effective <= 6:
         enforced_dir  = "HOLD"
-        enforced_prob = 0.47
+        enforced_prob = 0.46
 
     elif effective <= 7:
         enforced_dir  = "HOLD"
@@ -464,11 +609,11 @@ def enforce_consistency_v2(
 
     elif effective <= 9:
         enforced_dir  = direction if direction == "BUY" else "HOLD"
-        enforced_prob = round(max(probability, 0.54), 4) if enforced_dir == "BUY" else 0.51
+        enforced_prob = round(max(probability, 0.55), 4) if enforced_dir == "BUY" else 0.51
 
-    else:  # 10-12 (or session-boosted equivalent)
+    else:  # 10-13 weighted — Tier 1 must be contributing here
         enforced_dir  = "BUY"
-        enforced_prob = round(max(probability, 0.64), 4)
+        enforced_prob = round(max(probability, 0.65), 4)
 
     enforced_prob = round(max(0.01, min(0.99, enforced_prob)), 4)
     return enforced_dir, enforced_prob, confluence_agreement
