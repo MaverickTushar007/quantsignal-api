@@ -422,9 +422,9 @@ def evaluate_alerts(x_cron_secret: str = Header(None, alias="X-Cron-Secret")):
         except Exception as _e:
             print(f"WFV error: {_e}")
 
-    return {"status": "ok", "evaluated": evaluated}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+    return {"status": "ok", "evaluated": evaluated}
 
 @router.post("/cron/upload-cache", tags=["cron"])
 async def upload_cache(request: Request, x_cron_secret: str = Header(None, alias="X-Cron-Secret")):
