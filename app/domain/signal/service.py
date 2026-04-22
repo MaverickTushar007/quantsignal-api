@@ -325,6 +325,16 @@ def generate_signal(symbol: str, include_reasoning: bool = True, bypass_cache: b
             model_agreement=ml.model_agreement,
         )
 
+    # ── Live performance blending ────────────────────────────────────────
+    if ml is not None:
+        try:
+            from app.domain.signal.live_blend import _blend_live_performance
+            _blended_prob = _blend_live_performance(symbol, ml.probability)
+            if _blended_prob != ml.probability:
+                ml = dataclasses.replace(ml, probability=_blended_prob)
+        except Exception:
+            pass
+
     # ── Volatility regime detection ──────────────────────────────────────
     try:
         from app.domain.core.regime_detector import detect_regime
