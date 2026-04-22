@@ -325,6 +325,22 @@ def generate_signal(symbol: str, include_reasoning: bool = True, bypass_cache: b
             model_agreement=ml.model_agreement,
         )
 
+    # ── Volatility regime detection ──────────────────────────────────────
+    try:
+        from app.domain.core.regime_detector import detect_regime
+        _regime_info = detect_regime(df, ml.atr if ml is not None else 0)
+        _regime      = _regime_info["regime"]
+        _reg_mod     = _regime_info["modifier"]
+        _reg_pct     = _regime_info["percentile"]
+    except Exception:
+        _regime, _reg_mod, _reg_pct = "MEDIUM", 1.0, 50.0
+
+    # Apply regime modifier to ML probability
+    if ml is not None and _reg_mod != 1.0:
+        ml = dataclasses.replace(ml,
+            probability=round(min(0.99, max(0.01, ml.probability * _reg_mod)), 4)
+        )
+
     result = asdict(FullSignal(
         symbol=symbol,
         display=meta["display"],
@@ -380,17 +396,17 @@ def generate_signal(symbol: str, include_reasoning: bool = True, bypass_cache: b
             if result.get("direction") == "BUY" and not _h4_bull:
                 result["h4_confluence"] = False
                 result["probability"] = round(result.get("probability", 0.5) * 0.88, 4)
-                log.info(f"[H4Gate] {symbol} BUY suppressed — H4 bearish")
+                print(f"[H4Gate] {symbol} BUY suppressed — H4 bearish")
             elif result.get("direction") == "SELL" and _h4_bull:
                 result["h4_confluence"] = False
                 result["probability"] = round(result.get("probability", 0.5) * 0.88, 4)
-                log.info(f"[H4Gate] {symbol} SELL suppressed — H4 bullish")
+                print(f"[H4Gate] {symbol} SELL suppressed — H4 bullish")
             else:
                 result["h4_confluence"] = True
         else:
             result["h4_confluence"] = None  # insufficient data
     except Exception as _e:
-        log.debug(f"[H4Gate] failed: {_e}")
+        print(f"[H4Gate] failed: {_e}")
         result["h4_confluence"] = None
 
     # Attach MTF alignment
@@ -415,17 +431,17 @@ def generate_signal(symbol: str, include_reasoning: bool = True, bypass_cache: b
             if result.get("direction") == "BUY" and not _h4_bull:
                 result["h4_confluence"] = False
                 result["probability"] = round(result.get("probability", 0.5) * 0.88, 4)
-                log.info(f"[H4Gate] {symbol} BUY suppressed — H4 bearish")
+                print(f"[H4Gate] {symbol} BUY suppressed — H4 bearish")
             elif result.get("direction") == "SELL" and _h4_bull:
                 result["h4_confluence"] = False
                 result["probability"] = round(result.get("probability", 0.5) * 0.88, 4)
-                log.info(f"[H4Gate] {symbol} SELL suppressed — H4 bullish")
+                print(f"[H4Gate] {symbol} SELL suppressed — H4 bullish")
             else:
                 result["h4_confluence"] = True
         else:
             result["h4_confluence"] = None
     except Exception as _e:
-        log.debug(f"[H4Gate] failed: {_e}")
+        print(f"[H4Gate] failed: {_e}")
         result["h4_confluence"] = None
 
     # Attach energy state
