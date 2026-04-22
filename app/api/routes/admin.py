@@ -362,8 +362,6 @@ def reset_user_quota(user_id: str, x_admin_key: str = Header(None, alias="x-admi
 @router.get("/admin/auth-debug", tags=["admin"])
 async def auth_debug(request: Request):
     """Debug JWT decode — shows what token resolves to."""
-    from app.api.routes.auth import get_current_user
-from fastapi import Request
     auth_header = request.headers.get("authorization", "")
     if not auth_header.startswith("Bearer "):
         return {"error": "no bearer token"}
