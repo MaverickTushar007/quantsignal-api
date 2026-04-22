@@ -279,3 +279,23 @@ def job_health():
         "unhealthy_jobs": unhealthy,
         "all_jobs": status,
     }
+
+
+@router.get("/admin/circuit-breaker", tags=["admin"])
+def circuit_breaker_status():
+    """Return current circuit breaker state."""
+    try:
+        from app.domain.core.circuit_breaker_v2 import CircuitBreaker
+        return CircuitBreaker.get_status()
+    except Exception as e:
+        return {"error": str(e)}
+
+@router.post("/admin/circuit-breaker/reset", tags=["admin"])
+def circuit_breaker_reset():
+    """Manually reset the circuit breaker."""
+    try:
+        from app.domain.core.circuit_breaker_v2 import CircuitBreaker
+        CircuitBreaker.reset()
+        return {"status": "reset", "state": CircuitBreaker.get_status()}
+    except Exception as e:
+        return {"error": str(e)}

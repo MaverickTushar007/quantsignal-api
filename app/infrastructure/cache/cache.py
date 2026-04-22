@@ -15,11 +15,12 @@ def _get_redis():
     global _redis
     if _redis is None:
         try:
+            url   = os.getenv("UPSTASH_REDIS_REST_URL")
+            token = os.getenv("UPSTASH_REDIS_REST_TOKEN")
+            if not url or not token:
+                return None
             from upstash_redis import Redis
-            _redis = Redis(
-                url=os.getenv("UPSTASH_REDIS_REST_URL"),
-                token=os.getenv("UPSTASH_REDIS_REST_TOKEN")
-            )
+            _redis = Redis(url=url, token=token)
         except Exception as e:
             print(f"Redis init failed: {e}")
             return None
