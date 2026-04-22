@@ -218,6 +218,35 @@ def get_performance() -> dict:
         losses = counts.get("loss", 0)
         evaluated = wins + losses
 
+        # Sharpe + expectancy
+        sharpe = None
+        expectancy = None
+        avg_win = None
+        avg_loss = None
+        try:
+            cur.execute("""
+                SELECT outcome, entry_price, exit_price FROM signal_history
+                WHERE outcome IN ('win', 'loss') AND exit_price IS NOT NULL AND entry_price > 0
+            """)
+            trades = cur.fetchall()
+            if len(trades) >= 10:
+                import math
+                pnls, win_pnls, loss_pnls = [], [], []
+                for outcome, entry, exit_p in trades:
+                    pct = (exit_p - entry) / entry * 100
+                    pnls.append(pct)
+                    (win_pnls if outcome == "win" else loss_pnls).append(abs(pct))
+                mean_pnl = sum(pnls) / len(pnls)
+                std_pnl = (sum((x - mean_pnl)**2 for x in pnls) / len(pnls)) ** 0.5
+                sharpe = round((mean_pnl / std_pnl) * math.sqrt(252), 3) if std_pnl > 0 else None
+                avg_win = round(sum(win_pnls) / len(win_pnls), 3) if win_pnls else None
+                avg_loss = round(sum(loss_pnls) / len(loss_pnls), 3) if loss_pnls else None
+                if avg_win and avg_loss and evaluated:
+                    wr = wins / evaluated
+                    expectancy = round(wr * avg_win - (1 - wr) * avg_loss, 3)
+        except Exception as _e:
+            pass
+
         return {
             "win_rate": round(wins / evaluated, 3) if evaluated else None,
             "wins": wins,
@@ -225,6 +254,10 @@ def get_performance() -> dict:
             "open": total - evaluated,
             "total_signals": total,
             "recent_trades": recent,
+            "sharpe_ratio": sharpe,
+            "expectancy_pct": expectancy,
+            "avg_win_pct": avg_win,
+            "avg_loss_pct": avg_loss,
         }
     finally:
         con.close()
