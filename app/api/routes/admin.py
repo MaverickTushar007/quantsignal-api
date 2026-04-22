@@ -8,7 +8,7 @@ GET /admin/errors      → recent errors from Railway logs
 import logging
 import os
 from datetime import datetime, timedelta, timezone
-from fastapi import APIRouter, Header
+from fastapi import Request, APIRouter, Header
 from typing import Optional
 
 router = APIRouter()
@@ -305,7 +305,7 @@ def circuit_breaker_reset():
 def cleanup_duplicate_signals(x_admin_key: str = Header(None, alias="x-admin-key")):
     """Delete duplicate signals — keep only latest per symbol per day."""
     if x_admin_key != "quantsignal-admin-2026":
-        from fastapi import HTTPException
+        from fastapi import Request, HTTPException
         raise HTTPException(status_code=401, detail="Unauthorized")
     try:
         from app.infrastructure.db.signal_history import _get_conn
@@ -353,8 +353,41 @@ def get_user_quota(user_id: str):
 def reset_user_quota(user_id: str, x_admin_key: str = Header(None, alias="x-admin-key")):
     """Reset a user's daily quota (admin only)."""
     if x_admin_key != "quantsignal-admin-2026":
-        from fastapi import HTTPException
+        from fastapi import Request, HTTPException
         raise HTTPException(status_code=401, detail="Unauthorized")
     from app.domain.core.rate_limiter import reset_user
     ok = reset_user(user_id)
     return {"user_id": user_id, "reset": ok}
+
+
+@router.get("/admin/auth-debug", tags=["admin"])
+async def auth_debug(request: Request):
+    """Debug JWT decode — shows what token resolves to."""
+    from fastapi import Request
+    auth_header = request.headers.get("authorization", "")
+    if not auth_header.startswith("Bearer "):
+        return {"error": "no bearer token"}
+    token = auth_header[7:]
+    
+    import urllib.request, json
+    supabase_url = "https://xvwkloqmzgwqsouxhgiy.supabase.co"
+    jwks_url = f"{supabase_url}/auth/v1/.well-known/jwks.json"
+    
+    try:
+        with urllib.request.urlopen(jwks_url, timeout=5) as r:
+            jwks = json.loads(r.read())
+        keys = jwks.get("keys", [])
+        key_types = [k.get("kty") for k in keys]
+        
+        import jwt
+        header = jwt.get_unverified_header(token)
+        
+        return {
+            "jwks_reachable": True,
+            "key_count": len(keys),
+            "key_types": key_types,
+            "token_header": header,
+            "token_preview": token[:20] + "...",
+        }
+    except Exception as e:
+        return {"jwks_reachable": False, "error": str(e)}
