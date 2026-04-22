@@ -306,8 +306,6 @@ def circuit_breaker_reset():
 def cleanup_duplicate_signals(x_admin_key: str = Header(None, alias="x-admin-key")):
     """Delete duplicate signals — keep only latest per symbol per day."""
     if x_admin_key != "quantsignal-admin-2026":
-        from app.api.routes.auth import get_current_user
-from fastapi import Request, HTTPException
         raise HTTPException(status_code=401, detail="Unauthorized")
     try:
         from app.infrastructure.db.signal_history import _get_conn
@@ -355,8 +353,6 @@ def get_user_quota(user_id: str):
 def reset_user_quota(user_id: str, x_admin_key: str = Header(None, alias="x-admin-key")):
     """Reset a user's daily quota (admin only)."""
     if x_admin_key != "quantsignal-admin-2026":
-        from app.api.routes.auth import get_current_user
-from fastapi import Request, HTTPException
         raise HTTPException(status_code=401, detail="Unauthorized")
     from app.domain.core.rate_limiter import reset_user
     ok = reset_user(user_id)
