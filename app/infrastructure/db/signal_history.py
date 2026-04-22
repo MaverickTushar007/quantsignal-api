@@ -229,7 +229,7 @@ def get_performance() -> dict:
                 WHERE outcome IN ('win', 'loss') AND exit_price IS NOT NULL AND entry_price > 0
             """)
             trades = cur.fetchall()
-            if len(trades) >= 10:
+            if len(trades) >= 30:
                 import math
                 pnls, win_pnls, loss_pnls = [], [], []
                 for outcome, entry, exit_p in trades:
