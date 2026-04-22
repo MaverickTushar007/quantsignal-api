@@ -49,6 +49,9 @@ async def lifespan(app: FastAPI):
         from app.infrastructure.scheduler.perseus_watcher import scan_and_alert
         scheduler = BackgroundScheduler()
         scheduler.add_job(scan_and_alert, 'interval', minutes=5, id='perseus_watcher')
+        from app.domain.performance.evaluator import evaluate_open_signals
+        scheduler.add_job(evaluate_open_signals, 'interval', minutes=15, id='outcome_evaluator')
+
         from app.infrastructure.documents.scraper import run_full_scrape
         scheduler.add_job(run_full_scrape, 'interval', hours=1, id='doc_scraper')
         # Wipe stale cache on every startup so prices are always fresh

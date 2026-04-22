@@ -22,7 +22,7 @@ def _blend_live_performance(symbol: str, ml_probability: float) -> float:
         rows = cur.fetchall()
         con.close()
 
-        if len(rows) < 20:
+        if len(rows) < 5:
             return ml_probability
 
         wins = [r for r in rows if r[0] == "win"]
