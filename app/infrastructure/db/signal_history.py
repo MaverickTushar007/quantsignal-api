@@ -261,3 +261,65 @@ def get_recent_signals(symbol: str, limit: int = 5) -> list[dict]:
         return []
     finally:
         con.close()
+
+def get_monte_carlo_significance(symbol: str = None, n_shuffles: int = 500) -> dict:
+    """
+    Monte Carlo significance test on win rate.
+    Shuffles the win/loss sequence N times and checks what fraction
+    of shuffles produce a win rate >= the actual rate.
+    p_value < 0.10 = edge is likely real.
+    p_value >= 0.10 = could be luck, flag as unverified.
+    """
+    import random
+    con, db = _get_conn()
+    try:
+        cur = con.cursor()
+        if symbol:
+            cur.execute(
+                "SELECT outcome FROM signal_history WHERE symbol=? AND outcome IN ('win','loss') ORDER BY evaluated_at ASC"
+                if db != "pg" else
+                "SELECT outcome FROM signal_history WHERE symbol=%s AND outcome IN ('win','loss') ORDER BY evaluated_at ASC",
+                (symbol,)
+            )
+        else:
+            cur.execute(
+                "SELECT outcome FROM signal_history WHERE outcome IN ('win','loss') ORDER BY evaluated_at ASC"
+            )
+        outcomes = [row[0] for row in cur.fetchall()]
+    finally:
+        con.close()
+
+    n = len(outcomes)
+    if n < 30:
+        return {
+            "symbol": symbol,
+            "n_trades": n,
+            "win_rate": None,
+            "p_value": None,
+            "verified": False,
+            "reason": f"insufficient_data ({n} < 30 required)"
+        }
+
+    wins = outcomes.count("win")
+    actual_wr = wins / n
+
+    # Shuffle and count how many beat actual win rate
+    beats = 0
+    seq = outcomes.copy()
+    for _ in range(n_shuffles):
+        random.shuffle(seq)
+        shuffled_wr = seq.count("win") / n
+        if shuffled_wr >= actual_wr:
+            beats += 1
+
+    p_value = round(beats / n_shuffles, 4)
+    verified = p_value < 0.10
+
+    return {
+        "symbol": symbol,
+        "n_trades": n,
+        "win_rate": round(actual_wr, 4),
+        "p_value": p_value,
+        "verified": verified,
+        "reason": "edge_confirmed" if verified else "possibly_luck"
+    }

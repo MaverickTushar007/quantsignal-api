@@ -82,3 +82,41 @@ def get_degradation():
         "degraded_symbols": degraded,
         "details": results,
     }
+
+
+@router.get("/performance/monte-carlo")
+def get_monte_carlo(symbol: str = None):
+    """Monte Carlo significance test on win rate. p_value < 0.10 = verified edge."""
+    from app.infrastructure.db.signal_history import get_monte_carlo_significance
+    return get_monte_carlo_significance(symbol=symbol)
+
+
+@router.get("/performance/verified-symbols")
+def get_verified_symbols():
+    """Return all symbols with enough history and their verification status."""
+    from app.infrastructure.db.signal_history import _get_conn, get_monte_carlo_significance
+    con, db = _get_conn()
+    try:
+        cur = con.cursor()
+        cur.execute("""
+            SELECT symbol, COUNT(*) as n
+            FROM signal_history
+            WHERE outcome IN ('win', 'loss')
+            GROUP BY symbol
+            HAVING COUNT(*) >= 30
+            ORDER BY n DESC
+        """)
+        symbols = [row[0] for row in cur.fetchall()]
+    finally:
+        con.close()
+
+    results = {}
+    for sym in symbols:
+        results[sym] = get_monte_carlo_significance(symbol=sym)
+
+    verified = [s for s, r in results.items() if r.get("verified")]
+    return {
+        "total_symbols_tested": len(results),
+        "verified_symbols": verified,
+        "details": results,
+    }
