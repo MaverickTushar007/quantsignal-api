@@ -69,3 +69,16 @@ def get_walk_forward():
         }
         for sym, r in results.items()
     }
+
+
+@router.get("/performance/degradation")
+def get_degradation():
+    """Check model degradation across all symbols with enough history."""
+    from app.domain.core.degradation_detector import check_all
+    results = check_all()
+    degraded = [s for s, r in results.items() if r.get("degraded")]
+    return {
+        "healthy": len(degraded) == 0,
+        "degraded_symbols": degraded,
+        "details": results,
+    }

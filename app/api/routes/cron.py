@@ -403,6 +403,18 @@ def evaluate_alerts(x_cron_secret: str = Header(None, alias="X-Cron-Secret")):
         from app.domain.alerts.tracker import evaluate_outcomes
         evaluated = evaluate_outcomes()
     
+        # Model degradation check (runs daily)
+        try:
+            from app.domain.core.degradation_detector import check_all
+            deg_results = check_all()
+            degraded = [s for s, r in deg_results.items() if r.get("degraded")]
+            if degraded:
+                print(f"[Degradation] WARNING: {degraded}")
+            else:
+                print(f"[Degradation] All {len(deg_results)} symbols healthy")
+        except Exception as _e:
+            print(f"Degradation check error: {_e}")
+
         # Walk-forward validation (runs on every 7th cron cycle ~weekly)
         try:
             import time as _time
