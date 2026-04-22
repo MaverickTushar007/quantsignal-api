@@ -367,6 +367,30 @@ def generate_signal(symbol: str, include_reasoning: bool = True, bypass_cache: b
     except Exception as e:
         print(f"Insider error for {symbol}: {e}")
 
+    # ── H4 EMA confluence gate ───────────────────────────────────────────
+    # Uses MTF data already computed — no extra fetch needed.
+    # If H4 is bearish and signal is BUY, reduce confidence.
+    # If H4 is bullish and signal is SELL, reduce confidence.
+    try:
+        _mtf = result.get("mtf", {})
+        _h4_bull = _mtf.get("tf_4h_bull", None)
+        if _h4_bull is not None and ml is not None:
+            if result.get("direction") == "BUY" and not _h4_bull:
+                result["h4_confluence"] = False
+                result["probability"] = round(result.get("probability", 0.5) * 0.88, 4)
+                log.info(f"[H4Gate] {symbol} BUY suppressed — H4 bearish")
+            elif result.get("direction") == "SELL" and _h4_bull:
+                result["h4_confluence"] = False
+                result["probability"] = round(result.get("probability", 0.5) * 0.88, 4)
+                log.info(f"[H4Gate] {symbol} SELL suppressed — H4 bullish")
+            else:
+                result["h4_confluence"] = True
+        else:
+            result["h4_confluence"] = None  # insufficient data
+    except Exception as _e:
+        log.debug(f"[H4Gate] failed: {_e}")
+        result["h4_confluence"] = None
+
     # Attach MTF alignment
     try:
         from app.domain.data.mtf import fetch_mtf_features
@@ -378,6 +402,30 @@ def generate_signal(symbol: str, include_reasoning: bool = True, bypass_cache: b
         result['mtf'] = mtf
     except Exception as e:
         print(f"MTF error for {symbol}: {e}")
+    # ── H4 EMA confluence gate ───────────────────────────────────────────
+    # Uses MTF data already computed — no extra fetch needed.
+    # If H4 is bearish and signal is BUY, reduce confidence.
+    # If H4 is bullish and signal is SELL, reduce confidence.
+    try:
+        _mtf = result.get("mtf", {})
+        _h4_bull = _mtf.get("tf_4h_bull", None)
+        if _h4_bull is not None and ml is not None:
+            if result.get("direction") == "BUY" and not _h4_bull:
+                result["h4_confluence"] = False
+                result["probability"] = round(result.get("probability", 0.5) * 0.88, 4)
+                log.info(f"[H4Gate] {symbol} BUY suppressed — H4 bearish")
+            elif result.get("direction") == "SELL" and _h4_bull:
+                result["h4_confluence"] = False
+                result["probability"] = round(result.get("probability", 0.5) * 0.88, 4)
+                log.info(f"[H4Gate] {symbol} SELL suppressed — H4 bullish")
+            else:
+                result["h4_confluence"] = True
+        else:
+            result["h4_confluence"] = None
+    except Exception as _e:
+        log.debug(f"[H4Gate] failed: {_e}")
+        result["h4_confluence"] = None
+
     # Attach energy state
     try:
         from app.domain.core.energy_detector import compute_energy_state
