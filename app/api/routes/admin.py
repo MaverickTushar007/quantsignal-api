@@ -9,7 +9,7 @@ import logging
 import os
 from datetime import datetime, timedelta, timezone
 from app.api.routes.auth import get_current_user
-from fastapi import Request, APIRouter, Header
+from fastapi import Request, APIRouter, Header, Depends
 from typing import Optional
 
 router = APIRouter()
