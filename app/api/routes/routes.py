@@ -211,7 +211,27 @@ async def get_signal(
                     _log.getLogger(__name__).info(f"[tracker] skipped {sig.get('symbol')} prob={_prob:.2f} suppressed={_suppressed}")
             except Exception as _track_e:
                 import logging; logging.getLogger(__name__).warning(f"[tracker] {_track_e}")
-            save_signal(sig)
+            # Only save if no signal in last 4 hours for this symbol
+            try:
+                from app.infrastructure.db.signal_history import _get_conn
+                _rc, _db = _get_conn()
+                _rcu = _rc.cursor()
+                _sym = sig.get("symbol", "")
+                if _db == "pg":
+                    _rcu.execute(
+                        "SELECT COUNT(*) FROM signal_history WHERE symbol=%s "
+                        "AND generated_at > NOW() - INTERVAL '4 hours'", (_sym,)
+                    )
+                else:
+                    _rcu.execute(
+                        "SELECT COUNT(*) FROM signal_history WHERE symbol=? "
+                        "AND generated_at > datetime('now', '-4 hours')", (_sym,)
+                    )
+                if _rcu.fetchone()[0] == 0:
+                    save_signal(sig)
+                _rc.close()
+            except Exception:
+                save_signal(sig)
     except Exception as _e:
         import logging; logging.getLogger(__name__).error(f'[save_signal FAILED] {_e}', exc_info=True)
 

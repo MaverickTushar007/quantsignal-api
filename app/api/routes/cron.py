@@ -155,17 +155,40 @@ def _rebuild():
         except Exception as e:
             print(f"Pattern detection error: {e}")
 
-        # Save signals to history DB (feeds morning briefing + performance tracking)
+        # Save signals to history DB — max once per 4 hours per symbol
         try:
-            from app.infrastructure.db.signal_history import init_db, save_signal, is_open
+            from app.infrastructure.db.signal_history import init_db, save_signal, _get_conn
             init_db()
             saved = 0
+            skipped = 0
+            _con, _db = _get_conn()
+            _cur = _con.cursor()
             for sym, sig in cache.items():
-                if sig.get("direction") in ("BUY", "SELL"):
-                    if not is_open(sym):
+                if sig.get("direction") not in ("BUY", "SELL"):
+                    continue
+                try:
+                    if _db == "pg":
+                        _cur.execute(
+                            "SELECT COUNT(*) FROM signal_history WHERE symbol=%s "
+                            "AND generated_at > NOW() - INTERVAL '4 hours'",
+                            (sym,)
+                        )
+                    else:
+                        _cur.execute(
+                            "SELECT COUNT(*) FROM signal_history WHERE symbol=? "
+                            "AND generated_at > datetime('now', '-4 hours')",
+                            (sym,)
+                        )
+                    _recent = _cur.fetchone()[0]
+                    if _recent == 0:
                         save_signal({**sig, "symbol": sym})
                         saved += 1
-            print(f"Signal history: {saved} new signals recorded")
+                    else:
+                        skipped += 1
+                except Exception as _se:
+                    print(f"Signal save error for {sym}: {_se}")
+            _con.close()
+            print(f"Signal history: {saved} saved, {skipped} skipped (recent)")
         except Exception as e:
             print(f"Signal history error: {e}")
 
