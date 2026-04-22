@@ -299,3 +299,45 @@ def circuit_breaker_reset():
         return {"status": "reset", "state": CircuitBreaker.get_status()}
     except Exception as e:
         return {"error": str(e)}
+
+
+@router.post("/admin/cleanup-duplicate-signals", tags=["admin"])
+def cleanup_duplicate_signals(x_admin_key: str = Header(None, alias="x-admin-key")):
+    """Delete duplicate signals — keep only latest per symbol per day."""
+    if x_admin_key != "quantsignal-admin-2026":
+        from fastapi import HTTPException
+        raise HTTPException(status_code=401, detail="Unauthorized")
+    try:
+        from app.infrastructure.db.signal_history import _get_conn
+        con, db = _get_conn()
+        cur = con.cursor()
+        cur.execute("SELECT COUNT(*) FROM signal_history")
+        before = cur.fetchone()[0]
+        if db == "pg":
+            cur.execute("""
+                DELETE FROM signal_history
+                WHERE id NOT IN (
+                    SELECT MAX(id)
+                    FROM signal_history
+                    GROUP BY symbol, DATE(generated_at)
+                )
+            """)
+        else:
+            cur.execute("""
+                DELETE FROM signal_history
+                WHERE id NOT IN (
+                    SELECT MAX(id)
+                    FROM signal_history
+                    GROUP BY symbol, DATE(generated_at)
+                )
+            """)
+        deleted = cur.rowcount
+        con.commit()
+        cur.execute("SELECT COUNT(*) FROM signal_history")
+        after = cur.fetchone()[0]
+        cur.execute("SELECT outcome, COUNT(*) FROM signal_history GROUP BY outcome")
+        breakdown = {r[0]: r[1] for r in cur.fetchall()}
+        con.close()
+        return {"before": before, "after": after, "deleted": deleted, "breakdown": breakdown}
+    except Exception as e:
+        return {"error": str(e)}
