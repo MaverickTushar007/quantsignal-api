@@ -58,6 +58,8 @@ class FullSignal:
     data_warnings:   list = None
     volume_ratio: float = 1.0
     session_info:  str = "nse (×1.0)"
+    volatility_regime: str = "MEDIUM"
+    regime_percentile: float = 50.0
 
 
 
