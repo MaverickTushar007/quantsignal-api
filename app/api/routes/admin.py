@@ -8,6 +8,7 @@ GET /admin/errors      → recent errors from Railway logs
 import logging
 import os
 from datetime import datetime, timedelta, timezone
+from app.api.routes.auth import get_current_user
 from fastapi import Request, APIRouter, Header
 from typing import Optional
 
@@ -305,7 +306,8 @@ def circuit_breaker_reset():
 def cleanup_duplicate_signals(x_admin_key: str = Header(None, alias="x-admin-key")):
     """Delete duplicate signals — keep only latest per symbol per day."""
     if x_admin_key != "quantsignal-admin-2026":
-        from fastapi import Request, HTTPException
+        from app.api.routes.auth import get_current_user
+from fastapi import Request, HTTPException
         raise HTTPException(status_code=401, detail="Unauthorized")
     try:
         from app.infrastructure.db.signal_history import _get_conn
@@ -353,7 +355,8 @@ def get_user_quota(user_id: str):
 def reset_user_quota(user_id: str, x_admin_key: str = Header(None, alias="x-admin-key")):
     """Reset a user's daily quota (admin only)."""
     if x_admin_key != "quantsignal-admin-2026":
-        from fastapi import Request, HTTPException
+        from app.api.routes.auth import get_current_user
+from fastapi import Request, HTTPException
         raise HTTPException(status_code=401, detail="Unauthorized")
     from app.domain.core.rate_limiter import reset_user
     ok = reset_user(user_id)
@@ -363,7 +366,8 @@ def reset_user_quota(user_id: str, x_admin_key: str = Header(None, alias="x-admi
 @router.get("/admin/auth-debug", tags=["admin"])
 async def auth_debug(request: Request):
     """Debug JWT decode — shows what token resolves to."""
-    from fastapi import Request
+    from app.api.routes.auth import get_current_user
+from fastapi import Request
     auth_header = request.headers.get("authorization", "")
     if not auth_header.startswith("Bearer "):
         return {"error": "no bearer token"}
@@ -391,3 +395,9 @@ async def auth_debug(request: Request):
         }
     except Exception as e:
         return {"jwks_reachable": False, "error": str(e)}
+
+
+@router.get("/admin/whoami", tags=["admin"])
+async def whoami(user: dict = Depends(get_current_user)):
+    """Returns the resolved user object for the current token."""
+    return user
