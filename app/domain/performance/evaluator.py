@@ -50,6 +50,23 @@ def evaluate_open_signals() -> dict:
                 results["expired"] += 1
                 continue
 
+            # ── Minimum hold time — skip signals < 15 minutes old ──
+            try:
+                from datetime import datetime, timezone, timedelta
+                gen_at = s.get("generated_at")
+                if gen_at:
+                    if isinstance(gen_at, str):
+                        from dateutil import parser as _dp
+                        gen_at = _dp.parse(gen_at)
+                    if gen_at.tzinfo is None:
+                        gen_at = gen_at.replace(tzinfo=timezone.utc)
+                    age_minutes = (datetime.now(timezone.utc) - gen_at).total_seconds() / 60
+                    if age_minutes < 15:
+                        results["skipped"] += 1
+                        continue
+            except Exception:
+                pass
+
             price = _get_price(s["symbol"])
             if not price:
                 # fallback to yfinance directly
