@@ -102,6 +102,7 @@ async def get_signal(
     symbol: str,
     background_tasks: BackgroundTasks,
     _gate: dict = Depends(signal_gate),
+    user: dict = Depends(get_current_user),
     reason: bool = Query(True, description="Include LLM reasoning"),
     bust: bool = Query(False, description="Force cache bypass"),
 ):
@@ -112,6 +113,26 @@ async def get_signal(
     symbol = symbol.upper()
     if symbol not in TICKER_MAP:
         raise HTTPException(status_code=404, detail=f"Unknown symbol: {symbol}")
+
+    # ── Rate limiting ─────────────────────────────────────────────────
+    try:
+        from app.domain.core.rate_limiter import check_rate_limit
+        rl = check_rate_limit(user.get("id", "anon"), user.get("tier", "free"))
+        if not rl["allowed"]:
+            raise HTTPException(
+                status_code=429,
+                detail={
+                    "error": "rate_limit_exceeded",
+                    "message": rl.get("message"),
+                    "used": rl.get("used"),
+                    "limit": rl.get("limit"),
+                    "retry_after": rl.get("retry_after"),
+                }
+            )
+    except HTTPException:
+        raise
+    except Exception:
+        pass  # fail open
 
     if bust:
         from app.infrastructure.cache.cache import get_cached, set_cached
@@ -323,6 +344,26 @@ def get_asset_news(symbol: str, limit: int = 10):
     symbol = symbol.upper()
     if symbol not in TICKER_MAP:
         raise HTTPException(status_code=404, detail=f"Unknown symbol: {symbol}")
+
+    # ── Rate limiting ─────────────────────────────────────────────────
+    try:
+        from app.domain.core.rate_limiter import check_rate_limit
+        rl = check_rate_limit(user.get("id", "anon"), user.get("tier", "free"))
+        if not rl["allowed"]:
+            raise HTTPException(
+                status_code=429,
+                detail={
+                    "error": "rate_limit_exceeded",
+                    "message": rl.get("message"),
+                    "used": rl.get("used"),
+                    "limit": rl.get("limit"),
+                    "retry_after": rl.get("retry_after"),
+                }
+            )
+    except HTTPException:
+        raise
+    except Exception:
+        pass  # fail open
     try:
         from app.domain.data.news import get_news
         items = get_news(symbol, limit=limit)
@@ -400,6 +441,26 @@ def backtest(
     symbol = symbol.upper()
     if symbol not in TICKER_MAP:
         raise HTTPException(status_code=404, detail=f"Unknown symbol: {symbol}")
+
+    # ── Rate limiting ─────────────────────────────────────────────────
+    try:
+        from app.domain.core.rate_limiter import check_rate_limit
+        rl = check_rate_limit(user.get("id", "anon"), user.get("tier", "free"))
+        if not rl["allowed"]:
+            raise HTTPException(
+                status_code=429,
+                detail={
+                    "error": "rate_limit_exceeded",
+                    "message": rl.get("message"),
+                    "used": rl.get("used"),
+                    "limit": rl.get("limit"),
+                    "retry_after": rl.get("retry_after"),
+                }
+            )
+    except HTTPException:
+        raise
+    except Exception:
+        pass  # fail open
 
     from app.domain.data.market import fetch_ohlcv
     from app.domain.ml.backtest import run
@@ -620,6 +681,26 @@ async def stream_signal(
     symbol = symbol.upper()
     if symbol not in TICKER_MAP:
         raise HTTPException(status_code=404, detail=f"Unknown symbol: {symbol}")
+
+    # ── Rate limiting ─────────────────────────────────────────────────
+    try:
+        from app.domain.core.rate_limiter import check_rate_limit
+        rl = check_rate_limit(user.get("id", "anon"), user.get("tier", "free"))
+        if not rl["allowed"]:
+            raise HTTPException(
+                status_code=429,
+                detail={
+                    "error": "rate_limit_exceeded",
+                    "message": rl.get("message"),
+                    "used": rl.get("used"),
+                    "limit": rl.get("limit"),
+                    "retry_after": rl.get("retry_after"),
+                }
+            )
+    except HTTPException:
+        raise
+    except Exception:
+        pass  # fail open
 
     async def generate():
         def emit(step: int, label: str, status: str, detail: str = ""):
