@@ -79,7 +79,7 @@ async def get_current_user(
     try:
         from app.infrastructure.db.supabase_client import get_supabase
         sb = get_supabase()
-        row = sb.table("profiles").select("tier").eq("user_id", user_id).single().execute()
+        row = sb.table("profiles").select("tier").eq("id", user_id).single().execute()
         tier = row.data.get("tier", "free") if row.data else "free"
     except Exception:
         tier = "free"
