@@ -257,7 +257,27 @@ async def get_signal_reasoning(symbol: str, _gate: dict = Depends(signal_gate)):
     if symbol not in TICKER_MAP:
         raise HTTPException(status_code=404, detail=f"Unknown symbol: {symbol}")
 
-    # Try Redis first, fall back to JSON cache
+    # ── Rate limiting ─────────────────────────────────────────────────
+    try:
+        from app.domain.core.rate_limiter import check_rate_limit
+        rl = check_rate_limit(user.get("id", "anon"), user.get("tier", "free"))
+        if not rl["allowed"]:
+            raise HTTPException(
+                status_code=429,
+                detail={
+                    "error": "rate_limit_exceeded",
+                    "message": rl.get("message"),
+                    "used": rl.get("used"),
+                    "limit": rl.get("limit"),
+                    "retry_after": rl.get("retry_after"),
+                }
+            )
+    except HTTPException:
+        raise
+    except Exception:
+        pass  # fail open
+
+        # Try Redis first, fall back to JSON cache
     from app.infrastructure.cache.cache import get_cached
     import json
     from pathlib import Path

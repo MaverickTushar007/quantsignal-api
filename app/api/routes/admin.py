@@ -341,3 +341,20 @@ def cleanup_duplicate_signals(x_admin_key: str = Header(None, alias="x-admin-key
         return {"before": before, "after": after, "deleted": deleted, "breakdown": breakdown}
     except Exception as e:
         return {"error": str(e)}
+
+
+@router.get("/admin/rate-limit/{user_id}", tags=["admin"])
+def get_user_quota(user_id: str):
+    """Inspect a user's current daily signal quota."""
+    from app.domain.core.rate_limiter import get_usage
+    return {"user_id": user_id, **get_usage(user_id)}
+
+@router.post("/admin/rate-limit/{user_id}/reset", tags=["admin"])
+def reset_user_quota(user_id: str, x_admin_key: str = Header(None, alias="x-admin-key")):
+    """Reset a user's daily quota (admin only)."""
+    if x_admin_key != "quantsignal-admin-2026":
+        from fastapi import HTTPException
+        raise HTTPException(status_code=401, detail="Unauthorized")
+    from app.domain.core.rate_limiter import reset_user
+    ok = reset_user(user_id)
+    return {"user_id": user_id, "reset": ok}
