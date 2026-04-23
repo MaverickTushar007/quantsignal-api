@@ -50,6 +50,62 @@ DOCUMENTS = [
         "url": "https://www.bseindia.com/xml-data/corpfiling/AttachLive/532174_Q3FY25.pdf",
         "bse_code": "532174",
     },
+    {
+        "ticker": "BAJFINANCE.NS",
+        "doc_type": "earnings",
+        "doc_name": "Bajaj Finance Q3 FY25 Results",
+        "url": "",
+        "bse_code": "500034",
+    },
+    {
+        "ticker": "WIPRO.NS",
+        "doc_type": "earnings",
+        "doc_name": "Wipro Q3 FY25 Results",
+        "url": "",
+        "bse_code": "507685",
+    },
+    {
+        "ticker": "HCLTECH.NS",
+        "doc_type": "earnings",
+        "doc_name": "HCL Tech Q3 FY25 Results",
+        "url": "",
+        "bse_code": "532281",
+    },
+    {
+        "ticker": "KOTAKBANK.NS",
+        "doc_type": "earnings",
+        "doc_name": "Kotak Bank Q3 FY25 Results",
+        "url": "",
+        "bse_code": "500247",
+    },
+    {
+        "ticker": "AXISBANK.NS",
+        "doc_type": "earnings",
+        "doc_name": "Axis Bank Q3 FY25 Results",
+        "url": "",
+        "bse_code": "532215",
+    },
+    {
+        "ticker": "MARUTI.NS",
+        "doc_type": "earnings",
+        "doc_name": "Maruti Suzuki Q3 FY25 Results",
+        "url": "",
+        "bse_code": "532500",
+    },
+    {
+        "ticker": "SUNPHARMA.NS",
+        "doc_type": "earnings",
+        "doc_name": "Sun Pharma Q3 FY25 Results",
+        "url": "",
+        "bse_code": "524715",
+    },
+    {
+        "ticker": "TITAN.NS",
+        "doc_type": "earnings",
+        "doc_name": "Titan Q3 FY25 Results",
+        "url": "",
+        "bse_code": "500114",
+    },
 ]
 
 
