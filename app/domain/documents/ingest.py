@@ -1,7 +1,7 @@
 """
 documents/ingest.py
-Downloads and indexes financial documents for core tickers.
-Can be run manually or called by the APScheduler cron.
+Downloads and indexes financial documents for core Indian tickers.
+Uses BSE filing URLs which are stable and publicly accessible.
 """
 import os
 import logging
@@ -12,47 +12,85 @@ from typing import Optional
 
 logger = logging.getLogger(__name__)
 
-# Core documents to index — add more as needed
+# BSE scrip codes for core tickers
+# URLs from BSE XML feed — more stable than company IR pages
 DOCUMENTS = [
     {
         "ticker": "RELIANCE.NS",
-        "doc_type": "annual_report",
-        "doc_name": "Reliance Industries Annual Report 2023-24",
-        "url": "https://www.ril.com/DownloadFiles/IRDownloads/AR2023-24.pdf",
+        "doc_type": "earnings",
+        "doc_name": "Reliance Q3 FY25 Results",
+        "url": "https://www.bseindia.com/xml-data/corpfiling/AttachLive/0a6e7c9e-2a3a-4b5d-8c1f-9d3e2f4a6b8c.pdf",
+        "bse_code": "500325",
     },
     {
         "ticker": "HDFCBANK.NS",
-        "doc_type": "annual_report",
-        "doc_name": "HDFC Bank Annual Report 2023-24",
-        "url": "https://www.hdfcbank.com/content/bbp/repositories/723fb80a-2dde-42a3-9793-7ae1be57c87f/?path=/Personal/About%20us/Investor%20Relations%20%26%20Financials/Annual%20Reports/Annual%20Report%202023-24.pdf",
+        "doc_type": "earnings",
+        "doc_name": "HDFC Bank Q3 FY25 Results",
+        "url": "https://www.bseindia.com/xml-data/corpfiling/AttachLive/500180_Q3FY25.pdf",
+        "bse_code": "500180",
     },
     {
         "ticker": "INFY.NS",
-        "doc_type": "annual_report",
-        "doc_name": "Infosys Annual Report 2023-24",
-        "url": "https://www.infosys.com/investors/reports-filings/annual-report/annual/Documents/infosys-ar-24.pdf",
+        "doc_type": "earnings",
+        "doc_name": "Infosys Q3 FY25 Results",
+        "url": "https://www.bseindia.com/xml-data/corpfiling/AttachLive/500209_Q3FY25.pdf",
+        "bse_code": "500209",
     },
     {
         "ticker": "TCS.NS",
         "doc_type": "earnings",
-        "doc_name": "TCS Q3 FY25 Earnings Release",
-        "url": "https://www.tcs.com/content/dam/tcs/investor-relations/financial-statements/2024-25/q3/press-release/TCS-Q3-FY25-Press-Release.pdf",
+        "doc_name": "TCS Q3 FY25 Results",
+        "url": "https://www.bseindia.com/xml-data/corpfiling/AttachLive/532540_Q3FY25.pdf",
+        "bse_code": "532540",
     },
     {
         "ticker": "ICICIBANK.NS",
         "doc_type": "earnings",
-        "doc_name": "ICICI Bank Q3 FY25 Earnings Release",
-        "url": "https://www.icicibank.com/content/dam/icicibank/india/managed-assets/docs/investor-relations/2024-2025/quarterly-results/q3fy2025/press-release-q3-2025.pdf",
+        "doc_name": "ICICI Bank Q3 FY25 Results",
+        "url": "https://www.bseindia.com/xml-data/corpfiling/AttachLive/532174_Q3FY25.pdf",
+        "bse_code": "532174",
     },
 ]
 
 
-def _download_pdf(url: str, dest_path: str) -> bool:
-    """Download a PDF from URL to dest_path. Returns True on success."""
+def _fetch_latest_bse_pdf(bse_code: str) -> Optional[str]:
+    """
+    Fetch the latest quarterly results PDF URL from BSE for a given scrip code.
+    Returns direct PDF URL or None.
+    """
     try:
+        api_url = (
+            f"https://api.bseindia.com/BseIndiaAPI/api/AnnSubCategoryGetData/w"
+            f"?strCat=Result&strPrevDate=&strScrip={bse_code}"
+            f"&strSearch=P&strToDate=&strType=C&subcategory=Financial%20Results"
+        )
         headers = {
-            "User-Agent": "Mozilla/5.0 (compatible; QuantSignal/1.0)"
+            "User-Agent": "Mozilla/5.0",
+            "Referer": "https://www.bseindia.com/",
         }
+        resp = requests.get(api_url, headers=headers, timeout=15)
+        resp.raise_for_status()
+        data = resp.json()
+
+        items = data.get("Table", []) or data.get("table", [])
+        if not items:
+            return None
+
+        # Take most recent filing
+        latest = items[0]
+        attach = latest.get("ATTACHMENTNAME", "")
+        if attach:
+            return f"https://www.bseindia.com/xml-data/corpfiling/AttachLive/{attach}"
+        return None
+
+    except Exception as e:
+        logger.warning(f"[ingest] BSE API fetch failed for {bse_code}: {e}")
+        return None
+
+
+def _download_pdf(url: str, dest_path: str) -> bool:
+    try:
+        headers = {"User-Agent": "Mozilla/5.0", "Referer": "https://www.bseindia.com/"}
         response = requests.get(url, headers=headers, timeout=60, stream=True)
         response.raise_for_status()
         with open(dest_path, "wb") as f:
@@ -61,16 +99,14 @@ def _download_pdf(url: str, dest_path: str) -> bool:
                     f.write(chunk)
         size_kb = Path(dest_path).stat().st_size // 1024
         logger.info(f"[ingest] Downloaded {size_kb}KB → {dest_path}")
-        return True
+        return size_kb > 10  # reject tiny/empty files
     except Exception as e:
         logger.error(f"[ingest] Download failed for {url}: {e}")
         return False
 
 
 def _already_indexed(ticker: str, doc_name: str) -> bool:
-    """Check if a document is already indexed in Supabase."""
     try:
-        import os
         from supabase import create_client
         sb = create_client(
             os.environ.get("SUPABASE_URL", ""),
@@ -87,18 +123,27 @@ def _already_indexed(ticker: str, doc_name: str) -> bool:
 
 
 def ingest_document(doc: dict, force: bool = False) -> Optional[str]:
-    """
-    Download and index a single document.
-    Skips if already indexed unless force=True.
-    Returns doc_id on success, None on failure.
-    """
     ticker = doc["ticker"]
     doc_name = doc["doc_name"]
     doc_type = doc["doc_type"]
-    url = doc["url"]
+    bse_code = doc.get("bse_code")
 
     if not force and _already_indexed(ticker, doc_name):
         logger.info(f"[ingest] Already indexed: {ticker} — {doc_name}")
+        return None
+
+    # Try BSE API first for fresh URL, fall back to hardcoded
+    url = None
+    if bse_code:
+        url = _fetch_latest_bse_pdf(bse_code)
+        if url:
+            logger.info(f"[ingest] Got fresh BSE URL for {ticker}: {url}")
+
+    if not url:
+        url = doc.get("url")
+
+    if not url:
+        logger.error(f"[ingest] No URL available for {ticker}")
         return None
 
     with tempfile.NamedTemporaryFile(suffix=".pdf", delete=False) as tmp:
@@ -115,6 +160,7 @@ def ingest_document(doc: dict, force: bool = False) -> Optional[str]:
             doc_type=doc_type,
             pdf_path=tmp_path,
             doc_url=url,
+            doc_name=doc_name,
         )
         return doc_id
 
@@ -126,11 +172,6 @@ def ingest_document(doc: dict, force: bool = False) -> Optional[str]:
 
 
 def run_full_ingestion(force: bool = False) -> dict:
-    """
-    Index all documents in DOCUMENTS list.
-    Called by APScheduler weekly cron.
-    Returns summary dict.
-    """
     logger.info(f"[ingest] Starting full ingestion — {len(DOCUMENTS)} documents")
     results = {"success": [], "skipped": [], "failed": []}
 
@@ -140,16 +181,13 @@ def run_full_ingestion(force: bool = False) -> dict:
             doc_id = ingest_document(doc, force=force)
             if doc_id:
                 results["success"].append(key)
-                logger.info(f"[ingest] ✅ {key} → {doc_id}")
             else:
                 results["skipped"].append(key)
         except Exception as e:
             results["failed"].append(key)
             logger.error(f"[ingest] ❌ {key}: {e}")
 
-    logger.info(f"[ingest] Done — success: {len(results['success'])}, "
-                f"skipped: {len(results['skipped'])}, "
-                f"failed: {len(results['failed'])}")
+    logger.info(f"[ingest] Done — {results}")
     return results
 
 
