@@ -71,13 +71,30 @@ def train(ticker, df):
             _LGB_OK = False
 
         feat = build_features(df)
-        future_ret = df["Close"].pct_change(FORWARD_DAYS).shift(-FORWARD_DAYS).reindex(feat.index)
-        # Dynamic threshold — use 30th percentile of abs returns so we always get enough samples
-        dynamic_thresh = max(float(future_ret.abs().quantile(0.30)), 0.001)
-        labels = pd.Series(np.nan, index=feat.index)
-        labels[future_ret >  dynamic_thresh] = 1
-        labels[future_ret < -dynamic_thresh] = 0
-        valid = labels.dropna()
+        from app.domain.ml.labeling import build_triple_barrier_labels
+        try:
+            labeled = build_triple_barrier_labels(
+                df, pt_mult=2.0, sl_mult=1.0, num_days=FORWARD_DAYS, min_ret=0.001,
+            )
+            labeled["bin_binary"] = (labeled["bin"] == 1).astype(int)
+            valid = labeled["bin_binary"].reindex(feat.index).dropna()
+            # ── frac-diff features (injected by deploy_features) ──
+            try:
+                from app.domain.ml.features import patch_feature_df
+                feat = patch_feature_df(feat, df)
+            except Exception as _fe:
+                import logging as _log
+                _log.getLogger(__name__).warning(f"[features] frac-diff injection failed: {_fe}")
+
+        except Exception as _e:
+            import logging
+            logging.getLogger(__name__).warning(f"[labeling] triple barrier failed, using naive: {_e}")
+            future_ret = df["Close"].pct_change(FORWARD_DAYS).shift(-FORWARD_DAYS).reindex(feat.index)
+            dynamic_thresh = max(float(future_ret.abs().quantile(0.30)), 0.001)
+            labels = pd.Series(np.nan, index=feat.index)
+            labels[future_ret >  dynamic_thresh] = 1
+            labels[future_ret < -dynamic_thresh] = 0
+            valid = labels.dropna()
 
         X = feat.loc[valid.index, FEATURE_COLUMNS]
         y = valid.values.astype(int)
@@ -87,8 +104,10 @@ def train(ticker, df):
         split = int(len(X) * 0.8)
         X_tr, y_tr = X.iloc[:split], y[:split]
 
+        scale_pos = int((len(y) - y.sum()) / max(y.sum(), 1))
         xgb_base = xgb.XGBClassifier(n_estimators=200, max_depth=4, learning_rate=0.05,
             subsample=0.8, colsample_bytree=0.8, eval_metric="logloss",
+            scale_pos_weight=scale_pos,
             random_state=42, verbosity=0)
         xgb_model = CalibratedClassifierCV(xgb_base, cv=3, method="isotonic")
         xgb_model.fit(X_tr, y_tr)
@@ -264,10 +283,21 @@ def predict(ticker, df, sentiment=0.0):
         except Exception:
             volume_ratio = 1.0
 
+        try:
+            from app.domain.ml.bet_sizing import BetSizer as _BetSizer
+            # For SELL, prob is P(BUY) so confidence = 1-prob
+            _adj_prob = float(prob) if direction != "SELL" else 1.0 - float(prob)
+            _sized = _BetSizer().size_signal({"direction": direction, "probability": _adj_prob})
+            _position_size = _sized.get("position_size", 0.0)
+            _kelly_raw     = _sized.get("kelly_raw", 0.0)
+        except Exception:
+            _position_size, _kelly_raw = 0.0, 0.0
+
         return SignalResult(
             ticker=ticker, direction=direction,
             probability=round(prob, 4), confidence=confidence,
-            kelly_size=round(kelly_size, 2), expected_value=round(ev, 4),
+            kelly_size=round(_position_size * 100, 2),  # BetSizer: half-Kelly % of capital
+            expected_value=round(ev, 4),
             take_profit=round(tp, 4), stop_loss=round(sl, 4),
             current_price=round(close, 4), atr=round(atr, 4),
             risk_reward=round(rr, 2), model_agreement=round(agreement, 3),

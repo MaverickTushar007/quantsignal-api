@@ -8,6 +8,7 @@ Clean pipeline: fetch → features → ML → confluence → news → reasoning 
 import pandas as pd
 from typing import Optional
 from dataclasses import dataclass, asdict
+import dataclasses
 from datetime import datetime, timezone
 
 from app.domain.data.universe import TICKER_MAP
@@ -168,7 +169,6 @@ def generate_signal(symbol: str, include_reasoning: bool = True, bypass_cache: b
 
     if ml is not None and liquidity_clusters is not None:
         try:
-            import dataclasses
             from app.domain.data.liquidity_levels import snap_to_liquidity
             new_tp, new_sl, snap_info = snap_to_liquidity(
                 ml.direction, ml.current_price,
@@ -182,7 +182,6 @@ def generate_signal(symbol: str, include_reasoning: bool = True, bypass_cache: b
 
     # Apply event-day ATR multiplier to TP/SL and Kelly reduction
     if ml is not None and event_adj["atr_multiplier"] != 1.0:
-        import dataclasses
         mult = event_adj["atr_multiplier"]
         kelly_mult = event_adj["kelly_reduction"]
         close = ml.current_price
@@ -233,7 +232,6 @@ def generate_signal(symbol: str, include_reasoning: bool = True, bypass_cache: b
 
     if liquidity_clusters is not None:
         try:
-            import dataclasses
             from app.domain.data.liquidity_levels import snap_to_liquidity
             new_tp, new_sl, snap_info = snap_to_liquidity(
                 ml.direction, ml.current_price,
@@ -247,7 +245,6 @@ def generate_signal(symbol: str, include_reasoning: bool = True, bypass_cache: b
 
     # 4d. Apply event-day ATR multiplier AFTER direction is enforced
     if event_adj["atr_multiplier"] != 1.0:
-        import dataclasses
         mult = event_adj["atr_multiplier"]
         kelly_mult = event_adj["kelly_reduction"]
         close = ml.current_price
