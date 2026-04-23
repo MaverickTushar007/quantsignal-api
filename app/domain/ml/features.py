@@ -331,6 +331,14 @@ FEATURE_COLUMNS = [
     "obv_change",
     "high_low_range", "close_position",
     "momentum_10d", "momentum_20d",
+    # regime + mean-reversion
+    "hurst_exp",
+    "adx_14",
+    "dist_from_52w_high", "dist_from_52w_low",
+    "vol_regime",
+    "mean_rev_z",
+    "overnight_gap",
+    "body_ratio",
 ]
 
 
@@ -404,6 +412,150 @@ def build_features(df: pd.DataFrame) -> pd.DataFrame:
     feat["momentum_10d"]   = close / close.shift(10).clip(lower=1e-8) - 1
     feat["momentum_20d"]   = close / close.shift(20).clip(lower=1e-8) - 1
 
+    # ── regime + mean-reversion features ─────────────────────────────────────
+    open_ = df["Open"] if "Open" in df.columns else close
+
+    # Hurst exponent approximation (R/S over 20 days) — <0.5 mean-reverting, >0.5 trending
+    def _hurst(s, n=20):
+        def _rs(x):
+            m = x.mean(); d = (x - m).cumsum()
+            r = d.max() - d.min()
+            s_ = x.std()
+            return r / s_ if s_ > 0 else 0
+        return s.rolling(n).apply(lambda x: np.log(_rs(x)) / np.log(n) if len(x)==n else np.nan, raw=True)
+    feat["hurst_exp"] = _hurst(close.pct_change().dropna().reindex(close.index).fillna(0))
+
+    # ADX (Average Directional Index) — trend strength 0-100
+    plus_dm  = high.diff().clip(lower=0)
+    minus_dm = (-low.diff()).clip(lower=0)
+    plus_dm[plus_dm < (-low.diff()).clip(lower=0)]  = 0
+    minus_dm[minus_dm < high.diff().clip(lower=0)] = 0
+    tr_adx   = pd.concat([high-low, (high-close.shift()).abs(), (low-close.shift()).abs()], axis=1).max(axis=1)
+    atr14    = tr_adx.rolling(14).mean()
+    pdi      = 100 * plus_dm.rolling(14).mean()  / atr14.clip(lower=1e-8)
+    mdi      = 100 * minus_dm.rolling(14).mean() / atr14.clip(lower=1e-8)
+    dx       = (100 * (pdi - mdi).abs() / (pdi + mdi).clip(lower=1e-8))
+    feat["adx_14"] = dx.rolling(14).mean()
+
+    # Distance from 52-week high/low — mean reversion anchors
+    high_52w = high.rolling(252).max()
+    low_52w  = low.rolling(252).min()
+    feat["dist_from_52w_high"] = close / high_52w.clip(lower=1e-8) - 1
+    feat["dist_from_52w_low"]  = close / low_52w.clip(lower=1e-8)  - 1
+
+    # Volatility regime: short vol vs long vol
+    ret1     = close.pct_change()
+    feat["vol_regime"]  = ret1.rolling(10).std() / ret1.rolling(60).std().clip(lower=1e-8)
+
+    # Mean reversion z-score
+    sma20_   = close.rolling(20).mean()
+    std20_   = close.rolling(20).std()
+    feat["mean_rev_z"]  = (close - sma20_) / std20_.clip(lower=1e-8)
+
+    # Overnight gap
+    feat["overnight_gap"] = (open_ - close.shift(1)) / close.shift(1).clip(lower=1e-8)
+
+    # Candle body ratio
+    feat["body_ratio"] = (close - open_).abs() / (high - low).clip(lower=1e-8)
+
     feat = feat.replace([np.inf, -np.inf], np.nan)
     return feat
 
+
+
+# ── Trend-following feature set (US equities, crypto) ────────────────────────
+
+FEATURE_COLUMNS_TREND = [
+    "return_1d", "return_5d", "return_10d", "return_20d",
+    "volatility_10d", "volatility_20d",
+    "rsi_14", "rsi_28",
+    "macd", "macd_signal", "macd_hist",
+    "bb_width", "bb_pct",
+    "price_to_sma20", "price_to_sma50",
+    "volume_ratio_10d", "volume_ratio_20d",
+    "atr_pct",
+    "momentum_10d", "momentum_20d",
+    "adx_14",
+    "vol_regime",
+    "obv_change",
+    "close_position",
+]
+
+
+def build_features_trend(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Trend-following feature set for US equities and crypto.
+    Omits mean-reversion features (Hurst, 52w anchors) that hurt trending markets.
+    """
+    df = df.copy()
+    if isinstance(df.columns, pd.MultiIndex):
+        df.columns = df.columns.get_level_values(0)
+
+    close  = df["Close"]
+    high   = df["High"]   if "High"   in df.columns else close
+    low    = df["Low"]    if "Low"    in df.columns else close
+    volume = df["Volume"] if "Volume" in df.columns else pd.Series(1, index=df.index)
+
+    feat = pd.DataFrame(index=df.index)
+
+    feat["return_1d"]  = close.pct_change(1)
+    feat["return_5d"]  = close.pct_change(5)
+    feat["return_10d"] = close.pct_change(10)
+    feat["return_20d"] = close.pct_change(20)
+
+    feat["volatility_10d"] = feat["return_1d"].rolling(10).std()
+    feat["volatility_20d"] = feat["return_1d"].rolling(20).std()
+
+    delta = close.diff()
+    gain  = delta.clip(lower=0).rolling(14).mean()
+    loss  = (-delta.clip(upper=0)).rolling(14).mean()
+    feat["rsi_14"] = 100 - 100 / (1 + gain / loss.clip(lower=1e-8))
+    gain2 = delta.clip(lower=0).rolling(28).mean()
+    loss2 = (-delta.clip(upper=0)).rolling(28).mean()
+    feat["rsi_28"] = 100 - 100 / (1 + gain2 / loss2.clip(lower=1e-8))
+
+    ema12 = close.ewm(span=12, adjust=False).mean()
+    ema26 = close.ewm(span=26, adjust=False).mean()
+    macd  = ema12 - ema26
+    feat["macd"]        = macd
+    feat["macd_signal"] = macd.ewm(span=9, adjust=False).mean()
+    feat["macd_hist"]   = macd - feat["macd_signal"]
+
+    sma20 = close.rolling(20).mean()
+    std20 = close.rolling(20).std()
+    feat["bb_width"] = (sma20 + 2*std20 - (sma20 - 2*std20)) / sma20.clip(lower=1e-8)
+    feat["bb_pct"]   = (close - (sma20 - 2*std20)) / (4*std20).clip(lower=1e-8)
+
+    feat["price_to_sma20"] = close / sma20.clip(lower=1e-8) - 1
+    feat["price_to_sma50"] = close / close.rolling(50).mean().clip(lower=1e-8) - 1
+
+    feat["volume_ratio_10d"] = volume / volume.rolling(10).mean().clip(lower=1e-8)
+    feat["volume_ratio_20d"] = volume / volume.rolling(20).mean().clip(lower=1e-8)
+    obv = (np.sign(close.diff()) * volume).fillna(0).cumsum()
+    feat["obv_change"] = obv.pct_change(5)
+
+    tr = pd.concat([high-low, (high-close.shift()).abs(), (low-close.shift()).abs()], axis=1).max(axis=1)
+    atr14 = tr.rolling(14).mean()
+    feat["atr_pct"] = atr14 / close.clip(lower=1e-8)
+
+    feat["momentum_10d"] = close / close.shift(10).clip(lower=1e-8) - 1
+    feat["momentum_20d"] = close / close.shift(20).clip(lower=1e-8) - 1
+
+    feat["close_position"] = (close - low) / (high - low).clip(lower=1e-8)
+
+    # ADX
+    plus_dm  = high.diff().clip(lower=0)
+    minus_dm = (-low.diff()).clip(lower=0)
+    plus_dm[plus_dm  < (-low.diff()).clip(lower=0)] = 0
+    minus_dm[minus_dm < high.diff().clip(lower=0)]  = 0
+    pdi = 100 * plus_dm.rolling(14).mean() / atr14.clip(lower=1e-8)
+    mdi = 100 * minus_dm.rolling(14).mean() / atr14.clip(lower=1e-8)
+    dx  = 100 * (pdi - mdi).abs() / (pdi + mdi).clip(lower=1e-8)
+    feat["adx_14"] = dx.rolling(14).mean()
+
+    # Vol regime
+    ret1 = close.pct_change()
+    feat["vol_regime"] = ret1.rolling(10).std() / ret1.rolling(60).std().clip(lower=1e-8)
+
+    feat = feat.replace([np.inf, -np.inf], np.nan)
+    return feat
