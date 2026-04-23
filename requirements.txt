@@ -30,3 +30,4 @@ pandas-datareader>=0.10.0
 APScheduler==3.10.4
 lxml==5.2.2
 PyJWT==2.8.0
+sentry-sdk==2.0.0

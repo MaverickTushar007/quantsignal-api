@@ -4,6 +4,14 @@ FastAPI application entry point.
 Run with: python -m uvicorn main:app --reload
 """
 
+import sentry_sdk
+sentry_sdk.init(
+    dsn="https://3abbd3b209a37b2f1379c89151f9675e@o4511269104320512.ingest.us.sentry.io/4511269114544128",
+    traces_sample_rate=0.1,
+    send_default_pii=False,
+    environment="production",
+)
+
 from fastapi import FastAPI
 from contextlib import asynccontextmanager
 from fastapi.middleware.cors import CORSMiddleware
