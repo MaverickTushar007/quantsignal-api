@@ -32,3 +32,7 @@ lxml==5.2.2
 PyJWT==2.8.0
 sentry-sdk==2.0.0
 statsmodels==0.14.2
+pymupdf==1.26.4
+PyPDF2==3.0.1
+litellm==1.83.0
+pyyaml==6.0.2

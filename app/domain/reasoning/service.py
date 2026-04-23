@@ -523,6 +523,15 @@ async def stream_chat(symbol: str, message: str, history: list, user_id: str = "
         except Exception:
             pass
 
+        # Inject document intelligence from indexed filings
+        try:
+            from app.domain.documents.context_builder import build_document_context
+            doc_ctx = build_document_context(symbol, message)
+            if doc_ctx:
+                sys_prompt += f"\n{doc_ctx}\n"
+        except Exception:
+            pass
+
         sys_prompt += "\nSearch the web for the latest news, price action, and analyst views before responding.\n"
 
         if not settings.groq_api_key:

@@ -68,6 +68,18 @@ async def lifespan(app: FastAPI):
             wipe_signal_cache()
         except Exception:
             pass
+        # Weekly document ingestion (Sat 17:00 UTC = Sat 22:30 IST)
+        from app.domain.documents.ingest import run_full_ingestion
+        from apscheduler.triggers.cron import CronTrigger
+        scheduler.add_job(
+            run_full_ingestion,
+            trigger=CronTrigger(day_of_week="sat", hour=17, minute=0, timezone="UTC"),
+            id="weekly_doc_ingestion",
+            name="Weekly document ingestion",
+            replace_existing=True,
+            max_instances=1,
+            misfire_grace_time=3600,
+        )
         # Weekly model retrain (Sun 18:30 UTC = Mon 00:00 IST)
         from app.domain.ml.scheduler import retrain_all_models
         from apscheduler.triggers.cron import CronTrigger
