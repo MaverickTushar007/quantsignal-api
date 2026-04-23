@@ -192,7 +192,7 @@ async def get_signal(
                 conf_int = int(str(raw_conf).split("/")[0]) if "/" in str(raw_conf) else None
             except Exception:
                 conf_int = None
-            sig["confluence_score"] = conf_int
+            sig["confluence_score"] = str(conf_int)
             mtf = sig.get("mtf", {})
             sig["mtf_score"] = mtf.get("mtf_score_with_daily") or mtf.get("mtf_score")
             # Telegram alert
