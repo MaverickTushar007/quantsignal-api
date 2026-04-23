@@ -886,7 +886,7 @@ async def get_portfolio(
 
     # Try Redis first, then file cache
     from app.infrastructure.cache.cache import get_cached
-    cached = get_cached("signals_cache_full")
+    cached = get_cached("all_signals_list")
     if not cached:
         cache_path = BASE_DIR / "data/signals_cache.json"
         if cache_path.exists():
