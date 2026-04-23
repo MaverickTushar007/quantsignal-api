@@ -877,9 +877,22 @@ async def get_portfolio(
     _gate: dict = Depends(signal_gate),
 ):
     """
-    Portfolio-level capital allocation across all signals.
-    Returns position sizes, rupee amounts, and portfolio summary.
+    Portfolio-level capital allocation built from cached signals.
+    Fast — reads from signals cache, no live ML inference.
     """
-    from app.domain.portfolio.allocator import allocate
-    result = allocate(capital=capital)
+    import json
+    from app.core.config import BASE_DIR
+    from app.domain.portfolio.allocator import allocate_from_cache
+
+    # Try Redis first, then file cache
+    cached = get_cached("signals_cache_full")
+    if not cached:
+        cache_path = BASE_DIR / "data/signals_cache.json"
+        if cache_path.exists():
+            cached = json.loads(cache_path.read_text())
+
+    if not cached:
+        return {"error": "No cached signals available. Run /api/v1/signals first.", "allocations": [], "summary": {}}
+
+    result = allocate_from_cache(cached, capital=capital)
     return result
