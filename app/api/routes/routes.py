@@ -94,7 +94,12 @@ def get_all_signals(
             kelly_size=sig["kelly_size"],
         ))
     if not type and not direction:
-        set_cached("all_signals_list", results, ttl=86400)
+        # Serialize Pydantic objects to dicts before caching
+        try:
+            serializable = [r.model_dump() if hasattr(r, "model_dump") else dict(r) for r in results]
+        except Exception:
+            serializable = results
+        set_cached("all_signals_list", serializable, ttl=86400)
     return results
 
 @router.get("/signals/{symbol}", response_model=SignalResponse, tags=["signals"])
