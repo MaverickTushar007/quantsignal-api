@@ -20,7 +20,14 @@ from pathlib import Path
 from dataclasses import dataclass
 from typing import Optional
 from datetime import datetime, timezone
-from app.domain.ml.features import build_features, FEATURE_COLUMNS
+from app.domain.ml.features import (
+    build_features, FEATURE_COLUMNS,
+    build_features_trend, FEATURE_COLUMNS_TREND,
+)
+
+def _get_feature_set(ticker: str):
+    trend = any(x in ticker for x in ["AAPL","MSFT","GOOGL","AMZN","NVDA","BTC","ETH","SOL","QQQ","SPY"])
+    return (build_features_trend, FEATURE_COLUMNS_TREND) if trend else (build_features, FEATURE_COLUMNS)
 
 MODELS_DIR   = BASE_DIR / "ml/models"
 MODELS_DIR.mkdir(exist_ok=True)
@@ -70,7 +77,8 @@ def train(ticker, df):
             lgb = None
             _LGB_OK = False
 
-        feat = build_features(df)
+        _bf, _fc = _get_feature_set(ticker)
+        feat = _bf(df)
         from app.domain.ml.labeling import build_triple_barrier_labels
         try:
             labeled = build_triple_barrier_labels(
@@ -96,7 +104,7 @@ def train(ticker, df):
             labels[future_ret < -dynamic_thresh] = 0
             valid = labels.dropna()
 
-        X = feat.loc[valid.index, FEATURE_COLUMNS]
+        X = feat.loc[valid.index, _fc]
         y = valid.values.astype(int)
         if len(X) < 50 or len(np.unique(y)) < 2:
             return None
@@ -148,8 +156,9 @@ def predict(ticker, df, sentiment=0.0):
         if bundle is None:
             return None
 
-        feat   = build_features(df)
-        latest = feat[FEATURE_COLUMNS].iloc[[-1]]
+        _bf, _fc = _get_feature_set(ticker)
+        feat   = _bf(df)
+        latest = feat[_fc].iloc[[-1]]
 
         xgb_prob = float(bundle["xgb"].predict_proba(latest)[0, 1])
         lgb_prob = float(bundle["lgb"].predict_proba(latest)[0, 1])
