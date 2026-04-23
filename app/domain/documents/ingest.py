@@ -247,6 +247,22 @@ def run_full_ingestion(force: bool = False) -> dict:
     return results
 
 
+# Global/Crypto documents — using public research reports
+GLOBAL_DOCUMENTS = [
+    {
+        "ticker": "BTC-USD",
+        "doc_type": "research",
+        "doc_name": "Bitcoin Q4 2024 Market Report",
+        "url": "https://assets.coingecko.com/reports/2024/CoinGecko-2024-Annual-Crypto-Industry-Report.pdf",
+        "bse_code": None,
+    },
+
+]
+
+# Combined list
+ALL_DOCUMENTS = DOCUMENTS + GLOBAL_DOCUMENTS
+
+
 if __name__ == "__main__":
     import sys
     logging.basicConfig(level=logging.INFO)
