@@ -885,6 +885,7 @@ async def get_portfolio(
     from app.domain.portfolio.allocator import allocate_from_cache
 
     # Try Redis first, then file cache
+    from app.infrastructure.cache.cache import get_cached
     cached = get_cached("signals_cache_full")
     if not cached:
         cache_path = BASE_DIR / "data/signals_cache.json"
