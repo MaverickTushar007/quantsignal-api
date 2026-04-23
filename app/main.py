@@ -68,6 +68,18 @@ async def lifespan(app: FastAPI):
             wipe_signal_cache()
         except Exception:
             pass
+        # Weekly model retrain (Sun 18:30 UTC = Mon 00:00 IST)
+        from app.domain.ml.scheduler import retrain_all_models
+        from apscheduler.triggers.cron import CronTrigger
+        scheduler.add_job(
+            retrain_all_models,
+            trigger=CronTrigger(day_of_week="sun", hour=18, minute=30, timezone="UTC"),
+            id="weekly_retrain",
+            name="Weekly model retrain",
+            replace_existing=True,
+            max_instances=1,
+            misfire_grace_time=3600,
+        )
         scheduler.start()
         import logging
         logging.getLogger(__name__).info("[Perseus Watcher] Scheduler started — scanning every 15 min")
