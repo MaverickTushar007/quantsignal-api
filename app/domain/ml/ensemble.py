@@ -305,7 +305,7 @@ def predict(ticker, df, sentiment=0.0):
         return SignalResult(
             ticker=ticker, direction=direction,
             probability=round(prob, 4), confidence=confidence,
-            kelly_size=round(_position_size * 100, 2),  # BetSizer: half-Kelly % of capital
+            kelly_size=round(_position_size * 100 * (-1 if direction == "SELL" else 1), 2),  # negative for SELL
             expected_value=round(ev, 4),
             take_profit=round(tp, 4), stop_loss=round(sl, 4),
             current_price=round(close, 4), atr=round(atr, 4),
