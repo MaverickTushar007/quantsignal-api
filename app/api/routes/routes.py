@@ -886,14 +886,29 @@ async def get_portfolio(
 
     # Try Redis first, then file cache
     from app.infrastructure.cache.cache import get_cached
-    cached = get_cached("all_signals_list")
-    if not cached:
-        cache_path = BASE_DIR / "data/signals_cache.json"
-        if cache_path.exists():
-            cached = json.loads(cache_path.read_text())
+    from app.domain.data.universe import TICKER_MAP
+    from app.domain.signal.service import generate_signal
 
-    if not cached:
+    cached = get_cached("all_signals_list")
+
+    if cached:
+        # Convert Pydantic objects or dicts to plain dicts
+        signals_dict = {}
+        for item in cached:
+            if hasattr(item, "__dict__"):
+                d = {k: v for k, v in item.__dict__.items() if not k.startswith("_")}
+            elif isinstance(item, dict):
+                d = item
+            else:
+                try:
+                    d = dict(item)
+                except Exception:
+                    continue
+            ticker = d.get("symbol") or d.get("ticker")
+            if ticker:
+                signals_dict[ticker] = d
+        result = allocate_from_cache(signals_dict, capital=capital)
+    else:
         return {"error": "No cached signals available. Run /api/v1/signals first.", "allocations": [], "summary": {}}
 
-    result = allocate_from_cache(cached, capital=capital)
     return result
