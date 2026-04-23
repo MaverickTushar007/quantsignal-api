@@ -870,3 +870,8 @@ async def get_usage_endpoint(ctx: dict = Depends(signal_gate.__wrapped__ if hasa
     from app.domain.billing.middleware import user_context
     from app.domain.billing.usage import get_usage_summary
     return get_usage_summary(ctx["user_id"], ctx["tier"])
+
+@router.get("/sentry-debug", tags=["system"])
+async def sentry_debug():
+    """Trigger a test error to verify Sentry is working."""
+    division_by_zero = 1 / 0
