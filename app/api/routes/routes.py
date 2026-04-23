@@ -870,3 +870,16 @@ async def get_usage_endpoint(ctx: dict = Depends(signal_gate.__wrapped__ if hasa
     from app.domain.billing.middleware import user_context
     from app.domain.billing.usage import get_usage_summary
     return get_usage_summary(ctx["user_id"], ctx["tier"])
+
+@router.get("/portfolio", tags=["portfolio"])
+async def get_portfolio(
+    capital: float = 1_000_000.0,
+    _gate: dict = Depends(signal_gate),
+):
+    """
+    Portfolio-level capital allocation across all signals.
+    Returns position sizes, rupee amounts, and portfolio summary.
+    """
+    from app.domain.portfolio.allocator import allocate
+    result = allocate(capital=capital)
+    return result
