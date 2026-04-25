@@ -3,7 +3,8 @@ import logging
 
 log = logging.getLogger(__name__)
 
-TELEGRAM_TOKEN = "8611494119:AAGxk4nkCz590YEaJt_lfF83ZRX0WhRqTbM"
+import os
+TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN", "")
 CHAT_ID = "776559643"
 
 def send_telegram(msg: str) -> bool:

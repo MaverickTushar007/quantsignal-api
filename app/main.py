@@ -28,7 +28,6 @@ from app.api.routes.replay import router as replay_router
 from app.api.routes.ai_explain import router as ai_explain_router
 from app.api.routes.guardian import router as guardian_router
 from app.api.routes.portfolio import router as portfolio_router
-from app.api.routes.payments import router as payments_router
 from app.api.routes.cron import router as cron_router
 from app.api.routes.agents import router as agents_router
 from app.api.routes.montecarlo import router as mc_router
@@ -127,7 +126,6 @@ app.include_router(ai_explain_router, prefix="/api/v1")
 app.include_router(guardian_router, prefix="/api/v1")
 app.include_router(portfolio_router, prefix="/api/v1")
 app.include_router(billing_router, prefix="/api/v1")
-app.include_router(payments_router, prefix="/api/v1")
 app.include_router(cron_router, prefix="/api/v1")
 app.include_router(agents_router, prefix="/api/v1")
 app.include_router(mc_router, prefix="/api/v1")

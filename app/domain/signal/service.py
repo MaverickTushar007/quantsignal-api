@@ -180,23 +180,7 @@ def generate_signal(symbol: str, include_reasoning: bool = True, bypass_cache: b
         except Exception:
             pass
 
-    # Apply event-day ATR multiplier to TP/SL and Kelly reduction
-    if ml is not None and event_adj["atr_multiplier"] != 1.0:
-        mult = event_adj["atr_multiplier"]
-        kelly_mult = event_adj["kelly_reduction"]
-        close = ml.current_price
-        if ml.direction == "BUY":
-            new_tp = close + (ml.take_profit - close) * mult
-            new_sl = close - (close - ml.stop_loss) * mult
-        else:
-            new_tp = close - (close - ml.take_profit) * mult
-            new_sl = close + (ml.stop_loss - close) * mult
-        ml = dataclasses.replace(
-            ml,
-            take_profit=round(new_tp, 4),
-            stop_loss=round(new_sl, 4),
-            kelly_size=round(ml.kelly_size * kelly_mult, 2),
-        )
+    # Event adjustment applied once after confluence enforcement (see section 4d)
 
     if ml is None:
         return None

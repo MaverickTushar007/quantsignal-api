@@ -488,11 +488,6 @@ def backtest(
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-@router.get("/regime/{symbol}", tags=["quant"])
-async def get_regime(symbol: str):
-    from app.domain.regime.detector import detect_regime
-    return detect_regime(symbol)
-
 @router.post("/regime/cache", tags=["quant"])
 async def cache_regime(payload: dict):
     """Accept regime data pushed from local runner and cache it."""

@@ -255,9 +255,9 @@ def _rebuild():
             from app.infrastructure.cache.cache import _get_redis
             r = _get_redis()
             if r:
-                for k in r.keys("*"):
+                for k in r.keys("signal:*"):
                     r.delete(k)
-                print("Redis cleared")
+                print("Redis signal keys cleared")
         except Exception as e:
             print(f"Redis clear skipped: {e}")
 
