@@ -95,6 +95,7 @@ class PortfolioXRay:
             "most_crowded_pct":     round(self.most_crowded_pct, 3),
             "estimated_annual_vol": round(self.estimated_annual_vol, 3),
             "correlation_pairs": self.correlation_pairs,
+            "correlation_pairs": self.correlation_pairs,
             "estimated_10pct_loss": round(self.estimated_10pct_loss, 2),
             "regime_fit_score":     round(self.regime_fit_score, 3),
             "misaligned_positions": self.misaligned_positions,
