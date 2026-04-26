@@ -22,7 +22,15 @@ async def get_ticker_research(
     try:
         from app.domain.research.ticker_packet import build_ticker_packet
         packet = await build_ticker_packet(symbol.upper())
-        return packet.to_dict()
+        d = packet.to_dict()
+        # W2.4 — persist packet (fire and forget, never block response)
+        try:
+            from app.domain.research.packet_store import save_packet
+            user_id = user.get("sub") or user.get("user_id") if user else None
+            save_packet(d, user_id=user_id)
+        except Exception as _pe:
+            log.warning(f"[research] packet save failed: {_pe}")
+        return d
     except Exception as e:
         log.error(f"[research] ticker_packet failed for {symbol}: {e}")
         raise HTTPException(status_code=500, detail=f"Research unavailable: {str(e)}")
@@ -54,3 +62,14 @@ async def get_ticker_summary(
     except Exception as e:
         log.error(f"[research] summary failed for {symbol}: {e}")
         raise HTTPException(status_code=500, detail=str(e))
+
+
+@router.get("/research/history/{symbol}")
+async def get_research_history(
+    symbol: str,
+    limit: int = 10,
+    user: dict = Depends(get_current_user),
+):
+    """Last N research packets for a symbol — for comparison and memory."""
+    from app.domain.research.packet_store import get_history
+    return {"symbol": symbol.upper(), "history": get_history(symbol, limit=min(limit, 50))}
