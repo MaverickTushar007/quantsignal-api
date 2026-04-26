@@ -28,69 +28,6 @@ def debug_signal(symbol: str):
         return {"error": str(e), "trace": traceback.format_exc()[-500:]}
 
 
-@router.get("/market/mood", response_model=MarketMood, tags=["signals"])
-def market_mood():
-    """Aggregate mood across first 20 assets — powers the top bar."""
-    sample = [t["symbol"] for t in TICKERS[:20]]
-    buys = sells = holds = 0
-    probs = []
-
-    for sym in sample:
-        sig = generate_signal(sym, include_reasoning=False)
-        if not sig:
-            continue
-        if sig["direction"] == "BUY":
-            buys += 1
-        elif sig["direction"] == "SELL":
-            sells += 1
-        else:
-            holds += 1
-        probs.append(sig["probability"])
-
-    total = buys + sells + holds
-    avg_conf = round(sum(probs) / len(probs), 3) if probs else 0
-
-    if buys > sells * 1.5:
-        mood = "BULLISH"
-    elif sells > buys * 1.5:
-        mood = "BEARISH"
-    else:
-        mood = "NEUTRAL"
-
-    return MarketMood(
-        mood=mood, buy_count=buys, sell_count=sells,
-        hold_count=holds, avg_confidence=avg_conf, total=total
-    )
-
-
-@router.get("/backtest/{symbol}", response_model=BacktestSummary, tags=["backtest"])
-def backtest(symbol: str, user: dict = Depends(require_pro)):
-    """Walk-forward backtest — pro only."""
-    symbol = symbol.upper()
-    if symbol not in TICKER_MAP:
-        raise HTTPException(status_code=404, detail=f"Unknown symbol: {symbol}")
-
-    from app.domain.data.market import fetch_ohlcv
-    from app.domain.ml.backtest import run
-
-    df = fetch_ohlcv(symbol, period="2y")
-    if df is None:
-        raise HTTPException(status_code=503, detail="Could not fetch data")
-
-    try:
-        result = run(df, symbol)
-        return BacktestSummary(
-            ticker=result.ticker,
-            win_rate=result.win_rate,
-            avg_return=result.avg_return,
-            sharpe=result.sharpe,
-            max_drawdown=result.max_drawdown,
-            total_return=result.total_return,
-            n_trades=result.n_trades,
-        )
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
-
 @router.get("/signals/{symbol}/stream", tags=["signals"])
 async def stream_signal(symbol: str, _gate: dict = Depends(signal_gate)):
     """Perseus streaming endpoint — emits SSE events for each pipeline step."""

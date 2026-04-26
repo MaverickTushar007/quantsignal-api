@@ -36,24 +36,6 @@ def get_asset_news(symbol: str, limit: int = 10):
         return {"symbol": symbol, "count": 0, "items": [], "error": str(e)}
 
 
-@router.get("/signals/debug/{symbol}", tags=["signals"])
-def debug_signal(symbol: str):
-    import traceback, requests
-    try:
-        from app.domain.data.market import COINGECKO_ID_MAP
-        cg_id = COINGECKO_ID_MAP.get(symbol.upper())
-        url = f"https://api.coingecko.com/api/v3/coins/{cg_id}/ohlc?vs_currency=usd&days=90"
-        resp = requests.get(url, timeout=20)
-        return {
-            "status": resp.status_code,
-            "cg_id": cg_id,
-            "data_len": len(resp.json()) if resp.status_code == 200 else 0,
-            "body_preview": resp.text[:100],
-        }
-    except Exception as e:
-        return {"error": str(e), "trace": traceback.format_exc()[-500:]}
-
-
 @router.get("/market/mood", response_model=MarketMood, tags=["signals"])
 def market_mood():
     """Aggregate mood across first 20 assets — powers the top bar."""
@@ -117,6 +99,7 @@ def backtest(symbol: str, user: dict = Depends(require_pro)):
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
+
 @router.get("/regime/{symbol}", tags=["quant"])
 async def get_regime(symbol: str):
     from app.infrastructure.cache.cache import get_cached
@@ -134,3 +117,5 @@ async def debug_regime(symbol: str):
         return {"status": "ok", "result": result}
     except Exception as e:
         return {"status": "error", "error": str(e), "type": type(e).__name__}
+
+
