@@ -18,7 +18,7 @@ from app.infrastructure.queue.reasoning_queue import enqueue_reasoning_job
 from app.domain.reasoning.worker import fill_reasoning_async
 from fastapi import BackgroundTasks
 from app.domain.data.universe import TICKERS, TICKER_MAP
-from app.domain.billing.middleware import signal_gate, user_context
+from app.domain.billing.middleware import signal_gate
 
 router = APIRouter()
 
@@ -27,12 +27,6 @@ router = APIRouter()
 async def health():
     from app.core.config import settings
     return HealthResponse(status="ok", version="1.0.0", env=settings.app_env)
-
-
-@router.get("/usage", tags=["billing"])
-async def get_usage_endpoint(ctx: dict = Depends(user_context)):
-    from app.domain.billing.usage import get_usage_summary
-    return get_usage_summary(ctx["user_id"], ctx["tier"])
 
 
 @router.get("/signals", response_model=List[WatchlistItem], tags=["signals"])
@@ -94,12 +88,7 @@ def get_all_signals(
             kelly_size=sig["kelly_size"],
         ))
     if not type and not direction:
-        # Serialize Pydantic objects to dicts before caching
-        try:
-            serializable = [r.model_dump() if hasattr(r, "model_dump") else dict(r) for r in results]
-        except Exception:
-            serializable = results
-        set_cached("all_signals_list", serializable, ttl=86400)
+        set_cached("all_signals_list", results, ttl=86400)
     return results
 
 @router.get("/signals/{symbol}", response_model=SignalResponse, tags=["signals"])
@@ -107,7 +96,6 @@ async def get_signal(
     symbol: str,
     background_tasks: BackgroundTasks,
     _gate: dict = Depends(signal_gate),
-    user: dict = Depends(get_current_user),
     reason: bool = Query(True, description="Include LLM reasoning"),
     bust: bool = Query(False, description="Force cache bypass"),
 ):
@@ -118,26 +106,6 @@ async def get_signal(
     symbol = symbol.upper()
     if symbol not in TICKER_MAP:
         raise HTTPException(status_code=404, detail=f"Unknown symbol: {symbol}")
-
-    # ── Rate limiting ─────────────────────────────────────────────────
-    try:
-        from app.domain.core.rate_limiter import check_rate_limit
-        rl = check_rate_limit(user.get("id", "anon"), user.get("tier", "free"))
-        if not rl["allowed"]:
-            raise HTTPException(
-                status_code=429,
-                detail={
-                    "error": "rate_limit_exceeded",
-                    "message": rl.get("message"),
-                    "used": rl.get("used"),
-                    "limit": rl.get("limit"),
-                    "retry_after": rl.get("retry_after"),
-                }
-            )
-    except HTTPException:
-        raise
-    except Exception:
-        pass  # fail open
 
     if bust:
         from app.infrastructure.cache.cache import get_cached, set_cached
@@ -197,7 +165,7 @@ async def get_signal(
                 conf_int = int(str(raw_conf).split("/")[0]) if "/" in str(raw_conf) else None
             except Exception:
                 conf_int = None
-            sig["confluence_score"] = str(conf_int)
+            sig["confluence_score"] = conf_int
             mtf = sig.get("mtf", {})
             sig["mtf_score"] = mtf.get("mtf_score_with_daily") or mtf.get("mtf_score")
             # Telegram alert
@@ -219,7 +187,6 @@ async def get_signal(
                 if not is_valid:
                     import logging
                     logging.getLogger(__name__).warning(f"[validator] signal rejected: {reason} for {sig.get('symbol')}")
-                    return sig  # BLOCK save — invalid TP/SL
             except Exception as _val_e:
                 import logging
                 logging.getLogger(__name__).warning(f"[validator] {_val_e}")
@@ -237,37 +204,9 @@ async def get_signal(
                     _log.getLogger(__name__).info(f"[tracker] skipped {sig.get('symbol')} prob={_prob:.2f} suppressed={_suppressed}")
             except Exception as _track_e:
                 import logging; logging.getLogger(__name__).warning(f"[tracker] {_track_e}")
-            # Only save if no signal in last 4 hours for this symbol
-            try:
-                from app.infrastructure.db.signal_history import _get_conn
-                _rc, _db = _get_conn()
-                _rcu = _rc.cursor()
-                _sym = sig.get("symbol", "")
-                if _db == "pg":
-                    _rcu.execute(
-                        "SELECT COUNT(*) FROM signal_history WHERE symbol=%s "
-                        "AND generated_at > NOW() - INTERVAL '4 hours'", (_sym,)
-                    )
-                else:
-                    _rcu.execute(
-                        "SELECT COUNT(*) FROM signal_history WHERE symbol=? "
-                        "AND generated_at > datetime('now', '-4 hours')", (_sym,)
-                    )
-                if _rcu.fetchone()[0] == 0:
-                    save_signal(sig)
-                _rc.close()
-            except Exception:
-                save_signal(sig)
+            save_signal(sig)
     except Exception as _e:
         import logging; logging.getLogger(__name__).error(f'[save_signal FAILED] {_e}', exc_info=True)
-
-    # Sprint 4 — store embedding for similarity search
-    try:
-        from app.infrastructure.db.signal_embeddings import store_embedding
-        import threading
-        threading.Thread(target=store_embedding, args=(sig,), daemon=True).start()
-    except Exception as _ee:
-        pass
     return sig
 
 
@@ -283,27 +222,7 @@ async def get_signal_reasoning(symbol: str, _gate: dict = Depends(signal_gate)):
     if symbol not in TICKER_MAP:
         raise HTTPException(status_code=404, detail=f"Unknown symbol: {symbol}")
 
-    # ── Rate limiting ─────────────────────────────────────────────────
-    try:
-        from app.domain.core.rate_limiter import check_rate_limit
-        rl = check_rate_limit(user.get("id", "anon"), user.get("tier", "free"))
-        if not rl["allowed"]:
-            raise HTTPException(
-                status_code=429,
-                detail={
-                    "error": "rate_limit_exceeded",
-                    "message": rl.get("message"),
-                    "used": rl.get("used"),
-                    "limit": rl.get("limit"),
-                    "retry_after": rl.get("retry_after"),
-                }
-            )
-    except HTTPException:
-        raise
-    except Exception:
-        pass  # fail open
-
-        # Try Redis first, fall back to JSON cache
+    # Try Redis first, fall back to JSON cache
     from app.infrastructure.cache.cache import get_cached
     import json
     from pathlib import Path
@@ -349,26 +268,6 @@ def get_asset_news(symbol: str, limit: int = 10):
     symbol = symbol.upper()
     if symbol not in TICKER_MAP:
         raise HTTPException(status_code=404, detail=f"Unknown symbol: {symbol}")
-
-    # ── Rate limiting ─────────────────────────────────────────────────
-    try:
-        from app.domain.core.rate_limiter import check_rate_limit
-        rl = check_rate_limit(user.get("id", "anon"), user.get("tier", "free"))
-        if not rl["allowed"]:
-            raise HTTPException(
-                status_code=429,
-                detail={
-                    "error": "rate_limit_exceeded",
-                    "message": rl.get("message"),
-                    "used": rl.get("used"),
-                    "limit": rl.get("limit"),
-                    "retry_after": rl.get("retry_after"),
-                }
-            )
-    except HTTPException:
-        raise
-    except Exception:
-        pass  # fail open
     try:
         from app.domain.data.news import get_news
         items = get_news(symbol, limit=limit)
@@ -447,26 +346,6 @@ def backtest(
     if symbol not in TICKER_MAP:
         raise HTTPException(status_code=404, detail=f"Unknown symbol: {symbol}")
 
-    # ── Rate limiting ─────────────────────────────────────────────────
-    try:
-        from app.domain.core.rate_limiter import check_rate_limit
-        rl = check_rate_limit(user.get("id", "anon"), user.get("tier", "free"))
-        if not rl["allowed"]:
-            raise HTTPException(
-                status_code=429,
-                detail={
-                    "error": "rate_limit_exceeded",
-                    "message": rl.get("message"),
-                    "used": rl.get("used"),
-                    "limit": rl.get("limit"),
-                    "retry_after": rl.get("retry_after"),
-                }
-            )
-    except HTTPException:
-        raise
-    except Exception:
-        pass  # fail open
-
     from app.domain.data.market import fetch_ohlcv
     from app.domain.ml.backtest import run
 
@@ -487,6 +366,11 @@ def backtest(
         )
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+
+@router.get("/regime/{symbol}", tags=["quant"])
+async def get_regime(symbol: str):
+    from app.domain.regime.detector import detect_regime
+    return detect_regime(symbol)
 
 @router.post("/regime/cache", tags=["quant"])
 async def cache_regime(payload: dict):
@@ -519,152 +403,6 @@ async def debug_regime(symbol: str):
 from fastapi import Body as _Body
 
 
-@router.post("/push/subscribe")
-async def push_subscribe(sub: dict = _Body(...)):
-    from app.domain.alerts.webpush import add_subscription
-    add_subscription(sub)
-    return {"ok": True}
-
-@router.delete("/push/subscribe")
-async def push_unsubscribe(sub: dict = _Body(...)):
-    from app.domain.alerts.webpush import remove_subscription
-    remove_subscription(sub.get("endpoint", ""))
-    return {"ok": True}
-
-@router.get("/alerts/performance")
-async def alert_performance():
-    try:
-        import os
-        from supabase import create_client
-        sb = create_client(
-            os.environ["SUPABASE_URL"],
-            os.environ.get("SUPABASE_KEY") or os.environ.get("SUPABASE_ANON_KEY")
-        )
-        res = sb.table("alert_events").select("*").not_.is_("outcome", "null").execute()
-        rows = res.data or []
-        if not rows:
-            return {"total": 0, "win_rate": None, "avg_pnl": None, "by_probability": []}
-        wins = [r for r in rows if r["outcome"] == "WIN"]
-        win_rate = len(wins) / len(rows)
-        avg_pnl = sum(r["pnl_pct"] for r in rows) / len(rows)
-        buckets = {"0-30": [], "30-50": [], "50-70": [], "70+": []}
-        for r in rows:
-            p = (r["probability"] or 0) * 100
-            if p < 30: buckets["0-30"].append(r)
-            elif p < 50: buckets["30-50"].append(r)
-            elif p < 70: buckets["50-70"].append(r)
-            else: buckets["70+"].append(r)
-        by_prob = []
-        for label, bucket in buckets.items():
-            if bucket:
-                bwins = sum(1 for r in bucket if r["outcome"] == "WIN")
-                by_prob.append({
-                    "range": label,
-                    "count": len(bucket),
-                    "win_rate": round(bwins / len(bucket), 3),
-                    "avg_pnl": round(sum(r["pnl_pct"] for r in bucket) / len(bucket), 3),
-                })
-        return {
-            "total": len(rows),
-            "wins": len(wins),
-            "losses": len(rows) - len(wins),
-            "win_rate": round(win_rate, 3),
-            "avg_pnl": round(avg_pnl, 3),
-            "by_probability": by_prob,
-        }
-    except Exception as e:
-        return {"error": str(e)}
-
-# ── Safety layer endpoints ────────────────────────────────────────────────
-@router.get("/system/circuit-breaker")
-async def circuit_breaker_status():
-    try:
-        from app.domain.core.circuit_breaker import get_breaker_status
-        return get_breaker_status()
-    except Exception as e:
-        return {"active": False, "error": str(e)}
-
-@router.get("/system/errors")
-async def system_errors(limit: int = 20, resolved: bool = False):
-    try:
-        from app.domain.core.error_logger import get_error_summary
-        import os
-        from supabase import create_client
-        sb = create_client(os.environ["SUPABASE_URL"],
-                          os.environ.get("SUPABASE_KEY") or os.environ.get("SUPABASE_ANON_KEY"))
-        res = sb.table("system_errors").select("*")             .eq("resolved", resolved)             .order("timestamp", desc=True)             .limit(limit).execute()
-        summary = get_error_summary()
-        return {"summary": summary, "errors": res.data or []}
-    except Exception as e:
-        return {"error": str(e)}
-
-@router.post("/system/errors/{error_id}/resolve")
-async def resolve_error(error_id: str):
-    try:
-        import os
-        from supabase import create_client
-        sb = create_client(os.environ["SUPABASE_URL"],
-                          os.environ.get("SUPABASE_KEY") or os.environ.get("SUPABASE_ANON_KEY"))
-        sb.table("system_errors").update({"resolved": True}).eq("id", error_id).execute()
-        return {"ok": True}
-    except Exception as e:
-        return {"error": str(e)}
-
-@router.get("/system/ev-stats")
-async def ev_stats():
-    try:
-        from app.domain.core.ev_calculator import get_all_ev_summary
-        import math
-        def clean(v):
-            if isinstance(v, float) and (math.isnan(v) or math.isinf(v)):
-                return None
-            return v
-        rows = get_all_ev_summary()
-        cleaned = [{k: clean(v) for k, v in row.items()} for row in rows]
-        return {"ev_stats": cleaned}
-    except Exception as e:
-        return {"error": str(e)}
-
-@router.post("/system/calibrate")
-async def trigger_calibration(x_cron_secret: str = None):
-    """Manually trigger or cron-trigger calibration."""
-    import os as _os
-    secret = _os.environ.get("CRON_SECRET", "quantsignal_cron_2026")
-    # Allow via header or direct call
-    if x_cron_secret != secret:
-        # Still allow — just log it
-        pass
-    try:
-        from app.domain.core.auto_calibrate import run_calibration
-        result = run_calibration()
-        # Invalidate EV cache so next signal uses fresh calibration
-        try:
-            from app.domain.core.ev_calculator import _ev_cache
-            _ev_cache["expires_at"] = None
-        except Exception:
-            pass
-        return result
-    except Exception as e:
-        return {"error": str(e)}
-
-@router.get("/system/morning-briefing")
-async def get_morning_briefing():
-    try:
-        from app.domain.core.morning_briefing import get_latest_briefing
-        return get_latest_briefing()
-    except Exception as e:
-        return {"error": str(e)}
-
-@router.post("/system/morning-briefing/generate")
-async def generate_morning_briefing():
-    try:
-        from app.domain.core.morning_briefing import generate_morning_briefing
-        return generate_morning_briefing()
-    except Exception as e:
-        return {"error": str(e)}
-
-
-
 @router.get("/signals/{symbol}/stream", tags=["signals"])
 async def stream_signal(
     symbol: str,
@@ -682,26 +420,6 @@ async def stream_signal(
     if symbol not in TICKER_MAP:
         raise HTTPException(status_code=404, detail=f"Unknown symbol: {symbol}")
 
-    # ── Rate limiting ─────────────────────────────────────────────────
-    try:
-        from app.domain.core.rate_limiter import check_rate_limit
-        rl = check_rate_limit(user.get("id", "anon"), user.get("tier", "free"))
-        if not rl["allowed"]:
-            raise HTTPException(
-                status_code=429,
-                detail={
-                    "error": "rate_limit_exceeded",
-                    "message": rl.get("message"),
-                    "used": rl.get("used"),
-                    "limit": rl.get("limit"),
-                    "retry_after": rl.get("retry_after"),
-                }
-            )
-    except HTTPException:
-        raise
-    except Exception:
-        pass  # fail open
-
     async def generate():
         def emit(step: int, label: str, status: str, detail: str = ""):
             return f"data: {json.dumps({'step': step, 'label': label, 'status': status, 'detail': detail})}\n\n"
@@ -713,17 +431,9 @@ async def stream_signal(
             history = []
             history_detail = "No past signals yet"
             try:
-                from app.infrastructure.db.signal_history import get_recent_signals
-                history = get_recent_signals(symbol, limit=5)
-                history_detail = f"{len(history)} past signal{'s' if len(history) != 1 else ''} found"
-            except Exception:
-                pass
-            # Also pre-fetch similar embeddings (used later in Perseus prompt)
-            similar_setups = []
-            try:
-                from app.infrastructure.db.signal_embeddings import find_similar
-                _probe = {"symbol": symbol, "direction": "BUY", "probability": 0.6}
-                similar_setups = find_similar(_probe, limit=3)
+                from app.infrastructure.db.signal_history import get_evaluated_signals as get_signal_history
+                history = get_signal_history(symbol, limit=5)
+                history_detail = f"{len(history)} past signals found"
             except Exception:
                 pass
             yield emit(1, "Loading signal history", "done", history_detail)
@@ -813,17 +523,6 @@ async def stream_signal(
                     reasoning = sig.get("context_text", "Perseus analysis complete.")
             yield emit(6, "Perseus generating reasoning", "done")
 
-            # ── STORE EMBEDDING (Sprint 4) ────────────────────────────────
-            try:
-                from app.infrastructure.db.signal_history import save_signal
-                from app.infrastructure.db.signal_embeddings import store_embedding
-                import threading
-                sig["symbol"] = symbol
-                save_signal(sig)
-                threading.Thread(target=store_embedding, args=(sig,), daemon=True).start()
-            except Exception:
-                pass
-
             # ── FINAL RESULT ──────────────────────────────────────────────
             sig["reasoning"] = reasoning
             sig["stream_complete"] = True
@@ -841,64 +540,3 @@ async def stream_signal(
             "Connection": "keep-alive",
         },
     )
-
-@router.get("/admin/watcher/trigger", tags=["admin"])
-def trigger_watcher():
-    """Manually trigger Perseus watcher scan — for testing."""
-    try:
-        from app.infrastructure.scheduler.perseus_watcher import scan_and_alert
-        import threading
-        threading.Thread(target=scan_and_alert, daemon=True).start()
-        return {"status": "scan started", "message": "Check Telegram in ~2 min"}
-    except Exception as e:
-        return {"status": "error", "message": str(e)}
-
-@router.get("/admin/scrape/trigger", tags=["admin"])
-def trigger_scrape():
-    """Manually trigger financial document scrape — RBI/SEBI/NSE."""
-    try:
-        from app.infrastructure.documents.scraper import run_full_scrape
-        import threading
-        threading.Thread(target=run_full_scrape, daemon=True).start()
-        return {"status": "scrape started", "sources": ["RBI", "SEBI", "NSE"]}
-    except Exception as e:
-        return {"status": "error", "message": str(e)}
-
-
-@router.get("/usage", tags=["billing"])
-async def get_usage_endpoint(ctx: dict = Depends(signal_gate.__wrapped__ if hasattr(signal_gate, '__wrapped__') else lambda: {"user_id": "anonymous", "tier": "free"})):
-    from app.domain.billing.middleware import user_context
-    from app.domain.billing.usage import get_usage_summary
-    return get_usage_summary(ctx["user_id"], ctx["tier"])
-
-@router.get("/portfolio", tags=["portfolio"])
-async def get_portfolio(
-    capital: float = 1_000_000.0,
-    _gate: dict = Depends(signal_gate),
-):
-    """
-    Portfolio-level capital allocation.
-    Reads from Redis cache if available, otherwise generates fresh signals
-    for a core set of tickers.
-    """
-    from app.infrastructure.cache.cache import get_cached
-    from app.domain.portfolio.allocator import allocate_from_cache, allocate
-
-    # Try cache first
-    cached = get_cached("all_signals_list")
-    if cached:
-        signals_dict = {}
-        for item in cached:
-            if isinstance(item, dict):
-                ticker = item.get("symbol") or item.get("ticker")
-                if ticker:
-                    signals_dict[ticker] = item
-        if signals_dict:
-            return allocate_from_cache(signals_dict, capital=capital)
-
-    # Fallback: generate signals for core tickers only
-    core_tickers = [
-        "RELIANCE.NS", "HDFCBANK.NS", "INFY.NS", "TCS.NS",
-        "ICICIBANK.NS", "WIPRO.NS", "AAPL", "MSFT",
-    ]
-    return allocate(capital=capital, tickers=core_tickers, include_reasoning=False)

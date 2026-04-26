@@ -4,14 +4,6 @@ FastAPI application entry point.
 Run with: python -m uvicorn main:app --reload
 """
 
-import sentry_sdk
-sentry_sdk.init(
-    dsn="https://3abbd3b209a37b2f1379c89151f9675e@o4511269104320512.ingest.us.sentry.io/4511269114544128",
-    traces_sample_rate=0.1,
-    send_default_pii=False,
-    environment="production",
-)
-
 from fastapi import FastAPI
 from contextlib import asynccontextmanager
 from fastapi.middleware.cors import CORSMiddleware
@@ -19,6 +11,7 @@ from fastapi.middleware.gzip import GZipMiddleware
 from app.api.middleware.protection import protection_middleware
 from app.core.config import settings
 from app.api.routes.routes import router
+from app.api.routes.system import router as system_router
 from app.api.routes.metrics import router as metrics_router
 from app.api.routes.performance import router as performance_router
 from app.api.routes.chat import router as chat_router
@@ -28,6 +21,7 @@ from app.api.routes.replay import router as replay_router
 from app.api.routes.ai_explain import router as ai_explain_router
 from app.api.routes.guardian import router as guardian_router
 from app.api.routes.portfolio import router as portfolio_router
+from app.api.routes.payments import router as payments_router
 from app.api.routes.cron import router as cron_router
 from app.api.routes.agents import router as agents_router
 from app.api.routes.montecarlo import router as mc_router
@@ -50,53 +44,7 @@ from app.api.routes.feedback import router as feedback_router
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    # Perseus Watcher — Sprint 5
-    try:
-        from apscheduler.schedulers.background import BackgroundScheduler
-        from app.infrastructure.scheduler.perseus_watcher import scan_and_alert
-        scheduler = BackgroundScheduler()
-        scheduler.add_job(scan_and_alert, 'interval', minutes=5, id='perseus_watcher')
-        from app.domain.performance.evaluator import evaluate_open_signals
-        scheduler.add_job(evaluate_open_signals, 'interval', minutes=15, id='outcome_evaluator')
-
-        from app.infrastructure.documents.scraper import run_full_scrape
-        scheduler.add_job(run_full_scrape, 'interval', hours=1, id='doc_scraper')
-        # Wipe stale cache on every startup so prices are always fresh
-        try:
-            from app.infrastructure.scheduler.cache_manager import wipe_signal_cache
-            wipe_signal_cache()
-        except Exception:
-            pass
-        # Weekly document ingestion (Sat 17:00 UTC = Sat 22:30 IST)
-        from app.domain.documents.ingest import run_full_ingestion
-        from apscheduler.triggers.cron import CronTrigger
-        scheduler.add_job(
-            run_full_ingestion,
-            trigger=CronTrigger(day_of_week="sat", hour=17, minute=0, timezone="UTC"),
-            id="weekly_doc_ingestion",
-            name="Weekly document ingestion",
-            replace_existing=True,
-            max_instances=1,
-            misfire_grace_time=3600,
-        )
-        # Weekly model retrain (Sun 18:30 UTC = Mon 00:00 IST)
-        from app.domain.ml.scheduler import retrain_all_models
-        from apscheduler.triggers.cron import CronTrigger
-        scheduler.add_job(
-            retrain_all_models,
-            trigger=CronTrigger(day_of_week="sun", hour=18, minute=30, timezone="UTC"),
-            id="weekly_retrain",
-            name="Weekly model retrain",
-            replace_existing=True,
-            max_instances=1,
-            misfire_grace_time=3600,
-        )
-        scheduler.start()
-        import logging
-        logging.getLogger(__name__).info("[Perseus Watcher] Scheduler started — scanning every 15 min")
-    except Exception as _e:
-        import logging
-        logging.getLogger(__name__).error(f"[Perseus Watcher] Scheduler failed to start: {_e}")
+    # start_poller temporarily disabled for debugging
     yield
 
 app = FastAPI(
@@ -118,6 +66,7 @@ app.add_middleware(
 app.add_middleware(GZipMiddleware, minimum_size=1000)
 
 app.include_router(router, prefix="/api/v1")
+app.include_router(system_router, prefix="/api/v1")
 app.include_router(chat_router, prefix="/api/v1")
 app.include_router(sentiment_router, prefix="/api/v1")
 app.include_router(liquidity_router, prefix="/api/v1")
@@ -126,6 +75,7 @@ app.include_router(ai_explain_router, prefix="/api/v1")
 app.include_router(guardian_router, prefix="/api/v1")
 app.include_router(portfolio_router, prefix="/api/v1")
 app.include_router(billing_router, prefix="/api/v1")
+app.include_router(payments_router, prefix="/api/v1")
 app.include_router(cron_router, prefix="/api/v1")
 app.include_router(agents_router, prefix="/api/v1")
 app.include_router(mc_router, prefix="/api/v1")
