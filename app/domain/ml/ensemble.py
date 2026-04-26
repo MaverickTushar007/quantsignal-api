@@ -97,7 +97,13 @@ def train(ticker, df):
         except Exception as _e:
             import logging
             logging.getLogger(__name__).warning(f"[labeling] triple barrier failed, using naive: {_e}")
-            future_ret = df["Close"].pct_change(FORWARD_DAYS).shift(-FORWARD_DAYS).reindex(feat.index)
+            # TIME-SAFE fallback: label row t using close[t+FORWARD_DAYS]
+            # We shift close FORWARD days into the past so each row
+            # only sees prices that existed AT that row's timestamp.
+            close_shifted = df["Close"].shift(FORWARD_DAYS)
+            future_ret = (df["Close"] / close_shifted - 1).reindex(feat.index)
+            # Trim the last FORWARD_DAYS rows — they have no valid label yet
+            future_ret = future_ret.iloc[FORWARD_DAYS:]
             dynamic_thresh = max(float(future_ret.abs().quantile(0.30)), 0.001)
             labels = pd.Series(np.nan, index=feat.index)
             labels[future_ret >  dynamic_thresh] = 1

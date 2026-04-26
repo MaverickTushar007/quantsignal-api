@@ -33,9 +33,15 @@ def score_model(sym: str) -> float:
         if len(feat) < 80:
             return -1.0
 
-        future_ret = df["Close"].pct_change(FORWARD_DAYS).shift(-FORWARD_DAYS).reindex(feat.index)
+        # TIME-SAFE: shift close forward to get return from t to t+FORWARD_DAYS
+        # close_shifted[t] = close[t-FORWARD_DAYS], so
+        # (close[t] / close_shifted[t] - 1) = return over past FORWARD_DAYS
+        # We then align this with feat.index and drop last N rows (no label yet)
+        close_shifted = df["Close"].shift(FORWARD_DAYS)
+        future_ret = (df["Close"] / close_shifted - 1).reindex(feat.index)
+        future_ret = future_ret.iloc[FORWARD_DAYS:]  # drop rows with no valid label
         dynamic_thresh = max(float(future_ret.abs().quantile(0.30)), 0.001)
-        probs = bundle["xgb"].predict_proba(feat[FEATURE_COLUMNS])[:, 1]
+        probs = bundle["xgb"].predict_proba(feat.loc[future_ret.index, FEATURE_COLUMNS])[:, 1]
 
         wins, total = 0, 0
         for prob, ret in zip(probs, future_ret.values):

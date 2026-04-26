@@ -46,8 +46,17 @@ from app.api.routes.feedback import router as feedback_router
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    # start_poller temporarily disabled for debugging
+    import asyncio
+    try:
+        from app.infrastructure.queue.poller import start_poller
+        poller_task = asyncio.create_task(start_poller())
+    except Exception as e:
+        import logging
+        logging.getLogger(__name__).warning(f"Poller failed to start: {e}")
+        poller_task = None
     yield
+    if poller_task:
+        poller_task.cancel()
 
 app = FastAPI(
     title="QuantSignal API",
@@ -62,8 +71,8 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=os.getenv("ALLOWED_ORIGINS", "http://localhost:3000").split(","),
     allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
+    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allow_headers=["Authorization", "Content-Type", "x-user-id"],
 )
 app.add_middleware(GZipMiddleware, minimum_size=1000)
 
