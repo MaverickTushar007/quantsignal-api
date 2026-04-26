@@ -369,21 +369,6 @@ def backtest(
 
 @router.get("/regime/{symbol}", tags=["quant"])
 async def get_regime(symbol: str):
-    from app.domain.regime.detector import detect_regime
-    return detect_regime(symbol)
-
-@router.post("/regime/cache", tags=["quant"])
-async def cache_regime(payload: dict):
-    """Accept regime data pushed from local runner and cache it."""
-    from app.infrastructure.cache.cache import set_cached, get_cached
-    symbol = payload.get("symbol")
-    if not symbol:
-        return {"error": "symbol required"}
-    set_cached(f"regime:{symbol}", payload, ttl=3600)
-    return {"status": "cached", "symbol": symbol}
-
-@router.get("/regime/{symbol}", tags=["quant"])
-async def get_regime(symbol: str):
     from app.infrastructure.cache.cache import get_cached
     cached = get_cached(f"regime:{symbol}")
     if cached:
