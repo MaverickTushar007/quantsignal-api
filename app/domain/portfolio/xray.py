@@ -66,6 +66,7 @@ class PortfolioXRay:
 
     # Risk
     estimated_annual_vol:  float
+    correlation_pairs:     list = field(default_factory=list)
     estimated_10pct_loss:  float   # loss in base currency in 10% drawdown
     regime_fit_score:      float   # 0-1 (1 = fully aligned with regime)
 
@@ -94,6 +95,7 @@ class PortfolioXRay:
             "most_crowded_sector":  self.most_crowded_sector,
             "most_crowded_pct":     round(self.most_crowded_pct, 3),
             "estimated_annual_vol": round(self.estimated_annual_vol, 3),
+            "correlation_pairs": self.correlation_pairs,
             "estimated_10pct_loss": round(self.estimated_10pct_loss, 2),
             "regime_fit_score":     round(self.regime_fit_score, 3),
             "misaligned_positions": self.misaligned_positions,
@@ -221,7 +223,34 @@ class PortfolioXRayEngine:
             vol = ASSET_VOL_MAP.get(asset_class, ASSET_VOL_MAP["default"])
             weighted_vol += vol * (h["value"] / total_value)
 
-        # Simple (no-correlation) vol estimate — conservative overestimate
+        # W3.1 — Real pairwise correlation over 60-day window
+        correlation_pairs = []
+        try:
+            import yfinance as yf
+            syms = [h["symbol"] for h in holdings if h.get("symbol")]
+            if len(syms) >= 2:
+                raw = yf.download(syms, period="60d", progress=False, auto_adjust=True)
+                closes = raw["Close"] if "Close" in raw.columns else raw
+                if hasattr(closes, "columns") and len(closes.columns) >= 2:
+                    corr_matrix = closes.pct_change().dropna().corr()
+                    for i, s1 in enumerate(corr_matrix.columns):
+                        for j, s2 in enumerate(corr_matrix.columns):
+                            if j <= i:
+                                continue
+                            c = round(float(corr_matrix.loc[s1, s2]), 3)
+                            correlation_pairs.append({"s1": s1, "s2": s2, "correlation": c})
+                            if abs(c) > 0.75:
+                                alerts.append(PositionAlert(
+                                    symbol=f"{s1}/{s2}",
+                                    severity="high" if abs(c) > 0.88 else "medium",
+                                    category="correlation_risk",
+                                    message=f"{s1} and {s2} are {c:.0%} correlated (60d) — hidden concentration",
+                                    action="Consider replacing one with a lower-correlation alternative",
+                                ))
+        except Exception as _ce:
+            log.warning(f"[xray] correlation calc failed: {_ce}")
+
+        # Simple vol estimate — conservative overestimate
         estimated_loss_10pct = total_value * 0.10
 
         # ── Suggested actions ──────────────────────────────────────────
@@ -253,6 +282,7 @@ class PortfolioXRayEngine:
             most_crowded_sector=most_crowded_sector,
             most_crowded_pct=most_crowded_pct,
             estimated_annual_vol=weighted_vol,
+            correlation_pairs=correlation_pairs,
             estimated_10pct_loss=estimated_loss_10pct,
             regime_fit_score=regime_fit,
             misaligned_positions=misaligned,
