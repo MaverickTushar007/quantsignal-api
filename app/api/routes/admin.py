@@ -14,6 +14,22 @@ from typing import Optional
 
 router = APIRouter()
 log = logging.getLogger(__name__)
+import os
+from fastapi import Depends, HTTPException
+from app.api.routes.auth import get_current_user
+import logging
+audit_logger = logging.getLogger("audit")
+
+def require_admin(user: dict = Depends(get_current_user)) -> dict:
+    ADMIN_EMAILS = [e.strip() for e in os.getenv("ADMIN_EMAILS", "").split(",") if e.strip()]
+    if not ADMIN_EMAILS:
+        raise HTTPException(status_code=500, detail="ADMIN_EMAILS not configured")
+    if user.get("email") not in ADMIN_EMAILS:
+        audit_logger.warning(f"UNAUTHORIZED_ADMIN_ACCESS by {user.get('email')} id={user.get('id')}")
+        raise HTTPException(status_code=403, detail="Admin access required")
+    return user
+
+
 
 
 def _sb():
@@ -25,7 +41,7 @@ def _sb():
 
 
 @router.get("/admin/dashboard")
-def admin_dashboard():
+def admin_dashboard(admin: dict = Depends(require_admin)):
     """Full system health overview."""
     now      = datetime.now(timezone.utc)
     day_ago  = now - timedelta(hours=24)
@@ -99,7 +115,7 @@ def admin_dashboard():
 
 
 @router.get("/admin/signals")
-def admin_signals(symbol: Optional[str] = None):
+def admin_signals(symbol: Optional[str] = None, admin: dict = Depends(require_admin)):
     """Signal quality breakdown per symbol."""
     try:
         sb  = _sb()
@@ -138,7 +154,7 @@ def admin_signals(symbol: Optional[str] = None):
 
 
 @router.get("/admin/weekly-reports")
-def admin_weekly_reports():
+def admin_weekly_reports(admin: dict = Depends(require_admin)):
     """List all generated weekly reports."""
     try:
         sb  = _sb()
@@ -150,7 +166,7 @@ def admin_weekly_reports():
 
 
 @router.post("/admin/cache/wipe")
-async def wipe_signal_cache():
+async def wipe_signal_cache(admin: dict = Depends(require_admin)):
     """Nuclear cache clear — wipes JSON file + all Redis signal keys."""
     import json
     from app.core.config import BASE_DIR
@@ -174,7 +190,7 @@ async def wipe_signal_cache():
     return {"status": "wiped", "detail": wiped}
 
 @router.post("/admin/expire-signal/{signal_id}", tags=["admin"])
-def expire_signal(signal_id: int):
+def expire_signal(signal_id: int, admin: dict = Depends(require_admin)):
     """One-time use: manually expire a bad signal by ID."""
     from app.infrastructure.db.signal_history import update_outcome, get_open_signals
     signals = get_open_signals()
@@ -185,7 +201,7 @@ def expire_signal(signal_id: int):
     return {"expired": signal_id, "symbol": match["symbol"]}
 
 @router.post("/admin/fix-null-outcomes")
-async def fix_null_outcomes():
+async def fix_null_outcomes(admin: dict = Depends(require_admin)):
     from app.infrastructure.db.signal_history import _get_conn
     con, db = _get_conn()
     try:
@@ -202,7 +218,7 @@ async def fix_null_outcomes():
         con.close()
 
 @router.get("/admin/signals/raw")
-async def raw_signals():
+async def raw_signals(admin: dict = Depends(require_admin)):
     from app.infrastructure.db.signal_history import _get_conn
     con, db = _get_conn()
     try:
@@ -215,7 +231,7 @@ async def raw_signals():
         con.close()
 
 @router.post("/admin/watcher/trigger")
-async def trigger_watcher():
+async def trigger_watcher(admin: dict = Depends(require_admin)):
     from app.infrastructure.scheduler.perseus_watcher import scan_and_alert
     import threading
     t = threading.Thread(target=scan_and_alert, daemon=True)
@@ -223,7 +239,7 @@ async def trigger_watcher():
     return {"status": "watcher triggered — check signals in 3 minutes"}
 
 @router.post("/admin/models/wipe")
-async def wipe_models():
+async def wipe_models(admin: dict = Depends(require_admin)):
     """Delete all cached ML model pickles — forces retrain on next signal request."""
     import glob
     from app.core.config import BASE_DIR
@@ -236,7 +252,7 @@ async def wipe_models():
     return {"wiped": len(files), "message": f"Deleted {len(files)} model pickles — will retrain on next request"}
 
 @router.post("/admin/db/cleanup", tags=["admin"])
-def cleanup_bad_signals():
+def cleanup_bad_signals(admin: dict = Depends(require_admin)):
     """Expire pre-tier junk signals from Railway Postgres."""
     from app.infrastructure.db.signal_history import _get_conn
     con, db = _get_conn()
@@ -270,7 +286,7 @@ def cleanup_bad_signals():
 
 
 @router.get("/admin/job-health", tags=["admin"])
-def job_health():
+def job_health(admin: dict = Depends(require_admin)):
     """Return consecutive failure counts for all tracked jobs."""
     from app.domain.core.failure_tracker import get_all_status
     status = get_all_status()
@@ -283,7 +299,7 @@ def job_health():
 
 
 @router.get("/admin/circuit-breaker", tags=["admin"])
-def circuit_breaker_status():
+def circuit_breaker_status(admin: dict = Depends(require_admin)):
     """Return current circuit breaker state."""
     try:
         from app.domain.core.circuit_breaker_v2 import CircuitBreaker
@@ -292,7 +308,7 @@ def circuit_breaker_status():
         return {"error": str(e)}
 
 @router.post("/admin/circuit-breaker/reset", tags=["admin"])
-def circuit_breaker_reset():
+def circuit_breaker_reset(admin: dict = Depends(require_admin)):
     """Manually reset the circuit breaker."""
     try:
         from app.domain.core.circuit_breaker_v2 import CircuitBreaker
@@ -303,7 +319,7 @@ def circuit_breaker_reset():
 
 
 @router.post("/admin/cleanup-duplicate-signals", tags=["admin"])
-def cleanup_duplicate_signals(x_admin_key: str = Header(None, alias="x-admin-key")):
+def cleanup_duplicate_signals(x_admin_key: str = Header(None, alias="x-admin-key"), admin: dict = Depends(require_admin)):
     """Delete duplicate signals — keep only latest per symbol per day."""
     if x_admin_key != "quantsignal-admin-2026":
         raise HTTPException(status_code=401, detail="Unauthorized")
@@ -344,13 +360,13 @@ def cleanup_duplicate_signals(x_admin_key: str = Header(None, alias="x-admin-key
 
 
 @router.get("/admin/rate-limit/{user_id}", tags=["admin"])
-def get_user_quota(user_id: str):
+def get_user_quota(user_id: str, admin: dict = Depends(require_admin)):
     """Inspect a user's current daily signal quota."""
     from app.domain.core.rate_limiter import get_usage
     return {"user_id": user_id, **get_usage(user_id)}
 
 @router.post("/admin/rate-limit/{user_id}/reset", tags=["admin"])
-def reset_user_quota(user_id: str, x_admin_key: str = Header(None, alias="x-admin-key")):
+def reset_user_quota(user_id: str, x_admin_key: str = Header(None, alias="x-admin-key"), admin: dict = Depends(require_admin)):
     """Reset a user's daily quota (admin only)."""
     if x_admin_key != "quantsignal-admin-2026":
         raise HTTPException(status_code=401, detail="Unauthorized")
@@ -360,7 +376,7 @@ def reset_user_quota(user_id: str, x_admin_key: str = Header(None, alias="x-admi
 
 
 @router.get("/admin/auth-debug", tags=["admin"])
-async def auth_debug(request: Request):
+async def auth_debug(request: Request, admin: dict = Depends(require_admin)):
     """Debug JWT decode — shows what token resolves to."""
     auth_header = request.headers.get("authorization", "")
     if not auth_header.startswith("Bearer "):
@@ -392,6 +408,6 @@ async def auth_debug(request: Request):
 
 
 @router.get("/admin/whoami", tags=["admin"])
-async def whoami(user: dict = Depends(get_current_user)):
+async def whoami(user: dict = Depends(get_current_user), admin: dict = Depends(require_admin)):
     """Returns the resolved user object for the current token."""
     return user

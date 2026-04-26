@@ -7,6 +7,7 @@ Run with: python -m uvicorn main:app --reload
 from fastapi import FastAPI
 from contextlib import asynccontextmanager
 from fastapi.middleware.cors import CORSMiddleware
+import os
 from fastapi.middleware.gzip import GZipMiddleware
 from app.api.middleware.protection import protection_middleware
 from app.core.config import settings
@@ -59,7 +60,7 @@ app = FastAPI(
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=os.getenv("ALLOWED_ORIGINS", "http://localhost:3000").split(","),
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
