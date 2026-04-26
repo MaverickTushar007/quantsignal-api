@@ -68,7 +68,16 @@ async def portfolio_xray(
             current_signals=current_signals,
             current_regime=current_regime,
         )
-        return {"status": "ok", "user_id": user.get("id"), **result.to_dict()}
+        d = result.to_dict()
+        # W3.2 — Stress simulation
+        try:
+            from app.domain.portfolio.stress import run_stress
+            scenarios = payload.get("scenarios") or None
+            d["stress"] = run_stress(holdings, result.total_value, scenarios=scenarios)
+        except Exception as _se:
+            log.warning(f"[portfolio_xray] stress failed: {_se}")
+            d["stress"] = {}
+        return {"status": "ok", "user_id": user.get("id"), **d}
     except Exception as e:
         log.error(f"[portfolio_xray] failed: {e}")
         raise HTTPException(status_code=500, detail=str(e))
