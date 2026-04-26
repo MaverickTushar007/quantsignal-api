@@ -33,6 +33,7 @@ class HybridRetriever:
         self,
         query: str,
         top_k: int = 5,
+        query_date: str | None = None,
         symbol: str = None,
         mode: str = "auto",
     ) -> str:
@@ -56,6 +57,26 @@ class HybridRetriever:
 
             # 3. Rerank and slice
             reranked = sorted(boosted, key=lambda x: x["_score"], reverse=True)[:top_k]
+
+            # W4.3 — Point-in-time filter
+            if query_date:
+                try:
+                    from datetime import datetime
+                    cutoff = datetime.fromisoformat(query_date)
+                    pit_filtered = []
+                    for r in reranked:
+                        doc_date = r.get("date") or r.get("published_at") or r.get("created_at")
+                        if doc_date:
+                            try:
+                                if datetime.fromisoformat(str(doc_date)[:10]) <= cutoff:
+                                    pit_filtered.append(r)
+                            except Exception:
+                                pit_filtered.append(r)
+                        else:
+                            pit_filtered.append(r)
+                    reranked = pit_filtered
+                except Exception as _pit:
+                    log.warning(f"[hybrid_retrieval] PIT filter failed: {_pit}")
 
             return "\n\n".join(r["content"][:300] for r in reranked)
 

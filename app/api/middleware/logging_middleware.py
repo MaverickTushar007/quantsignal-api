@@ -27,4 +27,18 @@ class LoggingMiddleware(BaseHTTPMiddleware):
             f"cid={correlation_id}"
         )
         response.headers["X-Correlation-ID"] = correlation_id
+        response.headers["X-Response-Time-Ms"] = f"{duration_ms:.1f}"
+
+        # Alert on slow routes
+        THRESHOLDS = {
+            "/research/": 8000,
+            "/documents/": 15000,
+            "/portfolio/": 5000,
+        }
+        for path_prefix, threshold in THRESHOLDS.items():
+            if path_prefix in request.url.path and duration_ms > threshold:
+                log.warning(
+                    f"SLOW_ROUTE {request.url.path} took {duration_ms:.0f}ms "
+                    f"(threshold {threshold}ms) cid={correlation_id}"
+                )
         return response
