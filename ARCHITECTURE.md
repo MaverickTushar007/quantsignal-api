@@ -1,11 +1,10 @@
-# QuantSignal API — Architecture
+# quantsignal-api — Architecture
 
 ## Stack
-- **Framework:** FastAPI (Python)
-- **Deployment:** Railway
-- **Cache:** Redis
-- **DB:** Supabase (Postgres)
-- **ML:** scikit-learn, custom models in `domain/ml/`
+- FastAPI (Python)
+- PostgreSQL (via infrastructure/db)
+- Redis (via infrastructure/cache)
+- Deployed on Railway
 
 ---
 
@@ -13,86 +12,70 @@
 
 ```
 app/
-├── main.py                        # FastAPI app init, all router registration
-├── core/
-│   └── config.py                  # BASE_DIR, env vars, global config
+├── main.py                        # App entry — registers all routers
 │
 ├── api/
-│   ├── schemas.py                 # Pydantic models — SignalResponse, WatchlistItem,
-│   │                              # MarketMood, BacktestSummary, HealthResponse
-│   └── routes/
-│       ├── routes.py              # Core signal endpoints (265 lines)
-│       │                          # GET /signals, /signals/{symbol},
-│       │                          # /signals/{symbol}/reasoning, /health
-│       ├── signals_ext.py         # Extended signal endpoints (262 lines)
-│       │                          # GET /news, /market/mood, /backtest,
-│       │                          # /regime, /debug/regime, /signals/{symbol}/stream
-│       ├── cron.py                # Cron HTTP handlers only (252 lines)
-│       │                          # POST /cron/refresh, /cron/retrain,
-│       │                          # /cron/rebuild-mtf, /cron/guardian, etc.
-│       ├── tasks.py               # _rebuild() logic (263 lines)
-│       │                          # Full cache rebuild, agent execution,
-│       │                          # outcome tracking, shock scan, MTF/earnings cache
-│       ├── system.py              # System endpoints (158 lines)
-│       │                          # /system/ev-stats, /system/morning-briefing
-│       ├── alerts.py              # Alert subscription + Telegram firing
-│       ├── agents.py              # AI agent CRUD endpoints
-│       ├── agent_executor.py      # Agent execution engine
-│       ├── auth.py                # JWT auth, get_current_user, require_pro
-│       ├── billing.py             # Subscription management
-│       ├── calendar.py            # Economic calendar scraper
-│       ├── chat.py                # Perseus chat endpoint
-│       ├── feedback.py            # User feedback collection
-│       ├── guardian.py            # Trade Guardian check endpoint
-│       ├── history.py             # Signal history + trade log
-│       ├── liquidity.py           # Liquidation levels data
-│       ├── mcp.py                 # MCP server integration
-│       ├── metrics.py             # System metrics
-│       ├── montecarlo.py          # Monte Carlo simulation endpoint
-│       ├── payments.py            # Stripe webhook + checkout
-│       ├── performance.py         # Performance stats endpoints
-│       ├── portfolio.py           # Portfolio tracking endpoints
-│       ├── preferences.py         # User preferences
-│       ├── replay.py              # Signal replay endpoint
-│       ├── sentiment.py           # Market sentiment endpoint
-│       ├── weekly_report.py       # Weekly report generation
-│       └── ws.py                  # WebSocket endpoint
+│   ├── routes/
+│   │   ├── routes.py              # 265 lines — core signal endpoints (4 endpoints)
+│   │   ├── signals_ext.py         # 262 lines — original extended file (kept for safety)
+│   │   ├── market_context.py      # 121 lines — news, mood, backtest, regime
+│   │   ├── signal_stream.py       # 150 lines — debug signal + SSE stream
+│   │   ├── cron.py                # 252 lines — HTTP cron handlers only (delegates to tasks.py)
+│   │   ├── tasks.py               # 263 lines — rebuild/job execution logic
+│   │   ├── system.py              # 158 lines — health, ev-stats, morning briefing
+│   │   ├── admin.py               # Admin endpoints
+│   │   ├── agent_executor.py      # Agent execution endpoints
+│   │   ├── agents.py              # Agent management endpoints
+│   │   ├── ai_explain.py          # AI explanation endpoints
+│   │   ├── alerts.py              # Alert subscription endpoints
+│   │   ├── auth.py                # Auth middleware (require_pro)
+│   │   ├── billing.py             # Billing endpoints
+│   │   ├── calendar.py            # Economic calendar endpoints
+│   │   ├── chat.py                # Chat endpoints
+│   │   ├── feedback.py            # Feedback endpoints
+│   │   ├── guardian.py            # TradeGuardian endpoints
+│   │   ├── history.py             # Trade history endpoints
+│   │   ├── liquidity.py           # Liquidity level endpoints
+│   │   ├── mcp.py                 # MCP endpoints
+│   │   ├── metrics.py             # Metrics endpoints
+│   │   ├── montecarlo.py          # Monte Carlo simulation endpoints
+│   │   ├── payments.py            # Payment/checkout endpoints
+│   │   ├── performance.py         # Performance endpoints
+│   │   ├── portfolio.py           # Portfolio endpoints
+│   │   ├── portfolio_tracker.py   # Portfolio tracker endpoints
+│   │   ├── preferences.py         # User preferences endpoints
+│   │   ├── replay.py              # Signal replay endpoints
+│   │   ├── sentiment.py           # Market sentiment endpoints
+│   │   ├── weekly_report.py       # Weekly report endpoints
+│   │   └── ws.py                  # WebSocket endpoints
+│   │
+│   └── schemas.py                 # Pydantic models (MarketMood, BacktestSummary, etc.)
 │
 ├── domain/                        # Business logic — no HTTP here
 │   ├── signal/
-│   │   └── service.py             # generate_signal() — main signal pipeline
-│   ├── data/
-│   │   ├── universe.py            # TICKERS, TICKER_MAP — all 118 assets
-│   │   ├── market.py              # OHLCV fetch, CoinGecko/Yahoo integration
-│   │   └── news.py                # News fetch + sentiment
-│   ├── ml/
-│   │   ├── backtest.py            # Walk-forward backtest runner
-│   │   └── ...                    # Model training, calibration
-│   ├── reasoning/
-│   │   ├── service.py             # get_reasoning() — Perseus AI reasoning
-│   │   └── worker.py              # Async reasoning job worker
+│   │   └── service.py             # generate_signal() — core signal pipeline
 │   ├── regime/
-│   │   └── detector.py            # Market regime detection
+│   │   └── detector.py            # detect_regime()
 │   ├── billing/
-│   │   └── middleware.py          # signal_gate — usage limit enforcement
-│   ├── agents/                    # AI agent definitions
-│   ├── alerts/                    # Alert evaluation logic
-│   ├── core/
-│   │   └── failure_tracker.py     # Record success/failure per symbol
-│   ├── documents/                 # Document processing
+│   │   └── middleware.py          # signal_gate() — rate limiting
+│   ├── agents/                    # Agent domain logic
+│   ├── alerts/                    # Alert domain logic
+│   ├── core/                      # Core domain utilities
+│   ├── data/
+│   │   └── universe.py            # TICKERS, TICKER_MAP
+│   ├── documents/                 # Document handling
+│   ├── ml/                        # ML models
 │   ├── performance/               # Performance calculation
 │   ├── portfolio/                 # Portfolio logic
-│   └── reasoning/                 # Reasoning queue + worker
+│   └── reasoning/                 # AI reasoning logic
 │
-└── infrastructure/                # External service adapters
+└── infrastructure/                # External adapters
     ├── cache/
-    │   └── cache.py               # Redis get/set wrappers
-    ├── db/
-    │   └── signal_history.py      # Signal history DB reads/writes
-    ├── queue/
-    │   └── reasoning_queue.py     # Reasoning job queue
-    ├── scheduler/                 # Scheduled task runners
-    └── documents/                 # Document storage
+    │   └── cache.py               # get_cached(), set_cached()
+    ├── db/                        # Database connections
+    ├── documents/                 # Document storage
+    ├── queue/                     # Job queue
+    └── scheduler/                 # Cron scheduler
 ```
 
 ---
@@ -101,49 +84,46 @@ app/
 
 ```
 HTTP Request
-    ↓
-main.py (router registration, CORS, middleware)
-    ↓
-api/routes/*.py  (thin HTTP handlers — validate, auth, call domain)
-    ↓
-domain/*/        (business logic — signal generation, ML, reasoning)
-    ↓
-infrastructure/  (Redis cache, Supabase DB, external APIs)
-```
-
-## Cron Flow
-
-```
-Railway cron / external scheduler
-    ↓
-POST /cron/refresh  (cron.py — validates CRON_SECRET)
-    ↓
-tasks._rebuild()    (tasks.py — full pipeline)
-    ↓
-generate_signal() × 118 assets  (4 parallel workers)
-    ↓
-Redis cache update + signal history save + alerts fire
+  → main.py (router registration)
+  → api/routes/*.py (thin HTTP handler — validate, call domain, return)
+  → domain/*/service.py (business logic)
+  → infrastructure/* (cache, db, external APIs)
+  → Response
 ```
 
 ---
 
-## Key Rules
+## Route File Responsibilities
 
-1. **HTTP handlers stay thin** — routes just validate input, call domain, return response
-2. **All business logic in `domain/`** — never put signal generation logic in a route file
-3. **Cache-first reads** — always check Redis before hitting external APIs
-4. **`tasks.py` owns rebuild** — cron.py just calls `_rebuild()`, never duplicates logic
-5. **Auth via `require_pro` / `signal_gate`** — never check billing inline in route logic
+| File | Responsibility | Endpoints |
+|---|---|---|
+| routes.py | Core signal CRUD | GET /signals, GET /signals/:symbol, POST /signals/generate |
+| market_context.py | Market data | GET /news/:symbol, GET /market/mood, GET /backtest/:symbol, GET /regime/:symbol |
+| signal_stream.py | Debug + streaming | GET /signals/debug/:symbol, GET /signals/:symbol/stream (SSE) |
+| cron.py | HTTP cron triggers | POST /cron/* — delegates all logic to tasks.py |
+| tasks.py | Job execution | _rebuild_* functions called by cron.py |
+| system.py | System health | GET /health, GET /system/ev-stats, GET /system/morning-briefing |
 
 ---
 
-## Environment Variables
+## Rules
 
-| Variable | Purpose |
-|----------|---------|
-| `CRON_SECRET` | Authenticates cron job requests |
-| `REDIS_URL` | Redis connection string |
-| `SUPABASE_URL` | Supabase project URL |
-| `SUPABASE_KEY` | Supabase service key |
-| `TELEGRAM_BOT_TOKEN` | Telegram alert bot |
-| `OPENAI_API_KEY` | Perseus reasoning (if used) |
+1. **Route files are HTTP-only** — validate input, call domain, return response. No business logic.
+2. **Domain files have no FastAPI imports** — pure Python business logic only.
+3. **Infrastructure files handle external adapters** — cache, db, queues. No business logic.
+4. **cron.py delegates to tasks.py** — cron.py only accepts HTTP and triggers. tasks.py does the work.
+5. **No file should exceed ~300 lines** — if it does, split by concern.
+
+---
+
+## Line Count Reference (post-refactor)
+
+| File | Lines |
+|---|---|
+| routes.py | 265 |
+| market_context.py | 121 |
+| signal_stream.py | 150 |
+| signals_ext.py | 262 |
+| cron.py | 252 |
+| tasks.py | 263 |
+| system.py | 158 |
