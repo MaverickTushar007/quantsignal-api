@@ -460,6 +460,27 @@ def generate_signal(symbol: str, include_reasoning: bool = True, bypass_cache: b
     except Exception:
         pass
 
+    # ── Calibration gate (Phase 6) ────────────────────────────────────────
+    try:
+        from app.domain.signal.calibration import calibrate_probability
+        raw_prob = result.get("probability")
+        if raw_prob is not None:
+            cal_prob = calibrate_probability(float(raw_prob))
+            shift = abs(cal_prob - float(raw_prob))
+            result["probability"] = cal_prob
+            result["probability_raw"] = round(float(raw_prob), 4)
+            result["calibration_applied"] = True
+            if shift > 0.05:
+                if result.get("confidence") == "HIGH":
+                    result["confidence"] = "MEDIUM"
+                    result["calibration_note"] = (
+                        f"Calibration adjusted probability {raw_prob:.2f}→{cal_prob:.2f} "
+                        f"(shift {shift:.2f}) — confidence downgraded"
+                    )
+    except Exception as _ce:
+        import logging as _log
+        _log.getLogger(__name__).warning(f"[calibration_gate] failed for {symbol}: {_ce}")
+
     return result
 
 def validate_model_features(model, symbol: str) -> bool:
