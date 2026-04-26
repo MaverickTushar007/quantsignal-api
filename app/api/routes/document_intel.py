@@ -52,12 +52,17 @@ async def analyze_document(
             user_question=question,
             symbol=symbol.upper() if symbol else None,
         )
-        return {
-            "status":  "ok",
-            "filename": filename,
-            "user_id": user.get("id"),
-            **result.to_dict(),
-        }
+        d = result.to_dict()
+        # W3.4 — persist document
+        try:
+            from app.domain.documents.doc_store import save_document
+            uid = user.get("sub") or user.get("user_id") if user else None
+            doc_id = save_document(d, filename=filename, user_id=uid)
+            if doc_id:
+                d["doc_id"] = doc_id
+        except Exception as _de:
+            log.warning(f"[document_intel] doc save failed: {_de}")
+        return {"status": "ok", "filename": filename, "user_id": user.get("id"), **d}
     except Exception as e:
         log.error(f"[document_intel] analyze failed: {e}")
         raise HTTPException(status_code=500, detail=f"Analysis failed: {str(e)}")
@@ -156,12 +161,17 @@ async def analyze_document(
             user_question=question,
             symbol=symbol.upper() if symbol else None,
         )
-        return {
-            "status":  "ok",
-            "filename": filename,
-            "user_id": user.get("id"),
-            **result.to_dict(),
-        }
+        d = result.to_dict()
+        # W3.4 — persist document
+        try:
+            from app.domain.documents.doc_store import save_document
+            uid = user.get("sub") or user.get("user_id") if user else None
+            doc_id = save_document(d, filename=filename, user_id=uid)
+            if doc_id:
+                d["doc_id"] = doc_id
+        except Exception as _de:
+            log.warning(f"[document_intel] doc save failed: {_de}")
+        return {"status": "ok", "filename": filename, "user_id": user.get("id"), **d}
     except Exception as e:
         log.error(f"[document_intel] analyze failed: {e}")
         raise HTTPException(status_code=500, detail=f"Analysis failed: {str(e)}")
