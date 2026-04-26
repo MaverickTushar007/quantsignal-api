@@ -152,6 +152,24 @@ async def build_ticker_packet(symbol: str) -> ResearchPacket:
         log.warning(f"[ticker_packet] circuit breaker check failed: {e}")
 
     # ── 7. Summary ────────────────────────────────────────────────────────
+    # ── W2.2 Freshness confidence downgrade ─────────────────────────────
+    try:
+        from app.domain.data.freshness import confidence_after_staleness, staleness_label, is_stale
+        age_s = int(signal.get("data_age_seconds", 60)) if signal else 3600
+        raw_conf = _map_confidence(confidence_raw)
+        downgraded_conf = confidence_after_staleness(raw_conf.value, age_s, "signal")
+        if downgraded_conf != raw_conf.value:
+            from app.domain.research.packet import ConfidenceLevel
+            confidence_raw = downgraded_conf
+            risk_flags.append(RiskFlag(
+                category="data_freshness",
+                severity="medium",
+                description=f"Signal data is {staleness_label(age_s)} — confidence downgraded",
+                invalidation_trigger="Refresh signal or wait for next data cycle",
+            ))
+    except Exception as _fe:
+        log.warning(f"[ticker_packet] freshness downgrade failed: {_fe}")
+
     summary = _build_summary(symbol, direction, probability, regime_label,
                               risk_flags, contradictions)
 
