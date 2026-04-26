@@ -9,6 +9,7 @@ from contextlib import asynccontextmanager
 from fastapi.middleware.cors import CORSMiddleware
 import os
 from fastapi.middleware.gzip import GZipMiddleware
+from app.api.middleware.logging_middleware import LoggingMiddleware
 from app.api.middleware.protection import protection_middleware
 from app.core.config import settings
 from app.api.routes.routes import router
@@ -84,6 +85,7 @@ app.add_middleware(
     allow_headers=["Authorization", "Content-Type", "x-user-id"],
 )
 app.add_middleware(GZipMiddleware, minimum_size=1000)
+app.add_middleware(LoggingMiddleware)
 
 app.include_router(router, prefix="/api/v1")
 app.include_router(market_context_router, prefix="/api/v1")

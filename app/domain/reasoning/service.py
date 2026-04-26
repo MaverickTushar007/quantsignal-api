@@ -346,18 +346,31 @@ async def stream_chat(symbol: str, message: str, history: list, user_id: str = "
         rag_text = "No academic context available."
         _rag_mode = "quant" if mode == "quant" else "auto"
         try:
-            from app.domain.reasoning.rag import search_research
+            from app.domain.reasoning.hybrid_retrieval import hybrid_retriever
             if sig_data:
                 feat = ", ".join(sig_data.get("top_features", []))
                 dir_ = sig_data.get("direction", "neutral")
                 qs = f"{dir_} signal {feat} momentum volatility technicals"
-                chunks = search_research(qs, top_k=2)
+                results = hybrid_retriever.retrieve(qs, top_k=3, symbol=ticker)
+                chunks = [r.get("content", r) if isinstance(r, dict) else r for r in results]
                 rag_text = "\n".join([f"- {c}" for c in chunks])
             elif symbol == "GENERIC":
-                chunks = search_research(message, top_k=2)
+                results = hybrid_retriever.retrieve(message, top_k=3)
+                chunks = [r.get("content", r) if isinstance(r, dict) else r for r in results]
                 rag_text = "\n".join([f"- {c}" for c in chunks])
         except Exception:
-            pass
+            try:
+                from app.domain.reasoning.rag import search_research
+                if sig_data:
+                    feat = ", ".join(sig_data.get("top_features", []))
+                    dir_ = sig_data.get("direction", "neutral")
+                    qs = f"{dir_} signal {feat} momentum volatility technicals"
+                    chunks = search_research(qs, top_k=2)
+                else:
+                    chunks = search_research(message, top_k=2)
+                rag_text = "\n".join([f"- {c}" for c in chunks])
+            except Exception:
+                pass
 
         # ── Calendar suppression check ────────────────────────────────────
         calendar_warning = ""
