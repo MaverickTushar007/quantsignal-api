@@ -66,7 +66,6 @@ class PortfolioXRay:
 
     # Risk
     estimated_annual_vol:  float
-    correlation_pairs:     list = field(default_factory=list)
     estimated_10pct_loss:  float   # loss in base currency in 10% drawdown
     regime_fit_score:      float   # 0-1 (1 = fully aligned with regime)
 
