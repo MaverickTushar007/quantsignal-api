@@ -11,7 +11,6 @@ from fastapi.middleware.gzip import GZipMiddleware
 from app.api.middleware.protection import protection_middleware
 from app.core.config import settings
 from app.api.routes.routes import router
-from app.api.routes.signals_ext import router as signals_ext_router
 from app.api.routes.market_context import router as market_context_router
 from app.api.routes.signal_stream import router as signal_stream_router
 from app.api.routes.system import router as system_router
@@ -68,7 +67,6 @@ app.add_middleware(
 app.add_middleware(GZipMiddleware, minimum_size=1000)
 
 app.include_router(router, prefix="/api/v1")
-app.include_router(signals_ext_router, prefix="/api/v1")
 app.include_router(market_context_router, prefix="/api/v1")
 app.include_router(signal_stream_router, prefix="/api/v1")
 app.include_router(system_router, prefix="/api/v1")
