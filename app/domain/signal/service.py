@@ -460,6 +460,15 @@ def generate_signal(symbol: str, include_reasoning: bool = True, bypass_cache: b
     except Exception:
         pass
 
+    # ── Kelly cap — hard max 0.25 (Phase 6 / W1.5) ─────────────────────────
+    try:
+        ks = result.get("kelly_size")
+        if ks is not None and float(ks) > 0.25:
+            result["kelly_size"] = 0.25
+            result["kelly_capped"] = True
+    except Exception:
+        pass
+
     # ── Calibration gate (Phase 6) ────────────────────────────────────────
     try:
         from app.domain.signal.calibration import calibrate_probability

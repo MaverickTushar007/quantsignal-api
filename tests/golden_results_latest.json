@@ -1,0 +1,262 @@
+[
+  {
+    "id": "T001",
+    "symbol": "RELIANCE.NS",
+    "status": "PASS",
+    "failures": [],
+    "snapshot": {
+      "direction": "SELL",
+      "confidence": "high",
+      "probability": 0.1819,
+      "kelly_size": 0.25,
+      "freshness_seconds": 60,
+      "verification": {
+        "score": 0.525,
+        "passed": true,
+        "citation_coverage": 0.875,
+        "claims_verified": false,
+        "numeric_checked": false,
+        "issues": [
+          "claims_not_verified",
+          "numerics_not_checked"
+        ]
+      },
+      "risk_flags_count": 0,
+      "evidence_count": 7
+    }
+  },
+  {
+    "id": "T002",
+    "symbol": "HDFCBANK.NS",
+    "status": "PASS",
+    "failures": [],
+    "snapshot": {
+      "direction": "SELL",
+      "confidence": "moderate",
+      "probability": 0.3161,
+      "kelly_size": 0.25,
+      "freshness_seconds": 60,
+      "verification": {
+        "score": 0.525,
+        "passed": true,
+        "citation_coverage": 0.875,
+        "claims_verified": false,
+        "numeric_checked": false,
+        "issues": [
+          "claims_not_verified",
+          "numerics_not_checked"
+        ]
+      },
+      "risk_flags_count": 0,
+      "evidence_count": 7
+    }
+  },
+  {
+    "id": "T003",
+    "symbol": "NIFTY50",
+    "status": "PASS",
+    "failures": [],
+    "snapshot": {
+      "direction": null,
+      "confidence": "insufficient",
+      "probability": null,
+      "kelly_size": null,
+      "freshness_seconds": 3600,
+      "verification": {
+        "score": 0.3,
+        "passed": false,
+        "citation_coverage": 0.5,
+        "claims_verified": false,
+        "numeric_checked": false,
+        "issues": [
+          "claims_not_verified",
+          "numerics_not_checked"
+        ]
+      },
+      "risk_flags_count": 0,
+      "evidence_count": 1
+    }
+  },
+  {
+    "id": "T004",
+    "symbol": "BTC-USD",
+    "status": "PASS",
+    "failures": [],
+    "snapshot": {
+      "direction": "SELL",
+      "confidence": "high",
+      "probability": 0.2079,
+      "kelly_size": 0.25,
+      "freshness_seconds": 60,
+      "verification": {
+        "score": 0.525,
+        "passed": true,
+        "citation_coverage": 0.875,
+        "claims_verified": false,
+        "numeric_checked": false,
+        "issues": [
+          "claims_not_verified",
+          "numerics_not_checked"
+        ]
+      },
+      "risk_flags_count": 0,
+      "evidence_count": 7
+    }
+  },
+  {
+    "id": "T005",
+    "symbol": "TCS.NS",
+    "status": "PASS",
+    "failures": [],
+    "snapshot": {
+      "direction": "SELL",
+      "confidence": "high",
+      "probability": 0.2269,
+      "kelly_size": 0.25,
+      "freshness_seconds": 60,
+      "verification": {
+        "score": 0.525,
+        "passed": true,
+        "citation_coverage": 0.875,
+        "claims_verified": false,
+        "numeric_checked": false,
+        "issues": [
+          "claims_not_verified",
+          "numerics_not_checked"
+        ]
+      },
+      "risk_flags_count": 0,
+      "evidence_count": 7
+    }
+  },
+  {
+    "id": "T006",
+    "symbol": "INFY.NS",
+    "status": "PASS",
+    "failures": [],
+    "snapshot": {
+      "direction": "SELL",
+      "confidence": "high",
+      "probability": 0.2833,
+      "kelly_size": 0.25,
+      "freshness_seconds": 60,
+      "verification": {
+        "score": 0.525,
+        "passed": true,
+        "citation_coverage": 0.875,
+        "claims_verified": false,
+        "numeric_checked": false,
+        "issues": [
+          "claims_not_verified",
+          "numerics_not_checked"
+        ]
+      },
+      "risk_flags_count": 0,
+      "evidence_count": 7
+    }
+  },
+  {
+    "id": "T007",
+    "symbol": "ICICIBANK.NS",
+    "status": "PASS",
+    "failures": [],
+    "snapshot": {
+      "direction": "SELL",
+      "confidence": "high",
+      "probability": 0.2358,
+      "kelly_size": 0.25,
+      "freshness_seconds": 60,
+      "verification": {
+        "score": 0.525,
+        "passed": true,
+        "citation_coverage": 0.875,
+        "claims_verified": false,
+        "numeric_checked": false,
+        "issues": [
+          "claims_not_verified",
+          "numerics_not_checked"
+        ]
+      },
+      "risk_flags_count": 0,
+      "evidence_count": 7
+    }
+  },
+  {
+    "id": "T008",
+    "symbol": "AXISBANK.NS",
+    "status": "PASS",
+    "failures": [],
+    "snapshot": {
+      "direction": "SELL",
+      "confidence": "high",
+      "probability": 0.2028,
+      "kelly_size": 0.25,
+      "freshness_seconds": 60,
+      "verification": {
+        "score": 0.525,
+        "passed": true,
+        "citation_coverage": 0.875,
+        "claims_verified": false,
+        "numeric_checked": false,
+        "issues": [
+          "claims_not_verified",
+          "numerics_not_checked"
+        ]
+      },
+      "risk_flags_count": 0,
+      "evidence_count": 7
+    }
+  },
+  {
+    "id": "T009",
+    "symbol": "SBIN.NS",
+    "status": "PASS",
+    "failures": [],
+    "snapshot": {
+      "direction": "SELL",
+      "confidence": "high",
+      "probability": 0.1769,
+      "kelly_size": 0.25,
+      "freshness_seconds": 60,
+      "verification": {
+        "score": 0.525,
+        "passed": true,
+        "citation_coverage": 0.875,
+        "claims_verified": false,
+        "numeric_checked": false,
+        "issues": [
+          "claims_not_verified",
+          "numerics_not_checked"
+        ]
+      },
+      "risk_flags_count": 0,
+      "evidence_count": 7
+    }
+  },
+  {
+    "id": "T010",
+    "symbol": "WIPRO.NS",
+    "status": "PASS",
+    "failures": [],
+    "snapshot": {
+      "direction": "SELL",
+      "confidence": "high",
+      "probability": 0.2428,
+      "kelly_size": 0.25,
+      "freshness_seconds": 60,
+      "verification": {
+        "score": 0.525,
+        "passed": true,
+        "citation_coverage": 0.875,
+        "claims_verified": false,
+        "numeric_checked": false,
+        "issues": [
+          "claims_not_verified",
+          "numerics_not_checked"
+        ]
+      },
+      "risk_flags_count": 0,
+      "evidence_count": 7
+    }
+  }
+]

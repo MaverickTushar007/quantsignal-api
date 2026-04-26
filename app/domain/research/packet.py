@@ -113,7 +113,31 @@ class ResearchPacket:
                 return {k: _serialize(v) for k, v in obj.__dict__.items()}
             return obj
 
-        return {k: _serialize(v) for k, v in self.__dict__.items()}
+        base = {k: _serialize(v) for k, v in self.__dict__.items()}
+
+        # ── Verification block — always present in API response ───────────
+        cov   = self.citation_coverage
+        score = round(min(1.0, cov * 0.6 + (0.4 if self.claims_verified else 0.0) + (0.1 if self.numeric_checked else 0.0)), 3)
+        passed = score >= 0.5
+        issues = []
+        if cov < 0.3:
+            issues.append("low_citation_coverage")
+        if not self.claims_verified:
+            issues.append("claims_not_verified")
+        if not self.numeric_checked:
+            issues.append("numerics_not_checked")
+        if self.freshness_seconds > 86400:
+            issues.append("stale_data")
+
+        base["verification"] = {
+            "score":             score,
+            "passed":            passed,
+            "citation_coverage": round(cov, 3),
+            "claims_verified":   self.claims_verified,
+            "numeric_checked":   self.numeric_checked,
+            "issues":            issues,
+        }
+        return base
 
 
 def _map_confidence(raw) -> ConfidenceLevel:

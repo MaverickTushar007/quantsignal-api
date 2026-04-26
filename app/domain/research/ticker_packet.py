@@ -32,7 +32,7 @@ async def build_ticker_packet(symbol: str) -> ResearchPacket:
     signal = {}
     try:
         from app.domain.signal.service import generate_signal
-        signal = await generate_signal(symbol) or {}
+        signal = generate_signal(symbol) or {}
     except Exception as e:
         log.warning(f"[ticker_packet] signal failed for {symbol}: {e}")
         open_questions.append("Signal pipeline unavailable — check data feed.")
@@ -95,10 +95,10 @@ async def build_ticker_packet(symbol: str) -> ResearchPacket:
         for item in news_items:
             evidence.append(EvidenceItem(
                 source="news",
-                content=item.get("headline", item.get("title", "")),
-                timestamp=item.get("published_at", now),
+                content=getattr(item, "title", "") or "",
+                timestamp=now,
                 weight=0.6,
-                url=item.get("url"),
+                url=getattr(item, "url", None),
                 verified=True,
             ))
     except Exception as e:
@@ -106,8 +106,8 @@ async def build_ticker_packet(symbol: str) -> ResearchPacket:
 
     # ── 4. Earnings risk ──────────────────────────────────────────────────
     try:
-        from app.domain.data.earnings import get_earnings
-        earnings = get_earnings(symbol) or {}
+        from app.domain.data.earnings import get_earnings_flag
+        earnings = get_earnings_flag(symbol) or {}
         days_until = earnings.get("days_until_earnings", 999)
         if days_until < 14:
             severity = "high" if days_until < 5 else "medium"
@@ -122,27 +122,30 @@ async def build_ticker_packet(symbol: str) -> ResearchPacket:
 
     # ── 5. Conflict detection ─────────────────────────────────────────────
     try:
-        from app.domain.agents.conflict_agent import check_conflicts
-        conflicts = check_conflicts(signal) or []
-        for c in conflicts:
-            contradictions.append(str(c))
-            risk_flags.append(RiskFlag(
-                category="regime_conflict",
-                severity="medium",
-                description=str(c),
-            ))
+        from app.domain.agents.conflict_agent import get_conflict_map
+        conflict_map = get_conflict_map() or {}
+        sym_conflicts = conflict_map.get(symbol, {})
+        if sym_conflicts.get("conflicts"):
+            for c in sym_conflicts["conflicts"]:
+                desc = str(c.get("reason", c))
+                contradictions.append(desc)
+                risk_flags.append(RiskFlag(
+                    category="signal_conflict",
+                    severity=c.get("severity", "medium") if isinstance(c, dict) else "medium",
+                    description=desc,
+                ))
     except Exception as e:
         log.warning(f"[ticker_packet] conflict check failed for {symbol}: {e}")
 
     # ── 6. Circuit breaker ────────────────────────────────────────────────
     try:
-        from app.domain.core.circuit_breaker_v2 import check_circuit_breaker
-        cb = check_circuit_breaker() or {}
-        if cb.get("tripped"):
+        from app.domain.core.circuit_breaker_v2 import check_daily_loss_limit
+        tripped, loss_pct = check_daily_loss_limit()
+        if tripped:
             risk_flags.append(RiskFlag(
                 category="circuit_breaker",
                 severity="high",
-                description=f"Circuit breaker active: {cb.get('reason', 'consecutive losses')}",
+                description=f"Daily loss limit hit ({loss_pct:.1%}) — circuit breaker active",
                 invalidation_trigger="Reset after win streak or manual override",
             ))
     except Exception as e:
@@ -157,7 +160,7 @@ async def build_ticker_packet(symbol: str) -> ResearchPacket:
         packet_type=PacketType.TICKER,
         symbol=symbol,
         timestamp=now,
-        freshness_seconds=0,
+        freshness_seconds=int(signal.get('data_age_seconds', 60)) if signal else 3600,
         summary=summary,
         confidence=_map_confidence(confidence_raw),
         evidence=evidence,
