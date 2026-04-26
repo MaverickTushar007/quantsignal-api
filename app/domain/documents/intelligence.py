@@ -157,9 +157,33 @@ class DocumentIntelligencePipeline:
         return DocumentType.UNKNOWN
 
     def _extract_pdf_text(self, pdf_bytes: bytes):
-        """Extract text from PDF using pypdf."""
+        """W3.3 — Layout-aware PDF extraction using pdfplumber (multi-column, tables)."""
+        import io
+        # Try pdfplumber first — handles multi-column and tables
         try:
-            import pypdf, io
+            import pdfplumber
+            pages_text = []
+            tables_raw = []
+            with pdfplumber.open(io.BytesIO(pdf_bytes)) as pdf:
+                page_count = len(pdf.pages)
+                for page in pdf.pages:
+                    # Extract tables as structured data first
+                    for tbl in (page.extract_tables() or []):
+                        if tbl:
+                            tables_raw.append(tbl)
+                    # Extract text preserving layout
+                    text = page.extract_text(layout=True) or page.extract_text() or ""
+                    if text.strip():
+                        pages_text.append(text)
+            self._pdfplumber_tables = tables_raw  # store for table extractor
+            return "\n".join(pages_text), page_count
+        except ImportError:
+            pass
+        except Exception as e:
+            log.warning(f"[doc_intel] pdfplumber failed: {e}")
+        # Fallback to pypdf
+        try:
+            import pypdf
             reader = pypdf.PdfReader(io.BytesIO(pdf_bytes))
             pages = []
             for page in reader.pages:
@@ -167,9 +191,6 @@ class DocumentIntelligencePipeline:
                 if text:
                     pages.append(text)
             return "\n".join(pages), len(reader.pages)
-        except ImportError:
-            log.warning("[doc_intel] pypdf not installed — install with: pip install pypdf")
-            return "", 0
         except Exception as e:
             log.warning(f"[doc_intel] PDF extraction failed: {e}")
             return "", 0
