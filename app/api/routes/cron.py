@@ -206,6 +206,19 @@ def evaluate_alerts(x_cron_secret: str = Header(None, alias="X-Cron-Secret")):
         except Exception as _e:
             print(f"WFV error: {_e}")
 
+        # W4.6 — Weekly Sharpe tracking
+        try:
+            if _run_wfv:
+                from app.domain.core.sharpe_tracker import run_weekly_sharpe
+                _sharpe_result = run_weekly_sharpe()
+                _alerts = _sharpe_result.get("alerts", [])
+                if _alerts:
+                    print(f"[SharpeTracker] alerts: {_alerts}")
+                else:
+                    print(f"[SharpeTracker] {_sharpe_result.get('computed', 0)} classes tracked")
+        except Exception as _ste:
+            print(f"[SharpeTracker] error: {_ste}")
+
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
     return {"status": "ok", "evaluated": evaluated}
@@ -250,3 +263,15 @@ def guardian_cron(x_cron_secret: str = Header(None, alias="X-Cron-Secret")):
     import threading
     threading.Thread(target=_run, daemon=True).start()
     return {"status": "started"}
+
+
+@router.post("/cron/weekly-sharpe", tags=["cron"])
+def trigger_weekly_sharpe(x_cron_secret: str = Header(None, alias="X-Cron-Secret")):
+    if x_cron_secret != CRON_SECRET:
+        raise HTTPException(status_code=401, detail="Invalid cron secret")
+    try:
+        from app.domain.core.sharpe_tracker import run_weekly_sharpe
+        result = run_weekly_sharpe()
+        return {"status": "ok", **result}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
