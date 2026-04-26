@@ -137,6 +137,30 @@ def train(ticker, df):
         importance = dict(zip(FEATURE_COLUMNS, xgb_model.calibrated_classifiers_[0].estimator.feature_importances_))
         top3 = dict(sorted(importance.items(), key=lambda x: x[1], reverse=True)[:3])
 
+        # ── W4.4 OOS Sharpe gate — reject model if OOS Sharpe < 0.30 ─────────
+        try:
+            X_oos = X.iloc[split:]
+            y_oos = y[split:]
+            if len(X_oos) >= 10:
+                oos_probs = xgb_model.predict_proba(X_oos)[:, 1]
+                oos_preds = (oos_probs > 0.5).astype(int)
+                oos_correct = (oos_preds == y_oos.values).astype(float)
+                # Treat each prediction as a +1/-1 return
+                oos_returns = oos_correct * 2 - 1
+                import numpy as _np
+                oos_sharpe = (
+                    _np.mean(oos_returns) / (_np.std(oos_returns) + 1e-9) * _np.sqrt(252)
+                )
+                if oos_sharpe < 0.30:
+                    import logging as _log
+                    _log.getLogger(__name__).warning(
+                        f"[ensemble] {ticker} OOS Sharpe {oos_sharpe:.2f} < 0.30 — model rejected"
+                    )
+                    return None
+        except Exception as _oos_e:
+            import logging as _log
+            _log.getLogger(__name__).warning(f"[ensemble] OOS gate failed: {_oos_e}")
+
         bundle = {"xgb": xgb_model, "lgb": lgb_model, "top_features": top3,
                   "trained_at": datetime.now(timezone.utc).isoformat()}
         with open(_model_path(ticker), "wb") as f:

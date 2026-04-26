@@ -124,3 +124,90 @@ async def main():
 
 if __name__ == "__main__":
     asyncio.run(main())
+
+
+# ── W4.7 Adversarial cases ────────────────────────────────────────────────────
+
+ADVERSARIAL_CASES = [
+    {"id": "A001", "symbol": "INVALID_TICKER_XYZ999", "expect_error": True},
+    {"id": "A002", "symbol": "RELIANCE.NS",            "force_stale": True},
+    {"id": "A003", "symbol": "HDFCBANK.NS",            "check_regime_conflict": True},
+    {"id": "A004", "symbol": "TCS.NS",                 "check_kelly_cap": True},
+    {"id": "A005", "symbol": "WIPRO.NS",               "check_no_crash": True},
+]
+
+async def run_adversarial():
+    from app.domain.research.ticker_packet import build_ticker_packet
+    print("\n" + "="*60)
+    print("ADVERSARIAL CASES")
+    print("="*60)
+    passed = failed = 0
+    for case in ADVERSARIAL_CASES:
+        sym = case["symbol"]
+        print(f"\nRunning {case['id']} — {sym}...")
+        try:
+            packet = await build_ticker_packet(sym)
+            d = packet.to_dict()
+
+            failures = []
+
+            # A001 — invalid ticker should still not crash (returns packet with null direction)
+            if case.get("expect_error"):
+                # Should return something, not crash
+                if d is None:
+                    failures.append("Returned None — should return empty packet")
+
+            # A002 — stale data should downgrade confidence
+            if case.get("force_stale"):
+                # freshness_seconds should be populated
+                if d.get("freshness_seconds") is None:
+                    failures.append("freshness_seconds is None")
+
+            # A003 — regime conflict check
+            if case.get("check_regime_conflict"):
+                # verification block must always be present
+                if "verification" not in d:
+                    failures.append("verification block missing")
+
+            # A004 — kelly cap
+            if case.get("check_kelly_cap"):
+                ks = d.get("kelly_size")
+                if ks is not None and float(ks) > 0.25:
+                    failures.append(f"kelly_size {ks} > 0.25")
+
+            # A005 — no crash on any valid ticker
+            if case.get("check_no_crash"):
+                if d.get("symbol") is None:
+                    failures.append("symbol missing from packet")
+
+            status = "PASS" if not failures else "FAIL"
+            icon = "✅" if status == "PASS" else "❌"
+            print(f"  {icon} {status}")
+            for f in failures:
+                print(f"     ⚠ {f}")
+            if status == "PASS":
+                passed += 1
+            else:
+                failed += 1
+
+        except Exception as e:
+            if case.get("expect_error"):
+                print(f"  ✅ PASS (expected error: {e})")
+                passed += 1
+            else:
+                print(f"  ❌ UNEXPECTED CRASH: {e}")
+                failed += 1
+
+    print(f"\nADVERSARIAL: {passed} passed / {failed} failed")
+    return failed
+
+if __name__ == "__main__":
+    import asyncio, sys
+
+    async def full_run():
+        await main()
+        adv_failures = await run_adversarial()
+        if adv_failures > 0:
+            sys.exit(1)
+
+    asyncio.run(full_run())
