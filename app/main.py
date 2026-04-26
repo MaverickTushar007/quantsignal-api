@@ -47,16 +47,25 @@ from app.api.routes.feedback import router as feedback_router
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     import asyncio
+    tasks = []
     try:
         from app.infrastructure.queue.poller import start_poller
-        poller_task = asyncio.create_task(start_poller())
+        tasks.append(asyncio.create_task(start_poller()))
     except Exception as e:
         import logging
         logging.getLogger(__name__).warning(f"Poller failed to start: {e}")
-        poller_task = None
+
+    try:
+        from app.infrastructure.scheduler.refresh_scheduler import run_refresh_scheduler
+        tasks.append(asyncio.create_task(run_refresh_scheduler()))
+    except Exception as e:
+        import logging
+        logging.getLogger(__name__).warning(f"Refresh scheduler failed to start: {e}")
+
     yield
-    if poller_task:
-        poller_task.cancel()
+
+    for t in tasks:
+        t.cancel()
 
 app = FastAPI(
     title="QuantSignal API",

@@ -158,7 +158,7 @@ def _send_to_chat(chat_id: str, msg: str) -> bool:
     """Send message to a specific Telegram chat ID."""
     import requests
     import os
-    token = os.getenv("TELEGRAM_BOT_TOKEN", "8611494119:AAGxk4nkCz590YEaJt_lfF83ZRX0WhRqTbM")
+    token = os.getenv("TELEGRAM_BOT_TOKEN", "")
     try:
         res = requests.post(
             f"https://api.telegram.org/bot{token}/sendMessage",
