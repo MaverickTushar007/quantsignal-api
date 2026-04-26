@@ -469,6 +469,33 @@ def generate_signal(symbol: str, include_reasoning: bool = True, bypass_cache: b
     except Exception:
         pass
 
+    # ── W2.6 Regime gating — mandatory conflict flag ───────────────────────
+    try:
+        direction = result.get("direction")
+        vol_regime = result.get("volatility_regime", "MEDIUM")
+        if direction == "BUY" and vol_regime in ("HIGH", "EXTREME", "BEAR"):
+            result.setdefault("regime_flags", [])
+            result["regime_flags"].append({
+                "type": "regime_conflict",
+                "severity": "high",
+                "description": f"BUY signal in {vol_regime} regime — reduced edge",
+                "invalidation_trigger": "Regime shift to LOW or MEDIUM vol",
+            })
+            result["regime_conflict"] = True
+        elif direction == "SELL" and vol_regime in ("LOW", "BULL"):
+            result.setdefault("regime_flags", [])
+            result["regime_flags"].append({
+                "type": "regime_conflict",
+                "severity": "medium",
+                "description": f"SELL signal in {vol_regime} regime — momentum may resist",
+                "invalidation_trigger": "Regime shift to HIGH vol or BEAR",
+            })
+            result["regime_conflict"] = True
+        else:
+            result["regime_conflict"] = False
+    except Exception:
+        result["regime_conflict"] = False
+
     # ── Calibration gate (Phase 6) ────────────────────────────────────────
     try:
         from app.domain.signal.calibration import calibrate_probability
