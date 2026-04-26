@@ -141,6 +141,18 @@ def _build_agent_context(symbol: str, user_id: str) -> str:
 FAST_MODEL  = "llama-3.1-8b-instant"     # cheap — calibration, conflict, risk
 SMART_MODEL = "llama-3.3-70b-versatile"  # powerful — Perseus final narrative only
 
+def _route_query_to_groq_model(query: str) -> str:
+    """
+    Use the Perseus task router to pick fast vs smart Groq model.
+    Falls back to SMART_MODEL on any error.
+    """
+    try:
+        from app.domain.ai.router import route_query, ModelTier
+        _, tier, _ = route_query(query)
+        return FAST_MODEL if tier.value == "fast" else SMART_MODEL
+    except Exception:
+        return SMART_MODEL
+
 def _groq_reasoning(prompt: str, use_smart: bool = False) -> str:
     """
     Multi-model router — Sprint 3.
@@ -289,7 +301,21 @@ PAST SIGNALS FOR {ticker}:
 {doc_context}
 Write exactly 3 sentences. Each must contain specific numbers."""
     try:
-        return _groq_smart(prompt)  # Sprint 3: always use smart model for Perseus narrative
+        # Route through task router — trade setup always gets smart model
+        routed_model = _route_query_to_groq_model(f"trade setup {ticker} {direction}")
+        use_smart = (routed_model == SMART_MODEL)
+        answer = _groq_reasoning(prompt, use_smart=use_smart)
+
+        # Verify answer quality — append warning if low confidence
+        try:
+            from app.domain.ai.verifier import verifier
+            result = verifier.verify(answer, news_headlines, None)
+            if not result.passed and result.issues:
+                answer += f" ⚠️ Note: {result.issues[0]}"
+        except Exception:
+            pass
+
+        return answer
     except Exception:
         return _rule_based_reasoning(ticker, direction, probability, confluence_bulls, top_features)
 
