@@ -19,17 +19,33 @@ async def get_ticker_research(
     Full intelligence packet for a symbol.
     Returns signal, regime, news evidence, risk flags, contradictions.
     """
+    import time as _time
+    _t0 = _time.perf_counter()
     try:
         from app.domain.research.ticker_packet import build_ticker_packet
         packet = await build_ticker_packet(symbol.upper())
         d = packet.to_dict()
-        # W2.4 — persist packet (fire and forget, never block response)
+        latency_ms = (_time.perf_counter() - _t0) * 1000
+        # W2.4 — persist packet
         try:
             from app.domain.research.packet_store import save_packet
             user_id = user.get("sub") or user.get("user_id") if user else None
             save_packet(d, user_id=user_id)
         except Exception as _pe:
             log.warning(f"[research] packet save failed: {_pe}")
+        # W4.1 — log verification result
+        try:
+            from app.domain.core.verifier_log import log_verification
+            uid = user.get("sub") or user.get("user_id") if user else None
+            log_verification(
+                endpoint="/research/{symbol}",
+                symbol=symbol.upper(),
+                verification=d.get("verification", {}),
+                latency_ms=latency_ms,
+                user_id=uid,
+            )
+        except Exception as _vl:
+            log.debug(f"[research] verifier log failed: {_vl}")
         return d
     except Exception as e:
         log.error(f"[research] ticker_packet failed for {symbol}: {e}")
