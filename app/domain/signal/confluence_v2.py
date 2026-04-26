@@ -559,7 +559,7 @@ def build_confluence_v2(
 
     score_label = f"{bull_count}/13 bullish (weighted: {weighted_score}/13)"
 
-    return factors, weighted_score, score_label, session_info
+    return factors, bull_count, score_label, session_info
 
 
 # ─────────────────────────────────────────────────────────────────────────────
