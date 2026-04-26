@@ -79,3 +79,22 @@ def leakage_audit_checklist(feature_name: str) -> List[str]:
         f"[ ] Feature stationary (ADF test p < 0.05)?",
         f"[ ] Survives 6-month walk-forward OOS test?",
     ]
+
+
+def print_spec(spec: ResearchSpec):
+    """Pretty print a ResearchSpec for documentation."""
+    print(f"\n{'='*60}")
+    print(f"RESEARCH SPEC: {spec.hypothesis[:60]}")
+    print(f"{'='*60}")
+    print(f"Universe:        {spec.universe}")
+    print(f"Holding period:  {spec.expected_holding_period}")
+    print(f"Data needed:     {', '.join(spec.data_required)}")
+    print(f"Rationale:       {spec.feature_rationale}")
+    print(f"Known risks:     {', '.join(spec.known_risks)}")
+    print(f"Kill criteria:   {spec.kill_criteria}")
+    print(f"Cost estimate:   {spec.cost_estimate_bps}bps round-trip")
+    print(f"PIT safe:        {'✅' if spec.point_in_time_safe else '❌ NOT CONFIRMED'}")
+    print()
+    print("LEAKAGE AUDIT:")
+    for item in leakage_audit_checklist("all features"):
+        print(f"  {item}")
