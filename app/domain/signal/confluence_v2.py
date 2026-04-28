@@ -392,13 +392,13 @@ def build_confluence_v2(
         session_info   : str  e.g. "london_ny (×1.2)" or "nse (×1.0)"
     """
     # ── Factors 1-9 (original) ────────────────────────────────────────────
-    rsi    = float(feat_row.get("RSI_14",      50))
-    macd   = float(feat_row.get("MACD",         0))    # normalised MACD
-    bbpct  = float(feat_row.get("BB_pct",      0.5)) * 100
-    volr   = float(feat_row.get("vol_ratio",    1))
-    dsma50 = float(feat_row.get("dist_SMA50",   0))
-    mom5   = float(feat_row.get("mom_5d",       0)) * 100
-    mom20  = float(feat_row.get("mom_20d",      0)) * 100
+    rsi    = float(feat_row.get("rsi_14",      50))
+    macd   = float(feat_row.get("macd",         0))    # normalised MACD
+    bbpct  = float(feat_row.get("bb_pct",      0.5)) * 100
+    volr   = float(feat_row.get("volume_ratio_10d",    1))
+    dsma50 = float(feat_row.get("price_to_sma50",   0))
+    mom5   = float(feat_row.get("return_5d",       0)) * 100
+    mom20  = float(feat_row.get("return_20d",      0)) * 100
     mrevz  = float(feat_row.get("mean_rev_z",   0))
     body   = float(feat_row.get("body_ratio",  0.5))
 
@@ -414,7 +414,7 @@ def build_confluence_v2(
         },
         # 2  (normalised MACD — positive = bullish)
         {
-            "name":   "MACD",
+            "name":   "macd",
             "value":  f"{'Bullish' if macd > 0 else 'Bearish'} ({macd:+.5f})",
             "signal": sig(macd > 0),
         },
@@ -512,7 +512,7 @@ def build_confluence_v2(
     # Tier 3: indicators (factors 1-3, 5-8)
     tier_map = {
         "RSI-14":              3,
-        "MACD":                3,
+        "macd":                3,
         "Bollinger":           3,
         "Volume":              2,
         "vs SMA50":            3,
