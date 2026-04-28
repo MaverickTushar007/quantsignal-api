@@ -414,7 +414,7 @@ def build_confluence_v2(
         },
         # 2  (normalised MACD — positive = bullish)
         {
-            "name":   "macd",
+            "name":   "MACD",
             "value":  f"{'Bullish' if macd > 0 else 'Bearish'} ({macd:+.5f})",
             "signal": sig(macd > 0),
         },
