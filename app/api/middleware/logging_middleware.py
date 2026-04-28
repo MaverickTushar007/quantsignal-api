@@ -17,12 +17,7 @@ class LoggingMiddleware(BaseHTTPMiddleware):
         request.state.correlation_id = correlation_id
         start = time.perf_counter()
 
-        try:
-            response = await call_next(request)
-        except Exception as _exc:
-            import traceback
-            log.error(f"UNHANDLED EXCEPTION {request.url.path}: {traceback.format_exc()}")
-            raise
+        response = await call_next(request)
 
         duration_ms = (time.perf_counter() - start) * 1000
         log.info(
