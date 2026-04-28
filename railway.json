@@ -6,11 +6,11 @@
     "cronJobs": [
       {
         "schedule": "*/15 * * * *",
-        "command": "curl -s -X POST http://localhost:8080/api/v1/cron/check-outcomes -H 'X-Cron-Secret: quantsignal_cron_2026'"
+        "command": "curl -s -X POST http://localhost:8080/api/v1/cron/check-outcomes -H 'x-cron-secret: quantsignal-cron-2026'"
       },
       {
-        "schedule": "*/15 * * * *", 
-        "command": "curl -s -X POST http://localhost:8080/api/v1/cron/refresh -H 'X-Cron-Secret: quantsignal_cron_2026'"
+        "schedule": "0 * * * *",
+        "command": "curl -s -X POST http://localhost:8080/api/v1/cron/refresh -H 'x-cron-secret: quantsignal-cron-2026'"
       }
     ]
   }
