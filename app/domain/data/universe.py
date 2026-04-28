@@ -220,5 +220,13 @@ TICKER_MAP = {t["symbol"]: t for t in TICKERS}
 # All symbols as a flat list
 ALL_SYMBOLS = [t["symbol"] for t in TICKERS]
 
-# Rebuild all 184 tickers
-REBUILD_TICKERS = TICKERS
+# Core rebuild set — fast enough to complete without OOM
+# Full TICKERS list (184) available for individual /signals/{symbol} lookups
+REBUILD_TICKERS = [t for t in TICKERS if t["symbol"] in {
+    "BTC-USD", "ETH-USD", "SOL-USD", "BNB-USD", "XRP-USD", "DOGE-USD",
+    "^GSPC", "^IXIC", "^NSEI", "^NSEBANK",
+    "SPY", "QQQ", "GLD", "TLT",
+    "AAPL", "MSFT", "NVDA", "TSLA", "GOOGL", "AMZN", "META",
+    "RELIANCE.NS", "TCS.NS", "INFY.NS", "HDFCBANK.NS",
+    "GC=F", "CL=F", "USDINR=X",
+}]
