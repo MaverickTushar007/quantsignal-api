@@ -28,7 +28,7 @@ async def _refresh_realtime():
         from app.domain.data.market import refresh_live_prices
         await refresh_live_prices() if asyncio.iscoroutinefunction(
             refresh_live_prices) else refresh_live_prices()
-    except AttributeError:
+    except (AttributeError, ImportError):
         pass  # function may not exist yet — safe skip
     except Exception as e:
         log.warning(f"[scheduler] realtime refresh failed: {e}")
