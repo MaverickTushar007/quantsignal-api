@@ -129,7 +129,11 @@ async def get_signal(
                     cache_path.write_text(json.dumps(cache))
         except Exception:
             pass
-    sig = generate_signal(symbol, include_reasoning=False)
+    try:
+        sig = generate_signal(symbol, include_reasoning=False)
+    except Exception as _gen_e:
+        import traceback
+        raise HTTPException(status_code=500, detail=f"generate_signal failed: {traceback.format_exc()}")
 
     # Staleness SLA — flag signal age so frontend can warn users
     if sig and sig.get("generated_at"):
