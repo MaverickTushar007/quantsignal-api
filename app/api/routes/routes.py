@@ -88,7 +88,7 @@ def get_all_signals(
             kelly_size=sig["kelly_size"],
         ))
     if not type and not direction:
-        set_cached("all_signals_list", results, ttl=86400)
+        set_cached("all_signals_list", [r.dict() for r in results], ttl=86400)
     return results
 
 @router.get("/signals/{symbol}", response_model=SignalResponse, tags=["signals"])
