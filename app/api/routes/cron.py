@@ -6,6 +6,7 @@ from fastapi import APIRouter, Header, HTTPException, Request
 from app.api.routes.tasks import _rebuild, CRON_SECRET
 import os, json, time, threading
 from pathlib import Path
+from app.core.config import BASE_DIR
 
 router = APIRouter()
 
