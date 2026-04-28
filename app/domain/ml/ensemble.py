@@ -144,7 +144,7 @@ def train(ticker, df):
             if len(X_oos) >= 10:
                 oos_probs = xgb_model.predict_proba(X_oos)[:, 1]
                 oos_preds = (oos_probs > 0.5).astype(int)
-                oos_correct = (oos_preds == y_oos.values).astype(float)
+                oos_correct = (oos_preds == y_oos).astype(float)
                 # Treat each prediction as a +1/-1 return
                 oos_returns = oos_correct * 2 - 1
                 import numpy as _np
