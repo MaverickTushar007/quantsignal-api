@@ -23,15 +23,16 @@ def _rebuild():
         old_cache = {}
 
     try:
-        from app.domain.data.universe import TICKERS
+        from app.domain.data.universe import TICKERS, REBUILD_TICKERS
         from app.domain.signal.service import generate_signal
 
-        # Split into 4 parallel worker groups
+        # Split into 4 parallel worker groups — use REBUILD_TICKERS (25 core assets)
+        _RT = REBUILD_TICKERS
         GROUPS = {
-            "CRYPTO":  [t for t in TICKERS if t["type"] == "CRYPTO"],
-            "INDIA":   [t for t in TICKERS if t["type"] == "IN_STOCK"],
-            "US":      [t for t in TICKERS if t["type"] in ("STOCK", "ETF")],
-            "MACRO":   [t for t in TICKERS if t["type"] in ("INDEX", "FOREX", "COMMODITY")],
+            "CRYPTO":  [t for t in _RT if t["type"] == "CRYPTO"],
+            "INDIA":   [t for t in _RT if t["type"] == "IN_STOCK"],
+            "US":      [t for t in _RT if t["type"] in ("STOCK", "ETF")],
+            "MACRO":   [t for t in _RT if t["type"] in ("INDEX", "FOREX", "COMMODITY")],
         }
 
         # Load existing cache as fallback — never serve empty dashboard
