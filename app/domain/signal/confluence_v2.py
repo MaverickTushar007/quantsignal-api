@@ -591,23 +591,23 @@ def enforce_consistency_v2(
     effective = bull_count * session_mult
     confluence_agreement = round(bull_count / 13, 3)
 
-    if effective <= 3:
+    if effective <= 2:
         enforced_dir  = "SELL"
         enforced_prob = round(min(probability, 0.38) * 0.85 + 0.10, 4)
 
-    elif effective <= 5:
+    elif effective <= 4:
         enforced_dir  = "SELL"
         enforced_prob = round(min(probability, 0.44), 4)
 
-    elif effective <= 6:
+    elif effective <= 5:
         enforced_dir  = "HOLD"
         enforced_prob = 0.46
 
-    elif effective <= 7:
+    elif effective <= 6:
         enforced_dir  = "HOLD"
         enforced_prob = 0.50
 
-    elif effective <= 9:
+    elif effective <= 8:
         enforced_dir  = direction if direction == "BUY" else "HOLD"
         enforced_prob = round(max(probability, 0.55), 4) if enforced_dir == "BUY" else 0.51
 

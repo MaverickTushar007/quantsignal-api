@@ -220,19 +220,5 @@ TICKER_MAP = {t["symbol"]: t for t in TICKERS}
 # All symbols as a flat list
 ALL_SYMBOLS = [t["symbol"] for t in TICKERS]
 
-# Core rebuild set — 25 assets the dashboard actively displays
-# Full TICKERS list (184) is still available for individual lookups
-REBUILD_TICKERS = [t for t in TICKERS if t["symbol"] in {
-    # Crypto (6)
-    "BTC-USD", "ETH-USD", "SOL-USD", "BNB-USD", "XRP-USD", "DOGE-USD",
-    # Indices (4)
-    "^GSPC", "^IXIC", "^NSEI", "^NSEBANK",
-    # ETFs (4)
-    "SPY", "QQQ", "GLD", "TLT",
-    # US Stocks (7)
-    "AAPL", "MSFT", "NVDA", "TSLA", "GOOGL", "AMZN", "META",
-    # Indian Stocks (4)
-    "RELIANCE.NS", "TCS.NS", "INFY.NS", "HDFCBANK.NS",
-    # Commodity & Forex (3)
-    "GC=F", "CL=F", "USDINR=X",
-}]
+# Rebuild all 184 tickers
+REBUILD_TICKERS = TICKERS
