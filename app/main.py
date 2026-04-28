@@ -63,6 +63,17 @@ async def lifespan(app: FastAPI):
         import logging
         logging.getLogger(__name__).warning(f"Refresh scheduler failed to start: {e}")
 
+    # Auto-rebuild cache on startup (Railway filesystem is ephemeral)
+    try:
+        import threading
+        from app.api.routes.tasks import _rebuild
+        _t = threading.Thread(target=_rebuild, daemon=True)
+        _t.start()
+        import logging
+        logging.getLogger(__name__).info("[startup] cache rebuild triggered")
+    except Exception as e:
+        import logging
+        logging.getLogger(__name__).warning(f"[startup] cache rebuild failed: {e}")
     yield
 
     for t in tasks:
