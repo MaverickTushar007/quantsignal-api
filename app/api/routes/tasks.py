@@ -83,6 +83,15 @@ def _rebuild():
             print(f"[cron] WARNING: only {len(cache)} new signals vs {len(existing_cache)} before — merging with stale cache")
             cache = {**existing_cache, **cache}
         (BASE_DIR / "data/signals_cache.json").write_text(json.dumps(cache, indent=2))
+        # Invalidate stale all_signals_list so /signals serves fresh data
+        try:
+            from app.infrastructure.cache.cache import _get_redis
+            r = _get_redis()
+            if r:
+                r.delete("all_signals_list")
+                print("[cron] invalidated all_signals_list Redis cache")
+        except Exception as _re:
+            print(f"[cron] Redis invalidation failed: {_re}")
         try:
             from app.infrastructure.cache.cache import set_cached
             set_cached("signals_cache_full", cache, ttl=86400)
