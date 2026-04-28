@@ -58,12 +58,11 @@ async def _refresh_intraday():
 async def _refresh_daily():
     """6 AM IST — full signal rebuild."""
     try:
-        from app.domain.signal.service import rebuild_all_signals
-        await rebuild_all_signals() if asyncio.iscoroutinefunction(
-            rebuild_all_signals) else rebuild_all_signals()
-        log.info("[scheduler] daily signal rebuild complete")
-    except (AttributeError, ImportError):
-        log.info("[scheduler] rebuild_all_signals not available — skipping daily rebuild")
+        from app.api.routes.tasks import _rebuild
+        import threading
+        t = threading.Thread(target=_rebuild, daemon=True)
+        t.start()
+        log.info("[scheduler] daily signal rebuild triggered")
     except Exception as e:
         log.error(f"[scheduler] daily rebuild failed: {e}")
 
