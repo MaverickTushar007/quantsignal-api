@@ -63,6 +63,13 @@ async def lifespan(app: FastAPI):
         import logging
         logging.getLogger(__name__).warning(f"Refresh scheduler failed to start: {e}")
 
+    # DB migrations
+    try:
+        from app.infrastructure.db.signal_history import ensure_calibration_table
+        ensure_calibration_table()
+    except Exception as _dbe:
+        import logging
+        logging.getLogger(__name__).warning(f"[startup] DB migration failed: {_dbe}")
     # Auto-rebuild cache on startup (Railway filesystem is ephemeral)
     try:
         import threading

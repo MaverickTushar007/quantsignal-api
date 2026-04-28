@@ -356,3 +356,39 @@ def get_monte_carlo_significance(symbol: str = None, n_shuffles: int = 500) -> d
         "verified": verified,
         "reason": "edge_confirmed" if verified else "possibly_luck"
     }
+
+def ensure_calibration_table():
+    """Auto-create calibration_params table if missing."""
+    import json
+    try:
+        conn, db = _get_conn()
+        cur = conn.cursor()
+        if db == "pg":
+            cur.execute("""
+                CREATE TABLE IF NOT EXISTS calibration_params (
+                    id SERIAL PRIMARY KEY,
+                    params JSONB NOT NULL,
+                    created_at TIMESTAMP DEFAULT NOW()
+                )
+            """)
+            cur.execute("SELECT COUNT(*) FROM calibration_params")
+            if cur.fetchone()[0] == 0:
+                cur.execute("INSERT INTO calibration_params (params) VALUES (%s)",
+                    (json.dumps({"coef": 1.0, "intercept": 0.0}),))
+        else:
+            cur.execute("""
+                CREATE TABLE IF NOT EXISTS calibration_params (
+                    id INTEGER PRIMARY KEY,
+                    params TEXT NOT NULL,
+                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                )
+            """)
+            cur.execute("SELECT COUNT(*) FROM calibration_params")
+            if cur.fetchone()[0] == 0:
+                cur.execute("INSERT INTO calibration_params (params) VALUES (?)",
+                    (json.dumps({"coef": 1.0, "intercept": 0.0}),))
+        conn.commit()
+        conn.close()
+    except Exception as e:
+        import logging
+        logging.getLogger(__name__).warning(f"[db] calibration_params migration failed: {e}")
