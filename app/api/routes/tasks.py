@@ -64,18 +64,19 @@ def _rebuild():
                 time.sleep(0.2)
             return group_name, results
 
-        # Run all 4 groups in parallel
-        print(f"Starting parallel rebuild — 4 workers for {len(TICKERS)} signals...")
-        with ThreadPoolExecutor(max_workers=1) as executor:
-            futures = {
-                executor.submit(process_group, name, tickers): name
-                for name, tickers in GROUPS.items()
-            }
-            for future in as_completed(futures):
-                group_name, results = future.result()
-                with cache_lock:
-                    cache.update(results)
-                print(f"[{group_name}] done — {len(results)} signals")
+        # Run batches sequentially, writing cache after each batch
+        print(f"Starting sequential batch rebuild — {len(GROUPS)} batches for {len(_RT)} tickers...")
+        for batch_name, tickers in GROUPS.items():
+            _, results = process_group(batch_name, tickers)
+            with cache_lock:
+                cache.update(results)
+            print(f"[{batch_name}] done — {len(results)} signals, total so far: {len(cache)}")
+            # Write incrementally after each batch so progress is never lost
+            try:
+                merged = {**existing_cache, **cache}
+                (BASE_DIR / "data/signals_cache.json").write_text(json.dumps(merged, indent=2))
+            except Exception as _we:
+                print(f"[cron] incremental write failed: {_we}")
 
         elapsed = round(time.time() - start_time, 1)
         # Never serve empty dashboard — merge with stale cache if rebuild produced fewer signals
