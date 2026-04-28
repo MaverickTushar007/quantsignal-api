@@ -29,8 +29,10 @@ def load_calibration_params() -> dict:
         row = cur.fetchone()
         conn.close()
         if row:
-            _cache["params"] = row[0]
-            return row[0]
+            import json as _json
+            p = row[0] if isinstance(row[0], dict) else _json.loads(row[0])
+            _cache["params"] = p
+            return p
     except Exception as e:
         logger.warning(f"[calibration] Could not load params: {e}")
     return None
