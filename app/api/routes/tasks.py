@@ -27,13 +27,13 @@ def _rebuild():
         from app.domain.signal.service import generate_signal
 
         # Split into 4 parallel worker groups — use REBUILD_TICKERS (25 core assets)
-        _RT = REBUILD_TICKERS
-        GROUPS = {
-            "CRYPTO":  [t for t in _RT if t["type"] == "CRYPTO"],
-            "INDIA":   [t for t in _RT if t["type"] == "IN_STOCK"],
-            "US":      [t for t in _RT if t["type"] in ("STOCK", "ETF")],
-            "MACRO":   [t for t in _RT if t["type"] in ("INDEX", "FOREX", "COMMODITY")],
-        }
+        # Process all tickers in batches of 25 to avoid OOM
+        _RT = TICKERS
+        BATCH_SIZE = 25
+        _batches = [_RT[i:i+BATCH_SIZE] for i in range(0, len(_RT), BATCH_SIZE)]
+        GROUPS = {}
+        for i, batch in enumerate(_batches):
+            GROUPS[f"BATCH_{i+1}"] = batch
 
         # Load existing cache as fallback — never serve empty dashboard
         try:
@@ -66,7 +66,7 @@ def _rebuild():
 
         # Run all 4 groups in parallel
         print(f"Starting parallel rebuild — 4 workers for {len(TICKERS)} signals...")
-        with ThreadPoolExecutor(max_workers=4) as executor:
+        with ThreadPoolExecutor(max_workers=1) as executor:
             futures = {
                 executor.submit(process_group, name, tickers): name
                 for name, tickers in GROUPS.items()
