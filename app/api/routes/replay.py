@@ -100,9 +100,9 @@ def replay_signal(
 
         # Confluence at replay row
         latest_row = feat_full.loc[replay_idx[-1]].to_dict()
-        confluence = _build_confluence(latest_row)
-        bull_count = sum(1 for c in confluence if c["signal"] == "BULLISH")
-
+        asset_type = TICKER_MAP.get(symbol, {}).get("type", "default")
+        confluence, bull_count, _, _ = _build_confluence(latest_row, df_sliced, asset_type)
+        
         # Price at replay date
         current_price = float(df_sliced["Close"].iloc[-1])
         feat_row = feat_full.loc[replay_idx[-1]]
