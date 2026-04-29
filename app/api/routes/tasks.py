@@ -18,10 +18,7 @@ def _rebuild():
 
     # Load old cache for alert comparison
     try:
-        try:
         old_cache = json.loads((BASE_DIR / "data/signals_cache.json").read_text())
-    except Exception:
-        old_cache = {}
     except Exception:
         old_cache = {}
 
