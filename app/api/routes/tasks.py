@@ -103,7 +103,6 @@ def _rebuild():
                 print("[cron] invalidated all_signals_list Redis cache")
         except Exception as _re:
             print(f"[cron] Redis invalidation failed: {_re}")
-    _rebuild_lock.release()
         try:
             from app.infrastructure.cache.cache import set_cached
             set_cached("signals_cache_full", cache, ttl=86400)
@@ -111,6 +110,7 @@ def _rebuild():
         except Exception as e:
             print(f"[cron] Redis write failed: {e}")
         print(f"Cache rebuilt: {len(cache)}/{len(TICKERS)} signals in {elapsed}s")
+    _rebuild_lock.release()
 
         # Run virtual agent executor
         try:
