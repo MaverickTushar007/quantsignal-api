@@ -31,7 +31,7 @@ def _get_feature_set(ticker: str):
 
 MODELS_DIR   = BASE_DIR / "ml/models"
 MODELS_DIR.mkdir(exist_ok=True)
-RETRAIN_DAYS = 7
+RETRAIN_DAYS = 0
 FORWARD_DAYS = 5
 RETURN_THRESH= 0.02
 
