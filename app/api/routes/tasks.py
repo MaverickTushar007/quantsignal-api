@@ -9,12 +9,7 @@ from pathlib import Path
 
 CRON_SECRET = os.getenv("CRON_SECRET", "quantsignal-cron-2026")
 
-_rebuild_lock = threading.Lock()
-
 def _rebuild():
-    if not _rebuild_lock.acquire(blocking=False):
-        print("[cron] rebuild already running — skipping")
-        return
     from app.domain.core.failure_tracker import record_failure, record_success
     from app.api.routes.alerts import fire_signal_alerts
     import json, time, threading
@@ -110,7 +105,6 @@ def _rebuild():
         except Exception as e:
             print(f"[cron] Redis write failed: {e}")
         print(f"Cache rebuilt: {len(cache)}/{len(TICKERS)} signals in {elapsed}s")
-    _rebuild_lock.release()
 
         # Run virtual agent executor
         try:
