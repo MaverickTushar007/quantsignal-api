@@ -1013,6 +1013,353 @@
     "probability_raw": 0.46,
     "calibration_applied": true
   },
+  "^GSPC": {
+    "symbol": "^GSPC",
+    "display": "S&P 500",
+    "name": "S&P 500",
+    "type": "INDEX",
+    "icon": "S",
+    "direction": "SELL",
+    "probability": 0.5205,
+    "confidence": "MEDIUM",
+    "kelly_size": 0.25,
+    "expected_value": 1.4365,
+    "take_profit": 7019.5854,
+    "stop_loss": 7198.407,
+    "current_price": 7138.7998,
+    "risk_reward": 2.0,
+    "atr": 59.6072,
+    "model_agreement": 0.308,
+    "top_features": [
+      "macd_hist",
+      "momentum_20d",
+      "sma_10"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "78 \u2014 Overbought",
+        "signal": "BEARISH",
+        "tier": 3
+      },
+      {
+        "name": "MACD",
+        "value": "Bullish (+126.30056)",
+        "signal": "BULLISH",
+        "tier": 3
+      },
+      {
+        "name": "Bollinger",
+        "value": "75% (Mid)",
+        "signal": "BEARISH",
+        "tier": 3
+      },
+      {
+        "name": "Volume",
+        "value": "0.96\u00d7 avg",
+        "signal": "BEARISH",
+        "tier": 2
+      },
+      {
+        "name": "vs SMA50",
+        "value": "Above SMA50 (+4.95%)",
+        "signal": "BULLISH",
+        "tier": 3
+      },
+      {
+        "name": "5D Momentum",
+        "value": "+1.06% ROC",
+        "signal": "BULLISH",
+        "tier": 3
+      },
+      {
+        "name": "20D Momentum",
+        "value": "+12.53% ROC",
+        "signal": "BULLISH",
+        "tier": 3
+      },
+      {
+        "name": "Mean Rev Z",
+        "value": "+0.98 ATR units (Neutral)",
+        "signal": "BEARISH",
+        "tier": 3
+      },
+      {
+        "name": "Candle Conviction",
+        "value": "0.14 body ratio (Weak)",
+        "signal": "BEARISH",
+        "tier": 2
+      },
+      {
+        "name": "Equal H/L (Liquidity)",
+        "value": "None detected",
+        "signal": "NEUTRAL",
+        "tier": 1
+      },
+      {
+        "name": "Market Structure",
+        "value": "No clear swings",
+        "signal": "NEUTRAL",
+        "tier": 1
+      },
+      {
+        "name": "Liquidity Sweep",
+        "value": "No sweep detected",
+        "signal": "NEUTRAL",
+        "tier": 1
+      },
+      {
+        "name": "Order Block",
+        "value": "Nearest bullish OB: 6316.91\u20136427.31 (not in zone)",
+        "signal": "NEUTRAL",
+        "tier": 1
+      }
+    ],
+    "confluence_score": "4/13 bullish (weighted: 2/13)",
+    "news": [
+      {
+        "title": "Walmart redesigns its leadership pipeline as managers making $400K stay for longer",
+        "source": "Yahoo Finance",
+        "sentiment": "NEUTRAL",
+        "url": "https://finance.yahoo.com/news/walmart-redesigns-its-leadership-pipeline-as-managers-making-400k-stay-for-longer-213345314.html"
+      },
+      {
+        "title": "Starbucks stock surges on earnings beat, guidance raise as turnaround efforts gain steam",
+        "source": "Yahoo Finance",
+        "sentiment": "BULLISH",
+        "url": "https://finance.yahoo.com/news/starbucks-stock-surges-on-earnings-beat-guidance-raise-as-turnaround-efforts-gain-steam-204259048.html"
+      },
+      {
+        "title": "Stock market all-time highs are not the danger zone investors think they are: Chart of the Day",
+        "source": "Yahoo Finance",
+        "sentiment": "BULLISH",
+        "url": "https://finance.yahoo.com/markets/article/stock-market-all-time-highs-are-not-the-danger-zone-investors-think-they-are-chart-of-the-day-125437756.html"
+      }
+    ],
+    "reasoning": "",
+    "generated_at": "2026-04-29T08:49:01.263306+00:00",
+    "market_open": false,
+    "earnings_flag": null,
+    "macro_event_today": {
+      "title": "RBNZ Gov Breman Speaks",
+      "country": "NZD",
+      "hours_away": 1.2
+    },
+    "event_adjustment": null,
+    "data_warnings": null,
+    "volume_ratio": 0.97,
+    "session_info": "nse (\u00d71.0)",
+    "volatility_regime": "MEDIUM",
+    "regime_percentile": 55.1,
+    "h4_confluence": false,
+    "mtf": {
+      "tf_15m_bull": false,
+      "tf_1h_bull": false,
+      "tf_4h_bull": true,
+      "tf_1h_rsi": 40.7,
+      "tf_4h_rsi": 56.7,
+      "mtf_score": 1,
+      "mtf_details": {
+        "15m": "BEAR",
+        "1h": "BEAR",
+        "4h": "BULL",
+        "1d": "BEAR"
+      },
+      "mtf_score_with_daily": 1
+    },
+    "energy": {
+      "state": "exhausted",
+      "score": 1,
+      "direction_bias": "down",
+      "reason": "Mean rev z=3.30, extension score=1.00",
+      "components": {
+        "atr_ratio": 0.789,
+        "bb_squeeze": 1.202,
+        "vol_ratio": 0.968,
+        "momentum_accel": -0.02075,
+        "mean_rev_z": 3.296,
+        "extension_score": 1
+      }
+    },
+    "kelly_capped": true,
+    "regime_conflict": false,
+    "probability_raw": 0.082,
+    "calibration_applied": true,
+    "calibration_note": "Calibration adjusted probability 0.08\u21920.52 (shift 0.44) \u2014 confidence downgraded"
+  },
+  "^IXIC": {
+    "symbol": "^IXIC",
+    "display": "NASDAQ",
+    "name": "Nasdaq",
+    "type": "INDEX",
+    "icon": "N",
+    "direction": "HOLD",
+    "probability": 0.613,
+    "confidence": "LOW",
+    "kelly_size": 0.25,
+    "expected_value": 2.114,
+    "take_profit": 24091.7874,
+    "stop_loss": 24949.8075,
+    "current_price": 24663.8008,
+    "risk_reward": 2.0,
+    "atr": 286.0067,
+    "model_agreement": 0.385,
+    "top_features": [
+      "ema_12",
+      "mean_rev_z",
+      "ema_26"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "80 \u2014 Overbought",
+        "signal": "BEARISH",
+        "tier": 3
+      },
+      {
+        "name": "MACD",
+        "value": "Bullish (+667.13114)",
+        "signal": "BULLISH",
+        "tier": 3
+      },
+      {
+        "name": "Bollinger",
+        "value": "76% (Mid)",
+        "signal": "BEARISH",
+        "tier": 3
+      },
+      {
+        "name": "Volume",
+        "value": "0.83\u00d7 avg",
+        "signal": "BEARISH",
+        "tier": 2
+      },
+      {
+        "name": "vs SMA50",
+        "value": "Above SMA50 (+8.21%)",
+        "signal": "BULLISH",
+        "tier": 3
+      },
+      {
+        "name": "5D Momentum",
+        "value": "+1.66% ROC",
+        "signal": "BULLISH",
+        "tier": 3
+      },
+      {
+        "name": "20D Momentum",
+        "value": "+18.61% ROC",
+        "signal": "BULLISH",
+        "tier": 3
+      },
+      {
+        "name": "Mean Rev Z",
+        "value": "+1.04 ATR units (Overbought)",
+        "signal": "BEARISH",
+        "tier": 3
+      },
+      {
+        "name": "Candle Conviction",
+        "value": "0.27 body ratio (Weak)",
+        "signal": "BEARISH",
+        "tier": 2
+      },
+      {
+        "name": "Equal H/L (Liquidity)",
+        "value": "None detected",
+        "signal": "NEUTRAL",
+        "tier": 1
+      },
+      {
+        "name": "Market Structure",
+        "value": "No clear swings",
+        "signal": "NEUTRAL",
+        "tier": 1
+      },
+      {
+        "name": "Liquidity Sweep",
+        "value": "No sweep detected",
+        "signal": "NEUTRAL",
+        "tier": 1
+      },
+      {
+        "name": "Order Block",
+        "value": "Bullish OB zone 24209.74\u201324664.87 (price inside)",
+        "signal": "BULLISH",
+        "tier": 1
+      }
+    ],
+    "confluence_score": "5/13 bullish (weighted: 4/13)",
+    "news": [
+      {
+        "title": "Spotify stock tanks on earnings, Sherwin-Williams gives bleak outlook",
+        "source": "Yahoo Finance Video",
+        "sentiment": "BULLISH",
+        "url": "https://finance.yahoo.com/video/spotify-stock-tanks-on-earnings-sherwin-williams-gives-bleak-outlook-181126444.html"
+      },
+      {
+        "title": "Meta Q1 earnings to shine spotlight on spending, with capex nearly doubling from last year",
+        "source": "Yahoo Finance",
+        "sentiment": "BULLISH",
+        "url": "https://finance.yahoo.com/sectors/technology/article/meta-q1-earnings-to-shine-spotlight-on-spending-with-capex-nearly-doubling-from-last-year-160136256.html"
+      },
+      {
+        "title": "3 Things to Watch at Wednesday\u2019s Fed Meeting and Powell\u2019s Likely Last Conference as Chair",
+        "source": "Barrons.com",
+        "sentiment": "NEUTRAL",
+        "url": "https://www.barrons.com/livecoverage/fed-meeting-april-rates-news/card/3-things-to-watch-at-wednesday-s-fed-meeting-and-powell-s-likely-last-conference-as-chair-SGJGAfhmfiO3SCsvFgB2?siteid=yhoof2&yptr=yahoo"
+      }
+    ],
+    "reasoning": "",
+    "generated_at": "2026-04-29T08:49:05.553885+00:00",
+    "market_open": false,
+    "earnings_flag": null,
+    "macro_event_today": {
+      "title": "RBNZ Gov Breman Speaks",
+      "country": "NZD",
+      "hours_away": 1.2
+    },
+    "event_adjustment": null,
+    "data_warnings": null,
+    "volume_ratio": 0.82,
+    "session_info": "nse (\u00d71.0)",
+    "volatility_regime": "MEDIUM",
+    "regime_percentile": 61.5,
+    "h4_confluence": true,
+    "mtf": {
+      "tf_15m_bull": false,
+      "tf_1h_bull": false,
+      "tf_4h_bull": true,
+      "tf_1h_rsi": 41.4,
+      "tf_4h_rsi": 59.5,
+      "mtf_score": 1,
+      "mtf_details": {
+        "15m": "BEAR",
+        "1h": "BEAR",
+        "4h": "BULL",
+        "1d": "BEAR"
+      },
+      "mtf_score_with_daily": 1
+    },
+    "energy": {
+      "state": "exhausted",
+      "score": 1,
+      "direction_bias": "down",
+      "reason": "Mean rev z=3.48, extension score=1.00",
+      "components": {
+        "atr_ratio": 0.917,
+        "bb_squeeze": 1.31,
+        "vol_ratio": 0.823,
+        "momentum_accel": -0.02987,
+        "mean_rev_z": 3.48,
+        "extension_score": 1
+      }
+    },
+    "kelly_capped": true,
+    "regime_conflict": false,
+    "probability_raw": 0.46,
+    "calibration_applied": true
+  },
   "SPY": {
     "symbol": "SPY",
     "display": "SPY",
@@ -3030,6 +3377,1547 @@
     "kelly_capped": true,
     "regime_conflict": false,
     "probability_raw": 0.46,
+    "calibration_applied": true
+  },
+  "GC=F": {
+    "symbol": "GC=F",
+    "display": "GOLD",
+    "name": "Gold Futures",
+    "type": "COMMODITY",
+    "icon": "G",
+    "direction": "HOLD",
+    "probability": 0.6225,
+    "confidence": "LOW",
+    "kelly_size": 0.25,
+    "expected_value": 1.875,
+    "take_profit": 4473.4288,
+    "stop_loss": 4623.8359,
+    "current_price": 4573.7002,
+    "risk_reward": 2.0,
+    "atr": 50.1357,
+    "model_agreement": 0.462,
+    "top_features": [
+      "bb_lower",
+      "volatility_20d",
+      "adx_14"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "33 \u2014 Oversold",
+        "signal": "BULLISH",
+        "tier": 3
+      },
+      {
+        "name": "MACD",
+        "value": "Bearish (-38.09176)",
+        "signal": "BEARISH",
+        "tier": 3
+      },
+      {
+        "name": "Bollinger",
+        "value": "-0% (Lower)",
+        "signal": "BULLISH",
+        "tier": 3
+      },
+      {
+        "name": "Volume",
+        "value": "8.22\u00d7 avg",
+        "signal": "BULLISH",
+        "tier": 2
+      },
+      {
+        "name": "vs SMA50",
+        "value": "Below SMA50 (-5.66%)",
+        "signal": "BEARISH",
+        "tier": 3
+      },
+      {
+        "name": "5D Momentum",
+        "value": "-3.36% ROC",
+        "signal": "BEARISH",
+        "tier": 3
+      },
+      {
+        "name": "20D Momentum",
+        "value": "-1.59% ROC",
+        "signal": "BEARISH",
+        "tier": 3
+      },
+      {
+        "name": "Mean Rev Z",
+        "value": "-2.01 ATR units (Oversold)",
+        "signal": "BULLISH",
+        "tier": 3
+      },
+      {
+        "name": "Candle Conviction",
+        "value": "0.70 body ratio (Strong)",
+        "signal": "BULLISH",
+        "tier": 2
+      },
+      {
+        "name": "Equal H/L (Liquidity)",
+        "value": "Equal lows @ 4556.45 (0.4% below)",
+        "signal": "BULLISH",
+        "tier": 1
+      },
+      {
+        "name": "Market Structure",
+        "value": "No clear swings",
+        "signal": "NEUTRAL",
+        "tier": 1
+      },
+      {
+        "name": "Liquidity Sweep",
+        "value": "No sweep detected",
+        "signal": "NEUTRAL",
+        "tier": 1
+      },
+      {
+        "name": "Order Block",
+        "value": "Nearest bearish OB: 4770.00\u20134811.00 (not in zone)",
+        "signal": "NEUTRAL",
+        "tier": 1
+      }
+    ],
+    "confluence_score": "6/13 bullish (weighted: 6/13)",
+    "news": [
+      {
+        "title": "Gold, silver plunge amid US-Iran stalemate",
+        "source": "Yahoo Finance",
+        "sentiment": "BEARISH",
+        "url": "https://finance.yahoo.com/markets/article/gold-silver-plunge-amid-us-iran-stalemate-155453396.html"
+      },
+      {
+        "title": "Gold and silver prices today, Tuesday, April 28: Prices fall as inflation pressure mounts",
+        "source": "Yahoo Personal Finance",
+        "sentiment": "BEARISH",
+        "url": "https://finance.yahoo.com/personal-finance/investing/article/gold-and-silver-prices-today-tuesday-april-28-prices-fall-as-inflation-pressure-mounts-110827405.html"
+      },
+      {
+        "title": "Bitcoin traders flip bullish on price ahead of Powell\u2019s final FOMC as Fed chair",
+        "source": "DLNews",
+        "sentiment": "NEUTRAL",
+        "url": "https://www.dlnews.com/articles/markets/traders-bullish-on-bitcoin-price-ahead-of-powell-final-fomc/"
+      }
+    ],
+    "reasoning": "",
+    "generated_at": "2026-04-29T08:49:07.750388+00:00",
+    "market_open": false,
+    "earnings_flag": null,
+    "macro_event_today": {
+      "title": "RBNZ Gov Breman Speaks",
+      "country": "NZD",
+      "hours_away": 1.2
+    },
+    "event_adjustment": null,
+    "data_warnings": null,
+    "volume_ratio": 14.51,
+    "session_info": "london_ny (\u00d71.2)",
+    "volatility_regime": "MEDIUM",
+    "regime_percentile": 68.4,
+    "h4_confluence": true,
+    "mtf": {
+      "tf_15m_bull": false,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 30.5,
+      "tf_4h_rsi": 20.3,
+      "mtf_score": 0,
+      "mtf_details": {
+        "15m": "BEAR",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BEAR"
+      },
+      "mtf_score_with_daily": 0
+    },
+    "energy": {
+      "state": "releasing",
+      "score": 0.596,
+      "direction_bias": "down",
+      "reason": "Momentum accel=-0.0296, vol ratio=14.51",
+      "components": {
+        "atr_ratio": 0.647,
+        "bb_squeeze": 0.441,
+        "vol_ratio": 14.508,
+        "momentum_accel": -0.02958,
+        "mean_rev_z": -2.295,
+        "extension_score": 0.765
+      }
+    },
+    "kelly_capped": true,
+    "regime_conflict": false,
+    "probability_raw": 0.5,
+    "calibration_applied": true
+  },
+  "CL=F": {
+    "symbol": "CL=F",
+    "display": "OIL",
+    "name": "Crude Oil",
+    "type": "COMMODITY",
+    "icon": "O",
+    "direction": "HOLD",
+    "probability": 0.602,
+    "confidence": "LOW",
+    "kelly_size": 0.25,
+    "expected_value": 10.812,
+    "take_profit": 91.2257,
+    "stop_loss": 109.9671,
+    "current_price": 103.72,
+    "risk_reward": 2.0,
+    "atr": 6.2471,
+    "model_agreement": 0.385,
+    "top_features": [
+      "mean_rev_z",
+      "vol_regime",
+      "volatility_10d"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "56 \u2014 Neutral",
+        "signal": "BEARISH",
+        "tier": 3
+      },
+      {
+        "name": "MACD",
+        "value": "Bullish (+1.75505)",
+        "signal": "BULLISH",
+        "tier": 3
+      },
+      {
+        "name": "Bollinger",
+        "value": "70% (Mid)",
+        "signal": "BEARISH",
+        "tier": 3
+      },
+      {
+        "name": "Volume",
+        "value": "0.23\u00d7 avg",
+        "signal": "BEARISH",
+        "tier": 2
+      },
+      {
+        "name": "vs SMA50",
+        "value": "Above SMA50 (+15.74%)",
+        "signal": "BULLISH",
+        "tier": 3
+      },
+      {
+        "name": "5D Momentum",
+        "value": "+11.57% ROC",
+        "signal": "BULLISH",
+        "tier": 3
+      },
+      {
+        "name": "20D Momentum",
+        "value": "+2.31% ROC",
+        "signal": "BULLISH",
+        "tier": 3
+      },
+      {
+        "name": "Mean Rev Z",
+        "value": "+0.80 ATR units (Neutral)",
+        "signal": "BEARISH",
+        "tier": 3
+      },
+      {
+        "name": "Candle Conviction",
+        "value": "0.75 body ratio (Strong)",
+        "signal": "BULLISH",
+        "tier": 2
+      },
+      {
+        "name": "Equal H/L (Liquidity)",
+        "value": "None detected",
+        "signal": "NEUTRAL",
+        "tier": 1
+      },
+      {
+        "name": "Market Structure",
+        "value": "No clear swings",
+        "signal": "NEUTRAL",
+        "tier": 1
+      },
+      {
+        "name": "Liquidity Sweep",
+        "value": "No sweep detected",
+        "signal": "NEUTRAL",
+        "tier": 1
+      },
+      {
+        "name": "Order Block",
+        "value": "Nearest bullish OB: 92.68\u201397.85 (not in zone)",
+        "signal": "NEUTRAL",
+        "tier": 1
+      }
+    ],
+    "confluence_score": "5/13 bullish (weighted: 3/13)",
+    "news": [
+      {
+        "title": "Oil prices jump, erasing ceasefire losses, on reports President Trump will reject Iran's peace plan",
+        "source": "Yahoo Finance",
+        "sentiment": "NEUTRAL",
+        "url": "https://finance.yahoo.com/markets/article/oil-prices-jump-erasing-ceasefire-losses-on-reports-president-trump-will-reject-irans-peace-plan-160527419.html"
+      },
+      {
+        "title": "UAE is leaving OPEC on May 1, oil prices push above $100",
+        "source": "Yahoo Finance Video",
+        "sentiment": "NEUTRAL",
+        "url": "https://finance.yahoo.com/video/uae-is-leaving-opec-on-may-1-oil-prices-push-above-100-134957374.html"
+      },
+      {
+        "title": "Middle East Hidden Gems Including Saudi Steel Pipes And 2 Promising Small Caps",
+        "source": "Simply Wall St.",
+        "sentiment": "BULLISH",
+        "url": "https://finance.yahoo.com/markets/stocks/articles/middle-east-hidden-gems-including-083304545.html"
+      }
+    ],
+    "reasoning": "",
+    "generated_at": "2026-04-29T08:49:09.704123+00:00",
+    "market_open": false,
+    "earnings_flag": null,
+    "macro_event_today": {
+      "title": "RBNZ Gov Breman Speaks",
+      "country": "NZD",
+      "hours_away": 1.2
+    },
+    "event_adjustment": null,
+    "data_warnings": null,
+    "volume_ratio": 0.19,
+    "session_info": "london_ny (\u00d71.2)",
+    "volatility_regime": "HIGH",
+    "regime_percentile": 92.5,
+    "h4_confluence": true,
+    "mtf": {
+      "tf_15m_bull": true,
+      "tf_1h_bull": true,
+      "tf_4h_bull": true,
+      "tf_1h_rsi": 75.6,
+      "tf_4h_rsi": 76.4,
+      "mtf_score": 3,
+      "mtf_details": {
+        "15m": "BULL",
+        "1h": "BULL",
+        "4h": "BULL",
+        "1d": "BEAR"
+      },
+      "mtf_score_with_daily": 3
+    },
+    "energy": {
+      "state": "releasing",
+      "score": 0.437,
+      "direction_bias": "up",
+      "reason": "Momentum accel=0.1100, vol ratio=0.19",
+      "components": {
+        "atr_ratio": 0.632,
+        "bb_squeeze": 1.049,
+        "vol_ratio": 0.187,
+        "momentum_accel": 0.10998,
+        "mean_rev_z": 0.928,
+        "extension_score": 0.309
+      }
+    },
+    "kelly_capped": true,
+    "regime_conflict": false,
+    "probability_raw": 0.414,
+    "calibration_applied": true
+  },
+  "USDINR=X": {
+    "symbol": "USDINR=X",
+    "display": "USD/INR",
+    "name": "Dollar/Rupee",
+    "type": "FOREX",
+    "icon": "\u20b9",
+    "direction": "HOLD",
+    "probability": 0.602,
+    "confidence": "LOW",
+    "kelly_size": 0.25,
+    "expected_value": 1.2984,
+    "take_profit": 93.4779,
+    "stop_loss": 95.5323,
+    "current_price": 94.8475,
+    "risk_reward": 2.0,
+    "atr": 0.6848,
+    "model_agreement": 0.385,
+    "top_features": [
+      "close_position",
+      "volatility_10d",
+      "volatility_20d"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "67 \u2014 Overbought",
+        "signal": "BEARISH",
+        "tier": 3
+      },
+      {
+        "name": "MACD",
+        "value": "Bullish (+0.38936)",
+        "signal": "BULLISH",
+        "tier": 3
+      },
+      {
+        "name": "Bollinger",
+        "value": "94% (Upper)",
+        "signal": "BEARISH",
+        "tier": 3
+      },
+      {
+        "name": "Volume",
+        "value": "0.00\u00d7 avg",
+        "signal": "BEARISH",
+        "tier": 2
+      },
+      {
+        "name": "vs SMA50",
+        "value": "Above SMA50 (+2.20%)",
+        "signal": "BULLISH",
+        "tier": 3
+      },
+      {
+        "name": "5D Momentum",
+        "value": "+1.31% ROC",
+        "signal": "BULLISH",
+        "tier": 3
+      },
+      {
+        "name": "20D Momentum",
+        "value": "+1.46% ROC",
+        "signal": "BULLISH",
+        "tier": 3
+      },
+      {
+        "name": "Mean Rev Z",
+        "value": "+1.74 ATR units (Overbought)",
+        "signal": "BEARISH",
+        "tier": 3
+      },
+      {
+        "name": "Candle Conviction",
+        "value": "0.99 body ratio (Strong)",
+        "signal": "BULLISH",
+        "tier": 2
+      },
+      {
+        "name": "Equal H/L (Liquidity)",
+        "value": "None detected",
+        "signal": "NEUTRAL",
+        "tier": 1
+      },
+      {
+        "name": "Market Structure",
+        "value": "Range 91.97\u201395.15",
+        "signal": "NEUTRAL",
+        "tier": 1
+      },
+      {
+        "name": "Liquidity Sweep",
+        "value": "No sweep detected",
+        "signal": "NEUTRAL",
+        "tier": 1
+      },
+      {
+        "name": "Order Block",
+        "value": "No OB detected",
+        "signal": "NEUTRAL",
+        "tier": 1
+      }
+    ],
+    "confluence_score": "5/13 bullish (weighted: 3/13)",
+    "news": [],
+    "reasoning": "",
+    "generated_at": "2026-04-29T08:49:11.125660+00:00",
+    "market_open": false,
+    "earnings_flag": null,
+    "macro_event_today": {
+      "title": "RBNZ Gov Breman Speaks",
+      "country": "NZD",
+      "hours_away": 1.2
+    },
+    "event_adjustment": null,
+    "data_warnings": null,
+    "volume_ratio": 1.0,
+    "session_info": "london_ny (\u00d71.2)",
+    "volatility_regime": "HIGH",
+    "regime_percentile": 86.3,
+    "h4_confluence": true,
+    "mtf": {
+      "tf_15m_bull": true,
+      "tf_1h_bull": true,
+      "tf_4h_bull": true,
+      "tf_1h_rsi": 86.7,
+      "tf_4h_rsi": 83.2,
+      "mtf_score": 3,
+      "mtf_details": {
+        "15m": "BULL",
+        "1h": "BULL",
+        "4h": "BULL",
+        "1d": "BEAR"
+      },
+      "mtf_score_with_daily": 3
+    },
+    "energy": {
+      "state": "neutral",
+      "score": 0.5,
+      "direction_bias": "up",
+      "reason": "no dominant energy signal",
+      "components": {
+        "atr_ratio": 0.57,
+        "bb_squeeze": 0.947,
+        "vol_ratio": 1.0,
+        "momentum_accel": 0.00944,
+        "mean_rev_z": 1.451,
+        "extension_score": 0.484
+      }
+    },
+    "kelly_capped": true,
+    "regime_conflict": false,
+    "probability_raw": 0.414,
+    "calibration_applied": true
+  },
+  "^NSEI": {
+    "symbol": "^NSEI",
+    "display": "NIFTY 50",
+    "name": "Nifty 50",
+    "type": "INDEX",
+    "icon": "N",
+    "direction": "SELL",
+    "probability": 0.5322,
+    "confidence": "MEDIUM",
+    "kelly_size": 0.25,
+    "expected_value": 1.6117,
+    "take_profit": 23694.5499,
+    "stop_loss": 24444.0239,
+    "current_price": 24194.1992,
+    "risk_reward": 2.0,
+    "atr": 249.8246,
+    "model_agreement": 0.231,
+    "top_features": [
+      "price_to_sma20",
+      "ema_26",
+      "macd_signal"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "54 \u2014 Neutral",
+        "signal": "BEARISH",
+        "tier": 3
+      },
+      {
+        "name": "MACD",
+        "value": "Bullish (+84.89748)",
+        "signal": "BULLISH",
+        "tier": 3
+      },
+      {
+        "name": "Bollinger",
+        "value": "65% (Mid)",
+        "signal": "BEARISH",
+        "tier": 3
+      },
+      {
+        "name": "Volume",
+        "value": "0.00\u00d7 avg",
+        "signal": "BEARISH",
+        "tier": 2
+      },
+      {
+        "name": "vs SMA50",
+        "value": "Above SMA50 (+0.08%)",
+        "signal": "BULLISH",
+        "tier": 3
+      },
+      {
+        "name": "5D Momentum",
+        "value": "-0.75% ROC",
+        "signal": "BEARISH",
+        "tier": 3
+      },
+      {
+        "name": "20D Momentum",
+        "value": "+6.02% ROC",
+        "signal": "BULLISH",
+        "tier": 3
+      },
+      {
+        "name": "Mean Rev Z",
+        "value": "+0.61 ATR units (Neutral)",
+        "signal": "BEARISH",
+        "tier": 3
+      },
+      {
+        "name": "Candle Conviction",
+        "value": "0.35 body ratio (Moderate)",
+        "signal": "BEARISH",
+        "tier": 2
+      },
+      {
+        "name": "Equal H/L (Liquidity)",
+        "value": "None detected",
+        "signal": "NEUTRAL",
+        "tier": 1
+      },
+      {
+        "name": "Market Structure",
+        "value": "No clear swings",
+        "signal": "NEUTRAL",
+        "tier": 1
+      },
+      {
+        "name": "Liquidity Sweep",
+        "value": "No sweep detected",
+        "signal": "NEUTRAL",
+        "tier": 1
+      },
+      {
+        "name": "Order Block",
+        "value": "Nearest bullish OB: 22283.85\u201322714.10 (not in zone)",
+        "signal": "NEUTRAL",
+        "tier": 1
+      }
+    ],
+    "confluence_score": "3/13 bullish (weighted: 2/13)",
+    "news": [
+      {
+        "title": "Trending tickers: Datavault, Novo Nordisk, FedEx, SBI and NatWest",
+        "source": "Yahoo Finance UK",
+        "sentiment": "NEUTRAL",
+        "url": "https://uk.finance.yahoo.com/news/datavault-novo-nordisk-fedex-sbi-natwest-trending-tickers-092018752.html"
+      },
+      {
+        "title": "India might be the 'perfect' emerging market, strategist says",
+        "source": "Yahoo Finance Video",
+        "sentiment": "NEUTRAL",
+        "url": "https://finance.yahoo.com/video/india-might-perfect-emerging-market-183000557.html"
+      },
+      {
+        "title": "Analysts' top emerging market fund and trust picks",
+        "source": "Yahoo Finance UK",
+        "sentiment": "BULLISH",
+        "url": "https://uk.finance.yahoo.com/news/emerging-markets-funds-trusts-picks-050001233.html"
+      }
+    ],
+    "reasoning": "",
+    "generated_at": "2026-04-29T08:49:14.573424+00:00",
+    "market_open": false,
+    "earnings_flag": null,
+    "macro_event_today": {
+      "title": "RBNZ Gov Breman Speaks",
+      "country": "NZD",
+      "hours_away": 1.2
+    },
+    "event_adjustment": null,
+    "data_warnings": null,
+    "volume_ratio": 0.0,
+    "session_info": "nse (\u00d71.0)",
+    "volatility_regime": "MEDIUM",
+    "regime_percentile": 60.4,
+    "h4_confluence": false,
+    "mtf": {
+      "tf_15m_bull": false,
+      "tf_1h_bull": true,
+      "tf_4h_bull": true,
+      "tf_1h_rsi": 56.1,
+      "tf_4h_rsi": 46.6,
+      "mtf_score": 2,
+      "mtf_details": {
+        "15m": "BEAR",
+        "1h": "BULL",
+        "4h": "BULL",
+        "1d": "BEAR"
+      },
+      "mtf_score_with_daily": 2
+    },
+    "energy": {
+      "state": "neutral",
+      "score": 0.5,
+      "direction_bias": "down",
+      "reason": "no dominant energy signal",
+      "components": {
+        "atr_ratio": 0.734,
+        "bb_squeeze": 1.0,
+        "vol_ratio": 0.0,
+        "momentum_accel": -0.0226,
+        "mean_rev_z": 1.305,
+        "extension_score": 0.435
+      }
+    },
+    "kelly_capped": true,
+    "regime_conflict": false,
+    "probability_raw": 0.1288,
+    "calibration_applied": true,
+    "calibration_note": "Calibration adjusted probability 0.13\u21920.53 (shift 0.40) \u2014 confidence downgraded"
+  },
+  "^NSEBANK": {
+    "symbol": "^NSEBANK",
+    "display": "BANKNIFTY",
+    "name": "Bank Nifty",
+    "type": "INDEX",
+    "icon": "B",
+    "direction": "SELL",
+    "probability": 0.5244,
+    "confidence": "MEDIUM",
+    "kelly_size": 0.25,
+    "expected_value": 2.4027,
+    "take_profit": 53956.8415,
+    "stop_loss": 56347.6281,
+    "current_price": 55550.6992,
+    "risk_reward": 2.0,
+    "atr": 796.9289,
+    "model_agreement": 0.308,
+    "top_features": [
+      "atr_14",
+      "obv_change",
+      "rsi_14"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "49 \u2014 Neutral",
+        "signal": "BULLISH",
+        "tier": 3
+      },
+      {
+        "name": "MACD",
+        "value": "Bullish (+175.11193)",
+        "signal": "BULLISH",
+        "tier": 3
+      },
+      {
+        "name": "Bollinger",
+        "value": "56% (Mid)",
+        "signal": "BEARISH",
+        "tier": 3
+      },
+      {
+        "name": "Volume",
+        "value": "0.00\u00d7 avg",
+        "signal": "BEARISH",
+        "tier": 2
+      },
+      {
+        "name": "vs SMA50",
+        "value": "Below SMA50 (-1.73%)",
+        "signal": "BEARISH",
+        "tier": 3
+      },
+      {
+        "name": "5D Momentum",
+        "value": "-2.75% ROC",
+        "signal": "BEARISH",
+        "tier": 3
+      },
+      {
+        "name": "20D Momentum",
+        "value": "+6.27% ROC",
+        "signal": "BULLISH",
+        "tier": 3
+      },
+      {
+        "name": "Mean Rev Z",
+        "value": "+0.26 ATR units (Neutral)",
+        "signal": "BEARISH",
+        "tier": 3
+      },
+      {
+        "name": "Candle Conviction",
+        "value": "0.10 body ratio (Weak)",
+        "signal": "BEARISH",
+        "tier": 2
+      },
+      {
+        "name": "Equal H/L (Liquidity)",
+        "value": "None detected",
+        "signal": "NEUTRAL",
+        "tier": 1
+      },
+      {
+        "name": "Market Structure",
+        "value": "No clear swings",
+        "signal": "NEUTRAL",
+        "tier": 1
+      },
+      {
+        "name": "Liquidity Sweep",
+        "value": "No sweep detected",
+        "signal": "NEUTRAL",
+        "tier": 1
+      },
+      {
+        "name": "Order Block",
+        "value": "Bullish OB zone 54626.85\u201355583.10 (price inside)",
+        "signal": "BULLISH",
+        "tier": 1
+      }
+    ],
+    "confluence_score": "4/13 bullish (weighted: 3/13)",
+    "news": [
+      {
+        "title": "BofA sees opportunity in India's battered bank stocks, expects IT sector to underperform",
+        "source": "Reuters",
+        "sentiment": "BULLISH",
+        "url": "https://sg.finance.yahoo.com/news/bofa-sees-opportunity-indias-battered-034654824.html"
+      },
+      {
+        "title": "4 India ETFs Under the Spotlight as RBI Cuts Interest Rate",
+        "source": "Zacks",
+        "sentiment": "NEUTRAL",
+        "url": "https://finance.yahoo.com/news/4-india-etfs-under-spotlight-144900144.html"
+      },
+      {
+        "title": "India's Kotak Mahindra Bank announces first stock split in 15 years",
+        "source": "Reuters",
+        "sentiment": "NEUTRAL",
+        "url": "https://sg.finance.yahoo.com/news/indias-kotak-mahindra-bank-announces-105828631.html"
+      }
+    ],
+    "reasoning": "",
+    "generated_at": "2026-04-29T08:49:16.218977+00:00",
+    "market_open": false,
+    "earnings_flag": null,
+    "macro_event_today": {
+      "title": "RBNZ Gov Breman Speaks",
+      "country": "NZD",
+      "hours_away": 1.2
+    },
+    "event_adjustment": null,
+    "data_warnings": null,
+    "volume_ratio": 0.0,
+    "session_info": "nse (\u00d71.0)",
+    "volatility_regime": "HIGH",
+    "regime_percentile": 87.5,
+    "h4_confluence": true,
+    "mtf": {
+      "tf_15m_bull": false,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 32.2,
+      "tf_4h_rsi": 30.6,
+      "mtf_score": 0,
+      "mtf_details": {
+        "15m": "BEAR",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BEAR"
+      },
+      "mtf_score_with_daily": 0
+    },
+    "energy": {
+      "state": "neutral",
+      "score": 0.5,
+      "direction_bias": "down",
+      "reason": "no dominant energy signal",
+      "components": {
+        "atr_ratio": 0.671,
+        "bb_squeeze": 0.98,
+        "vol_ratio": 0.0,
+        "momentum_accel": -0.04322,
+        "mean_rev_z": 0.589,
+        "extension_score": 0.196
+      }
+    },
+    "kelly_capped": true,
+    "regime_conflict": false,
+    "probability_raw": 0.0976,
+    "calibration_applied": true,
+    "calibration_note": "Calibration adjusted probability 0.10\u21920.52 (shift 0.43) \u2014 confidence downgraded"
+  },
+  "RELIANCE.NS": {
+    "symbol": "RELIANCE.NS",
+    "display": "RELIANCE",
+    "name": "Reliance Industries",
+    "type": "IN_STOCK",
+    "icon": "R",
+    "direction": "SELL",
+    "probability": 0.5189,
+    "confidence": "MEDIUM",
+    "kelly_size": 0.25,
+    "expected_value": 3.1183,
+    "take_profit": 1364.8143,
+    "stop_loss": 1440.8429,
+    "current_price": 1415.5,
+    "risk_reward": 2.0,
+    "atr": 25.3429,
+    "model_agreement": 0.308,
+    "top_features": [
+      "bb_width",
+      "sma_10",
+      "bb_upper"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "63 \u2014 Neutral",
+        "signal": "BEARISH",
+        "tier": 3
+      },
+      {
+        "name": "MACD",
+        "value": "Bearish (-0.81773)",
+        "signal": "BEARISH",
+        "tier": 3
+      },
+      {
+        "name": "Bollinger",
+        "value": "112% (Upper)",
+        "signal": "BEARISH",
+        "tier": 3
+      },
+      {
+        "name": "Volume",
+        "value": "0.99\u00d7 avg",
+        "signal": "BEARISH",
+        "tier": 2
+      },
+      {
+        "name": "vs SMA50",
+        "value": "Above SMA50 (+2.40%)",
+        "signal": "BULLISH",
+        "tier": 3
+      },
+      {
+        "name": "5D Momentum",
+        "value": "+3.92% ROC",
+        "signal": "BULLISH",
+        "tier": 3
+      },
+      {
+        "name": "20D Momentum",
+        "value": "+5.00% ROC",
+        "signal": "BULLISH",
+        "tier": 3
+      },
+      {
+        "name": "Mean Rev Z",
+        "value": "+2.49 ATR units (Overbought)",
+        "signal": "BEARISH",
+        "tier": 3
+      },
+      {
+        "name": "Candle Conviction",
+        "value": "0.65 body ratio (Strong)",
+        "signal": "BULLISH",
+        "tier": 2
+      },
+      {
+        "name": "Equal H/L (Liquidity)",
+        "value": "None detected",
+        "signal": "NEUTRAL",
+        "tier": 1
+      },
+      {
+        "name": "Market Structure",
+        "value": "No clear swings",
+        "signal": "NEUTRAL",
+        "tier": 1
+      },
+      {
+        "name": "Liquidity Sweep",
+        "value": "No sweep detected",
+        "signal": "NEUTRAL",
+        "tier": 1
+      },
+      {
+        "name": "Order Block",
+        "value": "Nearest bullish OB: 1325.00\u20131345.90 (not in zone)",
+        "signal": "NEUTRAL",
+        "tier": 1
+      }
+    ],
+    "confluence_score": "4/13 bullish (weighted: 3/13)",
+    "news": [
+      {
+        "title": "Reliance and Meta's joint venture signals India's shift from AI ambition to enterprise deployment",
+        "source": "Proactive",
+        "sentiment": "NEUTRAL",
+        "url": "https://www.proactiveinvestors.com/companies/news/1091321/reliance-and-meta-s-joint-venture-signals-india-s-shift-from-ai-ambition-to-enterprise-deployment-1091321.html"
+      },
+      {
+        "title": "Indian shares snap losing streak; Reliance, Axis Bank cap gains",
+        "source": "Reuters",
+        "sentiment": "BULLISH",
+        "url": "https://sg.finance.yahoo.com/news/indian-shares-set-open-higher-025023163.html"
+      },
+      {
+        "title": "Reliance Industries Ltd (WBO:RLI) Q4 2026 Earnings Call Highlights: Strong Digital Growth Amid ...",
+        "source": "GuruFocus.com",
+        "sentiment": "BULLISH",
+        "url": "https://finance.yahoo.com/markets/stocks/articles/reliance-industries-ltd-wbo-rli-010022179.html"
+      }
+    ],
+    "reasoning": "",
+    "generated_at": "2026-04-29T08:49:19.217106+00:00",
+    "market_open": true,
+    "earnings_flag": null,
+    "macro_event_today": {
+      "title": "RBNZ Gov Breman Speaks",
+      "country": "NZD",
+      "hours_away": 1.2
+    },
+    "event_adjustment": null,
+    "data_warnings": null,
+    "volume_ratio": 0.95,
+    "session_info": "nse (\u00d71.0)",
+    "volatility_regime": "MEDIUM",
+    "regime_percentile": 65.0,
+    "h4_confluence": false,
+    "mtf": {
+      "tf_15m_bull": false,
+      "tf_1h_bull": true,
+      "tf_4h_bull": true,
+      "tf_1h_rsi": 74.8,
+      "tf_4h_rsi": 74.6,
+      "mtf_score": 2,
+      "mtf_details": {
+        "15m": "BEAR",
+        "1h": "BULL",
+        "4h": "BULL",
+        "1d": "BEAR"
+      },
+      "mtf_score_with_daily": 2
+    },
+    "energy": {
+      "state": "exhausted",
+      "score": 0.758,
+      "direction_bias": "up",
+      "reason": "Mean rev z=2.27, extension score=0.76",
+      "components": {
+        "atr_ratio": 1.104,
+        "bb_squeeze": 0.856,
+        "vol_ratio": 0.951,
+        "momentum_accel": 0.02671,
+        "mean_rev_z": 2.273,
+        "extension_score": 0.758
+      }
+    },
+    "kelly_capped": true,
+    "regime_conflict": false,
+    "probability_raw": 0.0758,
+    "calibration_applied": true,
+    "calibration_note": "Calibration adjusted probability 0.08\u21920.52 (shift 0.44) \u2014 confidence downgraded"
+  },
+  "TCS.NS": {
+    "symbol": "TCS.NS",
+    "display": "TCS",
+    "name": "Tata Consultancy",
+    "type": "IN_STOCK",
+    "icon": "T",
+    "direction": "HOLD",
+    "probability": 0.6225,
+    "confidence": "LOW",
+    "kelly_size": 0.25,
+    "expected_value": 1.9965,
+    "take_profit": 2582.3572,
+    "stop_loss": 2412.4715,
+    "current_price": 2469.1001,
+    "risk_reward": 2.0,
+    "atr": 56.6286,
+    "model_agreement": 0.462,
+    "top_features": [
+      "ema_26",
+      "ema_12",
+      "dist_from_52w_high"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "42 \u2014 Neutral",
+        "signal": "BULLISH",
+        "tier": 3
+      },
+      {
+        "name": "MACD",
+        "value": "Bearish (-18.06279)",
+        "signal": "BEARISH",
+        "tier": 3
+      },
+      {
+        "name": "Bollinger",
+        "value": "38% (Mid)",
+        "signal": "BULLISH",
+        "tier": 3
+      },
+      {
+        "name": "Volume",
+        "value": "0.57\u00d7 avg",
+        "signal": "BEARISH",
+        "tier": 2
+      },
+      {
+        "name": "vs SMA50",
+        "value": "Below SMA50 (-2.35%)",
+        "signal": "BEARISH",
+        "tier": 3
+      },
+      {
+        "name": "5D Momentum",
+        "value": "-2.73% ROC",
+        "signal": "BEARISH",
+        "tier": 3
+      },
+      {
+        "name": "20D Momentum",
+        "value": "+3.32% ROC",
+        "signal": "BULLISH",
+        "tier": 3
+      },
+      {
+        "name": "Mean Rev Z",
+        "value": "-0.50 ATR units (Neutral)",
+        "signal": "BULLISH",
+        "tier": 3
+      },
+      {
+        "name": "Candle Conviction",
+        "value": "0.45 body ratio (Moderate)",
+        "signal": "BULLISH",
+        "tier": 2
+      },
+      {
+        "name": "Equal H/L (Liquidity)",
+        "value": "None detected",
+        "signal": "NEUTRAL",
+        "tier": 1
+      },
+      {
+        "name": "Market Structure",
+        "value": "No clear swings",
+        "signal": "NEUTRAL",
+        "tier": 1
+      },
+      {
+        "name": "Liquidity Sweep",
+        "value": "No sweep detected",
+        "signal": "NEUTRAL",
+        "tier": 1
+      },
+      {
+        "name": "Order Block",
+        "value": "Bullish OB zone 2388.80\u20132505.00 (price inside)",
+        "signal": "BULLISH",
+        "tier": 1
+      }
+    ],
+    "confluence_score": "6/13 bullish (weighted: 5/13)",
+    "news": [
+      {
+        "title": "India's Infosys slumps to lowest level in three years over weak growth",
+        "source": "Reuters",
+        "sentiment": "NEUTRAL",
+        "url": "https://sg.finance.yahoo.com/news/indias-infosys-slumps-lowest-level-044403994.html"
+      },
+      {
+        "title": "Indian IT firms near\u2011term outlook muted as clients cut spending, AI risks mount",
+        "source": "Reuters",
+        "sentiment": "BULLISH",
+        "url": "https://finance.yahoo.com/markets/stocks/articles/indias-infosys-slips-weak-2027-035406840.html"
+      },
+      {
+        "title": "India's Infosys forecasts weak revenue growth as AI-driven caution dents IT spending",
+        "source": "Reuters",
+        "sentiment": "BEARISH",
+        "url": "https://sg.finance.yahoo.com/news/indias-infosys-pegs-fiscal-2027-120300567.html"
+      }
+    ],
+    "reasoning": "",
+    "generated_at": "2026-04-29T08:49:20.333822+00:00",
+    "market_open": true,
+    "earnings_flag": null,
+    "macro_event_today": {
+      "title": "RBNZ Gov Breman Speaks",
+      "country": "NZD",
+      "hours_away": 1.2
+    },
+    "event_adjustment": null,
+    "data_warnings": null,
+    "volume_ratio": 0.47,
+    "session_info": "nse (\u00d71.0)",
+    "volatility_regime": "MEDIUM",
+    "regime_percentile": 37.1,
+    "h4_confluence": true,
+    "mtf": {
+      "tf_15m_bull": false,
+      "tf_1h_bull": true,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 57.5,
+      "tf_4h_rsi": 38.1,
+      "mtf_score": 1,
+      "mtf_details": {
+        "15m": "BEAR",
+        "1h": "BULL",
+        "4h": "BEAR",
+        "1d": "BEAR"
+      },
+      "mtf_score_with_daily": 1
+    },
+    "energy": {
+      "state": "releasing",
+      "score": 0.35,
+      "direction_bias": "down",
+      "reason": "Momentum accel=-0.0356, vol ratio=0.47",
+      "components": {
+        "atr_ratio": 1.019,
+        "bb_squeeze": 0.929,
+        "vol_ratio": 0.47,
+        "momentum_accel": -0.03563,
+        "mean_rev_z": -0.552,
+        "extension_score": 0.184
+      }
+    },
+    "kelly_capped": true,
+    "regime_conflict": false,
+    "probability_raw": 0.5,
+    "calibration_applied": true
+  },
+  "INFY.NS": {
+    "symbol": "INFY.NS",
+    "display": "INFOSYS",
+    "name": "Infosys",
+    "type": "IN_STOCK",
+    "icon": "I",
+    "direction": "HOLD",
+    "probability": 0.613,
+    "confidence": "LOW",
+    "kelly_size": 0.25,
+    "expected_value": 3.2838,
+    "take_profit": 1228.6714,
+    "stop_loss": 1140.6643,
+    "current_price": 1170.0,
+    "risk_reward": 2.0,
+    "atr": 29.3357,
+    "model_agreement": 0.385,
+    "top_features": [
+      "dist_from_52w_low",
+      "vol_regime",
+      "ema_26"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "23 \u2014 Oversold",
+        "signal": "BULLISH",
+        "tier": 3
+      },
+      {
+        "name": "MACD",
+        "value": "Bearish (-35.80043)",
+        "signal": "BEARISH",
+        "tier": 3
+      },
+      {
+        "name": "Bollinger",
+        "value": "9% (Lower)",
+        "signal": "BULLISH",
+        "tier": 3
+      },
+      {
+        "name": "Volume",
+        "value": "0.38\u00d7 avg",
+        "signal": "BEARISH",
+        "tier": 2
+      },
+      {
+        "name": "vs SMA50",
+        "value": "Below SMA50 (-9.24%)",
+        "signal": "BEARISH",
+        "tier": 3
+      },
+      {
+        "name": "5D Momentum",
+        "value": "-7.77% ROC",
+        "signal": "BEARISH",
+        "tier": 3
+      },
+      {
+        "name": "20D Momentum",
+        "value": "-7.85% ROC",
+        "signal": "BEARISH",
+        "tier": 3
+      },
+      {
+        "name": "Mean Rev Z",
+        "value": "-1.62 ATR units (Oversold)",
+        "signal": "BULLISH",
+        "tier": 3
+      },
+      {
+        "name": "Candle Conviction",
+        "value": "0.54 body ratio (Moderate)",
+        "signal": "BULLISH",
+        "tier": 2
+      },
+      {
+        "name": "Equal H/L (Liquidity)",
+        "value": "Equal lows @ 1153.35 (1.4% below)",
+        "signal": "BULLISH",
+        "tier": 1
+      },
+      {
+        "name": "Market Structure",
+        "value": "No clear swings",
+        "signal": "NEUTRAL",
+        "tier": 1
+      },
+      {
+        "name": "Liquidity Sweep",
+        "value": "No sweep detected",
+        "signal": "NEUTRAL",
+        "tier": 1
+      },
+      {
+        "name": "Order Block",
+        "value": "Bearish OB zone 1154.50\u20131179.90 (price inside)",
+        "signal": "BEARISH",
+        "tier": 1
+      }
+    ],
+    "confluence_score": "5/13 bullish (weighted: 5/13)",
+    "news": [
+      {
+        "title": "BMO Capital Cuts PT on Infosys Limited (INFY) on Weaker Close to FY26",
+        "source": "Insider Monkey",
+        "sentiment": "BULLISH",
+        "url": "https://finance.yahoo.com/markets/stocks/articles/bmo-capital-cuts-pt-infosys-054801115.html"
+      },
+      {
+        "title": "How The Investment Story For Infosys (NSEI:INFY) Is Shifting With AI And New Caution",
+        "source": "Simply Wall St.",
+        "sentiment": "BEARISH",
+        "url": "https://finance.yahoo.com/markets/stocks/articles/investment-story-infosys-nsei-infy-100456661.html"
+      },
+      {
+        "title": "Infosys (INFY) Reports Q4 EPS Beat",
+        "source": "Insider Monkey",
+        "sentiment": "BULLISH",
+        "url": "https://finance.yahoo.com/markets/stocks/articles/infosys-infy-reports-q4-eps-155801291.html"
+      }
+    ],
+    "reasoning": "",
+    "generated_at": "2026-04-29T08:49:21.503930+00:00",
+    "market_open": true,
+    "earnings_flag": null,
+    "macro_event_today": {
+      "title": "RBNZ Gov Breman Speaks",
+      "country": "NZD",
+      "hours_away": 1.2
+    },
+    "event_adjustment": null,
+    "data_warnings": null,
+    "volume_ratio": 0.42,
+    "session_info": "nse (\u00d71.0)",
+    "volatility_regime": "MEDIUM",
+    "regime_percentile": 40.8,
+    "h4_confluence": true,
+    "mtf": {
+      "tf_15m_bull": false,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 47.5,
+      "tf_4h_rsi": 25.6,
+      "mtf_score": 0,
+      "mtf_details": {
+        "15m": "BEAR",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BEAR"
+      },
+      "mtf_score_with_daily": 0
+    },
+    "energy": {
+      "state": "releasing",
+      "score": 0.484,
+      "direction_bias": "down",
+      "reason": "Momentum accel=-0.0581, vol ratio=0.42",
+      "components": {
+        "atr_ratio": 1.087,
+        "bb_squeeze": 1.783,
+        "vol_ratio": 0.421,
+        "momentum_accel": -0.05809,
+        "mean_rev_z": -2.842,
+        "extension_score": 0.947
+      }
+    },
+    "kelly_capped": true,
+    "regime_conflict": false,
+    "probability_raw": 0.46,
+    "calibration_applied": true
+  },
+  "HDFCBANK.NS": {
+    "symbol": "HDFCBANK.NS",
+    "display": "HDFC BANK",
+    "name": "HDFC Bank",
+    "type": "IN_STOCK",
+    "icon": "H",
+    "direction": "SELL",
+    "probability": 0.6075,
+    "confidence": "MEDIUM",
+    "kelly_size": 0.25,
+    "expected_value": 1.3587,
+    "take_profit": 752.5786,
+    "stop_loss": 798.8857,
+    "current_price": 783.45,
+    "risk_reward": 2.0,
+    "atr": 15.4357,
+    "model_agreement": 0.308,
+    "top_features": [
+      "mean_rev_z",
+      "sma_10",
+      "atr_14"
+    ],
+    "confluence": [
+      {
+        "name": "RSI-14",
+        "value": "39 \u2014 Neutral",
+        "signal": "BULLISH",
+        "tier": 3
+      },
+      {
+        "name": "MACD",
+        "value": "Bearish (-9.37093)",
+        "signal": "BEARISH",
+        "tier": 3
+      },
+      {
+        "name": "Bollinger",
+        "value": "47% (Mid)",
+        "signal": "BULLISH",
+        "tier": 3
+      },
+      {
+        "name": "Volume",
+        "value": "0.50\u00d7 avg",
+        "signal": "BEARISH",
+        "tier": 2
+      },
+      {
+        "name": "vs SMA50",
+        "value": "Below SMA50 (-5.59%)",
+        "signal": "BEARISH",
+        "tier": 3
+      },
+      {
+        "name": "5D Momentum",
+        "value": "-2.06% ROC",
+        "signal": "BEARISH",
+        "tier": 3
+      },
+      {
+        "name": "20D Momentum",
+        "value": "+3.60% ROC",
+        "signal": "BULLISH",
+        "tier": 3
+      },
+      {
+        "name": "Mean Rev Z",
+        "value": "-0.12 ATR units (Neutral)",
+        "signal": "BULLISH",
+        "tier": 3
+      },
+      {
+        "name": "Candle Conviction",
+        "value": "0.21 body ratio (Weak)",
+        "signal": "BEARISH",
+        "tier": 2
+      },
+      {
+        "name": "Equal H/L (Liquidity)",
+        "value": "None detected",
+        "signal": "NEUTRAL",
+        "tier": 1
+      },
+      {
+        "name": "Market Structure",
+        "value": "No clear swings",
+        "signal": "NEUTRAL",
+        "tier": 1
+      },
+      {
+        "name": "Liquidity Sweep",
+        "value": "No sweep detected",
+        "signal": "NEUTRAL",
+        "tier": 1
+      },
+      {
+        "name": "Order Block",
+        "value": "Nearest bullish OB: 790.00\u2013809.95 (not in zone)",
+        "signal": "NEUTRAL",
+        "tier": 1
+      }
+    ],
+    "confluence_score": "4/13 bullish (weighted: 2/13)",
+    "news": [
+      {
+        "title": "Asian Equities Traded in the US as American Depositary Receipts Slightly Lower in Monday Trading",
+        "source": "MT Newswires",
+        "sentiment": "NEUTRAL",
+        "url": "https://finance.yahoo.com/markets/world-indices/articles/asian-equities-traded-us-american-144714969.html"
+      },
+      {
+        "title": "Is HDFC Bank (HDB) One of the Best Indian Stocks to Buy According to Hedge Funds?",
+        "source": "Insider Monkey",
+        "sentiment": "BULLISH",
+        "url": "https://finance.yahoo.com/markets/stocks/articles/hdfc-bank-hdb-one-best-164133221.html"
+      },
+      {
+        "title": "Asian Equities Traded in the US as American Depositary Receipts Rise in Friday Trading",
+        "source": "MT Newswires",
+        "sentiment": "BULLISH",
+        "url": "https://finance.yahoo.com/markets/world-indices/articles/asian-equities-traded-us-american-144800689.html"
+      }
+    ],
+    "reasoning": "",
+    "generated_at": "2026-04-29T08:49:22.637322+00:00",
+    "market_open": true,
+    "earnings_flag": null,
+    "macro_event_today": {
+      "title": "RBNZ Gov Breman Speaks",
+      "country": "NZD",
+      "hours_away": 1.2
+    },
+    "event_adjustment": null,
+    "data_warnings": null,
+    "volume_ratio": 0.39,
+    "session_info": "nse (\u00d71.0)",
+    "volatility_regime": "MEDIUM",
+    "regime_percentile": 72.0,
+    "h4_confluence": true,
+    "mtf": {
+      "tf_15m_bull": false,
+      "tf_1h_bull": false,
+      "tf_4h_bull": false,
+      "tf_1h_rsi": 38.0,
+      "tf_4h_rsi": 38.1,
+      "mtf_score": 0,
+      "mtf_details": {
+        "15m": "BEAR",
+        "1h": "BEAR",
+        "4h": "BEAR",
+        "1d": "BEAR"
+      },
+      "mtf_score_with_daily": 0
+    },
+    "energy": {
+      "state": "neutral",
+      "score": 0.5,
+      "direction_bias": "down",
+      "reason": "no dominant energy signal",
+      "components": {
+        "atr_ratio": 0.602,
+        "bb_squeeze": 0.68,
+        "vol_ratio": 0.389,
+        "momentum_accel": -0.02957,
+        "mean_rev_z": -0.157,
+        "extension_score": 0.052
+      }
+    },
+    "kelly_capped": true,
+    "regime_conflict": false,
+    "probability_raw": 0.4368,
     "calibration_applied": true
   }
 }
