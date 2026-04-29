@@ -31,6 +31,7 @@ def replay_signal(
         from app.domain.signal.service import TICKER_MAP, fetch_ohlcv
         from app.domain.signal.confluence_v2 import build_confluence_v2 as _build_confluence
         from app.domain.ml.features import build_features, FEATURE_COLUMNS
+        from app.domain.ml.ensemble import _get_feature_set
         from app.domain.ml.ensemble import _model_path, _is_stale, train
 
         meta = TICKER_MAP.get(symbol)
@@ -55,7 +56,8 @@ def replay_signal(
         if len(replay_idx) == 0:
             raise HTTPException(status_code=400, detail="No feature data for this date")
 
-        replay_row = feat_full.loc[[replay_idx[-1]], FEATURE_COLUMNS]
+        _bf, _fc = _get_feature_set(symbol)
+        replay_row = feat_full.loc[[replay_idx[-1]], _fc]
 
         # Load model bundle — always try cached first, retrain if needed
         path = _model_path(symbol)
@@ -94,7 +96,7 @@ def replay_signal(
         # Top features
         try:
             scores = bundle["xgb"].feature_importances_
-            top_features = [FEATURE_COLUMNS[i] for i in np.argsort(scores)[-5:][::-1]]
+            top_features = [_fc[i] for i in np.argsort(scores)[-5:][::-1]]
         except Exception:
             top_features = []
 
