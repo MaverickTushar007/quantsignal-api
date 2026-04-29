@@ -9,7 +9,12 @@ from pathlib import Path
 
 CRON_SECRET = os.getenv("CRON_SECRET", "quantsignal-cron-2026")
 
+_rebuild_lock = threading.Lock()
+
 def _rebuild():
+    if not _rebuild_lock.acquire(blocking=False):
+        print("[cron] rebuild already running — skipping")
+        return
     from app.domain.core.failure_tracker import record_failure, record_success
     from app.api.routes.alerts import fire_signal_alerts
     import json, time, threading
@@ -98,6 +103,7 @@ def _rebuild():
                 print("[cron] invalidated all_signals_list Redis cache")
         except Exception as _re:
             print(f"[cron] Redis invalidation failed: {_re}")
+    _rebuild_lock.release()
         try:
             from app.infrastructure.cache.cache import set_cached
             set_cached("signals_cache_full", cache, ttl=86400)
