@@ -27,13 +27,8 @@ def _rebuild():
         from app.domain.signal.service import generate_signal
 
         # Split into 4 parallel worker groups — use REBUILD_TICKERS (25 core assets)
-        # Process all tickers in batches of 25 to avoid OOM
-        _RT = TICKERS
-        BATCH_SIZE = 25
-        _batches = [_RT[i:i+BATCH_SIZE] for i in range(0, len(_RT), BATCH_SIZE)]
-        GROUPS = {}
-        for i, batch in enumerate(_batches):
-            GROUPS[f"BATCH_{i+1}"] = batch
+        # Use core 25 tickers — write after every ticker for max resilience
+        _RT = REBUILD_TICKERS
 
         # Load existing cache as fallback — never serve empty dashboard
         try:
@@ -64,19 +59,29 @@ def _rebuild():
                 time.sleep(0.2)
             return group_name, results
 
-        # Run batches sequentially, writing cache after each batch
-        print(f"Starting sequential batch rebuild — {len(GROUPS)} batches for {len(_RT)} tickers...")
-        for batch_name, tickers in GROUPS.items():
-            _, results = process_group(batch_name, tickers)
-            with cache_lock:
-                cache.update(results)
-            print(f"[{batch_name}] done — {len(results)} signals, total so far: {len(cache)}")
-            # Write incrementally after each batch so progress is never lost
+        # Process and write after every single ticker
+        print(f"Starting rebuild — {len(_RT)} core tickers...")
+        for t in _RT:
+            sym = t["symbol"]
+            try:
+                sig = generate_signal(sym, include_reasoning=False)
+                if sig:
+                    cache[sym] = sig
+                    record_success(f"signal:{sym}")
+                    print(f"[cron] ✓ {sym}: {sig['direction']}")
+                else:
+                    record_failure(f"signal:{sym}")
+                    print(f"[cron] ✗ {sym}: no data")
+            except Exception as e:
+                record_failure(f"signal:{sym}")
+                print(f"[cron] ✗ {sym}: {e}")
+            # Write after every ticker — survive OOM at any point
             try:
                 merged = {**existing_cache, **cache}
                 (BASE_DIR / "data/signals_cache.json").write_text(json.dumps(merged, indent=2))
             except Exception as _we:
-                print(f"[cron] incremental write failed: {_we}")
+                print(f"[cron] write failed: {_we}")
+            time.sleep(0.3)
 
         elapsed = round(time.time() - start_time, 1)
         # Never serve empty dashboard — merge with stale cache if rebuild produced fewer signals
