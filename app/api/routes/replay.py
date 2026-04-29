@@ -28,7 +28,8 @@ def replay_signal(
         raise HTTPException(status_code=400, detail="Only last 175 days supported")
 
     try:
-        from app.domain.signal.service import TICKER_MAP, fetch_ohlcv, _build_confluence
+        from app.domain.signal.service import TICKER_MAP, fetch_ohlcv
+        from app.domain.signal.confluence_v2 import build_confluence_v2 as _build_confluence
         from app.domain.ml.features import build_features, FEATURE_COLUMNS
         from app.domain.ml.ensemble import _model_path, _is_stale, train
 
@@ -92,7 +93,7 @@ def replay_signal(
 
         # Top features
         try:
-            scores = bundle["xgb"].base_estimator.feature_importances_
+            scores = bundle["xgb"].feature_importances_
             top_features = [FEATURE_COLUMNS[i] for i in np.argsort(scores)[-5:][::-1]]
         except Exception:
             top_features = []
