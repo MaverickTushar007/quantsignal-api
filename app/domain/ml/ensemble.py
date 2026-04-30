@@ -278,6 +278,21 @@ def predict(ticker, df, sentiment=0.0):
         confidence = "HIGH" if prob > 0.72 or prob < 0.28 else "MEDIUM" if prob > 0.60 or prob < 0.40 else "LOW"
 
         close = float(df["Close"].iloc[-1])
+        # Substitute live price if fresher than 5 minutes
+        try:
+            import json, time
+            from app.core.config import BASE_DIR
+            _lp_path = BASE_DIR / "data/live_prices.json"
+            if _lp_path.exists():
+                _lp = json.loads(_lp_path.read_text()).get(ticker)
+                if _lp:
+                    from datetime import datetime, timezone
+                    _age = (datetime.now(timezone.utc) - datetime.fromisoformat(
+                        _lp["ts"].replace("Z", "+00:00"))).total_seconds()
+                    if _age < 300:  # fresher than 5 min
+                        close = float(_lp["price"])
+        except Exception:
+            pass  # fall back to OHLCV close
         atr   = float((df["High"] - df["Low"]).rolling(14).mean().iloc[-1])
         tp_raw = close + 2.0 * atr if direction == "BUY" else close - 2.0 * atr
         sl_raw = close - 1.0 * atr if direction == "BUY" else close + 1.0 * atr
