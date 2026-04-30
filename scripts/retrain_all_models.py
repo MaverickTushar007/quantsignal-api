@@ -3,7 +3,7 @@ Retrains all 186 models using current feature set.
 Runs in parallel — ~5 min instead of 30.
 """
 import sys, os
-sys.path.insert(0, os.path.expanduser("~/Desktop/quantsignal"))
+sys.path.insert(0, os.path.expanduser("~/Desktop/quantsignal-api"))
 
 import warnings
 warnings.filterwarnings("ignore")
@@ -19,8 +19,8 @@ from app.domain.data.universe import TICKERS
 from app.domain.data.market import fetch_ohlcv
 from app.domain.ml.features import build_features, FEATURE_COLUMNS
 
-MODEL_DIR = Path.home() / "Desktop/quantsignal/ml/models"
-LOG_DIR   = Path.home() / "Desktop/quantsignal/logs"
+MODEL_DIR = Path.home() / "Desktop/quantsignal-api/ml/models"
+LOG_DIR   = Path.home() / "Desktop/quantsignal-api/logs"
 LOG_DIR.mkdir(exist_ok=True)
 
 def make_labels(df: pd.DataFrame, horizon=5, threshold=0.01):
@@ -49,39 +49,36 @@ def train_one(ticker_info):
             return sym, "skip", "only one class in labels"
 
         from xgboost import XGBClassifier
-        from sklearn.calibration import CalibratedClassifierCV
         from sklearn.preprocessing import LabelEncoder
-        from sklearn.model_selection import TimeSeriesSplit
+        import numpy as np
 
         le = LabelEncoder()
         y  = le.fit_transform(labels)
+        n_classes = len(le.classes_)
 
-        # Time-series split — no data leakage
-        tscv   = TimeSeriesSplit(n_splits=3)
-        xgb    = XGBClassifier(
+        model = XGBClassifier(
             n_estimators=200,
             max_depth=4,
             learning_rate=0.05,
             subsample=0.8,
             colsample_bytree=0.8,
-            use_label_encoder=False,
+            objective="multi:softprob",
+            num_class=n_classes,
             eval_metric="mlogloss",
             verbosity=0,
             n_jobs=1,
         )
-        model  = CalibratedClassifierCV(xgb, cv=tscv, method="isotonic")
         model.fit(feats, y)
 
-        # Attach metadata so we can detect mismatches in future
-        model.feature_names_  = FEATURE_COLUMNS
-        model.label_encoder_  = le
-        model.trained_at_     = datetime.now(timezone.utc).isoformat()
-        model.symbol_         = sym
+        # Attach metadata
+        model.label_encoder_    = le
+        model.trained_at_       = datetime.now(timezone.utc).isoformat()
+        model.symbol_           = sym
 
         out = MODEL_DIR / f"{sym.replace('-','_').replace('^','_')}.pkl"
         # Use symbol as-is to match existing naming
         out = MODEL_DIR / f"{sym}.pkl"
-        joblib.dump(model, out)
+        joblib.dump({"xgb": model, "lgb": model, "le": le}, out)
         return sym, "ok", f"{len(feats)} rows, classes={list(le.classes_)}"
 
     except Exception as e:
