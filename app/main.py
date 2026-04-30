@@ -70,15 +70,6 @@ async def lifespan(app: FastAPI):
     except Exception as _dbe:
         import logging
         logging.getLogger(__name__).warning(f"[startup] DB migration failed: {_dbe}")
-    # Warm live prices before rebuild so signals use current price
-    try:
-        from app.domain.data.market import refresh_live_prices
-        refresh_live_prices()
-        import logging
-        logging.getLogger(__name__).info("[startup] live prices warmed")
-    except Exception as _lpe:
-        import logging
-        logging.getLogger(__name__).warning(f"[startup] live price warm failed: {_lpe}")
     # Auto-rebuild cache on startup (Railway filesystem is ephemeral)
     try:
         import threading

@@ -22,6 +22,13 @@ def _rebuild():
     except Exception:
         old_cache = {}
 
+    # Warm live prices before generating signals
+    try:
+        from app.domain.data.market import refresh_live_prices
+        refresh_live_prices()
+        print("[rebuild] live prices refreshed")
+    except Exception as _lpe:
+        print(f"[rebuild] live price refresh failed: {_lpe}")
     try:
         from app.domain.data.universe import TICKERS, REBUILD_TICKERS
         from app.domain.signal.service import generate_signal
