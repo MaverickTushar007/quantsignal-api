@@ -9,8 +9,24 @@
         "command": "curl -s -X POST http://localhost:8080/api/v1/cron/check-outcomes -H 'x-cron-secret: quantsignal-cron-2026'"
       },
       {
-        "schedule": "0 * * * *",
+        "schedule": "45 3 * * 1-5",
         "command": "curl -s -X POST http://localhost:8080/api/v1/cron/refresh -H 'x-cron-secret: quantsignal-cron-2026'"
+      },
+      {
+        "schedule": "0 9 * * 1-5",
+        "command": "curl -s -X POST http://localhost:8080/api/v1/cron/refresh -H 'x-cron-secret: quantsignal-cron-2026'"
+      },
+      {
+        "schedule": "30 14 * * 1-5",
+        "command": "curl -s -X POST http://localhost:8080/api/v1/cron/refresh -H 'x-cron-secret: quantsignal-cron-2026'"
+      },
+      {
+        "schedule": "0 0 * * *",
+        "command": "curl -s -X POST http://localhost:8080/api/v1/cron/refresh -H 'x-cron-secret: quantsignal-cron-2026'"
+      },
+      {
+        "schedule": "0 18 * * 1-5",
+        "command": "curl -s -X POST http://localhost:8080/api/v1/cron/weekly-sharpe -H 'x-cron-secret: quantsignal-cron-2026'"
       }
     ]
   }
