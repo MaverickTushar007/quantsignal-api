@@ -28,7 +28,7 @@ def _rebuild():
 
         # Split into 4 parallel worker groups — use REBUILD_TICKERS (25 core assets)
         # Use core 25 tickers — write after every ticker for max resilience
-        _RT = REBUILD_TICKERS
+        _RT = TICKERS  # use full universe (184 symbols)
 
         # Load existing cache as fallback — never serve empty dashboard
         try:
