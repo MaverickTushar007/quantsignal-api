@@ -131,11 +131,11 @@ def flush_signal_cache():
         from app.infrastructure.cache.cache import _get_redis
         r = _get_redis()
         if r:
-            keys = r.keys("signal:*")
+            keys = list(r.keys("signal:*") or []) + list(r.keys("all_signals*") or []) + list(r.keys("signals_cache*") or [])
             if keys:
                 for key in keys:
                     r.delete(key)
-            result["redis_flushed"] = len(keys) if keys else 0
+            result["redis_flushed"] = len(keys)
     except Exception as e:
         result["redis_error"] = str(e)
     try:
