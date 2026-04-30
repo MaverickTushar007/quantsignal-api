@@ -45,21 +45,10 @@ def get_all_signals(
     from pathlib import Path
 
     # Try Redis first (fastest)
-    if not type and not direction:
-        # bulk cache disabled — always read from JSON to ensure reasoning is fresh
-        # cached = get_cached("all_signals_list")
-        # if cached:
-        #     return cached
-
+    # bulk cache disabled — always read from JSON to ensure reasoning is fresh
     # Load from Redis first (survives deploys), fall back to JSON file
     cache = {}
-    try:
-        # signals_cache_full disabled — read from JSON to ensure reasoning is fresh
-        # redis_cache = get_cached("signals_cache_full")
-        # if redis_cache and isinstance(redis_cache, dict) and len(redis_cache) > 0:
-        #     cache = redis_cache
-    except Exception:
-        pass
+    cache = {}
     if not cache:
         cache_path = BASE_DIR / "data/signals_cache.json"
         if cache_path.exists():
