@@ -29,7 +29,7 @@ async def health():
     return HealthResponse(status="ok", version="1.0.0", env=settings.app_env)
 
 
-@router.get("/signals", response_model=List[WatchlistItem], tags=["signals"])
+@router.get("/signals", response_model=List[SignalResponse], tags=["signals"])
 def get_all_signals(
     _gate: dict = Depends(signal_gate),
     type:      Optional[str] = Query(None, description="CRYPTO|STOCK|ETF|INDEX|COMMODITY|FOREX"),
@@ -75,20 +75,43 @@ def get_all_signals(
             continue
         if direction and sig.get("direction") != direction.upper():
             continue
-        results.append(WatchlistItem(
-            symbol=sig["symbol"],
-            display=sig["display"],
-            name=sig["name"],
-            type=sig["type"],
-            icon=sig["icon"],
-            direction=sig["direction"],
-            probability=sig["probability"],
-            confidence=sig["confidence"],
-            current_price=sig["current_price"],
-            kelly_size=sig["kelly_size"],
-        ))
+        try:
+            results.append(SignalResponse(**{
+                "symbol":          sig.get("symbol", sym),
+                "display":         sig.get("display", sym),
+                "name":            sig.get("name", sym),
+                "type":            sig.get("type", ""),
+                "icon":            sig.get("icon", ""),
+                "direction":       sig.get("direction", "HOLD"),
+                "probability":     sig.get("probability", 0.5),
+                "confidence":      sig.get("confidence", "LOW"),
+                "kelly_size":      sig.get("kelly_size", 0.0),
+                "expected_value":  sig.get("expected_value", 0.0),
+                "take_profit":     sig.get("take_profit", 0.0),
+                "stop_loss":       sig.get("stop_loss", 0.0),
+                "current_price":   sig.get("current_price", 0.0),
+                "risk_reward":     sig.get("risk_reward", 0.0),
+                "atr":             sig.get("atr", 0.0),
+                "model_agreement": sig.get("model_agreement", 0.0),
+                "top_features":    sig.get("top_features", []),
+                "confluence":      sig.get("confluence", []),
+                "confluence_score":str(sig.get("confluence_score", "")),
+                "news":            sig.get("news", []),
+                "reasoning":       sig.get("reasoning") or "",
+                "generated_at":    sig.get("generated_at", ""),
+                **{k: v for k, v in sig.items() if k not in {
+                    "symbol","display","name","type","icon","direction","probability",
+                    "confidence","kelly_size","expected_value","take_profit","stop_loss",
+                    "current_price","risk_reward","atr","model_agreement","top_features",
+                    "confluence","confluence_score","news","reasoning","generated_at"
+                }}
+            }))
+        except Exception as _se:
+            import logging
+            logging.getLogger(__name__).warning(f"Signal parse error for {sym}: {_se}")
+            continue
     if not type and not direction:
-        set_cached("all_signals_list", [r.dict() for r in results], ttl=86400)
+        set_cached("all_signals_list", [r.model_dump() for r in results], ttl=3600)
     return results
 
 @router.get("/signals/{symbol}", response_model=SignalResponse, tags=["signals"])
