@@ -189,38 +189,19 @@ def predict(ticker, df, sentiment=0.0):
         feat   = _bf(df)
         latest = feat[_fc].iloc[[-1]]
 
-        def safe_proba(model, X):
-            import numpy as np
-            # Try standard predict_proba first
-            try:
-                return float(model.predict_proba(X)[0, 1])
-            except Exception:
-                pass
-            # CalibratedClassifierCV wrapping a regressor — unwrap and call directly
-            try:
-                inner = model.estimator if hasattr(model, "estimator") else model
-                # For CalibratedClassifierCV, try calibrated_classifiers
-                if hasattr(model, "calibrated_classifiers_"):
-                    inner = model.calibrated_classifiers_[0].estimator
-                raw = float(inner.predict(X)[0])
-                return float(1 / (1 + np.exp(-raw))) if abs(raw) < 20 else float(np.clip(raw, 0, 1))
-            except Exception:
-                pass
-            # Last resort: XGBoost Booster API
-            try:
-                import xgboost as xgb
-                booster = model.get_booster() if hasattr(model, "get_booster") else None
-                if booster is None and hasattr(model, "estimator"):
-                    booster = model.estimator.get_booster()
-                if booster:
-                    dmat = xgb.DMatrix(X)
-                    raw = float(booster.predict(dmat)[0])
-                    return float(1 / (1 + np.exp(-raw))) if abs(raw) < 20 else float(np.clip(raw, 0, 1))
-            except Exception:
-                pass
-            return 0.5  # neutral fallback
-        xgb_prob = safe_proba(bundle["xgb"], latest)
-        lgb_prob = safe_proba(bundle["lgb"], latest)
+        le = bundle.get("le")
+        # New models: multi:softprob — index of SELL class
+        def get_prob(model, X):
+            proba = model.predict_proba(X)[0]
+            if le is not None and hasattr(le, "classes_"):
+                classes = list(le.classes_)
+                sell_i = classes.index("SELL") if "SELL" in classes else -1
+                buy_i  = classes.index("BUY")  if "BUY"  in classes else 0
+                # Return probability of the directional class (BUY or SELL dominant)
+                return float(proba[buy_i]) if proba[buy_i] > proba[sell_i] else float(1 - proba[sell_i])
+            return float(proba[1]) if len(proba) > 1 else float(proba[0])
+        xgb_prob = get_prob(bundle["xgb"], latest)
+        lgb_prob = get_prob(bundle["lgb"], latest)
 
         sentiment_adj = (sentiment + 1) / 2
         # Load dynamic weights if available
