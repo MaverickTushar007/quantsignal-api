@@ -52,7 +52,7 @@ def _rebuild():
             for t in tickers:
                 sym = t["symbol"]
                 try:
-                    sig = generate_signal(sym, include_reasoning=True)
+                    sig = generate_signal(sym, include_reasoning=True, bypass_cache=True)
                     if sig:
                         results[sym] = sig
                         record_success(f"signal:{sym}")
@@ -71,7 +71,7 @@ def _rebuild():
         for t in _RT:
             sym = t["symbol"]
             try:
-                sig = generate_signal(sym, include_reasoning=True)
+                sig = generate_signal(sym, include_reasoning=True, bypass_cache=True)
                 if sig:
                     cache[sym] = sig
                     record_success(f"signal:{sym}")
