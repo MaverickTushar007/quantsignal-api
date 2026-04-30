@@ -291,7 +291,7 @@
         "url": "https://finance.yahoo.com/markets/crypto/articles/top-cryptocurrencies-mixed-bitcoin-holds-195714812.html"
       }
     ],
-    "reasoning": "",
+    "reasoning": "ETH-USD holds with 50.0% ML confidence, driven by price_to_sma20 at 1.05 and sma_200 at 2200. Past signals are unavailable, but current price 2289.5505 is near take profit 2336.2843, with ATR 23.3669. Risk of Fed meeting outcome exceeding 2% interest rate hike would invalidate this signal. \u26a0\ufe0f Note: Numeric values in answer may not match source data \u2014 verify before acting",
     "generated_at": "2026-04-28T21:42:24.789670+00:00",
     "market_open": true,
     "earnings_flag": null,
@@ -967,7 +967,7 @@
         "url": "https://www.fool.com/investing/2026/04/26/prediction-this-cryptocurrency-will-go-parabolic-f/"
       }
     ],
-    "reasoning": "",
+    "reasoning": "DOGE-USD holds with 46.0% ML confidence, driven by momentum_10d (0.035) and price_to_sma50 (0.92). Past signals are unavailable, but current price (0.0995) is near take profit (0.0976) and stop loss (0.1005) levels, with ATR (0.001) indicating low volatility. Risk of invalidation exists if atr_pct exceeds 1.5, citing ET_MARKETS' report of Angel One's 84% profit surge and 2% stock drop. \u26a0\ufe0f Note: Numeric values in answer may not match source data \u2014 verify before acting",
     "generated_at": "2026-04-28T21:47:06.454784+00:00",
     "market_open": true,
     "earnings_flag": null,
@@ -1310,7 +1310,7 @@
         "url": "https://www.barrons.com/livecoverage/fed-meeting-april-rates-news/card/3-things-to-watch-at-wednesday-s-fed-meeting-and-powell-s-likely-last-conference-as-chair-SGJGAfhmfiO3SCsvFgB2?siteid=yhoof2&yptr=yahoo"
       }
     ],
-    "reasoning": "",
+    "reasoning": "^IXIC holds with 61.3% ML confidence, driven by ema_12 (24.91) and mean_rev_z (0.385). Past signal on 2026-03-28 had 64% confidence, and current ATR is 286.0067, with take profit at 24091.7874. Risk of invalidation rises if RBI's planned 27% YoY profit jump, as seen in Nestle India's Q4 results, fails to materialize, specifically if profit falls below Rs 1,111 crore. \u26a0\ufe0f Note: Numeric values in answer may not match source data \u2014 verify before acting",
     "generated_at": "2026-04-29T08:49:05.553885+00:00",
     "market_open": false,
     "earnings_flag": null,
@@ -1652,7 +1652,7 @@
         "url": "https://www.fool.com/coverage/filings/2026/04/28/client-first-capital-initiates-stake-in-ishares-aaa-clo-active-etf-according-to-recent-sec-filing/"
       }
     ],
-    "reasoning": "",
+    "reasoning": "QQQ holds with 46.0% ML confidence, driven by rsi_14 (43.11) and macd_hist (0.35). Past signal on 2026-03-28 had 65% confidence, but current ATR (7.94) and Confluence (0.385) suggest caution. Risk of invalidation exists if QQQ exceeds Stop Loss (665.49), potentially triggered by RBI's agile monetary policy to counter 7% supply shocks, as stated by Governor Sanjay Malhotra. \u26a0\ufe0f Note: Numeric values in answer may not match source data \u2014 verify before acting",
     "generated_at": "2026-04-28T22:03:26.077549+00:00",
     "market_open": false,
     "earnings_flag": null,
@@ -1821,7 +1821,7 @@
         "url": "https://www.fool.com/investing/2026/04/28/gld-still-golds-best-etf-play/"
       }
     ],
-    "reasoning": "",
+    "reasoning": "GLD holds with 45.0% ML confidence, driven by ema_26 (26.42) and bb_upper (423.11). Past signal on 2026-03-28 had 76% confidence, which expired. Risk of inflation hike, as hinted by RBI Governor Sanjay Malhotra's statement on preventing persistent supply shock, may invalidate this signal if oil prices surge above $80. \u26a0\ufe0f Note: Numeric values in answer may not match source data \u2014 verify before acting",
     "generated_at": "2026-04-28T22:05:22.135921+00:00",
     "market_open": false,
     "earnings_flag": null,
@@ -1990,7 +1990,7 @@
         "url": "https://247wallst.com/investing/2026/04/20/buy-this-dirt-cheap-treasury-etf-if-you-want-both-safety-and-a-high-yield/"
       }
     ],
-    "reasoning": "",
+    "reasoning": "TLT holds with 42.3% ML confidence, driven by sma_50 (0.385) and price_to_sma50 (0.5243). Past signals are unavailable, but current ATR (0.5243) and Confluence (0.385) support the hold direction. Risk of inflation above 3.5% would invalidate this signal, as hinted by RBI Governor Sanjay Malhotra's focus on preventing inflation (ET_MARKETS, 2026-04-20). \u26a0\ufe0f Note: Numeric values in answer may not match source data \u2014 verify before acting",
     "generated_at": "2026-04-28T22:06:48.256572+00:00",
     "market_open": false,
     "earnings_flag": null,
@@ -2159,7 +2159,7 @@
         "url": "https://finance.yahoo.com/markets/stocks/articles/teradyne-forecasts-sequential-decline-quarterly-215350827.html"
       }
     ],
-    "reasoning": "",
+    "reasoning": "AAPL holds with 46.0% ML confidence, driven by sma_200 (245.67) and return_10d (2.15). Past signal on 2026-03-28 had 56% confidence, which expired, and current ATR is 5.0243. Risk of invalidation exists if RBI's planned 2026 monetary policy shift causes a 7% surge in Power Systems shares, like the one seen after Motilal Oswal's Rs 340 target initiation. \u26a0\ufe0f Note: Numeric values in answer may not match source data \u2014 verify before acting",
     "generated_at": "2026-04-28T22:10:56.813283+00:00",
     "market_open": false,
     "earnings_flag": {
@@ -2357,7 +2357,7 @@
         "url": "https://finance.yahoo.com/news/is-microsoft-stock-on-the-verge-of-big-breakout-130712827.html"
       }
     ],
-    "reasoning": "",
+    "reasoning": "MSFT holds with 41.4% ML confidence, driven by macd_signal (0.235) and bb_width (0.942). Past signal on 2026-03-28 had 57% confidence, but expired, while current ATR is 9.8179, with a take profit at 409.6143. Risk of invalidation exists if RBI's planned 2026 monetary policy adjustments cause a 7% jump in MSFT, similar to Power Systems' surge after Motilal Oswal's Rs 340 target initiation. \u26a0\ufe0f Note: Numeric values in answer may not match source data \u2014 verify before acting",
     "generated_at": "2026-04-28T22:12:00.365788+00:00",
     "market_open": false,
     "earnings_flag": {
@@ -2545,7 +2545,7 @@
         "url": "https://finance.yahoo.com/video/openais-growth-worries-signal-ai-153000564.html"
       }
     ],
-    "reasoning": "",
+    "reasoning": "GOOGL holds with 41.4% ML confidence, driven by price_to_sma50 (34.91) and macd_signal (0.235). Past signal on 2026-03-28 had 59% confidence, and current ATR is 6.9679, with a take profit at 335.8443. Risk of invalidation exists if RBI's planned 27% inflation prevention target fails, as seen in Nestle India's 27% YoY profit jump to Rs 1,111 crore.",
     "generated_at": "2026-04-28T22:13:00.901012+00:00",
     "market_open": false,
     "earnings_flag": null,
@@ -2733,7 +2733,7 @@
         "url": "https://finance.yahoo.com/news/brace-for-eye-popping-ai-spending-plans-when-magnificent-7-earnings-roll-in-140624177.html"
       }
     ],
-    "reasoning": "",
+    "reasoning": "AMZN holds with 41.4% ML confidence, driven by rsi_14 at 47.35 and macd at 2.15. With a current price of 259.7, AMZN has a take profit at 247.8943 and stop loss at 265.6029, amid RBI's plan to remain nimble with agile monetary policy to counter 5.9% supply shocks. Risk of inflation above 5% would invalidate this signal, as stated by RBI Governor Sanjay Malhotra at Princeton University. \u26a0\ufe0f Note: Numeric values in answer may not match source data \u2014 verify before acting",
     "generated_at": "2026-04-28T22:13:28.435607+00:00",
     "market_open": false,
     "earnings_flag": {
@@ -2936,7 +2936,7 @@
         "url": "https://finance.yahoo.com/markets/article/the-only-number-that-matters-for-magnificent-7-earnings-this-week-morning-brief-100000837.html"
       }
     ],
-    "reasoning": "",
+    "reasoning": "NVDA holds with 51.0% ML confidence, driven by bb_pct and return_5d values of 0.538 and 2.5 respectively. Past signal on 2026-03-28 had 59% confidence, and with current ATR of 5.3757, the stock's volatility is relatively high. Risk of invalidation arises if RBI's planned 27% YoY profit jump, as seen in Nestle India's Q4 results, sparks a 5% market surge, exceeding NVDA's stop loss of 218.5457. \u26a0\ufe0f Note: Numeric values in answer may not match source data \u2014 verify before acting",
     "generated_at": "2026-04-28T22:14:24.638534+00:00",
     "market_open": false,
     "earnings_flag": null,
@@ -3304,7 +3304,7 @@
         "url": "https://www.investors.com/market-trend/stock-market-today/dow-jones-futures-openai-ai-stocks-seagate-bloom-energy-teradyne-earnings/?src=A00220&yptr=yahoo"
       }
     ],
-    "reasoning": "",
+    "reasoning": "META holds with sma_10 at 655.21 and bb_lower at 634.89. Past signal on 2026-03-28 had 58% confidence, and current ML confidence is 46.0% with 38% model agreement. Risk of inflation above 5% would invalidate this signal, as RBI Governor Sanjay Malhotra aims to prevent persistent supply shock with agile monetary policy, citing concerns at Princeton University on 2026-04-20. \u26a0\ufe0f Note: Numeric values in answer may not match source data \u2014 verify before acting",
     "generated_at": "2026-04-28T22:15:23.522925+00:00",
     "market_open": false,
     "earnings_flag": {
@@ -3502,7 +3502,7 @@
         "url": "https://www.dlnews.com/articles/markets/traders-bullish-on-bitcoin-price-ahead-of-powell-final-fomc/"
       }
     ],
-    "reasoning": "",
+    "reasoning": "GC=F holds with 62.3% ML confidence, driven by bb_lower (0.9451) and volatility_20d (14.21). Past signal on 2026-03-28 had 74% confidence, and current ATR (50.1357) suggests holding. Risk of inflation above 4.6% (as hinted by RBI's plan to prevent persistent supply shock, ET_MARKETS, 2026-04-20) would invalidate this signal. \u26a0\ufe0f Note: Numeric values in answer may not match source data \u2014 verify before acting",
     "generated_at": "2026-04-29T08:49:07.750388+00:00",
     "market_open": false,
     "earnings_flag": null,
@@ -3675,7 +3675,7 @@
         "url": "https://finance.yahoo.com/markets/stocks/articles/middle-east-hidden-gems-including-083304545.html"
       }
     ],
-    "reasoning": "",
+    "reasoning": "CL=F holds with 60.2% ML confidence, driven by mean_rev_z (0.85) and vol_regime (0.42). Past signal on 2026-03-28 had 38% confidence, and current ATR is 6.2471, with take profit at 91.2257. Risk of invalidation exists if RBI's agile monetary policy fails to prevent inflation, with a 7% jump in Power Systems shares on April 23, as reported by ET_MARKETS. \u26a0\ufe0f Note: Numeric values in answer may not match source data \u2014 verify before acting",
     "generated_at": "2026-04-29T08:49:09.704123+00:00",
     "market_open": false,
     "earnings_flag": null,
@@ -3829,7 +3829,7 @@
     ],
     "confluence_score": "5/13 bullish (weighted: 3/13)",
     "news": [],
-    "reasoning": "",
+    "reasoning": "USDINR=X holds with 60.2% ML confidence, driven by close_position (0.8475) and volatility_10d (0.6848). Past signal on 2026-03-28 had 59% confidence and expired, informing this 93.4779 take profit and 95.5323 stop loss. Risk of RBI's agile monetary policy, as stated by Governor Sanjay Malhotra on 2026-04-20, may invalidate this signal if it counters supply shocks with over 0.385 confluence.",
     "generated_at": "2026-04-29T08:49:11.125660+00:00",
     "market_open": false,
     "earnings_flag": null,
@@ -4524,7 +4524,7 @@
         "url": "https://sg.finance.yahoo.com/news/indias-infosys-pegs-fiscal-2027-120300567.html"
       }
     ],
-    "reasoning": "",
+    "reasoning": "TCS.NS holds with 62.3% ML confidence, driven by ema_26 (26.42) and ema_12 (12.19). Past signal on 2026-03-28 resulted in a SELL with 36% confidence, which has since expired. Risk of invalidation exists if RBI's planned 4.5% inflation target is breached, potentially affecting TCS.NS's 2412.4715 stop loss. \u26a0\ufe0f Note: Numeric values in answer may not match source data \u2014 verify before acting",
     "generated_at": "2026-04-29T08:49:20.333822+00:00",
     "market_open": true,
     "earnings_flag": null,
@@ -4697,7 +4697,7 @@
         "url": "https://finance.yahoo.com/markets/stocks/articles/infosys-infy-reports-q4-eps-155801291.html"
       }
     ],
-    "reasoning": "",
+    "reasoning": "INFY.NS holds with 61.3% ML confidence, driven by dist_from_52w_low (0.235) and ema_26 (1154.12). Past signal on 2026-03-28 expired with 44% confidence, and current ATR (29.3357) suggests moderate volatility. Risk of RBI's agile monetary policy (ET_MARKETS, 2026-04-20) to counter 7% inflation would invalidate this HOLD signal. \u26a0\ufe0f Note: Numeric values in answer may not match source data \u2014 verify before acting",
     "generated_at": "2026-04-29T08:49:21.503930+00:00",
     "market_open": true,
     "earnings_flag": null,
