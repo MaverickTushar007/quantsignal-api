@@ -189,8 +189,38 @@ def predict(ticker, df, sentiment=0.0):
         feat   = _bf(df)
         latest = feat[_fc].iloc[[-1]]
 
-        xgb_prob = float(bundle["xgb"].predict_proba(latest)[0, 1])
-        lgb_prob = float(bundle["lgb"].predict_proba(latest)[0, 1])
+        def safe_proba(model, X):
+            import numpy as np
+            # Try standard predict_proba first
+            try:
+                return float(model.predict_proba(X)[0, 1])
+            except Exception:
+                pass
+            # CalibratedClassifierCV wrapping a regressor — unwrap and call directly
+            try:
+                inner = model.estimator if hasattr(model, "estimator") else model
+                # For CalibratedClassifierCV, try calibrated_classifiers
+                if hasattr(model, "calibrated_classifiers_"):
+                    inner = model.calibrated_classifiers_[0].estimator
+                raw = float(inner.predict(X)[0])
+                return float(1 / (1 + np.exp(-raw))) if abs(raw) < 20 else float(np.clip(raw, 0, 1))
+            except Exception:
+                pass
+            # Last resort: XGBoost Booster API
+            try:
+                import xgboost as xgb
+                booster = model.get_booster() if hasattr(model, "get_booster") else None
+                if booster is None and hasattr(model, "estimator"):
+                    booster = model.estimator.get_booster()
+                if booster:
+                    dmat = xgb.DMatrix(X)
+                    raw = float(booster.predict(dmat)[0])
+                    return float(1 / (1 + np.exp(-raw))) if abs(raw) < 20 else float(np.clip(raw, 0, 1))
+            except Exception:
+                pass
+            return 0.5  # neutral fallback
+        xgb_prob = safe_proba(bundle["xgb"], latest)
+        lgb_prob = safe_proba(bundle["lgb"], latest)
 
         sentiment_adj = (sentiment + 1) / 2
         # Load dynamic weights if available
