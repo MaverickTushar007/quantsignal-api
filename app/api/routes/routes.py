@@ -54,9 +54,10 @@ def get_all_signals(
     # Load from Redis first (survives deploys), fall back to JSON file
     cache = {}
     try:
-        redis_cache = get_cached("signals_cache_full")
-        if redis_cache and isinstance(redis_cache, dict) and len(redis_cache) > 0:
-            cache = redis_cache
+        # signals_cache_full disabled — read from JSON to ensure reasoning is fresh
+        # redis_cache = get_cached("signals_cache_full")
+        # if redis_cache and isinstance(redis_cache, dict) and len(redis_cache) > 0:
+        #     cache = redis_cache
     except Exception:
         pass
     if not cache:
@@ -153,7 +154,7 @@ async def get_signal(
                     cache_path.write_text(json.dumps(cache))
         except Exception:
             pass
-    sig = generate_signal(symbol, include_reasoning=False)
+    sig = generate_signal(symbol, include_reasoning=True)
 
     # Staleness SLA — flag signal age so frontend can warn users
     if sig and sig.get("generated_at"):
