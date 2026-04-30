@@ -96,7 +96,7 @@ def generate_signal(symbol: str, include_reasoning: bool = True, bypass_cache: b
 
     # --- LAYER 2: Local JSON cache (Railway bypass) ---
     cache_path = BASE_DIR / "data/signals_cache.json"
-    if cache_path.exists():
+    if cache_path.exists() and not bypass_cache:
         try:
             cache = json.loads(cache_path.read_text())
             if symbol in cache:

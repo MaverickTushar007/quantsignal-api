@@ -284,7 +284,8 @@ def predict(ticker, df, sentiment=0.0):
             from app.core.config import BASE_DIR
             _lp_path = BASE_DIR / "data/live_prices.json"
             if _lp_path.exists():
-                _lp = json.loads(_lp_path.read_text()).get(ticker)
+                _sym = ticker if "ticker" in dir() else symbol
+                _lp = json.loads(_lp_path.read_text()).get(_sym)
                 if _lp:
                     from datetime import datetime, timezone
                     _age = (datetime.now(timezone.utc) - datetime.fromisoformat(
