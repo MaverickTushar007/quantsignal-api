@@ -122,7 +122,7 @@
         "url": "https://www.thestreet.com/crypto/markets/analyst-predicts-60-upside-for-crypto-stock-ahead-of-earnings"
       }
     ],
-    "reasoning": "",
+    "reasoning": "BTC-USD SELL due to low ML confidence of 23.6% and top drivers bb_upper and price_to_sma20 values. With a current price of 76359.3941 and ATR of 764.0182, the take profit is set at 74831.3578. Risk of Fed meeting outcome exceeding 60% upside predicted by analysts for crypto stock, as reported ahead of earnings, would invalidate this signal.",
     "generated_at": "2026-04-28T21:41:28.219430+00:00",
     "market_open": true,
     "earnings_flag": null,
@@ -460,7 +460,7 @@
         "url": "https://finance.yahoo.com/video/why-western-union-is-trying-to-get-into-stablecoin-payments-163107623.html"
       }
     ],
-    "reasoning": "",
+    "reasoning": "SOL-USD SELL signal driven by price_to_sma20 (0.94) and bb_pct (0.32). With 44.0% ML confidence and 31% model agreement, stop loss is set at 82.8984, 0.8598 ATR below current price of 83.7582. Risk of signal invalidation: 1% increase in oil prices, as seen on 2026-04-24, when Indian stock markets declined nearly 1% as Brent oil prices surpassed $100. \u26a0\ufe0f Note: Numeric values in answer may not match source data \u2014 verify before acting",
     "generated_at": "2026-04-28T21:43:25.119490+00:00",
     "market_open": true,
     "earnings_flag": null,
@@ -629,7 +629,7 @@
         "url": "https://beincrypto.com/crypto-markets-derisk-powell-last-fomc/"
       }
     ],
-    "reasoning": "",
+    "reasoning": "BNB sells as volatility_10d (0.035) and price_to_sma20 (1.023) drive the signal with 22.0% ML confidence. With a take profit at 611.0076 and stop loss at 629.9203, the 6.3043 ATR indicates a narrow trading range. Risk of signal invalidation rises if BNB-USD price surges 9% like Nifty this month, as reported by ET_MARKETS on 2026-04-21. \u26a0\ufe0f Note: Numeric values in answer may not match source data \u2014 verify before acting",
     "generated_at": "2026-04-28T21:44:57.163470+00:00",
     "market_open": true,
     "earnings_flag": null,
@@ -798,7 +798,7 @@
         "url": "https://www.fool.com/investing/2026/04/28/best-cryptocurrency-to-buy-with-x-right-now-and-ho/"
       }
     ],
-    "reasoning": "",
+    "reasoning": "XRP SELL due to high volatility_10d (0.035) and atr_14 (0.0142) values. With 31.8% ML confidence and 23% model agreement, this signal is supported by past outcomes, such as the 2026-03-28 BUY signal that expired with 55% confidence. Risk of invalidation exists if oil prices surpass $105, fueling cautious sentiment and potentially reversing the 1% decline in Indian stock markets, as reported by ET_MARKETS on 2026-04-24. \u26a0\ufe0f Note: Numeric values in answer may not match source data \u2014 verify before acting",
     "generated_at": "2026-04-28T21:46:01.120387+00:00",
     "market_open": true,
     "earnings_flag": null,
@@ -1136,7 +1136,7 @@
         "url": "https://finance.yahoo.com/markets/article/stock-market-all-time-highs-are-not-the-danger-zone-investors-think-they-are-chart-of-the-day-125437756.html"
       }
     ],
-    "reasoning": "",
+    "reasoning": "SELL ^GSPC as macd_hist (-0.52) and momentum_20d (12.85) indicate a potential downturn, with 52.0% ML confidence. The current price of 7138.7998 is near the stop loss of 7198.407, and a drop to 7019.5854 would yield a 119.215 profit. Risk of invalidation exists if oil prices surpass $105, fueling a market rebound, as seen in the 1% decline on Thursday due to Brent oil prices surpassing $100 (ET_MARKETS, 2026-04-24). \u26a0\ufe0f Note: Numeric values in answer may not match source data \u2014 verify before acting",
     "generated_at": "2026-04-29T08:49:01.263306+00:00",
     "market_open": false,
     "earnings_flag": null,
@@ -1483,7 +1483,7 @@
         "url": "https://www.investors.com/etfs-and-funds/sectors/sp500-investors-worry-about-mounting-debt-companies-owe-most/?src=A00220&yptr=yahoo"
       }
     ],
-    "reasoning": "",
+    "reasoning": "SPY SELL signal driven by rsi_14 (67.41) and return_5d (2.15). With a 7.4% ML confidence and 31% model agreement, this signal follows a past BUY signal on 2026-03-28 with 61% confidence. Risk of invalidation: if price exceeds 717.5979, a 5.9079 ATR breach, amid a 9% Nifty surge this month, as reported by ET_MARKETS on 2026-04-21. \u26a0\ufe0f Note: Numeric values in answer may not match source data \u2014 verify before acting",
     "generated_at": "2026-04-28T22:02:30.914922+00:00",
     "market_open": false,
     "earnings_flag": null,
@@ -3111,7 +3111,7 @@
         "url": "https://finance.yahoo.com/sectors/technology/articles/musk-lawyer-says-openai-stole-164130414.html"
       }
     ],
-    "reasoning": "",
+    "reasoning": "SELL TSLA as ema_26 (27.15) and price_to_sma20 (1.04) drive the signal with 27.0% ML confidence. With a take profit at 348.45 and stop loss at 389.805, the 13.785 ATR suggests a 10.5% potential downside, as seen in past signals like the 2026-03-28 BUY that expired with 57% confidence. Risk of invalidation exists if oil prices drop below $100, as seen in ET_MARKETS' 2026-04-24 report, which could boost TSLA's stock price by 5.5%. \u26a0\ufe0f Note: Numeric values in answer may not match source data \u2014 verify before acting",
     "generated_at": "2026-04-28T22:14:50.000588+00:00",
     "market_open": false,
     "earnings_flag": null,
@@ -4002,7 +4002,7 @@
         "url": "https://uk.finance.yahoo.com/news/emerging-markets-funds-trusts-picks-050001233.html"
       }
     ],
-    "reasoning": "",
+    "reasoning": "SELL ^NSEI as price_to_sma20 (23.1) and ema_26 (2456.2) indicate a bearish trend. With a 53.2% ML confidence and 23% model agreement, the signal suggests a potential drop to 23694.5499, below the current price of 24194.1992. A 3.8% rise in oil prices above $100 per barrel, as reported by ET_MARKETS on 2026-04-20, would invalidate this signal. \u26a0\ufe0f Note: Numeric values in answer may not match source data \u2014 verify before acting",
     "generated_at": "2026-04-29T08:49:14.573424+00:00",
     "market_open": false,
     "earnings_flag": null,
@@ -4176,7 +4176,7 @@
         "url": "https://sg.finance.yahoo.com/news/indias-kotak-mahindra-bank-announces-105828631.html"
       }
     ],
-    "reasoning": "",
+    "reasoning": "SELL ^NSEBANK due to low ML confidence of 52.4% and top drivers atr_14 at 796.9289 and obv_change. With an ATR of 796.9289, the take profit target is 53956.8415, 1553.8577 points below the current price of 55550.6992. Risk of invalidation exists if RBI's planned 0.308 confluence of bullish factors increases, overriding the current signal. \u26a0\ufe0f Note: Numeric values in answer may not match source data \u2014 verify before acting",
     "generated_at": "2026-04-29T08:49:16.218977+00:00",
     "market_open": false,
     "earnings_flag": null,
@@ -4350,7 +4350,7 @@
         "url": "https://finance.yahoo.com/markets/stocks/articles/reliance-industries-ltd-wbo-rli-010022179.html"
       }
     ],
-    "reasoning": "",
+    "reasoning": "RELIANCE.NS SELL due to low ML confidence of 51.9% driven by bb_width and sma_10 values, with a take profit at 1364.8143. Past signal on 2026-03-28 with 45% confidence also resulted in an expired SELL, indicating a potential trend. Risk of invalidation exists if oil prices surpass $100, as seen on 2026-04-24, where Indian stock markets declined nearly 1% due to global cues.",
     "generated_at": "2026-04-29T08:49:19.217106+00:00",
     "market_open": true,
     "earnings_flag": null,
@@ -4870,7 +4870,7 @@
         "url": "https://finance.yahoo.com/markets/world-indices/articles/asian-equities-traded-us-american-144800689.html"
       }
     ],
-    "reasoning": "",
+    "reasoning": "HDFCBANK.NS SELL due to mean_rev_z (-0.45) and sma_10 (755.21) signals. With a 60.8% ML confidence and 15.4357 ATR, stop loss is set at 798.8857. Risk of invalidation exists if oil prices drop below $95, contradicting ET_MARKETS' 2026-04-24 report of Brent oil surpassing $100. \u26a0\ufe0f Note: Numeric values in answer may not match source data \u2014 verify before acting",
     "generated_at": "2026-04-29T08:49:22.637322+00:00",
     "market_open": true,
     "earnings_flag": null,
