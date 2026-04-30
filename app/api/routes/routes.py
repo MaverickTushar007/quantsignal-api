@@ -46,9 +46,10 @@ def get_all_signals(
 
     # Try Redis first (fastest)
     if not type and not direction:
-        cached = get_cached("all_signals_list")
-        if cached:
-            return cached
+        # bulk cache disabled — always read from JSON to ensure reasoning is fresh
+        # cached = get_cached("all_signals_list")
+        # if cached:
+        #     return cached
 
     # Load from Redis first (survives deploys), fall back to JSON file
     cache = {}
