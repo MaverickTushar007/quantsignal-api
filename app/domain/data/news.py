@@ -63,3 +63,26 @@ def get_sentiment_score(symbol: str) -> float:
         groq_score = _llm_sentiment_score(headlines[:5])
         return round(max(-1.0, min(1.0, 0.4 * vader_avg + 0.6 * groq_score)), 3)
     except Exception: return 0.0
+
+
+def refresh_news_cache():
+    """Refresh news/sentiment cache for all tickers. Called every hour by scheduler."""
+    import json
+    from pathlib import Path
+    from app.core.config import BASE_DIR
+    from app.domain.data.universe import TICKERS
+
+    cache = {}
+    # Only refresh the 28 most-watched symbols to keep it fast
+    priority_syms = [t["symbol"] for t in TICKERS if t.get("type") in ("CRYPTO", "INDEX", "STOCK")][:30]
+    for sym in priority_syms:
+        try:
+            score = get_sentiment_score(sym)
+            cache[sym] = {"sentiment": score, "ts": __import__("datetime").datetime.utcnow().isoformat()}
+        except Exception:
+            pass
+
+    if cache:
+        cache_path = BASE_DIR / "data/sentiment_cache.json"
+        cache_path.parent.mkdir(exist_ok=True)
+        cache_path.write_text(json.dumps(cache, default=str))

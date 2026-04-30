@@ -82,3 +82,32 @@ def fetch_ohlcv(ticker, period="2y"):
         print(f"Multi-source fallback failed for {ticker}: {e}")
 
     return None
+
+
+def refresh_live_prices():
+    """Refresh live price cache for all tickers. Called every 60s by scheduler."""
+    import json
+    from pathlib import Path
+    from app.core.config import BASE_DIR
+    from app.domain.data.universe import TICKERS
+    import yfinance as yf
+
+    prices = {}
+    syms = [t["symbol"] for t in TICKERS]
+    try:
+        data = yf.download(syms, period="1d", interval="5m",
+                           group_by="ticker", progress=False, threads=True)
+        for sym in syms:
+            try:
+                closes = data[sym]["Close"].dropna() if sym in data.columns.get_level_values(0) else None
+                if closes is not None and len(closes):
+                    prices[sym] = {"price": float(closes.iloc[-1]), "ts": closes.index[-1].isoformat()}
+            except Exception:
+                pass
+    except Exception:
+        pass
+
+    if prices:
+        cache_path = BASE_DIR / "data/live_prices.json"
+        cache_path.parent.mkdir(exist_ok=True)
+        cache_path.write_text(json.dumps(prices, default=str))

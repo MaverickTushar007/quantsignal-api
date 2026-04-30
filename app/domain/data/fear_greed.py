@@ -83,3 +83,19 @@ def get_fear_greed() -> dict:
             "fear_improving": 0.0,
             "contrarian_signal": 0.0,
         }
+
+
+def refresh_fear_greed():
+    """Refresh fear/greed cache. Called every hour by scheduler."""
+    import json
+    from pathlib import Path
+    from app.core.config import BASE_DIR
+
+    try:
+        data = get_fear_greed()
+        if data:
+            cache_path = BASE_DIR / "data/fear_greed_cache.json"
+            cache_path.parent.mkdir(exist_ok=True)
+            cache_path.write_text(json.dumps(data, default=str))
+    except Exception:
+        pass
