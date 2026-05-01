@@ -23,8 +23,15 @@ def _now_ist_hour() -> float:
 
 
 async def _refresh_realtime():
-    """Every 1 min during market hours — price cache. Disabled to prevent OOM."""
-    pass  # refresh_live_prices() disabled — too memory-intensive for Railway free tier
+    """Every 5 min — price cache (batched to avoid OOM)."""
+    try:
+        import threading
+        from app.domain.data.market import refresh_live_prices
+        threading.Thread(target=refresh_live_prices, daemon=True).start()
+    except (AttributeError, ImportError):
+        pass
+    except Exception as e:
+        log.warning(f"[scheduler] realtime refresh failed: {e}")
 
 
 async def _refresh_intraday():
@@ -71,7 +78,7 @@ async def run_refresh_scheduler():
     last_intraday  = 0.0
     last_daily_day = -1
 
-    REALTIME_INTERVAL  = 60      # seconds
+    REALTIME_INTERVAL  = 300     # seconds (5 min — batched yfinance is slow)
     INTRADAY_INTERVAL  = 3600    # seconds
     DAILY_IST_HOUR     = 6.0     # 6:00 AM IST
 
