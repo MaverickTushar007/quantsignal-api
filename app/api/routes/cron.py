@@ -11,8 +11,12 @@ from app.core.config import BASE_DIR
 router = APIRouter()
 
 @router.post("/cron/refresh", tags=["cron"])
-def refresh_cache(x_cron_secret: str = Header(None, alias="X-Cron-Secret")):
-    if x_cron_secret != CRON_SECRET:
+def refresh_cache(
+    x_cron_secret: str = Header(None, alias="X-Cron-Secret"),
+    secret: str = None,
+):
+    effective = x_cron_secret or secret
+    if effective != CRON_SECRET:
         raise HTTPException(status_code=401, detail="Unauthorized")
 
     def _rebuild_and_calibrate():

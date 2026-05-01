@@ -331,7 +331,7 @@ def predict(ticker, df, sentiment=0.0):
         edge_prob  = prob if direction == "BUY" else 1 - prob
         q          = 1 - edge_prob
         full_kelly = max((edge_prob * rr - q) / rr, 0) if rr > 0 else 0
-        kelly_size = full_kelly * 0.25 * 100
+        kelly_size = min(full_kelly * 0.25, 0.25) * 100  # cap at 25%
         ev_raw = (edge_prob * tp_dist) - (q * sl_dist)
         # Normalize EV as % of current price for cross-asset comparability
         ev_pct = (ev_raw / close) * 100 if close > 0 else 0
@@ -361,7 +361,7 @@ def predict(ticker, df, sentiment=0.0):
         return SignalResult(
             ticker=ticker, direction=direction,
             probability=round(prob, 4), confidence=confidence,
-            kelly_size=round(_position_size * 100 * (-1 if direction == "SELL" else 1), 2),  # negative for SELL
+            kelly_size=round(min(abs(_position_size), 0.25) * 100 * (-1 if direction == "SELL" else 1), 2),  # cap at 25%  # negative for SELL
             expected_value=round(ev, 4),
             take_profit=round(tp, 4), stop_loss=round(sl, 4),
             current_price=round(close, 4), atr=round(atr, 4),
