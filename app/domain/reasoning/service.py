@@ -640,13 +640,19 @@ async def stream_chat(symbol: str, message: str, history: list, user_id: str = "
                         api_key=or_key,
                         base_url="https://openrouter.ai/api/v1"
                     )
-                    stream = await or_client.chat.completions.create(
-                        model="google/gemma-3-27b-it:free",
-                        messages=messages,
-                        stream=True,
-                        temperature=0.2,
-                        max_tokens=1200
-                    )
+                    or_models = ["deepseek/deepseek-r1-0528:free","meta-llama/llama-3.3-70b-instruct:free","mistralai/mistral-7b-instruct:free"]
+                    for or_model in or_models:
+                        try:
+                            stream = await or_client.chat.completions.create(
+                                model=or_model,
+                                messages=messages,
+                                stream=True,
+                                temperature=0.2,
+                                max_tokens=1200
+                            )
+                            break
+                        except Exception:
+                            continue
                 except Exception:
                     stream = None
 
