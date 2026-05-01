@@ -47,36 +47,41 @@ from app.api.routes.feedback import router as feedback_router
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    import asyncio
+    import asyncio, logging
+    log = logging.getLogger(__name__)
     tasks = []
-    try:
-        from app.infrastructure.queue.poller import start_poller
-        tasks.append(asyncio.create_task(start_poller()))
-    except Exception as e:
-        import logging
-        logging.getLogger(__name__).warning(f"Poller failed to start: {e}")
 
-    try:
-        from app.infrastructure.scheduler.refresh_scheduler import run_refresh_scheduler
-        tasks.append(asyncio.create_task(run_refresh_scheduler()))
-    except Exception as e:
-        import logging
-        logging.getLogger(__name__).warning(f"Refresh scheduler failed to start: {e}")
-
-    # DB migrations
+    # DB migrations — safe, no heavy work
     try:
         from app.infrastructure.db.signal_history import ensure_calibration_table
         ensure_calibration_table()
     except Exception as _dbe:
-        import logging
-        logging.getLogger(__name__).warning(f"[startup] DB migration failed: {_dbe}")
-    # Startup rebuild disabled — uses uploaded signals_cache.json + cron jobs
-    import logging
-    logging.getLogger(__name__).info("[startup] skipping auto-rebuild (using uploaded cache)")
+        log.warning(f"[startup] DB migration failed: {_dbe}")
+
+    # Poller — wrapped so crash doesn't kill app
+    try:
+        from app.infrastructure.queue.poller import start_poller
+        tasks.append(asyncio.create_task(start_poller()))
+        log.info("[startup] poller started")
+    except Exception as e:
+        log.warning(f"[startup] poller failed: {e}")
+
+    # Scheduler — wrapped so crash doesn't kill app
+    try:
+        from app.infrastructure.scheduler.refresh_scheduler import run_refresh_scheduler
+        tasks.append(asyncio.create_task(run_refresh_scheduler()))
+        log.info("[startup] scheduler started")
+    except Exception as e:
+        log.warning(f"[startup] scheduler failed: {e}")
+
+    log.info("[startup] QuantSignal API ready")
     yield
 
     for t in tasks:
-        t.cancel()
+        try:
+            t.cancel()
+        except Exception:
+            pass
 
 app = FastAPI(
     title="QuantSignal API",
