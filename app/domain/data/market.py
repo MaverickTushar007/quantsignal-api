@@ -85,27 +85,35 @@ def fetch_ohlcv(ticker, period="2y"):
 
 
 def refresh_live_prices():
-    """Refresh live price cache for all tickers. Called every 60s by scheduler."""
-    import json
-    from pathlib import Path
+    """Refresh live price cache in small batches to avoid OOM. Called by scheduler."""
+    import json, time
     from app.core.config import BASE_DIR
     from app.domain.data.universe import TICKERS
     import yfinance as yf
 
+    # Only refresh non-.NS symbols in bulk (NSE data unreliable on Railway)
+    syms = [t["symbol"] for t in TICKERS if not t["symbol"].endswith(".NS") and not t["symbol"].startswith("^NSE")]
     prices = {}
-    syms = [t["symbol"] for t in TICKERS]
-    try:
-        data = yf.download(syms, period="1d", interval="5m",
-                           group_by="ticker", progress=False, threads=True)
-        for sym in syms:
-            try:
-                closes = data[sym]["Close"].dropna() if sym in data.columns.get_level_values(0) else None
-                if closes is not None and len(closes):
-                    prices[sym] = {"price": float(closes.iloc[-1]), "ts": closes.index[-1].isoformat()}
-            except Exception:
-                pass
-    except Exception:
-        pass
+    # Process in batches of 20 to avoid OOM
+    batch_size = 20
+    for i in range(0, len(syms), batch_size):
+        batch = syms[i:i+batch_size]
+        try:
+            data = yf.download(batch, period="1d", interval="5m",
+                               group_by="ticker", progress=False, threads=False)
+            for sym in batch:
+                try:
+                    if len(batch) == 1:
+                        closes = data["Close"].dropna()
+                    else:
+                        closes = data[sym]["Close"].dropna() if sym in data.columns.get_level_values(0) else None
+                    if closes is not None and len(closes):
+                        prices[sym] = {"price": float(closes.iloc[-1]), "ts": closes.index[-1].isoformat()}
+                except Exception:
+                    pass
+        except Exception:
+            pass
+        time.sleep(0.5)
 
     if prices:
         cache_path = BASE_DIR / "data/live_prices.json"
