@@ -300,15 +300,15 @@ def get_global_news_feed():
         """More aggressive sentiment scoring — counts all occurrences, not unique words."""
         text = f"{title} {summary}".lower()
         words = text.split()
-        bulls = sum(1 for w in words if w.strip(".,!?;:'"") in BULL_WORDS)
-        bears = sum(1 for w in words if w.strip(".,!?;:'"") in BEAR_WORDS)
+        bulls = sum(1 for w in words if w.strip('.,!?;:') in BULL_WORDS)
+        bears = sum(1 for w in words if w.strip('.,!?;:') in BEAR_WORDS)
         # Lower threshold: 1 signal word is enough if uncontested
         if bulls > bears: return "BULLISH"
         if bears > bulls: return "BEARISH"
         # Tie-break: check title alone (stronger signal)
         title_words = title.lower().split()
-        t_bulls = sum(1 for w in title_words if w.strip(".,!?;:'"") in BULL_WORDS)
-        t_bears = sum(1 for w in title_words if w.strip(".,!?;:'"") in BEAR_WORDS)
+        t_bulls = sum(1 for w in title_words if w.strip('.,!?;:') in BULL_WORDS)
+        t_bears = sum(1 for w in title_words if w.strip('.,!?;:') in BEAR_WORDS)
         if t_bulls > t_bears: return "BULLISH"
         if t_bears > t_bulls: return "BEARISH"
         return "NEUTRAL"
