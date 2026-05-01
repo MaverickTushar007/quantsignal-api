@@ -23,15 +23,8 @@ def _now_ist_hour() -> float:
 
 
 async def _refresh_realtime():
-    """Every 1 min during market hours — price cache."""
-    try:
-        from app.domain.data.market import refresh_live_prices
-        await refresh_live_prices() if asyncio.iscoroutinefunction(
-            refresh_live_prices) else refresh_live_prices()
-    except (AttributeError, ImportError):
-        pass  # function may not exist yet — safe skip
-    except Exception as e:
-        log.warning(f"[scheduler] realtime refresh failed: {e}")
+    """Every 1 min during market hours — price cache. Disabled to prevent OOM."""
+    pass  # refresh_live_prices() disabled — too memory-intensive for Railway free tier
 
 
 async def _refresh_intraday():

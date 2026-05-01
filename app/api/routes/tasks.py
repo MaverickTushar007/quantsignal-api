@@ -22,11 +22,13 @@ def _rebuild():
     except Exception:
         old_cache = {}
 
-    # Warm live prices before generating signals
+    # Warm live prices before generating signals (skip on low-memory envs)
     try:
-        from app.domain.data.market import refresh_live_prices
-        refresh_live_prices()
-        print("[rebuild] live prices refreshed")
+        import os
+        if os.getenv("ENABLE_LIVE_PRICE_REFRESH", "false").lower() == "true":
+            from app.domain.data.market import refresh_live_prices
+            refresh_live_prices()
+            print("[rebuild] live prices refreshed")
     except Exception as _lpe:
         print(f"[rebuild] live price refresh failed: {_lpe}")
     try:
