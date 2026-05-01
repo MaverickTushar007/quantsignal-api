@@ -573,7 +573,14 @@ async def stream_chat(symbol: str, message: str, history: list, user_id: str = "
 
         sys_prompt += "\nSearch the web for the latest news, price action, and analyst views before responding.\n"
 
-        if not settings.groq_api_key:
+        import os
+        # Key rotation — cycle through multiple Groq keys if one is rate-limited
+        groq_keys = [k for k in [
+            settings.groq_api_key,
+            os.environ.get("GROQ_API_KEY_2", ""),
+            os.environ.get("GROQ_API_KEY_3", ""),
+        ] if k]
+        if not groq_keys:
             yield _yield_status("Error: No Groq API Key found.")
             return
 
@@ -588,7 +595,7 @@ async def stream_chat(symbol: str, message: str, history: list, user_id: str = "
             yield f"data: {json.dumps({'type': 'error', 'message': 'token_limit', 'used': estimated_tokens, 'limit': token_limit, 'tier': tier})}\n"
             return
 
-        client = AsyncGroq(api_key=settings.groq_api_key)
+        client = AsyncGroq(api_key=groq_keys[0])
         # Cap system prompt to prevent 413 from Groq
         if len(sys_prompt) > 3500:
             sys_prompt = sys_prompt[:3500] + "\n[Context truncated for brevity]"
@@ -599,24 +606,31 @@ async def stream_chat(symbol: str, message: str, history: list, user_id: str = "
 
         PRIMARY_MODEL  = "llama-3.3-70b-versatile"
         FALLBACK_MODEL = "llama-3.1-8b-instant"
-        try:
-            stream = await client.chat.completions.create(
-                model=PRIMARY_MODEL,
-                messages=messages,
-                stream=True,
-                temperature=0.2,
-                max_tokens=1200
-            )
-        except groq.RateLimitError:
-            yield "data: " + json.dumps({"type": "status", "message": "Primary model rate-limited — switching to fallback model..."}) + "\n\n"
-            stream = await client.chat.completions.create(
-                model=FALLBACK_MODEL,
-                messages=messages,
-                stream=True,
-                temperature=0.2,
-                max_tokens=1200
-            )
+        stream = None
 
+        # Try all Groq keys in rotation
+        for key_idx, groq_key in enumerate(groq_keys):
+            key_client = AsyncGroq(api_key=groq_key)
+            for model in [PRIMARY_MODEL, FALLBACK_MODEL]:
+                try:
+                    stream = await key_client.chat.completions.create(
+                        model=model,
+                        messages=messages,
+                        stream=True,
+                        temperature=0.2,
+                        max_tokens=1200
+                    )
+                    break
+                except groq.RateLimitError:
+                    if model == PRIMARY_MODEL:
+                        yield "data: " + json.dumps({"type": "status", "message": f"Rate-limited, trying key {key_idx+1}..."}) + "\n\n"
+                    continue
+            if stream is not None:
+                break
+
+        if stream is None:
+            yield f"data: {json.dumps({'type': 'error', 'message': 'All Groq keys rate-limited. Try again in a few minutes.'})}" + "\n\n"
+            return
         full_response = ""
         async for chunk in stream:
             token = chunk.choices[0].delta.content
