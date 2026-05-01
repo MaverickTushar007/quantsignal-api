@@ -628,8 +628,30 @@ async def stream_chat(symbol: str, message: str, history: list, user_id: str = "
             if stream is not None:
                 break
 
+        # OpenRouter fallback — free models, no daily limit
         if stream is None:
-            yield f"data: {json.dumps({'type': 'error', 'message': 'All Groq keys rate-limited. Try again in a few minutes.'})}" + "\n\n"
+            import os
+            or_key = os.environ.get("OPENROUTER_API_KEY", "")
+            if or_key:
+                try:
+                    yield "data: " + json.dumps({"type": "status", "message": "Switching to OpenRouter intelligence..."}) + "\n\n"
+                    from openai import AsyncOpenAI
+                    or_client = AsyncOpenAI(
+                        api_key=or_key,
+                        base_url="https://openrouter.ai/api/v1"
+                    )
+                    stream = await or_client.chat.completions.create(
+                        model="google/gemma-3-27b-it:free",
+                        messages=messages,
+                        stream=True,
+                        temperature=0.2,
+                        max_tokens=1200
+                    )
+                except Exception:
+                    stream = None
+
+        if stream is None:
+            yield f"data: {json.dumps({'type': 'error', 'message': 'All AI models are currently busy. Please try again in a few minutes.'})}" + "\n\n"
             return
         full_response = ""
         async for chunk in stream:
