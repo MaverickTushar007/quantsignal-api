@@ -70,17 +70,9 @@ async def lifespan(app: FastAPI):
     except Exception as _dbe:
         import logging
         logging.getLogger(__name__).warning(f"[startup] DB migration failed: {_dbe}")
-    # Auto-rebuild cache on startup (Railway filesystem is ephemeral)
-    try:
-        import threading
-        from app.api.routes.tasks import _rebuild
-        _t = threading.Thread(target=_rebuild, daemon=True)
-        _t.start()
-        import logging
-        logging.getLogger(__name__).info("[startup] cache rebuild triggered")
-    except Exception as e:
-        import logging
-        logging.getLogger(__name__).warning(f"[startup] cache rebuild failed: {e}")
+    # Startup rebuild disabled — uses uploaded signals_cache.json + cron jobs
+    import logging
+    logging.getLogger(__name__).info("[startup] skipping auto-rebuild (using uploaded cache)")
     yield
 
     for t in tasks:
