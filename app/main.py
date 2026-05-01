@@ -58,24 +58,8 @@ async def lifespan(app: FastAPI):
     except Exception as _dbe:
         log.warning(f"[startup] DB migration failed: {_dbe}")
 
-    # Poller + Scheduler — deferred 10s so startup completes first
-    async def _start_background():
-        await asyncio.sleep(10)
-        try:
-            from app.infrastructure.queue.poller import start_poller
-            coro = start_poller()
-            if asyncio.iscoroutine(coro):
-                await coro
-        except Exception as e:
-            log.warning(f"[bg] poller failed: {e}")
-        try:
-            from app.infrastructure.scheduler.refresh_scheduler import run_refresh_scheduler
-            await run_refresh_scheduler()
-        except Exception as e:
-            log.warning(f"[bg] scheduler failed: {e}")
-
-    tasks.append(asyncio.create_task(_start_background()))
-    log.info("[startup] background tasks deferred 10s")
+    # Background tasks disabled — cron jobs handle refresh via HTTP endpoints
+    log.info("[startup] background tasks disabled — using Railway cron jobs")
 
     log.info("[startup] QuantSignal API ready")
     yield
