@@ -282,17 +282,53 @@ async def get_signal_reasoning(symbol: str, _gate: dict = Depends(signal_gate)):
 @router.get("/news/feed")
 def get_global_news_feed():
     """Global news feed across key symbols for the News tab."""
-    from app.domain.data.news import get_news
-    import time
+    from app.domain.data.news import get_news, BULL_WORDS, BEAR_WORDS
 
     FEED_SYMBOLS = [
         ("BTC-USD", "CRYPTO"), ("ETH-USD", "CRYPTO"), ("SOL-USD", "CRYPTO"),
+        ("BNB-USD", "CRYPTO"), ("XRP-USD", "CRYPTO"),
         ("SPY", "EQUITY"), ("QQQ", "EQUITY"), ("AAPL", "EQUITY"),
         ("NVDA", "EQUITY"), ("TSLA", "EQUITY"), ("MSFT", "EQUITY"),
         ("GC=F", "COMMODITY"), ("CL=F", "COMMODITY"), ("SI=F", "COMMODITY"),
         ("EURUSD=X", "FOREX"), ("GBPUSD=X", "FOREX"), ("DX-Y.NYB", "FOREX"),
         ("^GSPC", "MACRO"), ("^VIX", "MACRO"), ("^TNX", "MACRO"),
+        ("^NSEI", "INDIA"), ("^BSESN", "INDIA"), ("RELIANCE.NS", "INDIA"),
+        ("INFY.NS", "INDIA"), ("TCS.NS", "INDIA"),
     ]
+
+    def _strong_sentiment(title: str, summary: str) -> str:
+        """More aggressive sentiment scoring — counts all occurrences, not unique words."""
+        text = f"{title} {summary}".lower()
+        words = text.split()
+        bulls = sum(1 for w in words if w.strip(".,!?;:'"") in BULL_WORDS)
+        bears = sum(1 for w in words if w.strip(".,!?;:'"") in BEAR_WORDS)
+        # Lower threshold: 1 signal word is enough if uncontested
+        if bulls > bears: return "BULLISH"
+        if bears > bulls: return "BEARISH"
+        # Tie-break: check title alone (stronger signal)
+        title_words = title.lower().split()
+        t_bulls = sum(1 for w in title_words if w.strip(".,!?;:'"") in BULL_WORDS)
+        t_bears = sum(1 for w in title_words if w.strip(".,!?;:'"") in BEAR_WORDS)
+        if t_bulls > t_bears: return "BULLISH"
+        if t_bears > t_bulls: return "BEARISH"
+        return "NEUTRAL"
+
+    def _infer_symbol_tag(title: str, summary: str, fallback: str) -> str:
+        """Pick the most relevant ticker mentioned in the article."""
+        text = f"{title} {summary}".upper()
+        MENTIONS = [
+            ("BITCOIN", "BTC"), ("BTC", "BTC"), ("ETHEREUM", "ETH"), ("ETH", "ETH"),
+            ("SOLANA", "SOL"), ("XRP", "XRP"), ("NVIDIA", "NVDA"), ("NVDA", "NVDA"),
+            ("APPLE", "AAPL"), ("AAPL", "AAPL"), ("TESLA", "TSLA"), ("TSLA", "TSLA"),
+            ("MICROSOFT", "MSFT"), ("MSFT", "MSFT"), ("S&P 500", "SPX"), ("SPX", "SPX"),
+            ("NASDAQ", "QQQ"), ("QQQ", "QQQ"), ("GOLD", "GC=F"), ("OIL", "CL=F"),
+            ("NIFTY", "NIFTY"), ("SENSEX", "SENSEX"), ("RELIANCE", "RELIANCE"),
+            ("INFOSYS", "INFY"), ("EUR/USD", "EURUSD"), ("DXY", "DXY"),
+        ]
+        for keyword, tag in MENTIONS:
+            if keyword in text:
+                return tag
+        return fallback
 
     seen_titles = set()
     articles = []
@@ -310,8 +346,8 @@ def get_global_news_feed():
                     "summary": item.summary,
                     "source": item.source,
                     "url": item.url,
-                    "sentiment": item.sentiment,
-                    "symbol": symbol,
+                    "sentiment": _strong_sentiment(item.title, item.summary),
+                    "symbol": _infer_symbol_tag(item.title, item.summary, symbol),
                     "category": category,
                 })
         except Exception:
