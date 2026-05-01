@@ -277,3 +277,44 @@ async def get_signal_reasoning(symbol: str, _gate: dict = Depends(signal_gate)):
         "reasoning": redis_reasoning or signal.get("reasoning") or None,
         "timestamp": signal.get("timestamp"),
     }
+
+
+@router.get("/news/feed")
+def get_global_news_feed():
+    """Global news feed across key symbols for the News tab."""
+    from app.domain.data.news import get_news
+    import time
+
+    FEED_SYMBOLS = [
+        ("BTC-USD", "CRYPTO"), ("ETH-USD", "CRYPTO"), ("SOL-USD", "CRYPTO"),
+        ("SPY", "EQUITY"), ("QQQ", "EQUITY"), ("AAPL", "EQUITY"),
+        ("NVDA", "EQUITY"), ("TSLA", "EQUITY"), ("MSFT", "EQUITY"),
+        ("GC=F", "COMMODITY"), ("CL=F", "COMMODITY"), ("SI=F", "COMMODITY"),
+        ("EURUSD=X", "FOREX"), ("GBPUSD=X", "FOREX"), ("DX-Y.NYB", "FOREX"),
+        ("^GSPC", "MACRO"), ("^VIX", "MACRO"), ("^TNX", "MACRO"),
+    ]
+
+    seen_titles = set()
+    articles = []
+
+    for symbol, category in FEED_SYMBOLS:
+        try:
+            items = get_news(symbol, limit=4)
+            for item in items:
+                key = item.title[:60].lower().strip()
+                if key in seen_titles:
+                    continue
+                seen_titles.add(key)
+                articles.append({
+                    "title": item.title,
+                    "summary": item.summary,
+                    "source": item.source,
+                    "url": item.url,
+                    "sentiment": item.sentiment,
+                    "symbol": symbol,
+                    "category": category,
+                })
+        except Exception:
+            pass
+
+    return articles
