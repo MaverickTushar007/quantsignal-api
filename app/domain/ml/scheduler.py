@@ -159,6 +159,21 @@ def _seed_news_backtest():
         logger.error(f"[news_backtest_seed] failed: {e}")
 
 
+def _refresh_macro_regime():
+    """Daily macro regime refresh — runs at 07:00 UTC using FRED data."""
+    try:
+        from app.domain.data.macro_regime import get_macro_regime
+        import os; os.environ.setdefault("FORCE_REGIME_REFRESH", "1")
+        # Delete cache to force refresh
+        from app.domain.data.macro_regime import REGIME_CACHE
+        if REGIME_CACHE.exists():
+            REGIME_CACHE.unlink()
+        result = get_macro_regime()
+        logger.info(f"[macro_regime] refreshed: {result['regime']} vix={result['details'].get('vix')}")
+    except Exception as e:
+        logger.error(f"[macro_regime] refresh failed: {e}")
+
+
 def register_data_jobs(scheduler: "BackgroundScheduler"):
     """
     Call this from start_scheduler() to register COT + news backtest jobs.
@@ -183,4 +198,12 @@ def register_data_jobs(scheduler: "BackgroundScheduler"):
         replace_existing=True,
         misfire_grace_time=3600,
     )
-    logger.info("[scheduler] COT weekly + news backtest daily jobs registered")
+    scheduler.add_job(
+        _refresh_macro_regime,
+        trigger="cron",
+        hour=7, minute=0,
+        id="macro_regime_daily",
+        replace_existing=True,
+        misfire_grace_time=3600,
+    )
+    logger.info("[scheduler] COT weekly + news backtest daily + macro regime jobs registered")
