@@ -36,10 +36,40 @@ def _llm_sentiment_score(headlines: List[str]) -> float:
         return float(match.group()) if match else 0.0
     except Exception: return 0.0
 
+def _is_relevant(title: str, symbol: str) -> bool:
+    """Filter out news that's clearly about a different asset."""
+    title_upper = title.upper()
+    sym_upper = symbol.upper()
+
+    # Build expected keywords from symbol
+    SYMBOL_KEYWORDS = {
+        "AAPL": ["APPLE", "IPHONE", "IPAD", "MAC", "AAPL", "TIM COOK"],
+        "NVDA": ["NVIDIA", "NVDA", "GPU", "CUDA", "JENSEN HUANG"],
+        "MSFT": ["MICROSOFT", "MSFT", "AZURE", "WINDOWS", "SATYA NADELLA"],
+        "GOOGL": ["GOOGLE", "GOOGL", "ALPHABET", "YOUTUBE", "GEMINI"],
+        "AMZN": ["AMAZON", "AMZN", "AWS", "PRIME"],
+        "BTC-USD": ["BITCOIN", "BTC", "CRYPTO", "CRYPTOCURRENCY"],
+        "ETH-USD": ["ETHEREUM", "ETH", "ETHER"],
+        "SOL-USD": ["SOLANA", "SOL"],
+        "GC=F": ["GOLD", "BULLION", "XAU"],
+        "CL=F": ["CRUDE", "OIL", "WTI", "BRENT", "OPEC"],
+        "SI=F": ["SILVER", "XAG"],
+        "NG=F": ["NATURAL GAS", "LNG"],
+        "EURUSD=X": ["EURO", "EUR", "ECB", "EUROZONE"],
+        "GBPUSD=X": ["POUND", "GBP", "STERLING", "BOE", "BANK OF ENGLAND"],
+        "JPYUSD=X": ["YEN", "JPY", "BOJ", "BANK OF JAPAN"],
+        "SPY": ["S&P", "S&P 500", "SPY", "SP500"],
+        "QQQ": ["NASDAQ", "QQQ", "TECH STOCKS"],
+    }
+    keywords = SYMBOL_KEYWORDS.get(sym_upper, [sym_upper.replace("=F","").replace("=X","").replace("-USD","")])
+    return any(kw in title_upper for kw in keywords)
+
+
 def get_news(symbol: str, limit: int = 5) -> List[NewsItem]:
     try:
         import yfinance as yf
-        raw_news = yf.Ticker(symbol).news or []
+        raw_news = [n for n in (yf.Ticker(symbol).news or [])
+                    if _is_relevant(n.get("title",""), symbol)]
     except Exception: return []
     results = []
     for item in raw_news[:limit]:
