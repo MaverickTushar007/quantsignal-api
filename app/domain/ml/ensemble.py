@@ -306,6 +306,42 @@ def predict(ticker, df, sentiment=0.0):
             except Exception:
                 pass
 
+            # ── OFI — Order Flow Imbalance (Phase 2B) ────────────────────
+            # Ref: arXiv 2508.06788, dm13450 OFI blog
+            try:
+                from app.domain.data.order_flow import get_ofi_features
+                _ofi = get_ofi_features(ticker)
+                if _ofi.get("available"):
+                    _ofi_sig = _ofi["ofi_signal"]
+                    if _ofi_sig == 1 and prob > 0.5:
+                        prob = prob + 0.01
+                    elif _ofi_sig == -1 and prob < 0.5:
+                        prob = prob - 0.01
+            except Exception:
+                pass
+
+            # ── Liquidation cascade signal (Phase 2C) ─────────────────────
+            # Ref: Binance forced liquidations, CoinGlass
+            try:
+                from app.domain.data.liquidation_heatmap import get_liquidation_signal
+                _liq = get_liquidation_signal(ticker)
+                if _liq.get("available"):
+                    _liq_sig = _liq["liq_signal"]
+                    if _liq_sig == 1 and prob > 0.5:
+                        prob = prob + 0.015
+                    elif _liq_sig == -1 and prob < 0.5:
+                        prob = prob - 0.015
+            except Exception:
+                pass
+
+            # ── Macro regime scaling (Phase 3) ────────────────────────────
+            # Ref: FRBSF regime-switching model, LuxAlgo market regimes
+            try:
+                from app.domain.data.macro_regime import apply_regime_to_prob
+                prob = apply_regime_to_prob(prob, direction)
+            except Exception:
+                pass
+
             prob = round(max(0.01, min(0.99, prob)), 4)
         except Exception:
             prob = raw_prob
