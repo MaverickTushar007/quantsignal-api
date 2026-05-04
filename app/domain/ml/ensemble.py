@@ -257,6 +257,55 @@ def predict(ticker, df, sentiment=0.0):
             except Exception:
                 pass
 
+            # ── VWAP confluence factor (Phase 1) ──────────────────────────
+            # Ref: HyroTrader VWAP guide, arXiv 2502.13722
+            try:
+                from app.domain.data.vwap import vwap_features as _vwap_feats
+                _vwap = _vwap_feats(
+                    highs=df["High"].tolist(), lows=df["Low"].tolist(),
+                    closes=df["Close"].tolist(), volumes=df["Volume"].tolist(),
+                    session_bars=1440,
+                )
+                _vwap_sig = _vwap["vwap_signal"]   # +1, -1, or 0
+                if _vwap_sig == 1 and prob > 0.5:   # bullish confluence → nudge up
+                    prob = prob + 0.01
+                elif _vwap_sig == -1 and prob < 0.5: # bearish confluence → nudge down
+                    prob = prob - 0.01
+            except Exception:
+                pass
+
+            # ── COT institutional positioning (Phase 1) ────────────────────
+            # Ref: CFTC COT report, Bank of Canada order-flow paper
+            # https://www.bankofcanada.ca/wp-content/uploads/2010/09/rime2.pdf
+            try:
+                from app.domain.data.cot import get_cot_signal as _get_cot
+                _cot = _get_cot(ticker)
+                _cot_sig = _cot.get("signal", "NEUTRAL")
+                if _cot.get("available"):
+                    if _cot_sig == "NET_LONG"    and prob > 0.5: prob = prob + 0.01
+                    elif _cot_sig == "NET_SHORT"  and prob < 0.5: prob = prob - 0.01
+                    elif _cot_sig == "CROWDED_LONG":              prob = prob - 0.015
+                    elif _cot_sig == "CROWDED_SHORT":             prob = prob + 0.015
+            except Exception:
+                pass
+
+            # ── News backtest weighted sentiment (Phase 1) ─────────────────
+            # Ref: Feuerriegel (2016), "First to Read the News" (2020)
+            # https://arxiv.org/abs/1807.06824
+            try:
+                from app.domain.data.news import get_news as _get_news
+                from app.domain.data.news_backtest import score_sentiment as _score_sent, signal_weight as _sig_wt
+                _news = _get_news(ticker, limit=3)
+                for _ni in _news[:3]:
+                    _ns, _nc = _score_sent(_ni.title)
+                    _nw = _sig_wt(_ni.source, _ns, horizon="24h")
+                    if _ns == "BULLISH":
+                        prob = prob + 0.01 * _nw * _nc
+                    elif _ns == "BEARISH":
+                        prob = prob - 0.01 * _nw * _nc
+            except Exception:
+                pass
+
             prob = round(max(0.01, min(0.99, prob)), 4)
         except Exception:
             prob = raw_prob

@@ -1,354 +1,193 @@
 """
-app/domain/ml/labeling.py
+labeling.py — Triple Barrier Labeling for QuantSignal
 
-Triple-barrier labeling + meta-labeling for QuantSignal.
-Replaces the naive pct_change threshold in ensemble.py with
-volatility-aware labels that reflect actual trade outcomes.
+Replaces naive "price up 5 days later = BUY" labels with proper
+triple barrier labels from López de Prado (AFML, Chapter 3).
 
-Triple Barrier Logic (from AFML Chapter 3):
-  - Upper barrier: close + pt_sl[0] * daily_vol * close  (profit target)
-  - Lower barrier: close - pt_sl[1] * daily_vol * close  (stop loss)
-  - Vertical barrier: t1 (time cutoff)
-  - Label = +1 if upper hit first, -1 if lower hit first, 0 if time cutoff
+Academic basis:
+  - López de Prado (2018) "Advances in Financial Machine Learning" Ch.3
+  - Triple Barrier Method — Interactive Brokers Campus:
+    https://www.interactivebrokers.com/campus/ibkr-quant-news/the-triple-barrier-method-a-python-gpu-based-computation-part-i/
+  - Quantreo triple barrier overview:
+    https://www.newsletter.quantreo.com/p/the-triple-barrier-labeling-of-marco
+  - arXiv 2504.02249 (triple barrier + raw time series for stock prediction):
+    https://arxiv.org/abs/2504.02249
+  - mlfinlab reference implementation (Hudson & Thames):
+    https://github.com/hudson-and-thames/mlfinlab
 
-Meta-labeling (from AFML Chapter 3.6):
-  - Primary model generates direction (BUY/SELL)
-  - Secondary model predicts WHETHER primary model is correct
-  - Output: binary (1 = take trade, 0 = skip) + confidence score
+Label logic:
+  For each row t with entry price p0:
+    Upper barrier: p0 * (1 + pt_mult * daily_vol)   → BUY  (1)
+    Lower barrier: p0 * (1 - sl_mult * daily_vol)   → SELL (−1)
+    Vertical barrier: t + num_days                  → HOLD  (0)
+
+  First barrier hit determines label.
+  bin=1: TP hit first (BUY)
+  bin=0: SL hit first (SELL)
+  bin=-1 (HOLD) mapped to 0 in binary classification
+
+This replaces the naive 5-day return threshold used in ensemble.py fallback.
 """
 
+from __future__ import annotations
+import logging
 import numpy as np
 import pandas as pd
-from typing import Optional, Tuple
+from typing import Optional
+
+logger = logging.getLogger(__name__)
 
 
-# ─────────────────────────────────────────────
-# 1. DAILY VOLATILITY (base unit for barriers)
-# ─────────────────────────────────────────────
-
-def get_daily_vol(close: pd.Series, span: int = 20) -> pd.Series:
+def _daily_vol(close: pd.Series, span: int = 20) -> pd.Series:
     """
-    Compute daily log-return volatility using EWM.
-    Used to scale barrier widths dynamically per asset.
-
-    Args:
-        close: pd.Series of closing prices
-        span:  EWM span (default 20 days)
-
-    Returns:
-        pd.Series of daily vol estimates (same index as close)
+    Compute exponentially weighted daily volatility (std of log returns).
+    Used to scale barrier width — wider barriers in volatile regimes.
+    Ref: AFML Ch.3, Eq. 3.1
     """
     log_ret = np.log(close / close.shift(1)).dropna()
-    vol = log_ret.ewm(span=span).std()
-    return vol.reindex(close.index).ffill()
+    vol = log_ret.ewm(span=span, min_periods=span // 2).std()
+    return vol.reindex(close.index).fillna(method="bfill").fillna(0.01)
 
-
-# ─────────────────────────────────────────────
-# 2. VERTICAL BARRIER (time cutoff)
-# ─────────────────────────────────────────────
-
-def get_vertical_barrier(
-    close: pd.Series,
-    t_events: pd.DatetimeIndex,
-    num_days: int = 5,
-) -> pd.Series:
-    """
-    For each event in t_events, find the timestamp num_days ahead.
-    This forms the right edge of the triple barrier.
-
-    Args:
-        close:    price series
-        t_events: event timestamps (signal fire dates)
-        num_days: max holding period in days
-
-    Returns:
-        pd.Series mapping event_date -> vertical_barrier_date
-    """
-    t1 = close.index.searchsorted(t_events + pd.Timedelta(days=num_days))
-    t1 = t1[t1 < close.shape[0]]
-    t1 = pd.Series(
-        close.index[t1],
-        index=t_events[:t1.shape[0]],
-        name="t1",
-    )
-    return t1
-
-
-# ─────────────────────────────────────────────
-# 3. TRIPLE BARRIER LABELING
-# ─────────────────────────────────────────────
-
-def get_events(
-    close: pd.Series,
-    t_events: pd.DatetimeIndex,
-    pt_sl: Tuple[float, float],
-    target: pd.Series,
-    min_ret: float = 0.0,
-    num_threads: int = 1,
-    t1: Optional[pd.Series] = None,
-    side: Optional[pd.Series] = None,
-) -> pd.DataFrame:
-    """
-    Find the first barrier touch for each event in t_events.
-
-    Args:
-        close:    price series
-        t_events: timestamps where we consider entering a trade
-        pt_sl:    (profit_take_mult, stop_loss_mult) — barrier widths as multiples of target
-        target:   volatility series (from get_daily_vol) — scales barrier width
-        min_ret:  minimum return threshold to consider a valid event
-        t1:       vertical barrier series (from get_vertical_barrier)
-        side:     primary model side (+1 BUY, -1 SELL) — for meta-labeling only
-
-    Returns:
-        DataFrame with columns: t1, trgt, side (if provided)
-    """
-    # Filter events by minimum return threshold
-    target = target.reindex(t_events).dropna()
-    target = target[target > min_ret]
-
-    # Vertical barrier
-    if t1 is None:
-        t1 = pd.Series(pd.NaT, index=t_events)
-    t1 = t1.reindex(target.index)
-
-    # Side (for meta-labeling)
-    if side is None:
-        _side = pd.Series(1.0, index=target.index)  # assume BUY for pure labeling
-    else:
-        _side = side.reindex(target.index).fillna(1.0)
-
-    events = pd.concat({"t1": t1, "trgt": target, "side": _side}, axis=1).dropna(subset=["trgt"])
-
-    # For each event, find first barrier touch
-    out = []
-    for loc, (t1_val, trgt, side_val) in events.iterrows():
-        path = _get_path(close, loc, t1_val, trgt, pt_sl, side_val)
-        out.append(path)
-
-    out_df = pd.DataFrame(out, index=events.index)
-    return out_df
-
-
-def _get_path(
-    close: pd.Series,
-    loc: pd.Timestamp,
-    t1: pd.Timestamp,
-    trgt: float,
-    pt_sl: Tuple[float, float],
-    side: float,
-) -> dict:
-    """
-    For a single event at `loc`, scan price path until first barrier touch.
-    Returns dict with: t1 (touch time), sl (stop level), pt (profit level), ret, label
-    """
-    # Barrier levels
-    price_0 = close.loc[loc]
-    pt_level = price_0 * (1 + pt_sl[0] * trgt * side)   # profit target
-    sl_level = price_0 * (1 - pt_sl[1] * trgt * side)   # stop loss
-
-    # Path: prices between entry and vertical barrier
-    if pd.isnull(t1):
-        path = close.loc[loc:]
-    else:
-        path = close.loc[loc:t1]
-
-    # First touch
-    pt_touched = path[path * side >= pt_level * side]
-    sl_touched = path[path * side <= sl_level * side]
-
-    # Determine which barrier was hit first
-    t_pt = pt_touched.index[0] if len(pt_touched) > 0 else pd.NaT
-    t_sl = sl_touched.index[0] if len(sl_touched) > 0 else pd.NaT
-
-    if pd.isnull(t_pt) and pd.isnull(t_sl):
-        # No barrier hit — vertical barrier (time cutoff)
-        touch_time = t1 if not pd.isnull(t1) else path.index[-1]
-        label = 0
-    elif pd.isnull(t_sl) or (not pd.isnull(t_pt) and t_pt <= t_sl):
-        touch_time = t_pt
-        label = 1   # profit target hit first
-    else:
-        touch_time = t_sl
-        label = -1  # stop loss hit first
-
-    ret = (close.loc[touch_time] / price_0 - 1) * side if touch_time in close.index else 0.0
-
-    return {
-        "touch_time": touch_time,
-        "ret": round(ret, 6),
-        "label": label,
-        "pt_level": round(pt_level, 4),
-        "sl_level": round(sl_level, 4),
-    }
-
-
-def get_bins(events: pd.DataFrame, close: pd.Series) -> pd.DataFrame:
-    """
-    Convert events DataFrame into labeled training rows.
-
-    For pure labeling (no side): label ∈ {-1, 0, 1}
-    For meta-labeling (side given): label ∈ {0, 1} — was the primary model correct?
-
-    Args:
-        events: output of get_events()
-        close:  price series
-
-    Returns:
-        DataFrame with columns: ret, bin (label for training)
-    """
-    events_ = events.dropna(subset=["touch_time"])
-    px = events_["touch_time"].map(close)
-    out = pd.DataFrame(index=events_.index)
-    out["ret"] = events_["ret"]
-    out["label"] = events_["label"]
-
-    # Meta-labeling: was primary side correct?
-    if "side" in events_.columns:
-        out["bin"] = np.where(out["label"] * events_["side"].values > 0, 1, 0)
-    else:
-        out["bin"] = out["label"]  # standard triple-barrier label
-
-    return out[["ret", "bin"]]
-
-
-# ─────────────────────────────────────────────
-# 4. DROP RARE LABELS (optional balance step)
-# ─────────────────────────────────────────────
-
-def drop_labels(events: pd.DataFrame, min_pct: float = 0.05) -> pd.DataFrame:
-    """
-    Remove label classes that appear less than min_pct of the time.
-    Prevents model from training on near-zero-sample classes.
-
-    Args:
-        events:  DataFrame with 'bin' column
-        min_pct: minimum fraction for a class to be kept
-
-    Returns:
-        Filtered DataFrame
-    """
-    while True:
-        counts = events["bin"].value_counts(normalize=True)
-        rare = counts[counts < min_pct]
-        if rare.empty:
-            break
-        events = events[~events["bin"].isin(rare.index)]
-    return events
-
-
-# ─────────────────────────────────────────────
-# 5. HIGH-LEVEL CONVENIENCE: LABEL FROM DF
-# ─────────────────────────────────────────────
 
 def build_triple_barrier_labels(
     df: pd.DataFrame,
-    pt_mult: float = 2.0,
-    sl_mult: float = 1.0,
-    vol_span: int = 20,
-    num_days: int = 5,
-    min_ret: float = 0.001,
-    side: Optional[pd.Series] = None,
+    pt_mult: float = 2.0,      # profit-take multiplier (ATR units)
+    sl_mult: float = 1.0,      # stop-loss multiplier (ATR units)
+    num_days: int = 5,         # vertical barrier width in trading days
+    min_ret: float = 0.001,    # minimum return to trigger a label (noise filter)
+    vol_span: int = 20,        # EWM span for volatility estimation
 ) -> pd.DataFrame:
     """
-    End-to-end: take a raw OHLCV DataFrame, return labeled rows.
-
-    This is the drop-in replacement for the naive label generation in ensemble.py:
-
-        BEFORE (naive):
-            future_ret = df["Close"].pct_change(FORWARD_DAYS).shift(-FORWARD_DAYS)
-            labels[future_ret >  thresh] = 1
-            labels[future_ret < -thresh] = 0
-
-        AFTER (triple barrier):
-            labeled = build_triple_barrier_labels(df, pt_mult=2.0, sl_mult=1.0)
-            labels = labeled["bin"]
+    Apply triple barrier labeling to an OHLCV dataframe.
 
     Args:
-        df:       OHLCV DataFrame with at minimum a 'Close' column
-        pt_mult:  profit target width (multiples of daily vol)
-        sl_mult:  stop loss width (multiples of daily vol)
-        vol_span: EWM span for daily vol
-        num_days: vertical barrier (max holding period in days)
-        min_ret:  minimum daily vol for event to be included
-        side:     optional primary model side series for meta-labeling
+        df:       OHLCV dataframe (daily bars)
+        pt_mult:  profit-take = pt_mult * daily_vol above entry
+        sl_mult:  stop-loss   = sl_mult * daily_vol below entry
+        num_days: max holding period in bars
+        min_ret:  minimum |return| to label as 1 or -1 (else 0)
+        vol_span: EWM span for volatility
 
     Returns:
-        DataFrame with columns: ret, bin
-        Index aligns with df index — can be merged back with features directly.
+        DataFrame with columns:
+          t1    : timestamp of first barrier hit
+          ret   : return from entry to first barrier
+          bin   : 1 (TP hit), -1 (SL hit), 0 (time barrier / hold)
+          bin_binary: 1 (TP hit = BUY), 0 (everything else = not-BUY)
+
+    Usage in ensemble.py train():
+        from app.domain.ml.labeling import build_triple_barrier_labels
+        labeled = build_triple_barrier_labels(df, pt_mult=2.0, sl_mult=1.0, num_days=5)
+        y = labeled["bin_binary"]
     """
-    close = df["Close"]
-    if isinstance(close.index, pd.RangeIndex):
-        # Give it a datetime index if not already (needed for time arithmetic)
-        close = close.copy()
-        close.index = pd.date_range(end=pd.Timestamp.today(), periods=len(close), freq="B")
-        if side is not None:
-            side = side.copy()
-            side.index = close.index
+    if isinstance(df.columns, pd.MultiIndex):
+        df = df.copy()
+        df.columns = df.columns.get_level_values(0)
 
-    # Step 1: daily vol
-    daily_vol = get_daily_vol(close, span=vol_span)
+    close = df["Close"].dropna()
+    if len(close) < num_days + vol_span:
+        logger.warning("[labeling] Not enough bars for triple barrier")
+        return pd.DataFrame()
 
-    # Step 2: use every row as a potential event
-    t_events = close.index
+    vol = _daily_vol(close, span=vol_span)
 
-    # Step 3: vertical barrier
-    t1 = get_vertical_barrier(close, t_events, num_days=num_days)
+    records = []
+    close_vals = close.values
+    close_idx  = close.index
 
-    # Step 4: get events (first barrier touch per row)
-    events = get_events(
-        close=close,
-        t_events=t_events,
-        pt_sl=(pt_mult, sl_mult),
-        target=daily_vol,
-        min_ret=min_ret,
-        t1=t1,
-        side=side,
+    for i in range(len(close_vals) - num_days):
+        t0   = close_idx[i]
+        p0   = close_vals[i]
+        v0   = float(vol.iloc[i])
+
+        if v0 < min_ret:
+            v0 = min_ret
+
+        upper = p0 * (1 + pt_mult * v0)
+        lower = p0 * (1 - sl_mult * v0)
+
+        # Search forward up to num_days bars
+        t1    = close_idx[min(i + num_days, len(close_vals) - 1)]
+        ret   = 0.0
+        label = 0   # default: time barrier (HOLD)
+
+        for j in range(i + 1, min(i + num_days + 1, len(close_vals))):
+            p_j = close_vals[j]
+            if p_j >= upper:
+                label = 1                          # TP hit → BUY
+                t1    = close_idx[j]
+                ret   = (p_j - p0) / p0
+                break
+            elif p_j <= lower:
+                label = -1                         # SL hit → SELL
+                t1    = close_idx[j]
+                ret   = (p_j - p0) / p0
+                break
+        else:
+            # Time barrier: use final price in window
+            p_final = close_vals[min(i + num_days, len(close_vals) - 1)]
+            ret     = (p_final - p0) / p0
+            # Label by return magnitude at time barrier
+            if ret > min_ret:
+                label = 1
+            elif ret < -min_ret:
+                label = -1
+            else:
+                label = 0
+
+        records.append({
+            "t0":  t0,
+            "t1":  t1,
+            "ret": round(ret, 6),
+            "bin": label,
+            "bin_binary": 1 if label == 1 else 0,
+        })
+
+    result = pd.DataFrame(records).set_index("t0")
+    result.index.name = None
+
+    n_buy  = (result["bin"] ==  1).sum()
+    n_sell = (result["bin"] == -1).sum()
+    n_hold = (result["bin"] ==  0).sum()
+    logger.info(
+        f"[labeling] triple barrier: {len(result)} labels | "
+        f"BUY={n_buy} ({n_buy/len(result)*100:.1f}%) "
+        f"SELL={n_sell} ({n_sell/len(result)*100:.1f}%) "
+        f"HOLD={n_hold} ({n_hold/len(result)*100:.1f}%)"
     )
-
-    # Step 5: label
-    labeled = get_bins(events, close)
-
-    return labeled
+    return result
 
 
-# ─────────────────────────────────────────────
-# 6. META-LABEL WRAPPER
-# ─────────────────────────────────────────────
-
-def build_meta_labels(
-    df: pd.DataFrame,
-    primary_side: pd.Series,
-    pt_mult: float = 2.0,
-    sl_mult: float = 1.0,
-    num_days: int = 5,
+def meta_label(
+    primary_labels: pd.Series,
+    primary_probs:  pd.Series,
+    prob_threshold: float = 0.55,
 ) -> pd.DataFrame:
     """
-    Build meta-labels given a primary model's direction predictions.
-
-    Use this to train a secondary model that predicts:
-        "Is the primary model correct on this trade?"
-
-    The secondary model output (0/1 probability) is used as a
-    confidence filter — only take trades where secondary_prob > threshold.
+    Meta-labeling (AFML Ch.3 extension).
+    
+    Given primary model predictions + probabilities, create a secondary
+    binary label: "was the primary model correct AND confident enough?"
+    
+    This is Phase 3 — a second model learns WHEN to trust the primary model.
+    Ref: López de Prado AFML Ch.3, mlfinlab meta-labeling docs.
 
     Args:
-        df:           OHLCV DataFrame
-        primary_side: pd.Series with values +1 (BUY) or -1 (SELL)
-                      aligned with df.index
-        pt_mult:      profit target multiplier
-        sl_mult:      stop loss multiplier
-        num_days:     max holding period
+        primary_labels: pd.Series of predicted labels (BUY=1/SELL=0)
+        primary_probs:  pd.Series of predicted probabilities
+        prob_threshold: minimum prob for meta-label = 1
 
     Returns:
-        DataFrame with columns: ret, bin
-        bin = 1 means "primary model was correct, take this trade"
-        bin = 0 means "primary model was wrong, skip this trade"
+        DataFrame with meta_label column (1 = trust primary, 0 = skip)
     """
-    return build_triple_barrier_labels(
-        df=df,
-        pt_mult=pt_mult,
-        sl_mult=sl_mult,
-        num_days=num_days,
-        side=primary_side,
+    df = pd.DataFrame({
+        "primary_label": primary_labels,
+        "primary_prob":  primary_probs,
+    })
+    df["meta_label"] = (
+        (df["primary_prob"] >= prob_threshold).astype(int)
     )
+    logger.info(
+        f"[meta_label] {df['meta_label'].sum()} / {len(df)} signals pass meta threshold {prob_threshold}"
+    )
+    return df

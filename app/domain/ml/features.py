@@ -559,3 +559,34 @@ def build_features_trend(df: pd.DataFrame) -> pd.DataFrame:
 
     feat = feat.replace([np.inf, -np.inf], np.nan)
     return feat
+
+
+# ── VWAP features (Phase 1 addition) ─────────────────────────────────────────
+# Academic basis: HyroTrader VWAP guide, arXiv 2502.13722
+# https://www.hyrotrader.com/blog/vwap-trading-strategy/
+# https://arxiv.org/html/2502.13722v2
+
+VWAP_FEATURE_COLUMNS = ["dist_vwap", "vwap_slope"]
+
+def add_vwap_features(feat: pd.DataFrame, df: pd.DataFrame, session_bars: int = 1440) -> pd.DataFrame:
+    """
+    Injects dist_vwap and vwap_slope into an existing feature DataFrame.
+    Call this after build_features() or build_features_trend().
+
+    session_bars=1440 for crypto (24h), 390 for equities (6.5h session).
+    """
+    try:
+        from app.domain.data.vwap import vwap_features as _vwap_feats
+        highs   = df["High"].tolist()   if "High"   in df.columns else df["Close"].tolist()
+        lows    = df["Low"].tolist()    if "Low"    in df.columns else df["Close"].tolist()
+        closes  = df["Close"].tolist()
+        volumes = df["Volume"].tolist() if "Volume" in df.columns else [1.0] * len(closes)
+        vf = _vwap_feats(highs=highs, lows=lows, closes=closes,
+                         volumes=volumes, session_bars=session_bars)
+        feat["dist_vwap"]  = vf["dist_vwap"]
+        feat["vwap_slope"] = vf["vwap_slope"]
+    except Exception as _e:
+        logger.warning(f"[vwap_features] failed: {_e}")
+        feat["dist_vwap"]  = 0.0
+        feat["vwap_slope"] = 0.0
+    return feat

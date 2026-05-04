@@ -37,3 +37,8 @@ PyPDF2==3.0.1
 litellm==1.83.0
 pyyaml==6.0.2
 openai>=1.0.0
+# FinBERT sentiment — optional, falls back to word-count if not installed
+# https://huggingface.co/ProsusAI/finbert | https://finbert.org
+transformers>=4.40.0
+sentencepiece>=0.1.99
+# torch: install separately with: pip install torch --index-url https://download.pytorch.org/whl/cpu
