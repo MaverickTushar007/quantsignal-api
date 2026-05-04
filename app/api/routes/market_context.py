@@ -10,6 +10,18 @@ from app.domain.data.universe import TICKERS, TICKER_MAP
 
 router = APIRouter()
 
+@router.get("/news/backtest-summary")
+def news_backtest_summary():
+    """
+    Aggregate stats on news sentiment prediction accuracy.
+    Shows accuracy per horizon (1h/4h/24h/5d) and per source.
+    MUST be before /news/{symbol} route to avoid catch-all conflict.
+    Ref: Feuerriegel (2016) https://arxiv.org/abs/1807.06824
+    """
+    from app.domain.data.news_backtest import get_backtest_summary
+    return get_backtest_summary()
+
+
 @router.get("/news/{symbol}", tags=["news"])
 def get_asset_news(symbol: str, limit: int = 10):
     symbol = symbol.upper()
@@ -122,17 +134,6 @@ async def debug_regime(symbol: str):
 
 
 # ── COT + News Backtest endpoints (Phase 1) ───────────────────────────────────
-
-@router.get("/news/backtest-summary")
-def news_backtest_summary():
-    """
-    Aggregate stats on news sentiment prediction accuracy.
-    Shows accuracy per horizon (1h/4h/24h/5d) and per source.
-    MUST be before /news/{symbol} route to avoid catch-all conflict.
-    Ref: Feuerriegel (2016) https://arxiv.org/abs/1807.06824
-    """
-    from app.domain.data.news_backtest import get_backtest_summary
-    return get_backtest_summary()
 
 
 @router.get("/cot/{symbol}")
