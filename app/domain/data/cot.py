@@ -1,6 +1,6 @@
 from __future__ import annotations
 import json, time, urllib.request
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Optional
 
@@ -127,7 +127,7 @@ def get_cot_signal(symbol: str, max_cache_hours: int = 168) -> dict:
     if cache_key in cache:
         cached = cache[cache_key]
         fetched_at = datetime.fromisoformat(cached.get("fetched_at", "2000-01-01"))
-        if datetime.now(timezone.utc).replace(tzinfo=None) - fetched_at.replace(tzinfo=None) < timedelta(hours=max_cache_hours):
+        if (datetime.utcnow() - fetched_at.replace(tzinfo=None)) < timedelta(hours=max_cache_hours):
             return cached
     raw = _fetch_cot_raw()
     if raw is None:
