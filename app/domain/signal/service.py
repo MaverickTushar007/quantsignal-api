@@ -108,6 +108,12 @@ def generate_signal(symbol: str, include_reasoning: bool = True, bypass_cache: b
                 sig = dict(cache[symbol])
                 if not include_reasoning and "reasoning" in sig:
                     sig["reasoning"] = ""
+                # Bust Layer 2 cache if contaminated with Indian market docs
+                _r2 = sig.get("reasoning", "")
+                if any(w in _r2 for w in ["RBI", "SEBI", "Motilal", "Rs ", "NSE filing", "BSE"]):
+                    sig = None  # fall through to live pipeline
+                if sig is None:
+                    raise ValueError("contaminated")
                 # Attach shock warning before returning
                 try:
                     from app.domain.data.correlations import load_shock_cache
