@@ -166,7 +166,9 @@ def admin_weekly_reports(admin: dict = Depends(require_admin)):
 
 
 @router.post("/admin/cache/wipe")
-async def wipe_signal_cache(admin: dict = Depends(require_admin)):
+async def wipe_signal_cache(x_admin_key: str = Header(None)):
+    if x_admin_key != settings.admin_key:
+        raise HTTPException(status_code=403, detail="Forbidden")
     """Nuclear cache clear — wipes JSON file + all Redis signal keys."""
     import json
     from app.core.config import BASE_DIR
