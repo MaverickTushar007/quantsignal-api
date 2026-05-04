@@ -292,7 +292,7 @@ STRICT RULES:
 
 SIGNAL DATA:
 - Asset: {name} ({ticker})
-- Direction: {direction} | ML Confidence: {probability*100:.1f}% ({confidence_label}) | Model Agreement: {model_agreement*100:.0f}%
+- Direction: {direction} | Calibrated Confidence: {probability*100:.1f}% ({confidence_label}) | Model Agreement: {model_agreement*100:.0f}%
 - Current Price: {current_price} | Take Profit: {take_profit} | Stop Loss: {stop_loss}
 - ATR: {atr} | Confluence: {confluence_bulls}/9 bullish factors
 - Top ML drivers: {feat_str}
