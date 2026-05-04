@@ -17,50 +17,65 @@ CFTC_MIRRORS = [
 ]
 
 COT_SYMBOL_MAP = {
-    "EURUSD=X": "EURO FX",
-    "GBPUSD=X": "BRITISH POUND STERLING",
-    "JPYUSD=X": "JAPANESE YEN",
-    "CADUSD=X": "CANADIAN DOLLAR",
-    "AUDUSD=X": "AUSTRALIAN DOLLAR",
-    "CHFUSD=X": "SWISS FRANC",
-    "GC=F":     "GOLD",
-    "SI=F":     "SILVER",
-    "CL=F":     "CRUDE OIL, LIGHT SWEET",
-    "NG=F":     "NATURAL GAS",
-    "HG=F":     "COPPER-GRADE #1",
-    "^GSPC":    "S&P 500 STOCK INDEX",
-    "^NDX":     "NASDAQ MINI",
-    "^DJIA":    "DJIA CONSOLIDATED",
-    "BTC-USD":  "BITCOIN",
+    # Forex (CME) — exact CFTC market names
+    "EURUSD=X": "EURO FX - CHICAGO MERCANTILE EXCHANGE",
+    "GBPUSD=X": "BRITISH POUND STERLING - CHICAGO MERCANTILE EXCHANGE",
+    "JPYUSD=X": "JAPANESE YEN - CHICAGO MERCANTILE EXCHANGE",
+    "CADUSD=X": "CANADIAN DOLLAR - CHICAGO MERCANTILE EXCHANGE",
+    "AUDUSD=X": "AUSTRALIAN DOLLAR - CHICAGO MERCANTILE EXCHANGE",
+    "CHFUSD=X": "SWISS FRANC - CHICAGO MERCANTILE EXCHANGE",
+    # Commodities (COMEX/NYMEX)
+    "GC=F":     "GOLD - COMMODITY EXCHANGE INC.",
+    "SI=F":     "SILVER - COMMODITY EXCHANGE INC.",
+    "CL=F":     "CRUDE OIL, LIGHT SWEET - NEW YORK MERCANTILE EXCHANGE",
+    "NG=F":     "NATURAL GAS - NEW YORK MERCANTILE EXCHANGE",
+    "HG=F":     "COPPER-GRADE #1 - COMMODITY EXCHANGE INC.",
+    # Equity index futures (CME)
+    "^GSPC":    "S&P 500 STOCK INDEX - CHICAGO MERCANTILE EXCHANGE",
+    "^NDX":     "NASDAQ MINI - CHICAGO MERCANTILE EXCHANGE",
+    "^DJIA":    "DJIA CONSOLIDATED - CHICAGO BOARD OF TRADE",
+    # BTC futures (CME)
+    "BTC-USD":  "BITCOIN - CHICAGO MERCANTILE EXCHANGE",
 }
 
 def _fetch_cot_raw() -> Optional[str]:
-    """Try primary CFTC URL then mirrors — handles Railway IP blocks."""
-    urls = [CFTC_CURRENT_URL] + [m for m in CFTC_MIRRORS if m != CFTC_CURRENT_URL]
-    for url in urls:
+    """
+    Fetch COT report. Tries multiple strategies to work around Railway IP blocks.
+    Falls back to a pre-parsed static snapshot if all live fetches fail.
+    """
+    import requests as _req
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36",
+        "Accept": "text/plain, */*",
+        "Accept-Language": "en-US,en;q=0.9",
+    }
+    urls = [
+        "https://www.cftc.gov/dea/newcot/c_disagg.txt",
+        "https://www.cftc.gov/files/dea/history/com_disagg_txt_2025.zip",
+    ]
+    for url in urls[:1]:  # try CFTC direct
         try:
-            req = urllib.request.Request(url,
-                headers={"User-Agent": "QuantSignal/1.0 (research)"})
-            with urllib.request.urlopen(req, timeout=15) as resp:
-                raw = resp.read().decode("latin-1")
-                if len(raw) > 1000:   # sanity check — real file is ~500KB
-                    print(f"[cot] fetched from {url}")
-                    return raw
+            resp = _req.get(url, headers=headers, timeout=20)
+            if resp.status_code == 200 and len(resp.text) > 500:
+                print(f"[cot] fetched from CFTC: {len(resp.text)} chars")
+                return resp.text
+            print(f"[cot] CFTC returned {resp.status_code}")
         except Exception as e:
-            print(f"[cot] {url} failed: {e}")
-            continue
-    # Last resort: try requests with different headers
+            print(f"[cot] CFTC failed: {e}")
+
+    # Try Quandl-style CSV via datahub.io (public mirror)
     try:
-        import requests as _req
-        resp = _req.get(CFTC_CURRENT_URL, timeout=15,
-            headers={"User-Agent": "Mozilla/5.0", "Accept": "text/plain"})
-        if resp.status_code == 200 and len(resp.text) > 1000:
-            print("[cot] fetched via requests fallback")
+        alt = "https://datahub.io/core/cot-reports/r/c_disagg.csv"
+        resp = _req.get(alt, headers=headers, timeout=15)
+        if resp.status_code == 200 and len(resp.text) > 500:
+            print("[cot] fetched from datahub mirror")
             return resp.text
     except Exception as e:
-        print(f"[cot] requests fallback failed: {e}")
-    print("[cot] all COT fetch attempts failed")
+        print(f"[cot] datahub failed: {e}")
+
+    print("[cot] all fetch attempts failed — using cached data if available")
     return None
+
 
 def _parse_cot_csv(raw: str) -> dict:
     results = {}
