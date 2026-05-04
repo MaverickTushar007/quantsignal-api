@@ -126,11 +126,6 @@ def generate_signal(symbol: str, include_reasoning: bool = True, bypass_cache: b
     # 5d. Apply event-day adjustments to TP/SL and Kelly size
     macro_event_today = None
     event_adj = {"atr_multiplier": 1.0, "kelly_reduction": 1.0, "event_type": None}
-    try:
-        from app.domain.data.event_adjustments import get_event_adjustments
-        event_adj = get_event_adjustments(symbol, macro_event_today)
-    except Exception:
-        pass
 
     # 5e. Liquidity-aware TP/SL snapping (crypto only)
     liquidity_clusters = None
@@ -283,6 +278,14 @@ def generate_signal(symbol: str, include_reasoning: bool = True, bypass_cache: b
                 continue
     except Exception:
         pass
+
+    # Now compute event_adj with the actual macro_event_today
+    try:
+        from app.domain.data.event_adjustments import get_event_adjustments
+        event_adj = get_event_adjustments(symbol, macro_event_today)
+    except Exception:
+        pass
+
     headlines  = [n.title for n in news_items]
     news_dicts = [{"title": n.title, "source": n.source,
                    "sentiment": n.sentiment, "url": n.url}
