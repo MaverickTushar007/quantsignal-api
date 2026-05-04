@@ -85,7 +85,7 @@ def generate_signal(symbol: str, include_reasoning: bool = True, bypass_cache: b
             cached["reasoning"] = ""
         # Bust cache if reasoning contains Indian market contamination
         r = cached.get("reasoning", "")
-        if any(w in r for w in ["RBI", "SEBI", "Motilal", "Rs ", "NSE filing", "BSE"]):
+        if any(w in r for w in ["RBI", "SEBI", "Motilal", "Rs ", "NSE filing", "BSE", "ML ensemble", "ML confidence"]):
             cached = None  # force regeneration — fall through to pipeline below
         if cached is not None:
             # Add energy if missing from cached signal
@@ -110,7 +110,7 @@ def generate_signal(symbol: str, include_reasoning: bool = True, bypass_cache: b
                     sig["reasoning"] = ""
                 # Bust Layer 2 cache if contaminated with Indian market docs
                 _r2 = sig.get("reasoning", "")
-                if any(w in _r2 for w in ["RBI", "SEBI", "Motilal", "Rs ", "NSE filing", "BSE"]):
+                if any(w in _r2 for w in ["RBI", "SEBI", "Motilal", "Rs ", "NSE filing", "BSE", "ML ensemble", "ML confidence"]):
                     sig = None  # fall through to live pipeline
                 if sig is None:
                     raise ValueError("contaminated")
