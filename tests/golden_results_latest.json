@@ -85,7 +85,7 @@
     "snapshot": {
       "direction": "SELL",
       "confidence": "high",
-      "probability": 0.2079,
+      "probability": 0.2094,
       "kelly_size": 0.25,
       "freshness_seconds": 60,
       "verification": {

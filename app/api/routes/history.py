@@ -50,38 +50,6 @@ def history_summary():
                 peak = cumulative
             dd_curve.append({"date": t["date"], "drawdown": round(cumulative - peak, 3)})
 
-        # Calculate risk metrics
-        import statistics
-        pnls = [t.get("pnl_pct", 0) for t in trades]
-        cumulative = 0
-        peak = 0
-        max_dd = 0
-        for p in pnls:
-            cumulative += p
-            if cumulative > peak:
-                peak = cumulative
-            dd = cumulative - peak
-            if dd < max_dd:
-                max_dd = dd
-        sharpe = 0.0
-        try:
-            avg = statistics.mean(pnls)
-            std = statistics.stdev(pnls)
-            sharpe = round((avg / std) * (252 ** 0.5), 2) if std > 0 else 0.0
-        except Exception:
-            pass
-        calmar = round(cumulative / abs(max_dd), 2) if max_dd != 0 else 0.0
-
-        # Drawdown curve
-        cumulative = 0
-        peak = 0
-        dd_curve = []
-        for t in trades:
-            cumulative += t.get("pnl_pct", 0)
-            if cumulative > peak:
-                peak = cumulative
-            dd_curve.append({"date": t["date"], "drawdown": round(cumulative - peak, 3)})
-
         # Load cached benchmark (written by cache_signals.py / cron)
         benchmark = {}
         try:

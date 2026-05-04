@@ -1,3 +1,4 @@
+from starlette.middleware.base import BaseHTTPMiddleware
 """
 main.py
 FastAPI application entry point.
@@ -79,6 +80,7 @@ app = FastAPI(
     lifespan=lifespan,
 )
 
+app.add_middleware(BaseHTTPMiddleware, dispatch=protection_middleware)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=os.getenv("ALLOWED_ORIGINS", "http://localhost:3000,https://quantsignal-v2.pages.dev,https://quantsignal-web.pages.dev").split(","),
@@ -121,5 +123,4 @@ app.include_router(feedback_router, prefix="/api/v1")
 @app.get("/")
 async def root():
     return {"name": "QuantSignal API", "version": "1.0.0", "docs": "/docs"}
-app.middleware('http')(protection_middleware)
 # rebuild Sun Mar 29 15:18:59 IST 2026

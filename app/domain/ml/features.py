@@ -590,3 +590,38 @@ def add_vwap_features(feat: pd.DataFrame, df: pd.DataFrame, session_bars: int = 
         feat["dist_vwap"]  = 0.0
         feat["vwap_slope"] = 0.0
     return feat
+
+
+# ── OFI features (Phase 2B addition) ─────────────────────────────────────────
+# Ref: arXiv 2508.06788, dm13450 OFI blog, QuantPedia deep OFI guide
+
+OFI_FEATURE_COLUMNS = ["ofi_norm", "depth_imbalance", "bid_ask_spread"]
+
+def add_ofi_features(feat: pd.DataFrame, symbol: str) -> pd.DataFrame:
+    """
+    Injects OFI features into an existing feature DataFrame.
+    Only meaningful for crypto symbols with OKX data — returns 0 for others.
+    Call after build_features() or build_features_trend().
+
+    Features added:
+      ofi_norm        : normalized order flow imbalance (-1 to +1)
+      depth_imbalance : (bid_depth - ask_depth) / total_depth
+      bid_ask_spread  : (best_ask - best_bid) / mid_price
+    """
+    try:
+        from app.domain.data.order_flow import get_ofi_features
+        ofi = get_ofi_features(symbol)
+        if ofi.get("available"):
+            feat["ofi_norm"]        = ofi.get("ofi_norm", 0.0)
+            feat["depth_imbalance"] = ofi.get("depth_imbalance", 0.0)
+            feat["bid_ask_spread"]  = ofi.get("bid_ask_spread", 0.0)
+        else:
+            feat["ofi_norm"]        = 0.0
+            feat["depth_imbalance"] = 0.0
+            feat["bid_ask_spread"]  = 0.0
+    except Exception as _e:
+        logger.warning(f"[ofi_features] failed: {_e}")
+        feat["ofi_norm"]        = 0.0
+        feat["depth_imbalance"] = 0.0
+        feat["bid_ask_spread"]  = 0.0
+    return feat

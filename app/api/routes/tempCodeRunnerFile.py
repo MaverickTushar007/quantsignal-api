@@ -1,0 +1,1 @@
+app.domain.core.circuit_breaker_v2
