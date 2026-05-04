@@ -8,7 +8,13 @@ BASE_DIR  = Path(__file__).resolve().parents[3]
 COT_CACHE = BASE_DIR / "data" / "cot_cache.json"
 COT_CACHE.parent.mkdir(parents=True, exist_ok=True)
 
+# Primary: CFTC direct (works locally, often blocked on cloud IPs)
 CFTC_CURRENT_URL = "https://www.cftc.gov/dea/newcot/c_disagg.txt"
+# Fallback mirrors for cloud deployment (Railway/Render/etc)
+CFTC_MIRRORS = [
+    "https://raw.githubusercontent.com/datasets/cot-reports/main/data/c_disagg.txt",
+    "https://www.cftc.gov/dea/newcot/c_disagg.txt",
+]
 
 COT_SYMBOL_MAP = {
     "EURUSD=X": "EURO FX",
@@ -29,14 +35,32 @@ COT_SYMBOL_MAP = {
 }
 
 def _fetch_cot_raw() -> Optional[str]:
+    """Try primary CFTC URL then mirrors — handles Railway IP blocks."""
+    urls = [CFTC_CURRENT_URL] + [m for m in CFTC_MIRRORS if m != CFTC_CURRENT_URL]
+    for url in urls:
+        try:
+            req = urllib.request.Request(url,
+                headers={"User-Agent": "QuantSignal/1.0 (research)"})
+            with urllib.request.urlopen(req, timeout=15) as resp:
+                raw = resp.read().decode("latin-1")
+                if len(raw) > 1000:   # sanity check — real file is ~500KB
+                    print(f"[cot] fetched from {url}")
+                    return raw
+        except Exception as e:
+            print(f"[cot] {url} failed: {e}")
+            continue
+    # Last resort: try requests with different headers
     try:
-        req = urllib.request.Request(CFTC_CURRENT_URL,
-            headers={"User-Agent": "QuantSignal/1.0"})
-        with urllib.request.urlopen(req, timeout=30) as resp:
-            return resp.read().decode("latin-1")
+        import requests as _req
+        resp = _req.get(CFTC_CURRENT_URL, timeout=15,
+            headers={"User-Agent": "Mozilla/5.0", "Accept": "text/plain"})
+        if resp.status_code == 200 and len(resp.text) > 1000:
+            print("[cot] fetched via requests fallback")
+            return resp.text
     except Exception as e:
-        print(f"[cot] Failed to fetch COT: {e}")
-        return None
+        print(f"[cot] requests fallback failed: {e}")
+    print("[cot] all COT fetch attempts failed")
+    return None
 
 def _parse_cot_csv(raw: str) -> dict:
     results = {}

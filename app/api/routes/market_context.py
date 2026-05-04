@@ -123,13 +123,22 @@ async def debug_regime(symbol: str):
 
 # ── COT + News Backtest endpoints (Phase 1) ───────────────────────────────────
 
+@router.get("/news/backtest-summary")
+def news_backtest_summary():
+    """
+    Aggregate stats on news sentiment prediction accuracy.
+    Shows accuracy per horizon (1h/4h/24h/5d) and per source.
+    MUST be before /news/{symbol} route to avoid catch-all conflict.
+    Ref: Feuerriegel (2016) https://arxiv.org/abs/1807.06824
+    """
+    from app.domain.data.news_backtest import get_backtest_summary
+    return get_backtest_summary()
+
+
 @router.get("/cot/{symbol}")
 def get_cot_for_symbol(symbol: str):
     """
-    CFTC Commitment of Traders positioning for a symbol.
-    Returns net positioning, cot_score (-1 to +1), and signal label.
-    Cached 7 days (matches CFTC weekly release cadence).
-    Ref: https://www.cftc.gov/MarketReports/CommitmentsofTraders/index.htm
+    CFTC COT positioning for a symbol.
     """
     from app.domain.data.cot import get_cot_signal
     return get_cot_signal(symbol.upper())
@@ -138,19 +147,7 @@ def get_cot_for_symbol(symbol: str):
 @router.get("/cot")
 def get_all_cot():
     """
-    CFTC COT signals for all covered symbols (forex, commodities, BTC, equity index).
+    CFTC COT signals for all covered symbols.
     """
     from app.domain.data.cot import get_all_cot_signals
     return get_all_cot_signals()
-
-
-@router.get("/news/backtest-summary")
-def news_backtest_summary():
-    """
-    Aggregate stats on news sentiment prediction accuracy.
-    Shows accuracy per horizon (1h/4h/24h/5d) and per source.
-    Populated by run_news_backtest() — seeds on weekdays via yfinance.
-    Ref: Feuerriegel (2016) https://arxiv.org/abs/1807.06824
-    """
-    from app.domain.data.news_backtest import get_backtest_summary
-    return get_backtest_summary()
