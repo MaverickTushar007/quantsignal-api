@@ -274,7 +274,7 @@ def get_reasoning(ticker, name, direction, probability, confluence_bulls,
             h_lines = []
             for h in past:
                 outcome = h.get("outcome", "open")
-                h_lines.append(f"- {str(h.get('generated_at',''))[:10]}: {h.get('direction','?')} -> {outcome} (conf: {h.get('probability',0)*100:.0f}%)")
+                h_lines.append(f"- {str(h.get('generated_at',''))[:10]}: {h.get('direction','?')} -> {outcome}")
             history_str = "\n".join(h_lines)
     except Exception:
         pass
