@@ -293,7 +293,7 @@ def generate_signal(symbol: str, include_reasoning: bool = True, bypass_cache: b
 
     # 6. LLM reasoning
     reasoning = ""
-    if False:  # TEMP: disabled pending reasoning fix
+    if include_reasoning:
         reasoning = get_reasoning(
             ticker=symbol,
             name=meta["name"],

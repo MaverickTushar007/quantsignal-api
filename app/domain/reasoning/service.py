@@ -301,10 +301,15 @@ PAST SIGNALS FOR {ticker}:
 {doc_context}
 Write exactly 3 sentences. Each must contain specific numbers."""
     try:
-        # Route through task router — trade setup always gets smart model
+        import concurrent.futures as _cf
         routed_model = _route_query_to_groq_model(f"trade setup {ticker} {direction}")
         use_smart = (routed_model == SMART_MODEL)
-        answer = _groq_reasoning(prompt, use_smart=use_smart)
+        with _cf.ThreadPoolExecutor(max_workers=1) as _pool:
+            _future = _pool.submit(_groq_reasoning, prompt, use_smart)
+            try:
+                answer = _future.result(timeout=8)
+            except _cf.TimeoutError:
+                return _rule_based_reasoning(ticker, direction, probability, confluence_bulls, top_features)
 
         # Verify answer quality — append warning if low confidence
         try:
