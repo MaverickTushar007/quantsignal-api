@@ -255,12 +255,15 @@ def get_reasoning(ticker, name, direction, probability, confluence_bulls,
     confidence_label = "HIGH" if probability >= 0.72 else "MEDIUM" if probability >= 0.58 else "LOW"
     # Fetch document context (RBI/SEBI/NSE)
     doc_context = ""
-    try:
-        from app.infrastructure.documents.retriever import get_relevant_context, format_for_perseus
-        raw_ctx = get_relevant_context(ticker, direction, limit=3)
-        doc_context = format_for_perseus(raw_ctx)
-    except Exception:
-        pass
+    # Only inject regulatory docs for Indian assets — avoids RBI/SEBI contaminating US/crypto signals
+    _is_indian = ticker.endswith(".NS") or ticker.endswith(".BO")
+    if _is_indian:
+        try:
+            from app.infrastructure.documents.retriever import get_relevant_context, format_for_perseus
+            raw_ctx = get_relevant_context(ticker, direction, limit=3)
+            doc_context = format_for_perseus(raw_ctx)
+        except Exception:
+            pass
 
     # Fetch past signal history
     history_str = "No prior signals for this asset."
