@@ -623,7 +623,7 @@ def build_confluence_v2(
     session, session_mult = _current_session(asset_type)
     session_info = f"{session} (×{session_mult:.1f})"
 
-    score_label = f"{bull_count}/13 bullish (weighted: {weighted_score}/13)"
+    score_label = f"{bull_count}/14 bullish (weighted: {weighted_score}/14)"
 
     return factors, bull_count, score_label, session_info
 
