@@ -7,7 +7,7 @@
     "net_position": 30624.0,
     "cot_score": 0.0949,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197079+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557076",
     "source": "CFTC",
     "available": true
   },
@@ -19,7 +19,7 @@
     "net_position": 27666.0,
     "cot_score": 0.334,
     "signal": "NET_LONG",
-    "fetched_at": "2026-05-04T09:43:52.197318+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557136",
     "source": "CFTC",
     "available": true
   },
@@ -31,7 +31,7 @@
     "net_position": 264103.0,
     "cot_score": 0.1133,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197324+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557152",
     "source": "CFTC",
     "available": true
   },
@@ -43,7 +43,7 @@
     "net_position": 185282.0,
     "cot_score": 0.169,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197327+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557155",
     "source": "CFTC",
     "available": true
   },
@@ -55,7 +55,7 @@
     "net_position": -782.0,
     "cot_score": -0.0643,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197329+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557159",
     "source": "CFTC",
     "available": true
   },
@@ -67,7 +67,7 @@
     "net_position": -740.0,
     "cot_score": -0.0049,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197332+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557161",
     "source": "CFTC",
     "available": true
   },
@@ -79,7 +79,7 @@
     "net_position": -3759.0,
     "cot_score": -0.0132,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197334+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557163",
     "source": "CFTC",
     "available": true
   },
@@ -91,7 +91,7 @@
     "net_position": 60714.0,
     "cot_score": 0.4686,
     "signal": "CROWDED_LONG",
-    "fetched_at": "2026-05-04T09:43:52.197337+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557166",
     "source": "CFTC",
     "available": true
   },
@@ -103,7 +103,7 @@
     "net_position": 331.0,
     "cot_score": 0.0087,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197339+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557173",
     "source": "CFTC",
     "available": true
   },
@@ -115,7 +115,7 @@
     "net_position": 0.0,
     "cot_score": 0.0,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197341+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557175",
     "source": "CFTC",
     "available": true
   },
@@ -127,7 +127,7 @@
     "net_position": -19477.0,
     "cot_score": -0.2799,
     "signal": "NET_SHORT",
-    "fetched_at": "2026-05-04T09:43:52.197343+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557178",
     "source": "CFTC",
     "available": true
   },
@@ -139,7 +139,7 @@
     "net_position": 3453.0,
     "cot_score": 0.2668,
     "signal": "NET_LONG",
-    "fetched_at": "2026-05-04T09:43:52.197345+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557180",
     "source": "CFTC",
     "available": true
   },
@@ -151,7 +151,7 @@
     "net_position": -100.0,
     "cot_score": -0.0101,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197347+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557188",
     "source": "CFTC",
     "available": true
   },
@@ -163,7 +163,7 @@
     "net_position": 0.0,
     "cot_score": 0.0,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197349+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557190",
     "source": "CFTC",
     "available": true
   },
@@ -175,7 +175,7 @@
     "net_position": 0.0,
     "cot_score": 0.0,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197351+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557193",
     "source": "CFTC",
     "available": true
   },
@@ -187,7 +187,7 @@
     "net_position": 0.0,
     "cot_score": 0.0,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197353+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557195",
     "source": "CFTC",
     "available": true
   },
@@ -199,7 +199,7 @@
     "net_position": 1100.0,
     "cot_score": 0.0177,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197355+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557202",
     "source": "CFTC",
     "available": true
   },
@@ -211,7 +211,7 @@
     "net_position": -588.0,
     "cot_score": -0.1974,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197359+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557205",
     "source": "CFTC",
     "available": true
   },
@@ -223,7 +223,7 @@
     "net_position": 89532.0,
     "cot_score": 0.3768,
     "signal": "NET_LONG",
-    "fetched_at": "2026-05-04T09:43:52.197361+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557207",
     "source": "CFTC",
     "available": true
   },
@@ -235,7 +235,7 @@
     "net_position": -1774.0,
     "cot_score": -0.0745,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197363+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557209",
     "source": "CFTC",
     "available": true
   },
@@ -247,7 +247,7 @@
     "net_position": -760.0,
     "cot_score": -0.0644,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197365+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557211",
     "source": "CFTC",
     "available": true
   },
@@ -259,7 +259,7 @@
     "net_position": 5924.0,
     "cot_score": 0.0845,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197367+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557213",
     "source": "CFTC",
     "available": true
   },
@@ -271,7 +271,7 @@
     "net_position": -9321.0,
     "cot_score": -0.4909,
     "signal": "CROWDED_SHORT",
-    "fetched_at": "2026-05-04T09:43:52.197369+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557215",
     "source": "CFTC",
     "available": true
   },
@@ -283,7 +283,7 @@
     "net_position": 0.0,
     "cot_score": 0.0,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197371+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557217",
     "source": "CFTC",
     "available": true
   },
@@ -295,7 +295,7 @@
     "net_position": 0.0,
     "cot_score": 0.0,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197373+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557219",
     "source": "CFTC",
     "available": true
   },
@@ -307,7 +307,7 @@
     "net_position": 164.0,
     "cot_score": 0.0295,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197375+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557221",
     "source": "CFTC",
     "available": true
   },
@@ -319,7 +319,7 @@
     "net_position": 0.0,
     "cot_score": 0.0,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197377+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557223",
     "source": "CFTC",
     "available": true
   },
@@ -331,7 +331,7 @@
     "net_position": 0.0,
     "cot_score": 0.0,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197379+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557225",
     "source": "CFTC",
     "available": true
   },
@@ -343,7 +343,7 @@
     "net_position": 0.0,
     "cot_score": 0.0,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197381+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557227",
     "source": "CFTC",
     "available": true
   },
@@ -355,7 +355,7 @@
     "net_position": 0.0,
     "cot_score": 0.0,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197383+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557229",
     "source": "CFTC",
     "available": true
   },
@@ -367,7 +367,7 @@
     "net_position": 0.0,
     "cot_score": 0.0,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197385+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557230",
     "source": "CFTC",
     "available": true
   },
@@ -379,7 +379,7 @@
     "net_position": 0.0,
     "cot_score": 0.0,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197387+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557232",
     "source": "CFTC",
     "available": true
   },
@@ -391,7 +391,7 @@
     "net_position": 0.0,
     "cot_score": 0.0,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197389+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557234",
     "source": "CFTC",
     "available": true
   },
@@ -403,7 +403,7 @@
     "net_position": 0.0,
     "cot_score": 0.0,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197391+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557236",
     "source": "CFTC",
     "available": true
   },
@@ -415,7 +415,7 @@
     "net_position": 0.0,
     "cot_score": 0.0,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197393+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557238",
     "source": "CFTC",
     "available": true
   },
@@ -427,7 +427,7 @@
     "net_position": 690.0,
     "cot_score": 0.0695,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197395+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557240",
     "source": "CFTC",
     "available": true
   },
@@ -439,7 +439,7 @@
     "net_position": 3951.0,
     "cot_score": 0.1381,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197397+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557242",
     "source": "CFTC",
     "available": true
   },
@@ -451,7 +451,7 @@
     "net_position": 1150.0,
     "cot_score": 0.1079,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197398+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557244",
     "source": "CFTC",
     "available": true
   },
@@ -463,7 +463,7 @@
     "net_position": 2500.0,
     "cot_score": 0.0839,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197400+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557246",
     "source": "CFTC",
     "available": true
   },
@@ -475,7 +475,7 @@
     "net_position": 550.0,
     "cot_score": 0.0281,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197402+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557247",
     "source": "CFTC",
     "available": true
   },
@@ -487,7 +487,7 @@
     "net_position": 165725.0,
     "cot_score": 0.197,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197404+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557249",
     "source": "CFTC",
     "available": true
   },
@@ -499,7 +499,7 @@
     "net_position": 25.0,
     "cot_score": 0.0009,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197406+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557251",
     "source": "CFTC",
     "available": true
   },
@@ -511,7 +511,7 @@
     "net_position": -2610.0,
     "cot_score": -0.1633,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197408+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557257",
     "source": "CFTC",
     "available": true
   },
@@ -523,7 +523,7 @@
     "net_position": 0.0,
     "cot_score": 0.0,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197410+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557259",
     "source": "CFTC",
     "available": true
   },
@@ -535,7 +535,7 @@
     "net_position": 0.0,
     "cot_score": 0.0,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197412+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557261",
     "source": "CFTC",
     "available": true
   },
@@ -547,7 +547,7 @@
     "net_position": 12577.0,
     "cot_score": 0.0494,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197414+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557263",
     "source": "CFTC",
     "available": true
   },
@@ -559,7 +559,7 @@
     "net_position": 0.0,
     "cot_score": 0.0,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197416+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557265",
     "source": "CFTC",
     "available": true
   },
@@ -571,7 +571,7 @@
     "net_position": 354682.0,
     "cot_score": 0.0434,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197418+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557267",
     "source": "CFTC",
     "available": true
   },
@@ -583,7 +583,7 @@
     "net_position": 16183.0,
     "cot_score": 0.0043,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197420+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557269",
     "source": "CFTC",
     "available": true
   },
@@ -595,7 +595,7 @@
     "net_position": 81660.0,
     "cot_score": 0.256,
     "signal": "NET_LONG",
-    "fetched_at": "2026-05-04T09:43:52.197422+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557271",
     "source": "CFTC",
     "available": true
   },
@@ -607,7 +607,7 @@
     "net_position": -2413.0,
     "cot_score": -0.0142,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197424+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557273",
     "source": "CFTC",
     "available": true
   },
@@ -619,7 +619,7 @@
     "net_position": 1973.0,
     "cot_score": 0.0052,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197426+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557275",
     "source": "CFTC",
     "available": true
   },
@@ -631,7 +631,7 @@
     "net_position": 13982.0,
     "cot_score": 0.0136,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197428+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557277",
     "source": "CFTC",
     "available": true
   },
@@ -643,7 +643,7 @@
     "net_position": 6201.0,
     "cot_score": 0.0174,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197430+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557279",
     "source": "CFTC",
     "available": true
   },
@@ -655,7 +655,7 @@
     "net_position": -102773.0,
     "cot_score": -0.1097,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197432+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557280",
     "source": "CFTC",
     "available": true
   },
@@ -667,7 +667,7 @@
     "net_position": -15880.0,
     "cot_score": -0.0219,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197434+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557282",
     "source": "CFTC",
     "available": true
   },
@@ -679,7 +679,7 @@
     "net_position": -3202.0,
     "cot_score": -0.0282,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197436+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557284",
     "source": "CFTC",
     "available": true
   },
@@ -691,7 +691,7 @@
     "net_position": -3723.0,
     "cot_score": -0.081,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197438+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557286",
     "source": "CFTC",
     "available": true
   },
@@ -703,7 +703,7 @@
     "net_position": -4440.0,
     "cot_score": -0.0424,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197440+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557288",
     "source": "CFTC",
     "available": true
   },
@@ -715,7 +715,7 @@
     "net_position": -18124.0,
     "cot_score": -0.5702,
     "signal": "CROWDED_SHORT",
-    "fetched_at": "2026-05-04T09:43:52.197442+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557290",
     "source": "CFTC",
     "available": true
   },
@@ -727,7 +727,7 @@
     "net_position": -94804.0,
     "cot_score": -0.2002,
     "signal": "NET_SHORT",
-    "fetched_at": "2026-05-04T09:43:52.197444+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557292",
     "source": "CFTC",
     "available": true
   },
@@ -739,7 +739,7 @@
     "net_position": -3347.0,
     "cot_score": -0.0155,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197446+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557294",
     "source": "CFTC",
     "available": true
   },
@@ -751,7 +751,7 @@
     "net_position": -32879.0,
     "cot_score": -0.0884,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197448+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557296",
     "source": "CFTC",
     "available": true
   },
@@ -763,7 +763,7 @@
     "net_position": -2645.0,
     "cot_score": -0.0413,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197450+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557297",
     "source": "CFTC",
     "available": true
   },
@@ -775,7 +775,7 @@
     "net_position": -44419.0,
     "cot_score": -0.0542,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197452+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557299",
     "source": "CFTC",
     "available": true
   },
@@ -787,7 +787,7 @@
     "net_position": 31308.0,
     "cot_score": 0.1171,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197454+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557301",
     "source": "CFTC",
     "available": true
   },
@@ -799,7 +799,7 @@
     "net_position": -29577.0,
     "cot_score": -0.1655,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197456+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557303",
     "source": "CFTC",
     "available": true
   },
@@ -811,7 +811,7 @@
     "net_position": -64629.0,
     "cot_score": -0.2806,
     "signal": "NET_SHORT",
-    "fetched_at": "2026-05-04T09:43:52.197457+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557305",
     "source": "CFTC",
     "available": true
   },
@@ -823,7 +823,7 @@
     "net_position": -60900.0,
     "cot_score": -0.1275,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197459+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557307",
     "source": "CFTC",
     "available": true
   },
@@ -835,7 +835,7 @@
     "net_position": -3037.0,
     "cot_score": -0.1023,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197461+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557309",
     "source": "CFTC",
     "available": true
   },
@@ -847,7 +847,7 @@
     "net_position": -17584.0,
     "cot_score": -0.0941,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197464+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557310",
     "source": "CFTC",
     "available": true
   },
@@ -859,7 +859,7 @@
     "net_position": -857.0,
     "cot_score": -0.0055,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197466+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557312",
     "source": "CFTC",
     "available": true
   },
@@ -871,7 +871,7 @@
     "net_position": -6195.0,
     "cot_score": -0.06,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197468+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557318",
     "source": "CFTC",
     "available": true
   },
@@ -883,7 +883,7 @@
     "net_position": -220.0,
     "cot_score": -0.0004,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197469+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557320",
     "source": "CFTC",
     "available": true
   },
@@ -895,7 +895,7 @@
     "net_position": -9664.0,
     "cot_score": -0.0671,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197471+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557322",
     "source": "CFTC",
     "available": true
   },
@@ -907,7 +907,7 @@
     "net_position": -861.0,
     "cot_score": -0.0132,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197473+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557324",
     "source": "CFTC",
     "available": true
   },
@@ -919,7 +919,7 @@
     "net_position": 2065.0,
     "cot_score": 0.0624,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197475+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557326",
     "source": "CFTC",
     "available": true
   },
@@ -931,7 +931,7 @@
     "net_position": 2031.0,
     "cot_score": 0.0164,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197477+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557328",
     "source": "CFTC",
     "available": true
   },
@@ -943,7 +943,7 @@
     "net_position": 20969.0,
     "cot_score": 0.1096,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197479+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557329",
     "source": "CFTC",
     "available": true
   },
@@ -955,7 +955,7 @@
     "net_position": 646.0,
     "cot_score": 0.0175,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197481+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557331",
     "source": "CFTC",
     "available": true
   },
@@ -967,7 +967,7 @@
     "net_position": 10857.0,
     "cot_score": 0.3069,
     "signal": "NET_LONG",
-    "fetched_at": "2026-05-04T09:43:52.197483+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557333",
     "source": "CFTC",
     "available": true
   },
@@ -979,7 +979,7 @@
     "net_position": 1034.0,
     "cot_score": 0.0316,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197485+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557335",
     "source": "CFTC",
     "available": true
   },
@@ -991,7 +991,7 @@
     "net_position": 7137.0,
     "cot_score": 0.0736,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197487+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557337",
     "source": "CFTC",
     "available": true
   },
@@ -1003,7 +1003,7 @@
     "net_position": -54819.0,
     "cot_score": -0.4207,
     "signal": "CROWDED_SHORT",
-    "fetched_at": "2026-05-04T09:43:52.197489+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557339",
     "source": "CFTC",
     "available": true
   },
@@ -1015,7 +1015,7 @@
     "net_position": 0.0,
     "cot_score": 0.0,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197491+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557341",
     "source": "CFTC",
     "available": true
   },
@@ -1027,7 +1027,7 @@
     "net_position": 1451.0,
     "cot_score": 0.0086,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197493+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557343",
     "source": "CFTC",
     "available": true
   },
@@ -1039,7 +1039,7 @@
     "net_position": 1782.0,
     "cot_score": 0.0092,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197495+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557345",
     "source": "CFTC",
     "available": true
   },
@@ -1051,7 +1051,7 @@
     "net_position": 2163.0,
     "cot_score": 0.0388,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197497+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557346",
     "source": "CFTC",
     "available": true
   },
@@ -1063,7 +1063,7 @@
     "net_position": 4367.0,
     "cot_score": 0.0165,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197499+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557348",
     "source": "CFTC",
     "available": true
   },
@@ -1075,7 +1075,7 @@
     "net_position": -1140.0,
     "cot_score": -0.0108,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197501+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557350",
     "source": "CFTC",
     "available": true
   },
@@ -1087,7 +1087,7 @@
     "net_position": 37556.0,
     "cot_score": 0.1061,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197503+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557352",
     "source": "CFTC",
     "available": true
   },
@@ -1099,7 +1099,7 @@
     "net_position": 1501.0,
     "cot_score": 0.0149,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197505+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557354",
     "source": "CFTC",
     "available": true
   },
@@ -1111,7 +1111,7 @@
     "net_position": 21123.0,
     "cot_score": 0.0378,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197507+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557356",
     "source": "CFTC",
     "available": true
   },
@@ -1123,7 +1123,7 @@
     "net_position": 4309.0,
     "cot_score": 0.0354,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197509+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557358",
     "source": "CFTC",
     "available": true
   },
@@ -1135,7 +1135,7 @@
     "net_position": -240.0,
     "cot_score": -0.0045,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197511+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557360",
     "source": "CFTC",
     "available": true
   },
@@ -1147,7 +1147,7 @@
     "net_position": 543.0,
     "cot_score": 0.0019,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197513+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557362",
     "source": "CFTC",
     "available": true
   },
@@ -1159,7 +1159,7 @@
     "net_position": -884.0,
     "cot_score": -0.0195,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197515+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557364",
     "source": "CFTC",
     "available": true
   },
@@ -1171,7 +1171,7 @@
     "net_position": -19392.0,
     "cot_score": -0.6179,
     "signal": "CROWDED_SHORT",
-    "fetched_at": "2026-05-04T09:43:52.197517+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557366",
     "source": "CFTC",
     "available": true
   },
@@ -1183,7 +1183,7 @@
     "net_position": 23874.0,
     "cot_score": 0.1428,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197543+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557368",
     "source": "CFTC",
     "available": true
   },
@@ -1195,7 +1195,7 @@
     "net_position": -97345.0,
     "cot_score": -0.0613,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197546+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557370",
     "source": "CFTC",
     "available": true
   },
@@ -1207,7 +1207,7 @@
     "net_position": -5770.0,
     "cot_score": -0.0079,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197548+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557372",
     "source": "CFTC",
     "available": true
   },
@@ -1219,7 +1219,7 @@
     "net_position": 48063.0,
     "cot_score": 0.0926,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197550+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557374",
     "source": "CFTC",
     "available": true
   },
@@ -1231,7 +1231,7 @@
     "net_position": 19107.0,
     "cot_score": 0.0872,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197552+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557376",
     "source": "CFTC",
     "available": true
   },
@@ -1243,7 +1243,7 @@
     "net_position": -18951.0,
     "cot_score": -0.1604,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197554+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557377",
     "source": "CFTC",
     "available": true
   },
@@ -1255,7 +1255,7 @@
     "net_position": 0.0,
     "cot_score": 0.0,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197556+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557379",
     "source": "CFTC",
     "available": true
   },
@@ -1267,7 +1267,7 @@
     "net_position": 6263.0,
     "cot_score": 0.114,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197558+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557381",
     "source": "CFTC",
     "available": true
   },
@@ -1279,7 +1279,7 @@
     "net_position": 121189.0,
     "cot_score": 0.19,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197560+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557383",
     "source": "CFTC",
     "available": true
   },
@@ -1291,7 +1291,7 @@
     "net_position": 38355.0,
     "cot_score": 0.0834,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197562+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557385",
     "source": "CFTC",
     "available": true
   },
@@ -1303,7 +1303,7 @@
     "net_position": -7904.0,
     "cot_score": -0.02,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197564+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557387",
     "source": "CFTC",
     "available": true
   },
@@ -1315,7 +1315,7 @@
     "net_position": -1868.0,
     "cot_score": -0.0191,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197566+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557389",
     "source": "CFTC",
     "available": true
   },
@@ -1327,7 +1327,7 @@
     "net_position": -1065.0,
     "cot_score": -0.0213,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197568+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557391",
     "source": "CFTC",
     "available": true
   },
@@ -1339,7 +1339,7 @@
     "net_position": -3971.0,
     "cot_score": -0.2925,
     "signal": "NET_SHORT",
-    "fetched_at": "2026-05-04T09:43:52.197570+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557393",
     "source": "CFTC",
     "available": true
   },
@@ -1351,7 +1351,7 @@
     "net_position": 613.0,
     "cot_score": 0.0715,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197572+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557395",
     "source": "CFTC",
     "available": true
   },
@@ -1363,7 +1363,7 @@
     "net_position": -289.0,
     "cot_score": -0.0107,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197574+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557397",
     "source": "CFTC",
     "available": true
   },
@@ -1375,7 +1375,7 @@
     "net_position": -479.0,
     "cot_score": -0.0086,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197576+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557406",
     "source": "CFTC",
     "available": true
   },
@@ -1387,7 +1387,7 @@
     "net_position": -32.0,
     "cot_score": -0.001,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197578+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557409",
     "source": "CFTC",
     "available": true
   },
@@ -1399,7 +1399,7 @@
     "net_position": 266.0,
     "cot_score": 0.0093,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197580+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557410",
     "source": "CFTC",
     "available": true
   },
@@ -1411,7 +1411,7 @@
     "net_position": -32.0,
     "cot_score": -0.0063,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197582+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557412",
     "source": "CFTC",
     "available": true
   },
@@ -1423,7 +1423,7 @@
     "net_position": 57565.0,
     "cot_score": 0.1356,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197584+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557414",
     "source": "CFTC",
     "available": true
   },
@@ -1435,7 +1435,7 @@
     "net_position": 136591.0,
     "cot_score": 0.2883,
     "signal": "NET_LONG",
-    "fetched_at": "2026-05-04T09:43:52.197586+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557416",
     "source": "CFTC",
     "available": true
   },
@@ -1447,7 +1447,7 @@
     "net_position": -5924.0,
     "cot_score": -0.5594,
     "signal": "CROWDED_SHORT",
-    "fetched_at": "2026-05-04T09:43:52.197588+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557423",
     "source": "CFTC",
     "available": true
   },
@@ -1459,7 +1459,7 @@
     "net_position": 17089.0,
     "cot_score": 0.1693,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197590+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557425",
     "source": "CFTC",
     "available": true
   },
@@ -1471,7 +1471,7 @@
     "net_position": -1911.0,
     "cot_score": -0.0437,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197592+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557427",
     "source": "CFTC",
     "available": true
   },
@@ -1483,7 +1483,7 @@
     "net_position": -5261.0,
     "cot_score": -0.1137,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197594+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557429",
     "source": "CFTC",
     "available": true
   },
@@ -1495,7 +1495,7 @@
     "net_position": -4644.0,
     "cot_score": -0.1445,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197596+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557431",
     "source": "CFTC",
     "available": true
   },
@@ -1507,7 +1507,7 @@
     "net_position": 88575.0,
     "cot_score": 0.3301,
     "signal": "NET_LONG",
-    "fetched_at": "2026-05-04T09:43:52.197598+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557433",
     "source": "CFTC",
     "available": true
   },
@@ -1519,7 +1519,7 @@
     "net_position": -4761.0,
     "cot_score": -0.043,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197600+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557435",
     "source": "CFTC",
     "available": true
   },
@@ -1531,7 +1531,7 @@
     "net_position": -9318.0,
     "cot_score": -0.1145,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197602+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557436",
     "source": "CFTC",
     "available": true
   },
@@ -1543,7 +1543,7 @@
     "net_position": -9621.0,
     "cot_score": -0.1574,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197604+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557438",
     "source": "CFTC",
     "available": true
   },
@@ -1555,7 +1555,7 @@
     "net_position": -11187.0,
     "cot_score": -0.1627,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197606+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557440",
     "source": "CFTC",
     "available": true
   },
@@ -1567,7 +1567,7 @@
     "net_position": -1645.0,
     "cot_score": -0.0292,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197608+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557443",
     "source": "CFTC",
     "available": true
   },
@@ -1579,7 +1579,7 @@
     "net_position": -1695.0,
     "cot_score": -0.0262,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197610+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557445",
     "source": "CFTC",
     "available": true
   },
@@ -1591,7 +1591,7 @@
     "net_position": 25.0,
     "cot_score": 0.0008,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197612+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557447",
     "source": "CFTC",
     "available": true
   },
@@ -1603,7 +1603,7 @@
     "net_position": 1921.0,
     "cot_score": 0.053,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197613+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557449",
     "source": "CFTC",
     "available": true
   },
@@ -1615,7 +1615,7 @@
     "net_position": 5489.0,
     "cot_score": 0.1243,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197616+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557451",
     "source": "CFTC",
     "available": true
   },
@@ -1627,7 +1627,7 @@
     "net_position": 5489.0,
     "cot_score": 0.1316,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197618+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557453",
     "source": "CFTC",
     "available": true
   },
@@ -1639,7 +1639,7 @@
     "net_position": 79498.0,
     "cot_score": 0.2889,
     "signal": "NET_LONG",
-    "fetched_at": "2026-05-04T09:43:52.197620+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557454",
     "source": "CFTC",
     "available": true
   },
@@ -1651,7 +1651,7 @@
     "net_position": -3675.0,
     "cot_score": -0.1116,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197622+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557456",
     "source": "CFTC",
     "available": true
   },
@@ -1663,7 +1663,7 @@
     "net_position": -3675.0,
     "cot_score": -0.1177,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197624+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557458",
     "source": "CFTC",
     "available": true
   },
@@ -1675,7 +1675,7 @@
     "net_position": -3274.0,
     "cot_score": -0.1014,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197626+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557460",
     "source": "CFTC",
     "available": true
   },
@@ -1687,7 +1687,7 @@
     "net_position": -3274.0,
     "cot_score": -0.1017,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197628+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557462",
     "source": "CFTC",
     "available": true
   },
@@ -1699,7 +1699,7 @@
     "net_position": 475.0,
     "cot_score": 0.0329,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197629+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557464",
     "source": "CFTC",
     "available": true
   },
@@ -1711,7 +1711,7 @@
     "net_position": 824.0,
     "cot_score": 0.1449,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197631+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557466",
     "source": "CFTC",
     "available": true
   },
@@ -1723,7 +1723,7 @@
     "net_position": 8843.0,
     "cot_score": 0.0767,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197633+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557468",
     "source": "CFTC",
     "available": true
   },
@@ -1735,7 +1735,7 @@
     "net_position": -1017.0,
     "cot_score": -0.0552,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197635+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557470",
     "source": "CFTC",
     "available": true
   },
@@ -1747,7 +1747,7 @@
     "net_position": 3262.0,
     "cot_score": 0.0762,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197637+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557472",
     "source": "CFTC",
     "available": true
   },
@@ -1759,7 +1759,7 @@
     "net_position": -1046.0,
     "cot_score": -0.0376,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197639+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557474",
     "source": "CFTC",
     "available": true
   },
@@ -1771,7 +1771,7 @@
     "net_position": -400.0,
     "cot_score": -0.0146,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197641+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557476",
     "source": "CFTC",
     "available": true
   },
@@ -1783,7 +1783,7 @@
     "net_position": -4899.0,
     "cot_score": -0.0734,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197643+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557478",
     "source": "CFTC",
     "available": true
   },
@@ -1795,7 +1795,7 @@
     "net_position": -13608.0,
     "cot_score": -0.1393,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197645+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557480",
     "source": "CFTC",
     "available": true
   },
@@ -1807,7 +1807,7 @@
     "net_position": -12705.0,
     "cot_score": -0.2397,
     "signal": "NET_SHORT",
-    "fetched_at": "2026-05-04T09:43:52.197646+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557481",
     "source": "CFTC",
     "available": true
   },
@@ -1819,7 +1819,7 @@
     "net_position": -7851.0,
     "cot_score": -0.1545,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197648+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557483",
     "source": "CFTC",
     "available": true
   },
@@ -1831,7 +1831,7 @@
     "net_position": 53766.0,
     "cot_score": 0.6328,
     "signal": "CROWDED_LONG",
-    "fetched_at": "2026-05-04T09:43:52.197650+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557485",
     "source": "CFTC",
     "available": true
   },
@@ -1843,7 +1843,7 @@
     "net_position": 23354.0,
     "cot_score": 0.3347,
     "signal": "NET_LONG",
-    "fetched_at": "2026-05-04T09:43:52.197652+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557487",
     "source": "CFTC",
     "available": true
   },
@@ -1855,7 +1855,7 @@
     "net_position": -1125.0,
     "cot_score": -0.1287,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197654+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557489",
     "source": "CFTC",
     "available": true
   },
@@ -1867,7 +1867,7 @@
     "net_position": -665.0,
     "cot_score": -0.0919,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197656+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557491",
     "source": "CFTC",
     "available": true
   },
@@ -1879,7 +1879,7 @@
     "net_position": -1974.0,
     "cot_score": -0.0643,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197658+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557493",
     "source": "CFTC",
     "available": true
   },
@@ -1891,7 +1891,7 @@
     "net_position": -564.0,
     "cot_score": -0.0175,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197660+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557495",
     "source": "CFTC",
     "available": true
   },
@@ -1903,7 +1903,7 @@
     "net_position": -3844.0,
     "cot_score": -0.1487,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197662+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557497",
     "source": "CFTC",
     "available": true
   },
@@ -1915,7 +1915,7 @@
     "net_position": -2828.0,
     "cot_score": -0.1318,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197664+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557499",
     "source": "CFTC",
     "available": true
   },
@@ -1927,7 +1927,7 @@
     "net_position": -2582.0,
     "cot_score": -0.128,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197666+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557501",
     "source": "CFTC",
     "available": true
   },
@@ -1939,7 +1939,7 @@
     "net_position": 217.0,
     "cot_score": 0.0127,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197668+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557506",
     "source": "CFTC",
     "available": true
   },
@@ -1951,7 +1951,7 @@
     "net_position": 1335.0,
     "cot_score": 0.0745,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197670+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557508",
     "source": "CFTC",
     "available": true
   },
@@ -1963,7 +1963,7 @@
     "net_position": 1260.0,
     "cot_score": 0.0664,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197672+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557510",
     "source": "CFTC",
     "available": true
   },
@@ -1975,7 +1975,7 @@
     "net_position": -1719.0,
     "cot_score": -0.0139,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197674+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557512",
     "source": "CFTC",
     "available": true
   },
@@ -1987,7 +1987,7 @@
     "net_position": -3521.0,
     "cot_score": -0.0276,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197675+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557514",
     "source": "CFTC",
     "available": true
   },
@@ -1999,7 +1999,7 @@
     "net_position": 59091.0,
     "cot_score": 0.0858,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197677+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557516",
     "source": "CFTC",
     "available": true
   },
@@ -2011,7 +2011,7 @@
     "net_position": 3715.0,
     "cot_score": 0.2698,
     "signal": "NET_LONG",
-    "fetched_at": "2026-05-04T09:43:52.197679+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557518",
     "source": "CFTC",
     "available": true
   },
@@ -2023,7 +2023,7 @@
     "net_position": -140.0,
     "cot_score": -0.0121,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197681+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557520",
     "source": "CFTC",
     "available": true
   },
@@ -2035,7 +2035,7 @@
     "net_position": 6024.0,
     "cot_score": 0.0477,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197683+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557522",
     "source": "CFTC",
     "available": true
   },
@@ -2047,7 +2047,7 @@
     "net_position": 95023.0,
     "cot_score": 0.4335,
     "signal": "CROWDED_LONG",
-    "fetched_at": "2026-05-04T09:43:52.197685+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557524",
     "source": "CFTC",
     "available": true
   },
@@ -2059,7 +2059,7 @@
     "net_position": 0.0,
     "cot_score": 0.0,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197687+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557526",
     "source": "CFTC",
     "available": true
   },
@@ -2071,7 +2071,7 @@
     "net_position": -1355.0,
     "cot_score": -0.0148,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197688+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557528",
     "source": "CFTC",
     "available": true
   },
@@ -2083,7 +2083,7 @@
     "net_position": -1085.0,
     "cot_score": -0.0131,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197690+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557530",
     "source": "CFTC",
     "available": true
   },
@@ -2095,7 +2095,7 @@
     "net_position": -1006.0,
     "cot_score": -0.0455,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197692+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557532",
     "source": "CFTC",
     "available": true
   },
@@ -2107,7 +2107,7 @@
     "net_position": -1150.0,
     "cot_score": -0.0544,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197694+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557534",
     "source": "CFTC",
     "available": true
   },
@@ -2119,7 +2119,7 @@
     "net_position": 600.0,
     "cot_score": 0.0155,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197696+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557536",
     "source": "CFTC",
     "available": true
   },
@@ -2131,7 +2131,7 @@
     "net_position": 600.0,
     "cot_score": 0.0165,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197698+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557537",
     "source": "CFTC",
     "available": true
   },
@@ -2143,7 +2143,7 @@
     "net_position": 240.0,
     "cot_score": 0.0057,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197700+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557539",
     "source": "CFTC",
     "available": true
   },
@@ -2155,7 +2155,7 @@
     "net_position": -430.0,
     "cot_score": -0.0109,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197702+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557541",
     "source": "CFTC",
     "available": true
   },
@@ -2167,7 +2167,7 @@
     "net_position": -300.0,
     "cot_score": -0.0105,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197703+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557543",
     "source": "CFTC",
     "available": true
   },
@@ -2179,7 +2179,7 @@
     "net_position": -300.0,
     "cot_score": -0.0109,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197705+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557545",
     "source": "CFTC",
     "available": true
   },
@@ -2191,7 +2191,7 @@
     "net_position": -375.0,
     "cot_score": -0.0103,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197707+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557547",
     "source": "CFTC",
     "available": true
   },
@@ -2203,7 +2203,7 @@
     "net_position": -740.0,
     "cot_score": -0.0206,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197709+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557549",
     "source": "CFTC",
     "available": true
   },
@@ -2215,7 +2215,7 @@
     "net_position": 1980.0,
     "cot_score": 0.0605,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197711+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557551",
     "source": "CFTC",
     "available": true
   },
@@ -2227,7 +2227,7 @@
     "net_position": 1980.0,
     "cot_score": 0.0606,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197713+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557553",
     "source": "CFTC",
     "available": true
   },
@@ -2239,7 +2239,7 @@
     "net_position": -2705.0,
     "cot_score": -0.0246,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197715+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557555",
     "source": "CFTC",
     "available": true
   },
@@ -2251,7 +2251,7 @@
     "net_position": -195.0,
     "cot_score": -0.0018,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197716+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557557",
     "source": "CFTC",
     "available": true
   },
@@ -2263,7 +2263,7 @@
     "net_position": 2440.0,
     "cot_score": 0.1763,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197718+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557559",
     "source": "CFTC",
     "available": true
   },
@@ -2275,7 +2275,7 @@
     "net_position": 2440.0,
     "cot_score": 0.1806,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197720+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557560",
     "source": "CFTC",
     "available": true
   },
@@ -2287,7 +2287,7 @@
     "net_position": 2900.0,
     "cot_score": 0.0969,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197722+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557562",
     "source": "CFTC",
     "available": true
   },
@@ -2299,7 +2299,7 @@
     "net_position": 2900.0,
     "cot_score": 0.0931,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197724+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557564",
     "source": "CFTC",
     "available": true
   },
@@ -2311,7 +2311,7 @@
     "net_position": -1140.0,
     "cot_score": -0.0206,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197726+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557567",
     "source": "CFTC",
     "available": true
   },
@@ -2323,7 +2323,7 @@
     "net_position": -1140.0,
     "cot_score": -0.0218,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197728+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557568",
     "source": "CFTC",
     "available": true
   },
@@ -2335,7 +2335,7 @@
     "net_position": -870.0,
     "cot_score": -0.0518,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197730+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557570",
     "source": "CFTC",
     "available": true
   },
@@ -2347,7 +2347,7 @@
     "net_position": -870.0,
     "cot_score": -0.0511,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197732+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557572",
     "source": "CFTC",
     "available": true
   },
@@ -2359,7 +2359,7 @@
     "net_position": -150.0,
     "cot_score": -0.0017,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197734+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557574",
     "source": "CFTC",
     "available": true
   },
@@ -2371,7 +2371,7 @@
     "net_position": -100.0,
     "cot_score": -0.0011,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197736+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557576",
     "source": "CFTC",
     "available": true
   },
@@ -2383,7 +2383,7 @@
     "net_position": 1562.0,
     "cot_score": 0.0124,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197738+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557583",
     "source": "CFTC",
     "available": true
   },
@@ -2395,7 +2395,7 @@
     "net_position": 1787.0,
     "cot_score": 0.0138,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197740+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557585",
     "source": "CFTC",
     "available": true
   },
@@ -2407,7 +2407,7 @@
     "net_position": -765.0,
     "cot_score": -0.03,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197742+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557587",
     "source": "CFTC",
     "available": true
   },
@@ -2419,7 +2419,7 @@
     "net_position": -765.0,
     "cot_score": -0.03,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197744+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557589",
     "source": "CFTC",
     "available": true
   },
@@ -2431,7 +2431,7 @@
     "net_position": 845.0,
     "cot_score": 0.0153,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197746+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557591",
     "source": "CFTC",
     "available": true
   },
@@ -2443,7 +2443,7 @@
     "net_position": 670.0,
     "cot_score": 0.0123,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197748+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557593",
     "source": "CFTC",
     "available": true
   },
@@ -2455,7 +2455,7 @@
     "net_position": 2395.0,
     "cot_score": 0.0262,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197750+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557595",
     "source": "CFTC",
     "available": true
   },
@@ -2467,7 +2467,7 @@
     "net_position": 2395.0,
     "cot_score": 0.027,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197752+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557596",
     "source": "CFTC",
     "available": true
   },
@@ -2479,7 +2479,7 @@
     "net_position": 5363.0,
     "cot_score": 0.0202,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197754+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557598",
     "source": "CFTC",
     "available": true
   },
@@ -2491,7 +2491,7 @@
     "net_position": 338.0,
     "cot_score": 0.0013,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197756+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557600",
     "source": "CFTC",
     "available": true
   },
@@ -2503,7 +2503,7 @@
     "net_position": 1350.0,
     "cot_score": 0.0481,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197757+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557602",
     "source": "CFTC",
     "available": true
   },
@@ -2515,7 +2515,7 @@
     "net_position": -390.0,
     "cot_score": -0.0046,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197759+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557604",
     "source": "CFTC",
     "available": true
   },
@@ -2527,7 +2527,7 @@
     "net_position": -2725.0,
     "cot_score": -0.0326,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197761+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557606",
     "source": "CFTC",
     "available": true
   },
@@ -2539,7 +2539,7 @@
     "net_position": 375.0,
     "cot_score": 0.005,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197763+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557608",
     "source": "CFTC",
     "available": true
   },
@@ -2551,7 +2551,7 @@
     "net_position": 2812.0,
     "cot_score": 0.0384,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197765+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557610",
     "source": "CFTC",
     "available": true
   },
@@ -2563,7 +2563,7 @@
     "net_position": 595.0,
     "cot_score": 0.0024,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197767+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557611",
     "source": "CFTC",
     "available": true
   },
@@ -2575,7 +2575,7 @@
     "net_position": 3825.0,
     "cot_score": 0.0187,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197769+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557613",
     "source": "CFTC",
     "available": true
   },
@@ -2587,7 +2587,7 @@
     "net_position": -75.0,
     "cot_score": -0.0009,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197770+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557615",
     "source": "CFTC",
     "available": true
   },
@@ -2599,7 +2599,7 @@
     "net_position": 0.0,
     "cot_score": 0.0,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197773+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557617",
     "source": "CFTC",
     "available": true
   },
@@ -2611,7 +2611,7 @@
     "net_position": 0.0,
     "cot_score": 0.0,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197774+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557619",
     "source": "CFTC",
     "available": true
   },
@@ -2623,7 +2623,7 @@
     "net_position": 0.0,
     "cot_score": 0.0,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197776+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557621",
     "source": "CFTC",
     "available": true
   },
@@ -2635,7 +2635,7 @@
     "net_position": 1900.0,
     "cot_score": 0.0547,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197778+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557623",
     "source": "CFTC",
     "available": true
   },
@@ -2647,7 +2647,7 @@
     "net_position": -2130.0,
     "cot_score": -0.1154,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197780+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557625",
     "source": "CFTC",
     "available": true
   },
@@ -2659,7 +2659,7 @@
     "net_position": 0.0,
     "cot_score": 0.0,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197782+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557627",
     "source": "CFTC",
     "available": true
   },
@@ -2671,7 +2671,7 @@
     "net_position": 0.0,
     "cot_score": 0.0,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197784+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557629",
     "source": "CFTC",
     "available": true
   },
@@ -2683,7 +2683,7 @@
     "net_position": 0.0,
     "cot_score": 0.0,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197786+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557631",
     "source": "CFTC",
     "available": true
   },
@@ -2695,7 +2695,7 @@
     "net_position": 0.0,
     "cot_score": 0.0,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197788+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557633",
     "source": "CFTC",
     "available": true
   },
@@ -2707,7 +2707,7 @@
     "net_position": 0.0,
     "cot_score": 0.0,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197790+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557635",
     "source": "CFTC",
     "available": true
   },
@@ -2719,7 +2719,7 @@
     "net_position": 0.0,
     "cot_score": 0.0,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197792+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557636",
     "source": "CFTC",
     "available": true
   },
@@ -2731,7 +2731,7 @@
     "net_position": -51.0,
     "cot_score": -0.0035,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197794+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557638",
     "source": "CFTC",
     "available": true
   },
@@ -2743,7 +2743,7 @@
     "net_position": 2232.0,
     "cot_score": 0.0232,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197797+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557640",
     "source": "CFTC",
     "available": true
   },
@@ -2755,7 +2755,7 @@
     "net_position": 0.0,
     "cot_score": 0.0,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197799+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557642",
     "source": "CFTC",
     "available": true
   },
@@ -2767,7 +2767,7 @@
     "net_position": 0.0,
     "cot_score": 0.0,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197801+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557644",
     "source": "CFTC",
     "available": true
   },
@@ -2779,7 +2779,7 @@
     "net_position": -313.0,
     "cot_score": -0.0047,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197803+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557646",
     "source": "CFTC",
     "available": true
   },
@@ -2791,7 +2791,7 @@
     "net_position": 0.0,
     "cot_score": 0.0,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197805+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557648",
     "source": "CFTC",
     "available": true
   },
@@ -2803,7 +2803,7 @@
     "net_position": 0.0,
     "cot_score": 0.0,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197807+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557650",
     "source": "CFTC",
     "available": true
   },
@@ -2815,7 +2815,7 @@
     "net_position": 877.0,
     "cot_score": 0.0044,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197809+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557652",
     "source": "CFTC",
     "available": true
   },
@@ -2827,7 +2827,7 @@
     "net_position": 25.0,
     "cot_score": 0.0057,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197811+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557653",
     "source": "CFTC",
     "available": true
   },
@@ -2839,7 +2839,7 @@
     "net_position": 0.0,
     "cot_score": 0.0,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197813+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557656",
     "source": "CFTC",
     "available": true
   },
@@ -2851,7 +2851,7 @@
     "net_position": 0.0,
     "cot_score": 0.0,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197815+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557658",
     "source": "CFTC",
     "available": true
   },
@@ -2863,7 +2863,7 @@
     "net_position": 1704.0,
     "cot_score": 0.0146,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197817+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557660",
     "source": "CFTC",
     "available": true
   },
@@ -2875,7 +2875,7 @@
     "net_position": 1864.0,
     "cot_score": 0.0416,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197819+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557661",
     "source": "CFTC",
     "available": true
   },
@@ -2887,7 +2887,7 @@
     "net_position": 1528.0,
     "cot_score": 0.0313,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197821+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557663",
     "source": "CFTC",
     "available": true
   },
@@ -2899,7 +2899,7 @@
     "net_position": 30.0,
     "cot_score": 0.0006,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197823+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557665",
     "source": "CFTC",
     "available": true
   },
@@ -2911,7 +2911,7 @@
     "net_position": -190.0,
     "cot_score": -0.0093,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197825+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557667",
     "source": "CFTC",
     "available": true
   },
@@ -2923,7 +2923,7 @@
     "net_position": 7675.0,
     "cot_score": 0.1459,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197827+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557669",
     "source": "CFTC",
     "available": true
   },
@@ -2935,7 +2935,7 @@
     "net_position": -27003.0,
     "cot_score": -0.0231,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197828+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557671",
     "source": "CFTC",
     "available": true
   },
@@ -2947,7 +2947,7 @@
     "net_position": 0.0,
     "cot_score": 0.0,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197830+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557673",
     "source": "CFTC",
     "available": true
   },
@@ -2959,7 +2959,7 @@
     "net_position": -1529.0,
     "cot_score": -0.0263,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197832+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557675",
     "source": "CFTC",
     "available": true
   },
@@ -2971,7 +2971,7 @@
     "net_position": 245.0,
     "cot_score": 0.0146,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197834+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557677",
     "source": "CFTC",
     "available": true
   },
@@ -2983,7 +2983,7 @@
     "net_position": 0.0,
     "cot_score": 0.0,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197836+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557679",
     "source": "CFTC",
     "available": true
   },
@@ -2995,7 +2995,7 @@
     "net_position": 135501.0,
     "cot_score": 0.0468,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197850+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557680",
     "source": "CFTC",
     "available": true
   },
@@ -3007,7 +3007,7 @@
     "net_position": 0.0,
     "cot_score": 0.0,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197861+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557682",
     "source": "CFTC",
     "available": true
   },
@@ -3019,7 +3019,7 @@
     "net_position": 11029.0,
     "cot_score": 0.0582,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197864+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557684",
     "source": "CFTC",
     "available": true
   },
@@ -3031,7 +3031,7 @@
     "net_position": 0.0,
     "cot_score": 0.0,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197867+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557686",
     "source": "CFTC",
     "available": true
   },
@@ -3043,7 +3043,7 @@
     "net_position": 16074.0,
     "cot_score": 0.0446,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197869+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557688",
     "source": "CFTC",
     "available": true
   },
@@ -3055,7 +3055,7 @@
     "net_position": -12145.0,
     "cot_score": -0.0271,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197871+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557690",
     "source": "CFTC",
     "available": true
   },
@@ -3067,7 +3067,7 @@
     "net_position": 0.0,
     "cot_score": 0.0,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197873+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557692",
     "source": "CFTC",
     "available": true
   },
@@ -3079,7 +3079,7 @@
     "net_position": 37468.0,
     "cot_score": 0.1318,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197875+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557694",
     "source": "CFTC",
     "available": true
   },
@@ -3091,7 +3091,7 @@
     "net_position": -3207.0,
     "cot_score": -0.0558,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197877+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557696",
     "source": "CFTC",
     "available": true
   },
@@ -3103,7 +3103,7 @@
     "net_position": -5460.0,
     "cot_score": -0.018,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197879+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557698",
     "source": "CFTC",
     "available": true
   },
@@ -3115,7 +3115,7 @@
     "net_position": -19885.0,
     "cot_score": -0.0837,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197881+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557700",
     "source": "CFTC",
     "available": true
   },
@@ -3127,7 +3127,7 @@
     "net_position": -2342.0,
     "cot_score": -0.14,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197883+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557702",
     "source": "CFTC",
     "available": true
   },
@@ -3139,7 +3139,7 @@
     "net_position": 13965.0,
     "cot_score": 0.2176,
     "signal": "NET_LONG",
-    "fetched_at": "2026-05-04T09:43:52.197885+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557703",
     "source": "CFTC",
     "available": true
   },
@@ -3151,7 +3151,7 @@
     "net_position": -187345.0,
     "cot_score": -0.1624,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197887+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557705",
     "source": "CFTC",
     "available": true
   },
@@ -3163,7 +3163,7 @@
     "net_position": 29410.0,
     "cot_score": 0.1428,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197889+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557707",
     "source": "CFTC",
     "available": true
   },
@@ -3175,7 +3175,7 @@
     "net_position": 10745.0,
     "cot_score": 0.0891,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197891+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557709",
     "source": "CFTC",
     "available": true
   },
@@ -3187,7 +3187,7 @@
     "net_position": 60796.0,
     "cot_score": 0.2469,
     "signal": "NET_LONG",
-    "fetched_at": "2026-05-04T09:43:52.197893+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557711",
     "source": "CFTC",
     "available": true
   },
@@ -3199,7 +3199,7 @@
     "net_position": 91574.0,
     "cot_score": 0.1756,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197895+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557713",
     "source": "CFTC",
     "available": true
   },
@@ -3211,7 +3211,7 @@
     "net_position": 578.0,
     "cot_score": 0.0093,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197897+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557715",
     "source": "CFTC",
     "available": true
   },
@@ -3223,7 +3223,7 @@
     "net_position": 0.0,
     "cot_score": 0.0,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197899+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557717",
     "source": "CFTC",
     "available": true
   },
@@ -3235,7 +3235,7 @@
     "net_position": 62830.0,
     "cot_score": 0.1992,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197900+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557719",
     "source": "CFTC",
     "available": true
   },
@@ -3247,7 +3247,7 @@
     "net_position": 85.0,
     "cot_score": 0.0037,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197902+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557720",
     "source": "CFTC",
     "available": true
   },
@@ -3259,7 +3259,7 @@
     "net_position": 82966.0,
     "cot_score": 0.2499,
     "signal": "NET_LONG",
-    "fetched_at": "2026-05-04T09:43:52.197904+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557722",
     "source": "CFTC",
     "available": true
   },
@@ -3271,7 +3271,7 @@
     "net_position": -846.0,
     "cot_score": -0.056,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197906+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557724",
     "source": "CFTC",
     "available": true
   },
@@ -3283,7 +3283,7 @@
     "net_position": 1168.0,
     "cot_score": 0.0645,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197908+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557726",
     "source": "CFTC",
     "available": true
   },
@@ -3295,7 +3295,7 @@
     "net_position": 71.0,
     "cot_score": 0.0024,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197910+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557728",
     "source": "CFTC",
     "available": true
   },
@@ -3307,7 +3307,7 @@
     "net_position": 887.0,
     "cot_score": 0.0455,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197912+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557730",
     "source": "CFTC",
     "available": true
   },
@@ -3319,7 +3319,7 @@
     "net_position": 11507.0,
     "cot_score": 0.2431,
     "signal": "NET_LONG",
-    "fetched_at": "2026-05-04T09:43:52.197914+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557737",
     "source": "CFTC",
     "available": true
   },
@@ -3331,7 +3331,7 @@
     "net_position": 3203.0,
     "cot_score": 0.3263,
     "signal": "NET_LONG",
-    "fetched_at": "2026-05-04T09:43:52.197916+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557739",
     "source": "CFTC",
     "available": true
   },
@@ -3343,7 +3343,7 @@
     "net_position": 0.0,
     "cot_score": 0.0,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197918+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557741",
     "source": "CFTC",
     "available": true
   },
@@ -3355,7 +3355,7 @@
     "net_position": 667.0,
     "cot_score": 0.0934,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197920+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557743",
     "source": "CFTC",
     "available": true
   },
@@ -3367,7 +3367,7 @@
     "net_position": 0.0,
     "cot_score": 0.0,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197922+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557744",
     "source": "CFTC",
     "available": true
   },
@@ -3379,7 +3379,7 @@
     "net_position": 0.0,
     "cot_score": 0.0,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197923+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557746",
     "source": "CFTC",
     "available": true
   },
@@ -3391,7 +3391,1039 @@
     "net_position": -846.0,
     "cot_score": -0.0848,
     "signal": "NEUTRAL",
-    "fetched_at": "2026-05-04T09:43:52.197925+00:00",
+    "fetched_at": "2026-05-04T10:06:47.557748",
+    "source": "CFTC",
+    "available": true
+  },
+  "cot::SWISS FRANC - CHICAGO MERCANTILE EXCHANGE": {
+    "report_date": "2026-04-28",
+    "open_interest": 94111.0,
+    "nc_long": 1658.0,
+    "nc_short": 7107.0,
+    "net_position": -5449.0,
+    "cot_score": -0.0579,
+    "signal": "NEUTRAL",
+    "fetched_at": "2026-05-04T10:06:48.768416",
+    "source": "CFTC",
+    "available": true
+  },
+  "cot::BRITISH POUND - CHICAGO MERCANTILE EXCHANGE": {
+    "report_date": "2026-04-28",
+    "open_interest": 263635.0,
+    "nc_long": 4512.0,
+    "nc_short": 58489.0,
+    "net_position": -53977.0,
+    "cot_score": -0.2047,
+    "signal": "NET_SHORT",
+    "fetched_at": "2026-05-04T10:06:48.768436",
+    "source": "CFTC",
+    "available": true
+  },
+  "cot::JAPANESE YEN - CHICAGO MERCANTILE EXCHANGE": {
+    "report_date": "2026-04-28",
+    "open_interest": 372780.0,
+    "nc_long": 25357.0,
+    "nc_short": 81800.0,
+    "net_position": -56443.0,
+    "cot_score": -0.1514,
+    "signal": "NEUTRAL",
+    "fetched_at": "2026-05-04T10:06:48.768441",
+    "source": "CFTC",
+    "available": true
+  },
+  "cot::EURO FX - CHICAGO MERCANTILE EXCHANGE": {
+    "report_date": "2026-04-28",
+    "open_interest": 801430.0,
+    "nc_long": 44800.0,
+    "nc_short": 111857.0,
+    "net_position": -67057.0,
+    "cot_score": -0.0837,
+    "signal": "NEUTRAL",
+    "fetched_at": "2026-05-04T10:06:48.768445",
+    "source": "CFTC",
+    "available": true
+  },
+  "cot::AUSTRALIAN DOLLAR - CHICAGO MERCANTILE EXCHANGE": {
+    "report_date": "2026-04-28",
+    "open_interest": 277370.0,
+    "nc_long": 7410.0,
+    "nc_short": 73808.0,
+    "net_position": -66398.0,
+    "cot_score": -0.2394,
+    "signal": "NET_SHORT",
+    "fetched_at": "2026-05-04T10:06:48.768449",
+    "source": "CFTC",
+    "available": true
+  },
+  "cot::EURO FX/BRITISH POUND XRATE - CHICAGO MERCANTILE EXCHANGE": {
+    "report_date": "2026-04-28",
+    "open_interest": 36993.0,
+    "nc_long": 1605.0,
+    "nc_short": 2179.0,
+    "net_position": -574.0,
+    "cot_score": -0.0155,
+    "signal": "NEUTRAL",
+    "fetched_at": "2026-05-04T10:06:48.768453",
+    "source": "CFTC",
+    "available": true
+  },
+  "cot::EURO FX/JAPANESE YEN XRATE - CHICAGO MERCANTILE EXCHANGE": {
+    "report_date": "2026-04-28",
+    "open_interest": 21371.0,
+    "nc_long": 278.0,
+    "nc_short": 1533.0,
+    "net_position": -1255.0,
+    "cot_score": -0.0587,
+    "signal": "NEUTRAL",
+    "fetched_at": "2026-05-04T10:06:48.768457",
+    "source": "CFTC",
+    "available": true
+  },
+  "cot::MEXICAN PESO - CHICAGO MERCANTILE EXCHANGE": {
+    "report_date": "2026-04-28",
+    "open_interest": 202265.0,
+    "nc_long": 2115.0,
+    "nc_short": 76797.0,
+    "net_position": -74682.0,
+    "cot_score": -0.3692,
+    "signal": "NET_SHORT",
+    "fetched_at": "2026-05-04T10:06:48.768460",
+    "source": "CFTC",
+    "available": true
+  },
+  "cot::BRAZILIAN REAL - CHICAGO MERCANTILE EXCHANGE": {
+    "report_date": "2026-04-28",
+    "open_interest": 151212.0,
+    "nc_long": 264.0,
+    "nc_short": 37195.0,
+    "net_position": -36931.0,
+    "cot_score": -0.2442,
+    "signal": "NET_SHORT",
+    "fetched_at": "2026-05-04T10:06:48.768464",
+    "source": "CFTC",
+    "available": true
+  },
+  "cot::NZ DOLLAR - CHICAGO MERCANTILE EXCHANGE": {
+    "report_date": "2026-04-28",
+    "open_interest": 83529.0,
+    "nc_long": 229.0,
+    "nc_short": 7160.0,
+    "net_position": -6931.0,
+    "cot_score": -0.083,
+    "signal": "NEUTRAL",
+    "fetched_at": "2026-05-04T10:06:48.768468",
+    "source": "CFTC",
+    "available": true
+  },
+  "cot::SO AFRICAN RAND - CHICAGO MERCANTILE EXCHANGE": {
+    "report_date": "2026-04-28",
+    "open_interest": 22400.0,
+    "nc_long": 77.0,
+    "nc_short": 6215.0,
+    "net_position": -6138.0,
+    "cot_score": -0.274,
+    "signal": "NET_SHORT",
+    "fetched_at": "2026-05-04T10:06:48.768472",
+    "source": "CFTC",
+    "available": true
+  },
+  "cot::DJIA CONSOLIDATED - CHICAGO BOARD OF TRADE": {
+    "report_date": "2026-04-28",
+    "open_interest": 78128.0,
+    "nc_long": 458.0,
+    "nc_short": 7094.0,
+    "net_position": -6636.0,
+    "cot_score": -0.0849,
+    "signal": "NEUTRAL",
+    "fetched_at": "2026-05-04T10:06:48.768476",
+    "source": "CFTC",
+    "available": true
+  },
+  "cot::DJIA X $5 - CHICAGO BOARD OF TRADE": {
+    "report_date": "2026-04-28",
+    "open_interest": 74874.0,
+    "nc_long": 458.0,
+    "nc_short": 7413.0,
+    "net_position": -6955.0,
+    "cot_score": -0.0929,
+    "signal": "NEUTRAL",
+    "fetched_at": "2026-05-04T10:06:48.768480",
+    "source": "CFTC",
+    "available": true
+  },
+  "cot::DOW JONES U.S. REAL ESTATE IDX - CHICAGO BOARD OF TRADE": {
+    "report_date": "2026-04-28",
+    "open_interest": 69381.0,
+    "nc_long": 2833.0,
+    "nc_short": 10610.0,
+    "net_position": -7777.0,
+    "cot_score": -0.1121,
+    "signal": "NEUTRAL",
+    "fetched_at": "2026-05-04T10:06:48.768484",
+    "source": "CFTC",
+    "available": true
+  },
+  "cot::MICRO E-MINI DJIA (X$0.5) - CHICAGO BOARD OF TRADE": {
+    "report_date": "2026-04-28",
+    "open_interest": 32535.0,
+    "nc_long": 0.0,
+    "nc_short": 15485.0,
+    "net_position": -15485.0,
+    "cot_score": -0.4759,
+    "signal": "CROWDED_SHORT",
+    "fetched_at": "2026-05-04T10:06:48.768487",
+    "source": "CFTC",
+    "available": true
+  },
+  "cot::S&P 500 CONSOLIDATED - CHICAGO MERCANTILE EXCHANGE": {
+    "report_date": "2026-04-28",
+    "open_interest": 1982697.0,
+    "nc_long": 110856.0,
+    "nc_short": 120816.0,
+    "net_position": -9960.0,
+    "cot_score": -0.005,
+    "signal": "NEUTRAL",
+    "fetched_at": "2026-05-04T10:06:48.768491",
+    "source": "CFTC",
+    "available": true
+  },
+  "cot::E-MINI S&P CONSU STAPLES INDEX - CHICAGO MERCANTILE EXCHANGE": {
+    "report_date": "2026-04-28",
+    "open_interest": 25506.0,
+    "nc_long": 182.0,
+    "nc_short": 0.0,
+    "net_position": 182.0,
+    "cot_score": 0.0071,
+    "signal": "NEUTRAL",
+    "fetched_at": "2026-05-04T10:06:48.768495",
+    "source": "CFTC",
+    "available": true
+  },
+  "cot::E-MINI S&P ENERGY INDEX - CHICAGO MERCANTILE EXCHANGE": {
+    "report_date": "2026-04-28",
+    "open_interest": 26622.0,
+    "nc_long": 197.0,
+    "nc_short": 977.0,
+    "net_position": -780.0,
+    "cot_score": -0.0293,
+    "signal": "NEUTRAL",
+    "fetched_at": "2026-05-04T10:06:48.768498",
+    "source": "CFTC",
+    "available": true
+  },
+  "cot::E-MINI S&P 500 - CHICAGO MERCANTILE EXCHANGE": {
+    "report_date": "2026-04-28",
+    "open_interest": 1959933.0,
+    "nc_long": 110386.0,
+    "nc_short": 120508.0,
+    "net_position": -10122.0,
+    "cot_score": -0.0052,
+    "signal": "NEUTRAL",
+    "fetched_at": "2026-05-04T10:06:48.768501",
+    "source": "CFTC",
+    "available": true
+  },
+  "cot::E-MINI S&P FINANCIAL INDEX - CHICAGO MERCANTILE EXCHANGE": {
+    "report_date": "2026-04-28",
+    "open_interest": 69326.0,
+    "nc_long": 0.0,
+    "nc_short": 1915.0,
+    "net_position": -1915.0,
+    "cot_score": -0.0276,
+    "signal": "NEUTRAL",
+    "fetched_at": "2026-05-04T10:06:48.768505",
+    "source": "CFTC",
+    "available": true
+  },
+  "cot::E-MINI S&P HEALTH CARE INDEX - CHICAGO MERCANTILE EXCHANGE": {
+    "report_date": "2026-04-28",
+    "open_interest": 17738.0,
+    "nc_long": 0.0,
+    "nc_short": 889.0,
+    "net_position": -889.0,
+    "cot_score": -0.0501,
+    "signal": "NEUTRAL",
+    "fetched_at": "2026-05-04T10:06:48.768508",
+    "source": "CFTC",
+    "available": true
+  },
+  "cot::E-MINI S&P INDUSTRIAL INDEX - CHICAGO MERCANTILE EXCHANGE": {
+    "report_date": "2026-04-28",
+    "open_interest": 15751.0,
+    "nc_long": 0.0,
+    "nc_short": 0.0,
+    "net_position": 0.0,
+    "cot_score": 0.0,
+    "signal": "NEUTRAL",
+    "fetched_at": "2026-05-04T10:06:48.768511",
+    "source": "CFTC",
+    "available": true
+  },
+  "cot::E-MINI S&P TECHNOLOGY INDEX - CHICAGO MERCANTILE EXCHANGE": {
+    "report_date": "2026-04-28",
+    "open_interest": 19523.0,
+    "nc_long": 0.0,
+    "nc_short": 554.0,
+    "net_position": -554.0,
+    "cot_score": -0.0284,
+    "signal": "NEUTRAL",
+    "fetched_at": "2026-05-04T10:06:48.768515",
+    "source": "CFTC",
+    "available": true
+  },
+  "cot::E-MINI S&P UTILITIES INDEX - CHICAGO MERCANTILE EXCHANGE": {
+    "report_date": "2026-04-28",
+    "open_interest": 23097.0,
+    "nc_long": 0.0,
+    "nc_short": 1983.0,
+    "net_position": -1983.0,
+    "cot_score": -0.0859,
+    "signal": "NEUTRAL",
+    "fetched_at": "2026-05-04T10:06:48.768518",
+    "source": "CFTC",
+    "available": true
+  },
+  "cot::E-MINI S&P COMMUNICATION INDEX - CHICAGO MERCANTILE EXCHANGE": {
+    "report_date": "2026-04-28",
+    "open_interest": 17057.0,
+    "nc_long": 0.0,
+    "nc_short": 1277.0,
+    "net_position": -1277.0,
+    "cot_score": -0.0749,
+    "signal": "NEUTRAL",
+    "fetched_at": "2026-05-04T10:06:48.768522",
+    "source": "CFTC",
+    "available": true
+  },
+  "cot::MICRO E-MINI S&P 500 INDEX - CHICAGO MERCANTILE EXCHANGE": {
+    "report_date": "2026-04-28",
+    "open_interest": 227644.0,
+    "nc_long": 3871.0,
+    "nc_short": 106221.0,
+    "net_position": -102350.0,
+    "cot_score": -0.4496,
+    "signal": "CROWDED_SHORT",
+    "fetched_at": "2026-05-04T10:06:48.768525",
+    "source": "CFTC",
+    "available": true
+  },
+  "cot::ADJUSTED INT RATE S&P 500 TOTL - CHICAGO MERCANTILE EXCHANGE": {
+    "report_date": "2026-04-28",
+    "open_interest": 884477.0,
+    "nc_long": 6200.0,
+    "nc_short": 113522.0,
+    "net_position": -107322.0,
+    "cot_score": -0.1213,
+    "signal": "NEUTRAL",
+    "fetched_at": "2026-05-04T10:06:48.768528",
+    "source": "CFTC",
+    "available": true
+  },
+  "cot::NASDAQ-100 CONSOLIDATED - CHICAGO MERCANTILE EXCHANGE": {
+    "report_date": "2026-04-28",
+    "open_interest": 302430.0,
+    "nc_long": 3535.0,
+    "nc_short": 34444.0,
+    "net_position": -30909.0,
+    "cot_score": -0.1022,
+    "signal": "NEUTRAL",
+    "fetched_at": "2026-05-04T10:06:48.768531",
+    "source": "CFTC",
+    "available": true
+  },
+  "cot::NASDAQ MINI - CHICAGO MERCANTILE EXCHANGE": {
+    "report_date": "2026-04-28",
+    "open_interest": 275963.0,
+    "nc_long": 3533.0,
+    "nc_short": 45417.0,
+    "net_position": -41884.0,
+    "cot_score": -0.1518,
+    "signal": "NEUTRAL",
+    "fetched_at": "2026-05-04T10:06:48.768535",
+    "source": "CFTC",
+    "available": true
+  },
+  "cot::MICRO E-MINI NASDAQ-100 INDEX - CHICAGO MERCANTILE EXCHANGE": {
+    "report_date": "2026-04-28",
+    "open_interest": 264672.0,
+    "nc_long": 24.0,
+    "nc_short": 12198.0,
+    "net_position": -12174.0,
+    "cot_score": -0.046,
+    "signal": "NEUTRAL",
+    "fetched_at": "2026-05-04T10:06:48.768538",
+    "source": "CFTC",
+    "available": true
+  },
+  "cot::RUSSELL E-MINI - CHICAGO MERCANTILE EXCHANGE": {
+    "report_date": "2026-04-28",
+    "open_interest": 412001.0,
+    "nc_long": 23432.0,
+    "nc_short": 69262.0,
+    "net_position": -45830.0,
+    "cot_score": -0.1112,
+    "signal": "NEUTRAL",
+    "fetched_at": "2026-05-04T10:06:48.768541",
+    "source": "CFTC",
+    "available": true
+  },
+  "cot::EMINI RUSSELL 1000 VALUE INDEX - CHICAGO MERCANTILE EXCHANGE": {
+    "report_date": "2026-04-28",
+    "open_interest": 32039.0,
+    "nc_long": 0.0,
+    "nc_short": 0.0,
+    "net_position": 0.0,
+    "cot_score": 0.0,
+    "signal": "NEUTRAL",
+    "fetched_at": "2026-05-04T10:06:48.768544",
+    "source": "CFTC",
+    "available": true
+  },
+  "cot::MICRO E-MINI RUSSELL 2000 INDX - CHICAGO MERCANTILE EXCHANGE": {
+    "report_date": "2026-04-28",
+    "open_interest": 35086.0,
+    "nc_long": 0.0,
+    "nc_short": 16942.0,
+    "net_position": -16942.0,
+    "cot_score": -0.4829,
+    "signal": "CROWDED_SHORT",
+    "fetched_at": "2026-05-04T10:06:48.768548",
+    "source": "CFTC",
+    "available": true
+  },
+  "cot::RUSSELL 2000 ANNUAL DIVIDEND  - CHICAGO MERCANTILE EXCHANGE": {
+    "report_date": "2026-04-28",
+    "open_interest": 41340.0,
+    "nc_long": 0.0,
+    "nc_short": 36566.0,
+    "net_position": -36566.0,
+    "cot_score": -0.8845,
+    "signal": "CROWDED_SHORT",
+    "fetched_at": "2026-05-04T10:06:48.768551",
+    "source": "CFTC",
+    "available": true
+  },
+  "cot::NIKKEI STOCK AVERAGE YEN DENOM - CHICAGO MERCANTILE EXCHANGE": {
+    "report_date": "2026-04-28",
+    "open_interest": 35291.0,
+    "nc_long": 108.0,
+    "nc_short": 10281.0,
+    "net_position": -10173.0,
+    "cot_score": -0.2883,
+    "signal": "NET_SHORT",
+    "fetched_at": "2026-05-04T10:06:48.768555",
+    "source": "CFTC",
+    "available": true
+  },
+  "cot::MSCI EAFE  - ICE FUTURES U.S.": {
+    "report_date": "2026-04-28",
+    "open_interest": 458047.0,
+    "nc_long": 42927.0,
+    "nc_short": 33613.0,
+    "net_position": 9314.0,
+    "cot_score": 0.0203,
+    "signal": "NEUTRAL",
+    "fetched_at": "2026-05-04T10:06:48.768558",
+    "source": "CFTC",
+    "available": true
+  },
+  "cot::MSCI EM INDEX - ICE FUTURES U.S.": {
+    "report_date": "2026-04-28",
+    "open_interest": 1119384.0,
+    "nc_long": 84532.0,
+    "nc_short": 123536.0,
+    "net_position": -39004.0,
+    "cot_score": -0.0348,
+    "signal": "NEUTRAL",
+    "fetched_at": "2026-05-04T10:06:48.768561",
+    "source": "CFTC",
+    "available": true
+  },
+  "cot::E-MINI S&P 400 STOCK INDEX - CHICAGO MERCANTILE EXCHANGE": {
+    "report_date": "2026-04-28",
+    "open_interest": 37549.0,
+    "nc_long": 1212.0,
+    "nc_short": 5407.0,
+    "net_position": -4195.0,
+    "cot_score": -0.1117,
+    "signal": "NEUTRAL",
+    "fetched_at": "2026-05-04T10:06:48.768565",
+    "source": "CFTC",
+    "available": true
+  },
+  "cot::S&P 500 ANNUAL DIVIDEND INDEX - CHICAGO MERCANTILE EXCHANGE": {
+    "report_date": "2026-04-28",
+    "open_interest": 362009.0,
+    "nc_long": 934.0,
+    "nc_short": 163842.0,
+    "net_position": -162908.0,
+    "cot_score": -0.45,
+    "signal": "CROWDED_SHORT",
+    "fetched_at": "2026-05-04T10:06:48.768568",
+    "source": "CFTC",
+    "available": true
+  },
+  "cot::S&P 500 QUARTERLY DIVIDEND IND - CHICAGO MERCANTILE EXCHANGE": {
+    "report_date": "2026-04-28",
+    "open_interest": 44973.0,
+    "nc_long": 0.0,
+    "nc_short": 30662.0,
+    "net_position": -30662.0,
+    "cot_score": -0.6818,
+    "signal": "CROWDED_SHORT",
+    "fetched_at": "2026-05-04T10:06:48.768572",
+    "source": "CFTC",
+    "available": true
+  },
+  "cot::UST BOND - CHICAGO BOARD OF TRADE": {
+    "report_date": "2026-04-28",
+    "open_interest": 1800714.0,
+    "nc_long": 221965.0,
+    "nc_short": 123992.0,
+    "net_position": 97973.0,
+    "cot_score": 0.0544,
+    "signal": "NEUTRAL",
+    "fetched_at": "2026-05-04T10:06:48.768575",
+    "source": "CFTC",
+    "available": true
+  },
+  "cot::ULTRA UST BOND - CHICAGO BOARD OF TRADE": {
+    "report_date": "2026-04-28",
+    "open_interest": 2310976.0,
+    "nc_long": 365846.0,
+    "nc_short": 76253.0,
+    "net_position": 289593.0,
+    "cot_score": 0.1253,
+    "signal": "NEUTRAL",
+    "fetched_at": "2026-05-04T10:06:48.768578",
+    "source": "CFTC",
+    "available": true
+  },
+  "cot::UST 2Y NOTE - CHICAGO BOARD OF TRADE": {
+    "report_date": "2026-04-28",
+    "open_interest": 4737135.0,
+    "nc_long": 469502.0,
+    "nc_short": 409828.0,
+    "net_position": 59674.0,
+    "cot_score": 0.0126,
+    "signal": "NEUTRAL",
+    "fetched_at": "2026-05-04T10:06:48.768582",
+    "source": "CFTC",
+    "available": true
+  },
+  "cot::UST 10Y NOTE - CHICAGO BOARD OF TRADE": {
+    "report_date": "2026-04-28",
+    "open_interest": 5374513.0,
+    "nc_long": 669734.0,
+    "nc_short": 341888.0,
+    "net_position": 327846.0,
+    "cot_score": 0.061,
+    "signal": "NEUTRAL",
+    "fetched_at": "2026-05-04T10:06:48.768585",
+    "source": "CFTC",
+    "available": true
+  },
+  "cot::ULTRA UST 10Y - CHICAGO BOARD OF TRADE": {
+    "report_date": "2026-04-28",
+    "open_interest": 2406104.0,
+    "nc_long": 586704.0,
+    "nc_short": 164321.0,
+    "net_position": 422383.0,
+    "cot_score": 0.1755,
+    "signal": "NEUTRAL",
+    "fetched_at": "2026-05-04T10:06:48.768588",
+    "source": "CFTC",
+    "available": true
+  },
+  "cot::MICRO 10 YEAR YIELD - CHICAGO BOARD OF TRADE": {
+    "report_date": "2026-04-28",
+    "open_interest": 1922.0,
+    "nc_long": 0.0,
+    "nc_short": 1203.0,
+    "net_position": -1203.0,
+    "cot_score": -0.6259,
+    "signal": "CROWDED_SHORT",
+    "fetched_at": "2026-05-04T10:06:48.768591",
+    "source": "CFTC",
+    "available": true
+  },
+  "cot::UST 5Y NOTE - CHICAGO BOARD OF TRADE": {
+    "report_date": "2026-04-28",
+    "open_interest": 6484836.0,
+    "nc_long": 846333.0,
+    "nc_short": 447149.0,
+    "net_position": 399184.0,
+    "cot_score": 0.0616,
+    "signal": "NEUTRAL",
+    "fetched_at": "2026-05-04T10:06:48.768594",
+    "source": "CFTC",
+    "available": true
+  },
+  "cot::FED FUNDS - CHICAGO BOARD OF TRADE": {
+    "report_date": "2026-04-28",
+    "open_interest": 1954442.0,
+    "nc_long": 48092.0,
+    "nc_short": 462406.0,
+    "net_position": -414314.0,
+    "cot_score": -0.212,
+    "signal": "NET_SHORT",
+    "fetched_at": "2026-05-04T10:06:48.768598",
+    "source": "CFTC",
+    "available": true
+  },
+  "cot::EURO SHORT TERM RATE - CHICAGO MERCANTILE EXCHANGE": {
+    "report_date": "2026-04-28",
+    "open_interest": 15667.0,
+    "nc_long": 0.0,
+    "nc_short": 1986.0,
+    "net_position": -1986.0,
+    "cot_score": -0.1268,
+    "signal": "NEUTRAL",
+    "fetched_at": "2026-05-04T10:06:48.768601",
+    "source": "CFTC",
+    "available": true
+  },
+  "cot::SOFR-3M - CHICAGO MERCANTILE EXCHANGE": {
+    "report_date": "2026-04-28",
+    "open_interest": 12166138.0,
+    "nc_long": 1093456.0,
+    "nc_short": 1567992.0,
+    "net_position": -474536.0,
+    "cot_score": -0.039,
+    "signal": "NEUTRAL",
+    "fetched_at": "2026-05-04T10:06:48.768604",
+    "source": "CFTC",
+    "available": true
+  },
+  "cot::SOFR-1M - CHICAGO MERCANTILE EXCHANGE": {
+    "report_date": "2026-04-28",
+    "open_interest": 1413565.0,
+    "nc_long": 43872.0,
+    "nc_short": 180628.0,
+    "net_position": -136756.0,
+    "cot_score": -0.0967,
+    "signal": "NEUTRAL",
+    "fetched_at": "2026-05-04T10:06:48.768607",
+    "source": "CFTC",
+    "available": true
+  },
+  "cot::BBG COMMODITY - CHICAGO BOARD OF TRADE": {
+    "report_date": "2026-04-28",
+    "open_interest": 242800.0,
+    "nc_long": 1212.0,
+    "nc_short": 9344.0,
+    "net_position": -8132.0,
+    "cot_score": -0.0335,
+    "signal": "NEUTRAL",
+    "fetched_at": "2026-05-04T10:06:48.768610",
+    "source": "CFTC",
+    "available": true
+  },
+  "cot::BLOOMBERG HY CREDIT FUTURES - CHICAGO BOARD OF TRADE": {
+    "report_date": "2026-04-28",
+    "open_interest": 2181.0,
+    "nc_long": 0.0,
+    "nc_short": 891.0,
+    "net_position": -891.0,
+    "cot_score": -0.4085,
+    "signal": "CROWDED_SHORT",
+    "fetched_at": "2026-05-04T10:06:48.768613",
+    "source": "CFTC",
+    "available": true
+  },
+  "cot::2 YEAR ERIS SOFR SWAP - CHICAGO BOARD OF TRADE": {
+    "report_date": "2026-04-28",
+    "open_interest": 116819.0,
+    "nc_long": 0.0,
+    "nc_short": 10632.0,
+    "net_position": -10632.0,
+    "cot_score": -0.091,
+    "signal": "NEUTRAL",
+    "fetched_at": "2026-05-04T10:06:48.768617",
+    "source": "CFTC",
+    "available": true
+  },
+  "cot::10 YEAR ERIS SOFR SWAP - CHICAGO BOARD OF TRADE": {
+    "report_date": "2026-04-28",
+    "open_interest": 233124.0,
+    "nc_long": 0.0,
+    "nc_short": 8370.0,
+    "net_position": -8370.0,
+    "cot_score": -0.0359,
+    "signal": "NEUTRAL",
+    "fetched_at": "2026-05-04T10:06:48.768620",
+    "source": "CFTC",
+    "available": true
+  },
+  "cot::5 YEAR ERIS SOFR SWAP - CHICAGO BOARD OF TRADE": {
+    "report_date": "2026-04-28",
+    "open_interest": 208810.0,
+    "nc_long": 0.0,
+    "nc_short": 5995.0,
+    "net_position": -5995.0,
+    "cot_score": -0.0287,
+    "signal": "NEUTRAL",
+    "fetched_at": "2026-05-04T10:06:48.768623",
+    "source": "CFTC",
+    "available": true
+  },
+  "cot::3 YEAR ERIS SOFR SWAP - CHICAGO BOARD OF TRADE": {
+    "report_date": "2026-04-28",
+    "open_interest": 95187.0,
+    "nc_long": 0.0,
+    "nc_short": 1955.0,
+    "net_position": -1955.0,
+    "cot_score": -0.0205,
+    "signal": "NEUTRAL",
+    "fetched_at": "2026-05-04T10:06:48.768626",
+    "source": "CFTC",
+    "available": true
+  },
+  "cot::7 YEAR ERIS SOFR SWAP - CHICAGO BOARD OF TRADE": {
+    "report_date": "2026-04-28",
+    "open_interest": 38482.0,
+    "nc_long": 0.0,
+    "nc_short": 4918.0,
+    "net_position": -4918.0,
+    "cot_score": -0.1278,
+    "signal": "NEUTRAL",
+    "fetched_at": "2026-05-04T10:06:48.768629",
+    "source": "CFTC",
+    "available": true
+  },
+  "cot::LITECOIN PERP STYLE - COINBASE DERIVATIVES, LLC": {
+    "report_date": "2026-04-28",
+    "open_interest": 2896.0,
+    "nc_long": 0.0,
+    "nc_short": 1037.0,
+    "net_position": -1037.0,
+    "cot_score": -0.3581,
+    "signal": "NET_SHORT",
+    "fetched_at": "2026-05-04T10:06:48.768632",
+    "source": "CFTC",
+    "available": true
+  },
+  "cot::POLKADOT PERP STYLE - COINBASE DERIVATIVES, LLC": {
+    "report_date": "2026-04-28",
+    "open_interest": 2422.0,
+    "nc_long": 0.0,
+    "nc_short": 404.0,
+    "net_position": -404.0,
+    "cot_score": -0.1668,
+    "signal": "NEUTRAL",
+    "fetched_at": "2026-05-04T10:06:48.768671",
+    "source": "CFTC",
+    "available": true
+  },
+  "cot::CHAINLINK PERP STYLE - COINBASE DERIVATIVES, LLC": {
+    "report_date": "2026-04-28",
+    "open_interest": 3707.0,
+    "nc_long": 0.0,
+    "nc_short": 1085.0,
+    "net_position": -1085.0,
+    "cot_score": -0.2927,
+    "signal": "NET_SHORT",
+    "fetched_at": "2026-05-04T10:06:48.768675",
+    "source": "CFTC",
+    "available": true
+  },
+  "cot::AVALANCHE PERP STYLE - COINBASE DERIVATIVES, LLC": {
+    "report_date": "2026-04-28",
+    "open_interest": 3917.0,
+    "nc_long": 0.0,
+    "nc_short": 173.0,
+    "net_position": -173.0,
+    "cot_score": -0.0442,
+    "signal": "NEUTRAL",
+    "fetched_at": "2026-05-04T10:06:48.768678",
+    "source": "CFTC",
+    "available": true
+  },
+  "cot::1K SHIB PERP - COINBASE DERIVATIVES, LLC": {
+    "report_date": "2026-04-28",
+    "open_interest": 1730.0,
+    "nc_long": 0.0,
+    "nc_short": 395.0,
+    "net_position": -395.0,
+    "cot_score": -0.2283,
+    "signal": "NET_SHORT",
+    "fetched_at": "2026-05-04T10:06:48.768681",
+    "source": "CFTC",
+    "available": true
+  },
+  "cot::STELLAR PERP STYLE - COINBASE DERIVATIVES, LLC": {
+    "report_date": "2026-04-28",
+    "open_interest": 1061.0,
+    "nc_long": 0.0,
+    "nc_short": 0.0,
+    "net_position": 0.0,
+    "cot_score": 0.0,
+    "signal": "NEUTRAL",
+    "fetched_at": "2026-05-04T10:06:48.768684",
+    "source": "CFTC",
+    "available": true
+  },
+  "cot::SUI PERP STYLE - COINBASE DERIVATIVES, LLC": {
+    "report_date": "2026-04-28",
+    "open_interest": 3270.0,
+    "nc_long": 0.0,
+    "nc_short": 1226.0,
+    "net_position": -1226.0,
+    "cot_score": -0.3749,
+    "signal": "NET_SHORT",
+    "fetched_at": "2026-05-04T10:06:48.768687",
+    "source": "CFTC",
+    "available": true
+  },
+  "cot::HEDERA PERP STYLE - COINBASE DERIVATIVES, LLC": {
+    "report_date": "2026-04-28",
+    "open_interest": 1180.0,
+    "nc_long": 0.0,
+    "nc_short": 102.0,
+    "net_position": -102.0,
+    "cot_score": -0.0864,
+    "signal": "NEUTRAL",
+    "fetched_at": "2026-05-04T10:06:48.768690",
+    "source": "CFTC",
+    "available": true
+  },
+  "cot::ONDO PERP STYLE - COINBASE DERIVATIVES, LLC": {
+    "report_date": "2026-04-28",
+    "open_interest": 1498.0,
+    "nc_long": 0.0,
+    "nc_short": 0.0,
+    "net_position": 0.0,
+    "cot_score": 0.0,
+    "signal": "NEUTRAL",
+    "fetched_at": "2026-05-04T10:06:48.768694",
+    "source": "CFTC",
+    "available": true
+  },
+  "cot::ZCASH PERP STYLE - COINBASE DERIVATIVES, LLC": {
+    "report_date": "2026-04-28",
+    "open_interest": 2628.0,
+    "nc_long": 0.0,
+    "nc_short": 58.0,
+    "net_position": -58.0,
+    "cot_score": -0.0221,
+    "signal": "NEUTRAL",
+    "fetched_at": "2026-05-04T10:06:48.768697",
+    "source": "CFTC",
+    "available": true
+  },
+  "cot::BITCOIN - CHICAGO MERCANTILE EXCHANGE": {
+    "report_date": "2026-04-28",
+    "open_interest": 21692.0,
+    "nc_long": 683.0,
+    "nc_short": 3534.0,
+    "net_position": -2851.0,
+    "cot_score": -0.1314,
+    "signal": "NEUTRAL",
+    "fetched_at": "2026-05-04T10:06:48.768700",
+    "source": "CFTC",
+    "available": true
+  },
+  "cot::MICRO BITCOIN - CHICAGO MERCANTILE EXCHANGE": {
+    "report_date": "2026-04-28",
+    "open_interest": 18731.0,
+    "nc_long": 0.0,
+    "nc_short": 4903.0,
+    "net_position": -4903.0,
+    "cot_score": -0.2618,
+    "signal": "NET_SHORT",
+    "fetched_at": "2026-05-04T10:06:48.768703",
+    "source": "CFTC",
+    "available": true
+  },
+  "cot::NANO BITCOIN  - COINBASE DERIVATIVES, LLC": {
+    "report_date": "2026-04-28",
+    "open_interest": 37190.0,
+    "nc_long": 0.0,
+    "nc_short": 11266.0,
+    "net_position": -11266.0,
+    "cot_score": -0.3029,
+    "signal": "NET_SHORT",
+    "fetched_at": "2026-05-04T10:06:48.768706",
+    "source": "CFTC",
+    "available": true
+  },
+  "cot::NANO BITCOIN PERP STYLE - COINBASE DERIVATIVES, LLC": {
+    "report_date": "2026-04-28",
+    "open_interest": 172598.0,
+    "nc_long": 0.0,
+    "nc_short": 54618.0,
+    "net_position": -54618.0,
+    "cot_score": -0.3164,
+    "signal": "NET_SHORT",
+    "fetched_at": "2026-05-04T10:06:48.768709",
+    "source": "CFTC",
+    "available": true
+  },
+  "cot::ETHER CASH SETTLED - CHICAGO MERCANTILE EXCHANGE": {
+    "report_date": "2026-04-28",
+    "open_interest": 27777.0,
+    "nc_long": 977.0,
+    "nc_short": 2142.0,
+    "net_position": -1165.0,
+    "cot_score": -0.0419,
+    "signal": "NEUTRAL",
+    "fetched_at": "2026-05-04T10:06:48.768713",
+    "source": "CFTC",
+    "available": true
+  },
+  "cot::MICRO ETHER  - CHICAGO MERCANTILE EXCHANGE": {
+    "report_date": "2026-04-28",
+    "open_interest": 41497.0,
+    "nc_long": 0.0,
+    "nc_short": 15373.0,
+    "net_position": -15373.0,
+    "cot_score": -0.3705,
+    "signal": "NET_SHORT",
+    "fetched_at": "2026-05-04T10:06:48.768716",
+    "source": "CFTC",
+    "available": true
+  },
+  "cot::NANO ETHER - COINBASE DERIVATIVES, LLC": {
+    "report_date": "2026-04-28",
+    "open_interest": 50919.0,
+    "nc_long": 0.0,
+    "nc_short": 11883.0,
+    "net_position": -11883.0,
+    "cot_score": -0.2334,
+    "signal": "NET_SHORT",
+    "fetched_at": "2026-05-04T10:06:48.768719",
+    "source": "CFTC",
+    "available": true
+  },
+  "cot::NANO ETHER PERP STYLE - COINBASE DERIVATIVES, LLC": {
+    "report_date": "2026-04-28",
+    "open_interest": 178740.0,
+    "nc_long": 0.0,
+    "nc_short": 18627.0,
+    "net_position": -18627.0,
+    "cot_score": -0.1042,
+    "signal": "NEUTRAL",
+    "fetched_at": "2026-05-04T10:06:48.768722",
+    "source": "CFTC",
+    "available": true
+  },
+  "cot::DOGECOIN PERP STYLE - COINBASE DERIVATIVES, LLC": {
+    "report_date": "2026-04-28",
+    "open_interest": 3836.0,
+    "nc_long": 0.0,
+    "nc_short": 2468.0,
+    "net_position": -2468.0,
+    "cot_score": -0.6434,
+    "signal": "CROWDED_SHORT",
+    "fetched_at": "2026-05-04T10:06:48.768725",
+    "source": "CFTC",
+    "available": true
+  },
+  "cot::CARDONA PERP STYLE - COINBASE DERIVATIVES, LLC": {
+    "report_date": "2026-04-28",
+    "open_interest": 5138.0,
+    "nc_long": 0.0,
+    "nc_short": 426.0,
+    "net_position": -426.0,
+    "cot_score": -0.0829,
+    "signal": "NEUTRAL",
+    "fetched_at": "2026-05-04T10:06:48.768728",
+    "source": "CFTC",
+    "available": true
+  },
+  "cot::XRP - CHICAGO MERCANTILE EXCHANGE": {
+    "report_date": "2026-04-28",
+    "open_interest": 7427.0,
+    "nc_long": 0.0,
+    "nc_short": 666.0,
+    "net_position": -666.0,
+    "cot_score": -0.0897,
+    "signal": "NEUTRAL",
+    "fetched_at": "2026-05-04T10:06:48.768731",
+    "source": "CFTC",
+    "available": true
+  },
+  "cot::NANO XRP - COINBASE DERIVATIVES, LLC": {
+    "report_date": "2026-04-28",
+    "open_interest": 28838.0,
+    "nc_long": 0.0,
+    "nc_short": 25752.0,
+    "net_position": -25752.0,
+    "cot_score": -0.893,
+    "signal": "CROWDED_SHORT",
+    "fetched_at": "2026-05-04T10:06:48.768735",
+    "source": "CFTC",
+    "available": true
+  },
+  "cot::NANO XRP PERP STYLE - COINBASE DERIVATIVES, LLC": {
+    "report_date": "2026-04-28",
+    "open_interest": 29167.0,
+    "nc_long": 0.0,
+    "nc_short": 9887.0,
+    "net_position": -9887.0,
+    "cot_score": -0.339,
+    "signal": "NET_SHORT",
+    "fetched_at": "2026-05-04T10:06:48.768738",
+    "source": "CFTC",
+    "available": true
+  },
+  "cot::SOL - CHICAGO MERCANTILE EXCHANGE": {
+    "report_date": "2026-04-28",
+    "open_interest": 12358.0,
+    "nc_long": 0.0,
+    "nc_short": 1538.0,
+    "net_position": -1538.0,
+    "cot_score": -0.1245,
+    "signal": "NEUTRAL",
+    "fetched_at": "2026-05-04T10:06:48.768741",
+    "source": "CFTC",
+    "available": true
+  },
+  "cot::NANO SOLANA - COINBASE DERIVATIVES, LLC": {
+    "report_date": "2026-04-28",
+    "open_interest": 16130.0,
+    "nc_long": 0.0,
+    "nc_short": 11247.0,
+    "net_position": -11247.0,
+    "cot_score": -0.6973,
+    "signal": "CROWDED_SHORT",
+    "fetched_at": "2026-05-04T10:06:48.768744",
+    "source": "CFTC",
+    "available": true
+  },
+  "cot::NANO SOLANA PERP STYLE - COINBASE DERIVATIVES, LLC": {
+    "report_date": "2026-04-28",
+    "open_interest": 40268.0,
+    "nc_long": 0.0,
+    "nc_short": 2091.0,
+    "net_position": -2091.0,
+    "cot_score": -0.0519,
+    "signal": "NEUTRAL",
+    "fetched_at": "2026-05-04T10:06:48.768747",
+    "source": "CFTC",
+    "available": true
+  },
+  "cot::USD INDEX - ICE FUTURES U.S.": {
+    "report_date": "2026-04-28",
+    "open_interest": 30611.0,
+    "nc_long": 1556.0,
+    "nc_short": 8782.0,
+    "net_position": -7226.0,
+    "cot_score": -0.2361,
+    "signal": "NET_SHORT",
+    "fetched_at": "2026-05-04T10:06:48.768750",
+    "source": "CFTC",
+    "available": true
+  },
+  "cot::VIX FUTURES - CBOE FUTURES EXCHANGE": {
+    "report_date": "2026-04-28",
+    "open_interest": 362343.0,
+    "nc_long": 40861.0,
+    "nc_short": 60287.0,
+    "net_position": -19426.0,
+    "cot_score": -0.0536,
+    "signal": "NEUTRAL",
+    "fetched_at": "2026-05-04T10:06:48.768753",
     "source": "CFTC",
     "available": true
   }

@@ -10,33 +10,79 @@ COT_CACHE.parent.mkdir(parents=True, exist_ok=True)
 
 # Primary: CFTC direct (works locally, often blocked on cloud IPs)
 CFTC_CURRENT_URL = "https://www.cftc.gov/dea/newcot/c_disagg.txt"
+CFTC_FINANCIAL_URL = "https://www.cftc.gov/dea/newcot/FinFutWk.txt"
+CFTC_FINANCIAL_URL = "https://www.cftc.gov/dea/newcot/FinFutWk.txt"
 # Fallback mirrors for cloud deployment (Railway/Render/etc)
 CFTC_MIRRORS = [
-    "https://raw.githubusercontent.com/datasets/cot-reports/main/data/c_disagg.txt",
     "https://www.cftc.gov/dea/newcot/c_disagg.txt",
+    "https://www.cftc.gov/dea/newcot/f_disagg.txt",
 ]
 
 COT_SYMBOL_MAP = {
-    # Forex (CME) — exact CFTC market names
+    # Forex — FinFutWk.txt (uppercased by parser)
     "EURUSD=X": "EURO FX - CHICAGO MERCANTILE EXCHANGE",
-    "GBPUSD=X": "BRITISH POUND STERLING - CHICAGO MERCANTILE EXCHANGE",
+    "GBPUSD=X": "BRITISH POUND - CHICAGO MERCANTILE EXCHANGE",
     "JPYUSD=X": "JAPANESE YEN - CHICAGO MERCANTILE EXCHANGE",
-    "CADUSD=X": "CANADIAN DOLLAR - CHICAGO MERCANTILE EXCHANGE",
     "AUDUSD=X": "AUSTRALIAN DOLLAR - CHICAGO MERCANTILE EXCHANGE",
     "CHFUSD=X": "SWISS FRANC - CHICAGO MERCANTILE EXCHANGE",
-    # Commodities (COMEX/NYMEX)
+    # Commodities — c_disagg.txt (uppercased by parser)
     "GC=F":     "GOLD - COMMODITY EXCHANGE INC.",
     "SI=F":     "SILVER - COMMODITY EXCHANGE INC.",
-    "CL=F":     "CRUDE OIL, LIGHT SWEET - NEW YORK MERCANTILE EXCHANGE",
-    "NG=F":     "NATURAL GAS - NEW YORK MERCANTILE EXCHANGE",
-    "HG=F":     "COPPER-GRADE #1 - COMMODITY EXCHANGE INC.",
-    # Equity index futures (CME)
-    "^GSPC":    "S&P 500 STOCK INDEX - CHICAGO MERCANTILE EXCHANGE",
-    "^NDX":     "NASDAQ MINI - CHICAGO MERCANTILE EXCHANGE",
+    "CL=F":     "CRUDE OIL, LIGHT SWEET-WTI - ICE FUTURES EUROPE",
+    "NG=F":     "NAT GAS NYME - NEW YORK MERCANTILE EXCHANGE",
+    "HG=F":     "COPPER- #1 - COMMODITY EXCHANGE INC.",
+    # Equity index — FinFutWk.txt (uppercased)
+    "^GSPC":    "S&P 500 CONSOLIDATED - CHICAGO MERCANTILE EXCHANGE",
+    "^NDX":     "NASDAQ-100 CONSOLIDATED - CHICAGO MERCANTILE EXCHANGE",
     "^DJIA":    "DJIA CONSOLIDATED - CHICAGO BOARD OF TRADE",
-    # BTC futures (CME)
+    # Crypto — FinFutWk.txt
     "BTC-USD":  "BITCOIN - CHICAGO MERCANTILE EXCHANGE",
+    "ETH-USD":  "ETHER CASH SETTLED - CHICAGO MERCANTILE EXCHANGE",
+    "SOL-USD":  "SOL - CHICAGO MERCANTILE EXCHANGE",
+    "XRP-USD":  "XRP - CHICAGO MERCANTILE EXCHANGE",
 }
+
+# Which file each symbol lives in
+_COT_FILE_MAP = {
+    "EURUSD=X": "financial", "GBPUSD=X": "financial", "JPYUSD=X": "financial",
+    "CADUSD=X": "financial", "AUDUSD=X": "financial", "CHFUSD=X": "financial",
+    "^GSPC": "financial", "^NDX": "financial", "^DJIA": "financial",
+    "BTC-USD": "financial",
+    "GC=F": "commodity", "SI=F": "commodity", "CL=F": "commodity",
+    "NG=F": "commodity", "HG=F": "commodity",
+}
+
+def _fetch_cot_url(url: str) -> Optional[str]:
+    """Fetch a single CFTC URL with fallback headers."""
+    import requests as _req
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36",
+        "Accept": "text/plain, */*",
+    }
+    try:
+        resp = _req.get(url, headers=headers, timeout=20)
+        if resp.status_code == 200 and len(resp.text) > 500:
+            return resp.text
+    except Exception as e:
+        print(f"[cot] {url} failed: {e}")
+    return None
+
+
+def _fetch_cot_url(url: str) -> Optional[str]:
+    """Fetch a single CFTC URL with fallback headers."""
+    import requests as _req
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36",
+        "Accept": "text/plain, */*",
+    }
+    try:
+        resp = _req.get(url, headers=headers, timeout=20)
+        if resp.status_code == 200 and len(resp.text) > 500:
+            return resp.text
+    except Exception as e:
+        print(f"[cot] {url} failed: {e}")
+    return None
+
 
 def _fetch_cot_raw() -> Optional[str]:
     """
