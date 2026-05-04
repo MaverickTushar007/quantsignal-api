@@ -1,1 +1,1172 @@
-{}
+{
+  "BTC-USD::How TeraWulf\u2019s (WULF) $1.04 Billion Equity Raise For Hawesville Data Center Expa": {
+    "symbol": "BTC-USD",
+    "title": "How TeraWulf\u2019s (WULF) $1.04 Billion Equity Raise For Hawesville Data Center Expansion Will Impact Investors",
+    "source": "Simply Wall St.",
+    "sentiment": "BULLISH",
+    "confidence": 0.7119,
+    "ts": "2026-05-03T11:10:13.982023",
+    "horizons": {}
+  },
+  "BTC-USD::Coinbase, Strategy, and Other Crypto Stocks Get a Boost as Bitcoin Rallies": {
+    "symbol": "BTC-USD",
+    "title": "Coinbase, Strategy, and Other Crypto Stocks Get a Boost as Bitcoin Rallies",
+    "source": "Barrons.com",
+    "sentiment": "BULLISH",
+    "confidence": 0.9438,
+    "ts": "2026-05-03T11:10:16.643655",
+    "horizons": {}
+  },
+  "BTC-USD::Stocks to Watch: eBay, Coinbase, Palantir": {
+    "symbol": "BTC-USD",
+    "title": "Stocks to Watch: eBay, Coinbase, Palantir",
+    "source": "The Wall Street Journal",
+    "sentiment": "BEARISH",
+    "confidence": 0.8187,
+    "ts": "2026-05-03T11:10:19.282007",
+    "horizons": {}
+  },
+  "BTC-USD::Bitcoin Price Hits $80K: We Asked Grok If BTC Could Hold $80K in May": {
+    "symbol": "BTC-USD",
+    "title": "Bitcoin Price Hits $80K: We Asked Grok If BTC Could Hold $80K in May",
+    "source": "24/7 Wall St.",
+    "sentiment": "BULLISH",
+    "confidence": 0.9006,
+    "ts": "2026-05-03T11:10:21.601929",
+    "horizons": {}
+  },
+  "BTC-USD::Bitcoin Tops $80,000 for First Time Since January as Stocks Rise": {
+    "symbol": "BTC-USD",
+    "title": "Bitcoin Tops $80,000 for First Time Since January as Stocks Rise",
+    "source": "Bloomberg",
+    "sentiment": "BULLISH",
+    "confidence": 0.9208,
+    "ts": "2026-05-03T11:10:24.064578",
+    "horizons": {}
+  },
+  "BTC-USD::Bitcoin Price Breaks $80,000. Why It\u2019s Just a Blip for the Crypto.": {
+    "symbol": "BTC-USD",
+    "title": "Bitcoin Price Breaks $80,000. Why It\u2019s Just a Blip for the Crypto.",
+    "source": "Barrons.com",
+    "sentiment": "BULLISH",
+    "confidence": 0.9285,
+    "ts": "2026-05-03T11:10:26.673705",
+    "horizons": {}
+  },
+  "BTC-USD::Why Bitcoin, Dogecoin, XRP, Zcash, and LUNC Are Up Today?": {
+    "symbol": "BTC-USD",
+    "title": "Why Bitcoin, Dogecoin, XRP, Zcash, and LUNC Are Up Today?",
+    "source": "CoinGape",
+    "sentiment": "BULLISH",
+    "confidence": 0.9552,
+    "ts": "2026-05-03T11:10:29.618023",
+    "horizons": {}
+  },
+  "BTC-USD::Bitcoin News: $80,000 Resistance Broken as Saylor Signals Strategy Buy Return": {
+    "symbol": "BTC-USD",
+    "title": "Bitcoin News: $80,000 Resistance Broken as Saylor Signals Strategy Buy Return",
+    "source": "Cryptonews",
+    "sentiment": "BULLISH",
+    "confidence": 0.9373,
+    "ts": "2026-05-03T11:10:32.552497",
+    "horizons": {}
+  },
+  "BTC-USD::Zcash Outpaces Bitcoin and Ethereum, but Analyst Flags Three Cracks in the Rally": {
+    "symbol": "BTC-USD",
+    "title": "Zcash Outpaces Bitcoin and Ethereum, but Analyst Flags Three Cracks in the Rally",
+    "source": "BeInCrypto",
+    "sentiment": "BEARISH",
+    "confidence": 0.737,
+    "ts": "2026-05-03T11:10:35.035201",
+    "horizons": {}
+  },
+  "BTC-USD::Strategy Pauses Bitcoin Buys Before Q1 2026 Results \u2014 What To Watch": {
+    "symbol": "BTC-USD",
+    "title": "Strategy Pauses Bitcoin Buys Before Q1 2026 Results \u2014 What To Watch",
+    "source": "CCN",
+    "sentiment": "NEUTRAL",
+    "confidence": 0.8185,
+    "ts": "2026-05-03T11:10:37.635111",
+    "horizons": {}
+  },
+  "ETH-USD::Bitcoin Tops $80,000 for First Time Since January as Stocks Rise": {
+    "symbol": "ETH-USD",
+    "title": "Bitcoin Tops $80,000 for First Time Since January as Stocks Rise",
+    "source": "Bloomberg",
+    "sentiment": "BULLISH",
+    "confidence": 0.9208,
+    "ts": "2026-05-03T11:10:41.124759",
+    "horizons": {}
+  },
+  "ETH-USD::Bitcoin Price Breaks $80,000. Why It\u2019s Just a Blip for the Crypto.": {
+    "symbol": "ETH-USD",
+    "title": "Bitcoin Price Breaks $80,000. Why It\u2019s Just a Blip for the Crypto.",
+    "source": "Barrons.com",
+    "sentiment": "BULLISH",
+    "confidence": 0.9285,
+    "ts": "2026-05-03T11:10:43.781905",
+    "horizons": {}
+  },
+  "ETH-USD::Why Bitcoin, Dogecoin, XRP, Zcash, and LUNC Are Up Today?": {
+    "symbol": "ETH-USD",
+    "title": "Why Bitcoin, Dogecoin, XRP, Zcash, and LUNC Are Up Today?",
+    "source": "CoinGape",
+    "sentiment": "BULLISH",
+    "confidence": 0.9552,
+    "ts": "2026-05-03T11:10:46.516372",
+    "horizons": {}
+  },
+  "ETH-USD::Zcash Outpaces Bitcoin and Ethereum, but Analyst Flags Three Cracks in the Rally": {
+    "symbol": "ETH-USD",
+    "title": "Zcash Outpaces Bitcoin and Ethereum, but Analyst Flags Three Cracks in the Rally",
+    "source": "BeInCrypto",
+    "sentiment": "BEARISH",
+    "confidence": 0.737,
+    "ts": "2026-05-03T11:10:49.004644",
+    "horizons": {}
+  },
+  "ETH-USD::Ethplorer\u2019s Aleksandr Vat Says Ethereum\u2019s Altseason Already Happened": {
+    "symbol": "ETH-USD",
+    "title": "Ethplorer\u2019s Aleksandr Vat Says Ethereum\u2019s Altseason Already Happened",
+    "source": "BeInCrypto",
+    "sentiment": "NEUTRAL",
+    "confidence": 0.8792,
+    "ts": "2026-05-03T11:10:51.508226",
+    "horizons": {}
+  },
+  "ETH-USD::Tired of Being Burned by Crypto? Cardano Targets Long\u2011Term Stability Over Meme C": {
+    "symbol": "ETH-USD",
+    "title": "Tired of Being Burned by Crypto? Cardano Targets Long\u2011Term Stability Over Meme Cycles.",
+    "source": "Motley Fool",
+    "sentiment": "BULLISH",
+    "confidence": 0.7518,
+    "ts": "2026-05-03T11:10:54.299320",
+    "horizons": {}
+  },
+  "ETH-USD::Is Ethereum the Generational Wealth Pick for Real\u2011World Crypto Use?": {
+    "symbol": "ETH-USD",
+    "title": "Is Ethereum the Generational Wealth Pick for Real\u2011World Crypto Use?",
+    "source": "Motley Fool",
+    "sentiment": "NEUTRAL",
+    "confidence": 0.8838,
+    "ts": "2026-05-03T11:10:57.475088",
+    "horizons": {}
+  },
+  "ETH-USD::Ethereum Exit Queue Explodes 72,000% After DeFi Hack Wave": {
+    "symbol": "ETH-USD",
+    "title": "Ethereum Exit Queue Explodes 72,000% After DeFi Hack Wave",
+    "source": "BeInCrypto",
+    "sentiment": "BULLISH",
+    "confidence": 0.9495,
+    "ts": "2026-05-03T11:11:00.116451",
+    "horizons": {}
+  },
+  "ETH-USD::XRP vs Solana vs Ethereum: Which Altcoin is the Best Buy for Upside Right Now?": {
+    "symbol": "ETH-USD",
+    "title": "XRP vs Solana vs Ethereum: Which Altcoin is the Best Buy for Upside Right Now?",
+    "source": "24/7 Wall St.",
+    "sentiment": "BEARISH",
+    "confidence": 0.9729,
+    "ts": "2026-05-03T11:11:02.965466",
+    "horizons": {}
+  },
+  "ETH-USD::XRP News: XRP Ledger Just Tokenized $3 Billion in Real-World Assets": {
+    "symbol": "ETH-USD",
+    "title": "XRP News: XRP Ledger Just Tokenized $3 Billion in Real-World Assets",
+    "source": "24/7 Wall St.",
+    "sentiment": "BULLISH",
+    "confidence": 0.8889,
+    "ts": "2026-05-03T11:11:05.699704",
+    "horizons": {}
+  },
+  "SOL-USD::Bitcoin Tops $80,000 for First Time Since January as Stocks Rise": {
+    "symbol": "SOL-USD",
+    "title": "Bitcoin Tops $80,000 for First Time Since January as Stocks Rise",
+    "source": "Bloomberg",
+    "sentiment": "BULLISH",
+    "confidence": 0.9208,
+    "ts": "2026-05-03T11:11:08.690811",
+    "horizons": {}
+  },
+  "SOL-USD::XRP vs Solana vs Ethereum: Which Altcoin is the Best Buy for Upside Right Now?": {
+    "symbol": "SOL-USD",
+    "title": "XRP vs Solana vs Ethereum: Which Altcoin is the Best Buy for Upside Right Now?",
+    "source": "24/7 Wall St.",
+    "sentiment": "BEARISH",
+    "confidence": 0.9729,
+    "ts": "2026-05-03T11:11:12.192698",
+    "horizons": {}
+  },
+  "SOL-USD::Is \"The Great Rotation\" Back to Crypto Going to Happen Soon?": {
+    "symbol": "SOL-USD",
+    "title": "Is \"The Great Rotation\" Back to Crypto Going to Happen Soon?",
+    "source": "Motley Fool",
+    "sentiment": "NEUTRAL",
+    "confidence": 0.8409,
+    "ts": "2026-05-03T11:11:14.690193",
+    "horizons": {}
+  },
+  "SOL-USD::Carrot protocol shuts down after $285M hack": {
+    "symbol": "SOL-USD",
+    "title": "Carrot protocol shuts down after $285M hack",
+    "source": "TheStreet",
+    "sentiment": "BEARISH",
+    "confidence": 0.9187,
+    "ts": "2026-05-03T11:11:16.983163",
+    "horizons": {}
+  },
+  "SOL-USD::Solana Trading Bot Turns 20 cents Into $1.32 Million on Ant Blockchain": {
+    "symbol": "SOL-USD",
+    "title": "Solana Trading Bot Turns 20 cents Into $1.32 Million on Ant Blockchain",
+    "source": "BeInCrypto",
+    "sentiment": "BULLISH",
+    "confidence": 0.779,
+    "ts": "2026-05-03T11:11:19.105782",
+    "horizons": {}
+  },
+  "SOL-USD::How Western Union\u2019s Solana Stablecoin Plan And Q1 2026 Results At Western Union ": {
+    "symbol": "SOL-USD",
+    "title": "How Western Union\u2019s Solana Stablecoin Plan And Q1 2026 Results At Western Union (WU) Has Changed Its Investment Story",
+    "source": "Simply Wall St.",
+    "sentiment": "BULLISH",
+    "confidence": 0.6931,
+    "ts": "2026-05-03T11:11:22.486154",
+    "horizons": {}
+  },
+  "SOL-USD::Crypto Markets Today, May 1: Bitcoin Holds Above $78,000 as Tech Stocks Set New ": {
+    "symbol": "SOL-USD",
+    "title": "Crypto Markets Today, May 1: Bitcoin Holds Above $78,000 as Tech Stocks Set New Highs",
+    "source": "Motley Fool",
+    "sentiment": "BULLISH",
+    "confidence": 0.9361,
+    "ts": "2026-05-03T11:11:25.382828",
+    "horizons": {}
+  },
+  "SOL-USD::Solana Yield Protocol Carrot Shuts Down After $8M Exploit": {
+    "symbol": "SOL-USD",
+    "title": "Solana Yield Protocol Carrot Shuts Down After $8M Exploit",
+    "source": "99bitcoins",
+    "sentiment": "BEARISH",
+    "confidence": 0.9634,
+    "ts": "2026-05-03T11:11:27.763754",
+    "horizons": {}
+  },
+  "SOL-USD::Analyst shares new Bitcoin prediction for all of 2026": {
+    "symbol": "SOL-USD",
+    "title": "Analyst shares new Bitcoin prediction for all of 2026",
+    "source": "TheStreet",
+    "sentiment": "NEUTRAL",
+    "confidence": 0.8239,
+    "ts": "2026-05-03T11:11:30.453466",
+    "horizons": {}
+  },
+  "SOL-USD::Crypto Card Spending Surges 500% to $600 Million Monthly, Visa Captures 90% Shar": {
+    "symbol": "SOL-USD",
+    "title": "Crypto Card Spending Surges 500% to $600 Million Monthly, Visa Captures 90% Share",
+    "source": "BeInCrypto",
+    "sentiment": "BULLISH",
+    "confidence": 0.9506,
+    "ts": "2026-05-03T11:11:32.742061",
+    "horizons": {}
+  },
+  "GC=F::Gold and silver prices today, Monday, May 4: Gold and silver down this morning a": {
+    "symbol": "GC=F",
+    "title": "Gold and silver prices today, Monday, May 4: Gold and silver down this morning after 'Project Freedom' announcement",
+    "source": "Yahoo Personal Finance",
+    "sentiment": "BEARISH",
+    "confidence": 0.9761,
+    "ts": "2026-05-03T11:11:35.435783",
+    "horizons": {}
+  },
+  "GC=F::Westgold Resources Agrees to Divest Peak Hill Gold Project for A$58.3 Million, 1": {
+    "symbol": "GC=F",
+    "title": "Westgold Resources Agrees to Divest Peak Hill Gold Project for A$58.3 Million, 1.0% NSR Royalty",
+    "source": "MT Newswires",
+    "sentiment": "BULLISH",
+    "confidence": 0.5454,
+    "ts": "2026-05-03T11:11:38.444293",
+    "horizons": {}
+  },
+  "GC=F::Gold Falls in Thin Trade as U.S.-Iran Uncertainty Clouds Rate Outlook": {
+    "symbol": "GC=F",
+    "title": "Gold Falls in Thin Trade as U.S.-Iran Uncertainty Clouds Rate Outlook",
+    "source": "The Wall Street Journal",
+    "sentiment": "BEARISH",
+    "confidence": 0.9616,
+    "ts": "2026-05-03T11:11:41.484615",
+    "horizons": {}
+  },
+  "GC=F::Markets on alert as Trump vows \u2018Project Freedom\u2019 for Hormuz, setting up potentia": {
+    "symbol": "GC=F",
+    "title": "Markets on alert as Trump vows \u2018Project Freedom\u2019 for Hormuz, setting up potential showdown after renewed attacks on ships",
+    "source": "Fortune",
+    "sentiment": "BEARISH",
+    "confidence": 0.4844,
+    "ts": "2026-05-03T11:11:45.156492",
+    "horizons": {}
+  },
+  "GC=F::Gold dips as inflation concerns linger; markets watch US-Iran talks": {
+    "symbol": "GC=F",
+    "title": "Gold dips as inflation concerns linger; markets watch US-Iran talks",
+    "source": "Reuters",
+    "sentiment": "BEARISH",
+    "confidence": 0.9719,
+    "ts": "2026-05-03T11:11:48.189892",
+    "horizons": {}
+  },
+  "GC=F::This Natural Resources ETF Has Silently Outperformed The S&P 500 Year-To-Date Wh": {
+    "symbol": "GC=F",
+    "title": "This Natural Resources ETF Has Silently Outperformed The S&P 500 Year-To-Date While Yielding 5%",
+    "source": "24/7 Wall St.",
+    "sentiment": "NEUTRAL",
+    "confidence": 0.6163,
+    "ts": "2026-05-03T11:11:50.917243",
+    "horizons": {}
+  },
+  "GC=F::This Overlooked Precious Metals ETF Offers a 7% Yield": {
+    "symbol": "GC=F",
+    "title": "This Overlooked Precious Metals ETF Offers a 7% Yield",
+    "source": "24/7 Wall St.",
+    "sentiment": "NEUTRAL",
+    "confidence": 0.8624,
+    "ts": "2026-05-03T11:11:54.198492",
+    "horizons": {}
+  },
+  "GC=F::Why Gold Won\u2019t Save You in a Real Crisis (But Stocks Will)": {
+    "symbol": "GC=F",
+    "title": "Why Gold Won\u2019t Save You in a Real Crisis (But Stocks Will)",
+    "source": "24/7 Wall St.",
+    "sentiment": "NEUTRAL",
+    "confidence": 0.8437,
+    "ts": "2026-05-03T11:11:57.110815",
+    "horizons": {}
+  },
+  "GC=F::Eldorado Gold (TSX:ELD) Is Down 7.4% After Earnings Double On Lower Output And B": {
+    "symbol": "GC=F",
+    "title": "Eldorado Gold (TSX:ELD) Is Down 7.4% After Earnings Double On Lower Output And Buybacks - Has The Bull Case Changed?",
+    "source": "Simply Wall St.",
+    "sentiment": "BEARISH",
+    "confidence": 0.9734,
+    "ts": "2026-05-03T11:12:00.114805",
+    "horizons": {}
+  },
+  "GC=F::Newmont (NEM) Is Down 10.0% After Authorizing US$6 Billion Buyback And Q1 Beat -": {
+    "symbol": "GC=F",
+    "title": "Newmont (NEM) Is Down 10.0% After Authorizing US$6 Billion Buyback And Q1 Beat - Has The Bull Case Changed?",
+    "source": "Simply Wall St.",
+    "sentiment": "BEARISH",
+    "confidence": 0.9719,
+    "ts": "2026-05-03T11:12:03.697122",
+    "horizons": {}
+  },
+  "CL=F::Stock market today: Dow, S&P 500, Nasdaq futures slide on reports US warship tur": {
+    "symbol": "CL=F",
+    "title": "Stock market today: Dow, S&P 500, Nasdaq futures slide on reports US warship turned back in Hormuz",
+    "source": "Yahoo Finance",
+    "sentiment": "BEARISH",
+    "confidence": 0.9703,
+    "ts": "2026-05-03T11:12:07.617907",
+    "horizons": {}
+  },
+  "CL=F::Higher gas prices are eating into Americans' tax refunds": {
+    "symbol": "CL=F",
+    "title": "Higher gas prices are eating into Americans' tax refunds",
+    "source": "Yahoo Finance",
+    "sentiment": "BEARISH",
+    "confidence": 0.7372,
+    "ts": "2026-05-03T11:12:10.433028",
+    "horizons": {}
+  },
+  "CL=F::Talos Energy (TALO) Reports Earnings Tomorrow: What To Expect": {
+    "symbol": "CL=F",
+    "title": "Talos Energy (TALO) Reports Earnings Tomorrow: What To Expect",
+    "source": "StockStory",
+    "sentiment": "NEUTRAL",
+    "confidence": 0.9268,
+    "ts": "2026-05-03T11:12:14.260238",
+    "horizons": {}
+  },
+  "CL=F::Barclays pivots, says no Fed rate cuts in 2026": {
+    "symbol": "CL=F",
+    "title": "Barclays pivots, says no Fed rate cuts in 2026",
+    "source": "Investing.com",
+    "sentiment": "BEARISH",
+    "confidence": 0.9381,
+    "ts": "2026-05-03T11:12:16.820986",
+    "horizons": {}
+  },
+  "CL=F::Oil jumps by 5% after report of US warship being hit by missiles": {
+    "symbol": "CL=F",
+    "title": "Oil jumps by 5% after report of US warship being hit by missiles",
+    "source": "Reuters",
+    "sentiment": "BULLISH",
+    "confidence": 0.9259,
+    "ts": "2026-05-03T11:12:19.781945",
+    "horizons": {}
+  },
+  "CL=F::Bank of Canada Faces a Delicate Balancing Act, Says TD": {
+    "symbol": "CL=F",
+    "title": "Bank of Canada Faces a Delicate Balancing Act, Says TD",
+    "source": "MT Newswires",
+    "sentiment": "BULLISH",
+    "confidence": 0.4578,
+    "ts": "2026-05-03T11:12:22.860946",
+    "horizons": {}
+  },
+  "CL=F::European Stocks Conceivably Trading Below Fair Value Estimates In May 2026": {
+    "symbol": "CL=F",
+    "title": "European Stocks Conceivably Trading Below Fair Value Estimates In May 2026",
+    "source": "Simply Wall St.",
+    "sentiment": "BEARISH",
+    "confidence": 0.5275,
+    "ts": "2026-05-03T11:12:26.225403",
+    "horizons": {}
+  },
+  "CL=F::3 European Growth Companies With Insider Ownership Up To 26%": {
+    "symbol": "CL=F",
+    "title": "3 European Growth Companies With Insider Ownership Up To 26%",
+    "source": "Simply Wall St.",
+    "sentiment": "BULLISH",
+    "confidence": 0.7249,
+    "ts": "2026-05-03T11:12:29.023824",
+    "horizons": {}
+  },
+  "CL=F::Global equity funds attract inflows for sixth week on earnings optimism": {
+    "symbol": "CL=F",
+    "title": "Global equity funds attract inflows for sixth week on earnings optimism",
+    "source": "Reuters",
+    "sentiment": "BULLISH",
+    "confidence": 0.9429,
+    "ts": "2026-05-03T11:12:32.762620",
+    "horizons": {}
+  },
+  "CL=F::Undiscovered European Gems to Explore This May 2026": {
+    "symbol": "CL=F",
+    "title": "Undiscovered European Gems to Explore This May 2026",
+    "source": "Simply Wall St.",
+    "sentiment": "BEARISH",
+    "confidence": 0.6614,
+    "ts": "2026-05-03T11:12:35.797317",
+    "horizons": {}
+  },
+  "EURUSD=X::ECB, Bank of England Set to Hold Rates Unchanged Today": {
+    "symbol": "EURUSD=X",
+    "title": "ECB, Bank of England Set to Hold Rates Unchanged Today",
+    "source": "FX Empire",
+    "sentiment": "NEUTRAL",
+    "confidence": 0.3816,
+    "ts": "2026-05-03T11:12:39.952064",
+    "horizons": {}
+  },
+  "EURUSD=X::Eni Raises Share Buyback Plan to $3.3B": {
+    "symbol": "EURUSD=X",
+    "title": "Eni Raises Share Buyback Plan to $3.3B",
+    "source": "Rigzone.com",
+    "sentiment": "BULLISH",
+    "confidence": 0.9506,
+    "ts": "2026-05-03T11:12:43.575370",
+    "horizons": {}
+  },
+  "EURUSD=X::Dollar softens but heads for weekly gain amid Middle East uncertainty": {
+    "symbol": "EURUSD=X",
+    "title": "Dollar softens but heads for weekly gain amid Middle East uncertainty",
+    "source": "Reuters",
+    "sentiment": "BULLISH",
+    "confidence": 0.7285,
+    "ts": "2026-05-03T11:12:46.055673",
+    "horizons": {}
+  },
+  "EURUSD=X::US dollar edges higher as Iran ceasefire deadline approaches": {
+    "symbol": "EURUSD=X",
+    "title": "US dollar edges higher as Iran ceasefire deadline approaches",
+    "source": "Reuters",
+    "sentiment": "BULLISH",
+    "confidence": 0.8568,
+    "ts": "2026-05-03T11:12:48.731887",
+    "horizons": {}
+  },
+  "EURUSD=X::Dollar subdued as markets eye ceasefire talks; yen pressured by BOJ delay": {
+    "symbol": "EURUSD=X",
+    "title": "Dollar subdued as markets eye ceasefire talks; yen pressured by BOJ delay",
+    "source": "Reuters",
+    "sentiment": "BULLISH",
+    "confidence": 0.8262,
+    "ts": "2026-05-03T11:12:51.372621",
+    "horizons": {}
+  },
+  "EURUSD=X::The WSJ Dollar Index Falls 0.52% This Week to 95.17": {
+    "symbol": "EURUSD=X",
+    "title": "The WSJ Dollar Index Falls 0.52% This Week to 95.17",
+    "source": "The Wall Street Journal",
+    "sentiment": "BEARISH",
+    "confidence": 0.9748,
+    "ts": "2026-05-03T11:12:54.557050",
+    "horizons": {}
+  },
+  "EURUSD=X::Losses by the Dollar as Focus on Diplomacy Continues": {
+    "symbol": "EURUSD=X",
+    "title": "Losses by the Dollar as Focus on Diplomacy Continues",
+    "source": "FX Empire",
+    "sentiment": "BEARISH",
+    "confidence": 0.971,
+    "ts": "2026-05-03T11:12:57.805699",
+    "horizons": {}
+  },
+  "EURUSD=X::An Energy Crisis Has Rocked Europe, but the Euro Could Still Be Worth a Buy Here": {
+    "symbol": "EURUSD=X",
+    "title": "An Energy Crisis Has Rocked Europe, but the Euro Could Still Be Worth a Buy Here",
+    "source": "Barchart",
+    "sentiment": "BULLISH",
+    "confidence": 0.9056,
+    "ts": "2026-05-03T11:13:00.518931",
+    "horizons": {}
+  },
+  "EURUSD=X::How global fiscal policy is reacting to the recent energy shock": {
+    "symbol": "EURUSD=X",
+    "title": "How global fiscal policy is reacting to the recent energy shock",
+    "source": "Investing.com",
+    "sentiment": "BEARISH",
+    "confidence": 0.9165,
+    "ts": "2026-05-03T11:13:03.655879",
+    "horizons": {}
+  },
+  "EURUSD=X::Dollar Tumbles and Gold Surges on US-Iran Ceasefire": {
+    "symbol": "EURUSD=X",
+    "title": "Dollar Tumbles and Gold Surges on US-Iran Ceasefire",
+    "source": "Barchart",
+    "sentiment": "BEARISH",
+    "confidence": 0.9711,
+    "ts": "2026-05-03T11:13:06.565204",
+    "horizons": {}
+  },
+  "SPY::Why Gold Won\u2019t Save You in a Real Crisis (But Stocks Will)": {
+    "symbol": "SPY",
+    "title": "Why Gold Won\u2019t Save You in a Real Crisis (But Stocks Will)",
+    "source": "24/7 Wall St.",
+    "sentiment": "NEUTRAL",
+    "confidence": 0.8437,
+    "ts": "2026-05-03T11:13:10.319878",
+    "horizons": {}
+  },
+  "SPY::A $300,000 Annuity Guarantees $1,900 a Month for Life, but Here Is What Retirees": {
+    "symbol": "SPY",
+    "title": "A $300,000 Annuity Guarantees $1,900 a Month for Life, but Here Is What Retirees Are Giving Up",
+    "source": "24/7 Wall St.",
+    "sentiment": "NEUTRAL",
+    "confidence": 0.879,
+    "ts": "2026-05-03T11:13:14.614757",
+    "horizons": {}
+  },
+  "SPY::SMH Has Crushed the S&P 500 by 2,041% Over a Decade, But Recent 42% Rally Signal": {
+    "symbol": "SPY",
+    "title": "SMH Has Crushed the S&P 500 by 2,041% Over a Decade, But Recent 42% Rally Signals Dangerous Valuations",
+    "source": "24/7 Wall St.",
+    "sentiment": "BEARISH",
+    "confidence": 0.5258,
+    "ts": "2026-05-03T11:13:18.295230",
+    "horizons": {}
+  },
+  "SPY::Concentration Risk High as Top Two Stocks Steer U.S. Communication Services ETF ": {
+    "symbol": "SPY",
+    "title": "Concentration Risk High as Top Two Stocks Steer U.S. Communication Services ETF Performance",
+    "source": "24/7 Wall St.",
+    "sentiment": "NEUTRAL",
+    "confidence": 0.8965,
+    "ts": "2026-05-03T11:13:21.697602",
+    "horizons": {}
+  },
+  "SPY::Amazon and Tesla Drive One-Third of FDIS as U.S. Spending Surges Despite Recessi": {
+    "symbol": "SPY",
+    "title": "Amazon and Tesla Drive One-Third of FDIS as U.S. Spending Surges Despite Recession-Level Sentiment",
+    "source": "24/7 Wall St.",
+    "sentiment": "NEUTRAL",
+    "confidence": 0.7026,
+    "ts": "2026-05-03T11:13:26.299966",
+    "horizons": {}
+  },
+  "SPY::Billionaire Ray Dalio: \u2018We\u2019re On the Brink\u2019 of Major Problems Within 2 Years": {
+    "symbol": "SPY",
+    "title": "Billionaire Ray Dalio: \u2018We\u2019re On the Brink\u2019 of Major Problems Within 2 Years",
+    "source": "24/7 Wall St.",
+    "sentiment": "NEUTRAL",
+    "confidence": 0.6543,
+    "ts": "2026-05-03T11:13:30.079425",
+    "horizons": {}
+  },
+  "SPY::Intel Stock Was Up 115% in April. How to Play It With Options Now.": {
+    "symbol": "SPY",
+    "title": "Intel Stock Was Up 115% in April. How to Play It With Options Now.",
+    "source": "Barrons.com",
+    "sentiment": "NEUTRAL",
+    "confidence": 0.8068,
+    "ts": "2026-05-03T11:13:35.120615",
+    "horizons": {}
+  },
+  "SPY::Why Paying Off Your Mortgage Could Cost You More Than Investing": {
+    "symbol": "SPY",
+    "title": "Why Paying Off Your Mortgage Could Cost You More Than Investing",
+    "source": "24/7 Wall St.",
+    "sentiment": "NEUTRAL",
+    "confidence": 0.9205,
+    "ts": "2026-05-03T11:13:38.949571",
+    "horizons": {}
+  },
+  "SPY::Gold Faces Headwinds From Higher Yields and Fading Fear but Year-End Targets Shi": {
+    "symbol": "SPY",
+    "title": "Gold Faces Headwinds From Higher Yields and Fading Fear but Year-End Targets Shine",
+    "source": "24/7 Wall St.",
+    "sentiment": "BEARISH",
+    "confidence": 0.9252,
+    "ts": "2026-05-03T11:13:42.655602",
+    "horizons": {}
+  },
+  "SPY::The CBOE VIX Falls to 16 Level as Risk-On Trade Returns to Market": {
+    "symbol": "SPY",
+    "title": "The CBOE VIX Falls to 16 Level as Risk-On Trade Returns to Market",
+    "source": "24/7 Wall St.",
+    "sentiment": "BEARISH",
+    "confidence": 0.9661,
+    "ts": "2026-05-03T11:13:47.358767",
+    "horizons": {}
+  },
+  "QQQ::Why Growth Investors Are Ditching FELG for the NASDAQ-100\u2019s 9.74% Edge": {
+    "symbol": "QQQ",
+    "title": "Why Growth Investors Are Ditching FELG for the NASDAQ-100\u2019s 9.74% Edge",
+    "source": "24/7 Wall St.",
+    "sentiment": "NEUTRAL",
+    "confidence": 0.9014,
+    "ts": "2026-05-03T11:13:51.249983",
+    "horizons": {}
+  },
+  "QQQ::U.S. Equities Remain King but Diversification Plays Grow": {
+    "symbol": "QQQ",
+    "title": "U.S. Equities Remain King but Diversification Plays Grow",
+    "source": "etf.com",
+    "sentiment": "BULLISH",
+    "confidence": 0.9339,
+    "ts": "2026-05-03T11:13:55.672803",
+    "horizons": {}
+  },
+  "QQQ::Exchange-Traded Funds Advance as US Equities Rise After Midday Friday": {
+    "symbol": "QQQ",
+    "title": "Exchange-Traded Funds Advance as US Equities Rise After Midday Friday",
+    "source": "MT Newswires",
+    "sentiment": "BULLISH",
+    "confidence": 0.9428,
+    "ts": "2026-05-03T11:13:59.072003",
+    "horizons": {}
+  },
+  "QQQ::Gold Faces Headwinds From Higher Yields and Fading Fear but Year-End Targets Shi": {
+    "symbol": "QQQ",
+    "title": "Gold Faces Headwinds From Higher Yields and Fading Fear but Year-End Targets Shine",
+    "source": "24/7 Wall St.",
+    "sentiment": "BEARISH",
+    "confidence": 0.9252,
+    "ts": "2026-05-03T11:14:02.128133",
+    "horizons": {}
+  },
+  "QQQ::The CBOE VIX Falls to 16 Level as Risk-On Trade Returns to Market": {
+    "symbol": "QQQ",
+    "title": "The CBOE VIX Falls to 16 Level as Risk-On Trade Returns to Market",
+    "source": "24/7 Wall St.",
+    "sentiment": "BEARISH",
+    "confidence": 0.9661,
+    "ts": "2026-05-03T11:14:05.532423",
+    "horizons": {}
+  },
+  "QQQ::Exchange-Traded Funds Higher, Equity Futures Mixed Amid Continued Earnings Resul": {
+    "symbol": "QQQ",
+    "title": "Exchange-Traded Funds Higher, Equity Futures Mixed Amid Continued Earnings Results",
+    "source": "MT Newswires",
+    "sentiment": "BULLISH",
+    "confidence": 0.9463,
+    "ts": "2026-05-03T11:14:08.744212",
+    "horizons": {}
+  },
+  "QQQ::Tech ETFs Dominate as $11.4B Floods Into U.S. Equity Funds": {
+    "symbol": "QQQ",
+    "title": "Tech ETFs Dominate as $11.4B Floods Into U.S. Equity Funds",
+    "source": "etf.com",
+    "sentiment": "NEUTRAL",
+    "confidence": 0.6473,
+    "ts": "2026-05-03T11:14:12.915411",
+    "horizons": {}
+  },
+  "QQQ::Exchange-Traded Funds Higher as US Equities Advance After Midday": {
+    "symbol": "QQQ",
+    "title": "Exchange-Traded Funds Higher as US Equities Advance After Midday",
+    "source": "MT Newswires",
+    "sentiment": "BULLISH",
+    "confidence": 0.9431,
+    "ts": "2026-05-03T11:14:16.286928",
+    "horizons": {}
+  },
+  "QQQ::VIX in Whipsaw on Sticky Inflation, Fed Dissent and Lofty AI Capex": {
+    "symbol": "QQQ",
+    "title": "VIX in Whipsaw on Sticky Inflation, Fed Dissent and Lofty AI Capex",
+    "source": "24/7 Wall St.",
+    "sentiment": "BULLISH",
+    "confidence": 0.7133,
+    "ts": "2026-05-03T11:14:19.734480",
+    "horizons": {}
+  },
+  "QQQ::Exchange-Traded Funds, Equity Futures Higher Pre-Bell Thursday Amid Big Tech Ear": {
+    "symbol": "QQQ",
+    "title": "Exchange-Traded Funds, Equity Futures Higher Pre-Bell Thursday Amid Big Tech Earnings, Economic Data",
+    "source": "MT Newswires",
+    "sentiment": "BULLISH",
+    "confidence": 0.9485,
+    "ts": "2026-05-03T11:14:23.232616",
+    "horizons": {}
+  },
+  "AAPL::Tech stocks today: Semiconductor company earnings in focus amid AI boom, Musk vs": {
+    "symbol": "AAPL",
+    "title": "Tech stocks today: Semiconductor company earnings in focus amid AI boom, Musk vs. Altman fight continues",
+    "source": "Yahoo Finance",
+    "sentiment": "BEARISH",
+    "confidence": 0.8869,
+    "ts": "2026-05-03T11:14:26.857994",
+    "horizons": {}
+  },
+  "AAPL::Mark Cuban Slams OpenAI For Overspending (CORRECTED)": {
+    "symbol": "AAPL",
+    "title": "Mark Cuban Slams OpenAI For Overspending (CORRECTED)",
+    "source": "Benzinga",
+    "sentiment": "BEARISH",
+    "confidence": 0.6019,
+    "ts": "2026-05-03T11:14:30.222274",
+    "horizons": {}
+  },
+  "AAPL::Microsoft Is a Mess. Is the \"Magnificent Seven\" Stock a Buy in May or Better Avo": {
+    "symbol": "AAPL",
+    "title": "Microsoft Is a Mess. Is the \"Magnificent Seven\" Stock a Buy in May or Better Avoided?",
+    "source": "Motley Fool",
+    "sentiment": "BEARISH",
+    "confidence": 0.9436,
+    "ts": "2026-05-03T11:14:34.296818",
+    "horizons": {}
+  },
+  "AAPL::Seoul, Taipei hit records as Asian stocks track Wall St tech rally": {
+    "symbol": "AAPL",
+    "title": "Seoul, Taipei hit records as Asian stocks track Wall St tech rally",
+    "source": "AFP",
+    "sentiment": "BULLISH",
+    "confidence": 0.9307,
+    "ts": "2026-05-03T11:14:37.846778",
+    "horizons": {}
+  },
+  "AAPL::Apple says users are snapping up Macs faster than ever and created a supply shor": {
+    "symbol": "AAPL",
+    "title": "Apple says users are snapping up Macs faster than ever and created a supply shortage",
+    "source": "Digital Trends",
+    "sentiment": "BEARISH",
+    "confidence": 0.9676,
+    "ts": "2026-05-03T11:14:41.403135",
+    "horizons": {}
+  },
+  "AAPL::Will Bitcoin Ever Be More Valuable Than Apple? You Might Be Surprised at What Pr": {
+    "symbol": "AAPL",
+    "title": "Will Bitcoin Ever Be More Valuable Than Apple? You Might Be Surprised at What Prediction Markets Say.",
+    "source": "Motley Fool",
+    "sentiment": "NEUTRAL",
+    "confidence": 0.5586,
+    "ts": "2026-05-03T11:14:45.063672",
+    "horizons": {}
+  },
+  "AAPL::Zacks Value Investor Highlights: Apple, Amazon and Starbucks": {
+    "symbol": "AAPL",
+    "title": "Zacks Value Investor Highlights: Apple, Amazon and Starbucks",
+    "source": "Zacks",
+    "sentiment": "NEUTRAL",
+    "confidence": 0.8846,
+    "ts": "2026-05-03T11:14:48.967851",
+    "horizons": {}
+  },
+  "AAPL::Dow Jones Futures: Trump Says U.S. To 'Guide' Ships Through Hormuz": {
+    "symbol": "AAPL",
+    "title": "Dow Jones Futures: Trump Says U.S. To 'Guide' Ships Through Hormuz",
+    "source": "Investor's Business Daily",
+    "sentiment": "BULLISH",
+    "confidence": 0.9097,
+    "ts": "2026-05-03T11:14:52.273313",
+    "horizons": {}
+  },
+  "AAPL::This Under\u2011the\u2011Radar Grid Infrastructure Powerhouse Could Be a Generational Weal": {
+    "symbol": "AAPL",
+    "title": "This Under\u2011the\u2011Radar Grid Infrastructure Powerhouse Could Be a Generational Wealth Builder for Patient Investors",
+    "source": "Motley Fool",
+    "sentiment": "BULLISH",
+    "confidence": 0.7868,
+    "ts": "2026-05-03T11:14:55.751501",
+    "horizons": {}
+  },
+  "AAPL::Apple Is Changing The Rules Right Before Tim Cook Exits": {
+    "symbol": "AAPL",
+    "title": "Apple Is Changing The Rules Right Before Tim Cook Exits",
+    "source": "Benzinga",
+    "sentiment": "BULLISH",
+    "confidence": 0.8379,
+    "ts": "2026-05-03T11:14:58.770355",
+    "horizons": {}
+  },
+  "NVDA::Allbirds Is Now an AI Company, and That Should Strike Fear Into Anyone Investing": {
+    "symbol": "NVDA",
+    "title": "Allbirds Is Now an AI Company, and That Should Strike Fear Into Anyone Investing in Its Competition",
+    "source": "Motley Fool",
+    "sentiment": "NEUTRAL",
+    "confidence": 0.745,
+    "ts": "2026-05-03T11:15:03.461219",
+    "horizons": {}
+  },
+  "NVDA::Greg Abel's $234 Million Buy Brings Berkshire Hathaway's Total Investment in War": {
+    "symbol": "NVDA",
+    "title": "Greg Abel's $234 Million Buy Brings Berkshire Hathaway's Total Investment in Warren Buffett's No. 1 Stock to $78 Billion in 8 Years",
+    "source": "Motley Fool",
+    "sentiment": "BULLISH",
+    "confidence": 0.7314,
+    "ts": "2026-05-03T11:15:07.011514",
+    "horizons": {}
+  },
+  "NVDA::2 Unstoppable AI Stocks Headed to $3 Trillion": {
+    "symbol": "NVDA",
+    "title": "2 Unstoppable AI Stocks Headed to $3 Trillion",
+    "source": "Motley Fool",
+    "sentiment": "BULLISH",
+    "confidence": 0.7301,
+    "ts": "2026-05-03T11:15:10.165208",
+    "horizons": {}
+  },
+  "NVDA::The Cheap Way to Own the Entire U.S. Stock Market Right Now": {
+    "symbol": "NVDA",
+    "title": "The Cheap Way to Own the Entire U.S. Stock Market Right Now",
+    "source": "Motley Fool",
+    "sentiment": "NEUTRAL",
+    "confidence": 0.9282,
+    "ts": "2026-05-03T11:15:13.563353",
+    "horizons": {}
+  },
+  "NVDA::Jerome Powell Just Threw President Donald Trump Under the Bus One Last Time Befo": {
+    "symbol": "NVDA",
+    "title": "Jerome Powell Just Threw President Donald Trump Under the Bus One Last Time Before His Term as Fed Chair Ends",
+    "source": "Motley Fool",
+    "sentiment": "NEUTRAL",
+    "confidence": 0.4694,
+    "ts": "2026-05-03T11:15:17.003559",
+    "horizons": {}
+  },
+  "NVDA::AI Chipmakers in Korea, Taiwan Drive Asian Stocks to Record": {
+    "symbol": "NVDA",
+    "title": "AI Chipmakers in Korea, Taiwan Drive Asian Stocks to Record",
+    "source": "Bloomberg",
+    "sentiment": "BULLISH",
+    "confidence": 0.8713,
+    "ts": "2026-05-03T11:15:20.114302",
+    "horizons": {}
+  },
+  "NVDA::Meet 3 Upcoming Monster Artificial Intelligence (AI) IPOs That Will Soon Join Me": {
+    "symbol": "NVDA",
+    "title": "Meet 3 Upcoming Monster Artificial Intelligence (AI) IPOs That Will Soon Join Meta, Tesla, and Broadcom in the $1 Trillion Club",
+    "source": "Motley Fool",
+    "sentiment": "NEUTRAL",
+    "confidence": 0.8296,
+    "ts": "2026-05-03T11:15:24.025798",
+    "horizons": {}
+  },
+  "NVDA::Want to Buy SpaceX Before Its IPO? This Venture Fund Crushed the S&P 500 and Nas": {
+    "symbol": "NVDA",
+    "title": "Want to Buy SpaceX Before Its IPO? This Venture Fund Crushed the S&P 500 and Nasdaq-100 in the Past Year.",
+    "source": "Motley Fool",
+    "sentiment": "NEUTRAL",
+    "confidence": 0.8644,
+    "ts": "2026-05-03T11:15:28.243192",
+    "horizons": {}
+  },
+  "NVDA::The Best Dividend Stocks to Buy and Hold Forever": {
+    "symbol": "NVDA",
+    "title": "The Best Dividend Stocks to Buy and Hold Forever",
+    "source": "Motley Fool",
+    "sentiment": "NEUTRAL",
+    "confidence": 0.8968,
+    "ts": "2026-05-03T11:15:31.791360",
+    "horizons": {}
+  },
+  "NVDA::Nvidia Stock Is Pushing Toward $200. What Could Get It There.": {
+    "symbol": "NVDA",
+    "title": "Nvidia Stock Is Pushing Toward $200. What Could Get It There.",
+    "source": "Barrons.com",
+    "sentiment": "BULLISH",
+    "confidence": 0.8962,
+    "ts": "2026-05-03T11:15:35.014547",
+    "horizons": {}
+  },
+  "RELIANCE.NS::Reliance and Meta's joint venture signals India's shift from AI ambition to ente": {
+    "symbol": "RELIANCE.NS",
+    "title": "Reliance and Meta's joint venture signals India's shift from AI ambition to enterprise deployment",
+    "source": "Proactive",
+    "sentiment": "NEUTRAL",
+    "confidence": 0.7768,
+    "ts": "2026-05-03T11:15:38.302243",
+    "horizons": {}
+  },
+  "RELIANCE.NS::Indian shares snap losing streak; Reliance, Axis Bank cap gains": {
+    "symbol": "RELIANCE.NS",
+    "title": "Indian shares snap losing streak; Reliance, Axis Bank cap gains",
+    "source": "Reuters",
+    "sentiment": "BULLISH",
+    "confidence": 0.9077,
+    "ts": "2026-05-03T11:15:41.525123",
+    "horizons": {}
+  },
+  "RELIANCE.NS::Reliance Industries Ltd (WBO:RLI) Q4 2026 Earnings Call Highlights: Strong Digit": {
+    "symbol": "RELIANCE.NS",
+    "title": "Reliance Industries Ltd (WBO:RLI) Q4 2026 Earnings Call Highlights: Strong Digital Growth Amid ...",
+    "source": "GuruFocus.com",
+    "sentiment": "BULLISH",
+    "confidence": 0.9551,
+    "ts": "2026-05-03T11:15:45.137207",
+    "horizons": {}
+  },
+  "RELIANCE.NS::Ambani's Reliance posts quarterly profit drop, misses street view": {
+    "symbol": "RELIANCE.NS",
+    "title": "Ambani's Reliance posts quarterly profit drop, misses street view",
+    "source": "Reuters",
+    "sentiment": "BEARISH",
+    "confidence": 0.9766,
+    "ts": "2026-05-03T11:15:48.257242",
+    "horizons": {}
+  },
+  "RELIANCE.NS::Indian court extends detention of aviation official, Reliance exec in bribery ca": {
+    "symbol": "RELIANCE.NS",
+    "title": "Indian court extends detention of aviation official, Reliance exec in bribery case",
+    "source": "Reuters",
+    "sentiment": "BEARISH",
+    "confidence": 0.498,
+    "ts": "2026-05-03T11:15:51.972387",
+    "horizons": {}
+  },
+  "RELIANCE.NS::Factbox-India's Asteria, the Reliance unit at the centre of a bribery scandal": {
+    "symbol": "RELIANCE.NS",
+    "title": "Factbox-India's Asteria, the Reliance unit at the centre of a bribery scandal",
+    "source": "Reuters",
+    "sentiment": "BEARISH",
+    "confidence": 0.8947,
+    "ts": "2026-05-03T11:15:54.859544",
+    "horizons": {}
+  },
+  "RELIANCE.NS::India's Reliance seen posting quarterly profit fall on crude price surge": {
+    "symbol": "RELIANCE.NS",
+    "title": "India's Reliance seen posting quarterly profit fall on crude price surge",
+    "source": "Reuters",
+    "sentiment": "BEARISH",
+    "confidence": 0.9753,
+    "ts": "2026-05-03T11:15:58.187031",
+    "horizons": {}
+  },
+  "RELIANCE.NS::India arrests officials at aviation regulator, Reliance in drone bribery probe": {
+    "symbol": "RELIANCE.NS",
+    "title": "India arrests officials at aviation regulator, Reliance in drone bribery probe",
+    "source": "Reuters",
+    "sentiment": "BEARISH",
+    "confidence": 0.8447,
+    "ts": "2026-05-03T11:16:01.119010",
+    "horizons": {}
+  },
+  "RELIANCE.NS::How The Story On Reliance Industries (NSEI:RELIANCE) Is Shifting As Analysts Rew": {
+    "symbol": "RELIANCE.NS",
+    "title": "How The Story On Reliance Industries (NSEI:RELIANCE) Is Shifting As Analysts Rework Fair Value",
+    "source": "Simply Wall St.",
+    "sentiment": "BULLISH",
+    "confidence": 0.8793,
+    "ts": "2026-05-03T11:16:04.137688",
+    "horizons": {}
+  },
+  "RELIANCE.NS::HBO Max comes to India via exclusive JioHotstar deal": {
+    "symbol": "RELIANCE.NS",
+    "title": "HBO Max comes to India via exclusive JioHotstar deal",
+    "source": "TechCrunch",
+    "sentiment": "NEUTRAL",
+    "confidence": 0.9016,
+    "ts": "2026-05-03T11:16:06.784704",
+    "horizons": {}
+  },
+  "TCS.NS::India's Infosys slumps to lowest level in three years over weak growth": {
+    "symbol": "TCS.NS",
+    "title": "India's Infosys slumps to lowest level in three years over weak growth",
+    "source": "Reuters",
+    "sentiment": "BEARISH",
+    "confidence": 0.9744,
+    "ts": "2026-05-03T11:16:10.037840",
+    "horizons": {}
+  },
+  "TCS.NS::Indian IT firms near\u2011term outlook muted as clients cut spending, AI risks mount": {
+    "symbol": "TCS.NS",
+    "title": "Indian IT firms near\u2011term outlook muted as clients cut spending, AI risks mount",
+    "source": "Reuters",
+    "sentiment": "BEARISH",
+    "confidence": 0.9704,
+    "ts": "2026-05-03T11:16:13.415865",
+    "horizons": {}
+  },
+  "TCS.NS::India's Infosys forecasts weak revenue growth as AI-driven caution dents IT spen": {
+    "symbol": "TCS.NS",
+    "title": "India's Infosys forecasts weak revenue growth as AI-driven caution dents IT spending",
+    "source": "Reuters",
+    "sentiment": "BEARISH",
+    "confidence": 0.9723,
+    "ts": "2026-05-03T11:16:16.552143",
+    "horizons": {}
+  },
+  "TCS.NS::India's Wipro unveils record buyback after slight quarterly revenue miss": {
+    "symbol": "TCS.NS",
+    "title": "India's Wipro unveils record buyback after slight quarterly revenue miss",
+    "source": "Reuters",
+    "sentiment": "BULLISH",
+    "confidence": 0.9153,
+    "ts": "2026-05-03T11:16:19.626080",
+    "horizons": {}
+  },
+  "TCS.NS::India's TCS falls as rare annual revenue drop dulls quarterly earnings beat, dea": {
+    "symbol": "TCS.NS",
+    "title": "India's TCS falls as rare annual revenue drop dulls quarterly earnings beat, deal wins",
+    "source": "Reuters",
+    "sentiment": "BEARISH",
+    "confidence": 0.9755,
+    "ts": "2026-05-03T11:16:23.035639",
+    "horizons": {}
+  },
+  "TCS.NS::Indian shares set to open higher after upbeat TCS earnings": {
+    "symbol": "TCS.NS",
+    "title": "Indian shares set to open higher after upbeat TCS earnings",
+    "source": "Reuters",
+    "sentiment": "BULLISH",
+    "confidence": 0.9455,
+    "ts": "2026-05-03T11:16:25.973613",
+    "horizons": {}
+  },
+  "TCS.NS::Tata Consultancy Services Ltd (BOM:532540) Q4 2026 Earnings Call Highlights: Str": {
+    "symbol": "TCS.NS",
+    "title": "Tata Consultancy Services Ltd (BOM:532540) Q4 2026 Earnings Call Highlights: Strong AI Revenue ...",
+    "source": "GuruFocus.com",
+    "sentiment": "BULLISH",
+    "confidence": 0.9451,
+    "ts": "2026-05-03T11:16:28.996164",
+    "horizons": {}
+  },
+  "TCS.NS::India's TCS tops estimates, says new AI models did not dent services demand": {
+    "symbol": "TCS.NS",
+    "title": "India's TCS tops estimates, says new AI models did not dent services demand",
+    "source": "Reuters",
+    "sentiment": "BULLISH",
+    "confidence": 0.9396,
+    "ts": "2026-05-03T11:16:32.222036",
+    "horizons": {}
+  },
+  "TCS.NS::Indian IT firms face subdued fourth quarter as war, AI concerns persist; weak ru": {
+    "symbol": "TCS.NS",
+    "title": "Indian IT firms face subdued fourth quarter as war, AI concerns persist; weak rupee helps earnings",
+    "source": "Reuters",
+    "sentiment": "BEARISH",
+    "confidence": 0.9654,
+    "ts": "2026-05-03T11:16:35.266070",
+    "horizons": {}
+  },
+  "TCS.NS::Bernstein: Human oversight remains critical despite rapid AI coding integration": {
+    "symbol": "TCS.NS",
+    "title": "Bernstein: Human oversight remains critical despite rapid AI coding integration",
+    "source": "Investing.com",
+    "sentiment": "BEARISH",
+    "confidence": 0.8851,
+    "ts": "2026-05-03T11:16:38.955578",
+    "horizons": {}
+  },
+  "INFY.NS::Asian Equities Traded in the US as American Depositary Receipts Rise Slightly Hi": {
+    "symbol": "INFY.NS",
+    "title": "Asian Equities Traded in the US as American Depositary Receipts Rise Slightly Higher in Friday Trading; End Week on Flat Note",
+    "source": "MT Newswires",
+    "sentiment": "BULLISH",
+    "confidence": 0.9394,
+    "ts": "2026-05-03T11:16:43.030482",
+    "horizons": {}
+  },
+  "INFY.NS::Asian Equities Traded in the US as American Depositary Receipts Flat in Wednesda": {
+    "symbol": "INFY.NS",
+    "title": "Asian Equities Traded in the US as American Depositary Receipts Flat in Wednesday Trading",
+    "source": "MT Newswires",
+    "sentiment": "BEARISH",
+    "confidence": 0.7122,
+    "ts": "2026-05-03T11:16:46.196065",
+    "horizons": {}
+  },
+  "INFY.NS::BMO Capital Cuts PT on Infosys Limited (INFY) on Weaker Close to FY26": {
+    "symbol": "INFY.NS",
+    "title": "BMO Capital Cuts PT on Infosys Limited (INFY) on Weaker Close to FY26",
+    "source": "Insider Monkey",
+    "sentiment": "BEARISH",
+    "confidence": 0.9244,
+    "ts": "2026-05-03T11:16:49.853341",
+    "horizons": {}
+  },
+  "INFY.NS::How The Investment Story For Infosys (NSEI:INFY) Is Shifting With AI And New Cau": {
+    "symbol": "INFY.NS",
+    "title": "How The Investment Story For Infosys (NSEI:INFY) Is Shifting With AI And New Caution",
+    "source": "Simply Wall St.",
+    "sentiment": "BEARISH",
+    "confidence": 0.8185,
+    "ts": "2026-05-03T11:16:52.867582",
+    "horizons": {}
+  },
+  "INFY.NS::Infosys (INFY) Reports Q4 EPS Beat": {
+    "symbol": "INFY.NS",
+    "title": "Infosys (INFY) Reports Q4 EPS Beat",
+    "source": "Insider Monkey",
+    "sentiment": "BULLISH",
+    "confidence": 0.9447,
+    "ts": "2026-05-03T11:16:56.269837",
+    "horizons": {}
+  },
+  "INFY.NS::3 ETFs to Own If a U.S.-India Trade Deal Succeeds (Plus a Bonus)": {
+    "symbol": "INFY.NS",
+    "title": "3 ETFs to Own If a U.S.-India Trade Deal Succeeds (Plus a Bonus)",
+    "source": "MarketBeat",
+    "sentiment": "BULLISH",
+    "confidence": 0.8998,
+    "ts": "2026-05-03T11:16:59.399338",
+    "horizons": {}
+  },
+  "INFY.NS::Here Is Why Infosys (INFY) Is Among the Best Indian Stocks to Buy According to H": {
+    "symbol": "INFY.NS",
+    "title": "Here Is Why Infosys (INFY) Is Among the Best Indian Stocks to Buy According to Hedge Funds",
+    "source": "Insider Monkey",
+    "sentiment": "BULLISH",
+    "confidence": 0.7479,
+    "ts": "2026-05-03T11:17:02.141812",
+    "horizons": {}
+  },
+  "INFY.NS::Infosys Q4 Earnings Surpass Estimates, Revenues Increase Y/Y": {
+    "symbol": "INFY.NS",
+    "title": "Infosys Q4 Earnings Surpass Estimates, Revenues Increase Y/Y",
+    "source": "Zacks",
+    "sentiment": "BULLISH",
+    "confidence": 0.9571,
+    "ts": "2026-05-03T11:17:05.263085",
+    "horizons": {}
+  },
+  "INFY.NS::Infosys Ltd (INFY) Q4 2026 Earnings Call Highlights: Strong Deal Growth and AI C": {
+    "symbol": "INFY.NS",
+    "title": "Infosys Ltd (INFY) Q4 2026 Earnings Call Highlights: Strong Deal Growth and AI Collaborations ...",
+    "source": "GuruFocus.com",
+    "sentiment": "BULLISH",
+    "confidence": 0.954,
+    "ts": "2026-05-03T11:17:08.063223",
+    "horizons": {}
+  },
+  "INFY.NS::India's Infosys slumps to lowest level in three years over weak growth": {
+    "symbol": "INFY.NS",
+    "title": "India's Infosys slumps to lowest level in three years over weak growth",
+    "source": "Reuters",
+    "sentiment": "BEARISH",
+    "confidence": 0.9744,
+    "ts": "2026-05-03T11:17:11.254430",
+    "horizons": {}
+  }
+}

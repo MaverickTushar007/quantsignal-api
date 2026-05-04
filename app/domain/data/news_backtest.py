@@ -57,20 +57,32 @@ def _fetch_price_at(symbol: str, ts: datetime, horizon_hours: int) -> Optional[f
     try:
         import yfinance as yf
         target = ts + timedelta(hours=horizon_hours)
-        start  = target - timedelta(hours=4)
-        end    = target + timedelta(hours=4)
-        interval = "1h" if horizon_hours <= 24 else "1d"
-        df = yf.Ticker(symbol).history(start=start, end=end, interval=interval)
-        if df.empty:
-            return None
-        df.index = df.index.tz_localize(None) if df.index.tzinfo else df.index
-        closest = df.iloc[(df.index - target).abs().argmin()]
-        return float(closest["Close"])
+        # Try 1h first, fall back to 1d if no data (weekends, holidays)
+        for interval, pad_hours in [("1h", 4), ("1d", 72)]:
+            start = target - timedelta(hours=pad_hours)
+            end   = target + timedelta(hours=pad_hours)
+            df = yf.Ticker(symbol).history(start=start, end=end, interval=interval)
+            if not df.empty:
+                df.index = df.index.tz_localize(None) if df.index.tzinfo else df.index
+                closest = df.iloc[(df.index - target).abs().argmin()]
+                return float(closest["Close"])
+        return None
     except Exception:
         return None
 
 def _fetch_base_price(symbol: str, ts: datetime) -> Optional[float]:
-    return _fetch_price_at(symbol, ts, 0)
+    p = _fetch_price_at(symbol, ts, 0)
+    if p is not None:
+        return p
+    # Ultimate fallback: just get the most recent close
+    try:
+        import yfinance as yf
+        df = yf.Ticker(symbol).history(period="5d", interval="1d")
+        if not df.empty:
+            return float(df["Close"].iloc[-1])
+    except Exception:
+        pass
+    return None
 
 HORIZONS = {"1h": 1, "4h": 4, "24h": 24, "5d": 5 * 24}
 
