@@ -86,17 +86,18 @@ def generate_signal(symbol: str, include_reasoning: bool = True, bypass_cache: b
         # Bust cache if reasoning contains Indian market contamination
         r = cached.get("reasoning", "")
         if any(w in r for w in ["RBI", "SEBI", "Motilal", "Rs ", "NSE filing", "BSE"]):
-            cached = None  # force regeneration
-        # Add energy if missing from cached signal
-        if "energy" not in cached or cached.get("energy") is None:
-            try:
-                from app.domain.core.energy_detector import compute_energy_state
-                _df = fetch_ohlcv(symbol, period="2y")
-                if _df is not None:
-                    cached["energy"] = compute_energy_state(_df)
-            except Exception:
-                pass
-        return cached
+            cached = None  # force regeneration — fall through to pipeline below
+        if cached is not None:
+            # Add energy if missing from cached signal
+            if "energy" not in cached or cached.get("energy") is None:
+                try:
+                    from app.domain.core.energy_detector import compute_energy_state
+                    _df = fetch_ohlcv(symbol, period="2y")
+                    if _df is not None:
+                        cached["energy"] = compute_energy_state(_df)
+                except Exception:
+                    pass
+            return cached
 
     # --- LAYER 2: Local JSON cache (Railway bypass) ---
     cache_path = BASE_DIR / "data/signals_cache.json"
