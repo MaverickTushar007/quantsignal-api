@@ -1,0 +1,13 @@
+{
+  "regime": "RISK_ON",
+  "regime_score": 0.2,
+  "prob_multiplier": 1.2,
+  "details": {
+    "vix": 16.89,
+    "yield_spread": 0.51,
+    "cpi_yoy": 3.32,
+    "rate_hike": 0.0,
+    "recession": 0.0
+  },
+  "cached_at": "2026-05-04T10:59:04.581967"
+}
