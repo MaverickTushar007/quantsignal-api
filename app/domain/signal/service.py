@@ -83,6 +83,10 @@ def generate_signal(symbol: str, include_reasoning: bool = True, bypass_cache: b
     if cached:
         if not include_reasoning and "reasoning" in cached:
             cached["reasoning"] = ""
+        # Bust cache if reasoning contains Indian market contamination
+        r = cached.get("reasoning", "")
+        if any(w in r for w in ["RBI", "SEBI", "Motilal", "Rs ", "NSE filing", "BSE"]):
+            cached = None  # force regeneration
         # Add energy if missing from cached signal
         if "energy" not in cached or cached.get("energy") is None:
             try:
