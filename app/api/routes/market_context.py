@@ -10,26 +10,6 @@ from app.domain.data.universe import TICKERS, TICKER_MAP
 
 router = APIRouter()
 
-@router.get("/news/backtest-debug2")
-def news_backtest_debug2():
-    from app.domain.data.news_backtest import _load_results, get_backtest_summary
-    results = _load_results()
-    return {
-        "raw_count": len(results),
-        "summary": get_backtest_summary(),
-    }
-
-@router.get("/news/backtest-debug")
-def news_backtest_debug():
-    from app.domain.data.news_backtest import RESULTS_FILE
-    import os
-    return {
-        "results_file_path": str(RESULTS_FILE),
-        "exists": RESULTS_FILE.exists(),
-        "size_bytes": RESULTS_FILE.stat().st_size if RESULTS_FILE.exists() else 0,
-        "cwd": os.getcwd(),
-    }
-
 @router.get("/news/backtest-summary")
 def news_backtest_summary():
     """
