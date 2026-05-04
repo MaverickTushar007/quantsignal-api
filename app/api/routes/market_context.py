@@ -118,7 +118,19 @@ async def get_regime(symbol: str):
     cached = get_cached(f"regime:{symbol}")
     if cached:
         return cached
-    return {"regime": "unknown", "reason": "no regime data cached — run local regime updater"}
+    # Fallback to macro_regime.py (FRED-based classifier)
+    try:
+        from app.domain.data.macro_regime import get_macro_regime
+        result = get_macro_regime()
+        return {
+            "regime": result["regime"],
+            "regime_score": result["regime_score"],
+            "prob_multiplier": result["prob_multiplier"],
+            "details": result["details"],
+            "source": "macro_regime_fallback",
+        }
+    except Exception as e:
+        return {"regime": "unknown", "reason": f"macro_regime fallback failed: {e}"}
 
 
 @router.get("/debug/regime/{symbol}")
