@@ -152,3 +152,27 @@ def get_all_cot():
     """
     from app.domain.data.cot import get_all_cot_signals
     return get_all_cot_signals()
+
+
+# ── OFI + Liquidation endpoints (Phase 2) ────────────────────────────────────
+
+@router.get("/ofi/{symbol}")
+def get_ofi(symbol: str):
+    """
+    Order Flow Imbalance from OKX L2 order book.
+    Crypto only — returns neutral defaults for equities/forex.
+    Ref: arXiv 2508.06788, dm13450 OFI blog
+    """
+    from app.domain.data.order_flow import get_ofi_features
+    return get_ofi_features(symbol.upper())
+
+
+@router.get("/liquidations/{symbol}")
+def get_liquidations(symbol: str):
+    """
+    Forced liquidation pressure from Binance futures.
+    Crypto only. liq_signal: +1=short squeeze, -1=long cascade, 0=neutral.
+    Ref: Binance allForceOrders API, CoinGlass liquidation heatmap
+    """
+    from app.domain.data.liquidation_heatmap import get_liquidation_signal
+    return get_liquidation_signal(symbol.upper())

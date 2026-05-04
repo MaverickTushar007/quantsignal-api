@@ -98,5 +98,89 @@ def start_scheduler() -> BackgroundScheduler:
         logger.warning(f"[scheduler] Startup check failed: {e}")
 
     scheduler.start()
+    register_data_jobs(scheduler)
     logger.info("[scheduler] APScheduler started — weekly retrain scheduled (Sun 18:30 UTC)")
     return scheduler
+
+
+# ── COT + News Backtest scheduled jobs ───────────────────────────────────────
+
+def _reseed_cot():
+    """
+    Weekly COT re-seed from CFTC (runs every Monday 08:00 UTC,
+    ~3h after CFTC publishes Friday's report).
+    Fetches both c_disagg.txt (commodities) and FinFutWk.txt (financials).
+    """
+    try:
+        from app.domain.data.cot import _fetch_cot_url, _parse_cot_csv, _load_cache, _save_cache
+        from datetime import datetime
+        cache = _load_cache()
+        for label, url in [
+            ("commodity", "https://www.cftc.gov/dea/newcot/c_disagg.txt"),
+            ("financial", "https://www.cftc.gov/dea/newcot/FinFutWk.txt"),
+        ]:
+            raw = _fetch_cot_url(url)
+            if raw:
+                parsed = _parse_cot_csv(raw)
+                for name, data in parsed.items():
+                    data["fetched_at"] = datetime.utcnow().isoformat()
+                    data["source"] = "CFTC"
+                    data["available"] = True
+                    cache[f"cot::{name}"] = data
+                logger.info(f"[cot_reseed] {label}: {len(parsed)} markets updated")
+        _save_cache(cache)
+        logger.info("[cot_reseed] COT cache refreshed successfully")
+    except Exception as e:
+        logger.error(f"[cot_reseed] failed: {e}")
+
+
+def _seed_news_backtest():
+    """
+    Daily news backtest seed — runs Mon-Fri at 16:00 UTC (after US market close).
+    Fetches recent news for all tracked symbols and scores sentiment vs price outcome.
+    """
+    try:
+        from app.domain.data.news import get_news
+        from app.domain.data.news_backtest import run_news_backtest
+        SYMBOLS = [
+            "BTC-USD", "ETH-USD", "SOL-USD",
+            "GC=F", "CL=F", "EURUSD=X",
+            "SPY", "QQQ", "AAPL", "NVDA",
+            "RELIANCE.NS", "TCS.NS", "INFY.NS",
+        ]
+        for symbol in SYMBOLS:
+            try:
+                news = get_news(symbol, limit=10)
+                run_news_backtest(symbol, news)
+            except Exception as _e:
+                logger.warning(f"[news_backtest_seed] {symbol}: {_e}")
+        logger.info("[news_backtest_seed] daily seed complete")
+    except Exception as e:
+        logger.error(f"[news_backtest_seed] failed: {e}")
+
+
+def register_data_jobs(scheduler: "BackgroundScheduler"):
+    """
+    Call this from start_scheduler() to register COT + news backtest jobs.
+    """
+    # COT: every Monday 08:00 UTC
+    scheduler.add_job(
+        _reseed_cot,
+        trigger="cron",
+        day_of_week="mon",
+        hour=8, minute=0,
+        id="cot_weekly_reseed",
+        replace_existing=True,
+        misfire_grace_time=3600,
+    )
+    # News backtest: Mon-Fri 16:00 UTC
+    scheduler.add_job(
+        _seed_news_backtest,
+        trigger="cron",
+        day_of_week="mon-fri",
+        hour=16, minute=0,
+        id="news_backtest_daily_seed",
+        replace_existing=True,
+        misfire_grace_time=3600,
+    )
+    logger.info("[scheduler] COT weekly + news backtest daily jobs registered")
