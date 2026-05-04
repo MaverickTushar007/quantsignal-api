@@ -1,7 +1,7 @@
 """
 app/domain/signal/confluence_v2.py
 
-12-factor confluence scorecard.
+14-factor confluence scorecard.
 Factors 1-9  → original technical indicators (unchanged logic)
 Factor 10    → Equal Highs / Equal Lows  (liquidity magnet — stop cluster detection)
 Factor 11    → BOS / CHoCH              (market structure break confirmation)
@@ -372,13 +372,58 @@ def _detect_order_block(
 # PUBLIC: 12-FACTOR CONFLUENCE BUILDER
 # ─────────────────────────────────────────────────────────────────────────────
 
+
+# ─────────────────────────────────────────────────────────────────────────────
+# FACTOR 14 — VWAP DISTANCE + SLOPE
+# ─────────────────────────────────────────────────────────────────────────────
+
+def _detect_vwap(df: pd.DataFrame) -> dict:
+    """
+    VWAP = cumulative(price * volume) / cumulative(volume) over session.
+    Bullish: price above VWAP and VWAP sloping up.
+    Bearish: price below VWAP or VWAP sloping down.
+    """
+    if len(df) < 10 or "Volume" not in df.columns:
+        return {"signal": "NEUTRAL", "value": "Insufficient data"}
+
+    try:
+        typical = (df["High"] + df["Low"] + df["Close"]) / 3
+        vol = df["Volume"].replace(0, np.nan).fillna(1)
+        cum_vol = vol.cumsum()
+        vwap_series = (typical * vol).cumsum() / cum_vol
+
+        current  = float(df["Close"].iloc[-1])
+        vwap_now = float(vwap_series.iloc[-1])
+        vwap_10  = float(vwap_series.iloc[-10])
+
+        dist_pct = (current - vwap_now) / vwap_now * 100
+        slope    = (vwap_now - vwap_10) / vwap_10 * 100  # % change over 10 bars
+
+        above = current > vwap_now
+        sloping_up = slope > 0
+
+        if above and sloping_up:
+            signal = "BULLISH"
+        elif not above and not sloping_up:
+            signal = "BEARISH"
+        else:
+            signal = "NEUTRAL"
+
+        direction = "above" if above else "below"
+        slope_str = f"+{slope:.2f}%" if slope >= 0 else f"{slope:.2f}%"
+        value = f"{dist_pct:+.2f}% {direction} VWAP (slope {slope_str})"
+
+        return {"signal": signal, "value": value}
+    except Exception:
+        return {"signal": "NEUTRAL", "value": "VWAP error"}
+
 def build_confluence_v2(
     feat_row: dict,
     df: pd.DataFrame,
     asset_type: str = "default",
 ) -> tuple[list[dict], int, str, str]:
     """
-    Builds the full 12-factor confluence scorecard.
+    Builds the full 14-factor confluence scorecard.
 
     Args:
         feat_row   : latest row from build_features() as dict
@@ -387,8 +432,8 @@ def build_confluence_v2(
 
     Returns:
         factors        : list of 12 confluence dicts (name, value, signal)
-        bull_count     : int  0–12
-        score_label    : str  e.g. "9/12 bullish"
+        bull_count     : int  0–14
+        score_label    : str  e.g. "9/14 bullish"
         session_info   : str  e.g. "london_ny (×1.2)" or "nse (×1.0)"
     """
     # ── Factors 1-9 (original) ────────────────────────────────────────────
@@ -411,54 +456,63 @@ def build_confluence_v2(
             "name":   "RSI-14",
             "value":  f"{rsi:.0f} — {'Oversold' if rsi < 35 else 'Overbought' if rsi > 65 else 'Neutral'}",
             "signal": sig(rsi < 50),
+            "tier":   3,
         },
         # 2  (normalised MACD — positive = bullish)
         {
             "name":   "MACD",
             "value":  f"{'Bullish' if macd > 0 else 'Bearish'} ({macd:+.5f})",
             "signal": sig(macd > 0),
+            "tier":   3,
         },
         # 3
         {
             "name":   "Bollinger",
             "value":  f"{bbpct:.0f}% ({'Upper' if bbpct > 80 else 'Lower' if bbpct < 20 else 'Mid'})",
             "signal": sig(bbpct < 50),
+            "tier":   3,
         },
         # 4
         {
             "name":   "Volume",
             "value":  f"{volr:.2f}× avg",
             "signal": sig(volr > 1),
+            "tier":   3,
         },
         # 5
         {
             "name":   "vs SMA50",
             "value":  f"{'Above' if dsma50 > 0 else 'Below'} SMA50 ({dsma50 * 100:+.2f}%)",
             "signal": sig(dsma50 > 0),
+            "tier":   3,
         },
         # 6
         {
             "name":   "5D Momentum",
             "value":  f"{mom5:+.2f}% ROC",
             "signal": sig(mom5 > 0),
+            "tier":   3,
         },
         # 7
         {
             "name":   "20D Momentum",
             "value":  f"{mom20:+.2f}% ROC",
             "signal": sig(mom20 > 0),
+            "tier":   3,
         },
         # 8 — mean reversion: negative z = oversold = bullish
         {
             "name":   "Mean Rev Z",
             "value":  f"{mrevz:+.2f} ATR units ({'Oversold' if mrevz < -1 else 'Overbought' if mrevz > 1 else 'Neutral'})",
             "signal": sig(mrevz < 0),
+            "tier":   3,
         },
         # 9 — body ratio: conviction candle in direction of mom5
         {
             "name":   "Candle Conviction",
             "value":  f"{body:.2f} body ratio ({'Strong' if body > 0.6 else 'Weak' if body < 0.3 else 'Moderate'})",
             "signal": sig(body > 0.4),  # any conviction candle is mildly bullish
+            "tier":   3,
         },
     ]
 
@@ -468,6 +522,7 @@ def build_confluence_v2(
         "name":   "Equal H/L (Liquidity)",
         "value":  eq["value"],
         "signal": eq["signal"] if eq["detected"] else "NEUTRAL",
+        "tier":   1,
     })
 
     # ── Factor 11 — BOS / CHoCH ──────────────────────────────────────────
@@ -476,6 +531,7 @@ def build_confluence_v2(
         "name":   "Market Structure",
         "value":  bos["value"],
         "signal": bos["signal"] if bos["detected"] else "NEUTRAL",
+        "tier":   1,
     })
 
     # ── Factor 12 — Liquidity Sweep ──────────────────────────────────────
@@ -505,6 +561,16 @@ def build_confluence_v2(
         "signal": ob["signal"] if ob["detected"] else "NEUTRAL",
         "tier":   1,
     })
+
+    # ── Factor 14 — VWAP Distance + Slope ────────────────────────────────
+    vwap = _detect_vwap(df)
+    factors.append({
+        "name":   "VWAP",
+        "value":  vwap["value"],
+        "signal": vwap["signal"],
+        "tier":   2,
+    })
+
 
     # ── Tier tags on existing factors ─────────────────────────────────────
     # Tier 1: structural/liquidity (factors 10-13) — already tagged above
@@ -541,7 +607,7 @@ def build_confluence_v2(
 
     weighted_bull = sum(tier_weights[f["tier"]] for f in factors if f["signal"] == "BULLISH")
     weighted_bear = sum(tier_weights[f["tier"]] for f in factors if f["signal"] == "BEARISH")
-    max_weighted  = sum(tier_weights[f["tier"]] for f in factors)  # 4×3 + 2×2 + 7×1 = 23
+    max_weighted  = sum(tier_weights[f["tier"]] for f in factors)  # 4×3 + 3×2 + 7×1 = 25
 
     # Raw bull count for display
     bull_count = sum(1 for f in factors if f["signal"] == "BULLISH")
