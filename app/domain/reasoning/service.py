@@ -203,7 +203,7 @@ def classify_signal_complexity(confluence_bulls: int, probability: float,
 def _rule_based_reasoning(ticker, direction, probability, confluence_bulls, top_features):
     pct = f"{probability*100:.0f}%"
     feat_str = ", ".join(top_features[:3]) if top_features else "technical indicators"
-    return (f"ML ensemble signals {direction} with {pct} confidence for {ticker}. "
+    return (f"{ticker} {direction} signal with {pct} calibrated confidence. "
             f"Primary drivers: {feat_str}. {confluence_bulls}/9 confluence factors align.")
 
 
