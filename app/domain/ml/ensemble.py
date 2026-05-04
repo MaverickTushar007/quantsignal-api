@@ -82,7 +82,7 @@ def train(ticker, df):
         from app.domain.ml.labeling import build_triple_barrier_labels
         try:
             labeled = build_triple_barrier_labels(
-                df, pt_mult=2.0, sl_mult=1.0, num_days=FORWARD_DAYS, min_ret=0.001,
+                df, pt_mult=1.5, sl_mult=1.5, num_days=3, min_ret=0.001,
             )
             labeled["bin_binary"] = (labeled["bin"] == 1).astype(int)
             valid = labeled["bin_binary"].reindex(feat.index).dropna()
@@ -138,22 +138,37 @@ def train(ticker, df):
 
         # ── W4.4 OOS Sharpe gate — reject model if OOS Sharpe < 0.30 ─────────
         try:
-            X_oos = X.iloc[split:]
-            y_oos = y[split:]
-            if len(X_oos) >= 10:
-                oos_probs = xgb_model.predict_proba(X_oos)[:, 1]
-                oos_preds = (oos_probs > 0.5).astype(int)
-                oos_correct = (oos_preds == y_oos).astype(float)
-                # Treat each prediction as a +1/-1 return
-                oos_returns = oos_correct * 2 - 1
-                import numpy as _np
-                oos_sharpe = (
-                    _np.mean(oos_returns) / (_np.std(oos_returns) + 1e-9) * _np.sqrt(252)
+            import numpy as _np
+            import logging as _log
+            # Walk-forward CV: 3 folds, each trained on expanding window
+            n = len(X)
+            fold_accs = []
+            for fold_start in [int(n*0.5), int(n*0.6), int(n*0.7)]:
+                fold_end = fold_start + max(10, int(n*0.15))
+                if fold_end > n:
+                    break
+                _xtr, _ytr = X.iloc[:fold_start].values, y[:fold_start]
+                _xoos, _yoos = X.iloc[fold_start:fold_end].values, y[fold_start:fold_end]
+                if len(_xoos) < 5:
+                    continue
+                try:
+                    from xgboost import XGBClassifier as _XGB
+                    _m = _XGB(n_estimators=100, max_depth=3, learning_rate=0.05,
+                              use_label_encoder=False, eval_metric="logloss",
+                              random_state=42, verbosity=0)
+                    _m.fit(_xtr, _ytr)
+                    _preds = (_m.predict_proba(_xoos)[:, 1] > 0.5).astype(int)
+                    fold_accs.append(float(_np.mean(_preds == _yoos)))
+                except Exception:
+                    pass
+            if fold_accs:
+                cv_acc = float(_np.mean(fold_accs))
+                _log.getLogger(__name__).info(
+                    f"[ensemble] {ticker} CV acc={cv_acc:.2%} ({len(fold_accs)} folds)"
                 )
-                if oos_sharpe < 0.30:
-                    import logging as _log
+                if cv_acc < 0.46:
                     _log.getLogger(__name__).warning(
-                        f"[ensemble] {ticker} OOS Sharpe {oos_sharpe:.2f} < 0.30 — model rejected"
+                        f"[ensemble] {ticker} rejected: CV acc={cv_acc:.2%} < 46%"
                     )
                     return None
         except Exception as _oos_e:

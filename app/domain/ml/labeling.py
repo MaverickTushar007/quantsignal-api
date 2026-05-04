@@ -46,7 +46,7 @@ def _daily_vol(close: pd.Series, span: int = 20) -> pd.Series:
     """
     log_ret = np.log(close / close.shift(1)).dropna()
     vol = log_ret.ewm(span=span, min_periods=span // 2).std()
-    return vol.reindex(close.index).fillna(method="bfill").fillna(0.01)
+    return vol.reindex(close.index).bfill().fillna(0.01)
 
 
 def build_triple_barrier_labels(
