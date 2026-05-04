@@ -289,6 +289,7 @@ STRICT RULES:
 5. End with one specific risk that would invalidate this signal.
 6. Never say "I think", "possibly", "might". Be declarative.
 7. Start with ticker or verb. Never "The" or "This".
+8. NEVER cite confidence % from past signals history. Only use the Calibrated Confidence value above.
 
 SIGNAL DATA:
 - Asset: {name} ({ticker})
