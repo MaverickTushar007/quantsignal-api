@@ -81,14 +81,12 @@ def _rebuild():
             cache = {**existing_cache, **cache}
         (BASE_DIR / "data/signals_cache.json").write_text(json.dumps(cache, indent=2))
         print(f"Cache rebuilt: {len(cache)}/{len(TICKERS)} signals in {elapsed}s")
-        # Run confluence verifier — integrity check on all signals
+        # Run confluence verifier — stores to Supabase
         try:
-            from app.domain.signal.confluence_verifier import verify_cache
-            verifier_report = verify_cache(cache, sample_size=40)
-            print(f"ConfluenceVerifier: score={verifier_report.get('avg_score')} "
-                  f"conflicts={verifier_report.get('conflict_density')} "
-                  f"coverage={verifier_report.get('coverage_pct')} "
-                  f"flagged={len(verifier_report.get('flagged_symbols', []))}")
+            from app.domain.signal.confluence_verifier import verify_confluence
+            cv = verify_confluence(cache)
+            dc = cv.get("direction_conflicts", {})
+            print(f"ConfluenceVerifier: total={cv['total_signals']}, conflicts={dc.get('count',0)}, conflict_pct={dc.get('pct',0)}, coverage={list(cv.get('coverage',{}).keys())}")
         except Exception as e:
             print(f"ConfluenceVerifier error: {e}")
 
