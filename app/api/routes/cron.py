@@ -81,6 +81,16 @@ def _rebuild():
             cache = {**existing_cache, **cache}
         (BASE_DIR / "data/signals_cache.json").write_text(json.dumps(cache, indent=2))
         print(f"Cache rebuilt: {len(cache)}/{len(TICKERS)} signals in {elapsed}s")
+        # Run confluence verifier — integrity check on all signals
+        try:
+            from app.domain.signal.confluence_verifier import verify_cache
+            verifier_report = verify_cache(cache, sample_size=40)
+            print(f"ConfluenceVerifier: score={verifier_report.get('avg_score')} "
+                  f"conflicts={verifier_report.get('conflict_density')} "
+                  f"coverage={verifier_report.get('coverage_pct')} "
+                  f"flagged={len(verifier_report.get('flagged_symbols', []))}")
+        except Exception as e:
+            print(f"ConfluenceVerifier error: {e}")
 
         # Run virtual agent executor
         try:
