@@ -45,6 +45,8 @@ def _rebuild():
         cache_lock = threading.Lock()
         start_time = time.time()
 
+        checkpoint_path = BASE_DIR / "data/signals_cache_checkpoint.json"
+
         def process_group(group_name, tickers):
             results = {}
             for t in tickers:
@@ -61,18 +63,40 @@ def _rebuild():
                 time.sleep(0.2)
             return group_name, results
 
-        # Run all 4 groups in parallel
-        print(f"Starting parallel rebuild — 4 workers for {len(TICKERS)} signals...")
-        with ThreadPoolExecutor(max_workers=4) as executor:
-            futures = {
-                executor.submit(process_group, name, tickers): name
-                for name, tickers in GROUPS.items()
-            }
-            for future in as_completed(futures):
-                group_name, results = future.result()
-                with cache_lock:
-                    cache.update(results)
-                print(f"[{group_name}] done — {len(results)} signals")
+        # Load checkpoint — resume from partial rebuild if Render spun down mid-run
+        try:
+            checkpoint = json.loads(checkpoint_path.read_text()) if checkpoint_path.exists() else {}
+        except Exception:
+            checkpoint = {}
+        if checkpoint:
+            print(f"[cron] Resuming from checkpoint: {len(checkpoint)} signals already done")
+            cache.update(checkpoint)
+
+        # Skip groups already fully covered by checkpoint
+        def group_needs_rebuild(group_name, tickers):
+            done = sum(1 for t in tickers if t["symbol"] in cache)
+            return done < len(tickers)
+
+        pending_groups = {k: v for k, v in GROUPS.items() if group_needs_rebuild(k, v)}
+        if not pending_groups:
+            print("[cron] All groups already in checkpoint — skipping rebuild")
+        else:
+            print(f"Starting parallel rebuild — {len(pending_groups)} groups, {sum(len(v) for v in pending_groups.values())} signals...")
+            with ThreadPoolExecutor(max_workers=4) as executor:
+                futures = {
+                    executor.submit(process_group, name, tickers): name
+                    for name, tickers in pending_groups.items()
+                }
+                for future in as_completed(futures):
+                    group_name, results = future.result()
+                    with cache_lock:
+                        cache.update(results)
+                        # Write checkpoint after each group completes
+                        try:
+                            checkpoint_path.write_text(json.dumps(cache))
+                        except Exception as ce:
+                            print(f"[cron] Checkpoint write error: {ce}")
+                    print(f"[{group_name}] done — {len(results)} signals")
 
         elapsed = round(time.time() - start_time, 1)
         # Never serve empty dashboard — merge with stale cache if rebuild produced fewer signals
@@ -81,6 +105,11 @@ def _rebuild():
             cache = {**existing_cache, **cache}
         (BASE_DIR / "data/signals_cache.json").write_text(json.dumps(cache, indent=2))
         print(f"Cache rebuilt: {len(cache)}/{len(TICKERS)} signals in {elapsed}s")
+        # Clear checkpoint — full rebuild succeeded
+        try:
+            checkpoint_path = BASE_DIR / "data/signals_cache_checkpoint.json"
+            if checkpoint_path.exists(): checkpoint_path.unlink()
+        except Exception: pass
         # Run confluence verifier — stores to Supabase
         try:
             from app.domain.signal.confluence_verifier import verify_confluence
