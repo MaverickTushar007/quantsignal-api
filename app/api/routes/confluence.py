@@ -44,10 +44,14 @@ def confluence_examples(limit: int = 20):
 def confluence_run_now():
     """Manually trigger ConfluenceVerifier against live cache and return result."""
     import os
-    from app.core.cache import get_cache
-    from app.domain.signal.confluence_verifier import verify_confluence
+        from app.domain.signal.confluence_verifier import verify_confluence
     try:
-        cache = get_cache()
+        import json
+        from app.core.config import BASE_DIR
+        cache_path = BASE_DIR / "data/signals_cache.json"
+        if not cache_path.exists():
+            return {"error": "cache file not found"}
+        cache = json.loads(cache_path.read_text())
         if not cache:
             return {"error": "cache is empty"}
         result = verify_confluence(cache)
