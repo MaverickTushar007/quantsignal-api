@@ -58,7 +58,7 @@ def get_positioning(symbol: str) -> dict:
     try:
         # OKX Long/Short ratio
         ls_url = f"https://www.okx.com/api/v5/rubik/stat/contracts/long-short-account-ratio-contract?instId={inst_id}&period=1D&limit=1"
-        ls_resp = requests.get(ls_url, timeout=8).json()
+        ls_resp = requests.get(ls_url, timeout=3).json()
         ls_data = ls_resp.get("data", [])
         if not ls_data:
             raise ValueError("Empty L/S response")
@@ -69,7 +69,7 @@ def get_positioning(symbol: str) -> dict:
 
         # OKX Open Interest
         oi_url = f"https://www.okx.com/api/v5/public/open-interest?instType=SWAP&instId={inst_id}"
-        oi_resp = requests.get(oi_url, timeout=8).json()
+        oi_resp = requests.get(oi_url, timeout=3).json()
         oi_data = oi_resp.get("data", [])
         open_interest = float(oi_data[0].get("oiCcy", 0)) if oi_data else 0.0
 

@@ -43,7 +43,7 @@ def get_funding_features(symbol: str) -> dict:
 
     try:
         url = f"https://www.okx.com/api/v5/public/funding-rate?instId={inst_id}"
-        resp = requests.get(url, timeout=8).json()
+        resp = requests.get(url, timeout=3).json()
         data = resp.get("data", [])
         if not data:
             raise ValueError("Empty funding response")
