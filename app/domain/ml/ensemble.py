@@ -83,10 +83,9 @@ def train(ticker, df):
         split = int(len(X) * 0.8)
         X_tr, y_tr = X.iloc[:split], y[:split]
 
-        xgb_base = xgb.XGBClassifier(n_estimators=200, max_depth=4, learning_rate=0.05,
+        xgb_model = xgb.XGBClassifier(n_estimators=200, max_depth=4, learning_rate=0.05,
             subsample=0.8, colsample_bytree=0.8, eval_metric="logloss",
-            random_state=42, verbosity=0)
-        xgb_model = CalibratedClassifierCV(xgb_base, cv=3, method="isotonic")
+            objective="binary:logistic", random_state=42, verbosity=0)
         xgb_model.fit(X_tr, y_tr)
 
         if not _LGB_OK:
@@ -94,10 +93,10 @@ def train(ticker, df):
         else:
             lgb_base = lgb.LGBMClassifier(n_estimators=200, max_depth=4, learning_rate=0.05,
                 subsample=0.8, colsample_bytree=0.8, random_state=42, verbose=-1)
-            lgb_model = CalibratedClassifierCV(lgb_base, cv=3, method="isotonic")
+            lgb_model = CalibratedClassifierCV(lgb_base, cv=2, method="sigmoid")
             lgb_model.fit(X_tr, y_tr)
 
-        importance = dict(zip(FEATURE_COLUMNS, xgb_model.calibrated_classifiers_[0].estimator.feature_importances_))
+        importance = dict(zip(FEATURE_COLUMNS, xgb_model.feature_importances_))
         top3 = dict(sorted(importance.items(), key=lambda x: x[1], reverse=True)[:3])
 
         bundle = {"xgb": xgb_model, "lgb": lgb_model, "top_features": top3,
