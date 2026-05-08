@@ -360,9 +360,9 @@ def backtest(
         raise HTTPException(status_code=404, detail=f"Unknown symbol: {symbol}")
 
     from app.domain.data.market import fetch_ohlcv
-    from app.domain.ml.backtest import run
+    from app.domain.ml.backtest_wf import run
 
-    df = fetch_ohlcv(symbol, period="2y")
+    df = fetch_ohlcv(symbol)  # uses 5y by default — required for honest WF backtest
     if df is None:
         raise HTTPException(status_code=503, detail="Could not fetch data")
 

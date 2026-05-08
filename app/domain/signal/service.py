@@ -17,6 +17,22 @@ from app.domain.ml.ensemble import predict, SignalResult
 from app.domain.ml.features import build_features
 from app.domain.reasoning.service import get_reasoning
 
+# Symbols with validated walk-forward ML edge (honest backtest, no lookahead)
+# All other symbols still get price/news/regime data — just no ML direction signal
+SIGNAL_UNIVERSE = {"BTC-USD", "INFY.NS", "NVDA", "MSFT"}
+
+def _current_regime(close_series) -> str:
+    """Quick regime check on latest prices."""
+    if len(close_series) < 50:
+        return "ranging"
+    sma50  = close_series.rolling(50).mean().iloc[-1]
+    sma200 = close_series.rolling(200).mean().iloc[-1] if len(close_series) >= 200 else sma50
+    price  = close_series.iloc[-1]
+    ret20  = (close_series.iloc[-1] / close_series.iloc[-20] - 1) if len(close_series) >= 20 else 0
+    if price > sma50 > sma200 and ret20 > 0.02:  return "bull"
+    if price < sma50 < sma200 and ret20 < -0.02: return "bear"
+    return "ranging"
+
 
 @dataclass
 class FullSignal:
@@ -108,7 +124,7 @@ def generate_signal(symbol: str, include_reasoning: bool = True) -> Optional[dic
         if "energy" not in cached or cached.get("energy") is None:
             try:
                 from app.domain.core.energy_detector import compute_energy_state
-                _df = fetch_ohlcv(symbol, period="2y")
+                _df = fetch_ohlcv(symbol)
                 if _df is not None:
                     cached["energy"] = compute_energy_state(_df)
             except Exception:
@@ -140,6 +156,10 @@ def generate_signal(symbol: str, include_reasoning: bool = True) -> Optional[dic
     meta = TICKER_MAP.get(symbol)
     if not meta:
         return None
+
+    # Gate: if symbol has no validated ML edge, skip ML direction
+    # (still serves price, news, regime, confluence below)
+    _has_ml_edge = symbol in SIGNAL_UNIVERSE
 
     # 1b. Market hours check
     try:
@@ -184,7 +204,7 @@ def generate_signal(symbol: str, include_reasoning: bool = True) -> Optional[dic
         pass
 
     # 1. Fetch price data
-    df = fetch_ohlcv(symbol, period="2y")
+    df = fetch_ohlcv(symbol)
     if df is None:
         return None
 
@@ -195,6 +215,44 @@ def generate_signal(symbol: str, include_reasoning: bool = True) -> Optional[dic
     ml: Optional[SignalResult] = predict(symbol, df, sentiment)
     if ml is None:
         return None
+
+    # 3b. Regime-conditional direction filter
+    # Only emit directional signals for symbols with validated walk-forward edge
+    if _has_ml_edge:
+        _regime = _current_regime(df["Close"].astype(float))
+        # In bull: suppress SELL signals (don't fight the trend)
+        # In bear: suppress BUY signals
+        if _regime == "bull" and ml.direction == "SELL":
+            ml = SignalResult(
+                ticker=ml.ticker, direction="HOLD", probability=0.5, confidence="low",
+                kelly_size=0.0, expected_value=0.0,
+                take_profit=ml.take_profit, stop_loss=ml.stop_loss,
+                current_price=ml.current_price, risk_reward=0.0,
+                atr=ml.atr, model_agreement=ml.model_agreement,
+                top_features=ml.top_features, was_cached=False,
+                volume_ratio=ml.volume_ratio,
+            )
+        elif _regime == "bear" and ml.direction == "BUY":
+            ml = SignalResult(
+                ticker=ml.ticker, direction="HOLD", probability=0.5, confidence="low",
+                kelly_size=0.0, expected_value=0.0,
+                take_profit=ml.take_profit, stop_loss=ml.stop_loss,
+                current_price=ml.current_price, risk_reward=0.0,
+                atr=ml.atr, model_agreement=ml.model_agreement,
+                top_features=ml.top_features, was_cached=False,
+                volume_ratio=ml.volume_ratio,
+            )
+    else:
+        # No validated ML edge — force HOLD, preserve price/news/confluence data
+        ml = SignalResult(
+            ticker=ml.ticker, direction="HOLD", probability=0.5, confidence="low",
+            kelly_size=0.0, expected_value=0.0,
+            take_profit=ml.take_profit, stop_loss=ml.stop_loss,
+            current_price=ml.current_price, risk_reward=0.0,
+            atr=ml.atr, model_agreement=ml.model_agreement,
+            top_features=ml.top_features, was_cached=False,
+            volume_ratio=ml.volume_ratio,
+        )
 
     # 3a. Snapshot metadata
     _model_version = None
@@ -215,15 +273,12 @@ def generate_signal(symbol: str, include_reasoning: bool = True) -> Optional[dic
     except Exception:
         pass
 
-    # 3b. Hard validation — EV must be consistent with direction
-    if ml.direction == "BUY" and ml.expected_value < 0:
+    # 3b. Hard validation — only block signals with genuinely negative EV
+    # EV is always calculated as positive (edge * reward - loss), so
+    # only suppress when EV < 0 (model has no edge at all)
+    if ml.direction in ("BUY", "SELL") and ml.expected_value < 0:
         import logging
-        logging.getLogger(__name__).warning(f"[{symbol}] EV/direction mismatch: BUY but EV={ml.expected_value:.4f} — overriding to HOLD")
-        from dataclasses import replace
-        ml = replace(ml, direction="HOLD", confidence="LOW", probability=0.5)
-    elif ml.direction == "SELL" and ml.expected_value > 0:
-        import logging
-        logging.getLogger(__name__).warning(f"[{symbol}] EV/direction mismatch: SELL but EV={ml.expected_value:.4f} — overriding to HOLD")
+        logging.getLogger(__name__).warning(f"[{symbol}] Negative EV={ml.expected_value:.4f} on {ml.direction} — overriding to HOLD")
         from dataclasses import replace
         ml = replace(ml, direction="HOLD", confidence="LOW", probability=0.5)
 

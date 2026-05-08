@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: quantsignal-api
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.api.main:app --host 0.0.0.0 --port $PORT
+
+  - type: cron
+    name: quantsignal-nightly-refresh
+    env: python
+    schedule: "0 2 * * *"
+    buildCommand: pip install -r requirements.txt
+    startCommand: >
+      curl -X POST https://quantsignal-api.onrender.com/api/v1/cron/refresh
+      -H "X-Cron-Secret: quantsignal_cron_2026"

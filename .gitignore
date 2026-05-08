@@ -1,5 +1,5 @@
 .env
-ml/models/
+# ml/models/  # committed — no persistent disk on Render
 .env.save
 node_modules/
 package-lock.json
@@ -15,10 +15,10 @@ data/*.json
 data/*.db
 data/*.jsonl
 logs/*.txt
-ml/
+# ml/
 
 data/*.json
 data/*.db
 data/*.jsonl
 logs/*.txt
-ml/
+# ml/

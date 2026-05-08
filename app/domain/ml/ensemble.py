@@ -84,17 +84,31 @@ def train(ticker, df):
         split = int(len(X) * 0.8)
         X_tr, y_tr = X.iloc[:split], y[:split]
 
-        xgb_model = xgb.XGBClassifier(n_estimators=200, max_depth=4, learning_rate=0.05,
-            subsample=0.8, colsample_bytree=0.8, eval_metric="logloss",
+        # Regularized params — prevents overfitting on small datasets (~300 samples)
+        # max_depth=3, n_estimators=100, higher reg_lambda, lower learning_rate
+        n_samples = len(X_tr)
+        n_est = 80 if n_samples < 200 else 120 if n_samples < 400 else 200
+        depth = 3 if n_samples < 400 else 4
+
+        xgb_model = xgb.XGBClassifier(
+            n_estimators=n_est, max_depth=depth, learning_rate=0.03,
+            subsample=0.7, colsample_bytree=0.7,
+            reg_lambda=2.0, reg_alpha=0.5,   # L2+L1 regularization
+            min_child_weight=5,               # require more samples per leaf
+            eval_metric="logloss",
             objective="binary:logistic", random_state=42, verbosity=0)
         xgb_model.fit(X_tr, y_tr)
 
         if not _LGB_OK:
             lgb_model = xgb_model
         else:
-            lgb_base = lgb.LGBMClassifier(n_estimators=200, max_depth=4, learning_rate=0.05,
-                subsample=0.8, colsample_bytree=0.8, random_state=42, verbose=-1)
-            lgb_model = CalibratedClassifierCV(lgb_base, cv=2, method="sigmoid")
+            lgb_base = lgb.LGBMClassifier(
+                n_estimators=n_est, max_depth=depth, learning_rate=0.03,
+                subsample=0.7, colsample_bytree=0.7,
+                reg_lambda=2.0, reg_alpha=0.5,
+                min_child_samples=10,         # minimum samples per leaf
+                random_state=42, verbose=-1)
+            lgb_model = CalibratedClassifierCV(lgb_base, cv=3, method="isotonic")
             lgb_model.fit(X_tr, y_tr)
 
         importance = dict(zip(FEATURE_COLUMNS, xgb_model.feature_importances_))
@@ -165,6 +179,30 @@ def predict(ticker, df, sentiment=0.0):
             funding_signal = funding.get("funding_signal", 0.0)
             if funding_signal != 0.0:
                 prob = prob + funding_signal * 0.02
+            # ── Crypto regime gate ──────────────────────────────────────────
+            # Bull regime (price > 200-week MA): suppress SELL signals
+            _crypto_ids = {
+                "BTC-USD","ETH-USD","SOL-USD","BNB-USD","XRP-USD","DOGE-USD",
+                "ADA-USD","AVAX-USD","MATIC-USD","DOT-USD","LINK-USD","LTC-USD",
+                "ATOM-USD","NEAR-USD","OP-USD","INJ-USD","FET-USD","PEPE-USD"
+            }
+            if ticker in _crypto_ids:
+                try:
+                    _weekly = df["Close"].resample("W").last().dropna()
+                    if len(_weekly) >= 200:
+                        _ma200w = float(_weekly.rolling(200).mean().iloc[-1])
+                        _cur = float(df["Close"].iloc[-1])
+                        if _cur > _ma200w:
+                            # Bull regime: pull SELL prob toward 0.45 (HOLD boundary)
+                            if prob < 0.45:
+                                prob = prob + (0.45 - prob) * 0.65
+                        else:
+                            # Bear regime: pull BUY prob toward 0.55 (HOLD boundary)
+                            if prob > 0.55:
+                                prob = prob - (prob - 0.55) * 0.40
+                except Exception:
+                    pass
+            # ────────────────────────────────────────────────────────────────
 
             # Fear & Greed contrarian adjustment
             try:
@@ -189,7 +227,7 @@ def predict(ticker, df, sentiment=0.0):
         except Exception:
             prob = raw_prob
 
-        direction = "BUY" if prob >= 0.55 else "SELL" if prob <= 0.45 else "HOLD"
+        direction = "BUY" if prob >= 0.52 else "SELL" if prob <= 0.48 else "HOLD"
         agreement = 1.0 - abs(xgb_prob - lgb_prob) if _LGB_OK else 1.0
         # Store per-model probs for dynamic weight tracking
         try:
@@ -202,7 +240,7 @@ def predict(ticker, df, sentiment=0.0):
                 _f.write(_entry)
         except Exception:
             pass
-        confidence = "HIGH" if prob > 0.65 or prob < 0.35 else "MEDIUM" if prob > 0.55 or prob < 0.45 else "LOW"
+        confidence = "HIGH" if prob > 0.65 or prob < 0.35 else "MEDIUM" if prob > 0.58 or prob < 0.42 else "LOW"
 
         close = float(df["Close"].iloc[-1])
         atr   = float((df["High"] - df["Low"]).rolling(14).mean().iloc[-1])

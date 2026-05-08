@@ -309,7 +309,9 @@ def trigger_retrain(x_cron_secret: str = Header(None, alias="X-Cron-Secret")):
         try:
             cache = json.loads((BASE_DIR / "data/signals_cache.json").read_text())
             from app.domain.ml.auto_retrain import run_auto_retrain
-            summary = run_auto_retrain(list(cache.keys()))
+            from app.domain.signal.service import SIGNAL_UNIVERSE
+            # Only retrain symbols with validated ML edge
+            summary = run_auto_retrain([s for s in list(cache.keys()) if s in SIGNAL_UNIVERSE])
             print(f"Manual retrain complete: {summary}")
         except Exception as e:
             print(f"Manual retrain failed: {e}")

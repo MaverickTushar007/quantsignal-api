@@ -13,7 +13,7 @@ COINGECKO_ID_MAP = {
     "PEPE-USD": "pepe",
 }
 
-def fetch_coingecko_ohlcv(ticker, days=365):
+def fetch_coingecko_ohlcv(ticker, days=730):
     cg_id = COINGECKO_ID_MAP.get(ticker)
     if not cg_id:
         return None
@@ -43,9 +43,9 @@ def fetch_coingecko_ohlcv(ticker, days=365):
         print(f"CoinGecko failed for {ticker}: {e}")
         return None
 
-def fetch_ohlcv(ticker, period="2y"):
+def fetch_ohlcv(ticker, period="5y"):
     if ticker in COINGECKO_ID_MAP:
-        days = 365
+        days = 730
         df = fetch_coingecko_ohlcv(ticker, days=days)
         if df is not None and len(df) > 50:
             return df
@@ -77,4 +77,38 @@ def fetch_ohlcv(ticker, period="2y"):
     except Exception as e:
         print(f"Multi-source fallback failed for {ticker}: {e}")
 
+    return None
+
+def fetch_ohlcv_as_of(ticker: str, as_of, lookback_days: int = 500):
+    """Fetch OHLCV trimmed to as_of date — for historical backtests."""
+    import pandas as pd
+    import yfinance as yf
+    from datetime import datetime as _dt, timedelta as _td
+    if isinstance(as_of, str):
+        as_of = _dt.fromisoformat(as_of)
+    start_dt = as_of - _td(days=lookback_days)
+    end_dt   = as_of + _td(days=1)
+    try:
+        t = yf.Ticker(ticker)
+        df = t.history(start=start_dt.strftime("%Y-%m-%d"),
+                       end=end_dt.strftime("%Y-%m-%d"),
+                       auto_adjust=True)
+        if df is not None and len(df) > 50:
+            df.index = df.index.tz_localize(None) if df.index.tzinfo else df.index
+            return df
+    except Exception as e:
+        print(f"fetch_ohlcv_as_of yf failed for {ticker}: {e}")
+    for period in ("2y", "5y", "max"):
+        try:
+            df = fetch_ohlcv(ticker, period=period)
+            if df is None or df.empty:
+                continue
+            if df.index.tzinfo is not None:
+                df.index = df.index.tz_convert(None)
+            cutoff = pd.Timestamp(as_of).normalize()
+            df = df[df.index <= cutoff]
+            if len(df) > 50:
+                return df
+        except Exception:
+            pass
     return None
