@@ -45,7 +45,7 @@ def fetch_coingecko_ohlcv(ticker, days=365):
 
 def fetch_ohlcv(ticker, period="2y"):
     if ticker in COINGECKO_ID_MAP:
-        days = 180
+        days = 365
         df = fetch_coingecko_ohlcv(ticker, days=days)
         if df is not None and len(df) > 50:
             return df

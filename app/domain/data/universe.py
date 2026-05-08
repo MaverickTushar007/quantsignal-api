@@ -209,7 +209,6 @@ TICKERS = [
     {"symbol": "VEDL.NS",       "display": "VEDANTA",    "name": "Vedanta Ltd",         "type": "IN_STOCK", "icon": "V"},
     # IT Mid-cap
     {"symbol": "MPHASIS.NS",    "display": "MPHASIS",    "name": "Mphasis",             "type": "IN_STOCK", "icon": "M"},
-    {"symbol": "LTIM.NS",       "display": "LTI MIND",   "name": "LTIMindtree",         "type": "IN_STOCK", "icon": "L"},
     {"symbol": "PERSISTENT.NS", "display": "PERSISTENT", "name": "Persistent Systems",  "type": "IN_STOCK", "icon": "P"},
     {"symbol": "COFORGE.NS",    "display": "COFORGE",    "name": "Coforge Ltd",         "type": "IN_STOCK", "icon": "C"},
     {"symbol": "TATAELXSI.NS",  "display": "TATA ELXSI", "name": "Tata Elxsi",         "type": "IN_STOCK", "icon": "T"},
