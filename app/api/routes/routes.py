@@ -26,7 +26,7 @@ router = APIRouter()
 @router.get("/health", response_model=HealthResponse, tags=["system"])
 async def health():
     from app.core.config import settings
-    return HealthResponse(status="ok", version="1.0.0", env=settings.app_env)
+    return HealthResponse(status="ok", version="1.1.0", env=settings.app_env)
 
 
 @router.get("/signals", response_model=List[WatchlistItem], tags=["signals"])
