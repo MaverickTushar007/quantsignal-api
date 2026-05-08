@@ -44,19 +44,29 @@ def fetch_coingecko_ohlcv(ticker, days=730):
         return None
 
 def fetch_ohlcv(ticker, period="5y"):
-    if ticker in COINGECKO_ID_MAP:
-        days = 730
-        df = fetch_coingecko_ohlcv(ticker, days=days)
-        if df is not None and len(df) > 50:
-            return df
-    # Try Yahoo direct first — fastest, no rate limits, works for all symbols
+    # Try Yahoo direct first — most reliable, full history, no rate limits
     try:
         from app.domain.data.multi_source import _fetch_yahoo_direct
         df = _fetch_yahoo_direct(ticker, period)
-        if df is not None:
+        if df is not None and len(df) > 200:
             return df
     except Exception as e:
         print(f"Yahoo direct failed for {ticker}: {e}")
+    # yfinance fallback (covers crypto + equities)
+    try:
+        t = yf.Ticker(ticker)
+        df = t.history(period=period, auto_adjust=True)
+        if df is not None and len(df) > 200:
+            df.index = df.index.tz_localize(None) if df.index.tzinfo else df.index
+            return df
+    except Exception as e:
+        print(f"yFinance fallback 1 failed for {ticker}: {e}")
+    # CoinGecko last resort (only 23 days on free tier IPs — unreliable)
+    if ticker in COINGECKO_ID_MAP:
+        days = 730
+        df = fetch_coingecko_ohlcv(ticker, days=days)
+        if df is not None and len(df) > 200:
+            return df
 
     # yfinance fallback
     try:
