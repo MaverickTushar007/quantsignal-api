@@ -139,6 +139,9 @@ def generate_signal(symbol: str, include_reasoning: bool = True) -> Optional[dic
             cache = json.loads(cache_path.read_text())
             if symbol in cache:
                 sig = dict(cache[symbol])
+                # Inject wf_validated into cached response (backfill for old cache entries)
+                if "wf_validated" not in sig:
+                    sig["wf_validated"] = symbol in SIGNAL_UNIVERSE
                 if not include_reasoning and "reasoning" in sig:
                     sig["reasoning"] = ""
                 # Attach shock warning before returning
