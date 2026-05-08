@@ -39,3 +39,19 @@ def confluence_examples(limit: int = 20):
         return {"run_at":res.data[0].get("run_at"),"examples":(dc.get("examples") or [])[:limit]}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+
+@router.post("/admin/confluence/run-now")
+def confluence_run_now():
+    """Manually trigger ConfluenceVerifier against live cache and return result."""
+    import os
+    from app.core.cache import get_cache
+    from app.domain.signal.confluence_verifier import verify_confluence
+    try:
+        cache = get_cache()
+        if not cache:
+            return {"error": "cache is empty"}
+        result = verify_confluence(cache)
+        return result
+    except Exception as e:
+        import traceback
+        return {"error": str(e), "trace": traceback.format_exc()}
