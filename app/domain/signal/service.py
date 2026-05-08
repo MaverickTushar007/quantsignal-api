@@ -119,6 +119,9 @@ def generate_signal(symbol: str, include_reasoning: bool = True) -> Optional[dic
     redis_key = f"signal:{symbol}"
     cached = get_cached(redis_key)
     if cached:
+        # Backfill wf_validated for old cache entries
+        if "wf_validated" not in cached:
+            cached["wf_validated"] = symbol in SIGNAL_UNIVERSE
         if not include_reasoning and "reasoning" in cached:
             cached["reasoning"] = ""
         # Add energy if missing from cached signal
