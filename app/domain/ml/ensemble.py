@@ -217,7 +217,7 @@ def predict(ticker, df, sentiment=0.0):
         q          = 1 - edge_prob
         full_kelly = max((edge_prob * rr - q) / rr, 0) if rr > 0 else 0
         kelly_size = full_kelly * 0.25 * 100
-        ev = (edge_prob * tp_dist) - (q * sl_dist)
+        ev = ((edge_prob * tp_dist) - (q * sl_dist)) / close if close > 0 else 0
 
         # Volume anomaly
         try:

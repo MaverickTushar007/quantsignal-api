@@ -9,7 +9,7 @@
     "probability": 0.5,
     "confidence": "LOW",
     "kelly_size": 15.6,
-    "expected_value": 977.4972,
+    "expected_value": 0.0119,
     "take_profit": 78031.5872,
     "stop_loss": 80381.5284,
     "current_price": 79598.2147,
