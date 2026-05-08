@@ -9,7 +9,7 @@
     "probability": 0.5,
     "confidence": "LOW",
     "kelly_size": 15.6,
-    "expected_value": 0.0119,
+    "expected_value": 977.4972,
     "take_profit": 78031.5872,
     "stop_loss": 80381.5284,
     "current_price": 79598.2147,
@@ -226,12 +226,12 @@
       "direction_bias": "down",
       "reason": "no dominant energy signal",
       "components": {
-        "atr_ratio": 0.827,
-        "bb_squeeze": 0.502,
-        "vol_ratio": 1.365,
-        "momentum_accel": -0.00372,
-        "mean_rev_z": -1.103,
-        "extension_score": 0.368
+        "atr_ratio": 0.817,
+        "bb_squeeze": 0.499,
+        "vol_ratio": 1.347,
+        "momentum_accel": -0.0027,
+        "mean_rev_z": -1.036,
+        "extension_score": 0.345
       }
     }
   },
@@ -340,16 +340,16 @@
     "snapshot_id": "SOL-USD:v1778247834:afe00cbc",
     "energy": {
       "state": "releasing",
-      "score": 0.575,
+      "score": 0.585,
       "direction_bias": "up",
-      "reason": "Momentum accel=0.0471, vol ratio=1.02",
+      "reason": "Momentum accel=0.0484, vol ratio=1.01",
       "components": {
-        "atr_ratio": 1.11,
-        "bb_squeeze": 0.79,
-        "vol_ratio": 1.022,
-        "momentum_accel": 0.04708,
-        "mean_rev_z": 1.925,
-        "extension_score": 0.642
+        "atr_ratio": 1.097,
+        "bb_squeeze": 0.795,
+        "vol_ratio": 1.006,
+        "momentum_accel": 0.04837,
+        "mean_rev_z": 2.034,
+        "extension_score": 0.678
       }
     }
   },
@@ -458,16 +458,16 @@
     "snapshot_id": "BNB-USD:v1778247893:afe00cbc",
     "energy": {
       "state": "releasing",
-      "score": 0.446,
+      "score": 0.452,
       "direction_bias": "up",
-      "reason": "Momentum accel=0.0345, vol ratio=1.01",
+      "reason": "Momentum accel=0.0353, vol ratio=1.00",
       "components": {
-        "atr_ratio": 1.143,
-        "bb_squeeze": 0.702,
-        "vol_ratio": 1.008,
-        "momentum_accel": 0.03448,
-        "mean_rev_z": 1.026,
-        "extension_score": 0.342
+        "atr_ratio": 1.134,
+        "bb_squeeze": 0.705,
+        "vol_ratio": 0.997,
+        "momentum_accel": 0.0353,
+        "mean_rev_z": 1.097,
+        "extension_score": 0.366
       }
     }
   },
@@ -580,12 +580,12 @@
       "direction_bias": "up",
       "reason": "no dominant energy signal",
       "components": {
-        "atr_ratio": 1.007,
-        "bb_squeeze": 0.591,
-        "vol_ratio": 0.799,
-        "momentum_accel": 0.00955,
-        "mean_rev_z": -1.021,
-        "extension_score": 0.34
+        "atr_ratio": 0.997,
+        "bb_squeeze": 0.589,
+        "vol_ratio": 0.752,
+        "momentum_accel": 0.01048,
+        "mean_rev_z": -0.952,
+        "extension_score": 0.317
       }
     }
   },
@@ -1234,16 +1234,16 @@
     "snapshot_id": "DOT-USD:v1778247346:f5ab1b5b",
     "energy": {
       "state": "releasing",
-      "score": 0.626,
+      "score": 0.624,
       "direction_bias": "up",
-      "reason": "Momentum accel=0.0695, vol ratio=1.13",
+      "reason": "Momentum accel=0.0728, vol ratio=1.12",
       "components": {
-        "atr_ratio": 1.178,
-        "bb_squeeze": 0.766,
-        "vol_ratio": 1.129,
-        "momentum_accel": 0.06951,
-        "mean_rev_z": 2.301,
-        "extension_score": 0.767
+        "atr_ratio": 1.16,
+        "bb_squeeze": 0.777,
+        "vol_ratio": 1.121,
+        "momentum_accel": 0.07278,
+        "mean_rev_z": 2.526,
+        "extension_score": 0.842
       }
     }
   },
@@ -1350,32 +1350,17 @@
     "model_version": "v1778248050",
     "feature_hash": "2052531e",
     "snapshot_id": "LINK-USD:v1778248050:2052531e",
-    "mtf": {
-      "tf_15m_bull": false,
-      "tf_1h_bull": true,
-      "tf_4h_bull": true,
-      "tf_1h_rsi": 58.2,
-      "tf_4h_rsi": 51.1,
-      "mtf_score": 2,
-      "mtf_details": {
-        "15m": "BEAR",
-        "1h": "BULL",
-        "4h": "BULL",
-        "1d": "BEAR"
-      },
-      "mtf_score_with_daily": 2
-    },
     "energy": {
       "state": "releasing",
-      "score": 0.625,
+      "score": 0.624,
       "direction_bias": "up",
-      "reason": "Momentum accel=0.0715, vol ratio=1.13",
+      "reason": "Momentum accel=0.0736, vol ratio=1.12",
       "components": {
-        "atr_ratio": 1.315,
-        "bb_squeeze": 1.069,
-        "vol_ratio": 1.125,
-        "momentum_accel": 0.07148,
-        "mean_rev_z": 3.074,
+        "atr_ratio": 1.297,
+        "bb_squeeze": 1.08,
+        "vol_ratio": 1.122,
+        "momentum_accel": 0.07357,
+        "mean_rev_z": 3.243,
         "extension_score": 1
       }
     }
@@ -1483,33 +1468,18 @@
     "model_version": "v1778248080",
     "feature_hash": "afe00cbc",
     "snapshot_id": "LTC-USD:v1778248080:afe00cbc",
-    "mtf": {
-      "tf_15m_bull": false,
-      "tf_1h_bull": false,
-      "tf_4h_bull": false,
-      "tf_1h_rsi": 54.9,
-      "tf_4h_rsi": 43.1,
-      "mtf_score": 0,
-      "mtf_details": {
-        "15m": "BEAR",
-        "1h": "BEAR",
-        "4h": "BEAR",
-        "1d": "BEAR"
-      },
-      "mtf_score_with_daily": 0
-    },
     "energy": {
       "state": "neutral",
       "score": 0.5,
       "direction_bias": "up",
       "reason": "no dominant energy signal",
       "components": {
-        "atr_ratio": 0.987,
-        "bb_squeeze": 0.742,
-        "vol_ratio": 1.129,
-        "momentum_accel": 0.01999,
-        "mean_rev_z": 1.123,
-        "extension_score": 0.374
+        "atr_ratio": 1.069,
+        "bb_squeeze": 0.8,
+        "vol_ratio": 1.073,
+        "momentum_accel": 0.01917,
+        "mean_rev_z": 0.696,
+        "extension_score": 0.232
       }
     }
   },
@@ -1622,12 +1592,12 @@
       "direction_bias": "down",
       "reason": "no dominant energy signal",
       "components": {
-        "atr_ratio": 0.639,
-        "bb_squeeze": 0.923,
-        "vol_ratio": 0.886,
-        "momentum_accel": -0.01275,
-        "mean_rev_z": -0.839,
-        "extension_score": 0.28
+        "atr_ratio": 1.084,
+        "bb_squeeze": 0.852,
+        "vol_ratio": 0.893,
+        "momentum_accel": -0.01513,
+        "mean_rev_z": -0.572,
+        "extension_score": 0.191
       }
     }
   },
@@ -1736,16 +1706,16 @@
     "snapshot_id": "NEAR-USD:v1778247922:5323ca3b",
     "energy": {
       "state": "releasing",
-      "score": 0.765,
+      "score": 0.753,
       "direction_bias": "up",
-      "reason": "Momentum accel=0.1562, vol ratio=1.82",
+      "reason": "Momentum accel=0.1693, vol ratio=1.77",
       "components": {
-        "atr_ratio": 1.814,
-        "bb_squeeze": 1.284,
-        "vol_ratio": 1.823,
-        "momentum_accel": 0.15617,
-        "mean_rev_z": 4.362,
-        "extension_score": 1
+        "atr_ratio": 1.842,
+        "bb_squeeze": 1.397,
+        "vol_ratio": 1.767,
+        "momentum_accel": 0.16931,
+        "mean_rev_z": 2.531,
+        "extension_score": 0.844
       }
     }
   },
