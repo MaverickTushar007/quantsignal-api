@@ -19,7 +19,7 @@ from app.domain.reasoning.service import get_reasoning
 
 # Symbols with validated walk-forward ML edge (honest backtest, no lookahead)
 # All other symbols still get price/news/regime data — just no ML direction signal
-SIGNAL_UNIVERSE = {"BTC-USD", "INFY.NS", "NVDA", "MSFT"}
+SIGNAL_UNIVERSE = {"BTC-USD", "INFY.NS", "NVDA", "MSFT", "TSLA", "SOL-USD"}
 
 def _current_regime(close_series) -> str:
     """Quick regime check on latest prices."""
@@ -76,6 +76,7 @@ class FullSignal:
     model_version: str = None
     feature_hash: str = None
     snapshot_id: str = None
+    wf_validated: bool = False
 
 
 def _build_confluence(feat_row) -> list:
@@ -368,9 +369,19 @@ def generate_signal(symbol: str, include_reasoning: bool = True) -> Optional[dic
         snapshot_id=_snapshot_id,
         corporate_action_warning=_corporate_action_warning,
         corporate_actions=_corporate_actions_list,
+        wf_validated=symbol in SIGNAL_UNIVERSE,
     ))
     from app.infrastructure.cache.cache import set_cached
     set_cached(f"signal:{symbol}", result, ttl=3600)
+
+    # Log signal for outcome tracking (5-day forward scoring)
+    try:
+        from app.domain.ml.outcome_tracker import log_signal
+        if ml.direction != "HOLD" and symbol in SIGNAL_UNIVERSE:
+            log_signal(symbol, ml.direction, ml.probability,
+                      ml.current_price, ml.confidence)
+    except Exception:
+        pass
     # Attach insider trades (US stocks only)
     try:
         from app.domain.data.insider import get_insider_trades

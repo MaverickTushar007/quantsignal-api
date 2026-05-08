@@ -318,6 +318,12 @@ def debug_signal(symbol: str):
     except Exception as e:
         return {"error": str(e), "trace": traceback.format_exc()[-500:]}
 
+@router.get("/signals/outcomes", tags=["signals"])
+def signal_outcomes():
+    """Live win/loss stats from outcome tracker."""
+    from app.domain.ml.outcome_tracker import get_stats
+    return get_stats()
+
 @router.get("/market/mood", response_model=MarketMood, tags=["signals"])
 def market_mood():
     """
