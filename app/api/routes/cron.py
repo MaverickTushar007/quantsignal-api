@@ -402,7 +402,7 @@ def flush_signal_cache():
 
 
 @router.post("/cron/check-outcomes", tags=["cron"])
-def check_outcomes(x_cron_secret: str = Header(None)):
+def check_outcomes(x_cron_secret: str = Header(None, alias="X-Cron-Secret")):
     if x_cron_secret != CRON_SECRET:
         raise HTTPException(status_code=401, detail="Unauthorized")
     def _run():
