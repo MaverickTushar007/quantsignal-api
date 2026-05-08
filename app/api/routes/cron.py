@@ -159,7 +159,8 @@ def _rebuild():
         # Auto-retrain weak models (Karpathy: verifiable metric → auto-improve)
         try:
             from app.domain.ml.auto_retrain import run_auto_retrain
-            symbols = list(cache.keys())
+            from app.domain.signal.service import SIGNAL_UNIVERSE
+            symbols = [s for s in list(cache.keys()) if s in SIGNAL_UNIVERSE]
             retrain_summary = run_auto_retrain(symbols)
             print(f"Auto-retrain: {retrain_summary['retrained']} models improved")
         except Exception as e:
