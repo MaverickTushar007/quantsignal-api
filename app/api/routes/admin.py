@@ -194,3 +194,17 @@ def admin_token_usage():
         }
     except Exception as e:
         return {"error": str(e)}
+
+@router.post("/admin/flush-signal-cache")
+def flush_signal_cache():
+    try:
+        from app.infrastructure.cache.cache import _get_redis
+        r = _get_redis()
+        if not r:
+            return {"flushed": 0, "note": "No Redis connection"}
+        keys = r.keys("signal:*")
+        if keys:
+            r.delete(*keys)
+        return {"flushed": len(keys) if keys else 0}
+    except Exception as e:
+        return {"error": str(e)}
