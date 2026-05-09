@@ -72,68 +72,42 @@ def parse_ff_date(date_str: str, time_str: str, year: int = 2026) -> str:
         return ""
 
 def scrape_forexfactory() -> list:
-    headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'}
     events = []
-    current_date = ""
-
-    for url in [
-        'https://www.forexfactory.com/calendar',
-        'https://www.forexfactory.com/calendar?week=next',
-    ]:
+    urls = [
+        "https://nfs.faireconomy.media/ff_calendar_thisweek.json",
+        "https://nfs.faireconomy.media/ff_calendar_nextweek.json",
+    ]
+    for url in urls:
         try:
-            resp = requests.get(url, headers=headers, timeout=10)
-            soup = BeautifulSoup(resp.text, 'html.parser')
-            rows = soup.select('tr.calendar__row')
-
-            for row in rows:
-                date_el = row.select_one('.calendar__date')
-                if date_el and date_el.text.strip():
-                    current_date = date_el.text.strip()
-
-                currency = row.select_one('.calendar__currency')
-                event = row.select_one('.calendar__event')
-                time_el = row.select_one('.calendar__time')
-                impact_el = row.select_one('.calendar__impact span')
-                forecast_el = row.select_one('.calendar__forecast')
-                previous_el = row.select_one('.calendar__previous')
-
-                if not event or not currency or not impact_el:
+            resp = requests.get(url, timeout=10)
+            if not resp.ok:
+                continue
+            for item in resp.json():
+                impact = item.get("impact", "")
+                if impact not in ("High", "Medium"):
                     continue
-
-                impact_class = ' '.join(impact_el.get('class', []))
-                if 'impact-red' in impact_class or 'impact-ora' in impact_class:
-                    impact = 'High'
-                elif 'impact-yel' in impact_class:
-                    impact = 'Medium'
-                else:
+                currency = item.get("country", "")
+                if currency not in COUNTRY_FLAGS:
                     continue
-
-                currency_text = currency.text.strip()
-                if currency_text not in COUNTRY_FLAGS:
-                    continue
-
-                event_title = event.text.strip()
-                time_text = time_el.text.strip() if time_el else ''
-                iso_date = parse_ff_date(current_date, time_text)
-                pb = get_playbook(event_title)
-
+                title = item.get("title", "")
+                pb = get_playbook(title)
                 events.append({
-                    "title": event_title,
-                    "country": currency_text,
-                    "flag": COUNTRY_FLAGS.get(currency_text, "🌍"),
-                    "date": iso_date,
-                    "time_display": time_text,
-                    "date_display": current_date,
+                    "title": title,
+                    "country": currency,
+                    "flag": COUNTRY_FLAGS.get(currency, "🌍"),
+                    "date": item.get("date", ""),
+                    "time_display": item.get("date", "")[-5:] if item.get("date") else "",
+                    "date_display": item.get("date", "")[:10] if item.get("date") else "",
                     "impact": impact,
-                    "forecast": forecast_el.text.strip() if forecast_el else '',
-                    "previous": previous_el.text.strip() if previous_el else '',
+                    "forecast": item.get("forecast", "") or "",
+                    "previous": item.get("previous", "") or "",
+                    "actual": item.get("actual", "") or "",
                     "bullish_scenario": pb["bullish"],
                     "bearish_scenario": pb["bearish"],
                     "affected_assets": pb["assets"],
                 })
         except Exception as e:
-            print(f"FF scrape failed for {url}: {e}")
-
+            print(f"FF JSON fetch failed for {url}: {e}")
     return events
 
 def fetch_calendar() -> list:
