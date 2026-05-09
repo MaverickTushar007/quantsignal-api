@@ -498,19 +498,20 @@ Perseus must always leave the user with something actionable. Never end on a dea
                     _raw = _json.loads(_cache_path.read_text())
                     if isinstance(_raw, dict) and len(_raw) > 50:
                         all_sigs = list(_raw.values())
-                # If cache empty or stale, fetch top 25 symbols individually
+                # If cache empty or stale, fetch top symbols in parallel
                 if len(all_sigs) < 10:
-                    _top = ["BTC-USD","ETH-USD","SOL-USD","NVDA","TSLA","MSFT","AAPL","AMZN","GOOGL","META",
-                            "RELIANCE.NS","TCS.NS","INFY.NS","HDFCBANK.NS","SBIN.NS",
-                            "XRP-USD","BNB-USD","ADA-USD","DOGE-USD","AVAX-USD",
-                            "SPY","QQQ","GLD","^NSEI","EURUSD=X"]
-                    for _sym in _top:
+                    _top = ["BTC-USD","ETH-USD","NVDA","TSLA","MSFT",
+                            "XRP-USD","SOL-USD","RELIANCE.NS","TCS.NS","INFY.NS"]
+                    import concurrent.futures as _cf
+                    def _fetch(sym):
                         try:
-                            _r = _req.get(f"https://quantsignal-api.onrender.com/api/v1/signals/{_sym}", timeout=3)
-                            if _r.ok:
-                                all_sigs.append(_r.json())
+                            _r = _req.get(f"https://quantsignal-api.onrender.com/api/v1/signals/{sym}", timeout=4)
+                            return _r.json() if _r.ok else None
                         except Exception:
-                            pass
+                            return None
+                    with _cf.ThreadPoolExecutor(max_workers=10) as _ex:
+                        _results = list(_ex.map(_fetch, _top))
+                    all_sigs = [r for r in _results if r]
                 print(f"[Perseus GENERIC] {len(all_sigs)} signals loaded", flush=True)
                 buys = sum(1 for s in all_sigs if s.get("direction")=="BUY")
                 sells = sum(1 for s in all_sigs if s.get("direction")=="SELL")
