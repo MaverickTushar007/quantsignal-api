@@ -120,7 +120,7 @@ def generate_signal(symbol: str, include_reasoning: bool = True) -> Optional[dic
     cached = get_cached(redis_key)
     if cached:
         # Backfill wf_validated for old cache entries
-        if "wf_validated" not in cached:
+        if not cached.get("wf_validated"):
             cached["wf_validated"] = symbol in SIGNAL_UNIVERSE
         if not include_reasoning and "reasoning" in cached:
             cached["reasoning"] = ""
@@ -143,7 +143,7 @@ def generate_signal(symbol: str, include_reasoning: bool = True) -> Optional[dic
             if symbol in cache:
                 sig = dict(cache[symbol])
                 # Inject wf_validated into cached response (backfill for old cache entries)
-                if "wf_validated" not in sig:
+                if not sig.get("wf_validated"):
                     sig["wf_validated"] = symbol in SIGNAL_UNIVERSE
                 if not include_reasoning and "reasoning" in sig:
                     sig["reasoning"] = ""
