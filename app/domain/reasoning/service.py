@@ -498,8 +498,8 @@ Perseus must always leave the user with something actionable. Never end on a dea
                     _raw = _json.loads(_cache_path.read_text())
                     if isinstance(_raw, dict) and len(_raw) > 50:
                         all_sigs = list(_raw.values())
-                # If cache empty, fetch top 25 symbols individually (won't crash Render)
-                if not all_sigs:
+                # If cache empty or stale, fetch top 25 symbols individually
+                if len(all_sigs) < 10:
                     _top = ["BTC-USD","ETH-USD","SOL-USD","NVDA","TSLA","MSFT","AAPL","AMZN","GOOGL","META",
                             "RELIANCE.NS","TCS.NS","INFY.NS","HDFCBANK.NS","SBIN.NS",
                             "XRP-USD","BNB-USD","ADA-USD","DOGE-USD","AVAX-USD",
