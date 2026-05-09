@@ -45,7 +45,27 @@ from app.api.routes.confluence import router as confluence_router
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    # start_poller temporarily disabled for debugging
+    # Warm up GENERIC signal cache on startup
+    import asyncio, concurrent.futures
+    def _warmup():
+        try:
+            from app.infrastructure.cache.cache import get_cached, set_cached
+            if get_cached("generic_signals_warm"):
+                return
+            from app.domain.signal.service import generate_signal
+            _top = ["BTC-USD","ETH-USD","NVDA","TSLA","MSFT",
+                    "XRP-USD","SOL-USD","RELIANCE.NS","TCS.NS","INFY.NS"]
+            def _fetch(sym):
+                try: return generate_signal(sym, include_reasoning=False)
+                except: return None
+            with concurrent.futures.ThreadPoolExecutor(max_workers=5) as ex:
+                results = list(ex.map(_fetch, _top))
+            sigs = [r for r in results if r]
+            set_cached("generic_signals_warm", sigs, ttl=600)
+            print(f"[warmup] {len(sigs)} signals cached", flush=True)
+        except Exception as e:
+            print(f"[warmup] failed: {e}", flush=True)
+    asyncio.get_event_loop().run_in_executor(None, _warmup)
     yield
 
 app = FastAPI(

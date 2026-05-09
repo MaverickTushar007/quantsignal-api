@@ -498,7 +498,12 @@ Perseus must always leave the user with something actionable. Never end on a dea
                     _raw = _json.loads(_cache_path.read_text())
                     if isinstance(_raw, dict) and len(_raw) > 50:
                         all_sigs = list(_raw.values())
-                # If cache empty or stale, call generate_signal directly (no HTTP)
+                # Try warmup cache first (populated at startup)
+                if len(all_sigs) < 10:
+                    from app.infrastructure.cache.cache import get_cached as _gc; _warm = _gc("generic_signals_warm")
+                    if _warm and len(_warm) >= 5:
+                        all_sigs = _warm
+                # If still empty, call generate_signal directly (no HTTP)
                 if len(all_sigs) < 10:
                     from app.domain.signal.service import generate_signal as _gen_sig
                     import concurrent.futures as _cf
