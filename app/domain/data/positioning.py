@@ -104,7 +104,7 @@ def get_positioning(symbol: str) -> dict:
         return result
 
     except Exception as e:
-        print(f"OKX positioning failed for {symbol}: {e}")
+        import logging; logging.getLogger("okx").debug(f"OKX positioning failed for {symbol}: {e}")
         return {
             "long_ratio": 0.5, "short_ratio": 0.5,
             "long_short_ratio": 1.0, "open_interest": 0.0,

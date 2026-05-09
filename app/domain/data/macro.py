@@ -86,7 +86,20 @@ def get_macro_features() -> dict:
         data["high_fear"] = 1.0 if data.get("vix", 20) > 25 else 0.0
         data["dollar_strong"] = 1.0 if data.get("dxy_change", 0) > 0 else 0.0
 
-        _save_cache(data)
+        # Also save full series for historical backtests
+        series_store = {}
+        for feature_name, series_id in FRED_SERIES.items():
+            try:
+                from fredapi import Fred as _Fred
+                _fred = _Fred(api_key=os.getenv("FRED_API_KEY"))
+                _s = _fred.get_series(series_id, observation_start="2020-01-01").dropna()
+                series_store[feature_name] = [
+                    {"date": str(d.date()), "value": float(v)}
+                    for d, v in _s.items()
+                ]
+            except Exception:
+                pass
+        _save_cache_with_series(data, series_store)
         print(f"FRED macro features loaded: {list(data.keys())}")
         return data
 
@@ -111,3 +124,87 @@ def get_macro_features() -> dict:
             "high_fear": 0.0,
             "dollar_strong": 0.0,
         }
+
+def _save_cache_with_series(data: dict, series_store: dict):
+    CACHE_PATH.write_text(json.dumps({
+        "timestamp": time.time(),
+        "data": data,
+        "series": series_store
+    }))
+
+def _load_cache_full():
+    if CACHE_PATH.exists():
+        try:
+            cache = json.loads(CACHE_PATH.read_text())
+            if time.time() - cache.get("timestamp", 0) < CACHE_TTL:
+                return cache
+        except Exception:
+            pass
+    return None
+
+def state_as_of(as_of) -> dict:
+    """Macro regime snapshot as of a past date. Uses cached FRED series."""
+    from datetime import datetime as _dt
+    if isinstance(as_of, str):
+        as_of = _dt.fromisoformat(as_of)
+
+    full = _load_cache_full()
+    if not full or not full.get("series"):
+        return get_macro_features()
+
+    series_store = full["series"]
+
+    def _latest_on_or_before(name):
+        arr = series_store.get(name) or []
+        best_val, best_date = None, None
+        for item in arr:
+            try:
+                d = _dt.fromisoformat(item["date"])
+                if d <= as_of and (best_date is None or d > best_date):
+                    best_date, best_val = d, float(item["value"])
+            except Exception:
+                continue
+        return best_val
+
+    data = {}
+    for feature_name in FRED_SERIES:
+        latest = _latest_on_or_before(feature_name)
+        if latest is None:
+            data[feature_name] = 0.0
+            data[f"{feature_name}_change"] = 0.0
+            continue
+        arr = series_store.get(feature_name) or []
+        prev_val = None
+        for item in reversed(arr):
+            try:
+                d = _dt.fromisoformat(item["date"])
+                if d < as_of:
+                    prev_val = float(item["value"])
+                    break
+            except Exception:
+                continue
+        if feature_name == "cpi_yoy":
+            year_ago = None
+            for item in arr:
+                try:
+                    d = _dt.fromisoformat(item["date"])
+                    diff = (as_of - d).days
+                    if 300 <= diff <= 400:
+                        year_ago = float(item["value"])
+                        break
+                except Exception:
+                    continue
+            if year_ago and year_ago != 0:
+                latest = round((latest - year_ago) / year_ago * 100, 2)
+            data[feature_name] = latest
+            data[f"{feature_name}_change"] = 0.0 if prev_val is None else latest - prev_val
+        else:
+            data[feature_name] = latest
+            data[f"{feature_name}_change"] = 0.0 if prev_val is None else latest - prev_val
+
+    data["rate_hike_regime"] = 1.0 if data.get("fed_funds_rate_change", 0) > 0 else 0.0
+    data["inflation_high"]   = 1.0 if data.get("cpi_yoy", 0) > 4.0 else 0.0
+    data["recession_signal"] = 1.0 if data.get("yield_spread_10y2y", 1) < 0 else 0.0
+    data["high_fear"]        = 1.0 if data.get("vix", 20) > 25 else 0.0
+    data["dollar_strong"]    = 1.0 if data.get("dxy_change", 0) > 0 else 0.0
+    return data

@@ -77,6 +77,6 @@ def get_funding_features(symbol: str) -> dict:
         return result
 
     except Exception as e:
-        print(f"OKX funding failed for {symbol}: {e}")
+        import logging; logging.getLogger("okx").debug(f"OKX funding failed for {symbol}: {e}")
         return {"funding_rate": 0.0, "funding_signal": 0.0,
                 "is_overleveraged_long": 0.0, "is_overleveraged_short": 0.0}
