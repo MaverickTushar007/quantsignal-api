@@ -181,8 +181,8 @@ async def get_signal(
         background_tasks.add_task(fill_reasoning_async, symbol, sig)
 
     try:
-        from app.infrastructure.db.signal_history import save_signal, is_open
-        if sig.get("direction") in ("BUY", "SELL") and not is_open(sig["symbol"]) and not sig.get("regime_suppressed"):
+        from app.infrastructure.db.signal_history import save_signal, is_open as is_signal_open
+        if sig.get("direction") in ("BUY", "SELL") and not is_signal_open(sig["symbol"]) and not sig.get("regime_suppressed"):
             raw_conf = sig.get("confluence_score", "")
             try:
                 conf_int = int(str(raw_conf).split("/")[0]) if "/" in str(raw_conf) else None
@@ -404,14 +404,6 @@ async def cache_regime(payload: dict):
         return {"error": "symbol required"}
     set_cached(f"regime:{symbol}", payload, ttl=3600)
     return {"status": "cached", "symbol": symbol}
-
-@router.get("/regime/{symbol}", tags=["quant"])
-async def get_regime(symbol: str):
-    from app.infrastructure.cache.cache import get_cached
-    cached = get_cached(f"regime:{symbol}")
-    if cached:
-        return cached
-    return {"regime": "unknown", "reason": "no regime data cached — run local regime updater"}
 
 @router.get("/debug/regime/{symbol}")
 async def debug_regime(symbol: str):
