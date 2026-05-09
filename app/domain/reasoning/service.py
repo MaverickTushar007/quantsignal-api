@@ -489,6 +489,8 @@ Perseus must always leave the user with something actionable. Never end on a dea
             else:
                 sys_prompt += f"\n⚠️ HARD CONSTRAINT: ML direction is {ml_direction}. Your **Action:** field MUST say {ml_direction}. Narrative tone must match. Do not contradict the ML signal.\n"
         elif symbol == "GENERIC":
+            yield _yield_status("Loading live signal intelligence...")
+            await asyncio.sleep(0.1)
             try:
                 import json as _json, pathlib as _pl, requests as _req
                 all_sigs = []
