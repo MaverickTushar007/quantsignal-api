@@ -498,18 +498,18 @@ Perseus must always leave the user with something actionable. Never end on a dea
                     _raw = _json.loads(_cache_path.read_text())
                     if isinstance(_raw, dict) and len(_raw) > 50:
                         all_sigs = list(_raw.values())
-                # If cache empty or stale, fetch top symbols in parallel
+                # If cache empty or stale, call generate_signal directly (no HTTP)
                 if len(all_sigs) < 10:
+                    from app.domain.signal.service import generate_signal as _gen_sig
                     import concurrent.futures as _cf
                     _top = ["BTC-USD","ETH-USD","NVDA","TSLA","MSFT",
                             "XRP-USD","SOL-USD","RELIANCE.NS","TCS.NS","INFY.NS"]
                     def _fetch_sig(sym):
                         try:
-                            _r = _req.get(f"https://quantsignal-api.onrender.com/api/v1/signals/{sym}", timeout=5)
-                            return _r.json() if _r.ok else None
+                            return _gen_sig(sym, include_reasoning=False)
                         except Exception:
                             return None
-                    with _cf.ThreadPoolExecutor(max_workers=10) as _ex:
+                    with _cf.ThreadPoolExecutor(max_workers=5) as _ex:
                         _results = list(_ex.map(_fetch_sig, _top))
                     all_sigs = [r for r in _results if r]
                 print(f"[Perseus GENERIC] {len(all_sigs)} signals loaded", flush=True)
