@@ -508,6 +508,14 @@ LIVE SIGNAL TABLE (symbol|direction|prob|confidence|EV|kelly|price|TP|SL):
 """ + "\n".join(sig_lines) + """
 
 RULES: Only cite prices/directions/probabilities from the table above. Never invent numbers.
+If an asset is asked about but NOT in the signal table above, NEVER say only "not in the signal table".
+Instead follow the FALLBACK INTELLIGENCE POLICY in this system prompt:
+- State coverage status explicitly
+- Provide what you CAN say confidently from regime/macro context
+- State what you CANNOT verify
+- Give best inference from current context
+- State key risk
+- Give best next step with supported alternatives
 """
             except Exception as e:
                 sys_prompt += f"\nMODE: Global Macro Intelligence. Cover Stocks, Forex, Crypto, Commodities.\n"
