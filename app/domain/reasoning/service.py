@@ -490,12 +490,15 @@ Perseus must always leave the user with something actionable. Never end on a dea
                 sys_prompt += f"\n⚠️ HARD CONSTRAINT: ML direction is {ml_direction}. Your **Action:** field MUST say {ml_direction}. Narrative tone must match. Do not contradict the ML signal.\n"
         elif symbol == "GENERIC":
             try:
-                import requests as _req
-                _r = _req.get("https://quantsignal-api.onrender.com/api/v1/signals", timeout=8)
-                all_sigs = _r.json() if _r.ok else []
-                if isinstance(all_sigs, dict):
-                    all_sigs = list(all_sigs.values())
-                print(f"[Perseus GENERIC] fetched {len(all_sigs)} signals, status={_r.status_code}", flush=True)
+                import json as _json, pathlib as _pl
+                _cache_path = _pl.Path(__file__).resolve().parent.parent.parent / "data/signals_cache.json"
+                print(f"[Perseus GENERIC] cache path: {_cache_path}, exists: {_cache_path.exists()}", flush=True)
+                if _cache_path.exists():
+                    _raw = _json.loads(_cache_path.read_text())
+                    all_sigs = list(_raw.values()) if isinstance(_raw, dict) else _raw
+                else:
+                    all_sigs = []
+                print(f"[Perseus GENERIC] loaded {len(all_sigs)} signals from file", flush=True)
                 buys = sum(1 for s in all_sigs if s.get("direction")=="BUY")
                 sells = sum(1 for s in all_sigs if s.get("direction")=="SELL")
                 high_conv = sum(1 for s in all_sigs if s.get("confidence")=="HIGH")
