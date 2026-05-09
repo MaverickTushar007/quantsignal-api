@@ -496,7 +496,7 @@ Perseus must always leave the user with something actionable. Never end on a dea
                 _cache_path = _pl.Path(__file__).resolve().parent.parent.parent / "data/signals_cache.json"
                 if _cache_path.exists():
                     _raw = _json.loads(_cache_path.read_text())
-                    if isinstance(_raw, dict) and len(_raw) > 5:
+                    if isinstance(_raw, dict) and len(_raw) > 50:
                         all_sigs = list(_raw.values())
                 # If cache empty, fetch top 25 symbols individually (won't crash Render)
                 if not all_sigs:
