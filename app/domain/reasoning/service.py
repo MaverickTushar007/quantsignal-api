@@ -570,7 +570,7 @@ CRITICAL RULES:
         except Exception:
             pass
 
-        sys_prompt += "\nSearch the web for the latest news, price action, and analyst views before responding.\n"
+        # Web search disabled — Perseus uses injected live signal data only
 
         if not settings.groq_api_key:
             yield _yield_status("Error: No Groq API Key found.")
@@ -586,8 +586,8 @@ CRITICAL RULES:
         except Exception:
             pass
         # Cap system prompt to prevent 413 from Groq
-        if len(sys_prompt) > 3500:
-            sys_prompt = sys_prompt[:3500] + "\n[Context truncated for brevity]"
+        if len(sys_prompt) > 8000:
+            sys_prompt = sys_prompt[:8000] + "\n[Context truncated for brevity]"
 
         # DATA FENCE — injected after truncation so it always survives
         # Explicitly lists what tool data is/isn't available to prevent hallucination
