@@ -26,7 +26,7 @@ router = APIRouter()
 @router.get("/health", response_model=HealthResponse, tags=["system"])
 async def health():
     from app.core.config import settings
-    return HealthResponse(status="ok", version="1.5.0", env=settings.app_env)
+    return HealthResponse(status="ok", version="1.6.0", env=settings.app_env)
 
 
 @router.get("/signals", response_model=List[WatchlistItem], tags=["signals"])
@@ -136,6 +136,10 @@ async def get_signal(
                             })
                     except Exception:
                         pass
+                # Backfill wf_validated for cached signals
+                from app.domain.signal.service import SIGNAL_UNIVERSE
+                if not _sig.get("wf_validated"):
+                    _sig["wf_validated"] = symbol in SIGNAL_UNIVERSE
                 return _sig
         except Exception:
             pass
