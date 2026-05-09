@@ -22,3 +22,13 @@ data/*.db
 data/*.jsonl
 logs/*.txt
 # ml/
+data/fear_greed_cache.json
+data/macro_cache.json
+data/model_prob_log.jsonl
+audit_results.txt
+audit_results_final.txt
+ml/models/*.pkl
+pageindex/
+run_signal_integrity_audit.py
+scripts/deploy_confluence_verifier.py
+tests/
