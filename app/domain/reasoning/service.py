@@ -495,30 +495,35 @@ Perseus must always leave the user with something actionable. Never end on a dea
                 all_sigs = _r.json() if _r.ok else []
                 if isinstance(all_sigs, dict):
                     all_sigs = list(all_sigs.values())
+                print(f"[Perseus GENERIC] fetched {len(all_sigs)} signals, status={_r.status_code}", flush=True)
                 buys = sum(1 for s in all_sigs if s.get("direction")=="BUY")
                 sells = sum(1 for s in all_sigs if s.get("direction")=="SELL")
                 high_conv = sum(1 for s in all_sigs if s.get("confidence")=="HIGH")
                 sorted_sigs = sorted(all_sigs, key=lambda s: (s.get("expected_value",0) or 0)*(s.get("probability",0) or 0), reverse=True)
                 sig_lines = []
                 for s in sorted_sigs[:40]:
-                    sig_lines.append(f"{s.get('symbol')}|{s.get('direction')}|{round((s.get('probability',0) or 0)*100)}%|{s.get('confidence')}|EV:{round(s.get('expected_value',0) or 0,1)}|K:{round(s.get('kelly_size',0) or 0,1)}%|${round(s.get('current_price',0) or 0,2)}|TP:${round(s.get('take_profit',0) or 0,2)}|SL:${round(s.get('stop_loss',0) or 0,2)}")
+                    sig_lines.append(
+                        f"  {{\"symbol\":\"{s.get('symbol')}\",\"direction\":\"{s.get('direction')}\","
+                        f"\"prob\":{round((s.get('probability',0) or 0)*100)},\"conf\":\"{s.get('confidence')}\","
+                        f"\"EV\":{round(s.get('expected_value',0) or 0,2)},\"kelly\":{round(s.get('kelly_size',0) or 0,1)},"
+                        f"\"price\":{round(s.get('current_price',0) or 0,2)},"
+                        f"\"TP\":{round(s.get('take_profit',0) or 0,2)},\"SL\":{round(s.get('stop_loss',0) or 0,2)}}}"
+                    )
                 sys_prompt += f"""
-MODE: Global Multi-Asset Intelligence — {len(all_sigs)} assets tracked.
-BUY: {buys} | SELL: {sells} | HOLD: {len(all_sigs)-buys-sells} | HIGH conviction: {high_conv}
-Bias: {"RISK-ON" if buys > sells else "RISK-OFF"} ({round(buys/max(len(all_sigs),1)*100)}% bullish)
+=== LIVE QUANTSIGNAL DATA ({len(all_sigs)} assets) ===
+Market bias: {"RISK-ON" if buys > sells else "RISK-OFF"} | BUY:{buys} SELL:{sells} HOLD:{len(all_sigs)-buys-sells} | HIGH conviction:{high_conv}
 
-LIVE SIGNAL TABLE (symbol|direction|prob|confidence|EV|kelly|price|TP|SL):
-""" + "\n".join(sig_lines) + """
+TOP 40 SIGNALS (JSON — these are the ONLY valid prices/directions to cite):
+[
+""" + ",\n".join(sig_lines) + """
+]
+=== END LIVE DATA ===
 
-RULES: Only cite prices/directions/probabilities from the table above. Never invent numbers.
-If an asset is asked about but NOT in the signal table above, NEVER say only "not in the signal table".
-Instead follow the FALLBACK INTELLIGENCE POLICY in this system prompt:
-- State coverage status explicitly
-- Provide what you CAN say confidently from regime/macro context
-- State what you CANNOT verify
-- Give best inference from current context
-- State key risk
-- Give best next step with supported alternatives
+CRITICAL RULES:
+1. The JSON above contains the ONLY valid prices. NVDA price = whatever is in the JSON above, NOT your training data.
+2. If a symbol appears in the JSON, use its exact price/direction/TP/SL — never your training memory.
+3. If a symbol is NOT in the JSON, follow FALLBACK INTELLIGENCE POLICY.
+4. Never invent numbers. Never use training-data prices.
 """
             except Exception as e:
                 sys_prompt += f"\nMODE: Global Macro Intelligence. Cover Stocks, Forex, Crypto, Commodities.\n"
