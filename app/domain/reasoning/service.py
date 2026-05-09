@@ -490,15 +490,33 @@ Perseus must always leave the user with something actionable. Never end on a dea
                 sys_prompt += f"\n⚠️ HARD CONSTRAINT: ML direction is {ml_direction}. Your **Action:** field MUST say {ml_direction}. Narrative tone must match. Do not contradict the ML signal.\n"
         elif symbol == "GENERIC":
             try:
+                from app.infrastructure.cache.cache import get_cached
                 import json as _json, pathlib as _pl
-                _cache_path = _pl.Path(__file__).resolve().parent.parent.parent / "data/signals_cache.json"
-                print(f"[Perseus GENERIC] cache path: {_cache_path}, exists: {_cache_path.exists()}", flush=True)
-                if _cache_path.exists():
-                    _raw = _json.loads(_cache_path.read_text())
-                    all_sigs = list(_raw.values()) if isinstance(_raw, dict) else _raw
+                # Try Redis cache first (populated by cron)
+                _cached = get_cached("all_signals_list")
+                if _cached and len(_cached) > 0:
+                    all_sigs = _cached
+                    print(f"[Perseus GENERIC] {len(all_sigs)} signals from Redis cache", flush=True)
                 else:
-                    all_sigs = []
-                print(f"[Perseus GENERIC] loaded {len(all_sigs)} signals from file", flush=True)
+                    # Fall back to file
+                    _cache_path = _pl.Path(__file__).resolve().parent.parent.parent / "data/signals_cache.json"
+                    if _cache_path.exists():
+                        _raw = _json.loads(_cache_path.read_text())
+                        all_sigs = list(_raw.values()) if isinstance(_raw, dict) else _raw
+                    else:
+                        all_sigs = []
+                    # If still empty, call signal pipeline directly for top symbols
+                    if not all_sigs:
+                        from app.domain.data.universe import TICKERS
+                        from app.domain.signal.service import get_signal
+                        all_sigs = []
+                        for _t in TICKERS[:30]:
+                            try:
+                                _s = get_signal(_t["symbol"])
+                                if _s: all_sigs.append(_s if isinstance(_s, dict) else _s.dict())
+                            except Exception:
+                                pass
+                    print(f"[Perseus GENERIC] {len(all_sigs)} signals loaded", flush=True)
                 buys = sum(1 for s in all_sigs if s.get("direction")=="BUY")
                 sells = sum(1 for s in all_sigs if s.get("direction")=="SELL")
                 high_conv = sum(1 for s in all_sigs if s.get("confidence")=="HIGH")
