@@ -6,10 +6,10 @@ Scans signals, opens trades, closes positions, enforces kill switch.
 import os, json, urllib.request
 from datetime import datetime, timezone, timedelta
 from dotenv import load_dotenv
-load_dotenv("/Users/tusharbhatt/Desktop/quantsignal/.env")
+load_dotenv()
 
 SUPABASE_URL = os.getenv("SUPABASE_URL", "")
-SERVICE_KEY  = os.getenv("SUPABASE_SERVICE_KEY", "")
+SERVICE_KEY  = os.getenv("SUPABASE_KEY") or os.getenv("SUPABASE_SERVICE_KEY", "")
 
 HEADERS = {
     "apikey": SERVICE_KEY,
