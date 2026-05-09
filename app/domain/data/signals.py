@@ -1,10 +1,10 @@
-from app.core.config import BASE_DIR
+from app.core.config import BASE_DIR, settings
 import json
-import requests
+import os
 
 def get_all_signals() -> list:
-    """Load all signals - try cache file first, fall back to HTTP."""
-    # Try cache file first (fastest)
+    """Load all signals from cache file (primary) or env-configured API URL (fallback)."""
+    # Primary: cache file
     try:
         cache_path = BASE_DIR / "data/signals_cache.json"
         if cache_path.exists():
@@ -16,26 +16,18 @@ def get_all_signals() -> list:
     except Exception:
         pass
 
-    # Fall back to Redis or internal API call
+    # Fallback: call signals endpoint using own public URL
     try:
-        import redis
-        from app.core.config import settings
-        r = redis.from_url(settings.redis_url)
-        keys = r.keys("signal:*")
-        if keys:
-            signals = []
-            for key in keys:
-                val = r.get(key)
-                if val:
-                    signals.append(json.loads(val))
-            if signals:
-                return signals
-    except Exception:
-        pass
-
-    # Last resort: call own signals endpoint
-    try:
-        resp = requests.get("http://localhost:8000/api/v1/signals", timeout=5)
+        import requests
+        base_url = os.getenv("RENDER_EXTERNAL_URL", "")
+        if not base_url:
+            # Try common Render env vars
+            service = os.getenv("RENDER_SERVICE_NAME", "")
+            if service:
+                base_url = f"https://{service}.onrender.com"
+        if not base_url:
+            base_url = "https://quantsignal-api.onrender.com"
+        resp = requests.get(f"{base_url}/api/v1/signals", timeout=8)
         if resp.ok:
             data = resp.json()
             if isinstance(data, list) and len(data) > 0:
