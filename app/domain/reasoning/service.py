@@ -490,33 +490,28 @@ Perseus must always leave the user with something actionable. Never end on a dea
                 sys_prompt += f"\n⚠️ HARD CONSTRAINT: ML direction is {ml_direction}. Your **Action:** field MUST say {ml_direction}. Narrative tone must match. Do not contradict the ML signal.\n"
         elif symbol == "GENERIC":
             try:
-                from app.infrastructure.cache.cache import get_cached
-                import json as _json, pathlib as _pl
-                # Try Redis cache first (populated by cron)
-                _cached = get_cached("all_signals_list")
-                if _cached and len(_cached) > 0:
-                    all_sigs = _cached
-                    print(f"[Perseus GENERIC] {len(all_sigs)} signals from Redis cache", flush=True)
-                else:
-                    # Fall back to file
-                    _cache_path = _pl.Path(__file__).resolve().parent.parent.parent / "data/signals_cache.json"
-                    if _cache_path.exists():
-                        _raw = _json.loads(_cache_path.read_text())
-                        all_sigs = list(_raw.values()) if isinstance(_raw, dict) else _raw
-                    else:
-                        all_sigs = []
-                    # If still empty, call signal pipeline directly for top symbols
-                    if not all_sigs:
-                        from app.domain.data.universe import TICKERS
-                        from app.domain.signal.service import get_signal
-                        all_sigs = []
-                        for _t in TICKERS[:30]:
-                            try:
-                                _s = get_signal(_t["symbol"])
-                                if _s: all_sigs.append(_s if isinstance(_s, dict) else _s.dict())
-                            except Exception:
-                                pass
-                    print(f"[Perseus GENERIC] {len(all_sigs)} signals loaded", flush=True)
+                import json as _json, pathlib as _pl, requests as _req
+                all_sigs = []
+                # Try file cache first
+                _cache_path = _pl.Path(__file__).resolve().parent.parent.parent / "data/signals_cache.json"
+                if _cache_path.exists():
+                    _raw = _json.loads(_cache_path.read_text())
+                    if isinstance(_raw, dict) and len(_raw) > 5:
+                        all_sigs = list(_raw.values())
+                # If cache empty, fetch top 25 symbols individually (won't crash Render)
+                if not all_sigs:
+                    _top = ["BTC-USD","ETH-USD","SOL-USD","NVDA","TSLA","MSFT","AAPL","AMZN","GOOGL","META",
+                            "RELIANCE.NS","TCS.NS","INFY.NS","HDFCBANK.NS","SBIN.NS",
+                            "XRP-USD","BNB-USD","ADA-USD","DOGE-USD","AVAX-USD",
+                            "SPY","QQQ","GLD","^NSEI","EURUSD=X"]
+                    for _sym in _top:
+                        try:
+                            _r = _req.get(f"https://quantsignal-api.onrender.com/api/v1/signals/{_sym}", timeout=3)
+                            if _r.ok:
+                                all_sigs.append(_r.json())
+                        except Exception:
+                            pass
+                print(f"[Perseus GENERIC] {len(all_sigs)} signals loaded", flush=True)
                 buys = sum(1 for s in all_sigs if s.get("direction")=="BUY")
                 sells = sum(1 for s in all_sigs if s.get("direction")=="SELL")
                 high_conv = sum(1 for s in all_sigs if s.get("confidence")=="HIGH")
