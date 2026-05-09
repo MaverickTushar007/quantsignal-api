@@ -414,7 +414,28 @@ async def stream_chat(symbol: str, message: str, history: list, user_id: str = "
             else:
                 sys_prompt += f"\n⚠️ HARD CONSTRAINT: ML direction is {ml_direction}. Your **Action:** field MUST say {ml_direction}. Narrative tone must match. Do not contradict the ML signal.\n"
         elif symbol == "GENERIC":
-            sys_prompt += "\nMODE: Global Macro Intelligence. Cover Stocks, Forex, Crypto, Commodities.\n"
+            try:
+                from app.domain.data.signals import get_all_signals
+                all_sigs = get_all_signals() or []
+                buys = sum(1 for s in all_sigs if s.get("direction")=="BUY")
+                sells = sum(1 for s in all_sigs if s.get("direction")=="SELL")
+                high_conv = sum(1 for s in all_sigs if s.get("confidence")=="HIGH")
+                sorted_sigs = sorted(all_sigs, key=lambda s: (s.get("expected_value",0) or 0)*(s.get("probability",0) or 0), reverse=True)
+                sig_lines = []
+                for s in sorted_sigs[:40]:
+                    sig_lines.append(f"{s.get('symbol')}|{s.get('direction')}|{round((s.get('probability',0) or 0)*100)}%|{s.get('confidence')}|EV:{round(s.get('expected_value',0) or 0,1)}|K:{round(s.get('kelly_size',0) or 0,1)}%|${round(s.get('current_price',0) or 0,2)}|TP:${round(s.get('take_profit',0) or 0,2)}|SL:${round(s.get('stop_loss',0) or 0,2)}")
+                sys_prompt += f"""
+MODE: Global Multi-Asset Intelligence — {len(all_sigs)} assets tracked.
+BUY: {buys} | SELL: {sells} | HOLD: {len(all_sigs)-buys-sells} | HIGH conviction: {high_conv}
+Bias: {"RISK-ON" if buys > sells else "RISK-OFF"} ({round(buys/max(len(all_sigs),1)*100)}% bullish)
+
+LIVE SIGNAL TABLE (symbol|direction|prob|confidence|EV|kelly|price|TP|SL):
+""" + "\n".join(sig_lines) + """
+
+RULES: Only cite prices/directions/probabilities from the table above. Never invent numbers.
+"""
+            except Exception as e:
+                sys_prompt += f"\nMODE: Global Macro Intelligence. Cover Stocks, Forex, Crypto, Commodities.\n"
 
         if macro_context:
             sys_prompt += f"\n## {macro_context}\n"
