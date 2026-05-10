@@ -20,8 +20,14 @@ def _rebuild():
     # Load old cache for alert comparison
     try:
         old_cache = json.loads((BASE_DIR / "data/signals_cache.json").read_text())
+        if not old_cache:
+            raise ValueError("empty")
     except Exception:
-        old_cache = {}
+        try:
+            from app.infrastructure.cache.cache import load_bulk_cache
+            old_cache = load_bulk_cache()
+        except Exception:
+            old_cache = {}
 
     try:
         from app.domain.data.universe import TICKERS
@@ -38,8 +44,14 @@ def _rebuild():
         # Load existing cache as fallback — never serve empty dashboard
         try:
             existing_cache = json.loads((BASE_DIR / "data/signals_cache.json").read_text())
+            if not existing_cache:
+                raise ValueError("empty")
         except Exception:
-            existing_cache = {}
+            try:
+                from app.infrastructure.cache.cache import load_bulk_cache
+                existing_cache = load_bulk_cache()
+            except Exception:
+                existing_cache = {}
 
         cache = {}
         cache_lock = threading.Lock()
@@ -104,6 +116,11 @@ def _rebuild():
             print(f"[cron] WARNING: only {len(cache)} new signals vs {len(existing_cache)} before — merging with stale cache")
             cache = {**existing_cache, **cache}
         (BASE_DIR / "data/signals_cache.json").write_text(json.dumps(cache, indent=2))
+        try:
+            from app.infrastructure.cache.cache import save_bulk_cache
+            save_bulk_cache(cache)
+        except Exception as _be:
+            print(f"[cron] Bulk Redis save error: {_be}")
         print(f"Cache rebuilt: {len(cache)}/{len(TICKERS)} signals in {elapsed}s")
         # Clear checkpoint — full rebuild succeeded
         try:

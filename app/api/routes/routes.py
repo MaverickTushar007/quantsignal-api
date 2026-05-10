@@ -53,6 +53,17 @@ def get_all_signals(
     # Load from file
     cache = {}
     cache_path = BASE_DIR / "data/signals_cache.json"
+    # Cold-start recovery: if file missing/empty, pull from Redis bulk cache
+    if not cache_path.exists() or cache_path.stat().st_size < 10:
+        try:
+            from app.infrastructure.cache.cache import load_bulk_cache, save_bulk_cache
+            bulk = load_bulk_cache()
+            if bulk:
+                cache_path.parent.mkdir(parents=True, exist_ok=True)
+                import json as _j; cache_path.write_text(_j.dumps(bulk))
+                print(f"[routes] Cold-start: restored {len(bulk)} signals from Redis")
+        except Exception as _ce:
+            print(f"[routes] Cold-start Redis restore failed: {_ce}")
     if cache_path.exists():
         try:
             cache = json.loads(cache_path.read_text())
