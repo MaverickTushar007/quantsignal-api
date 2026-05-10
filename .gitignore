@@ -32,3 +32,6 @@ pageindex/
 run_signal_integrity_audit.py
 scripts/deploy_confluence_verifier.py
 tests/
+data/signals_cache.json
+data/signals_cache_checkpoint.json
+data/signals_cache.json.bak
